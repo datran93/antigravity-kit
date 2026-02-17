@@ -4,7 +4,7 @@
 # Antigravity Kit (agk) - AI Agent Management Tool
 # =============================================================================
 
-VERSION="1.3.0"
+VERSION="1.4.0"
 
 # Configuration
 CACHE_DIR="$HOME/.antigravity/cache"
@@ -171,6 +171,35 @@ cmd_remove() {
     log_success ".agent removed!"
 }
 
+cmd_toolbox() {
+    local current_dir=$(pwd)
+    local source="${BASH_SOURCE[0]}"
+
+    # Resolve symlinks
+    while [ -h "$source" ]; do
+        local dir="$( cd -P "$( dirname "$source" )" && pwd )"
+        source="$(readlink "$source")"
+        [[ $source != /* ]] && source="$dir/$source"
+    done
+    local script_dir="$( cd -P "$( dirname "$source" )" && pwd )"
+    local tool_script="$script_dir/toolbox-mcp.sh"
+
+    if [ ! -f "$tool_script" ]; then
+        log_error "toolbox-mcp.sh not found at $tool_script"
+        exit 1
+    fi
+
+    log_info "Updating toolbox project directory to: $current_dir"
+
+    if [[ "$OSTYPE" == "darwin"* ]]; then
+        sed -i '' "s|^PROJECT_DIR=.*|PROJECT_DIR=\"$current_dir\"|" "$tool_script"
+    else
+        sed -i "s|^PROJECT_DIR=.*|PROJECT_DIR=\"$current_dir\"|" "$tool_script"
+    fi
+
+    log_success "Updated $tool_script"
+}
+
 show_help() {
     cat << EOF
 Antigravity Kit v$VERSION
@@ -182,6 +211,7 @@ Commands:
   update    Update .agent to latest
   status    Check for updates
   remove    Remove .agent folder
+  toolbox   Set current directory as PROJECT_DIR for toolbox-mcp
   help      Show this help
 
 EOF
@@ -196,6 +226,7 @@ case "$1" in
     update)  cmd_update ;;
     status)  cmd_status ;;
     remove)  cmd_remove ;;
+    toolbox) cmd_toolbox ;;
     help|-h|--help|"") show_help ;;
     *) log_error "Unknown command: $1"; show_help; exit 1 ;;
 esac
