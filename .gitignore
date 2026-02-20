@@ -4,3 +4,4 @@ node_modules/
 antigravity-doc
 tests
 others
+.env

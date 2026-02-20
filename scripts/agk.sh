@@ -167,25 +167,6 @@ cmd_remove() {
     log_success ".agent removed!"
 }
 
-cmd_toolbox() {
-    local current_dir=$(pwd)
-    local tool_script="$SCRIPT_DIR/toolbox-mcp.sh"
-
-    if [ ! -f "$tool_script" ]; then
-        log_error "toolbox-mcp.sh not found at $tool_script"
-        exit 1
-    fi
-
-    log_info "Updating toolbox project directory to: $current_dir"
-
-    if [[ "$OSTYPE" == "darwin"* ]]; then
-        sed -i '' "s|^PROJECT_DIR=.*|PROJECT_DIR=\"$current_dir\"|" "$tool_script"
-    else
-        sed -i "s|^PROJECT_DIR=.*|PROJECT_DIR=\"$current_dir\"|" "$tool_script"
-    fi
-
-    log_success "Updated $tool_script"
-}
 
 cmd_sync_skills() {
     local sync_script="$SCRIPT_DIR/sync-skills.sh"
@@ -199,6 +180,34 @@ cmd_sync_skills() {
     bash "$sync_script" "$@"
 }
 
+cmd_sync_env() {
+    local src_env="$(pwd)/.env"
+    local dest_env="$SCRIPT_DIR/.env"
+
+    if [ ! -f "$src_env" ]; then
+        log_error ".env file not found in current directory: $src_env"
+        exit 1
+    fi
+
+    log_info "Copying $src_env to $dest_env"
+    mkdir -p "$(dirname "$dest_env")" 2>/dev/null
+    cp "$src_env" "$dest_env"
+    log_success "Environment configuration copied successfully!"
+}
+
+cmd_show_env() {
+    local env_file="$SCRIPT_DIR/.env"
+    if [ ! -f "$env_file" ]; then
+        log_error "No .env file found at: $env_file. You need to run 'agk sync-env' first."
+        exit 1
+    fi
+
+    log_info "Content of .env file:"
+    echo "----------------------------------------"
+    cat "$env_file"
+    echo "----------------------------------------"
+}
+
 show_help() {
     cat << EOF
 Antigravity Kit v$VERSION
@@ -210,8 +219,9 @@ Commands:
   update        Update .agent to latest
   status        Check for updates
   remove        Remove .agent folder
-  toolbox       Set current directory as PROJECT_DIR for toolbox-mcp
   sync-skills   Sync local .agent with awesome-skills repo
+  sync-env      Copy current directory .env to .agent/scripts/.env
+  show-env      Print the current .env from .agent/scripts/.env
   help          Show this help
 
 EOF
@@ -226,8 +236,9 @@ case "$1" in
     update)  cmd_update ;;
     status)  cmd_status ;;
     remove)  cmd_remove ;;
-    toolbox) cmd_toolbox ;;
     sync-skills) shift; cmd_sync_skills "$@" ;;
+    sync-env) cmd_sync_env ;;
+    show-env) cmd_show_env ;;
     help|-h|--help|"") show_help ;;
     *) log_error "Unknown command: $1"; show_help; exit 1 ;;
 esac
