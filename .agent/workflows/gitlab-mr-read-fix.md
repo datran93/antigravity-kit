@@ -1,9 +1,9 @@
 ---
-description: Workflow to read GitLab Merge Request discussions, address the code review feedback, push the changes, and reply to or resolve the discussions.
+description: Read GitLab Merge Request discussions, analyze requested changes, and apply fixes locally.
 ---
-# Address GitLab MR Discussions Workflow
+# Read and Fix GitLab MR Discussions Workflow
 
-This workflow automates the process of reading feedback from a GitLab Merge Request (MR), making the necessary code changes locally, pushing those changes, and responding to the reviewer.
+This workflow automates the first half of addressing a GitLab Merge Request (MR) feedback: reading the reviewer's feedback, analyzing the requested changes, and applying the fixes to the local codebase.
 
 ## Requirements
 - The user must provide the Merge Request IID (e.g., `!123` or just `123`) or the Agent should be able to deduce the current MR from the branch context.
@@ -38,18 +38,5 @@ This workflow automates the process of reading feedback from a GitLab Merge Requ
    # go test ./...
    ```
 
-5. **Commit and Push Changes**
-   Stage the modified files, commit them with a descriptive message referencing the MR or discussion, and push to the remote branch. (You can also refer to the `/git-commit-push` workflow).
-   ```bash
-   git add .
-   git commit -m "fix: address review comments on MR"
-   git push origin $(git rev-parse --abbrev-ref HEAD)
-   ```
-
-6. **Reply to and Resolve Discussions**
-   Once the code is pushed, go back to the GitLab discussions and inform the reviewer.
-   - To reply to a thread, use `mcp_gitlab_create_merge_request_discussion_note` with the `discussion_id` and a message like: *"Fixed in the latest commit."*
-   - To resolve the thread, use `mcp_gitlab_resolve_merge_request_thread` with `resolved: true`.
-
-## Final Verification
-Confirm with the user that all targeted discussions have been addressed, resolved, and changes are successfully pushed to GitLab.
+## Next Steps
+Once verified, proceed to the `/gitlab-mr-reply-push` workflow to commit, push the changes, and resolve the discussions on GitLab.
