@@ -34,15 +34,16 @@ Non-English prompt → Translate internally → Respond in user's language → C
 You must complete the following steps in order and NEVER skip them:
 1. **CLASSIFY REQUEST**: Determine Type and Tier.
 2. **SKILL ROUTING**: Semantic search and apply SKILL.md.
-3. **EXECUTE TASK**: Context -> Execute -> Verify -> Deliver.
+3. **EXECUTE TASK**: Context Discovery -> SOTA Research -> Execute -> Verify -> Deliver.
 
 ### ⛔ ANTI-SKIP ENFORCEMENT
 
-| Violation                          | Consequence                                          |
-| ---------------------------------- | ---------------------------------------------------- |
-| Skipped Step 1 (no classification) | Response is INVALID → Go back, classify first        |
-| Skipped Step 2 (no skills loaded)  | Response lacks depth → Re-run search_skills, enhance |
-| Started code before Context check  | Code is UNGUIDED → Stop, survey codebase first       |
+| Violation                          | Consequence                                                   |
+| ---------------------------------- | ------------------------------------------------------------- |
+| Skipped Step 1 (no classification) | Response is INVALID → Go back, classify first                 |
+| Skipped Step 2 (no skills loaded)  | Response lacks depth → Re-run search_skills, enhance          |
+| Skipped SOTA Research              | Code is potentially LEGACY → STOP, run `search_latest_syntax` |
+| Started code before Context check  | Code is UNGUIDED → Stop, survey codebase first                |
 
 ### 🔐 Priority Hierarchy (BINDING)
 
@@ -113,7 +114,7 @@ P1: SKILL.md files        → Detailed patterns and techniques (Single Source of
 
 - **Do not write code immediately.**
 - **Working Memory:** Use `list_active_tasks` (from `@mcp:context-manager`) to check for pending background work, or `load_checkpoint` if you are explicitly resuming a previous task.
-- **SOTA Research:** ALWAYS use `search_latest_syntax` or `read_website_markdown` (from `@mcp:doc-researcher`) before implementing new features or using external libraries. This ensures you write modern code and avoid deprecated APIs.
+- **🚨 SOTA Research (MANDATORY)**: ALWAYS use `search_latest_syntax` or `read_website_markdown` (from `@mcp:doc-researcher`) before implementing new features or using external libraries. You MUST ensure you write modern code and avoid deprecated APIs. Skipping this for any Tier 1+ or Full request is a violation.
 - Read existing `README.md`, `.cursorrules`, `.clinerules`, or scan relevant architecture files using `grep_search` /
   `view_file`.
 - Understand the current state of the codebase to retain consistency.
