@@ -21,16 +21,8 @@ if [ ! -d "$AGENT_DIR" ]; then
   exit 1
 fi
 
-# --- 2. Copy and replace skills and CATALOG.md ---
-echo "🔄 Copying skills and CATALOG.md to $AGENT_DIR..."
-
-# Copy CATALOG.md
-if [ -f "$REPO_DIR/CATALOG.md" ]; then
-  cp -f "$REPO_DIR/CATALOG.md" "$AGENT_DIR/CATALOG.md"
-  echo "✅ Copied CATALOG.md"
-else
-  echo "⚠️ Warning: $REPO_DIR/CATALOG.md not found."
-fi
+# --- 2. Copy and replace skills directory ---
+echo "🔄 Copying skills directory to $AGENT_DIR..."
 
 # Replace skills directory
 if [ -d "$REPO_DIR/skills" ]; then
