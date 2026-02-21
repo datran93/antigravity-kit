@@ -115,8 +115,7 @@ P1: SKILL.md files        → Detailed patterns and techniques (Single Source of
 - **Do not write code immediately.**
 - **Working Memory:** Use `list_active_tasks` (from `@mcp:context-manager`) to check for pending background work, or `load_checkpoint` if you are explicitly resuming a previous task.
 - **🚨 SOTA Research (MANDATORY)**: ALWAYS use `search_latest_syntax` or `read_website_markdown` (from `@mcp:doc-researcher`) before implementing new features or using external libraries. You MUST ensure you write modern code and avoid deprecated APIs. Skipping this for any Tier 1+ or Full request is a violation.
-- Read existing `README.md`, `.cursorrules`, `.clinerules`, or scan relevant architecture files using `grep_search` /
-  `view_file`.
+- Read existing `README.md`, `.cursorrules`, `.clinerules`, or scan relevant architecture files using `grep_search` / `view_file`.
 - Understand the current state of the codebase to retain consistency.
 
 ### Phase 2: Execute with Skills
