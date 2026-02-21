@@ -1,14 +1,15 @@
 ---
 name: azure-ai-projects-dotnet
-description: |
+description: "|"
   Azure AI Projects SDK for .NET. High-level client for Azure AI Foundry projects including agents, connections, datasets, deployments, evaluations, and indexes. Use for AI Foundry project management, versioned agents, and orchestration. Triggers: "AI Projects", "AIProjectClient", "Foundry project", "versioned agents", "evaluations", "datasets", "connections", "deployments .NET".
 package: Azure.AI.Projects
+risk: unknown
+source: community
 ---
 
 # Azure.AI.Projects (.NET)
 
-High-level SDK for Azure AI Foundry project operations including agents, connections, datasets, deployments,
-evaluations, and indexes.
+High-level SDK for Azure AI Foundry project operations including agents, connections, datasets, deployments, evaluations, and indexes.
 
 ## Installation
 
@@ -42,7 +43,7 @@ using Azure.AI.Projects;
 
 var endpoint = Environment.GetEnvironmentVariable("PROJECT_ENDPOINT");
 AIProjectClient projectClient = new AIProjectClient(
-    new Uri(endpoint),
+    new Uri(endpoint), 
     new DefaultAzureCredential());
 ```
 
@@ -150,7 +151,7 @@ foreach (AIProjectConnection connection in projectClient.Connections.GetConnecti
 
 // Get specific connection
 AIProjectConnection conn = projectClient.Connections.GetConnection(
-    connectionName,
+    connectionName, 
     includeCredentials: true);
 
 // Get default connection
@@ -236,9 +237,9 @@ evaluatorConfig.InitParams.Add("deployment_name", BinaryData.FromObjectAsJson("g
 // Create evaluation
 Evaluation evaluation = new Evaluation(
     data: new InputDataset("<dataset_id>"),
-    evaluators: new Dictionary<string, EvaluatorConfiguration>
-    {
-        { "relevance", evaluatorConfig }
+    evaluators: new Dictionary<string, EvaluatorConfiguration> 
+    { 
+        { "relevance", evaluatorConfig } 
     }
 )
 {
@@ -280,30 +281,30 @@ Console.WriteLine(result.Content[0].Text);
 
 ## Available Agent Tools
 
-| Tool             | Class                           | Purpose                      |
-| ---------------- | ------------------------------- | ---------------------------- |
-| Code Interpreter | `CodeInterpreterToolDefinition` | Execute Python code          |
-| File Search      | `FileSearchToolDefinition`      | Search uploaded files        |
-| Function Calling | `FunctionToolDefinition`        | Call custom functions        |
-| Bing Grounding   | `BingGroundingToolDefinition`   | Web search via Bing          |
-| Azure AI Search  | `AzureAISearchToolDefinition`   | Search Azure AI indexes      |
-| OpenAPI          | `OpenApiToolDefinition`         | Call external APIs           |
-| Azure Functions  | `AzureFunctionToolDefinition`   | Invoke Azure Functions       |
-| MCP              | `MCPToolDefinition`             | Model Context Protocol tools |
+| Tool | Class | Purpose |
+|------|-------|---------|
+| Code Interpreter | `CodeInterpreterToolDefinition` | Execute Python code |
+| File Search | `FileSearchToolDefinition` | Search uploaded files |
+| Function Calling | `FunctionToolDefinition` | Call custom functions |
+| Bing Grounding | `BingGroundingToolDefinition` | Web search via Bing |
+| Azure AI Search | `AzureAISearchToolDefinition` | Search Azure AI indexes |
+| OpenAPI | `OpenApiToolDefinition` | Call external APIs |
+| Azure Functions | `AzureFunctionToolDefinition` | Invoke Azure Functions |
+| MCP | `MCPToolDefinition` | Model Context Protocol tools |
 
 ## Key Types Reference
 
-| Type                     | Purpose                              |
-| ------------------------ | ------------------------------------ |
-| `AIProjectClient`        | Main entry point                     |
-| `PersistentAgentsClient` | Low-level agent operations           |
-| `PromptAgentDefinition`  | Versioned agent definition           |
-| `AgentVersion`           | Versioned agent instance             |
-| `AIProjectConnection`    | Connection to Azure resource         |
-| `AIProjectDeployment`    | Model deployment info                |
-| `AIProjectDataset`       | Dataset metadata                     |
-| `AIProjectIndex`         | Search index metadata                |
-| `Evaluation`             | Evaluation configuration and results |
+| Type | Purpose |
+|------|---------|
+| `AIProjectClient` | Main entry point |
+| `PersistentAgentsClient` | Low-level agent operations |
+| `PromptAgentDefinition` | Versioned agent definition |
+| `AgentVersion` | Versioned agent instance |
+| `AIProjectConnection` | Connection to Azure resource |
+| `AIProjectDeployment` | Model deployment info |
+| `AIProjectDataset` | Dataset metadata |
+| `AIProjectIndex` | Search index metadata |
+| `Evaluation` | Evaluation configuration and results |
 
 ## Best Practices
 
@@ -333,17 +334,20 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                          | Purpose                              | Install                                         |
-| ---------------------------- | ------------------------------------ | ----------------------------------------------- |
-| `Azure.AI.Projects`          | High-level project client (this SDK) | `dotnet add package Azure.AI.Projects`          |
-| `Azure.AI.Agents.Persistent` | Low-level agent operations           | `dotnet add package Azure.AI.Agents.Persistent` |
-| `Azure.AI.Projects.OpenAI`   | Versioned agents with OpenAI         | `dotnet add package Azure.AI.Projects.OpenAI`   |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.AI.Projects` | High-level project client (this SDK) | `dotnet add package Azure.AI.Projects` |
+| `Azure.AI.Agents.Persistent` | Low-level agent operations | `dotnet add package Azure.AI.Agents.Persistent` |
+| `Azure.AI.Projects.OpenAI` | Versioned agents with OpenAI | `dotnet add package Azure.AI.Projects.OpenAI` |
 
 ## Reference Links
 
-| Resource      | URL                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------- |
-| NuGet Package | https://www.nuget.org/packages/Azure.AI.Projects                                      |
-| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.projects                              |
-| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects         |
-| Samples       | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects/samples |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.AI.Projects |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.projects |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects |
+| Samples | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Projects/samples |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -59,7 +59,7 @@ compatibility where necessary (e.g., API signatures).
 
 Run smoke tests, linting, and unit tests to ensure nothing broke.
 
-Save a summary to `UPDATE-{slug}.md`:
+Save a summary to `update-{slug}.md`:
 
 - What changed (Files)
 - New Behavior

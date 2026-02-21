@@ -7,8 +7,7 @@ tags: client, external, setup, initialization
 
 ## Initialize DBOSClient for External Access
 
-Use `DBOSClient` to interact with DBOS from external applications like API servers, CLI tools, or separate services.
-`DBOSClient` connects directly to the DBOS system database.
+Use `DBOSClient` to interact with DBOS from external applications like API servers, CLI tools, or separate services. `DBOSClient` connects directly to the DBOS system database.
 
 **Incorrect (using DBOS directly from an external app):**
 
@@ -54,7 +53,6 @@ await client.destroy();
 ```
 
 Constructor options:
-
 - `systemDatabaseUrl`: Connection string to the Postgres system database (required)
 - `systemDatabasePool`: Optional custom `node-postgres` connection pool
 - `serializer`: Optional custom serializer (must match the DBOS application's serializer)

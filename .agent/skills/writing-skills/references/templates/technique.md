@@ -19,7 +19,6 @@ metadata:
 - [Error message text]
 
 **NOT for:**
-
 - [When to avoid]
 
 ## The Problem
@@ -48,14 +47,13 @@ function goodCode() {
 
 ## Quick Reference
 
-| Scenario | Approach   |
-| -------- | ---------- |
-| Case A   | Solution A |
-| Case B   | Solution B |
+| Scenario | Approach |
+|----------|----------|
+| Case A | Solution A |
+| Case B | Solution B |
 
 ## Common Mistakes
 
 **Mistake 1:** [Description]
-
 - Wrong: `bad code`
 - Right: `good code`

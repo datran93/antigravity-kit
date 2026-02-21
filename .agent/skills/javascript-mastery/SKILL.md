@@ -1,15 +1,13 @@
 ---
 name: javascript-mastery
-description:
-  "Comprehensive JavaScript reference covering 33+ essential concepts every developer should know. From fundamentals
-  like primitives and closures to advanced patterns like async/await and functional programming. Use when explaining JS
-  concepts, debugging JavaScript issues, or teaching JavaScript fundamentals."
+description: "Comprehensive JavaScript reference covering 33+ essential concepts every developer should know. From fundamentals like primitives and closures to advanced patterns like async/await and functional p..."
+risk: unknown
+source: community
 ---
 
 # 🧠 JavaScript Mastery
 
-> 33+ essential JavaScript concepts every developer should know, inspired by
-> [33-js-concepts](https://github.com/leonardomso/33-js-concepts).
+> 33+ essential JavaScript concepts every developer should know, inspired by [33-js-concepts](https://github.com/leonardomso/33-js-concepts).
 
 ## When to Use This Skill
 
@@ -79,7 +77,8 @@ Boolean([]); // true (!)
 "5" === 5; // false (strict)
 ```
 
-**Falsy values** (8 total): `false`, `0`, `-0`, `0n`, `""`, `null`, `undefined`, `NaN`
+**Falsy values** (8 total):
+`false`, `0`, `-0`, `0n`, `""`, `null`, `undefined`, `NaN`
 
 ### 1.3 Equality Operators
 
@@ -362,7 +361,10 @@ async function fetchUserData(userId) {
 
 // Parallel execution
 async function fetchAll() {
-  const [users, posts] = await Promise.all([fetch("/api/users"), fetch("/api/posts")]);
+  const [users, posts] = await Promise.all([
+    fetch("/api/users"),
+    fetch("/api/posts"),
+  ]);
   return { users, posts };
 }
 ```

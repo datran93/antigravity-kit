@@ -1,14 +1,19 @@
 ---
 name: python-patterns
-description:
-  Python development principles and decision-making. Framework selection, async patterns, type hints, project structure.
-  Teaches thinking, not copying.
+description: "Python development principles and decision-making. Framework selection, async patterns, type hints, project structure. Teaches thinking, not copying."
 allowed-tools: Read, Write, Edit, Glob, Grep
+risk: unknown
+source: community
 ---
 
 # Python Patterns
 
-> Python development principles and decision-making for 2025. **Learn to THINK, not memorize patterns.**
+> Python development principles and decision-making for 2025.
+> **Learn to THINK, not memorize patterns.**
+
+## When to Use
+
+Use this skill when making Python architecture decisions, choosing frameworks, designing async patterns, or structuring Python projects.
 
 ---
 
@@ -47,16 +52,15 @@ What are you building?
 
 ### Comparison Principles
 
-| Factor             | FastAPI             | Django          | Flask            |
-| ------------------ | ------------------- | --------------- | ---------------- |
-| **Best for**       | APIs, microservices | Full-stack, CMS | Simple, learning |
-| **Async**          | Native              | Django 5.0+     | Via extensions   |
-| **Admin**          | Manual              | Built-in        | Via extensions   |
-| **ORM**            | Choose your own     | Django ORM      | Choose your own  |
-| **Learning curve** | Low                 | Medium          | Low              |
+| Factor | FastAPI | Django | Flask |
+|--------|---------|--------|-------|
+| **Best for** | APIs, microservices | Full-stack, CMS | Simple, learning |
+| **Async** | Native | Django 5.0+ | Via extensions |
+| **Admin** | Manual | Built-in | Via extensions |
+| **ORM** | Choose your own | Django ORM | Choose your own |
+| **Learning curve** | Low | Medium | Low |
 
 ### Selection Questions to Ask:
-
 1. Is this API-only or full-stack?
 2. Need admin interface?
 3. Team familiar with async?
@@ -98,12 +102,12 @@ Don't:
 
 ### Async Library Selection
 
-| Need         | Async Library                  |
-| ------------ | ------------------------------ |
-| HTTP client  | httpx                          |
-| PostgreSQL   | asyncpg                        |
-| Redis        | aioredis / redis-py async      |
-| File I/O     | aiofiles                       |
+| Need | Async Library |
+|------|---------------|
+| HTTP client | httpx |
+| PostgreSQL | asyncpg |
+| Redis | aioredis / redis-py async |
+| File I/O | aiofiles |
 | Database ORM | SQLAlchemy 2.0 async, Tortoise |
 
 ---
@@ -314,13 +318,13 @@ async def create(user: UserCreate) -> UserResponse:
 
 ### Selection Guide
 
-| Solution            | Best For                         |
-| ------------------- | -------------------------------- |
-| **BackgroundTasks** | Simple, in-process tasks         |
-| **Celery**          | Distributed, complex workflows   |
-| **ARQ**             | Async, Redis-based               |
-| **RQ**              | Simple Redis queue               |
-| **Dramatiq**        | Actor-based, simpler than Celery |
+| Solution | Best For |
+|----------|----------|
+| **BackgroundTasks** | Simple, in-process tasks |
+| **Celery** | Distributed, complex workflows |
+| **ARQ** | Async, Redis-based |
+| **RQ** | Simple Redis queue |
+| **Dramatiq** | Actor-based, simpler than Celery |
 
 ### When to Use Each
 
@@ -374,11 +378,11 @@ Include:
 
 ### Testing Strategy
 
-| Type            | Purpose        | Tools                     |
-| --------------- | -------------- | ------------------------- |
-| **Unit**        | Business logic | pytest                    |
-| **Integration** | API endpoints  | pytest + httpx/TestClient |
-| **E2E**         | Full workflows | pytest + DB               |
+| Type | Purpose | Tools |
+|------|---------|-------|
+| **Unit** | Business logic | pytest |
+| **Integration** | API endpoints | pytest + httpx/TestClient |
+| **E2E** | Full workflows | pytest + DB |
 
 ### Async Testing
 
@@ -424,7 +428,6 @@ Before implementing:
 ## 11. Anti-Patterns to Avoid
 
 ### ❌ DON'T:
-
 - Default to Django for simple APIs (FastAPI may be better)
 - Use sync libraries in async code
 - Skip type hints for public APIs
@@ -433,7 +436,6 @@ Before implementing:
 - Mix async and sync carelessly
 
 ### ✅ DO:
-
 - Choose framework based on context
 - Ask about async requirements
 - Use Pydantic for validation
@@ -442,5 +444,4 @@ Before implementing:
 
 ---
 
-> **Remember**: Python patterns are about decision-making for YOUR specific context. Don't copy code—think about what
-> serves your application best.
+> **Remember**: Python patterns are about decision-making for YOUR specific context. Don't copy code—think about what serves your application best.

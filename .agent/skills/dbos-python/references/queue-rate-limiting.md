@@ -41,7 +41,6 @@ def process_prompts(prompts):
 ```
 
 Rate limit parameters:
-
 - `limit`: Maximum number of functions to start in the period
 - `period`: Time period in seconds
 

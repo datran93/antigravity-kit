@@ -117,11 +117,15 @@ Weak language invites rationalization:
 ```markdown
 # Weak
 
-You should write tests first. Generally, test before code. It's better to test first.
+You should write tests first.
+Generally, test before code.
+It's better to test first.
 
 # Strong
 
-ALWAYS write test first. NEVER write code before test. Test-first is MANDATORY.
+ALWAYS write test first.
+NEVER write code before test.
+Test-first is MANDATORY.
 ```
 
 **Why it works**: No ambiguity, no wiggle room.
@@ -131,7 +135,9 @@ ALWAYS write test first. NEVER write code before test. Test-first is MANDATORY.
 Reference agent's own standards:
 
 ```markdown
-You claimed to follow TDD. TDD means test-first. Code-first is NOT TDD.
+You claimed to follow TDD.
+TDD means test-first.
+Code-first is NOT TDD.
 
 **Either**:
 

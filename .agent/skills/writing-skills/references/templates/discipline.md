@@ -26,18 +26,17 @@ Violating the letter IS violating the spirit.
 [Action before rule]? **Delete it. Start over.**
 
 **No exceptions:**
-
 - Don't keep it as "reference"
 - Don't "adapt" it
 - Delete means delete
 
 ## Common Rationalizations
 
-| Excuse              | Reality                                    |
-| ------------------- | ------------------------------------------ |
-| "Too simple"        | Simple code breaks. Rule takes 30 seconds. |
-| "I'll do it after"  | After = never. Do it now.                  |
-| "Spirit not ritual" | The ritual IS the spirit.                  |
+| Excuse | Reality |
+|--------|---------|
+| "Too simple" | Simple code breaks. Rule takes 30 seconds. |
+| "I'll do it after" | After = never. Do it now. |
+| "Spirit not ritual" | The ritual IS the spirit. |
 
 ## Red Flags - STOP
 

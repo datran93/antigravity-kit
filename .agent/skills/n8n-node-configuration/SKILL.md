@@ -1,9 +1,6 @@
 ---
 name: n8n-node-configuration
-description:
-  "Operation-aware node configuration guidance. Use when configuring nodes, understanding property dependencies,
-  determining required fields, choosing between get_node detail levels, or learning common configuration patterns by
-  node type."
+description: "Operation-aware node configuration guidance. Use when configuring nodes, understanding property dependencies, determining required fields, choosing between get_node detail levels, or learning commo..."
 source: "https://github.com/czlonkowski/n8n-skills/tree/main/skills/n8n-node-configuration"
 risk: safe
 ---
@@ -15,7 +12,6 @@ Expert guidance for operation-aware node configuration with property dependencie
 ## When to Use This Skill
 
 Use this skill when:
-
 - Configuring n8n nodes
 - Understanding property dependencies
 - Determining required fields
@@ -29,7 +25,6 @@ Use this skill when:
 **Progressive disclosure**: Start minimal, add complexity as needed
 
 Configuration best practices:
-
 - `get_node` with `detail: "standard"` is the most used discovery pattern
 - 56 seconds average between configuration edits
 - Covers 95% of use cases with 1-2K tokens response
@@ -45,7 +40,6 @@ Configuration best practices:
 **Not all fields are always required** - it depends on operation!
 
 **Example**: Slack node
-
 ```javascript
 // For operation='post'
 {
@@ -72,7 +66,6 @@ Configuration best practices:
 **Fields appear/disappear based on other field values**
 
 **Example**: HTTP Request node
-
 ```javascript
 // When method='GET'
 {
@@ -139,23 +132,20 @@ Configuration best practices:
 ### Example: Configuring HTTP Request
 
 **Step 1**: Identify what you need
-
 ```javascript
 // Goal: POST JSON to API
 ```
 
 **Step 2**: Get node info
-
 ```javascript
 const info = get_node({
-  nodeType: "nodes-base.httpRequest",
+  nodeType: "nodes-base.httpRequest"
 });
 
 // Returns: method, url, sendBody, body, authentication required/optional
 ```
 
 **Step 3**: Minimal config
-
 ```javascript
 {
   "method": "POST",
@@ -165,18 +155,16 @@ const info = get_node({
 ```
 
 **Step 4**: Validate
-
 ```javascript
 validate_node({
   nodeType: "nodes-base.httpRequest",
   config,
-  profile: "runtime",
+  profile: "runtime"
 });
 // → Error: "sendBody required for POST"
 ```
 
 **Step 5**: Add required field
-
 ```javascript
 {
   "method": "POST",
@@ -187,14 +175,12 @@ validate_node({
 ```
 
 **Step 6**: Validate again
-
 ```javascript
 validate_node({...});
 // → Error: "body required when sendBody=true"
 ```
 
 **Step 7**: Complete configuration
-
 ```javascript
 {
   "method": "POST",
@@ -212,7 +198,6 @@ validate_node({...});
 ```
 
 **Step 8**: Final validation
-
 ```javascript
 validate_node({...});
 // → Valid! ✅
@@ -225,16 +210,14 @@ validate_node({...});
 ### Standard Detail (DEFAULT - Use This!)
 
 **✅ Starting configuration**
-
 ```javascript
 get_node({
-  nodeType: "nodes-base.slack",
+  nodeType: "nodes-base.slack"
 });
 // detail="standard" is the default
 ```
 
 **Returns** (~1-2K tokens):
-
 - Required fields
 - Common options
 - Operation list
@@ -245,16 +228,14 @@ get_node({
 ### Full Detail (Use Sparingly)
 
 **✅ When standard isn't enough**
-
 ```javascript
 get_node({
   nodeType: "nodes-base.slack",
-  detail: "full",
+  detail: "full"
 });
 ```
 
 **Returns** (~3-8K tokens):
-
 - Complete schema
 - All properties
 - All nested options
@@ -264,12 +245,11 @@ get_node({
 ### Search Properties Mode
 
 **✅ Looking for specific field**
-
 ```javascript
 get_node({
   nodeType: "nodes-base.httpRequest",
   mode: "search_properties",
-  propertyQuery: "auth",
+  propertyQuery: "auth"
 });
 ```
 
@@ -326,7 +306,6 @@ get_node({
 ```
 
 **Translation**: "body" field shows when:
-
 - sendBody = true AND
 - method = POST, PUT, or PATCH
 
@@ -335,7 +314,6 @@ get_node({
 #### Pattern 1: Boolean Toggle
 
 **Example**: HTTP Request sendBody
-
 ```javascript
 // sendBody controls body visibility
 {
@@ -346,7 +324,6 @@ get_node({
 #### Pattern 2: Operation Switch
 
 **Example**: Slack resource/operation
-
 ```javascript
 // Different operations → different fields
 {
@@ -365,7 +342,6 @@ get_node({
 #### Pattern 3: Type Selection
 
 **Example**: IF node conditions
-
 ```javascript
 {
   "type": "string",
@@ -383,23 +359,21 @@ get_node({
 ### Finding Property Dependencies
 
 **Use get_node with search_properties mode**:
-
 ```javascript
 get_node({
   nodeType: "nodes-base.httpRequest",
   mode: "search_properties",
-  propertyQuery: "body",
+  propertyQuery: "body"
 });
 
 // Returns property paths matching "body" with descriptions
 ```
 
 **Or use full detail for complete schema**:
-
 ```javascript
 get_node({
   nodeType: "nodes-base.httpRequest",
-  detail: "full",
+  detail: "full"
 });
 
 // Returns complete schema with displayOptions rules
@@ -416,7 +390,6 @@ get_node({
 **Examples**: Slack, Google Sheets, Airtable
 
 **Structure**:
-
 ```javascript
 {
   "resource": "<entity>",      // What type of thing
@@ -426,7 +399,6 @@ get_node({
 ```
 
 **How to configure**:
-
 1. Choose resource
 2. Choose operation
 3. Use get_node to see operation-specific requirements
@@ -437,7 +409,6 @@ get_node({
 **Examples**: HTTP Request, Webhook
 
 **Structure**:
-
 ```javascript
 {
   "method": "<HTTP_METHOD>",
@@ -448,7 +419,6 @@ get_node({
 ```
 
 **Dependencies**:
-
 - POST/PUT/PATCH → sendBody available
 - sendBody=true → body required
 - authentication != "none" → credentials required
@@ -458,7 +428,6 @@ get_node({
 **Examples**: Postgres, MySQL, MongoDB
 
 **Structure**:
-
 ```javascript
 {
   "operation": "<query|insert|update|delete>",
@@ -467,7 +436,6 @@ get_node({
 ```
 
 **Dependencies**:
-
 - operation="executeQuery" → query required
 - operation="insert" → table + values required
 - operation="update" → table + values + where required
@@ -477,7 +445,6 @@ get_node({
 **Examples**: IF, Switch, Merge
 
 **Structure**:
-
 ```javascript
 {
   "conditions": {
@@ -493,7 +460,6 @@ get_node({
 ```
 
 **Dependencies**:
-
 - Binary operators (equals, contains, etc.) → value1 + value2
 - Unary operators (isEmpty, isNotEmpty) → value1 only + singleValue: true
 
@@ -504,7 +470,6 @@ get_node({
 ### Slack Node Examples
 
 #### Post Message
-
 ```javascript
 {
   "resource": "message",
@@ -517,7 +482,6 @@ get_node({
 ```
 
 #### Update Message
-
 ```javascript
 {
   "resource": "message",
@@ -529,7 +493,6 @@ get_node({
 ```
 
 #### Create Channel
-
 ```javascript
 {
   "resource": "channel",
@@ -543,7 +506,6 @@ get_node({
 ### HTTP Request Node Examples
 
 #### GET Request
-
 ```javascript
 {
   "method": "GET",
@@ -563,7 +525,6 @@ get_node({
 ```
 
 #### POST with JSON
-
 ```javascript
 {
   "method": "POST",
@@ -583,7 +544,6 @@ get_node({
 ### IF Node Examples
 
 #### String Comparison (Binary)
-
 ```javascript
 {
   "conditions": {
@@ -599,7 +559,6 @@ get_node({
 ```
 
 #### Empty Check (Unary)
-
 ```javascript
 {
   "conditions": {
@@ -624,7 +583,6 @@ get_node({
 **Scenario**: body field required, but only sometimes
 
 **Rule**:
-
 ```
 body is required when:
   - sendBody = true AND
@@ -632,7 +590,6 @@ body is required when:
 ```
 
 **How to discover**:
-
 ```javascript
 // Option 1: Read validation error
 validate_node({...});
@@ -655,7 +612,6 @@ get_node({
 **Scenario**: singleValue property appears for unary operators
 
 **Rule**:
-
 ```
 singleValue should be true when:
   - operation IN (isEmpty, isNotEmpty, true, false)
@@ -664,11 +620,10 @@ singleValue should be true when:
 **Good news**: Auto-sanitization fixes this!
 
 **Manual check**:
-
 ```javascript
 get_node({
   nodeType: "nodes-base.if",
-  detail: "full",
+  detail: "full"
 });
 // Shows complete schema with operator-specific rules
 ```
@@ -680,7 +635,6 @@ get_node({
 ### ❌ Don't: Over-configure Upfront
 
 **Bad**:
-
 ```javascript
 // Adding every possible field
 {
@@ -696,7 +650,6 @@ get_node({
 ```
 
 **Good**:
-
 ```javascript
 // Start minimal
 {
@@ -710,7 +663,6 @@ get_node({
 ### ❌ Don't: Skip Validation
 
 **Bad**:
-
 ```javascript
 // Configure and deploy without validating
 const config = {...};
@@ -718,7 +670,6 @@ n8n_update_partial_workflow({...});  // YOLO
 ```
 
 **Good**:
-
 ```javascript
 // Validate before deploying
 const config = {...};
@@ -731,7 +682,6 @@ if (result.valid) {
 ### ❌ Don't: Ignore Operation Context
 
 **Bad**:
-
 ```javascript
 // Same config for all Slack operations
 {
@@ -751,11 +701,10 @@ if (result.valid) {
 ```
 
 **Good**:
-
 ```javascript
 // Check requirements when changing operation
 get_node({
-  nodeType: "nodes-base.slack",
+  nodeType: "nodes-base.slack"
 });
 // See what update operation needs (messageId, not channel)
 ```
@@ -819,15 +768,14 @@ get_node({
 
 For comprehensive guides on specific topics:
 
-- **[DEPENDENCIES.md](DEPENDENCIES.md)** - Deep dive into property dependencies and displayOptions
-- **[OPERATION_PATTERNS.md](OPERATION_PATTERNS.md)** - Common configuration patterns by node type
+- **DEPENDENCIES.md** - Deep dive into property dependencies and displayOptions
+- **OPERATION_PATTERNS.md** - Common configuration patterns by node type
 
 ---
 
 ## Summary
 
 **Configuration Strategy**:
-
 1. Start with `get_node` (standard detail is default)
 2. Configure required fields for operation
 3. Validate configuration
@@ -836,14 +784,12 @@ For comprehensive guides on specific topics:
 6. Deploy with confidence
 
 **Key Principles**:
-
 - **Operation-aware**: Different operations = different requirements
 - **Progressive disclosure**: Start minimal, add as needed
 - **Dependency-aware**: Understand field visibility rules
 - **Validation-driven**: Let validation guide configuration
 
 **Related Skills**:
-
 - **n8n MCP Tools Expert** - How to use discovery tools correctly
 - **n8n Validation Expert** - Interpret validation errors
 - **n8n Expression Syntax** - Configure expression fields

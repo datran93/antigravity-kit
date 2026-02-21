@@ -34,7 +34,6 @@ def fetch_data():
 ```
 
 Retry parameters:
-
 - `retries_allowed`: Enable automatic retries (default: False)
 - `max_attempts`: Maximum retry attempts (default: 3)
 - `interval_seconds`: Initial delay between retries (default: 1.0)

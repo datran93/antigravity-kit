@@ -1,19 +1,19 @@
 ---
 name: azure-monitor-opentelemetry-exporter-java
-description: |
+description: "|"
   Azure Monitor OpenTelemetry Exporter for Java. Export OpenTelemetry traces, metrics, and logs to Azure Monitor/Application Insights.
   Triggers: "AzureMonitorExporter java", "opentelemetry azure java", "application insights java otel", "azure monitor tracing java".
   Note: This package is DEPRECATED. Migrate to azure-monitor-opentelemetry-autoconfigure.
 package: com.azure:azure-monitor-opentelemetry-exporter
+risk: unknown
+source: community
 ---
 
 # Azure Monitor OpenTelemetry Exporter for Java
 
 > **⚠️ DEPRECATION NOTICE**: This package is deprecated. Migrate to `azure-monitor-opentelemetry-autoconfigure`.
 >
-> See
-> [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md)
-> for detailed instructions.
+> See [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md) for detailed instructions.
 
 Export OpenTelemetry telemetry data to Azure Monitor / Application Insights.
 
@@ -106,7 +106,7 @@ try (Scope scope = span.makeCurrent()) {
     // Add attributes during execution
     span.setAttribute("items.count", 3);
     span.setAttribute("total.amount", 99.99);
-
+    
     processOrder();
 } finally {
     span.end();
@@ -151,7 +151,7 @@ AutoConfiguredOpenTelemetrySdkBuilder sdkBuilder = AutoConfiguredOpenTelemetrySd
 AzureMonitorExporter.customize(sdkBuilder);
 
 sdkBuilder.addTracerProviderCustomizer(
-    (sdkTracerProviderBuilder, configProperties) ->
+    (sdkTracerProviderBuilder, configProperties) -> 
         sdkTracerProviderBuilder.addSpanProcessor(customProcessor)
 );
 
@@ -230,18 +230,17 @@ latencyHistogram.record(150, Attributes.of(
 
 ## Key Concepts
 
-| Concept           | Description                                                     |
-| ----------------- | --------------------------------------------------------------- |
+| Concept | Description |
+|---------|-------------|
 | Connection String | Application Insights connection string with instrumentation key |
-| Tracer            | Creates spans for distributed tracing                           |
-| Span              | Represents a unit of work with timing and attributes            |
-| SpanProcessor     | Intercepts span lifecycle for customization                     |
-| Exporter          | Sends telemetry to Azure Monitor                                |
+| Tracer | Creates spans for distributed tracing |
+| Span | Represents a unit of work with timing and attributes |
+| SpanProcessor | Intercepts span lifecycle for customization |
+| Exporter | Sends telemetry to Azure Monitor |
 
 ## Migration to Autoconfigure
 
 The `azure-monitor-opentelemetry-autoconfigure` package provides:
-
 - Automatic instrumentation of common libraries
 - Simplified configuration
 - Better integration with OpenTelemetry SDK
@@ -249,14 +248,13 @@ The `azure-monitor-opentelemetry-autoconfigure` package provides:
 ### Migration Steps
 
 1. Replace dependency:
-
    ```xml
    <!-- Remove -->
    <dependency>
        <groupId>com.azure</groupId>
        <artifactId>azure-monitor-opentelemetry-exporter</artifactId>
    </dependency>
-
+   
    <!-- Add -->
    <dependency>
        <groupId>com.azure</groupId>
@@ -264,8 +262,7 @@ The `azure-monitor-opentelemetry-autoconfigure` package provides:
    </dependency>
    ```
 
-2. Update initialization code per
-   [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md)
+2. Update initialization code per [Migration Guide](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md)
 
 ## Best Practices
 
@@ -279,11 +276,14 @@ The `azure-monitor-opentelemetry-autoconfigure` package provides:
 
 ## Reference Links
 
-| Resource              | URL                                                                                                                 |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Maven Package         | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-exporter                                |
-| GitHub                | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter              |
-| Migration Guide       | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |
-| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure                           |
-| OpenTelemetry Java    | https://opentelemetry.io/docs/languages/java/                                                                       |
-| Application Insights  | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview                                           |
+| Resource | URL |
+|----------|-----|
+| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-exporter |
+| GitHub | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/monitor/azure-monitor-opentelemetry-exporter |
+| Migration Guide | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-opentelemetry-exporter/MIGRATION.md |
+| Autoconfigure Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-opentelemetry-autoconfigure |
+| OpenTelemetry Java | https://opentelemetry.io/docs/languages/java/ |
+| Application Insights | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

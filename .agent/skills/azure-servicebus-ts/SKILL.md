@@ -1,9 +1,9 @@
 ---
 name: azure-servicebus-ts
-description:
-  Build messaging applications using Azure Service Bus SDK for JavaScript (@azure/service-bus). Use when implementing
-  queues, topics/subscriptions, message sessions, dead-letter handling, or enterprise messaging patterns.
+description: "Build messaging applications using Azure Service Bus SDK for JavaScript (@azure/service-bus). Use when implementing queues, topics/subscriptions, message sessions, dead-letter handling, or enterpri..."
 package: "@azure/service-bus"
+risk: unknown
+source: community
 ---
 
 # Azure Service Bus SDK for TypeScript
@@ -156,7 +156,10 @@ const sender = client.createSender("my-queue");
 
 // Schedule for future delivery
 const scheduledTime = new Date(Date.now() + 60000); // 1 minute from now
-const sequenceNumber = await sender.scheduleMessages({ body: "Delayed message" }, scheduledTime);
+const sequenceNumber = await sender.scheduleMessages(
+  { body: "Delayed message" },
+  scheduledTime
+);
 
 // Cancel scheduled message
 await sender.cancelScheduledMessages(sequenceNumber);
@@ -205,9 +208,9 @@ import {
 ```typescript
 // Peek-Lock (default) - message locked until completed/abandoned
 const receiver = client.createReceiver("my-queue", { receiveMode: "peekLock" });
-await receiver.completeMessage(message); // Remove from queue
-await receiver.abandonMessage(message); // Return to queue
-await receiver.deferMessage(message); // Defer for later
+await receiver.completeMessage(message);   // Remove from queue
+await receiver.abandonMessage(message);    // Return to queue
+await receiver.deferMessage(message);      // Defer for later
 await receiver.deadLetterMessage(message); // Move to DLQ
 
 // Receive-and-Delete - message removed immediately
@@ -228,7 +231,8 @@ const receiver = client.createReceiver("my-queue", { receiveMode: "receiveAndDel
 
 For detailed patterns, see:
 
-- [Queues vs Topics Patterns](references/queues-topics.md) - Queue/topic patterns, sessions, receive modes, message
-  settlement
-- [Error Handling and Reliability](references/error-handling.md) - ServiceBusError codes, DLQ handling, lock renewal,
-  graceful shutdown
+- Queues vs Topics Patterns - Queue/topic patterns, sessions, receive modes, message settlement
+- Error Handling and Reliability - ServiceBusError codes, DLQ handling, lock renewal, graceful shutdown
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

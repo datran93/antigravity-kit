@@ -52,13 +52,11 @@ if __name__ == "__main__":
 ```
 
 Key points:
-
 - Call `DBOS.listen_queues()` **before** `DBOS.launch()`
 - Workers can still **enqueue** to any queue, just won't **dequeue** from others
 - By default, workers listen to all declared queues
 
 Use cases:
-
 - CPU vs GPU workers
 - Memory-intensive vs lightweight tasks
 - Geographic task routing

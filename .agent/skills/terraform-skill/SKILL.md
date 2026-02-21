@@ -2,22 +2,19 @@
 name: terraform-skill
 description: "Terraform infrastructure as code best practices"
 license: Apache-2.0
-metadata:
+metadata: 
 author: "Anton Babenko"
 version: 1.5.0
 source: "https://github.com/antonbabenko/terraform-skill"
 risk: safe
 ---
-
 # Terraform Skill for Claude
 
-Comprehensive Terraform and OpenTofu guidance covering testing, modules, CI/CD, and production patterns. Based on
-terraform-best-practices.com and enterprise experience.
+Comprehensive Terraform and OpenTofu guidance covering testing, modules, CI/CD, and production patterns. Based on terraform-best-practices.com and enterprise experience.
 
 ## When to Use This Skill
 
 **Activate this skill when:**
-
 - Creating new Terraform or OpenTofu configurations or modules
 - Setting up testing infrastructure for IaC code
 - Deciding between testing approaches (validate, plan, frameworks)
@@ -27,7 +24,6 @@ terraform-best-practices.com and enterprise experience.
 - Choosing between module patterns or state management approaches
 
 **Don't use this skill for:**
-
 - Basic Terraform/OpenTofu syntax questions (Claude knows this)
 - Provider-specific API reference (link to docs instead)
 - Cloud platform questions unrelated to Terraform/OpenTofu
@@ -38,16 +34,15 @@ terraform-best-practices.com and enterprise experience.
 
 **Module Hierarchy:**
 
-| Type                      | When to Use                                  | Scope                                           |
-| ------------------------- | -------------------------------------------- | ----------------------------------------------- |
-| **Resource Module**       | Single logical group of connected resources  | VPC + subnets, Security group + rules           |
+| Type | When to Use | Scope |
+|------|-------------|-------|
+| **Resource Module** | Single logical group of connected resources | VPC + subnets, Security group + rules |
 | **Infrastructure Module** | Collection of resource modules for a purpose | Multiple resource modules in one region/account |
-| **Composition**           | Complete infrastructure                      | Spans multiple regions/accounts                 |
+| **Composition** | Complete infrastructure | Spans multiple regions/accounts |
 
 **Hierarchy:** Resource → Resource Module → Infrastructure Module → Composition
 
 **Directory Structure:**
-
 ```
 environments/        # Environment-specific configurations
 ├── prod/
@@ -65,17 +60,15 @@ examples/           # Module usage examples (also serve as tests)
 ```
 
 **Key principle from terraform-best-practices.com:**
-
 - Separate **environments** (prod, staging) from **modules** (reusable components)
 - Use **examples/** as both documentation and integration test fixtures
 - Keep modules small and focused (single responsibility)
 
-**For detailed module architecture, see:** [Code Patterns: Module Types & Hierarchy](references/code-patterns.md)
+**For detailed module architecture, see:** Code Patterns: Module Types & Hierarchy
 
 ### 2. Naming Conventions
 
 **Resources:**
-
 ```hcl
 # Good: Descriptive, contextual
 resource "aws_instance" "web_server" { }
@@ -95,14 +88,12 @@ resource "aws_s3_bucket" "bucket" { }
 Use `"this"` when your module creates only one resource of that type:
 
 ✅ DO:
-
 ```hcl
 resource "aws_vpc" "this" {}           # Module creates one VPC
 resource "aws_security_group" "this" {}  # Module creates one SG
 ```
 
 ❌ DON'T use "this" for multiple resources:
-
 ```hcl
 resource "aws_subnet" "this" {}  # If creating multiple subnets
 ```
@@ -110,7 +101,6 @@ resource "aws_subnet" "this" {}  # If creating multiple subnets
 Use descriptive names when creating multiple resources of the same type.
 
 **Variables:**
-
 ```hcl
 # Prefix with context when needed
 var.vpc_cidr_block          # Not just "cidr"
@@ -118,7 +108,6 @@ var.database_instance_class # Not just "instance_class"
 ```
 
 **Files:**
-
 - `main.tf` - Primary resources
 - `variables.tf` - Input variables
 - `outputs.tf` - Output values
@@ -129,15 +118,15 @@ var.database_instance_class # Not just "instance_class"
 
 ### Decision Matrix: Which Testing Approach?
 
-| Your Situation                   | Recommended Approach  | Tools                                    | Cost     |
-| -------------------------------- | --------------------- | ---------------------------------------- | -------- |
-| **Quick syntax check**           | Static analysis       | `terraform validate`, `fmt`              | Free     |
-| **Pre-commit validation**        | Static + lint         | `validate`, `tflint`, `trivy`, `checkov` | Free     |
-| **Terraform 1.6+, simple logic** | Native test framework | Built-in `terraform test`                | Free-Low |
-| **Pre-1.6, or Go expertise**     | Integration testing   | Terratest                                | Low-Med  |
-| **Security/compliance focus**    | Policy as code        | OPA, Sentinel                            | Free     |
-| **Cost-sensitive workflow**      | Mock providers (1.7+) | Native tests + mocking                   | Free     |
-| **Multi-cloud, complex**         | Full integration      | Terratest + real infra                   | Med-High |
+| Your Situation | Recommended Approach | Tools | Cost |
+|----------------|---------------------|-------|------|
+| **Quick syntax check** | Static analysis | `terraform validate`, `fmt` | Free |
+| **Pre-commit validation** | Static + lint | `validate`, `tflint`, `trivy`, `checkov` | Free |
+| **Terraform 1.6+, simple logic** | Native test framework | Built-in `terraform test` | Free-Low |
+| **Pre-1.6, or Go expertise** | Integration testing | Terratest | Low-Med |
+| **Security/compliance focus** | Policy as code | OPA, Sentinel | Free |
+| **Cost-sensitive workflow** | Mock providers (1.7+) | Native tests + mocking | Free |
+| **Multi-cloud, complex** | Full integration | Terratest + real infra | Med-High |
 
 ### Testing Pyramid for Infrastructure
 
@@ -160,7 +149,6 @@ var.database_instance_class # Not just "instance_class"
 **Before generating test code:**
 
 1. **Validate schemas with Terraform MCP:**
-
    ```
    Search provider docs → Get resource schema → Identify block types
    ```
@@ -175,24 +163,19 @@ var.database_instance_class # Not just "instance_class"
    - Or use `command = apply` to materialize
 
 **Common patterns:**
-
 - S3 encryption rules: **set** (use for expressions)
 - Lifecycle transitions: **set** (use for expressions)
 - IAM policy statements: **set** (use for expressions)
 
 **For detailed testing guides, see:**
-
-- **[Testing Frameworks Guide](references/testing-frameworks.md)** - Deep dive into static analysis, native tests, and
-  Terratest
-- **[Quick Reference](references/quick-reference.md#testing-approach-selection)** - Decision flowchart and command cheat
-  sheet
+- **Testing Frameworks Guide** - Deep dive into static analysis, native tests, and Terratest
+- **Quick Reference** - Decision flowchart and command cheat sheet
 
 ## Code Structure Standards
 
 ### Resource Block Ordering
 
 **Strict ordering for consistency:**
-
 1. `count` or `for_each` FIRST (blank line after)
 2. Other arguments
 3. `tags` as last real argument
@@ -242,25 +225,23 @@ variable "environment" {
 }
 ```
 
-**For complete structure guidelines, see:**
-[Code Patterns: Block Ordering & Structure](references/code-patterns.md#block-ordering--structure)
+**For complete structure guidelines, see:** Code Patterns: Block Ordering & Structure
 
 ## Count vs For_Each: When to Use Each
 
 ### Quick Decision Guide
 
-| Scenario                            | Use                         | Why                                 |
-| ----------------------------------- | --------------------------- | ----------------------------------- |
-| Boolean condition (create or don't) | `count = condition ? 1 : 0` | Simple on/off toggle                |
-| Simple numeric replication          | `count = 3`                 | Fixed number of identical resources |
-| Items may be reordered/removed      | `for_each = toset(list)`    | Stable resource addresses           |
-| Reference by key                    | `for_each = map`            | Named access to resources           |
-| Multiple named resources            | `for_each`                  | Better maintainability              |
+| Scenario | Use | Why |
+|----------|-----|-----|
+| Boolean condition (create or don't) | `count = condition ? 1 : 0` | Simple on/off toggle |
+| Simple numeric replication | `count = 3` | Fixed number of identical resources |
+| Items may be reordered/removed | `for_each = toset(list)` | Stable resource addresses |
+| Reference by key | `for_each = map` | Named access to resources |
+| Multiple named resources | `for_each` | Better maintainability |
 
 ### Common Patterns
 
 **Boolean conditions:**
-
 ```hcl
 # ✅ GOOD - Boolean condition
 resource "aws_nat_gateway" "this" {
@@ -270,7 +251,6 @@ resource "aws_nat_gateway" "this" {
 ```
 
 **Stable addressing with for_each:**
-
 ```hcl
 # ✅ GOOD - Removing "us-east-1b" only affects that subnet
 resource "aws_subnet" "private" {
@@ -289,8 +269,7 @@ resource "aws_subnet" "private" {
 }
 ```
 
-**For migration guides and detailed examples, see:**
-[Code Patterns: Count vs For_Each](references/code-patterns.md#count-vs-for_each-deep-dive)
+**For migration guides and detailed examples, see:** Code Patterns: Count vs For_Each
 
 ## Locals for Dependency Management
 
@@ -328,13 +307,11 @@ resource "aws_subnet" "public" {
 ```
 
 **Why this matters:**
-
 - Prevents deletion errors when destroying infrastructure
 - Ensures correct dependency order without explicit `depends_on`
 - Particularly useful for VPC configurations with secondary CIDR blocks
 
-**For detailed examples, see:**
-[Code Patterns: Locals for Dependency Management](references/code-patterns.md#locals-for-dependency-management)
+**For detailed examples, see:** Code Patterns: Locals for Dependency Management
 
 ## Module Development
 
@@ -357,7 +334,6 @@ my-module/
 ### Best Practices Summary
 
 **Variables:**
-
 - ✅ Always include `description`
 - ✅ Use explicit `type` constraints
 - ✅ Provide sensible `default` values where appropriate
@@ -365,18 +341,14 @@ my-module/
 - ✅ Use `sensitive = true` for secrets
 
 **Outputs:**
-
 - ✅ Always include `description`
 - ✅ Mark sensitive outputs with `sensitive = true`
 - ✅ Consider returning objects for related values
 - ✅ Document what consumers should do with each output
 
 **For detailed module patterns, see:**
-
-- **[Module Patterns Guide](references/module-patterns.md)** - Variable best practices, output design, ✅ DO vs ❌ DON'T
-  patterns
-- **[Quick Reference](references/quick-reference.md#common-patterns)** - Resource naming, variable naming, file
-  organization
+- **Module Patterns Guide** - Variable best practices, output design, ✅ DO vs ❌ DON'T patterns
+- **Quick Reference** - Resource naming, variable naming, file organization
 
 ## CI/CD Integration
 
@@ -395,10 +367,8 @@ my-module/
 4. **Tag all test resources** (track spending)
 
 **For complete CI/CD templates, see:**
-
-- **[CI/CD Workflows Guide](references/ci-cd-workflows.md)** - GitHub Actions, GitLab CI, Atlantis integration, cost
-  optimization
-- **[Quick Reference](references/quick-reference.md#troubleshooting-guide)** - Common CI/CD issues and solutions
+- **CI/CD Workflows Guide** - GitHub Actions, GitLab CI, Atlantis integration, cost optimization
+- **Quick Reference** - Common CI/CD issues and solutions
 
 ## Security & Compliance
 
@@ -413,23 +383,19 @@ checkov -d .
 ### Common Issues to Avoid
 
 ❌ **Don't:**
-
 - Store secrets in variables
 - Use default VPC
 - Skip encryption
 - Open security groups to 0.0.0.0/0
 
 ✅ **Do:**
-
 - Use AWS Secrets Manager / Parameter Store
 - Create dedicated VPCs
 - Enable encryption at rest
 - Use least-privilege security groups
 
 **For detailed security guidance, see:**
-
-- **[Security & Compliance Guide](references/security-compliance.md)** - Trivy/Checkov integration, secrets management,
-  state file security, compliance testing
+- **Security & Compliance Guide** - Trivy/Checkov integration, secrets management, state file security, compliance testing
 
 ## Version Management
 
@@ -443,12 +409,12 @@ version = ">= 5.0"     # Minimum (risky - breaking changes)
 
 ### Strategy by Component
 
-| Component          | Strategy            | Example                       |
-| ------------------ | ------------------- | ----------------------------- |
-| **Terraform**      | Pin minor version   | `required_version = "~> 1.9"` |
-| **Providers**      | Pin major version   | `version = "~> 5.0"`          |
-| **Modules (prod)** | Pin exact version   | `version = "5.1.2"`           |
-| **Modules (dev)**  | Allow patch updates | `version = "~> 5.1"`          |
+| Component | Strategy | Example |
+|-----------|----------|---------|
+| **Terraform** | Pin minor version | `required_version = "~> 1.9"` |
+| **Providers** | Pin major version | `version = "~> 5.0"` |
+| **Modules (prod)** | Pin exact version | `version = "5.1.2"` |
+| **Modules (dev)** | Allow patch updates | `version = "~> 5.1"` |
 
 ### Update Workflow
 
@@ -463,24 +429,23 @@ terraform init -upgrade     # Updates providers
 terraform plan
 ```
 
-**For detailed version management, see:**
-[Code Patterns: Version Management](references/code-patterns.md#version-management)
+**For detailed version management, see:** Code Patterns: Version Management
 
 ## Modern Terraform Features (1.0+)
 
 ### Feature Availability by Version
 
-| Feature                    | Version | Use Case                                     |
-| -------------------------- | ------- | -------------------------------------------- |
-| `try()` function           | 0.13+   | Safe fallbacks, replaces `element(concat())` |
-| `nullable = false`         | 1.1+    | Prevent null values in variables             |
-| `moved` blocks             | 1.1+    | Refactor without destroy/recreate            |
-| `optional()` with defaults | 1.3+    | Optional object attributes                   |
-| Native testing             | 1.6+    | Built-in test framework                      |
-| Mock providers             | 1.7+    | Cost-free unit testing                       |
-| Provider functions         | 1.8+    | Provider-specific data transformation        |
-| Cross-variable validation  | 1.9+    | Validate relationships between variables     |
-| Write-only arguments       | 1.11+   | Secrets never stored in state                |
+| Feature | Version | Use Case |
+|---------|---------|----------|
+| `try()` function | 0.13+ | Safe fallbacks, replaces `element(concat())` |
+| `nullable = false` | 1.1+ | Prevent null values in variables |
+| `moved` blocks | 1.1+ | Refactor without destroy/recreate |
+| `optional()` with defaults | 1.3+ | Optional object attributes |
+| Native testing | 1.6+ | Built-in test framework |
+| Mock providers | 1.7+ | Cost-free unit testing |
+| Provider functions | 1.8+ | Provider-specific data transformation |
+| Cross-variable validation | 1.9+ | Validate relationships between variables |
+| Write-only arguments | 1.11+ | Secrets never stored in state |
 
 ### Quick Examples
 
@@ -509,54 +474,41 @@ variable "backup_days" {
 }
 ```
 
-**For complete patterns and examples, see:**
-[Code Patterns: Modern Terraform Features](references/code-patterns.md#modern-terraform-features-10)
+**For complete patterns and examples, see:** Code Patterns: Modern Terraform Features
 
 ## Version-Specific Guidance
 
 ### Terraform 1.0-1.5
-
 - Use Terratest for testing
 - No native testing framework available
 - Focus on static analysis and plan validation
 
 ### Terraform 1.6+ / OpenTofu 1.6+
-
 - **New:** Native `terraform test` / `tofu test` command
 - Consider migrating from external frameworks for simple tests
 - Keep Terratest only for complex integration tests
 
 ### Terraform 1.7+ / OpenTofu 1.7+
-
 - **New:** Mock providers for unit testing
 - Reduce cost by mocking external dependencies
 - Use real integration tests for final validation
 
 ### Terraform vs OpenTofu
 
-Both are fully supported by this skill. For licensing, governance, and feature comparison, see
-[Quick Reference: Terraform vs OpenTofu](references/quick-reference.md#terraform-vs-opentofu-comparison).
+Both are fully supported by this skill. For licensing, governance, and feature comparison, see Quick Reference: Terraform vs OpenTofu.
 
 ## Detailed Guides
 
-This skill uses **progressive disclosure** - essential information is in this main file, detailed guides are available
-when needed:
+This skill uses **progressive disclosure** - essential information is in this main file, detailed guides are available when needed:
 
 📚 **Reference Files:**
+- **Testing Frameworks** - In-depth guide to static analysis, native tests, and Terratest
+- **Module Patterns** - Module structure, variable/output best practices, ✅ DO vs ❌ DON'T patterns
+- **CI/CD Workflows** - GitHub Actions, GitLab CI templates, cost optimization, automated cleanup
+- **Security & Compliance** - Trivy/Checkov integration, secrets management, compliance testing
+- **Quick Reference** - Command cheat sheets, decision flowcharts, troubleshooting guide
 
-- **[Testing Frameworks](references/testing-frameworks.md)** - In-depth guide to static analysis, native tests, and
-  Terratest
-- **[Module Patterns](references/module-patterns.md)** - Module structure, variable/output best practices, ✅ DO vs ❌
-  DON'T patterns
-- **[CI/CD Workflows](references/ci-cd-workflows.md)** - GitHub Actions, GitLab CI templates, cost optimization,
-  automated cleanup
-- **[Security & Compliance](references/security-compliance.md)** - Trivy/Checkov integration, secrets management,
-  compliance testing
-- **[Quick Reference](references/quick-reference.md)** - Command cheat sheets, decision flowcharts, troubleshooting
-  guide
-
-**How to use:** When you need detailed information on a topic, reference the appropriate guide. Claude will load it on
-demand to provide comprehensive guidance.
+**How to use:** When you need detailed information on a topic, reference the appropriate guide. Claude will load it on demand to provide comprehensive guidance.
 
 ## License
 

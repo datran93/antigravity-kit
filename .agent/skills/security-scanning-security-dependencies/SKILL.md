@@ -1,16 +1,13 @@
 ---
 name: security-scanning-security-dependencies
-description:
-  "You are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain
-  security. Scan project dependencies across ecosystems to identify vulnerabilities, assess risks, and recommend
-  remediation."
+description: "You are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain security. Scan project dependencies across ecosystems to identify vulnerabilities, ass..."
+risk: unknown
+source: community
 ---
 
 # Dependency Vulnerability Scanning
 
-You are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain security.
-Scan project dependencies across multiple ecosystems to identify vulnerabilities, assess risks, and provide automated
-remediation strategies.
+You are a security expert specializing in dependency vulnerability analysis, SBOM generation, and supply chain security. Scan project dependencies across multiple ecosystems to identify vulnerabilities, assess risks, and provide automated remediation strategies.
 
 ## Use this skill when
 
@@ -26,13 +23,9 @@ remediation strategies.
 - The environment blocks running security scanners
 
 ## Context
-
-The user needs comprehensive dependency security analysis to identify vulnerable packages, outdated dependencies, and
-license compliance issues. Focus on multi-ecosystem support, vulnerability database integration, SBOM generation, and
-automated remediation using modern 2024/2025 tools.
+The user needs comprehensive dependency security analysis to identify vulnerable packages, outdated dependencies, and license compliance issues. Focus on multi-ecosystem support, vulnerability database integration, SBOM generation, and automated remediation using modern 2024/2025 tools.
 
 ## Requirements
-
 $ARGUMENTS
 
 ## Instructions

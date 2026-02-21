@@ -1,15 +1,13 @@
 ---
 name: github-workflow-automation
-description:
-  "Automate GitHub workflows with AI assistance. Includes PR reviews, issue triage, CI/CD integration, and Git
-  operations. Use when automating GitHub workflows, setting up PR review automation, creating GitHub Actions, or
-  triaging issues."
+description: "Automate GitHub workflows with AI assistance. Includes PR reviews, issue triage, CI/CD integration, and Git operations. Use when automating GitHub workflows, setting up PR review automation, creati..."
+risk: unknown
+source: community
 ---
 
 # 🔧 GitHub Workflow Automation
 
-> Patterns for automating GitHub workflows with AI assistance, inspired by
-> [Gemini CLI](https://github.com/google-gemini/gemini-cli) and modern DevOps practices.
+> Patterns for automating GitHub workflows with AI assistance, inspired by [Gemini CLI](https://github.com/google-gemini/gemini-cli) and modern DevOps practices.
 
 ## When to Use This Skill
 
@@ -563,7 +561,9 @@ async function smartCherryPick(commitHash: string, targetBranch: string) {
   const commitInfo = await exec(`git show ${commitHash} --stat`);
 
   // Check for potential conflicts
-  const targetDiff = await exec(`git diff ${targetBranch}...HEAD -- ${affectedFiles}`);
+  const targetDiff = await exec(
+    `git diff ${targetBranch}...HEAD -- ${affectedFiles}`
+  );
 
   // AI analysis
   const analysis = await ai.analyze(`
@@ -579,7 +579,9 @@ async function smartCherryPick(commitHash: string, targetBranch: string) {
 
   if (analysis.willConflict) {
     // Create branch for manual resolution
-    await exec(`git checkout -b cherry-pick-${commitHash.slice(0, 7)} ${targetBranch}`);
+    await exec(
+      `git checkout -b cherry-pick-${commitHash.slice(0, 7)} ${targetBranch}`
+    );
     const result = await exec(`git cherry-pick ${commitHash}`, {
       allowFail: true,
     });

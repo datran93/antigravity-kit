@@ -7,8 +7,7 @@ tags: communication, stream, real-time, async-generator
 
 ## Use Streams for Real-Time Data
 
-Workflows can stream data to clients in real-time using `DBOS.writeStream`, `DBOS.closeStream`, and `DBOS.readStream`.
-Useful for LLM output streaming or progress reporting.
+Workflows can stream data to clients in real-time using `DBOS.writeStream`, `DBOS.closeStream`, and `DBOS.readStream`. Useful for LLM output streaming or progress reporting.
 
 **Incorrect (accumulating results then returning at end):**
 
@@ -42,7 +41,6 @@ for await (const value of DBOS.readStream<string>(handle.workflowID, "results"))
 ```
 
 Key behaviors:
-
 - A workflow may have any number of streams, each identified by a unique key
 - Streams are immutable and append-only
 - Writes from workflows happen exactly-once

@@ -1,8 +1,6 @@
 ---
 name: threejs-skills
-description:
-  Create 3D scenes, interactive experiences, and visual effects using Three.js. Use when user requests 3D graphics,
-  WebGL experiences, 3D visualizations, animations, or interactive 3D elements.
+description: "Create 3D scenes, interactive experiences, and visual effects using Three.js. Use when user requests 3D graphics, WebGL experiences, 3D visualizations, animations, or interactive 3D elements."
 source: https://github.com/CloudAI-X/threejs-skills
 risk: safe
 ---
@@ -265,7 +263,10 @@ for (let i = 0; i < particlesCount * 3; i++) {
   posArray[i] = (Math.random() - 0.5) * 10;
 }
 
-particlesGeometry.setAttribute("position", new THREE.BufferAttribute(posArray, 3));
+particlesGeometry.setAttribute(
+  "position",
+  new THREE.BufferAttribute(posArray, 3),
+);
 
 const particlesMaterial = new THREE.PointsMaterial({
   size: 0.02,
@@ -473,8 +474,7 @@ geometry.setAttribute("position", new THREE.BufferAttribute(vertices, 3));
 
 ### Post-Processing Effects
 
-While advanced post-processing may not be available in r128 CDN, basic effects can be achieved with shaders and render
-targets.
+While advanced post-processing may not be available in r128 CDN, basic effects can be achieved with shaders and render targets.
 
 ### Group Objects
 
@@ -502,8 +502,7 @@ Follow these patterns for reliable, performant 3D experiences.
 
 ## Modern Three.js & Production Practices
 
-While this skill focuses on CDN-based Three.js (r128) for artifact compatibility, here's what you'd do in production
-environments:
+While this skill focuses on CDN-based Three.js (r128) for artifact compatibility, here's what you'd do in production environments:
 
 ### Modular Imports with Build Tools
 
@@ -537,7 +536,9 @@ gsap.to(mesh.position, {
 
 // Complex sequences:
 const timeline = gsap.timeline();
-timeline.to(mesh.rotation, { y: Math.PI * 2, duration: 2 }).to(mesh.scale, { x: 2, y: 2, z: 2, duration: 1 }, "-=1");
+timeline
+  .to(mesh.rotation, { y: Math.PI * 2, duration: 2 })
+  .to(mesh.scale, { x: 2, y: 2, z: 2, duration: 1 }, "-=1");
 ```
 
 **Why GSAP:**
@@ -593,7 +594,11 @@ const instancedMesh = new THREE.InstancedMesh(geometry, material, 1000);
 // Set transforms for each instance
 const matrix = new THREE.Matrix4();
 for (let i = 0; i < 1000; i++) {
-  matrix.setPosition(Math.random() * 100, Math.random() * 100, Math.random() * 100);
+  matrix.setPosition(
+    Math.random() * 100,
+    Math.random() * 100,
+    Math.random() * 100,
+  );
   instancedMesh.setMatrixAt(i, matrix);
 }
 ```
@@ -646,5 +651,4 @@ Three.js (latest) + Vite/Webpack
 └── Post-processing effects
 ```
 
-This skill provides CDN-compatible foundations. In production, you'd layer on these modern tools for professional
-results.
+This skill provides CDN-compatible foundations. In production, you'd layer on these modern tools for professional results.

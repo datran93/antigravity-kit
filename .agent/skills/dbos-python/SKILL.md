@@ -1,9 +1,6 @@
 ---
 name: dbos-python
-description:
-  DBOS Python SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing
-  Python code with DBOS, creating workflows and steps, using queues, using DBOSClient from external applications, or
-  building applications that need to be resilient to failures.
+description: "DBOS Python SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing Python code with DBOS, creating workflows and steps, using queues, using DBOSC..."
 risk: safe
 source: https://docs.dbos.dev/
 license: MIT
@@ -12,9 +9,7 @@ metadata:
   version: "1.0.0"
   organization: DBOS
   date: January 2026
-  abstract:
-    Comprehensive guide for building fault-tolerant Python applications with DBOS. Covers workflows, steps, queues,
-    communication patterns, and best practices for durable execution.
+  abstract: Comprehensive guide for building fault-tolerant Python applications with DBOS. Covers workflows, steps, queues, communication patterns, and best practices for durable execution.
 ---
 
 # DBOS Python Best Practices
@@ -24,7 +19,6 @@ Guide for building reliable, fault-tolerant Python applications with DBOS durabl
 ## When to Use
 
 Reference these guidelines when:
-
 - Adding DBOS to existing Python code
 - Creating workflows and steps
 - Using queues for concurrency control
@@ -35,17 +29,17 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category      | Impact     | Prefix       |
-| -------- | ------------- | ---------- | ------------ |
-| 1        | Lifecycle     | CRITICAL   | `lifecycle-` |
-| 2        | Workflow      | CRITICAL   | `workflow-`  |
-| 3        | Step          | HIGH       | `step-`      |
-| 4        | Queue         | HIGH       | `queue-`     |
-| 5        | Communication | MEDIUM     | `comm-`      |
-| 6        | Pattern       | MEDIUM     | `pattern-`   |
-| 7        | Testing       | LOW-MEDIUM | `test-`      |
-| 8        | Client        | MEDIUM     | `client-`    |
-| 9        | Advanced      | LOW        | `advanced-`  |
+| Priority | Category | Impact | Prefix |
+|----------|----------|--------|--------|
+| 1 | Lifecycle | CRITICAL | `lifecycle-` |
+| 2 | Workflow | CRITICAL | `workflow-` |
+| 3 | Step | HIGH | `step-` |
+| 4 | Queue | HIGH | `queue-` |
+| 5 | Communication | MEDIUM | `comm-` |
+| 6 | Pattern | MEDIUM | `pattern-` |
+| 7 | Testing | LOW-MEDIUM | `test-` |
+| 8 | Client | MEDIUM | `client-` |
+| 9 | Advanced | LOW | `advanced-` |
 
 ## Critical Rules
 
@@ -72,8 +66,7 @@ if __name__ == "__main__":
 
 ### Workflow and Step Structure
 
-Workflows are comprised of steps. Any function performing complex operations or accessing external services must be a
-step:
+Workflows are comprised of steps. Any function performing complex operations or accessing external services must be a step:
 
 ```python
 @DBOS.step()

@@ -1,8 +1,10 @@
 ---
 name: azure-resource-manager-mysql-dotnet
-description: |
+description: "|"
   Azure MySQL Flexible Server SDK for .NET. Database management for MySQL Flexible Server deployments. Use for creating servers, databases, firewall rules, configurations, backups, and high availability. Triggers: "MySQL", "MySqlFlexibleServer", "MySQL Flexible Server", "Azure Database for MySQL", "MySQL database management", "MySQL firewall", "MySQL backup".
 package: Azure.ResourceManager.MySql
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.MySql (.NET)
@@ -282,36 +284,36 @@ await server.DeleteAsync(WaitUntil.Completed);
 
 ## Key Types Reference
 
-| Type                                          | Purpose                   |
-| --------------------------------------------- | ------------------------- |
-| `MySqlFlexibleServerResource`                 | Flexible Server instance  |
-| `MySqlFlexibleServerData`                     | Server configuration data |
-| `MySqlFlexibleServerCollection`               | Collection of servers     |
-| `MySqlFlexibleServerDatabaseResource`         | Database within server    |
-| `MySqlFlexibleServerFirewallRuleResource`     | IP firewall rule          |
-| `MySqlFlexibleServerConfigurationResource`    | Server parameter          |
-| `MySqlFlexibleServerBackupResource`           | Backup metadata           |
-| `MySqlFlexibleServerAadAdministratorResource` | Entra ID admin            |
-| `MySqlFlexibleServerSku`                      | SKU (compute tier + size) |
-| `MySqlFlexibleServerStorage`                  | Storage configuration     |
-| `MySqlFlexibleServerHighAvailability`         | HA configuration          |
-| `MySqlFlexibleServerBackupProperties`         | Backup settings           |
+| Type | Purpose |
+|------|---------|
+| `MySqlFlexibleServerResource` | Flexible Server instance |
+| `MySqlFlexibleServerData` | Server configuration data |
+| `MySqlFlexibleServerCollection` | Collection of servers |
+| `MySqlFlexibleServerDatabaseResource` | Database within server |
+| `MySqlFlexibleServerFirewallRuleResource` | IP firewall rule |
+| `MySqlFlexibleServerConfigurationResource` | Server parameter |
+| `MySqlFlexibleServerBackupResource` | Backup metadata |
+| `MySqlFlexibleServerAadAdministratorResource` | Entra ID admin |
+| `MySqlFlexibleServerSku` | SKU (compute tier + size) |
+| `MySqlFlexibleServerStorage` | Storage configuration |
+| `MySqlFlexibleServerHighAvailability` | HA configuration |
+| `MySqlFlexibleServerBackupProperties` | Backup settings |
 
 ## SKU Tiers
 
-| Tier              | Use Case                  | SKU Examples                       |
-| ----------------- | ------------------------- | ---------------------------------- |
-| `Burstable`       | Dev/test, light workloads | Standard_B1ms, Standard_B2s        |
-| `GeneralPurpose`  | Production workloads      | Standard_D2ds_v4, Standard_D4ds_v4 |
-| `MemoryOptimized` | High memory requirements  | Standard_E2ds_v4, Standard_E4ds_v4 |
+| Tier | Use Case | SKU Examples |
+|------|----------|--------------|
+| `Burstable` | Dev/test, light workloads | Standard_B1ms, Standard_B2s |
+| `GeneralPurpose` | Production workloads | Standard_D2ds_v4, Standard_D4ds_v4 |
+| `MemoryOptimized` | High memory requirements | Standard_E2ds_v4, Standard_E4ds_v4 |
 
 ## High Availability Modes
 
-| Mode            | Description                      |
-| --------------- | -------------------------------- |
-| `Disabled`      | No HA (single server)            |
-| `SameZone`      | HA within same availability zone |
-| `ZoneRedundant` | HA across availability zones     |
+| Mode | Description |
+|------|-------------|
+| `Disabled` | No HA (single server) |
+| `SameZone` | HA within same availability zone |
+| `ZoneRedundant` | HA across availability zones |
 
 ## Best Practices
 
@@ -376,17 +378,20 @@ string connectionString = $"Server={server.Data.FullyQualifiedDomainName};" +
 
 ## Related SDKs
 
-| SDK                                | Purpose                     | Install                                               |
-| ---------------------------------- | --------------------------- | ----------------------------------------------------- |
-| `Azure.ResourceManager.MySql`      | MySQL management (this SDK) | `dotnet add package Azure.ResourceManager.MySql`      |
-| `Azure.ResourceManager.PostgreSql` | PostgreSQL management       | `dotnet add package Azure.ResourceManager.PostgreSql` |
-| `MySqlConnector`                   | MySQL data access           | `dotnet add package MySqlConnector`                   |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.ResourceManager.MySql` | MySQL management (this SDK) | `dotnet add package Azure.ResourceManager.MySql` |
+| `Azure.ResourceManager.PostgreSql` | PostgreSQL management | `dotnet add package Azure.ResourceManager.PostgreSql` |
+| `MySqlConnector` | MySQL data access | `dotnet add package MySqlConnector` |
 
 ## Reference Links
 
-| Resource              | URL                                                                                        |
-| --------------------- | ------------------------------------------------------------------------------------------ |
-| NuGet Package         | https://www.nuget.org/packages/Azure.ResourceManager.MySql                                 |
-| API Reference         | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.mysql                         |
-| Product Documentation | https://learn.microsoft.com/azure/mysql/flexible-server/                                   |
-| GitHub Source         | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/mysql/Azure.ResourceManager.MySql |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.MySql |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.mysql |
+| Product Documentation | https://learn.microsoft.com/azure/mysql/flexible-server/ |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/mysql/Azure.ResourceManager.MySql |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # React Modernization
 
-Master React version upgrades, class to hooks migration, concurrent features adoption, and codemods for automated
-transformation.
+Master React version upgrades, class to hooks migration, concurrent features adoption, and codemods for automated transformation.
 
 ## When to Use This Skill
 
@@ -24,14 +23,12 @@ transformation.
 **Breaking Changes by Version:**
 
 **React 17:**
-
 - Event delegation changes
 - No event pooling
 - Effect cleanup timing
 - JSX transform (no React import needed)
 
 **React 18:**
-
 - Automatic batching
 - Concurrent rendering
 - Strict Mode changes (double invocation)
@@ -41,7 +38,6 @@ transformation.
 ## Class to Hooks Migration
 
 ### State Management
-
 ```javascript
 // Before: Class component
 class Counter extends React.Component {
@@ -49,13 +45,13 @@ class Counter extends React.Component {
     super(props);
     this.state = {
       count: 0,
-      name: "",
+      name: ''
     };
   }
 
   increment = () => {
     this.setState({ count: this.state.count + 1 });
-  };
+  }
 
   render() {
     return (
@@ -70,7 +66,7 @@ class Counter extends React.Component {
 // After: Functional component with hooks
 function Counter() {
   const [count, setCount] = useState(0);
-  const [name, setName] = useState("");
+  const [name, setName] = useState('');
 
   const increment = () => {
     setCount(count + 1);
@@ -86,7 +82,6 @@ function Counter() {
 ```
 
 ### Lifecycle Methods to Hooks
-
 ```javascript
 // Before: Lifecycle methods
 class DataFetcher extends React.Component {
@@ -159,7 +154,6 @@ function DataFetcher({ id }) {
 ```
 
 ### Context and HOCs to Hooks
-
 ```javascript
 // Before: Context consumer and HOC
 const ThemeContext = React.createContext();
@@ -168,7 +162,11 @@ class ThemedButton extends React.Component {
   static contextType = ThemeContext;
 
   render() {
-    return <button style={{ background: this.context.theme }}>{this.props.children}</button>;
+    return (
+      <button style={{ background: this.context.theme }}>
+        {this.props.children}
+      </button>
+    );
   }
 }
 
@@ -176,7 +174,11 @@ class ThemedButton extends React.Component {
 function ThemedButton({ children }) {
   const { theme } = useContext(ThemeContext);
 
-  return <button style={{ background: theme }}>{children}</button>;
+  return (
+    <button style={{ background: theme }}>
+      {children}
+    </button>
+  );
 }
 
 // Before: HOC for data fetching
@@ -185,7 +187,7 @@ function withUser(Component) {
     state = { user: null };
 
     componentDidMount() {
-      fetchUser().then((user) => this.setState({ user }));
+      fetchUser().then(user => this.setState({ user }));
     }
 
     render() {
@@ -215,55 +217,52 @@ function UserProfile() {
 ## React 18 Concurrent Features
 
 ### New Root API
-
 ```javascript
 // Before: React 17
-import ReactDOM from "react-dom";
+import ReactDOM from 'react-dom';
 
-ReactDOM.render(<App />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById('root'));
 
 // After: React 18
-import { createRoot } from "react-dom/client";
+import { createRoot } from 'react-dom/client';
 
-const root = createRoot(document.getElementById("root"));
+const root = createRoot(document.getElementById('root'));
 root.render(<App />);
 ```
 
 ### Automatic Batching
-
 ```javascript
 // React 18: All updates are batched
 function handleClick() {
-  setCount((c) => c + 1);
-  setFlag((f) => !f);
+  setCount(c => c + 1);
+  setFlag(f => !f);
   // Only one re-render (batched)
 }
 
 // Even in async:
 setTimeout(() => {
-  setCount((c) => c + 1);
-  setFlag((f) => !f);
+  setCount(c => c + 1);
+  setFlag(f => !f);
   // Still batched in React 18!
 }, 1000);
 
 // Opt out if needed
-import { flushSync } from "react-dom";
+import { flushSync } from 'react-dom';
 
 flushSync(() => {
-  setCount((c) => c + 1);
+  setCount(c => c + 1);
 });
 // Re-render happens here
-setFlag((f) => !f);
+setFlag(f => !f);
 // Another re-render
 ```
 
 ### Transitions
-
 ```javascript
-import { useState, useTransition } from "react";
+import { useState, useTransition } from 'react';
 
 function SearchResults() {
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [results, setResults] = useState([]);
   const [isPending, startTransition] = useTransition();
 
@@ -288,9 +287,8 @@ function SearchResults() {
 ```
 
 ### Suspense for Data Fetching
-
 ```javascript
-import { Suspense } from "react";
+import { Suspense } from 'react';
 
 // Resource-based data fetching (with React 18)
 const resource = fetchProfileData();
@@ -321,7 +319,6 @@ function ProfileTimeline() {
 ## Codemods for Automation
 
 ### Run React Codemods
-
 ```bash
 # Install jscodeshift
 npm install -g jscodeshift
@@ -344,25 +341,22 @@ npx codemod react/hooks/convert-class-to-function src/
 ```
 
 ### Custom Codemod Example
-
 ```javascript
 // custom-codemod.js
-module.exports = function (file, api) {
+module.exports = function(file, api) {
   const j = api.jscodeshift;
   const root = j(file.source);
 
   // Find setState calls
-  root
-    .find(j.CallExpression, {
-      callee: {
-        type: "MemberExpression",
-        property: { name: "setState" },
-      },
-    })
-    .forEach((path) => {
-      // Transform to useState
-      // ... transformation logic
-    });
+  root.find(j.CallExpression, {
+    callee: {
+      type: 'MemberExpression',
+      property: { name: 'setState' }
+    }
+  }).forEach(path => {
+    // Transform to useState
+    // ... transformation logic
+  });
 
   return root.toSource();
 };
@@ -373,36 +367,38 @@ module.exports = function (file, api) {
 ## Performance Optimization
 
 ### useMemo and useCallback
-
 ```javascript
 function ExpensiveComponent({ items, filter }) {
   // Memoize expensive calculation
   const filteredItems = useMemo(() => {
-    return items.filter((item) => item.category === filter);
+    return items.filter(item => item.category === filter);
   }, [items, filter]);
 
   // Memoize callback to prevent child re-renders
   const handleClick = useCallback((id) => {
-    console.log("Clicked:", id);
+    console.log('Clicked:', id);
   }, []); // No dependencies, never changes
 
-  return <List items={filteredItems} onClick={handleClick} />;
+  return (
+    <List items={filteredItems} onClick={handleClick} />
+  );
 }
 
 // Child component with memo
 const List = React.memo(({ items, onClick }) => {
-  return items.map((item) => <Item key={item.id} item={item} onClick={onClick} />);
+  return items.map(item => (
+    <Item key={item.id} item={item} onClick={onClick} />
+  ));
 });
 ```
 
 ### Code Splitting
-
 ```javascript
-import { lazy, Suspense } from "react";
+import { lazy, Suspense } from 'react';
 
 // Lazy load components
-const Dashboard = lazy(() => import("./Dashboard"));
-const Settings = lazy(() => import("./Settings"));
+const Dashboard = lazy(() => import('./Dashboard'));
+const Settings = lazy(() => import('./Settings'));
 
 function App() {
   return (
@@ -449,14 +445,12 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 
 ```markdown
 ### Pre-Migration
-
 - [ ] Update dependencies incrementally (not all at once)
 - [ ] Review breaking changes in release notes
 - [ ] Set up testing suite
 - [ ] Create feature branch
 
 ### Class → Hooks Migration
-
 - [ ] Identify class components to migrate
 - [ ] Start with leaf components (no children)
 - [ ] Convert state to useState
@@ -466,7 +460,6 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 - [ ] Test thoroughly
 
 ### React 18 Upgrade
-
 - [ ] Update to React 17 first (if needed)
 - [ ] Update react and react-dom to 18
 - [ ] Update @types/react if using TypeScript
@@ -476,7 +469,6 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 - [ ] Adopt Suspense/Transitions where beneficial
 
 ### Performance
-
 - [ ] Identify performance bottlenecks
 - [ ] Add React.memo where appropriate
 - [ ] Use useMemo/useCallback for expensive operations
@@ -484,7 +476,6 @@ function List<T>({ items, renderItem }: ListProps<T>) {
 - [ ] Optimize re-renders
 
 ### Testing
-
 - [ ] Update test utilities (React Testing Library)
 - [ ] Test with React 18 features
 - [ ] Check for warnings in console

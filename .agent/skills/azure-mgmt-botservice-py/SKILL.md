@@ -1,8 +1,10 @@
 ---
 name: azure-mgmt-botservice-py
-description: |
+description: "|"
   Azure Bot Service Management SDK for Python. Use for creating, managing, and configuring Azure Bot Service resources.
   Triggers: "azure-mgmt-botservice", "AzureBotService", "bot management", "conversational AI", "bot channels".
+risk: unknown
+source: community
 ---
 
 # Azure Bot Service Management SDK for Python
@@ -281,33 +283,33 @@ for conn in connections:
 
 ## Client Operations
 
-| Operation               | Method                         |
-| ----------------------- | ------------------------------ |
-| `client.bots`           | Bot CRUD operations            |
-| `client.channels`       | Channel configuration          |
-| `client.bot_connection` | OAuth connection settings      |
-| `client.direct_line`    | Direct Line channel operations |
-| `client.email`          | Email channel operations       |
-| `client.operations`     | Available operations           |
-| `client.host_settings`  | Host settings operations       |
+| Operation | Method |
+|-----------|--------|
+| `client.bots` | Bot CRUD operations |
+| `client.channels` | Channel configuration |
+| `client.bot_connection` | OAuth connection settings |
+| `client.direct_line` | Direct Line channel operations |
+| `client.email` | Email channel operations |
+| `client.operations` | Available operations |
+| `client.host_settings` | Host settings operations |
 
 ## SKU Options
 
-| SKU  | Description                        |
-| ---- | ---------------------------------- |
-| `F0` | Free tier (limited messages)       |
+| SKU | Description |
+|-----|-------------|
+| `F0` | Free tier (limited messages) |
 | `S1` | Standard tier (unlimited messages) |
 
 ## Channel Types
 
-| Channel             | Class           | Purpose                     |
-| ------------------- | --------------- | --------------------------- |
-| `MsTeamsChannel`    | Microsoft Teams | Teams integration           |
-| `DirectLineChannel` | Direct Line     | Custom client integration   |
-| `WebChatChannel`    | Web Chat        | Embeddable web widget       |
-| `SlackChannel`      | Slack           | Slack workspace integration |
-| `FacebookChannel`   | Facebook        | Messenger integration       |
-| `EmailChannel`      | Email           | Email communication         |
+| Channel | Class | Purpose |
+|---------|-------|---------|
+| `MsTeamsChannel` | Microsoft Teams | Teams integration |
+| `DirectLineChannel` | Direct Line | Custom client integration |
+| `WebChatChannel` | Web Chat | Embeddable web widget |
+| `SlackChannel` | Slack | Slack workspace integration |
+| `FacebookChannel` | Facebook | Messenger integration |
+| `EmailChannel` | Email | Email communication |
 
 ## Best Practices
 
@@ -318,3 +320,6 @@ for conn in connections:
 5. **Rotate Direct Line keys** periodically
 6. **Use managed identity** when possible for bot connections
 7. **Configure proper CORS** for Web Chat channel
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

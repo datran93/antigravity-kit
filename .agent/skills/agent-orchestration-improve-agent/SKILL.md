@@ -1,16 +1,15 @@
 ---
 name: agent-orchestration-improve-agent
-description:
-  "Systematic improvement of existing agents through performance analysis, prompt engineering, and continuous iteration."
+description: "Systematic improvement of existing agents through performance analysis, prompt engineering, and continuous iteration."
+risk: unknown
+source: community
 ---
 
 # Agent Performance Optimization Workflow
 
 Systematic improvement of existing agents through performance analysis, prompt engineering, and continuous iteration.
 
-[Extended thinking: Agent optimization requires a data-driven approach combining performance metrics, user feedback
-analysis, and advanced prompt engineering techniques. Success depends on systematic evaluation, targeted improvements,
-and rigorous testing with rollback capabilities for production safety.]
+[Extended thinking: Agent optimization requires a data-driven approach combining performance metrics, user feedback analysis, and advanced prompt engineering techniques. Success depends on systematic evaluation, targeted improvements, and rigorous testing with rollback capabilities for production safety.]
 
 ## Use this skill when
 
@@ -349,5 +348,4 @@ Establish regular improvement cadence:
 - **Quarterly**: Major version updates with new capabilities
 - **Annually**: Strategic review and architecture updates
 
-Remember: Agent optimization is an iterative process. Each cycle builds upon previous learnings, gradually improving
-performance while maintaining stability and safety.
+Remember: Agent optimization is an iterative process. Each cycle builds upon previous learnings, gradually improving performance while maintaining stability and safety.

@@ -7,8 +7,7 @@ tags: step, external, api, checkpoint
 
 ## Use Steps for External Operations
 
-Any function that performs complex operations, accesses external APIs, or has side effects should be a step. Step
-results are checkpointed, enabling workflow recovery.
+Any function that performs complex operations, accesses external APIs, or has side effects should be a step. Step results are checkpointed, enabling workflow recovery.
 
 **Incorrect (external call in workflow):**
 
@@ -67,14 +66,12 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 Step type signature: `type Step[R any] func(ctx context.Context) (R, error)`
 
 Step requirements:
-
 - The function must accept a `context.Context` parameter — use the one provided, not the workflow's context
 - Inputs and outputs must be serializable to JSON
 - Cannot start or enqueue workflows from within steps
 - Calling a step from within another step makes the inner call part of the outer step's execution
 
 When to use steps:
-
 - API calls to external services
 - File system operations
 - Random number generation

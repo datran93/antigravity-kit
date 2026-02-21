@@ -1,12 +1,13 @@
 ---
 name: bash-pro
-description:
-  Master of defensive Bash scripting for production automation, CI/CD pipelines, and system utilities. Expert in safe,
-  portable, and testable shell scripts.
+description: "Master of defensive Bash scripting for production automation, CI/CD"
+  pipelines, and system utilities. Expert in safe, portable, and testable shell
+  scripts.
 metadata:
   model: sonnet
+risk: unknown
+source: community
 ---
-
 ## Use this skill when
 
 - Writing or reviewing Bash scripts for automation, CI/CD, or ops
@@ -220,7 +221,6 @@ metadata:
 ## Essential Tools
 
 ### Static Analysis & Formatting
-
 - **ShellCheck**: Static analyzer with `enable=all` and `external-sources=true` configuration
 - **shfmt**: Shell script formatter with standard config (`-i 2 -ci -bn -sr -kp`)
 - **checkbashisms**: Detect bash-specific constructs for portability analysis
@@ -228,14 +228,12 @@ metadata:
 - **CodeQL**: GitHub's security scanning for shell scripts
 
 ### Testing Frameworks
-
 - **bats-core**: Maintained fork of Bats with modern features and active development
 - **shellspec**: BDD-style testing framework with rich assertions and mocking
 - **shunit2**: xUnit-style testing framework for shell scripts
 - **bashing**: Testing framework with mocking support and test isolation
 
 ### Modern Development Tools
-
 - **bashly**: CLI framework generator for building command-line applications
 - **basher**: Bash package manager for dependency management
 - **bpkg**: Alternative bash package manager with npm-like interface
@@ -243,7 +241,6 @@ metadata:
 - **shellman**: Generate man pages from shell scripts
 
 ### CI/CD & Automation
-
 - **pre-commit**: Multi-language pre-commit hook framework
 - **actionlint**: GitHub Actions workflow linter
 - **gitleaks**: Secrets scanning to prevent credential leaks
@@ -251,8 +248,7 @@ metadata:
 
 ## Common Pitfalls to Avoid
 
-- `for f in $(ls ...)` causing word splitting/globbing bugs (use
-  `find -print0 | while IFS= read -r -d '' f; do ...; done`)
+- `for f in $(ls ...)` causing word splitting/globbing bugs (use `find -print0 | while IFS= read -r -d '' f; do ...; done`)
 - Unquoted variable expansions leading to unexpected behavior
 - Relying on `set -e` without proper error trapping in complex flows
 - Using `echo` for data output (prefer `printf` for reliability)
@@ -283,8 +279,7 @@ metadata:
 - **Parameter Expansion**: `${filename%.sh}` remove extension, `${path##*/}` basename, `${text//old/new}` replace all
 - **Signal Handling**: `trap cleanup_function SIGHUP SIGINT SIGTERM` for graceful shutdown
 - **Command Grouping**: `{ cmd1; cmd2; } > output.log` share redirection, `( cd dir && cmd )` use subshell for isolation
-- **Co-processes**: `coproc proc { cmd; }; echo "data" >&"${proc[1]}"; read -u "${proc[0]}" result` for bidirectional
-  pipes
+- **Co-processes**: `coproc proc { cmd; }; echo "data" >&"${proc[1]}"; read -u "${proc[0]}" result` for bidirectional pipes
 - **Here-documents**: `cat <<-'EOF'` with `-` strips leading tabs, quotes prevent expansion
 - **Process Management**: `wait $pid` to wait for background job, `jobs -p` list background PIDs
 - **Conditional Execution**: `cmd1 && cmd2` run cmd2 only if cmd1 succeeds, `cmd1 || cmd2` run cmd2 if cmd1 fails
@@ -298,16 +293,12 @@ metadata:
 ## References & Further Reading
 
 ### Style Guides & Best Practices
-
-- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) - Comprehensive style guide covering
-  quoting, arrays, and when to use shell
+- [Google Shell Style Guide](https://google.github.io/styleguide/shellguide.html) - Comprehensive style guide covering quoting, arrays, and when to use shell
 - [Bash Pitfalls](https://mywiki.wooledge.org/BashPitfalls) - Catalog of common Bash mistakes and how to avoid them
 - [Bash Hackers Wiki](https://wiki.bash-hackers.org/) - Comprehensive Bash documentation and advanced techniques
-- [Defensive BASH Programming](https://www.kfirlavi.com/blog/2012/11/14/defensive-bash-programming/) - Modern defensive
-  programming patterns
+- [Defensive BASH Programming](https://www.kfirlavi.com/blog/2012/11/14/defensive-bash-programming/) - Modern defensive programming patterns
 
 ### Tools & Frameworks
-
 - [ShellCheck](https://github.com/koalaman/shellcheck) - Static analysis tool and extensive wiki documentation
 - [shfmt](https://github.com/mvdan/sh) - Shell script formatter with detailed flag documentation
 - [bats-core](https://github.com/bats-core/bats-core) - Maintained Bash testing framework
@@ -316,8 +307,6 @@ metadata:
 - [shdoc](https://github.com/reconquest/shdoc) - Documentation generator for shell scripts
 
 ### Security & Advanced Topics
-
 - [Bash Security Best Practices](https://github.com/carlospolop/PEASS-ng) - Security-focused shell script patterns
 - [Awesome Bash](https://github.com/awesome-lists/awesome-bash) - Curated list of Bash resources and tools
-- [Pure Bash Bible](https://github.com/dylanaraps/pure-bash-bible) - Collection of pure bash alternatives to external
-  commands
+- [Pure Bash Bible](https://github.com/dylanaraps/pure-bash-bible) - Collection of pure bash alternatives to external commands

@@ -1,9 +1,9 @@
 ---
 name: azure-identity-ts
-description:
-  Authenticate to Azure services using Azure Identity SDK for JavaScript (@azure/identity). Use when configuring
-  authentication with DefaultAzureCredential, managed identity, service principals, or interactive browser login.
+description: "Authenticate to Azure services using Azure Identity SDK for JavaScript (@azure/identity). Use when configuring authentication with DefaultAzureCredential, managed identity, service principals, or i..."
 package: "@azure/identity"
+risk: unknown
+source: community
 ---
 
 # Azure Identity SDK for TypeScript
@@ -52,11 +52,13 @@ const credential = new DefaultAzureCredential();
 
 // Use with any Azure SDK client
 import { BlobServiceClient } from "@azure/storage-blob";
-const blobClient = new BlobServiceClient("https://<account>.blob.core.windows.net", credential);
+const blobClient = new BlobServiceClient(
+  "https://<account>.blob.core.windows.net",
+  credential
+);
 ```
 
 **Credential Chain Order:**
-
 1. EnvironmentCredential
 2. WorkloadIdentityCredential
 3. ManagedIdentityCredential
@@ -79,7 +81,7 @@ const credential = new ManagedIdentityCredential();
 
 ```typescript
 const credential = new ManagedIdentityCredential({
-  clientId: "<user-assigned-client-id>",
+  clientId: "<user-assigned-client-id>"
 });
 ```
 
@@ -87,8 +89,7 @@ const credential = new ManagedIdentityCredential({
 
 ```typescript
 const credential = new ManagedIdentityCredential({
-  resourceId:
-    "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<name>",
+  resourceId: "/subscriptions/<sub>/resourceGroups/<rg>/providers/Microsoft.ManagedIdentity/userAssignedIdentities/<name>"
 });
 ```
 
@@ -99,7 +100,11 @@ const credential = new ManagedIdentityCredential({
 ```typescript
 import { ClientSecretCredential } from "@azure/identity";
 
-const credential = new ClientSecretCredential("<tenant-id>", "<client-id>", "<client-secret>");
+const credential = new ClientSecretCredential(
+  "<tenant-id>",
+  "<client-id>",
+  "<client-secret>"
+);
 ```
 
 ### Client Certificate
@@ -107,15 +112,21 @@ const credential = new ClientSecretCredential("<tenant-id>", "<client-id>", "<cl
 ```typescript
 import { ClientCertificateCredential } from "@azure/identity";
 
-const credential = new ClientCertificateCredential("<tenant-id>", "<client-id>", {
-  certificatePath: "/path/to/cert.pem",
-});
+const credential = new ClientCertificateCredential(
+  "<tenant-id>",
+  "<client-id>",
+  { certificatePath: "/path/to/cert.pem" }
+);
 
 // With password
-const credentialWithPwd = new ClientCertificateCredential("<tenant-id>", "<client-id>", {
-  certificatePath: "/path/to/cert.pem",
-  certificatePassword: "<password>",
-});
+const credentialWithPwd = new ClientCertificateCredential(
+  "<tenant-id>",
+  "<client-id>",
+  { 
+    certificatePath: "/path/to/cert.pem",
+    certificatePassword: "<password>"
+  }
+);
 ```
 
 ## Interactive Authentication
@@ -128,7 +139,7 @@ import { InteractiveBrowserCredential } from "@azure/identity";
 const credential = new InteractiveBrowserCredential({
   clientId: "<client-id>",
   tenantId: "<tenant-id>",
-  loginHint: "user@example.com",
+  loginHint: "user@example.com"
 });
 ```
 
@@ -143,17 +154,24 @@ const credential = new DeviceCodeCredential({
   userPromptCallback: (info) => {
     console.log(info.message);
     // "To sign in, use a web browser to open..."
-  },
+  }
 });
 ```
 
 ## Custom Credential Chain
 
 ```typescript
-import { ChainedTokenCredential, ManagedIdentityCredential, AzureCliCredential } from "@azure/identity";
+import { 
+  ChainedTokenCredential,
+  ManagedIdentityCredential,
+  AzureCliCredential
+} from "@azure/identity";
 
 // Try managed identity first, fall back to CLI
-const credential = new ChainedTokenCredential(new ManagedIdentityCredential(), new AzureCliCredential());
+const credential = new ChainedTokenCredential(
+  new ManagedIdentityCredential(),
+  new AzureCliCredential()
+);
 ```
 
 ## Developer Credentials
@@ -191,14 +209,16 @@ const credential = new AzurePowerShellCredential();
 import { ClientSecretCredential, AzureAuthorityHosts } from "@azure/identity";
 
 // Azure Government
-const credential = new ClientSecretCredential("<tenant>", "<client>", "<secret>", {
-  authorityHost: AzureAuthorityHosts.AzureGovernment,
-});
+const credential = new ClientSecretCredential(
+  "<tenant>", "<client>", "<secret>",
+  { authorityHost: AzureAuthorityHosts.AzureGovernment }
+);
 
 // Azure China
-const credentialChina = new ClientSecretCredential("<tenant>", "<client>", "<secret>", {
-  authorityHost: AzureAuthorityHosts.AzureChina,
-});
+const credentialChina = new ClientSecretCredential(
+  "<tenant>", "<client>", "<secret>",
+  { authorityHost: AzureAuthorityHosts.AzureChina }
+);
 ```
 
 ## Bearer Token Provider
@@ -209,7 +229,10 @@ import { DefaultAzureCredential, getBearerTokenProvider } from "@azure/identity"
 const credential = new DefaultAzureCredential();
 
 // Create a function that returns tokens
-const getAccessToken = getBearerTokenProvider(credential, "https://cognitiveservices.azure.com/.default");
+const getAccessToken = getBearerTokenProvider(
+  credential,
+  "https://cognitiveservices.azure.com/.default"
+);
 
 // Use with APIs that need bearer tokens
 const token = await getAccessToken();
@@ -218,7 +241,11 @@ const token = await getAccessToken();
 ## Key Types
 
 ```typescript
-import type { TokenCredential, AccessToken, GetTokenOptions } from "@azure/core-auth";
+import type { 
+  TokenCredential, 
+  AccessToken, 
+  GetTokenOptions 
+} from "@azure/core-auth";
 
 import {
   DefaultAzureCredential,
@@ -232,7 +259,7 @@ import {
   AzurePowerShellCredential,
   AzureDeveloperCliCredential,
   DeviceCodeCredential,
-  AzureAuthorityHosts,
+  AzureAuthorityHosts
 } from "@azure/identity";
 ```
 
@@ -242,11 +269,14 @@ import {
 import type { TokenCredential, AccessToken, GetTokenOptions } from "@azure/core-auth";
 
 class CustomCredential implements TokenCredential {
-  async getToken(scopes: string | string[], options?: GetTokenOptions): Promise<AccessToken | null> {
+  async getToken(
+    scopes: string | string[],
+    options?: GetTokenOptions
+  ): Promise<AccessToken | null> {
     // Custom token acquisition logic
     return {
       token: "<access-token>",
-      expiresOnTimestamp: Date.now() + 3600000,
+      expiresOnTimestamp: Date.now() + 3600000
     };
   }
 }
@@ -273,3 +303,6 @@ AzureLogger.log = (...args) => {
 4. **Scope credentials appropriately** - Use user-assigned identity for multi-tenant scenarios
 5. **Handle token refresh** - Azure SDK handles this automatically
 6. **Use ChainedTokenCredential** - For custom fallback scenarios
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

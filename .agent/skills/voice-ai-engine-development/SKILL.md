@@ -1,25 +1,21 @@
 ---
 name: voice-ai-engine-development
-description:
-  "Build real-time conversational AI voice engines using async worker pipelines, streaming transcription, LLM agents,
-  and TTS synthesis with interrupt handling and multi-provider support"
+description: "Build real-time conversational AI voice engines using async worker pipelines, streaming transcription, LLM agents, and TTS synthesis with interrupt handling and multi-provider support"
+risk: unknown
+source: community
 ---
 
 # Voice AI Engine Development
 
 ## Overview
 
-This skill guides you through building production-ready voice AI engines with real-time conversation capabilities. Voice
-AI engines enable natural, bidirectional conversations between users and AI agents through streaming audio processing,
-speech-to-text transcription, LLM-powered responses, and text-to-speech synthesis.
+This skill guides you through building production-ready voice AI engines with real-time conversation capabilities. Voice AI engines enable natural, bidirectional conversations between users and AI agents through streaming audio processing, speech-to-text transcription, LLM-powered responses, and text-to-speech synthesis.
 
-The core architecture uses an async queue-based worker pipeline where each component runs independently and communicates
-via `asyncio.Queue` objects, enabling concurrent processing, interrupt handling, and real-time streaming at every stage.
+The core architecture uses an async queue-based worker pipeline where each component runs independently and communicates via `asyncio.Queue` objects, enabling concurrent processing, interrupt handling, and real-time streaming at every stage.
 
 ## When to Use This Skill
 
 Use this skill when:
-
 - Building real-time voice conversation systems
 - Implementing voice assistants or chatbots
 - Creating voice-enabled customer service agents
@@ -40,7 +36,6 @@ Audio In → Transcriber → Agent → Synthesizer → Audio Out
 ```
 
 **Key Benefits:**
-
 - **Decoupling**: Workers only know about their input/output queues
 - **Concurrency**: All workers run simultaneously via asyncio
 - **Backpressure**: Queues automatically handle rate differences
@@ -56,22 +51,22 @@ class BaseWorker:
         self.input_queue = input_queue   # asyncio.Queue to consume from
         self.output_queue = output_queue # asyncio.Queue to produce to
         self.active = False
-
+    
     def start(self):
         """Start the worker's processing loop"""
         self.active = True
         asyncio.create_task(self._run_loop())
-
+    
     async def _run_loop(self):
         """Main processing loop - runs forever until terminated"""
         while self.active:
             item = await self.input_queue.get()  # Block until item arrives
             await self.process(item)              # Process the item
-
+    
     async def process(self, item):
         """Override this - does the actual work"""
         raise NotImplementedError
-
+    
     def terminate(self):
         """Stop the worker"""
         self.active = False
@@ -84,14 +79,13 @@ class BaseWorker:
 **Purpose**: Converts incoming audio chunks to text transcriptions
 
 **Interface Requirements**:
-
 ```python
 class BaseTranscriber:
     def __init__(self, transcriber_config):
         self.input_queue = asyncio.Queue()   # Audio chunks (bytes)
         self.output_queue = asyncio.Queue()  # Transcriptions
         self.is_muted = False
-
+    
     def send_audio(self, chunk: bytes):
         """Client calls this to send audio"""
         if not self.is_muted:
@@ -99,18 +93,17 @@ class BaseTranscriber:
         else:
             # Send silence instead (prevents echo during bot speech)
             self.input_queue.put_nowait(self.create_silent_chunk(len(chunk)))
-
+    
     def mute(self):
         """Called when bot starts speaking (prevents echo)"""
         self.is_muted = True
-
+    
     def unmute(self):
         """Called when bot stops speaking"""
         self.is_muted = False
 ```
 
 **Output Format**:
-
 ```python
 class Transcription:
     message: str          # "Hello, how are you?"
@@ -120,14 +113,12 @@ class Transcription:
 ```
 
 **Supported Providers**:
-
 - **Deepgram** - Fast, accurate, streaming
 - **AssemblyAI** - High accuracy, good for accents
 - **Azure Speech** - Enterprise-grade
 - **Google Cloud Speech** - Multi-language support
 
 **Critical Implementation Details**:
-
 - Use WebSocket for bidirectional streaming
 - Run sender and receiver tasks concurrently with `asyncio.gather()`
 - Mute transcriber when bot speaks to prevent echo/feedback loops
@@ -138,33 +129,29 @@ class Transcription:
 **Purpose**: Processes user input and generates conversational responses
 
 **Interface Requirements**:
-
 ```python
 class BaseAgent:
     def __init__(self, agent_config):
         self.input_queue = asyncio.Queue()   # TranscriptionAgentInput
         self.output_queue = asyncio.Queue()  # AgentResponse
         self.transcript = None               # Conversation history
-
+    
     async def generate_response(self, human_input, is_interrupt, conversation_id):
         """Override this - returns AsyncGenerator of responses"""
         raise NotImplementedError
 ```
 
 **Why Streaming Responses?**
-
 - **Lower latency**: Start speaking as soon as first sentence is ready
 - **Better interrupts**: Can stop mid-response
 - **Sentence-by-sentence**: More natural conversation flow
 
 **Supported Providers**:
-
 - **OpenAI** (GPT-4, GPT-3.5) - High quality, fast
 - **Google Gemini** - Multimodal, cost-effective
 - **Anthropic Claude** - Long context, nuanced responses
 
 **Critical Implementation Details**:
-
 - Maintain conversation history in `Transcript` object
 - Stream responses using `AsyncGenerator`
 - **IMPORTANT**: Buffer entire LLM response before yielding to synthesizer (prevents audio jumping)
@@ -176,7 +163,6 @@ class BaseAgent:
 **Purpose**: Converts agent text responses to speech audio
 
 **Interface Requirements**:
-
 ```python
 class BaseSynthesizer:
     async def create_speech(self, message: BaseMessage, chunk_size: int) -> SynthesisResult:
@@ -189,19 +175,17 @@ class BaseSynthesizer:
 ```
 
 **SynthesisResult Structure**:
-
 ```python
 class SynthesisResult:
     chunk_generator: AsyncGenerator[ChunkResult, None]
     get_message_up_to: Callable[[float], str]  # seconds → partial text
-
+    
     class ChunkResult:
         chunk: bytes          # Raw PCM audio
         is_last_chunk: bool
 ```
 
 **Supported Providers**:
-
 - **ElevenLabs** - Most natural voices, streaming
 - **Azure TTS** - Enterprise-grade, many languages
 - **Google Cloud TTS** - Cost-effective, good quality
@@ -209,7 +193,6 @@ class SynthesisResult:
 - **Play.ht** - Voice cloning
 
 **Critical Implementation Details**:
-
 - Stream audio chunks as they're generated
 - Convert audio to LINEAR16 PCM format (16kHz sample rate)
 - Implement `get_message_up_to()` for interrupt handling
@@ -233,31 +216,30 @@ async def send_speech_to_output(self, message, synthesis_result,
                 chunk_idx * seconds_per_chunk
             )
             return message_sent, True  # cut_off = True
-
+        
         start_time = time.time()
-
+        
         # Send chunk to output device
         self.output_device.consume_nonblocking(chunk_result.chunk)
-
+        
         # CRITICAL: Wait for chunk to play before sending next one
         # This is what makes interrupts work!
         speech_length = seconds_per_chunk
         processing_time = time.time() - start_time
         await asyncio.sleep(max(speech_length - processing_time, 0))
-
+        
         chunk_idx += 1
-
+    
     return message, False  # cut_off = False
 ```
 
-**Why Rate Limiting?** Without rate limiting, all audio chunks would be sent immediately, which would:
-
+**Why Rate Limiting?**
+Without rate limiting, all audio chunks would be sent immediately, which would:
 - Buffer entire message on client side
 - Make interrupts impossible (all audio already sent)
 - Cause timing issues
 
 By sending one chunk every N seconds:
-
 - Real-time playback is maintained
 - Interrupts can stop mid-sentence
 - Natural conversation flow is preserved
@@ -271,7 +253,6 @@ The interrupt system is critical for natural conversations.
 **Scenario**: Bot is saying "I think the weather will be nice today and tomorrow and—" when user interrupts with "Stop".
 
 **Step 1: User starts speaking**
-
 ```python
 # TranscriptionsWorker detects new transcription while bot speaking
 async def process(self, transcription):
@@ -282,7 +263,6 @@ async def process(self, transcription):
 ```
 
 **Step 2: broadcast_interrupt() stops everything**
-
 ```python
 def broadcast_interrupt(self):
     num_interrupts = 0
@@ -294,7 +274,7 @@ def broadcast_interrupt(self):
                 num_interrupts += 1
         except queue.Empty:
             break
-
+    
     # Cancel current tasks
     self.agent.cancel_current_task()              # Stop generating text
     self.agent_responses_worker.cancel_current_task()  # Stop synthesizing
@@ -302,7 +282,6 @@ def broadcast_interrupt(self):
 ```
 
 **Step 3: SynthesisResultsWorker detects interrupt**
-
 ```python
 async def send_speech_to_output(self, synthesis_result, stop_event, ...):
     async for chunk_result in synthesis_result.chunk_generator:
@@ -317,7 +296,6 @@ async def send_speech_to_output(self, synthesis_result, stop_event, ...):
 ```
 
 **Step 4: Agent updates history**
-
 ```python
 if cut_off:
     # Update conversation history with partial message
@@ -337,7 +315,7 @@ class InterruptibleEvent:
         self.is_interruptible = is_interruptible
         self.interruption_event = threading.Event()  # Initially not set
         self.interrupted = False
-
+    
     def interrupt(self) -> bool:
         """Interrupt this event"""
         if not self.is_interruptible:
@@ -347,7 +325,7 @@ class InterruptibleEvent:
             self.interrupted = True
             return True
         return False
-
+    
     def is_interrupted(self) -> bool:
         return self.interruption_event.is_set()
 ```
@@ -359,11 +337,11 @@ Support multiple providers with a factory pattern:
 ```python
 class VoiceHandler:
     """Multi-provider factory for voice components"""
-
+    
     def create_transcriber(self, agent_config: Dict):
         """Create transcriber based on transcriberProvider"""
         provider = agent_config.get("transcriberProvider", "deepgram")
-
+        
         if provider == "deepgram":
             return self._create_deepgram_transcriber(agent_config)
         elif provider == "assemblyai":
@@ -374,22 +352,22 @@ class VoiceHandler:
             return self._create_google_transcriber(agent_config)
         else:
             raise ValueError(f"Unknown transcriber provider: {provider}")
-
+    
     def create_agent(self, agent_config: Dict):
         """Create LLM agent based on llmProvider"""
         provider = agent_config.get("llmProvider", "openai")
-
+        
         if provider == "openai":
             return self._create_openai_agent(agent_config)
         elif provider == "gemini":
             return self._create_gemini_agent(agent_config)
         else:
             raise ValueError(f"Unknown LLM provider: {provider}")
-
+    
     def create_synthesizer(self, agent_config: Dict):
         """Create voice synthesizer based on voiceProvider"""
         provider = agent_config.get("voiceProvider", "elevenlabs")
-
+        
         if provider == "elevenlabs":
             return self._create_elevenlabs_synthesizer(agent_config)
         elif provider == "azure":
@@ -412,20 +390,20 @@ Voice AI engines typically use WebSocket for bidirectional audio streaming:
 @app.websocket("/conversation")
 async def websocket_endpoint(websocket: WebSocket):
     await websocket.accept()
-
+    
     # Create voice components
     voice_handler = VoiceHandler()
     transcriber = voice_handler.create_transcriber(agent_config)
     agent = voice_handler.create_agent(agent_config)
     synthesizer = voice_handler.create_synthesizer(agent_config)
-
+    
     # Create output device
     output_device = WebsocketOutputDevice(
         ws=websocket,
         sampling_rate=16000,
         audio_encoding=AudioEncoding.LINEAR16
     )
-
+    
     # Create conversation orchestrator
     conversation = StreamingConversation(
         output_device=output_device,
@@ -433,10 +411,10 @@ async def websocket_endpoint(websocket: WebSocket):
         agent=agent,
         synthesizer=synthesizer
     )
-
+    
     # Start all workers
     await conversation.start()
-
+    
     try:
         # Receive audio from client
         async for message in websocket.iter_bytes():
@@ -495,10 +473,10 @@ self.transcriber.unmute()
 ```python
 async for chunk in synthesis_result.chunk_generator:
     start_time = time.time()
-
+    
     # Send chunk
     output_device.consume_nonblocking(chunk)
-
+    
     # Wait for chunk duration before sending next
     processing_time = time.time() - start_time
     await asyncio.sleep(max(seconds_per_chunk - processing_time, 0))
@@ -544,15 +522,15 @@ async def _run_loop(self):
 async def terminate(self):
     """Gracefully shut down all workers"""
     self.active = False
-
+    
     # Stop all workers
     self.transcriber.terminate()
     self.agent.terminate()
     self.synthesizer.terminate()
-
+    
     # Wait for queues to drain
     await asyncio.sleep(0.5)
-
+    
     # Close connections
     if self.websocket:
         await self.websocket.close()
@@ -627,13 +605,13 @@ Maintain conversation history for context:
 ```python
 class Transcript:
     event_logs: List[Message] = []
-
+    
     def add_human_message(self, text):
         self.event_logs.append(Message(sender=Sender.HUMAN, text=text))
-
+    
     def add_bot_message(self, text):
         self.event_logs.append(Message(sender=Sender.BOT, text=text))
-
+    
     def to_openai_messages(self):
         return [
             {"role": "user" if msg.sender == Sender.HUMAN else "assistant",
@@ -649,11 +627,11 @@ class Transcript:
 ```python
 async def test_transcriber():
     transcriber = DeepgramTranscriber(config)
-
+    
     # Mock audio input
     audio_chunk = b'\x00\x01\x02...'
     transcriber.send_audio(audio_chunk)
-
+    
     # Check output
     transcription = await transcriber.output_queue.get()
     assert transcription.message == "expected text"
@@ -665,13 +643,13 @@ async def test_transcriber():
 async def test_full_pipeline():
     # Create all components
     conversation = create_test_conversation()
-
+    
     # Send test audio
     conversation.receive_audio(test_audio_chunk)
-
+    
     # Wait for response
     response = await wait_for_audio_output(timeout=5)
-
+    
     assert response is not None
 ```
 
@@ -680,14 +658,14 @@ async def test_full_pipeline():
 ```python
 async def test_interrupt():
     conversation = create_test_conversation()
-
+    
     # Start bot speaking
     await conversation.agent.generate_response("Tell me a long story")
-
+    
     # Interrupt mid-response
     await asyncio.sleep(1)  # Let it speak for 1 second
     conversation.broadcast_interrupt()
-
+    
     # Verify partial message in transcript
     last_message = conversation.transcript.event_logs[-1]
     assert last_message.text != full_expected_message
@@ -720,7 +698,6 @@ When implementing a voice AI engine:
 ## Resources
 
 **Libraries**:
-
 - `asyncio` - Async programming
 - `websockets` - WebSocket client/server
 - `FastAPI` - WebSocket server framework
@@ -728,7 +705,6 @@ When implementing a voice AI engine:
 - `numpy` - Audio data processing
 
 **API Providers**:
-
 - Transcription: Deepgram, AssemblyAI, Azure Speech, Google Cloud Speech
 - LLM: OpenAI, Google Gemini, Anthropic Claude
 - TTS: ElevenLabs, Azure TTS, Google Cloud TTS, Amazon Polly, Play.ht
@@ -736,7 +712,6 @@ When implementing a voice AI engine:
 ## Summary
 
 Building a voice AI engine requires:
-
 - ✅ Async worker pipeline for concurrent processing
 - ✅ Queue-based communication between components
 - ✅ Streaming at every stage (transcription, LLM, synthesis)

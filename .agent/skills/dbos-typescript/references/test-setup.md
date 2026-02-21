@@ -96,7 +96,6 @@ describe("integration tests", () => {
 ```
 
 Key points:
-
 - Call `DBOS.shutdown()` before resetting and reconfiguring
 - Reset the database between tests for isolation
 - Set a generous `beforeEach` timeout (10s) for database setup

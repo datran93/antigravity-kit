@@ -82,7 +82,6 @@ func TestWorkflowIntegration(t *testing.T) {
 ```
 
 Key points:
-
 - Use `t.Cleanup` to ensure `Shutdown` is called after each test
 - Use unique `AppName` per test to avoid collisions
 - Mock `DBOSContext` for fast unit tests without Postgres

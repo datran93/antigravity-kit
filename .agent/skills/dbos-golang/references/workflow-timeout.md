@@ -7,8 +7,7 @@ tags: workflow, timeout, cancellation, duration
 
 ## Set Workflow Timeouts
 
-Set a timeout for a workflow by using Go's `context.WithTimeout` or `dbos.WithTimeout` on the DBOS context. When the
-timeout expires, the workflow and all its children are cancelled.
+Set a timeout for a workflow by using Go's `context.WithTimeout` or `dbos.WithTimeout` on the DBOS context. When the timeout expires, the workflow and all its children are cancelled.
 
 **Incorrect (no timeout for potentially long workflow):**
 
@@ -31,7 +30,6 @@ if err != nil {
 ```
 
 Key timeout behaviors:
-
 - Timeouts are **start-to-completion**: the timeout begins when the workflow starts execution, not when it's enqueued
 - Timeouts are **durable**: they persist across restarts, so workflows can have very long timeouts (hours, days, weeks)
 - Cancellation happens at the **beginning of the next step** - the current step completes first

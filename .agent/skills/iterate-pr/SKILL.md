@@ -1,8 +1,6 @@
 ---
 name: iterate-pr
-description:
-  "Iterate on a PR until CI passes. Use when you need to fix CI failures, address review feedback, or continuously push
-  fixes until all checks are green. Automates the feedback-fix-push-wait cycle."
+description: "Iterate on a PR until CI passes. Use when you need to fix CI failures, address review feedback, or continuously push fixes until all checks are green. Automates the feedback-fix-push-wait cycle."
 source: "https://github.com/getsentry/skills/tree/main/plugins/sentry-skills/skills/iterate-pr"
 risk: safe
 ---
@@ -14,7 +12,6 @@ Continuously iterate on the current branch until all CI checks pass and review f
 ## When to Use This Skill
 
 Use this skill when:
-
 - Fixing CI failures
 - Addressing review feedback
 - Continuously pushing fixes until all checks are green
@@ -44,7 +41,6 @@ gh pr checks --json name,state,bucket,link,workflow
 The `bucket` field categorizes state into: `pass`, `fail`, `pending`, `skipping`, or `cancel`.
 
 **Important:** If any of these checks are still `pending`, wait before proceeding:
-
 - `sentry` / `sentry-io`
 - `codecov`
 - `cursor` / `bugbot` / `seer`
@@ -57,19 +53,16 @@ These bots may post additional feedback comments once their checks complete. Wai
 Once CI checks have completed (or at least the bot-related checks), gather human and bot feedback:
 
 **Review Comments and Status:**
-
 ```bash
 gh pr view --json reviews,comments,reviewDecision
 ```
 
 **Inline Code Review Comments:**
-
 ```bash
 gh api repos/{owner}/{repo}/pulls/{pr_number}/comments
 ```
 
 **PR Conversation Comments (includes bot comments):**
-
 ```bash
 gh api repos/{owner}/{repo}/issues/{pr_number}/comments
 ```
@@ -130,7 +123,6 @@ gh pr checks --json name,state,bucket | jq '.[] | select(.bucket != "pass")'
 ### Step 9: Repeat
 
 Return to Step 2 if:
-
 - Any CI checks failed
 - New review feedback appeared
 
@@ -139,18 +131,15 @@ Continue until all checks pass and no unaddressed feedback remains.
 ## Exit Conditions
 
 **Success:**
-
 - All CI checks are green (`bucket: pass`)
 - No unaddressed human review feedback
 
 **Ask for Help:**
-
 - Same failure persists after 3 attempts (likely a flaky test or deeper issue)
 - Review feedback requires clarification or decision from the user
 - CI failure is unrelated to branch changes (infrastructure issue)
 
 **Stop Immediately:**
-
 - No PR exists for the current branch
 - Branch is out of sync and needs rebase (inform user)
 

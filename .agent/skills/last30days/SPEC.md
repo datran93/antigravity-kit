@@ -2,18 +2,13 @@
 
 ## Overview
 
-`last30days` is a Claude Code skill that researches a given topic across Reddit and X (Twitter) using the OpenAI
-Responses API and xAI Responses API respectively. It enforces a strict 30-day recency window, popularity-aware ranking,
-and produces actionable outputs including best practices, a prompt pack, and a reusable context snippet.
+`last30days` is a Claude Code skill that researches a given topic across Reddit and X (Twitter) using the OpenAI Responses API and xAI Responses API respectively. It enforces a strict 30-day recency window, popularity-aware ranking, and produces actionable outputs including best practices, a prompt pack, and a reusable context snippet.
 
-The skill operates in three modes depending on available API keys: **reddit-only** (OpenAI key), **x-only** (xAI key),
-or **both** (full cross-validation). It uses automatic model selection to stay current with the latest models from both
-providers, with optional pinning for stability.
+The skill operates in three modes depending on available API keys: **reddit-only** (OpenAI key), **x-only** (xAI key), or **both** (full cross-validation). It uses automatic model selection to stay current with the latest models from both providers, with optional pinning for stability.
 
 ## Architecture
 
-The orchestrator (`last30days.py`) coordinates discovery, enrichment, normalization, scoring, deduplication, and
-rendering. Each concern is isolated in `scripts/lib/`:
+The orchestrator (`last30days.py`) coordinates discovery, enrichment, normalization, scoring, deduplication, and rendering. Each concern is isolated in `scripts/lib/`:
 
 - **env.py**: Load and validate API keys from `~/.config/last30days/.env`
 - **dates.py**: Date range calculation and confidence scoring
@@ -34,30 +29,24 @@ rendering. Each concern is isolated in `scripts/lib/`:
 Other skills can import the research context in several ways:
 
 ### Inline Context Injection
-
 ```markdown
 ## Recent Research Context
-
 !python3 ~/.claude/skills/last30days/scripts/last30days.py "your topic" --emit=context
 ```
 
 ### Read from File
-
 ```markdown
 ## Research Context
-
 !cat ~/.local/share/last30days/out/last30days.context.md
 ```
 
 ### Get Path for Dynamic Loading
-
 ```bash
 CONTEXT_PATH=$(python3 ~/.claude/skills/last30days/scripts/last30days.py "topic" --emit=path)
 cat "$CONTEXT_PATH"
 ```
 
 ### JSON for Programmatic Use
-
 ```bash
 python3 ~/.claude/skills/last30days/scripts/last30days.py "topic" --emit=json > research.json
 ```

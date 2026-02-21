@@ -1,8 +1,10 @@
 ---
 name: azure-mgmt-apicenter-dotnet
-description: |
+description: "|"
   Azure API Center SDK for .NET. Centralized API inventory management with governance, versioning, and discovery. Use for creating API services, workspaces, APIs, versions, definitions, environments, deployments, and metadata schemas. Triggers: "API Center", "ApiCenterService", "ApiCenterWorkspace", "ApiCenterApi", "API inventory", "API governance", "API versioning", "API catalog", "API discovery".
 package: Azure.ResourceManager.ApiCenter
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.ApiCenter (.NET)
@@ -110,7 +112,7 @@ ApiCenterApiData apiData = new ApiCenterApiData
     {
         Uri = new Uri("https://example.com/terms")
     },
-    ExternalDocumentation =
+    ExternalDocumentation = 
     {
         new ApiExternalDocumentation
         {
@@ -243,7 +245,7 @@ ResourceIdentifier envResourceId = ApiCenterEnvironmentResource.CreateResourceId
 
 // Get API definition resource ID
 ResourceIdentifier definitionResourceId = ApiCenterApiDefinitionResource.CreateResourceIdentifier(
-    subscriptionId, resourceGroupName, serviceName, workspaceName,
+    subscriptionId, resourceGroupName, serviceName, workspaceName, 
     "orders-api", "v1-0-0", "openapi");
 
 ApiCenterDeploymentData deploymentData = new ApiCenterDeploymentData
@@ -320,7 +322,7 @@ await foreach (ApiCenterApiResource api in workspace.GetApiCenterApis())
     Console.WriteLine($"API: {api.Data.Title}");
     Console.WriteLine($"  Kind: {api.Data.Kind}");
     Console.WriteLine($"  Stage: {api.Data.LifecycleStage}");
-
+    
     // List versions
     await foreach (ApiCenterApiVersionResource version in api.GetApiCenterApiVersions())
     {
@@ -344,20 +346,20 @@ await foreach (ApiCenterDeploymentResource deployment in workspace.GetApiCenterD
 
 ## Key Types Reference
 
-| Type                              | Purpose                                                                |
-| --------------------------------- | ---------------------------------------------------------------------- |
-| `ApiCenterServiceResource`        | API Center service instance                                            |
-| `ApiCenterWorkspaceResource`      | Logical grouping of APIs                                               |
-| `ApiCenterApiResource`            | Individual API                                                         |
-| `ApiCenterApiVersionResource`     | Version of an API                                                      |
-| `ApiCenterApiDefinitionResource`  | API specification (OpenAPI, etc.)                                      |
-| `ApiCenterEnvironmentResource`    | Deployment environment                                                 |
-| `ApiCenterDeploymentResource`     | API deployment to environment                                          |
-| `ApiCenterMetadataSchemaResource` | Custom metadata schema                                                 |
-| `ApiKind`                         | rest, graphql, grpc, soap, webhook, websocket, mcp                     |
-| `ApiLifecycleStage`               | design, development, testing, preview, production, deprecated, retired |
-| `ApiCenterEnvironmentKind`        | development, testing, staging, production                              |
-| `ApiCenterDeploymentState`        | active, inactive                                                       |
+| Type | Purpose |
+|------|---------|
+| `ApiCenterServiceResource` | API Center service instance |
+| `ApiCenterWorkspaceResource` | Logical grouping of APIs |
+| `ApiCenterApiResource` | Individual API |
+| `ApiCenterApiVersionResource` | Version of an API |
+| `ApiCenterApiDefinitionResource` | API specification (OpenAPI, etc.) |
+| `ApiCenterEnvironmentResource` | Deployment environment |
+| `ApiCenterDeploymentResource` | API deployment to environment |
+| `ApiCenterMetadataSchemaResource` | Custom metadata schema |
+| `ApiKind` | rest, graphql, grpc, soap, webhook, websocket, mcp |
+| `ApiLifecycleStage` | design, development, testing, preview, production, deprecated, retired |
+| `ApiCenterEnvironmentKind` | development, testing, staging, production |
+| `ApiCenterDeploymentState` | active, inactive |
 
 ## Best Practices
 
@@ -396,16 +398,19 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                                   | Purpose                          | Install                                                  |
-| ------------------------------------- | -------------------------------- | -------------------------------------------------------- |
-| `Azure.ResourceManager.ApiCenter`     | API Center management (this SDK) | `dotnet add package Azure.ResourceManager.ApiCenter`     |
-| `Azure.ResourceManager.ApiManagement` | API gateway and policies         | `dotnet add package Azure.ResourceManager.ApiManagement` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.ResourceManager.ApiCenter` | API Center management (this SDK) | `dotnet add package Azure.ResourceManager.ApiCenter` |
+| `Azure.ResourceManager.ApiManagement` | API gateway and policies | `dotnet add package Azure.ResourceManager.ApiManagement` |
 
 ## Reference Links
 
-| Resource              | URL                                                                                                |
-| --------------------- | -------------------------------------------------------------------------------------------------- |
-| NuGet Package         | https://www.nuget.org/packages/Azure.ResourceManager.ApiCenter                                     |
-| API Reference         | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.apicenter                             |
-| Product Documentation | https://learn.microsoft.com/azure/api-center/                                                      |
-| GitHub Source         | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/apicenter/Azure.ResourceManager.ApiCenter |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.ApiCenter |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.apicenter |
+| Product Documentation | https://learn.microsoft.com/azure/api-center/ |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/apicenter/Azure.ResourceManager.ApiCenter |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

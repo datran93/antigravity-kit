@@ -1,9 +1,9 @@
 ---
 name: azure-storage-blob-java
-description:
-  Build blob storage applications with Azure Storage Blob SDK for Java. Use when uploading, downloading, or managing
-  files in Azure Blob Storage, working with containers, or implementing streaming data operations.
+description: "Build blob storage applications with Azure Storage Blob SDK for Java. Use when uploading, downloading, or managing files in Azure Blob Storage, working with containers, or implementing streaming da..."
 package: com.azure:azure-storage-blob
+risk: unknown
+source: community
 ---
 
 # Azure Storage Blob SDK for Java
@@ -151,7 +151,7 @@ try (InputStream stream = new FileInputStream("large-file.bin")) {
     BlobParallelUploadOptions options = new BlobParallelUploadOptions(stream)
         .setHeaders(headers)
         .setMetadata(metadata);
-
+    
     blobClient.uploadWithResponse(options, null, Context.NONE);
 }
 ```
@@ -293,7 +293,7 @@ String sasToken = blobClient.generateSas(sasValues);
 BlobContainerSasPermission containerPermissions = new BlobContainerSasPermission()
     .setReadPermission(true)
     .setListPermission(true);
-
+    
 BlobServiceSasSignatureValues containerSasValues = new BlobServiceSasSignatureValues(expiry, containerPermissions);
 String containerSas = containerClient.generateSas(containerSasValues);
 ```
@@ -388,3 +388,6 @@ AZURE_STORAGE_ACCOUNT_URL=https://<account>.blob.core.windows.net
 - "storage streaming"
 - "SAS token generation"
 - "blob metadata properties"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

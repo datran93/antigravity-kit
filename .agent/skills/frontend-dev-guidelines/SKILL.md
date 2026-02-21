@@ -1,10 +1,10 @@
 ---
 name: frontend-dev-guidelines
-description:
-  Opinionated frontend development standards for modern React + TypeScript applications. Covers Suspense-first data
-  fetching, lazy loading, feature-based architecture, MUI v7 styling, TanStack Router, performance optimization, and
-  strict TypeScript practices.
+description: "Opinionated frontend development standards for modern React + TypeScript applications. Covers Suspense-first data fetching, lazy loading, feature-based architecture, MUI v7 styling, TanStack Router..."
+risk: unknown
+source: community
 ---
+
 
 # Frontend Development Guidelines
 
@@ -14,12 +14,12 @@ You are a **senior frontend engineer** operating under strict architectural and 
 
 Your goal is to build **scalable, predictable, and maintainable React applications** using:
 
-- Suspense-first data fetching
-- Feature-based code organization
-- Strict TypeScript discipline
-- Performance-safe defaults
+* Suspense-first data fetching
+* Feature-based code organization
+* Strict TypeScript discipline
+* Performance-safe defaults
 
-This skill defines **how frontend code must be written**, not merely how it _can_ be written.
+This skill defines **how frontend code must be written**, not merely how it *can* be written.
 
 ---
 
@@ -60,29 +60,29 @@ FFCI = (Architectural Fit + Reusability + Performance) − (Complexity + Mainten
 
 ### 1. Suspense Is the Default
 
-- `useSuspenseQuery` is the **primary** data-fetching hook
-- No `isLoading` conditionals
-- No early-return spinners
+* `useSuspenseQuery` is the **primary** data-fetching hook
+* No `isLoading` conditionals
+* No early-return spinners
 
 ### 2. Lazy Load Anything Heavy
 
-- Routes
-- Feature entry components
-- Data grids, charts, editors
-- Large dialogs or modals
+* Routes
+* Feature entry components
+* Data grids, charts, editors
+* Large dialogs or modals
 
 ### 3. Feature-Based Organization
 
-- Domain logic lives in `features/`
-- Reusable primitives live in `components/`
-- Cross-feature coupling is forbidden
+* Domain logic lives in `features/`
+* Reusable primitives live in `components/`
+* Cross-feature coupling is forbidden
 
 ### 4. TypeScript Is Strict
 
-- No `any`
-- Explicit return types
-- `import type` always
-- Types are first-class design artifacts
+* No `any`
+* Explicit return types
+* `import type` always
+* Types are first-class design artifacts
 
 ---
 
@@ -90,13 +90,13 @@ FFCI = (Architectural Fit + Reusability + Performance) − (Complexity + Mainten
 
 Use **frontend-dev-guidelines** when:
 
-- Creating components or pages
-- Adding new features
-- Fetching or mutating data
-- Setting up routing
-- Styling with MUI
-- Addressing performance issues
-- Reviewing or refactoring frontend code
+* Creating components or pages
+* Adding new features
+* Fetching or mutating data
+* Setting up routing
+* Styling with MUI
+* Addressing performance issues
+* Reviewing or refactoring frontend code
 
 ---
 
@@ -104,27 +104,27 @@ Use **frontend-dev-guidelines** when:
 
 ### New Component Checklist
 
-- [ ] `React.FC<Props>` with explicit props interface
-- [ ] Lazy loaded if non-trivial
-- [ ] Wrapped in `<SuspenseLoader>`
-- [ ] Uses `useSuspenseQuery` for data
-- [ ] No early returns
-- [ ] Handlers wrapped in `useCallback`
-- [ ] Styles inline if <100 lines
-- [ ] Default export at bottom
-- [ ] Uses `useMuiSnackbar` for feedback
+* [ ] `React.FC<Props>` with explicit props interface
+* [ ] Lazy loaded if non-trivial
+* [ ] Wrapped in `<SuspenseLoader>`
+* [ ] Uses `useSuspenseQuery` for data
+* [ ] No early returns
+* [ ] Handlers wrapped in `useCallback`
+* [ ] Styles inline if <100 lines
+* [ ] Default export at bottom
+* [ ] Uses `useMuiSnackbar` for feedback
 
 ---
 
 ### New Feature Checklist
 
-- [ ] Create `features/{feature-name}/`
-- [ ] Subdirs: `api/`, `components/`, `hooks/`, `helpers/`, `types/`
-- [ ] API layer isolated in `api/`
-- [ ] Public exports via `index.ts`
-- [ ] Feature entry lazy loaded
-- [ ] Suspense boundary at feature level
-- [ ] Route defined under `routes/`
+* [ ] Create `features/{feature-name}/`
+* [ ] Subdirs: `api/`, `components/`, `hooks/`, `helpers/`, `types/`
+* [ ] API layer isolated in `api/`
+* [ ] Public exports via `index.ts`
+* [ ] Feature entry lazy loaded
+* [ ] Suspense boundary at feature level
+* [ ] Route defined under `routes/`
 
 ---
 
@@ -155,7 +155,7 @@ Aliases must be used consistently. Relative imports beyond one level are discour
 ### Lazy Loading Pattern
 
 ```ts
-const HeavyComponent = React.lazy(() => import("./HeavyComponent"));
+const HeavyComponent = React.lazy(() => import('./HeavyComponent'));
 ```
 
 Always wrapped in `<SuspenseLoader>`.
@@ -166,32 +166,35 @@ Always wrapped in `<SuspenseLoader>`.
 
 ### Primary Pattern
 
-- `useSuspenseQuery`
-- Cache-first
-- Typed responses
+* `useSuspenseQuery`
+* Cache-first
+* Typed responses
 
 ### Forbidden Patterns
 
-❌ `isLoading` ❌ manual spinners ❌ fetch logic inside components ❌ API calls without feature API layer
+❌ `isLoading`
+❌ manual spinners
+❌ fetch logic inside components
+❌ API calls without feature API layer
 
 ### API Layer Rules
 
-- One API file per feature
-- No inline axios calls
-- No `/api/` prefix in routes
+* One API file per feature
+* No inline axios calls
+* No `/api/` prefix in routes
 
 ---
 
 ## 8. Routing Standards (TanStack Router)
 
-- Folder-based routing only
-- Lazy load route components
-- Breadcrumb metadata via loaders
+* Folder-based routing only
+* Lazy load route components
+* Breadcrumb metadata via loaders
 
 ```ts
-export const Route = createFileRoute("/my-route/")({
+export const Route = createFileRoute('/my-route/')({
   component: MyPage,
-  loader: () => ({ crumb: "My Route" }),
+  loader: () => ({ crumb: 'My Route' }),
 });
 ```
 
@@ -201,8 +204,8 @@ export const Route = createFileRoute("/my-route/")({
 
 ### Inline vs Separate
 
-- `<100 lines`: inline `sx`
-- `>100 lines`: `{Component}.styles.ts`
+* `<100 lines`: inline `sx`
+* `>100 lines`: `{Component}.styles.ts`
 
 ### Grid Syntax (v7 Only)
 
@@ -219,22 +222,23 @@ Theme access must always be type-safe.
 
 ### Absolute Rule
 
-❌ Never return early loaders ✅ Always rely on Suspense boundaries
+❌ Never return early loaders
+✅ Always rely on Suspense boundaries
 
 ### User Feedback
 
-- `useMuiSnackbar` only
-- No third-party toast libraries
+* `useMuiSnackbar` only
+* No third-party toast libraries
 
 ---
 
 ## 11. Performance Defaults
 
-- `useMemo` for expensive derivations
-- `useCallback` for passed handlers
-- `React.memo` for heavy pure components
-- Debounce search (300–500ms)
-- Cleanup effects to avoid leaks
+* `useMemo` for expensive derivations
+* `useCallback` for passed handlers
+* `React.memo` for heavy pure components
+* Debounce search (300–500ms)
+* Cleanup effects to avoid leaks
 
 Performance regressions are bugs.
 
@@ -242,11 +246,11 @@ Performance regressions are bugs.
 
 ## 12. TypeScript Standards
 
-- Strict mode enabled
-- No implicit `any`
-- Explicit return types
-- JSDoc on public interfaces
-- Types colocated with feature
+* Strict mode enabled
+* No implicit `any`
+* Explicit return types
+* JSDoc on public interfaces
+* Types colocated with feature
 
 ---
 
@@ -317,18 +321,22 @@ export default MyComponent;
 
 ## 15. Anti-Patterns (Immediate Rejection)
 
-❌ Early loading returns ❌ Feature logic in `components/` ❌ Shared state via prop drilling instead of hooks ❌ Inline
-API calls ❌ Untyped responses ❌ Multiple responsibilities in one component
+❌ Early loading returns
+❌ Feature logic in `components/`
+❌ Shared state via prop drilling instead of hooks
+❌ Inline API calls
+❌ Untyped responses
+❌ Multiple responsibilities in one component
 
 ---
 
 ## 16. Integration With Other Skills
 
-- **frontend-design** → Visual systems & aesthetics
-- **page-cro** → Layout hierarchy & conversion logic
-- **analytics-tracking** → Event instrumentation
-- **backend-dev-guidelines** → API contract alignment
-- **error-tracking** → Runtime observability
+* **frontend-design** → Visual systems & aesthetics
+* **page-cro** → Layout hierarchy & conversion logic
+* **analytics-tracking** → Event instrumentation
+* **backend-dev-guidelines** → API contract alignment
+* **error-tracking** → Runtime observability
 
 ---
 
@@ -336,17 +344,21 @@ API calls ❌ Untyped responses ❌ Multiple responsibilities in one component
 
 Before finalizing code:
 
-- [ ] FFCI ≥ 6
-- [ ] Suspense used correctly
-- [ ] Feature boundaries respected
-- [ ] No early returns
-- [ ] Types explicit and correct
-- [ ] Lazy loading applied
-- [ ] Performance safe
+* [ ] FFCI ≥ 6
+* [ ] Suspense used correctly
+* [ ] Feature boundaries respected
+* [ ] No early returns
+* [ ] Types explicit and correct
+* [ ] Lazy loading applied
+* [ ] Performance safe
 
 ---
 
 ## 18. Skill Status
 
-**Status:** Stable, opinionated, and enforceable **Intended Use:** Production React codebases with long-term maintenance
-horizons
+**Status:** Stable, opinionated, and enforceable
+**Intended Use:** Production React codebases with long-term maintenance horizons
+
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

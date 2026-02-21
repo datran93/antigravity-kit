@@ -1,11 +1,14 @@
 ---
 name: c4-code
-description:
-  Expert C4 Code-level documentation specialist. Analyzes code directories to create comprehensive C4 code-level
-  documentation including function signatures, arguments, dependencies, and code structure. Use when documenting code at
-  the lowest C4 level for individual directories and code modules.
+description: "Expert C4 Code-level documentation specialist. Analyzes code"
+  directories to create comprehensive C4 code-level documentation including
+  function signatures, arguments, dependencies, and code structure. Use when
+  documenting code at the lowest C4 level for individual directories and code
+  modules.
 metadata:
   model: haiku
+risk: unknown
+source: community
 ---
 
 # C4 Code Level: [Directory Name]
@@ -64,8 +67,7 @@ metadata:
 
 ## Relationships
 
-Optional Mermaid diagrams for complex code structures. Choose the diagram type based on the programming paradigm. Code
-diagrams show the **internal structure of a single component**.
+Optional Mermaid diagrams for complex code structures. Choose the diagram type based on the programming paradigm. Code diagrams show the **internal structure of a single component**.
 
 ### Object-Oriented Code (Classes, Interfaces)
 
@@ -94,7 +96,6 @@ classDiagram
     Class1 ..|> Interface1 : implements
     Class1 --> Class2 : uses
 ```
-
 ````
 
 ### Functional/Procedural Code (Modules, Functions)
@@ -243,4 +244,3 @@ When analyzing code, provide:
 - Consistent naming and formatting across all code documentation
 
 ```
-````

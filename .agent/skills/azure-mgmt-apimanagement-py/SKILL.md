@@ -1,9 +1,11 @@
 ---
 name: azure-mgmt-apimanagement-py
-description: |
+description: "|"
   Azure API Management SDK for Python. Use for managing APIM services, APIs, products, subscriptions, and policies.
   Triggers: "azure-mgmt-apimanagement", "ApiManagementClient", "APIM", "API gateway", "API Management".
 package: azure-mgmt-apimanagement
+risk: unknown
+source: community
 ---
 
 # Azure API Management SDK for Python
@@ -253,20 +255,20 @@ user = client.user.create_or_update(
 
 ## Operation Groups
 
-| Group                    | Purpose                  |
-| ------------------------ | ------------------------ |
+| Group | Purpose |
+|-------|---------|
 | `api_management_service` | APIM instance management |
-| `api`                    | API operations           |
-| `api_operation`          | API operation details    |
-| `api_policy`             | API-level policies       |
-| `product`                | Product management       |
-| `product_api`            | Product-API associations |
-| `subscription`           | Subscription management  |
-| `user`                   | User management          |
-| `named_value`            | Named values/secrets     |
-| `backend`                | Backend services         |
-| `certificate`            | Certificates             |
-| `gateway`                | Self-hosted gateways     |
+| `api` | API operations |
+| `api_operation` | API operation details |
+| `api_policy` | API-level policies |
+| `product` | Product management |
+| `product_api` | Product-API associations |
+| `subscription` | Subscription management |
+| `user` | User management |
+| `named_value` | Named values/secrets |
+| `backend` | Backend services |
+| `certificate` | Certificates |
+| `gateway` | Self-hosted gateways |
 
 ## Best Practices
 
@@ -276,3 +278,6 @@ user = client.user.create_or_update(
 4. **Enable Application Insights** for monitoring
 5. **Use backends** to abstract backend services
 6. **Version your APIs** using APIM's versioning features
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

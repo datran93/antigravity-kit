@@ -1,9 +1,9 @@
 ---
 name: azure-communication-chat-java
-description:
-  Build real-time chat applications with Azure Communication Services Chat Java SDK. Use when implementing chat threads,
-  messaging, participants, read receipts, typing notifications, or real-time chat features.
+description: "Build real-time chat applications with Azure Communication Services Chat Java SDK. Use when implementing chat threads, messaging, participants, read receipts, typing notifications, or real-time cha..."
 package: com.azure:azure-communication-chat
+risk: unknown
+source: community
 ---
 
 # Azure Communication Chat (Java)
@@ -48,13 +48,13 @@ ChatAsyncClient chatAsyncClient = new ChatClientBuilder()
 
 ## Key Concepts
 
-| Class                    | Purpose                                                       |
-| ------------------------ | ------------------------------------------------------------- |
-| `ChatClient`             | Create/delete chat threads, get thread clients                |
-| `ChatThreadClient`       | Operations within a thread (messages, participants, receipts) |
-| `ChatParticipant`        | User in a chat thread with display name                       |
-| `ChatMessage`            | Message content, type, sender info, timestamps                |
-| `ChatMessageReadReceipt` | Read receipt tracking per participant                         |
+| Class | Purpose |
+|-------|---------|
+| `ChatClient` | Create/delete chat threads, get thread clients |
+| `ChatThreadClient` | Operations within a thread (messages, participants, receipts) |
+| `ChatParticipant` | User in a chat thread with display name |
+| `ChatMessage` | Message content, type, sender info, timestamps |
+| `ChatMessageReadReceipt` | Read receipt tracking per participant |
 
 ## Create Chat Thread
 
@@ -123,7 +123,7 @@ for (ChatMessage message : messages) {
     System.out.println("Content: " + message.getContent().getMessage());
     System.out.println("Sender: " + message.getSenderDisplayName());
     System.out.println("Created: " + message.getCreatedOn());
-
+    
     // Check if edited or deleted
     if (message.getEditedOn() != null) {
         System.out.println("Edited: " + message.getEditedOn());
@@ -157,7 +157,7 @@ threadClient.deleteMessage(messageId);
 PagedIterable<ChatParticipant> participants = threadClient.listParticipants();
 
 for (ChatParticipant participant : participants) {
-    CommunicationUserIdentifier user =
+    CommunicationUserIdentifier user = 
         (CommunicationUserIdentifier) participant.getCommunicationIdentifier();
     System.out.println("User: " + user.getId());
     System.out.println("Display Name: " + participant.getDisplayName());
@@ -250,7 +250,7 @@ PagedIterable<ChatMessage> pagedMessages = threadClient.listMessages(listOptions
 
 pagedMessages.iterableByPage().forEach(page -> {
     System.out.println("Page status code: " + page.getStatusCode());
-    page.getElements().forEach(msg ->
+    page.getElements().forEach(msg -> 
         System.out.println("Message: " + msg.getContent().getMessage()));
 });
 ```
@@ -281,13 +281,13 @@ try {
 
 ## Message Types
 
-| Type                  | Description                         |
-| --------------------- | ----------------------------------- |
-| `TEXT`                | Regular chat message                |
-| `HTML`                | HTML-formatted message              |
-| `TOPIC_UPDATED`       | System message - topic changed      |
-| `PARTICIPANT_ADDED`   | System message - participant joined |
-| `PARTICIPANT_REMOVED` | System message - participant left   |
+| Type | Description |
+|------|-------------|
+| `TEXT` | Regular chat message |
+| `HTML` | HTML-formatted message |
+| `TOPIC_UPDATED` | System message - topic changed |
+| `PARTICIPANT_ADDED` | System message - participant joined |
+| `PARTICIPANT_REMOVED` | System message - participant left |
 
 ## Environment Variables
 
@@ -310,3 +310,6 @@ AZURE_COMMUNICATION_USER_TOKEN=<user-access-token>
 - "chat thread", "chat participants", "chat messages"
 - "read receipts", "typing notifications"
 - "Azure Communication Services chat"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

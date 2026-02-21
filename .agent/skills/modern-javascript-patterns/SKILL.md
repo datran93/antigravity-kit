@@ -1,15 +1,13 @@
 ---
 name: modern-javascript-patterns
-description:
-  Master ES6+ features including async/await, destructuring, spread operators, arrow functions, promises, modules,
-  iterators, generators, and functional programming patterns for writing clean, efficient JavaScript code. Use when
-  refactoring legacy code, implementing modern patterns, or optimizing JavaScript applications.
+description: "Master ES6+ features including async/await, destructuring, spread operators, arrow functions, promises, modules, iterators, generators, and functional programming patterns for writing clean, effici..."
+risk: unknown
+source: community
 ---
 
 # Modern JavaScript Patterns
 
-Comprehensive guide for mastering modern JavaScript (ES6+) features, functional programming patterns, and best practices
-for writing clean, maintainable, and performant code.
+Comprehensive guide for mastering modern JavaScript (ES6+) features, functional programming patterns, and best practices for writing clean, maintainable, and performant code.
 
 ## Use this skill when
 

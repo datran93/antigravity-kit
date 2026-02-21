@@ -1,8 +1,8 @@
 ---
 name: deployment-pipeline-design
-description:
-  Design multi-stage CI/CD pipelines with approval gates, security checks, and deployment orchestration. Use when
-  architecting deployment workflows, setting up continuous delivery, or implementing GitOps practices.
+description: "Design multi-stage CI/CD pipelines with approval gates, security checks, and deployment orchestration. Use when architecting deployment workflows, setting up continuous delivery, or implementing Gi..."
+risk: unknown
+source: community
 ---
 
 # Deployment Pipeline Design
@@ -23,8 +23,7 @@ Architecture patterns for multi-stage CI/CD pipelines with approval gates and de
 
 ## Purpose
 
-Design robust, secure deployment pipelines that balance speed with safety through proper stage organization and approval
-workflows.
+Design robust, secure deployment pipelines that balance speed with safety through proper stage organization and approval workflows.
 
 ## Use this skill when
 
@@ -95,21 +94,21 @@ deploy:production:
 ```yaml
 # Azure Pipelines
 stages:
-  - stage: Production
-    dependsOn: Staging
-    jobs:
-      - deployment: Deploy
-        environment:
-          name: production
-          resourceType: Kubernetes
-        strategy:
-          runOnce:
-            preDeploy:
-              steps:
-                - task: ManualValidation@0
-                  inputs:
-                    notifyUsers: "team-leads@example.com"
-                    instructions: "Review staging metrics before approving"
+- stage: Production
+  dependsOn: Staging
+  jobs:
+  - deployment: Deploy
+    environment:
+      name: production
+      resourceType: Kubernetes
+    strategy:
+      runOnce:
+        preDeploy:
+          steps:
+          - task: ManualValidation@0
+            inputs:
+              notifyUsers: 'team-leads@example.com'
+              instructions: 'Review staging metrics before approving'
 ```
 
 **Reference:** See `assets/approval-gate-template.yml`
@@ -133,7 +132,6 @@ spec:
 ```
 
 **Characteristics:**
-
 - Gradual rollout
 - Zero downtime
 - Easy rollback
@@ -156,7 +154,6 @@ kubectl label service my-app version=blue
 ```
 
 **Characteristics:**
-
 - Instant switchover
 - Easy rollback
 - Doubles infrastructure cost temporarily
@@ -174,17 +171,16 @@ spec:
   strategy:
     canary:
       steps:
-        - setWeight: 10
-        - pause: { duration: 5m }
-        - setWeight: 25
-        - pause: { duration: 5m }
-        - setWeight: 50
-        - pause: { duration: 5m }
-        - setWeight: 100
+      - setWeight: 10
+      - pause: {duration: 5m}
+      - setWeight: 25
+      - pause: {duration: 5m}
+      - setWeight: 50
+      - pause: {duration: 5m}
+      - setWeight: 100
 ```
 
 **Characteristics:**
-
 - Gradual traffic shift
 - Risk mitigation
 - Real user testing
@@ -206,7 +202,6 @@ else:
 ```
 
 **Characteristics:**
-
 - Deploy without releasing
 - A/B testing
 - Instant rollback
@@ -221,7 +216,7 @@ name: Production Pipeline
 
 on:
   push:
-    branches: [main]
+    branches: [ main ]
 
 jobs:
   build:

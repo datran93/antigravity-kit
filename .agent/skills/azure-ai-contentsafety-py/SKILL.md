@@ -1,9 +1,11 @@
 ---
 name: azure-ai-contentsafety-py
-description: |
+description: "|"
   Azure AI Content Safety SDK for Python. Use for detecting harmful content in text and images with multi-severity classification.
   Triggers: "azure-ai-contentsafety", "ContentSafetyClient", "content moderation", "harmful content", "text analysis", "image analysis".
 package: azure-ai-contentsafety
+risk: unknown
+source: community
 ---
 
 # Azure AI Content Safety SDK for Python
@@ -63,9 +65,9 @@ request = AnalyzeTextOptions(text="Your text content to analyze")
 response = client.analyze_text(request)
 
 # Check each category
-for category in [TextCategory.HATE, TextCategory.SELF_HARM,
+for category in [TextCategory.HATE, TextCategory.SELF_HARM, 
                  TextCategory.SEXUAL, TextCategory.VIOLENCE]:
-    result = next((r for r in response.categories_analysis
+    result = next((r for r in response.categories_analysis 
                    if r.category == category), None)
     if result:
         print(f"{category}: severity {result.severity}")
@@ -180,28 +182,28 @@ request = AnalyzeTextOptions(
 
 ## Harm Categories
 
-| Category   | Description                                              |
-| ---------- | -------------------------------------------------------- |
-| `Hate`     | Attacks based on identity (race, religion, gender, etc.) |
-| `Sexual`   | Sexual content, relationships, anatomy                   |
-| `Violence` | Physical harm, weapons, injury                           |
-| `SelfHarm` | Self-injury, suicide, eating disorders                   |
+| Category | Description |
+|----------|-------------|
+| `Hate` | Attacks based on identity (race, religion, gender, etc.) |
+| `Sexual` | Sexual content, relationships, anatomy |
+| `Violence` | Physical harm, weapons, injury |
+| `SelfHarm` | Self-injury, suicide, eating disorders |
 
 ## Severity Scale
 
-| Level | Text Range | Image Range | Meaning            |
-| ----- | ---------- | ----------- | ------------------ |
-| 0     | Safe       | Safe        | No harmful content |
-| 2     | Low        | Low         | Mild references    |
-| 4     | Medium     | Medium      | Moderate content   |
-| 6     | High       | High        | Severe content     |
+| Level | Text Range | Image Range | Meaning |
+|-------|------------|-------------|---------|
+| 0 | Safe | Safe | No harmful content |
+| 2 | Low | Low | Mild references |
+| 4 | Medium | Medium | Moderate content |
+| 6 | High | High | Severe content |
 
 ## Client Types
 
-| Client                | Purpose                  |
-| --------------------- | ------------------------ |
-| `ContentSafetyClient` | Analyze text and images  |
-| `BlocklistClient`     | Manage custom blocklists |
+| Client | Purpose |
+|--------|---------|
+| `ContentSafetyClient` | Analyze text and images |
+| `BlocklistClient` | Manage custom blocklists |
 
 ## Best Practices
 
@@ -212,3 +214,6 @@ request = AnalyzeTextOptions(
 5. **Log analysis results** for audit and improvement
 6. **Consider 8-severity mode** for finer-grained control
 7. **Pre-moderate AI outputs** before showing to users
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

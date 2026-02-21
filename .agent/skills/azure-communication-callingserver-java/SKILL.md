@@ -1,15 +1,14 @@
 ---
 name: azure-communication-callingserver-java
-description:
-  Azure Communication Services CallingServer (legacy) Java SDK. Note - This SDK is deprecated. Use
-  azure-communication-callautomation instead for new projects. Only use this skill when maintaining legacy code.
+description: "Azure Communication Services CallingServer (legacy) Java SDK. Note - This SDK is deprecated. Use azure-communication-callautomation instead for new projects. Only use this skill when maintaining le..."
 package: com.azure:azure-communication-callingserver
+risk: unknown
+source: community
 ---
 
 # Azure Communication CallingServer (Java) - DEPRECATED
 
-> **⚠️ DEPRECATED**: This SDK has been renamed to **Call Automation**. For new projects, use
-> `azure-communication-callautomation` instead. This skill is for maintaining legacy code only.
+> **⚠️ DEPRECATED**: This SDK has been renamed to **Call Automation**. For new projects, use `azure-communication-callautomation` instead. This skill is for maintaining legacy code only.
 
 ## Migration to Call Automation
 
@@ -31,12 +30,12 @@ package: com.azure:azure-communication-callingserver
 
 ## Class Name Changes
 
-| CallingServer (Old)          | Call Automation (New)          |
-| ---------------------------- | ------------------------------ |
-| `CallingServerClient`        | `CallAutomationClient`         |
-| `CallingServerClientBuilder` | `CallAutomationClientBuilder`  |
-| `CallConnection`             | `CallConnection` (same)        |
-| `ServerCall`                 | Removed - use `CallConnection` |
+| CallingServer (Old) | Call Automation (New) |
+|---------------------|----------------------|
+| `CallingServerClient` | `CallAutomationClient` |
+| `CallingServerClientBuilder` | `CallAutomationClientBuilder` |
+| `CallConnection` | `CallConnection` (same) |
+| `ServerCall` | Removed - use `CallConnection` |
 
 ## Legacy Client Creation
 
@@ -77,10 +76,9 @@ client.stopRecording(recordingId);
 
 ## For New Development
 
-**Do not use this SDK for new projects.**
+**Do not use this SDK for new projects.** 
 
 See the `azure-communication-callautomation-java` skill for:
-
 - Making outbound calls
 - Answering incoming calls
 - Call recording
@@ -93,3 +91,6 @@ See the `azure-communication-callautomation-java` skill for:
 
 - "callingserver legacy", "deprecated calling SDK"
 - "migrate callingserver to callautomation"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,14 +1,13 @@
 ---
 name: wiki-onboarding
-description:
-  Generates two complementary onboarding guides — a Principal-Level architectural deep-dive and a Zero-to-Hero
-  contributor walkthrough. Use when the user wants onboarding documentation for a codebase.
+description: "Generates two complementary onboarding guides \u2014 a Principal-Level architectural deep-dive and a Zero-to-Hero contributor walkthrough. Use when the user wants onboarding documentation fo..."
+risk: unknown
+source: community
 ---
 
 # Wiki Onboarding Guide Generator
 
-Generate two complementary onboarding documents that together give any engineer — from newcomer to principal — a
-complete understanding of a codebase.
+Generate two complementary onboarding documents that together give any engineer — from newcomer to principal — a complete understanding of a codebase.
 
 ## When to Activate
 
@@ -19,7 +18,6 @@ complete understanding of a codebase.
 ## Language Detection
 
 Scan the repository for build files to determine the primary language for code examples:
-
 - `package.json` / `tsconfig.json` → TypeScript/JavaScript
 - `*.csproj` / `*.sln` → C# / .NET
 - `Cargo.toml` → Rust
@@ -33,8 +31,7 @@ Scan the repository for build files to determine the primary language for code e
 
 ### Required Sections
 
-1. **System Philosophy & Design Principles** — What invariants does the system maintain? What were the key design
-   choices and why?
+1. **System Philosophy & Design Principles** — What invariants does the system maintain? What were the key design choices and why?
 2. **Architecture Overview** — Component map with Mermaid diagram. What owns what, communication patterns.
 3. **Key Abstractions & Interfaces** — The load-bearing abstractions everything depends on
 4. **Decision Log** — Major architectural decisions with context, alternatives considered, trade-offs
@@ -48,7 +45,6 @@ Scan the repository for build files to determine the primary language for code e
 12. **Known Technical Debt** — Honest assessment of shortcuts and their risks
 
 ### Rules
-
 - Every claim backed by `(file_path:line_number)` citation
 - Minimum 3 Mermaid diagrams (architecture, data flow, dependency graph)
 - All Mermaid diagrams use dark-mode colors (see wiki-vitepress skill)
@@ -76,9 +72,11 @@ Scan the repository for build files to determine the primary language for code e
 14. **Quick Reference Card** — Cheat sheet of most-used commands and patterns
 
 ### Rules
-
 - All code examples in the detected primary language
 - Every command must be copy-pasteable
 - Include expected output for verification steps
 - Use Mermaid for workflow diagrams (dark-mode colors)
 - Ground all claims in actual code — cite `(file_path:line_number)`
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

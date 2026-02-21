@@ -8,7 +8,7 @@ Complete, copy-paste templates for each skill type.
 
 For how-to guides that teach a specific method.
 
-````markdown
+```markdown
 ---
 name: technique-name
 description: >-
@@ -31,7 +31,6 @@ metadata:
 - [Error message text]
 
 **NOT for:**
-
 - [When to avoid]
 
 ## The Problem
@@ -42,7 +41,6 @@ function badCode() {
   // problematic pattern
 }
 ```
-````
 
 ## The Solution
 
@@ -61,19 +59,17 @@ function goodCode() {
 
 ## Quick Reference
 
-| Scenario | Approach   |
-| -------- | ---------- |
-| Case A   | Solution A |
-| Case B   | Solution B |
+| Scenario | Approach |
+|----------|----------|
+| Case A | Solution A |
+| Case B | Solution B |
 
 ## Common Mistakes
 
 **Mistake 1:** [Description]
-
 - Wrong: `bad code`
 - Right: `good code`
-
-````
+```
 
 ---
 
@@ -105,10 +101,9 @@ metadata:
 **Pattern A:**
 ```bash
 example command
-````
+```
 
 **Pattern B:**
-
 ```bash
 another example
 ```
@@ -116,11 +111,9 @@ another example
 ## Detailed Docs
 
 For more options, run `--help` or see:
-
-- [patterns.md](patterns.md)
+- patterns.md
 - [examples.md](examples.md)
-
-````
+```
 
 ---
 
@@ -183,7 +176,7 @@ Violating the letter IS violating the spirit.
 - [Exception 2]
 
 **Everything else:** Follow the rule.
-````
+```
 
 ---
 
@@ -191,7 +184,7 @@ Violating the letter IS violating the spirit.
 
 For mental models and design patterns.
 
-````markdown
+```markdown
 ---
 name: pattern-name
 description: >-
@@ -221,7 +214,6 @@ function before() {
   // nested, confusing
 }
 ```
-````
 
 ## After
 
@@ -239,9 +231,9 @@ function after() {
 
 ## Impact
 
-**Before:** [Problem metric] **After:** [Improved metric]
-
-````
+**Before:** [Problem metric]
+**After:** [Improved metric]
+```
 
 ---
 
@@ -256,9 +248,9 @@ metadata:
   category: technique
   triggers: flaky tests, timeout, race condition, sleep, setTimeout
 ---
-````
+```
 
-````markdown
+```markdown
 # Condition-Based Waiting
 
 ## Overview
@@ -282,13 +274,9 @@ expect(element).toBeVisible();
 await waitFor(() => element.isVisible(), { timeout: 5000 });
 expect(element).toBeVisible();
 ```
-````
 
 ## Impact
 
 - Flaky tests: 15/100 → 0/100
 - Speed: 40% faster (no over-waiting)
-
-```
-
 ```

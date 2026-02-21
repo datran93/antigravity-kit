@@ -1,8 +1,10 @@
 ---
 name: azure-resource-manager-sql-dotnet
-description: |
+description: "|"
   Azure Resource Manager SDK for Azure SQL in .NET. Use for MANAGEMENT PLANE operations: creating/managing SQL servers, databases, elastic pools, firewall rules, and failover groups via Azure Resource Manager. NOT for data plane operations (executing queries) - use Microsoft.Data.SqlClient for that. Triggers: "SQL server", "create SQL database", "manage SQL resources", "ARM SQL", "SqlServerResource", "provision Azure SQL", "elastic pool", "firewall rule".
 package: Azure.ResourceManager.Sql
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.Sql (.NET)
@@ -10,9 +12,7 @@ package: Azure.ResourceManager.Sql
 Management plane SDK for provisioning and managing Azure SQL resources via Azure Resource Manager.
 
 > **⚠️ Management vs Data Plane**
->
-> - **This SDK (Azure.ResourceManager.Sql)**: Create servers, databases, elastic pools, configure firewall rules, manage
->   failover groups
+> - **This SDK (Azure.ResourceManager.Sql)**: Create servers, databases, elastic pools, configure firewall rules, manage failover groups
 > - **Data Plane SDK (Microsoft.Data.SqlClient)**: Execute queries, stored procedures, manage connections
 
 ## Installation
@@ -229,45 +229,45 @@ var connectionString = $"Server=tcp:{serverFqdn},1433;" +
 
 ## Key Types Reference
 
-| Type                        | Purpose                               |
-| --------------------------- | ------------------------------------- |
-| `ArmClient`                 | Entry point for all ARM operations    |
-| `SqlServerResource`         | Represents an Azure SQL server        |
-| `SqlServerCollection`       | Collection for server CRUD            |
-| `SqlDatabaseResource`       | Represents a SQL database             |
-| `SqlDatabaseCollection`     | Collection for database CRUD          |
-| `ElasticPoolResource`       | Represents an elastic pool            |
-| `ElasticPoolCollection`     | Collection for elastic pool CRUD      |
-| `SqlFirewallRuleResource`   | Represents a firewall rule            |
-| `SqlFirewallRuleCollection` | Collection for firewall rule CRUD     |
-| `SqlServerData`             | Server creation/update payload        |
-| `SqlDatabaseData`           | Database creation/update payload      |
-| `ElasticPoolData`           | Elastic pool creation/update payload  |
-| `SqlFirewallRuleData`       | Firewall rule creation/update payload |
-| `SqlSku`                    | SKU configuration (tier, capacity)    |
+| Type | Purpose |
+|------|---------|
+| `ArmClient` | Entry point for all ARM operations |
+| `SqlServerResource` | Represents an Azure SQL server |
+| `SqlServerCollection` | Collection for server CRUD |
+| `SqlDatabaseResource` | Represents a SQL database |
+| `SqlDatabaseCollection` | Collection for database CRUD |
+| `ElasticPoolResource` | Represents an elastic pool |
+| `ElasticPoolCollection` | Collection for elastic pool CRUD |
+| `SqlFirewallRuleResource` | Represents a firewall rule |
+| `SqlFirewallRuleCollection` | Collection for firewall rule CRUD |
+| `SqlServerData` | Server creation/update payload |
+| `SqlDatabaseData` | Database creation/update payload |
+| `ElasticPoolData` | Elastic pool creation/update payload |
+| `SqlFirewallRuleData` | Firewall rule creation/update payload |
+| `SqlSku` | SKU configuration (tier, capacity) |
 
 ## Common SKUs
 
 ### Database SKUs
 
-| SKU Name    | Tier             | Description           |
-| ----------- | ---------------- | --------------------- |
-| `Basic`     | Basic            | 5 DTUs, 2 GB max      |
-| `S0`-`S12`  | Standard         | 10-3000 DTUs          |
-| `P1`-`P15`  | Premium          | 125-4000 DTUs         |
-| `GP_Gen5_2` | GeneralPurpose   | vCore-based, 2 vCores |
+| SKU Name | Tier | Description |
+|----------|------|-------------|
+| `Basic` | Basic | 5 DTUs, 2 GB max |
+| `S0`-`S12` | Standard | 10-3000 DTUs |
+| `P1`-`P15` | Premium | 125-4000 DTUs |
+| `GP_Gen5_2` | GeneralPurpose | vCore-based, 2 vCores |
 | `BC_Gen5_2` | BusinessCritical | vCore-based, 2 vCores |
-| `HS_Gen5_2` | Hyperscale       | vCore-based, 2 vCores |
+| `HS_Gen5_2` | Hyperscale | vCore-based, 2 vCores |
 
 ### Elastic Pool SKUs
 
-| SKU Name       | Tier             | Description    |
-| -------------- | ---------------- | -------------- |
-| `BasicPool`    | Basic            | 50-1600 eDTUs  |
-| `StandardPool` | Standard         | 50-3000 eDTUs  |
-| `PremiumPool`  | Premium          | 125-4000 eDTUs |
-| `GP_Gen5_2`    | GeneralPurpose   | vCore-based    |
-| `BC_Gen5_2`    | BusinessCritical | vCore-based    |
+| SKU Name | Tier | Description |
+|----------|------|-------------|
+| `BasicPool` | Basic | 50-1600 eDTUs |
+| `StandardPool` | Standard | 50-3000 eDTUs |
+| `PremiumPool` | Premium | 125-4000 eDTUs |
+| `GP_Gen5_2` | GeneralPurpose | vCore-based |
+| `BC_Gen5_2` | BusinessCritical | vCore-based |
 
 ## Best Practices
 
@@ -306,16 +306,19 @@ catch (RequestFailedException ex)
 
 ## Reference Files
 
-| File                                                                   | When to Read                                              |
-| ---------------------------------------------------------------------- | --------------------------------------------------------- |
-| [references/server-management.md](references/server-management.md)     | Server CRUD, admin credentials, Azure AD auth, networking |
-| [references/database-operations.md](references/database-operations.md) | Database CRUD, scaling, backup, restore, copy             |
-| [references/elastic-pools.md](references/elastic-pools.md)             | Pool management, adding/removing databases, scaling       |
+| File | When to Read |
+|------|--------------|
+| references/server-management.md | Server CRUD, admin credentials, Azure AD auth, networking |
+| references/database-operations.md | Database CRUD, scaling, backup, restore, copy |
+| references/elastic-pools.md | Pool management, adding/removing databases, scaling |
 
 ## Related SDKs
 
-| SDK                                       | Purpose                                         | Install                                                      |
-| ----------------------------------------- | ----------------------------------------------- | ------------------------------------------------------------ |
-| `Microsoft.Data.SqlClient`                | Data plane (execute queries, stored procedures) | `dotnet add package Microsoft.Data.SqlClient`                |
-| `Azure.ResourceManager.Sql`               | Management plane (this SDK)                     | `dotnet add package Azure.ResourceManager.Sql`               |
-| `Microsoft.EntityFrameworkCore.SqlServer` | ORM for SQL Server                              | `dotnet add package Microsoft.EntityFrameworkCore.SqlServer` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Microsoft.Data.SqlClient` | Data plane (execute queries, stored procedures) | `dotnet add package Microsoft.Data.SqlClient` |
+| `Azure.ResourceManager.Sql` | Management plane (this SDK) | `dotnet add package Azure.ResourceManager.Sql` |
+| `Microsoft.EntityFrameworkCore.SqlServer` | ORM for SQL Server | `dotnet add package Microsoft.EntityFrameworkCore.SqlServer` |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -7,7 +7,6 @@ Research-backed patterns from Google DeepMind and Anthropic for enhanced multi-a
 ## Overview
 
 This reference consolidates key patterns from:
-
 1. **Google DeepMind** - World models, self-improvement, scalable oversight
 2. **Anthropic** - Constitutional AI, alignment safety, agentic coding
 
@@ -75,7 +74,6 @@ class SelfImprovementLoop:
 ```
 
 **Loki Mode Application:**
-
 - Generate test scenarios automatically
 - Score code quality with learned criteria
 - Bootstrap agent training across projects
@@ -105,7 +103,6 @@ class SelfImprovementLoop:
 ```
 
 **Loki Mode Application:**
-
 - Orchestrator = ER model (planning, tool calls)
 - Implementation agents = VLA model (code actions)
 - Task decomposition before execution
@@ -250,7 +247,6 @@ class ConstitutionalAI:
 ```
 
 **Loki Mode Constitution Example:**
-
 ```yaml
 loki_constitution:
   - "Never delete production data without explicit backup"
@@ -307,7 +303,6 @@ class DefectionProbe:
 ```
 
 **Loki Mode Application:**
-
 - Monitor agent actions for anomalies
 - Flag unusual file access patterns
 - Detect attempts to bypass quality gates
@@ -520,7 +515,6 @@ combined_approach:
 ## Sources
 
 **Google DeepMind:**
-
 - [SIMA 2: Generalist AI Agent](https://deepmind.google/blog/sima-2-an-agent-that-plays-reasons-and-learns-with-you-in-virtual-3d-worlds/)
 - [Gemini Robotics 1.5](https://deepmind.google/blog/gemini-robotics-15-brings-ai-agents-into-the-physical-world/)
 - [Dreamer 4: World Model Training](https://danijar.com/project/dreamer4/)
@@ -530,7 +524,6 @@ combined_approach:
 - [Technical AGI Safety Approach](https://arxiv.org/html/2504.01849v1)
 
 **Anthropic:**
-
 - [Constitutional AI](https://www.anthropic.com/research/constitutional-ai-harmlessness-from-ai-feedback)
 - [Building Effective Agents](https://www.anthropic.com/research/building-effective-agents)
 - [Claude Code Best Practices](https://www.anthropic.com/engineering/claude-code-best-practices)

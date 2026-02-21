@@ -51,7 +51,6 @@ if __name__ == "__main__":
 ```
 
 Requirements:
-
 - Class must be decorated with `@DBOS.dbos_class()`
 - Class must inherit from `DBOSConfiguredInstance`
 - `instance_name` must be unique and passed to `super().__init__()`

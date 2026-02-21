@@ -98,14 +98,17 @@ async function authenticatedFetch(url, options = {}) {
 
 ```javascript
 async function graphqlRequest(shop, accessToken, query, variables = {}) {
-  const response = await fetch(`https://${shop}/admin/api/2026-01/graphql.json`, {
-    method: "POST",
-    headers: {
-      "X-Shopify-Access-Token": accessToken,
-      "Content-Type": "application/json",
+  const response = await fetch(
+    `https://${shop}/admin/api/2026-01/graphql.json`,
+    {
+      method: "POST",
+      headers: {
+        "X-Shopify-Access-Token": accessToken,
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ query, variables }),
     },
-    body: JSON.stringify({ query, variables }),
-  });
+  );
 
   const data = await response.json();
 
@@ -146,7 +149,9 @@ Variables:
     "productType": "Apparel",
     "vendor": "Brand",
     "status": "ACTIVE",
-    "variants": [{ "price": "29.99", "sku": "SKU-001", "inventoryQuantity": 100 }]
+    "variants": [
+      { "price": "29.99", "sku": "SKU-001", "inventoryQuantity": 100 }
+    ]
   }
 }
 ```
@@ -286,7 +291,10 @@ function verifyWebhook(req) {
   const hmac = req.headers["x-shopify-hmac-sha256"];
   const body = req.rawBody; // Raw body buffer
 
-  const hash = crypto.createHmac("sha256", process.env.SHOPIFY_API_SECRET).update(body, "utf8").digest("base64");
+  const hash = crypto
+    .createHmac("sha256", process.env.SHOPIFY_API_SECRET)
+    .update(body, "utf8")
+    .digest("base64");
 
   return hmac === hash;
 }
@@ -375,7 +383,12 @@ mutation CreateSubscription(
   $lineItems: [AppSubscriptionLineItemInput!]!
   $trialDays: Int
 ) {
-  appSubscriptionCreate(name: $name, returnUrl: $returnUrl, lineItems: $lineItems, trialDays: $trialDays) {
+  appSubscriptionCreate(
+    name: $name
+    returnUrl: $returnUrl
+    lineItems: $lineItems
+    trialDays: $trialDays
+  ) {
     appSubscription {
       id
       name
@@ -413,8 +426,16 @@ Variables:
 **Usage-based Billing:**
 
 ```graphql
-mutation CreateUsageCharge($subscriptionLineItemId: ID!, $price: MoneyInput!, $description: String!) {
-  appUsageRecordCreate(subscriptionLineItemId: $subscriptionLineItemId, price: $price, description: $description) {
+mutation CreateUsageCharge(
+  $subscriptionLineItemId: ID!
+  $price: MoneyInput!
+  $description: String!
+) {
+  appUsageRecordCreate(
+    subscriptionLineItemId: $subscriptionLineItemId
+    price: $price
+    description: $description
+  ) {
     appUsageRecord {
       id
       price {
@@ -502,7 +523,9 @@ Variables:
 const response = await graphqlRequest(shop, token, query);
 const cost = response.extensions?.cost;
 
-console.log(`Cost: ${cost.actualQueryCost}/${cost.throttleStatus.maximumAvailable}`);
+console.log(
+  `Cost: ${cost.actualQueryCost}/${cost.throttleStatus.maximumAvailable}`,
+);
 ```
 
 **Handle Throttling:**

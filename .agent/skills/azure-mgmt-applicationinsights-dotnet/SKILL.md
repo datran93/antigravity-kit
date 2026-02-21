@@ -1,8 +1,10 @@
 ---
 name: azure-mgmt-applicationinsights-dotnet
-description: |
+description: "|"
   Azure Application Insights SDK for .NET. Application performance monitoring and observability resource management. Use for creating Application Insights components, web tests, workbooks, analytics items, and API keys. Triggers: "Application Insights", "ApplicationInsights", "App Insights", "APM", "application monitoring", "web tests", "availability tests", "workbooks".
 package: Azure.ResourceManager.ApplicationInsights
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.ApplicationInsights (.NET)
@@ -169,12 +171,12 @@ WebTestData urlPingTest = new WebTestData(AzureLocation.EastUS)
     Configuration = new WebTestConfiguration
     {
         WebTest = """
-            <WebTest Name="Homepage" Enabled="True" Timeout="120"
+            <WebTest Name="Homepage" Enabled="True" Timeout="120" 
                      xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
                 <Items>
-                    <Request Method="GET" Version="1.1" Url="https://myapp.example.com"
-                             ThinkTime="0" Timeout="120" ParseDependentRequests="False"
-                             FollowRedirects="True" RecordResult="True" Cache="False"
+                    <Request Method="GET" Version="1.1" Url="https://myapp.example.com" 
+                             ThinkTime="0" Timeout="120" ParseDependentRequests="False" 
+                             FollowRedirects="True" RecordResult="True" Cache="False" 
                              ResponseTimeGoal="0" Encoding="utf-8" ExpectedHttpStatusCode="200" />
                 </Items>
             </WebTest>
@@ -217,9 +219,9 @@ WebTestData multiStepTest = new WebTestData(AzureLocation.EastUS)
             <WebTest Name="LoginFlow" Enabled="True" Timeout="300"
                      xmlns="http://microsoft.com/schemas/VisualStudio/TeamTest/2010">
                 <Items>
-                    <Request Method="GET" Version="1.1" Url="https://myapp.example.com/login"
+                    <Request Method="GET" Version="1.1" Url="https://myapp.example.com/login" 
                              ThinkTime="0" Timeout="60" />
-                    <Request Method="POST" Version="1.1" Url="https://myapp.example.com/api/auth"
+                    <Request Method="POST" Version="1.1" Url="https://myapp.example.com/api/auth" 
                              ThinkTime="0" Timeout="60">
                         <Headers>
                             <Header Name="Content-Type" Value="application/json" />
@@ -318,7 +320,7 @@ ArmOperation<ComponentLinkedStorageAccountResource> operation = await linkedStor
 
 ```csharp
 // List all Application Insights components in resource group
-await foreach (ApplicationInsightsComponentResource component in
+await foreach (ApplicationInsightsComponentResource component in 
     resourceGroup.GetApplicationInsightsComponents())
 {
     Console.WriteLine($"Component: {component.Data.Name}");
@@ -375,45 +377,45 @@ await webTest.DeleteAsync(WaitUntil.Completed);
 
 ## Key Types Reference
 
-| Type                                         | Purpose                         |
-| -------------------------------------------- | ------------------------------- |
-| `ApplicationInsightsComponentResource`       | App Insights component          |
-| `ApplicationInsightsComponentData`           | Component configuration         |
-| `ApplicationInsightsComponentCollection`     | Collection of components        |
+| Type | Purpose |
+|------|---------|
+| `ApplicationInsightsComponentResource` | App Insights component |
+| `ApplicationInsightsComponentData` | Component configuration |
+| `ApplicationInsightsComponentCollection` | Collection of components |
 | `ApplicationInsightsComponentApiKeyResource` | API key for programmatic access |
-| `WebTestResource`                            | Availability/web test           |
-| `WebTestData`                                | Web test configuration          |
-| `WorkbookResource`                           | Analysis workbook               |
-| `WorkbookData`                               | Workbook configuration          |
-| `ComponentLinkedStorageAccountResource`      | Linked storage for exports      |
+| `WebTestResource` | Availability/web test |
+| `WebTestData` | Web test configuration |
+| `WorkbookResource` | Analysis workbook |
+| `WorkbookData` | Workbook configuration |
+| `ComponentLinkedStorageAccountResource` | Linked storage for exports |
 
 ## Application Types
 
-| Type                | Enum Value |
-| ------------------- | ---------- |
-| Web Application     | `Web`      |
-| iOS Application     | `iOS`      |
-| Java Application    | `Java`     |
-| Node.js Application | `NodeJS`   |
-| .NET Application    | `MRT`      |
-| Other               | `Other`    |
+| Type | Enum Value |
+|------|------------|
+| Web Application | `Web` |
+| iOS Application | `iOS` |
+| Java Application | `Java` |
+| Node.js Application | `NodeJS` |
+| .NET Application | `MRT` |
+| Other | `Other` |
 
 ## Web Test Locations
 
-| Location ID         | Region           |
-| ------------------- | ---------------- |
-| `us-ca-sjc-azr`     | West US          |
-| `us-tx-sn1-azr`     | South Central US |
-| `us-il-ch1-azr`     | North Central US |
-| `us-va-ash-azr`     | East US          |
-| `emea-gb-db3-azr`   | UK South         |
-| `emea-nl-ams-azr`   | West Europe      |
-| `emea-fr-pra-edge`  | France Central   |
-| `apac-sg-sin-azr`   | Southeast Asia   |
-| `apac-hk-hkn-azr`   | East Asia        |
-| `apac-jp-kaw-edge`  | Japan East       |
-| `latam-br-gru-edge` | Brazil South     |
-| `emea-au-syd-edge`  | Australia East   |
+| Location ID | Region |
+|-------------|--------|
+| `us-ca-sjc-azr` | West US |
+| `us-tx-sn1-azr` | South Central US |
+| `us-il-ch1-azr` | North Central US |
+| `us-va-ash-azr` | East US |
+| `emea-gb-db3-azr` | UK South |
+| `emea-nl-ams-azr` | West Europe |
+| `emea-fr-pra-edge` | France Central |
+| `apac-sg-sin-azr` | Southeast Asia |
+| `apac-hk-hkn-azr` | East Asia |
+| `apac-jp-kaw-edge` | Japan East |
+| `latam-br-gru-edge` | Brazil South |
+| `emea-au-syd-edge` | Australia East |
 
 ## Best Practices
 
@@ -469,18 +471,21 @@ builder.Services.AddApplicationInsightsTelemetry(options =>
 
 ## Related SDKs
 
-| SDK                                         | Purpose                        | Install                                                        |
-| ------------------------------------------- | ------------------------------ | -------------------------------------------------------------- |
+| SDK | Purpose | Install |
+|-----|---------|---------|
 | `Azure.ResourceManager.ApplicationInsights` | Resource management (this SDK) | `dotnet add package Azure.ResourceManager.ApplicationInsights` |
-| `Microsoft.ApplicationInsights`             | Telemetry SDK                  | `dotnet add package Microsoft.ApplicationInsights`             |
-| `Microsoft.ApplicationInsights.AspNetCore`  | ASP.NET Core integration       | `dotnet add package Microsoft.ApplicationInsights.AspNetCore`  |
-| `Azure.Monitor.OpenTelemetry.Exporter`      | OpenTelemetry export           | `dotnet add package Azure.Monitor.OpenTelemetry.Exporter`      |
+| `Microsoft.ApplicationInsights` | Telemetry SDK | `dotnet add package Microsoft.ApplicationInsights` |
+| `Microsoft.ApplicationInsights.AspNetCore` | ASP.NET Core integration | `dotnet add package Microsoft.ApplicationInsights.AspNetCore` |
+| `Azure.Monitor.OpenTelemetry.Exporter` | OpenTelemetry export | `dotnet add package Azure.Monitor.OpenTelemetry.Exporter` |
 
 ## Reference Links
 
-| Resource              | URL                                                                                                                    |
-| --------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| NuGet Package         | https://www.nuget.org/packages/Azure.ResourceManager.ApplicationInsights                                               |
-| API Reference         | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.applicationinsights                                       |
-| Product Documentation | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview                                              |
-| GitHub Source         | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/applicationinsights/Azure.ResourceManager.ApplicationInsights |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.ApplicationInsights |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.applicationinsights |
+| Product Documentation | https://learn.microsoft.com/azure/azure-monitor/app/app-insights-overview |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/applicationinsights/Azure.ResourceManager.ApplicationInsights |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

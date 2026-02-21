@@ -1,4 +1,5 @@
 # Kubernetes ConfigMap Templates
+
 ---
 # Template 1: Simple Key-Value Configuration
 apiVersion: v1

@@ -1,6 +1,8 @@
 ---
 name: tdd-workflows-tdd-refactor
 description: "Use when working with tdd workflows tdd refactor"
+risk: unknown
+source: community
 ---
 
 ## Use this skill when
@@ -22,9 +24,7 @@ description: "Use when working with tdd workflows tdd refactor"
 
 Refactor code with confidence using comprehensive test safety net:
 
-[Extended thinking: This tool uses the tdd-orchestrator agent (opus model) for sophisticated refactoring while
-maintaining all tests green. It applies design patterns, improves code quality, and optimizes performance with the
-safety of comprehensive test coverage.]
+[Extended thinking: This tool uses the tdd-orchestrator agent (opus model) for sophisticated refactoring while maintaining all tests green. It applies design patterns, improves code quality, and optimizes performance with the safety of comprehensive test coverage.]
 
 ## Usage
 
@@ -35,14 +35,12 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 ## Core Process
 
 **1. Pre-Assessment**
-
 - Run tests to establish green baseline
 - Analyze code smells and test coverage
 - Document current performance metrics
 - Create incremental refactoring plan
 
 **2. Code Smell Detection**
-
 - Duplicated code → Extract methods/classes
 - Long methods → Decompose into focused functions
 - Large classes → Split responsibilities
@@ -53,7 +51,6 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 - Dead code → Remove
 
 **3. Design Patterns**
-
 - Apply Creational (Factory, Builder, Singleton)
 - Apply Structural (Adapter, Facade, Decorator)
 - Apply Behavioral (Strategy, Observer, Command)
@@ -61,7 +58,6 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 - Use patterns only where they add clear value
 
 **4. SOLID Principles**
-
 - Single Responsibility: One reason to change
 - Open/Closed: Open for extension, closed for modification
 - Liskov Substitution: Subtypes substitutable
@@ -69,7 +65,6 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 - Dependency Inversion: Depend on abstractions
 
 **5. Refactoring Techniques**
-
 - Extract Method/Variable/Interface
 - Inline unnecessary indirection
 - Rename for clarity
@@ -80,7 +75,6 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 - Introduce Null Object
 
 **6. Performance Optimization**
-
 - Profile to identify bottlenecks
 - Optimize algorithms and data structures
 - Implement caching where beneficial
@@ -89,7 +83,6 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 - Always measure before and after
 
 **7. Incremental Steps**
-
 - Make small, atomic changes
 - Run tests after each modification
 - Commit after each successful refactoring
@@ -97,21 +90,18 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 - Use scaffolding when needed
 
 **8. Architecture Evolution**
-
 - Layer separation and dependency management
 - Module boundaries and interface definition
 - Event-driven patterns for decoupling
 - Database access pattern optimization
 
 **9. Safety Verification**
-
 - Run full test suite after each change
 - Performance regression testing
 - Mutation testing for test effectiveness
 - Rollback plan for major changes
 
 **10. Advanced Patterns**
-
 - Strangler Fig: Gradual legacy replacement
 - Branch by Abstraction: Large-scale changes
 - Parallel Change: Expand-contract pattern
@@ -129,7 +119,6 @@ Prompt: "Refactor this code while keeping all tests green: $ARGUMENTS. Apply TDD
 ## Safety Checklist
 
 Before committing:
-
 - ✓ All tests pass (100% green)
 - ✓ No functionality regression
 - ✓ Performance metrics acceptable
@@ -139,7 +128,6 @@ Before committing:
 ## Recovery Protocol
 
 If tests fail:
-
 - Immediately revert last change
 - Identify breaking refactoring
 - Apply smaller incremental changes
@@ -148,7 +136,6 @@ If tests fail:
 ## Example: Extract Method Pattern
 
 **Before:**
-
 ```typescript
 class OrderProcessor {
   processOrder(order: Order): ProcessResult {
@@ -162,7 +149,7 @@ class OrderProcessor {
     for (const item of order.items) {
       subtotal += item.price * item.quantity;
     }
-    let total = subtotal + subtotal * 0.08 + (subtotal > 100 ? 0 : 15);
+    let total = subtotal + (subtotal * 0.08) + (subtotal > 100 ? 0 : 15);
 
     // Process payment...
     // Update inventory...
@@ -172,7 +159,6 @@ class OrderProcessor {
 ```
 
 **After:**
-
 ```typescript
 class OrderProcessor {
   async processOrder(order: Order): Promise<ProcessResult> {

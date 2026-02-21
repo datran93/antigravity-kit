@@ -1,9 +1,11 @@
 ---
 name: azure-data-tables-py
-description: |
+description: "|"
   Azure Tables SDK for Python (Storage and Cosmos DB). Use for NoSQL key-value storage, entity CRUD, and batch operations.
   Triggers: "table storage", "TableServiceClient", "TableClient", "entities", "PartitionKey", "RowKey".
 package: azure-data-tables
+risk: unknown
+source: community
 ---
 
 # Azure Tables SDK for Python
@@ -44,10 +46,10 @@ table_client = TableClient(endpoint=endpoint, table_name="mytable", credential=c
 
 ## Client Types
 
-| Client               | Purpose                           |
-| -------------------- | --------------------------------- |
+| Client | Purpose |
+|--------|---------|
 | `TableServiceClient` | Create/delete tables, list tables |
-| `TableClient`        | Entity CRUD, queries              |
+| `TableClient` | Entity CRUD, queries |
 
 ## Table Operations
 
@@ -199,7 +201,7 @@ from azure.identity.aio import DefaultAzureCredential
 
 async def table_operations():
     credential = DefaultAzureCredential()
-
+    
     async with TableClient(
         endpoint="https://<account>.table.core.windows.net",
         table_name="mytable",
@@ -211,7 +213,7 @@ async def table_operations():
             "RowKey": "1",
             "data": "test"
         })
-
+        
         # Query
         async for entity in client.query_entities("PartitionKey eq 'async'"):
             print(entity)
@@ -223,14 +225,14 @@ asyncio.run(table_operations())
 ## Data Types
 
 | Python Type | Table Storage Type |
-| ----------- | ------------------ |
-| `str`       | String             |
-| `int`       | Int64              |
-| `float`     | Double             |
-| `bool`      | Boolean            |
-| `datetime`  | DateTime           |
-| `bytes`     | Binary             |
-| `UUID`      | Guid               |
+|-------------|-------------------|
+| `str` | String |
+| `int` | Int64 |
+| `float` | Double |
+| `bool` | Boolean |
+| `datetime` | DateTime |
+| `bytes` | Binary |
+| `UUID` | Guid |
 
 ## Best Practices
 
@@ -241,3 +243,6 @@ asyncio.run(table_operations())
 5. **Use parameterized queries** to prevent injection
 6. **Keep entities small** — max 1MB per entity
 7. **Use async client** for high-throughput scenarios
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

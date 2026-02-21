@@ -1,9 +1,6 @@
 ---
 name: deep-research
-description:
-  "Execute autonomous multi-step research using Google Gemini Deep Research Agent. Use for: market analysis, competitive
-  landscaping, literature reviews, technical research, due diligence. Takes 2-10 minutes but produces detailed, cited
-  reports. Costs $2-5 per task."
+description: "Execute autonomous multi-step research using Google Gemini Deep Research Agent. Use for: market analysis, competitive landscaping, literature reviews, technical research, due diligence. Takes 2-10 ..."
 source: "https://github.com/sanjay3290/ai-skills/tree/main/skills/deep-research"
 risk: safe
 ---
@@ -15,7 +12,6 @@ Run autonomous research tasks that plan, search, read, and synthesize informatio
 ## When to Use This Skill
 
 Use this skill when:
-
 - Performing market analysis
 - Conducting competitive landscaping
 - Creating literature reviews
@@ -41,50 +37,42 @@ Use this skill when:
 ## Usage
 
 ### Start a research task
-
 ```bash
 python3 scripts/research.py --query "Research the history of Kubernetes"
 ```
 
 ### With structured output format
-
 ```bash
 python3 scripts/research.py --query "Compare Python web frameworks" \
   --format "1. Executive Summary\n2. Comparison Table\n3. Recommendations"
 ```
 
 ### Stream progress in real-time
-
 ```bash
 python3 scripts/research.py --query "Analyze EV battery market" --stream
 ```
 
 ### Start without waiting
-
 ```bash
 python3 scripts/research.py --query "Research topic" --no-wait
 ```
 
 ### Check status of running research
-
 ```bash
 python3 scripts/research.py --status <interaction_id>
 ```
 
 ### Wait for completion
-
 ```bash
 python3 scripts/research.py --wait <interaction_id>
 ```
 
 ### Continue from previous research
-
 ```bash
 python3 scripts/research.py --query "Elaborate on point 2" --continue <interaction_id>
 ```
 
 ### List recent research
-
 ```bash
 python3 scripts/research.py --list
 ```
@@ -97,11 +85,11 @@ python3 scripts/research.py --list
 
 ## Cost & Time
 
-| Metric      | Value                                |
-| ----------- | ------------------------------------ |
-| Time        | 2-10 minutes per task                |
-| Cost        | $2-5 per task (varies by complexity) |
-| Token usage | ~250k-900k input, ~60k-80k output    |
+| Metric | Value |
+|--------|-------|
+| Time | 2-10 minutes per task |
+| Cost | $2-5 per task (varies by complexity) |
+| Token usage | ~250k-900k input, ~60k-80k output |
 
 ## Best Use Cases
 

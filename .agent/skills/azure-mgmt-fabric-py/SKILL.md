@@ -1,8 +1,10 @@
 ---
 name: azure-mgmt-fabric-py
-description: |
+description: "|"
   Azure Fabric Management SDK for Python. Use for managing Microsoft Fabric capacities and resources.
   Triggers: "azure-mgmt-fabric", "FabricMgmtClient", "Fabric capacity", "Microsoft Fabric", "Power BI capacity".
+risk: unknown
+source: community
 ---
 
 # Azure Fabric Management SDK for Python
@@ -198,37 +200,37 @@ for sku in skus:
 
 ## Client Operations
 
-| Operation                  | Method                    |
-| -------------------------- | ------------------------- |
-| `client.fabric_capacities` | Capacity CRUD operations  |
-| `client.operations`        | List available operations |
+| Operation | Method |
+|-----------|--------|
+| `client.fabric_capacities` | Capacity CRUD operations |
+| `client.operations` | List available operations |
 
 ## Fabric SKUs
 
-| SKU     | Description | CUs                 |
-| ------- | ----------- | ------------------- |
-| `F2`    | Entry level | 2 Capacity Units    |
-| `F4`    | Small       | 4 Capacity Units    |
-| `F8`    | Medium      | 8 Capacity Units    |
-| `F16`   | Large       | 16 Capacity Units   |
-| `F32`   | X-Large     | 32 Capacity Units   |
-| `F64`   | 2X-Large    | 64 Capacity Units   |
-| `F128`  | 4X-Large    | 128 Capacity Units  |
-| `F256`  | 8X-Large    | 256 Capacity Units  |
-| `F512`  | 16X-Large   | 512 Capacity Units  |
-| `F1024` | 32X-Large   | 1024 Capacity Units |
-| `F2048` | 64X-Large   | 2048 Capacity Units |
+| SKU | Description | CUs |
+|-----|-------------|-----|
+| `F2` | Entry level | 2 Capacity Units |
+| `F4` | Small | 4 Capacity Units |
+| `F8` | Medium | 8 Capacity Units |
+| `F16` | Large | 16 Capacity Units |
+| `F32` | X-Large | 32 Capacity Units |
+| `F64` | 2X-Large | 64 Capacity Units |
+| `F128` | 4X-Large | 128 Capacity Units |
+| `F256` | 8X-Large | 256 Capacity Units |
+| `F512` | 16X-Large | 512 Capacity Units |
+| `F1024` | 32X-Large | 1024 Capacity Units |
+| `F2048` | 64X-Large | 2048 Capacity Units |
 
 ## Capacity States
 
-| State          | Description                        |
-| -------------- | ---------------------------------- |
-| `Active`       | Capacity is running                |
-| `Paused`       | Capacity is suspended (no billing) |
-| `Provisioning` | Being created                      |
-| `Updating`     | Being modified                     |
-| `Deleting`     | Being removed                      |
-| `Failed`       | Operation failed                   |
+| State | Description |
+|-------|-------------|
+| `Active` | Capacity is running |
+| `Paused` | Capacity is suspended (no billing) |
+| `Provisioning` | Being created |
+| `Updating` | Being modified |
+| `Deleting` | Being removed |
+| `Failed` | Operation failed |
 
 ## Long-Running Operations
 
@@ -256,3 +258,6 @@ capacity = poller.result()
 6. **Handle LRO properly** — don't assume immediate completion
 7. **Set up capacity admins** — specify users who can manage workspaces
 8. **Monitor capacity usage** via Azure Monitor metrics
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

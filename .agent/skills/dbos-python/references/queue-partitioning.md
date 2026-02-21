@@ -7,8 +7,7 @@ tags: queue, partition, per-user, flow-control
 
 ## Partition Queues for Per-Entity Limits
 
-Partitioned queues apply flow control limits per partition, not globally. Useful for per-user or per-entity concurrency
-limits.
+Partitioned queues apply flow control limits per partition, not globally. Useful for per-user or per-entity concurrency limits.
 
 **Incorrect (global limit affects all users):**
 

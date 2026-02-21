@@ -1,15 +1,13 @@
 ---
 name: wiki-vitepress
-description:
-  Packages generated wiki Markdown into a VitePress static site with dark theme, dark-mode Mermaid diagrams with
-  click-to-zoom, and production build output. Use when the user wants to create a browsable website from generated wiki
-  pages.
+description: "Packages generated wiki Markdown into a VitePress static site with dark theme, dark-mode Mermaid diagrams with click-to-zoom, and production build output. Use when the user wants to create a browsa..."
+risk: unknown
+source: community
 ---
 
 # Wiki VitePress Packager
 
-Transform generated wiki Markdown files into a polished VitePress static site with dark theme and interactive Mermaid
-diagrams.
+Transform generated wiki Markdown files into a polished VitePress static site with dark theme and interactive Mermaid diagrams.
 
 ## When to Activate
 
@@ -64,52 +62,39 @@ mermaid: {
 ## Dark-Mode Mermaid: Three-Layer Fix
 
 ### Layer 1: Theme Variables (in config.mts)
-
 Set via `mermaid.themeVariables` as shown above.
 
 ### Layer 2: CSS Overrides (`custom.css`)
-
 Target Mermaid SVG elements with `!important`:
 
 ```css
 .mermaid .node rect,
 .mermaid .node circle,
-.mermaid .node polygon {
-  fill: #1e3a5f !important;
-  stroke: #4a9eed !important;
-}
-.mermaid .edgeLabel {
-  background-color: #1a1a2e !important;
-  color: #e0e0e0 !important;
-}
-.mermaid text {
-  fill: #e0e0e0 !important;
-}
-.mermaid .label {
-  color: #e0e0e0 !important;
-}
+.mermaid .node polygon { fill: #1e3a5f !important; stroke: #4a9eed !important; }
+.mermaid .edgeLabel { background-color: #1a1a2e !important; color: #e0e0e0 !important; }
+.mermaid text { fill: #e0e0e0 !important; }
+.mermaid .label { color: #e0e0e0 !important; }
 ```
 
 ### Layer 3: Inline Style Replacement (`theme/index.ts`)
-
 Mermaid inline `style` attributes override everything. Use `onMounted` + polling to replace them:
 
 ```typescript
-import { onMounted } from "vue";
+import { onMounted } from 'vue'
 
 // In setup()
 onMounted(() => {
-  let attempts = 0;
+  let attempts = 0
   const fix = setInterval(() => {
-    document.querySelectorAll(".mermaid svg [style]").forEach((el) => {
-      const s = (el as HTMLElement).style;
-      if (s.fill && !s.fill.includes("#1e3a5f")) s.fill = "#1e3a5f";
-      if (s.stroke && !s.stroke.includes("#4a9eed")) s.stroke = "#4a9eed";
-      if (s.color) s.color = "#e0e0e0";
-    });
-    if (++attempts >= 20) clearInterval(fix);
-  }, 500);
-});
+    document.querySelectorAll('.mermaid svg [style]').forEach(el => {
+      const s = (el as HTMLElement).style
+      if (s.fill && !s.fill.includes('#1e3a5f')) s.fill = '#1e3a5f'
+      if (s.stroke && !s.stroke.includes('#4a9eed')) s.stroke = '#4a9eed'
+      if (s.color) s.color = '#e0e0e0'
+    })
+    if (++attempts >= 20) clearInterval(fix)
+  }, 500)
+})
 ```
 
 Use `setup()` with `onMounted`, NOT `enhanceApp()` — DOM doesn't exist during SSR.
@@ -119,40 +104,32 @@ Use `setup()` with `onMounted`, NOT `enhanceApp()` — DOM doesn't exist during 
 Wrap each `.mermaid` container in a clickable wrapper that opens a fullscreen modal:
 
 ```typescript
-document.querySelectorAll(".mermaid").forEach((el) => {
-  el.style.cursor = "zoom-in";
-  el.addEventListener("click", () => {
-    const modal = document.createElement("div");
-    modal.className = "mermaid-zoom-modal";
-    modal.innerHTML = el.outerHTML;
-    modal.addEventListener("click", () => modal.remove());
-    document.body.appendChild(modal);
-  });
-});
+document.querySelectorAll('.mermaid').forEach(el => {
+  el.style.cursor = 'zoom-in'
+  el.addEventListener('click', () => {
+    const modal = document.createElement('div')
+    modal.className = 'mermaid-zoom-modal'
+    modal.innerHTML = el.outerHTML
+    modal.addEventListener('click', () => modal.remove())
+    document.body.appendChild(modal)
+  })
+})
 ```
 
 Modal CSS:
-
 ```css
 .mermaid-zoom-modal {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 9999;
-  cursor: zoom-out;
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.9);
+  display: flex; align-items: center; justify-content: center;
+  z-index: 9999; cursor: zoom-out;
 }
-.mermaid-zoom-modal .mermaid {
-  transform: scale(1.5);
-}
+.mermaid-zoom-modal .mermaid { transform: scale(1.5); }
 ```
 
 ## Post-Processing Rules
 
 Before VitePress build, scan all `.md` files and fix:
-
 - Replace `<br/>` with `<br>` (Vue template compiler compatibility)
 - Wrap bare `<T>` generic parameters in backticks outside code fences
 - Ensure every page has YAML frontmatter with `title` and `description`
@@ -171,3 +148,6 @@ Output goes to `wiki-site/.vitepress/dist/`.
 - `isCustomElement` compiler option for bare `<T>` causes worse crashes — do NOT use it
 - Node text in Mermaid uses inline `style` with highest specificity — CSS alone won't fix it
 - `enhanceApp()` runs during SSR where `document` doesn't exist — use `setup()` only
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

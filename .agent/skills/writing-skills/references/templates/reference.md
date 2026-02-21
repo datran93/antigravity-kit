@@ -12,20 +12,18 @@ metadata:
 ## Quick Reference
 
 | Command | Purpose |
-| ------- | ------- |
-| `cmd1`  | Does X  |
-| `cmd2`  | Does Y  |
+|---------|---------|
+| `cmd1` | Does X |
+| `cmd2` | Does Y |
 
 ## Common Patterns
 
 **Pattern A:**
-
 ```bash
 example command
 ```
 
 **Pattern B:**
-
 ```bash
 another example
 ```
@@ -33,6 +31,5 @@ another example
 ## Detailed Docs
 
 For more options, run `--help` or see:
-
-- [patterns.md](patterns.md)
-- [examples.md](examples.md)
+- patterns.md
+- examples.md

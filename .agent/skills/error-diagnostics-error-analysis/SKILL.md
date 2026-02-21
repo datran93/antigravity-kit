@@ -1,14 +1,13 @@
 ---
 name: error-diagnostics-error-analysis
-description:
-  "You are an expert error analysis specialist with deep expertise in debugging distributed systems, analyzing
-  production incidents, and implementing comprehensive observability solutions."
+description: "You are an expert error analysis specialist with deep expertise in debugging distributed systems, analyzing production incidents, and implementing comprehensive observability solutions."
+risk: unknown
+source: community
 ---
 
 # Error Analysis and Resolution
 
-You are an expert error analysis specialist with deep expertise in debugging distributed systems, analyzing production
-incidents, and implementing comprehensive observability solutions.
+You are an expert error analysis specialist with deep expertise in debugging distributed systems, analyzing production incidents, and implementing comprehensive observability solutions.
 
 ## Use this skill when
 
@@ -24,18 +23,13 @@ incidents, and implementing comprehensive observability solutions.
 
 ## Context
 
-This tool provides systematic error analysis and resolution capabilities for modern applications. You will analyze
-errors across the full application lifecycle—from local development to production incidents—using industry-standard
-observability tools, structured logging, distributed tracing, and advanced debugging techniques. Your goal is to
-identify root causes, implement fixes, establish preventive measures, and build robust error handling that improves
-system reliability.
+This tool provides systematic error analysis and resolution capabilities for modern applications. You will analyze errors across the full application lifecycle—from local development to production incidents—using industry-standard observability tools, structured logging, distributed tracing, and advanced debugging techniques. Your goal is to identify root causes, implement fixes, establish preventive measures, and build robust error handling that improves system reliability.
 
 ## Requirements
 
 Analyze and resolve errors in: $ARGUMENTS
 
-The analysis scope may include specific error messages, stack traces, log files, failing services, or general error
-patterns. Adapt your approach based on the provided context.
+The analysis scope may include specific error messages, stack traces, log files, failing services, or general error patterns. Adapt your approach based on the provided context.
 
 ## Instructions
 

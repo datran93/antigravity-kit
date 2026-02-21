@@ -1,7 +1,9 @@
 ---
 name: 2d-games
-description: 2D game development principles. Sprites, tilemaps, physics, camera.
+description: "2D game development principles. Sprites, tilemaps, physics, camera."
 allowed-tools: Read, Write, Edit, Glob, Grep
+risk: unknown
+source: community
 ---
 
 # 2D Game Development
@@ -14,12 +16,12 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 ### Sprite Organization
 
-| Component     | Purpose                             |
-| ------------- | ----------------------------------- |
-| **Atlas**     | Combine textures, reduce draw calls |
-| **Animation** | Frame sequences                     |
-| **Pivot**     | Rotation/scale origin               |
-| **Layering**  | Z-order control                     |
+| Component | Purpose |
+|-----------|---------|
+| **Atlas** | Combine textures, reduce draw calls |
+| **Animation** | Frame sequences |
+| **Pivot** | Rotation/scale origin |
+| **Layering** | Z-order control |
 
 ### Animation Principles
 
@@ -34,20 +36,20 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 ### Tile Considerations
 
-| Factor          | Recommendation      |
-| --------------- | ------------------- |
-| **Size**        | 16x16, 32x32, 64x64 |
-| **Auto-tiling** | Use for terrain     |
-| **Collision**   | Simplified shapes   |
+| Factor | Recommendation |
+|--------|----------------|
+| **Size** | 16x16, 32x32, 64x64 |
+| **Auto-tiling** | Use for terrain |
+| **Collision** | Simplified shapes |
 
 ### Layers
 
-| Layer      | Content                 |
-| ---------- | ----------------------- |
+| Layer | Content |
+|-------|---------|
 | Background | Non-interactive scenery |
-| Terrain    | Walkable ground         |
-| Props      | Interactive objects     |
-| Foreground | Parallax overlay        |
+| Terrain | Walkable ground |
+| Props | Interactive objects |
+| Foreground | Parallax overlay |
 
 ---
 
@@ -55,12 +57,12 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 ### Collision Shapes
 
-| Shape   | Use Case            |
-| ------- | ------------------- |
-| Box     | Rectangular objects |
-| Circle  | Balls, rounded      |
-| Capsule | Characters          |
-| Polygon | Complex shapes      |
+| Shape | Use Case |
+|-------|----------|
+| Box | Rectangular objects |
+| Circle | Balls, rounded |
+| Capsule | Characters |
+| Polygon | Complex shapes |
 
 ### Physics Considerations
 
@@ -74,12 +76,12 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 ### Camera Types
 
-| Type             | Use                 |
-| ---------------- | ------------------- |
-| **Follow**       | Track player        |
-| **Look-ahead**   | Anticipate movement |
-| **Multi-target** | Two-player          |
-| **Room-based**   | Metroidvania        |
+| Type | Use |
+|------|-----|
+| **Follow** | Track player |
+| **Look-ahead** | Anticipate movement |
+| **Multi-target** | Two-player |
+| **Room-based** | Metroidvania |
 
 ### Screen Shake
 
@@ -107,13 +109,16 @@ allowed-tools: Read, Write, Edit, Glob, Grep
 
 ## 6. Anti-Patterns
 
-| ❌ Don't                 | ✅ Do                |
-| ------------------------ | -------------------- |
-| Separate textures        | Use atlases          |
+| ❌ Don't | ✅ Do |
+|----------|-------|
+| Separate textures | Use atlases |
 | Complex collision shapes | Simplified collision |
-| Jittery camera           | Smooth following     |
-| Pixel-perfect on physics | Choose one approach  |
+| Jittery camera | Smooth following |
+| Pixel-perfect on physics | Choose one approach |
 
 ---
 
 > **Remember:** 2D is about clarity. Every pixel should communicate.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

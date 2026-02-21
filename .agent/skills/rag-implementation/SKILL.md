@@ -1,15 +1,13 @@
 ---
 name: rag-implementation
-description:
-  Build Retrieval-Augmented Generation (RAG) systems for LLM applications with vector databases and semantic search. Use
-  when implementing knowledge-grounded AI, building document Q&A systems, or integrating LLMs with external knowledge
-  bases.
+description: "Build Retrieval-Augmented Generation (RAG) systems for LLM applications with vector databases and semantic search. Use when implementing knowledge-grounded AI, building document Q&A systems, or int..."
+risk: unknown
+source: community
 ---
 
 # RAG Implementation
 
-Master Retrieval-Augmented Generation (RAG) to build LLM applications that provide accurate, grounded responses using
-external knowledge sources.
+Master Retrieval-Augmented Generation (RAG) to build LLM applications that provide accurate, grounded responses using external knowledge sources.
 
 ## Use this skill when
 
@@ -42,11 +40,9 @@ external knowledge sources.
 ## Core Components
 
 ### 1. Vector Databases
-
 **Purpose**: Store and retrieve document embeddings efficiently
 
 **Options:**
-
 - **Pinecone**: Managed, scalable, fast queries
 - **Weaviate**: Open-source, hybrid search
 - **Milvus**: High performance, on-premise
@@ -55,11 +51,9 @@ external knowledge sources.
 - **FAISS**: Meta's library, local deployment
 
 ### 2. Embeddings
-
 **Purpose**: Convert text to numerical vectors for similarity search
 
 **Models:**
-
 - **text-embedding-ada-002** (OpenAI): General purpose, 1536 dims
 - **all-MiniLM-L6-v2** (Sentence Transformers): Fast, lightweight
 - **e5-large-v2**: High quality, multilingual
@@ -67,9 +61,7 @@ external knowledge sources.
 - **bge-large-en-v1.5**: SOTA performance
 
 ### 3. Retrieval Strategies
-
 **Approaches:**
-
 - **Dense Retrieval**: Semantic similarity via embeddings
 - **Sparse Retrieval**: Keyword matching (BM25, TF-IDF)
 - **Hybrid Search**: Combine dense + sparse
@@ -77,11 +69,9 @@ external knowledge sources.
 - **HyDE**: Generate hypothetical documents
 
 ### 4. Reranking
-
 **Purpose**: Improve retrieval quality by reordering results
 
 **Methods:**
-
 - **Cross-Encoders**: BERT-based reranking
 - **Cohere Rerank**: API-based reranking
 - **Maximal Marginal Relevance (MMR)**: Diversity + relevance
@@ -130,7 +120,6 @@ print(result['source_documents'])
 ## Advanced RAG Patterns
 
 ### Pattern 1: Hybrid Search
-
 ```python
 from langchain.retrievers import BM25Retriever, EnsembleRetriever
 
@@ -149,7 +138,6 @@ ensemble_retriever = EnsembleRetriever(
 ```
 
 ### Pattern 2: Multi-Query Retrieval
-
 ```python
 from langchain.retrievers.multi_query import MultiQueryRetriever
 
@@ -164,7 +152,6 @@ results = retriever.get_relevant_documents("What is the main topic?")
 ```
 
 ### Pattern 3: Contextual Compression
-
 ```python
 from langchain.retrievers import ContextualCompressionRetriever
 from langchain.retrievers.document_compressors import LLMChainExtractor
@@ -181,7 +168,6 @@ compressed_docs = compression_retriever.get_relevant_documents("query")
 ```
 
 ### Pattern 4: Parent Document Retriever
-
 ```python
 from langchain.retrievers import ParentDocumentRetriever
 from langchain.storage import InMemoryStore
@@ -204,7 +190,6 @@ retriever = ParentDocumentRetriever(
 ## Document Chunking Strategies
 
 ### Recursive Character Text Splitter
-
 ```python
 from langchain.text_splitters import RecursiveCharacterTextSplitter
 
@@ -217,7 +202,6 @@ splitter = RecursiveCharacterTextSplitter(
 ```
 
 ### Token-Based Splitting
-
 ```python
 from langchain.text_splitters import TokenTextSplitter
 
@@ -228,7 +212,6 @@ splitter = TokenTextSplitter(
 ```
 
 ### Semantic Chunking
-
 ```python
 from langchain.text_splitters import SemanticChunker
 
@@ -239,7 +222,6 @@ splitter = SemanticChunker(
 ```
 
 ### Markdown Header Splitter
-
 ```python
 from langchain.text_splitters import MarkdownHeaderTextSplitter
 
@@ -255,7 +237,6 @@ splitter = MarkdownHeaderTextSplitter(headers_to_split_on=headers_to_split_on)
 ## Vector Store Configurations
 
 ### Pinecone
-
 ```python
 import pinecone
 from langchain.vectorstores import Pinecone
@@ -268,7 +249,6 @@ vectorstore = Pinecone(index, embeddings.embed_query, "text")
 ```
 
 ### Weaviate
-
 ```python
 import weaviate
 from langchain.vectorstores import Weaviate
@@ -279,7 +259,6 @@ vectorstore = Weaviate(client, "Document", "content", embeddings)
 ```
 
 ### Chroma (Local)
-
 ```python
 from langchain.vectorstores import Chroma
 
@@ -293,7 +272,6 @@ vectorstore = Chroma(
 ## Retrieval Optimization
 
 ### 1. Metadata Filtering
-
 ```python
 # Add metadata during indexing
 chunks_with_metadata = []
@@ -314,7 +292,6 @@ results = vectorstore.similarity_search(
 ```
 
 ### 2. Maximal Marginal Relevance
-
 ```python
 # Balance relevance with diversity
 results = vectorstore.max_marginal_relevance_search(
@@ -326,7 +303,6 @@ results = vectorstore.max_marginal_relevance_search(
 ```
 
 ### 3. Reranking with Cross-Encoder
-
 ```python
 from sentence_transformers import CrossEncoder
 
@@ -346,7 +322,6 @@ reranked = sorted(zip(candidates, scores), key=lambda x: x[1], reverse=True)[:5]
 ## Prompt Engineering for RAG
 
 ### Contextual Prompt
-
 ```python
 prompt_template = """Use the following context to answer the question. If you cannot answer based on the context, say "I don't have enough information."
 
@@ -359,7 +334,6 @@ Answer:"""
 ```
 
 ### With Citations
-
 ```python
 prompt_template = """Answer the question based on the context below. Include citations using [1], [2], etc.
 
@@ -372,7 +346,6 @@ Answer (with citations):"""
 ```
 
 ### With Confidence
-
 ```python
 prompt_template = """Answer the question using the context. Provide a confidence score (0-100%) for your answer.
 

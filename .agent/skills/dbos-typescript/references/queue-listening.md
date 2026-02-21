@@ -7,8 +7,7 @@ tags: queue, listen, worker, process, configuration
 
 ## Control Which Queues a Worker Listens To
 
-Configure `listenQueues` in DBOS configuration to make a process only dequeue from specific queues. This enables
-heterogeneous worker pools.
+Configure `listenQueues` in DBOS configuration to make a process only dequeue from specific queues. This enables heterogeneous worker pools.
 
 **Incorrect (all workers process all queues):**
 
@@ -61,5 +60,4 @@ async function main() {
 await DBOS.startWorkflow(gpuTask, { queueName: gpuQueue.name })("data");
 ```
 
-Reference:
-[Explicit Queue Listening](https://docs.dbos.dev/typescript/tutorials/queue-tutorial#explicit-queue-listening)
+Reference: [Explicit Queue Listening](https://docs.dbos.dev/typescript/tutorials/queue-tutorial#explicit-queue-listening)

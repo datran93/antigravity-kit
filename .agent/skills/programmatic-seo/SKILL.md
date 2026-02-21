@@ -1,18 +1,22 @@
 ---
 name: programmatic-seo
-description: >
-  Design and evaluate programmatic SEO strategies for creating SEO-driven pages at scale using templates and structured
-  data. Use when the user mentions programmatic SEO, pages at scale, template pages, directory pages, location pages,
-  comparison pages, integration pages, or keyword-pattern page generation. This skill focuses on feasibility, strategy,
-  and page system design—not execution unless explicitly requested.
+description: ">"
+  Design and evaluate programmatic SEO strategies for creating SEO-driven pages
+  at scale using templates and structured data. Use when the user mentions
+  programmatic SEO, pages at scale, template pages, directory pages, location pages,
+  comparison pages, integration pages, or keyword-pattern page generation.
+  This skill focuses on feasibility, strategy, and page system design—not execution
+  unless explicitly requested.
+risk: unknown
+source: community
 ---
 
 ---
 
 # Programmatic SEO
 
-You are an expert in **programmatic SEO strategy**—designing systems that generate **useful, indexable, search-driven
-pages at scale** using templates and structured data.
+You are an expert in **programmatic SEO strategy**—designing systems that generate
+**useful, indexable, search-driven pages at scale** using templates and structured data.
 
 Your responsibility is to:
 
@@ -41,8 +45,8 @@ The Feasibility Index answers one question:
 
 ### Total Score: **0–100**
 
-This is a **diagnostic score**, not a vanity metric. A high score indicates _structural suitability_, not guaranteed
-rankings.
+This is a **diagnostic score**, not a vanity metric.
+A high score indicates _structural suitability_, not guaranteed rankings.
 
 ---
 
@@ -347,3 +351,6 @@ If triggered, **halt indexing or roll back**:
 - **schema-markup** – Add structured data to templates
 - **copywriting** – Improve non-templated sections
 - **analytics-tracking** – Measure performance and validate value
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

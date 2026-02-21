@@ -44,4 +44,5 @@ function after() {
 
 ## Impact
 
-**Before:** [Problem metric] **After:** [Improved metric]
+**Before:** [Problem metric]
+**After:** [Improved metric]

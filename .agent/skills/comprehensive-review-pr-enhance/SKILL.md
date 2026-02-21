@@ -1,16 +1,13 @@
 ---
 name: comprehensive-review-pr-enhance
-description:
-  "You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code
-  reviews. Generate comprehensive PR descriptions, automate review processes, and ensure PRs follow best practices for
-  clarity, size, and reviewability."
+description: "You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and e..."
+risk: unknown
+source: community
 ---
 
 # Pull Request Enhancement
 
-You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code
-reviews. Generate comprehensive PR descriptions, automate review processes, and ensure PRs follow best practices for
-clarity, size, and reviewability.
+You are a PR optimization expert specializing in creating high-quality pull requests that facilitate efficient code reviews. Generate comprehensive PR descriptions, automate review processes, and ensure PRs follow best practices for clarity, size, and reviewability.
 
 ## Use this skill when
 
@@ -26,13 +23,9 @@ clarity, size, and reviewability.
 - The task is unrelated to software delivery
 
 ## Context
-
-The user needs to create or improve pull requests with detailed descriptions, proper documentation, test coverage
-analysis, and review facilitation. Focus on making PRs that are easy to review, well-documented, and include all
-necessary context.
+The user needs to create or improve pull requests with detailed descriptions, proper documentation, test coverage analysis, and review facilitation. Focus on making PRs that are easy to review, well-documented, and include all necessary context.
 
 ## Requirements
-
 $ARGUMENTS
 
 ## Instructions

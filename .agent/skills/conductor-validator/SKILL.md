@@ -1,26 +1,24 @@
 ---
 name: conductor-validator
-description:
-  Validates Conductor project artifacts for completeness, consistency, and correctness. Use after setup, when diagnosing
-  issues, or before implementation to verify project context.
+description: "Validates Conductor project artifacts for completeness,"
+  consistency, and correctness. Use after setup, when diagnosing issues, or
+  before implementation to verify project context.
 allowed-tools: Read Glob Grep Bash
 metadata:
   model: opus
   color: cyan
+risk: unknown
+source: community
 ---
 
 # Check if conductor directory exists
-
 ls -la conductor/
 
 # Find all track directories
-
 ls -la conductor/tracks/
 
 # Check for required files
-
 ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/workflow.md conductor/tracks.md
-
 ```
 
 ## Use this skill when
@@ -45,29 +43,22 @@ ls conductor/index.md conductor/product.md conductor/tech-stack.md conductor/wor
 **Status markers in tracks.md:**
 
 ```
-
-- [ ] Track Name # Not started
-- [~] Track Name # In progress
-- [x] Track Name # Complete
-
+- [ ] Track Name  # Not started
+- [~] Track Name  # In progress
+- [x] Track Name  # Complete
 ```
 
 **Task markers in plan.md:**
 
 ```
-
-- [ ] Task description # Pending
-- [~] Task description # In progress
-- [x] Task description # Complete
-
+- [ ] Task description  # Pending
+- [~] Task description  # In progress
+- [x] Task description  # Complete
 ```
 
 **Track ID pattern:**
 
 ```
-
-<type>_<name>_<YYYYMMDD> Example: feature_user_auth_20250115
-
-```
-
+<type>_<name>_<YYYYMMDD>
+Example: feature_user_auth_20250115
 ```

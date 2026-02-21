@@ -1,18 +1,15 @@
 ---
 name: production-code-audit
-description:
-  "Autonomously deep-scan entire codebase line-by-line, understand architecture and patterns, then systematically
-  transform it to production-grade, corporate-level professional quality with optimizations"
+description: "Autonomously deep-scan entire codebase line-by-line, understand architecture and patterns, then systematically transform it to production-grade, corporate-level professional quality with optimizations"
+risk: unknown
+source: community
 ---
 
 # Production Code Audit
 
 ## Overview
 
-Autonomously analyze the entire codebase to understand its architecture, patterns, and purpose, then systematically
-transform it into production-grade, corporate-level professional code. This skill performs deep line-by-line scanning,
-identifies all issues across security, performance, architecture, and quality, then provides comprehensive fixes to meet
-enterprise standards.
+Autonomously analyze the entire codebase to understand its architecture, patterns, and purpose, then systematically transform it into production-grade, corporate-level professional code. This skill performs deep line-by-line scanning, identifies all issues across security, performance, architecture, and quality, then provides comprehensive fixes to meet enterprise standards.
 
 ## When to Use This Skill
 
@@ -44,7 +41,6 @@ enterprise standards.
 **Scan line-by-line for all issues:**
 
 **Architecture Issues:**
-
 - Circular dependencies
 - Tight coupling
 - God classes (>500 lines or >20 methods)
@@ -53,7 +49,6 @@ enterprise standards.
 - Violation of design patterns
 
 **Security Vulnerabilities:**
-
 - SQL injection (string concatenation in queries)
 - XSS vulnerabilities (unescaped output)
 - Hardcoded secrets (API keys, passwords in code)
@@ -64,7 +59,6 @@ enterprise standards.
 - Insecure dependencies
 
 **Performance Problems:**
-
 - N+1 query problems
 - Missing database indexes
 - Synchronous operations that should be async
@@ -75,7 +69,6 @@ enterprise standards.
 - Memory leaks
 
 **Code Quality Issues:**
-
 - High cyclomatic complexity (>10)
 - Code duplication
 - Magic numbers
@@ -86,7 +79,6 @@ enterprise standards.
 - TODO/FIXME comments
 
 **Testing Gaps:**
-
 - Missing tests for critical paths
 - Low test coverage (<80%)
 - No edge case testing
@@ -94,7 +86,6 @@ enterprise standards.
 - Missing integration tests
 
 **Production Readiness:**
-
 - Missing environment variables
 - No logging/monitoring
 - No error tracking
@@ -135,7 +126,6 @@ User: @production-code-audit make this production-ready
 AI: I'll scan your entire codebase and transform it to production-grade quality.
 
 **Phase 1: Discovering Codebase** (analyzing 247 files)
-
 - Detected: Node.js + Express + PostgreSQL + React
 - Architecture: MVC pattern with REST API
 - Purpose: E-commerce platform
@@ -144,9 +134,8 @@ AI: I'll scan your entire codebase and transform it to production-grade quality.
 **Phase 2: Scanning for Issues** (line-by-line analysis)
 
 Found 127 issues:
-
 - 🔴 CRITICAL: 8 issues
-- 🟠 HIGH: 23 issues
+- 🟠 HIGH: 23 issues  
 - 🟡 MEDIUM: 41 issues
 - 🔵 LOW: 55 issues
 
@@ -216,34 +205,46 @@ Found 127 issues:
 
 [... 11 more high-priority fixes ...]
 
-🟡 MEDIUM PRIORITY FIXES (41/41 completed): [... all medium fixes ...]
+🟡 MEDIUM PRIORITY FIXES (41/41 completed):
+[... all medium fixes ...]
 
-🔵 LOW PRIORITY IMPROVEMENTS (55/55 completed): [... all low improvements ...]
+🔵 LOW PRIORITY IMPROVEMENTS (55/55 completed):
+[... all low improvements ...]
 
 **Phase 4: Adding Production Infrastructure**
 
-✅ Added structured logging (Winston) ✅ Added error tracking (Sentry) ✅ Added health check endpoints (/health, /ready)
-✅ Added monitoring (Prometheus metrics) ✅ Added rate limiting (Redis-based) ✅ Added API documentation
-(Swagger/OpenAPI) ✅ Added comprehensive README ✅ Added deployment guide ✅ Added CI/CD pipeline (.github/workflows)
+✅ Added structured logging (Winston)
+✅ Added error tracking (Sentry)
+✅ Added health check endpoints (/health, /ready)
+✅ Added monitoring (Prometheus metrics)
+✅ Added rate limiting (Redis-based)
+✅ Added API documentation (Swagger/OpenAPI)
+✅ Added comprehensive README
+✅ Added deployment guide
+✅ Added CI/CD pipeline (.github/workflows)
 
 **Phase 5: Verification**
 
-✅ All tests passing (1,247 tests) ✅ Test coverage: 42% → 87% ✅ Security scan: 0 vulnerabilities ✅ Performance: API
-response time 3.2s → 180ms ✅ Bundle size: 850KB → 380KB ✅ Lighthouse score: 62 → 94
+✅ All tests passing (1,247 tests)
+✅ Test coverage: 42% → 87%
+✅ Security scan: 0 vulnerabilities
+✅ Performance: API response time 3.2s → 180ms
+✅ Bundle size: 850KB → 380KB
+✅ Lighthouse score: 62 → 94
 
 **TRANSFORMATION COMPLETE**
 
 Your codebase is now production-ready with enterprise-grade quality:
 
 📊 Metrics:
-
 - Issues fixed: 127/127 (100%)
 - Test coverage: 87% (target: 80%+)
 - API performance: 94% improvement
 - Security: OWASP Top 10 compliant
 - Code quality: Grade A-
 
-📁 Files changed: 89 files 📝 Lines changed: +3,247 / -1,892
+📁 Files changed: 89 files
+📝 Lines changed: +3,247 / -1,892
 
 🚀 Ready for production deployment!
 ```
@@ -258,7 +259,6 @@ AI: Scanning for security vulnerabilities...
 **Security Scan Complete**
 
 Found 15 security issues:
-
 - 🔴 CRITICAL: 5
 - 🟠 HIGH: 7
 - 🟡 MEDIUM: 3
@@ -267,35 +267,64 @@ Found 15 security issues:
 
 🔴 CRITICAL (5/5 fixed):
 
-1. ✅ SQL Injection in UserRepository \`\`\`typescript // Before (VULNERABLE) const query = \`SELECT \* FROM users WHERE
-   email = '\${email}'\`;
+1. ✅ SQL Injection in UserRepository
+\`\`\`typescript
+// Before (VULNERABLE)
+const query = \`SELECT * FROM users WHERE email = '\${email}'\`;
 
-// After (SECURE) const query = 'SELECT \* FROM users WHERE email = $1'; await db.query(query, [email]); \`\`\`
-
-2. ✅ Hardcoded Secrets Removed \`\`\`typescript // Before (INSECURE) const JWT_SECRET = 'my-secret-key-123';
-
-// After (SECURE) const JWT_SECRET = process.env.JWT_SECRET; if (!JWT_SECRET) throw new Error('JWT_SECRET required');
+// After (SECURE)
+const query = 'SELECT * FROM users WHERE email = $1';
+await db.query(query, [email]);
 \`\`\`
 
-3. ✅ Authentication Added to Admin Routes \`\`\`typescript // Before (VULNERABLE) router.delete('/api/admin/users/:id',
-   deleteUser);
+2. ✅ Hardcoded Secrets Removed
+\`\`\`typescript
+// Before (INSECURE)
+const JWT_SECRET = 'my-secret-key-123';
 
-// After (SECURE) router.delete('/api/admin/users/:id', authenticateToken, requireRole('admin'), deleteUser ); \`\`\`
+// After (SECURE)
+const JWT_SECRET = process.env.JWT_SECRET;
+if (!JWT_SECRET) throw new Error('JWT_SECRET required');
+\`\`\`
 
-4. ✅ Password Hashing Upgraded \`\`\`typescript // Before (WEAK) const hash =
-   crypto.createHash('md5').update(password).digest('hex');
+3. ✅ Authentication Added to Admin Routes
+\`\`\`typescript
+// Before (VULNERABLE)
+router.delete('/api/admin/users/:id', deleteUser);
 
-// After (STRONG) const hash = await bcrypt.hash(password, 12); \`\`\`
+// After (SECURE)
+router.delete('/api/admin/users/:id',
+  authenticateToken,
+  requireRole('admin'),
+  deleteUser
+);
+\`\`\`
 
-5. ✅ Input Validation Added \`\`\`typescript // Before (VULNERABLE) const user = await db.user.create({ data: req.body
-   });
+4. ✅ Password Hashing Upgraded
+\`\`\`typescript
+// Before (WEAK)
+const hash = crypto.createHash('md5').update(password).digest('hex');
 
-// After (SECURE) const schema = z.object({ email: z.string().email(), password: z.string().min(12), name:
-z.string().min(2).max(100) }); const validated = schema.parse(req.body); const user = await db.user.create({ data:
-validated }); \`\`\`
+// After (STRONG)
+const hash = await bcrypt.hash(password, 12);
+\`\`\`
+
+5. ✅ Input Validation Added
+\`\`\`typescript
+// Before (VULNERABLE)
+const user = await db.user.create({ data: req.body });
+
+// After (SECURE)
+const schema = z.object({
+  email: z.string().email(),
+  password: z.string().min(12),
+  name: z.string().min(2).max(100)
+});
+const validated = schema.parse(req.body);
+const user = await db.user.create({ data: validated });
+\`\`\`
 
 **Security Status:**
-
 - ✅ OWASP Top 10: Compliant
 - ✅ SQL Injection: Protected
 - ✅ XSS: Protected
@@ -317,26 +346,30 @@ AI: Analyzing performance bottlenecks...
 **Performance Analysis Complete**
 
 Current metrics:
-
 - API response time: 3.2s (target: <200ms)
 - Page load time: 8.5s (target: <2s)
 - Bundle size: 850KB (target: <200KB)
 
 **Optimizing automatically...**
 
-✅ Fixed N+1 queries (3.2s → 180ms - 94% faster) ✅ Added Redis caching (95% cache hit rate) ✅ Optimized database
-indexes (98% faster queries) ✅ Reduced bundle size (850KB → 380KB - 55% smaller) ✅ Optimized images (28MB → 3.2MB -
-89% smaller) ✅ Implemented code splitting ✅ Added lazy loading ✅ Parallelized async operations
+✅ Fixed N+1 queries (3.2s → 180ms - 94% faster)
+✅ Added Redis caching (95% cache hit rate)
+✅ Optimized database indexes (98% faster queries)
+✅ Reduced bundle size (850KB → 380KB - 55% smaller)
+✅ Optimized images (28MB → 3.2MB - 89% smaller)
+✅ Implemented code splitting
+✅ Added lazy loading
+✅ Parallelized async operations
 
 **Performance Results:**
 
-| Metric       | Before | After | Improvement |
-| ------------ | ------ | ----- | ----------- |
-| API Response | 3.2s   | 180ms | 94%         |
-| Page Load    | 8.5s   | 1.8s  | 79%         |
-| Bundle Size  | 850KB  | 380KB | 55%         |
-| Image Size   | 28MB   | 3.2MB | 89%         |
-| Lighthouse   | 42     | 94    | +52 points  |
+| Metric | Before | After | Improvement |
+|--------|--------|-------|-------------|
+| API Response | 3.2s | 180ms | 94% |
+| Page Load | 8.5s | 1.8s | 79% |
+| Bundle Size | 850KB | 380KB | 55% |
+| Image Size | 28MB | 3.2MB | 89% |
+| Lighthouse | 42 | 94 | +52 points |
 
 🚀 Performance optimized to production standards!
 ```
@@ -400,21 +433,20 @@ indexes (98% faster queries) ✅ Reduced bundle size (850KB → 380KB - 55% smal
 ## Common Pitfalls
 
 ### Problem: Too Many Issues
-
-**Symptoms:** Team paralyzed by 200+ issues **Solution:** Focus on critical/high priority only, create sprints
+**Symptoms:** Team paralyzed by 200+ issues
+**Solution:** Focus on critical/high priority only, create sprints
 
 ### Problem: False Positives
-
-**Symptoms:** Flagging non-issues **Solution:** Understand context, verify manually, ask developers
+**Symptoms:** Flagging non-issues
+**Solution:** Understand context, verify manually, ask developers
 
 ### Problem: No Follow-Up
-
-**Symptoms:** Audit report ignored **Solution:** Create GitHub issues, assign owners, track in standups
+**Symptoms:** Audit report ignored
+**Solution:** Create GitHub issues, assign owners, track in standups
 
 ## Production Audit Checklist
 
 ### Security
-
 - [ ] No SQL injection vulnerabilities
 - [ ] No hardcoded secrets
 - [ ] Authentication on protected routes
@@ -425,7 +457,6 @@ indexes (98% faster queries) ✅ Reduced bundle size (850KB → 380KB - 55% smal
 - [ ] Dependencies have no vulnerabilities
 
 ### Performance
-
 - [ ] No N+1 query problems
 - [ ] Database indexes on foreign keys
 - [ ] Caching implemented
@@ -433,7 +464,6 @@ indexes (98% faster queries) ✅ Reduced bundle size (850KB → 380KB - 55% smal
 - [ ] Bundle size < 200KB (gzipped)
 
 ### Testing
-
 - [ ] Test coverage > 80%
 - [ ] Critical paths tested
 - [ ] Edge cases covered
@@ -441,7 +471,6 @@ indexes (98% faster queries) ✅ Reduced bundle size (850KB → 380KB - 55% smal
 - [ ] Tests run in CI/CD
 
 ### Production Readiness
-
 - [ ] Environment variables configured
 - [ ] Error tracking setup (Sentry)
 - [ ] Structured logging implemented
@@ -454,43 +483,40 @@ indexes (98% faster queries) ✅ Reduced bundle size (850KB → 380KB - 55% smal
 ```markdown
 # Production Audit Report
 
-**Project:** [Name] **Date:** [Date] **Overall Grade:** [A-F]
+**Project:** [Name]
+**Date:** [Date]
+**Overall Grade:** [A-F]
 
 ## Executive Summary
-
 [2-3 sentences on overall status]
 
-**Critical Issues:** [count] **High Priority:** [count] **Recommendation:** [Fix timeline]
+**Critical Issues:** [count]
+**High Priority:** [count]
+**Recommendation:** [Fix timeline]
 
 ## Findings by Category
 
 ### Architecture (Grade: [A-F])
-
 - Issue 1: [Description]
 - Issue 2: [Description]
 
 ### Security (Grade: [A-F])
-
 - Issue 1: [Description + Fix]
 - Issue 2: [Description + Fix]
 
 ### Performance (Grade: [A-F])
-
 - Issue 1: [Description + Fix]
 
 ### Testing (Grade: [A-F])
-
 - Coverage: [%]
 - Issues: [List]
 
 ## Priority Actions
-
 1. [Critical issue] - [Timeline]
 2. [High priority] - [Timeline]
 3. [High priority] - [Timeline]
 
 ## Timeline
-
 - Critical fixes: [X weeks]
 - High priority: [X weeks]
 - Production ready: [X weeks]
@@ -513,5 +539,4 @@ indexes (98% faster queries) ✅ Reduced bundle size (850KB → 380KB - 55% smal
 
 ---
 
-**Pro Tip:** Schedule regular audits (quarterly) to maintain code quality. Prevention is cheaper than fixing production
-bugs!
+**Pro Tip:** Schedule regular audits (quarterly) to maintain code quality. Prevention is cheaper than fixing production bugs!

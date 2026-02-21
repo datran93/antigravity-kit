@@ -61,7 +61,6 @@ if __name__ == "__main__":
     uvicorn.run(app, host="0.0.0.0", port=8000)
 ```
 
-The workflow decorator can be combined with FastAPI route decorators. The FastAPI decorator should come first
-(outermost).
+The workflow decorator can be combined with FastAPI route decorators. The FastAPI decorator should come first (outermost).
 
 Reference: [DBOS with FastAPI](https://docs.dbos.dev/python/tutorials/workflow-tutorial)

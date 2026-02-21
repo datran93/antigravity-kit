@@ -62,7 +62,7 @@
           "extract": "latest_issue",
           "enabled": true,
           "avg_quality": 4.3,
-          "success_rate": 0.9
+          "success_rate": 0.90
         },
         {
           "id": "fs_blog",
@@ -94,7 +94,7 @@
           "extract": "latest_3",
           "enabled": true,
           "avg_quality": 4.0,
-          "success_rate": 0.9
+          "success_rate": 0.90
         }
       ]
     },
@@ -121,7 +121,7 @@
           "extract": "latest_3",
           "enabled": true,
           "avg_quality": 4.6,
-          "success_rate": 0.7,
+          "success_rate": 0.70,
           "note": "Substack 需要 JS 渲染"
         }
       ]

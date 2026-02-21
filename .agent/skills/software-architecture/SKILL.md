@@ -1,14 +1,13 @@
 ---
 name: software-architecture
-description:
-  Guide for quality focused software architecture. This skill should be used when users want to write code, design
-  architecture, analyze code, in any case that relates to software development.
+description: "Guide for quality focused software architecture. This skill should be used when users want to write code, design architecture, analyze code, in any case that relates to software development."
+risk: unknown
+source: community
 ---
 
 # Software Architecture Development Skill
 
-This skill provides guidance for quality focused software development and architecture. It is based on Clean
-Architecture and Domain Driven Design principles.
+This skill provides guidance for quality focused software development and architecture. It is based on Clean Architecture and Domain Driven Design principles.
 
 ## Code Style Rules
 
@@ -16,9 +15,7 @@ Architecture and Domain Driven Design principles.
 
 - **Early return pattern**: Always use early returns when possible, over nested conditions for better readability
 - Avoid code duplication through creation of reusable functions and modules
-- Decompose long (more than 80 lines of code) components and functions into multiple smaller components and functions.
-  If they cannot be used anywhere else, keep it in the same file. But if file longer than 200 lines of code, it should
-  be split into multiple files.
+- Decompose long (more than 80 lines of code) components and functions into multiple smaller components and functions. If they cannot be used anywhere else, keep it in the same file. But if file longer than 200 lines of code, it should be split into multiple files.
 - Use arrow functions instead of function declarations when possible
 
 ### Best Practices
@@ -29,8 +26,7 @@ Architecture and Domain Driven Design principles.
   - Check npm for existing libraries that solve the problem
   - Evaluate existing services/SaaS solutions
   - Consider third-party APIs for common functionality
-- Use libraries instead of writing your own utils or helpers. For example, use `cockatiel` instead of writing your own
-  retry logic.
+- Use libraries instead of writing your own utils or helpers. For example, use `cockatiel` instead of writing your own retry logic.
 - **When custom code IS justified:**
   - Specific business logic unique to the domain
   - Performance-critical paths with special requirements
@@ -79,3 +75,6 @@ Architecture and Domain Driven Design principles.
 - Avoid deep nesting (max 3 levels)
 - Keep functions focused and under 50 lines when possible
 - Keep files focused and under 200 lines of code when possible
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

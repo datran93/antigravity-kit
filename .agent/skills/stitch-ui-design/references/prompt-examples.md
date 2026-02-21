@@ -598,5 +598,4 @@ Platform: Desktop web (1440px+)
 6. **Add context** - Include user personas or use cases for better results
 7. **Iterate** - Start with a basic prompt, then refine with annotations
 
-Remember: These are starting points. Stitch works best when you provide specific details relevant to your unique
-project.
+Remember: These are starting points. Stitch works best when you provide specific details relevant to your unique project.

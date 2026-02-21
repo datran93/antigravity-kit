@@ -1,8 +1,9 @@
 ---
 name: angular
-description: >-
-  Modern Angular (v20+) expert with deep knowledge of Signals, Standalone Components, Zoneless applications,
-  SSR/Hydration, and reactive patterns. Use PROACTIVELY for Angular development, component architecture, state
+description: ">-"
+  Modern Angular (v20+) expert with deep knowledge of Signals, Standalone
+  Components, Zoneless applications, SSR/Hydration, and reactive patterns.
+  Use PROACTIVELY for Angular development, component architecture, state
   management, performance optimization, and migration to modern patterns.
 risk: safe
 source: self
@@ -10,8 +11,7 @@ source: self
 
 # Angular Expert
 
-Master modern Angular development with Signals, Standalone Components, Zoneless applications, SSR/Hydration, and the
-latest reactive patterns.
+Master modern Angular development with Signals, Standalone Components, Zoneless applications, SSR/Hydration, and the latest reactive patterns.
 
 ## When to Use This Skill
 
@@ -118,7 +118,12 @@ export class UserCardComponent {
 ### Signal Queries (ViewChild/ContentChild)
 
 ```typescript
-import { Component, viewChild, viewChildren, contentChild } from "@angular/core";
+import {
+  Component,
+  viewChild,
+  viewChildren,
+  contentChild,
+} from "@angular/core";
 
 @Component({
   selector: "app-container",
@@ -202,11 +207,15 @@ import { Routes } from "@angular/router";
 export const routes: Routes = [
   {
     path: "dashboard",
-    loadComponent: () => import("./dashboard/dashboard.component").then((m) => m.DashboardComponent),
+    loadComponent: () =>
+      import("./dashboard/dashboard.component").then(
+        (m) => m.DashboardComponent,
+      ),
   },
   {
     path: "admin",
-    loadChildren: () => import("./admin/admin.routes").then((m) => m.ADMIN_ROUTES),
+    loadChildren: () =>
+      import("./admin/admin.routes").then((m) => m.ADMIN_ROUTES),
   },
 ];
 ```
@@ -276,7 +285,10 @@ ng add @angular/ssr
 ```typescript
 // app.config.ts
 import { ApplicationConfig } from "@angular/core";
-import { provideClientHydration, withEventReplay } from "@angular/platform-browser";
+import {
+  provideClientHydration,
+  withEventReplay,
+} from "@angular/platform-browser";
 
 export const appConfig: ApplicationConfig = {
   providers: [provideClientHydration(withEventReplay())],
@@ -506,7 +518,9 @@ export class StateService {
   readonly user = computed(() => this._user());
   readonly theme = computed(() => this._theme());
   readonly notifications = computed(() => this._notifications());
-  readonly unreadCount = computed(() => this._notifications().filter((n) => !n.read).length);
+  readonly unreadCount = computed(
+    () => this._notifications().filter((n) => !n.read).length,
+  );
 
   // Actions
   setUser(user: User | null) {
@@ -544,7 +558,9 @@ export class ProductStore {
   readonly loading = computed(() => this._loading());
   readonly filteredProducts = computed(() => {
     const filter = this._filter().toLowerCase();
-    return this._products().filter((p) => p.name.toLowerCase().includes(filter));
+    return this._products().filter((p) =>
+      p.name.toLowerCase().includes(filter),
+    );
   });
 
   // Actions

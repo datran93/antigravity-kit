@@ -1,9 +1,9 @@
 ---
 name: azure-ai-vision-imageanalysis-java
-description:
-  Build image analysis applications with Azure AI Vision SDK for Java. Use when implementing image captioning, OCR text
-  extraction, object detection, tagging, or smart cropping.
+description: "Build image analysis applications with Azure AI Vision SDK for Java. Use when implementing image captioning, OCR text extraction, object detection, tagging, or smart cropping."
 package: com.azure:azure-ai-vision-imageanalysis
+risk: unknown
+source: community
 ---
 
 # Azure AI Vision Image Analysis SDK for Java
@@ -62,15 +62,15 @@ ImageAnalysisClient client = new ImageAnalysisClientBuilder()
 
 ## Visual Features
 
-| Feature          | Description                               |
-| ---------------- | ----------------------------------------- |
-| `CAPTION`        | Generate human-readable image description |
-| `DENSE_CAPTIONS` | Captions for up to 10 regions             |
-| `READ`           | OCR - Extract text from images            |
-| `TAGS`           | Content tags for objects, scenes, actions |
-| `OBJECTS`        | Detect objects with bounding boxes        |
-| `SMART_CROPS`    | Smart thumbnail regions                   |
-| `PEOPLE`         | Detect people with locations              |
+| Feature | Description |
+|---------|-------------|
+| `CAPTION` | Generate human-readable image description |
+| `DENSE_CAPTIONS` | Captions for up to 10 regions |
+| `READ` | OCR - Extract text from images |
+| `TAGS` | Content tags for objects, scenes, actions |
+| `OBJECTS` | Detect objects with bounding boxes |
+| `SMART_CROPS` | Smart thumbnail regions |
+| `PEOPLE` | Detect people with locations |
 
 ## Core Patterns
 
@@ -118,7 +118,7 @@ for (DetectedTextBlock block : result.getRead().getBlocks()) {
     for (DetectedTextLine line : block.getLines()) {
         System.out.printf("Line: '%s'%n", line.getText());
         System.out.printf("  Bounding polygon: %s%n", line.getBoundingPolygon());
-
+        
         for (DetectedTextWord word : line.getWords()) {
             System.out.printf("  Word: '%s' (confidence: %.4f)%n",
                 word.getText(),
@@ -140,7 +140,7 @@ for (DetectedObject obj : result.getObjects()) {
     System.out.printf("Object: %s (confidence: %.4f)%n",
         obj.getTags().get(0).getName(),
         obj.getTags().get(0).getConfidence());
-
+    
     ImageBoundingBox box = obj.getBoundingBox();
     System.out.printf("  Location: x=%d, y=%d, w=%d, h=%d%n",
         box.getX(), box.getY(), box.getWidth(), box.getHeight());
@@ -278,9 +278,7 @@ VISION_KEY=<your-api-key>
 
 ## Regional Availability
 
-Caption and Dense Captions require GPU-supported regions. Check
-[supported regions](https://learn.microsoft.com/azure/ai-services/computer-vision/concept-describe-images-40) before
-deployment.
+Caption and Dense Captions require GPU-supported regions. Check [supported regions](https://learn.microsoft.com/azure/ai-services/computer-vision/concept-describe-images-40) before deployment.
 
 ## Trigger Phrases
 
@@ -291,3 +289,6 @@ deployment.
 - "object detection image"
 - "smart crop thumbnail"
 - "detect people image"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

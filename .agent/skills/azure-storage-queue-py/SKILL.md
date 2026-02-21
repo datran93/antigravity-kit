@@ -1,9 +1,11 @@
 ---
 name: azure-storage-queue-py
-description: |
+description: "|"
   Azure Queue Storage SDK for Python. Use for reliable message queuing, task distribution, and asynchronous processing.
   Triggers: "queue storage", "QueueServiceClient", "QueueClient", "message queue", "dequeue".
 package: azure-storage-queue
+risk: unknown
+source: community
 ---
 
 # Azure Queue Storage SDK for Python
@@ -87,9 +89,9 @@ for message in messages:
     print(f"ID: {message.id}")
     print(f"Content: {message.content}")
     print(f"Dequeue count: {message.dequeue_count}")
-
+    
     # Process message...
-
+    
     # Delete after processing
     queue_client.delete_message(message)
 ```
@@ -115,7 +117,7 @@ for message in messages:
         message,
         visibility_timeout=60
     )
-
+    
     # Update content and timeout
     queue_client.update_message(
         message,
@@ -166,7 +168,7 @@ from azure.identity.aio import DefaultAzureCredential
 
 async def queue_operations():
     credential = DefaultAzureCredential()
-
+    
     async with QueueClient(
         account_url="https://<account>.queue.core.windows.net",
         queue_name="myqueue",
@@ -174,7 +176,7 @@ async def queue_operations():
     ) as client:
         # Send
         await client.send_message("Async message")
-
+        
         # Receive
         async for message in client.receive_messages():
             print(message.content)
@@ -211,3 +213,6 @@ queue_client.send_message(b"Binary content")
 5. **Use `peek_messages`** for monitoring without affecting queue
 6. **Set `time_to_live`** to prevent stale messages
 7. **Consider Service Bus** for advanced features (sessions, topics)
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

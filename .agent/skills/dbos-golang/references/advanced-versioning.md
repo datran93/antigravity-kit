@@ -7,8 +7,7 @@ tags: advanced, versioning, blue-green, deployment
 
 ## Use Versioning for Blue-Green Deployments
 
-Set `ApplicationVersion` in configuration to tag workflows with a version. DBOS only recovers workflows matching the
-current application version, preventing code mismatches during recovery.
+Set `ApplicationVersion` in configuration to tag workflows with a version. DBOS only recovers workflows matching the current application version, preventing code mismatches during recovery.
 
 **Incorrect (deploying new code that breaks in-progress workflows):**
 
@@ -31,8 +30,7 @@ ctx, _ := dbos.NewDBOSContext(context.Background(), dbos.Config{
 })
 ```
 
-By default, the application version is automatically computed from a SHA-256 hash of the executable binary. Set it
-explicitly for more control.
+By default, the application version is automatically computed from a SHA-256 hash of the executable binary. Set it explicitly for more control.
 
 **Blue-green deployment strategy:**
 
@@ -54,11 +52,7 @@ oldWorkflows, _ := dbos.ListWorkflows(ctx,
 
 ```go
 // Fork a workflow from a failed step to run on the new version
-handle, _ := dbos.ForkWorkflow[string](ctx, dbos.ForkWorkflowInput{
-	OriginalWorkflowID: workflowID,
-	StartStep:          failedStepID,
-	ApplicationVersion: "2.0.0",
-})
+handle, _ := dbos.ForkWorkflowstring
 ```
 
 Reference: [Versioning](https://docs.dbos.dev/golang/tutorials/upgrading-workflows#versioning)

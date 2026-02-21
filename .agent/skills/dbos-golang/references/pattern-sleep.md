@@ -7,8 +7,7 @@ tags: pattern, sleep, delay, durable, schedule
 
 ## Use Durable Sleep for Delayed Execution
 
-Use `dbos.Sleep` for durable delays within workflows. The wakeup time is stored in the database, so the sleep survives
-restarts.
+Use `dbos.Sleep` for durable delays within workflows. The wakeup time is stored in the database, so the sleep survives restarts.
 
 **Incorrect (non-durable sleep):**
 
@@ -38,7 +37,6 @@ func delayedTask(ctx dbos.DBOSContext, input string) (string, error) {
 `dbos.Sleep` takes a `time.Duration`. It returns the remaining sleep duration (zero if completed normally).
 
 Use cases:
-
 - Scheduling tasks to run in the future
 - Implementing retry delays
 - Delays spanning hours, days, or weeks

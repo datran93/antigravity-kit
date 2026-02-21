@@ -1,6 +1,5 @@
 ---
-description:
-  Create new application command. Triggers interactive dialogue and skill mapping to build new projects systematically.
+description: Create new application command. Triggers interactive dialogue and skill mapping to build new projects systematically.
 ---
 
 # /create - Universal Creation Workflow
@@ -67,7 +66,7 @@ crashes.
 
 ## Phase 6: Documentation & Delivery 📝
 
-Save a summary to `CREATE-{slug}.md` detailing:
+Save a summary to `create-{slug}.md` detailing:
 
 - What was created
 - Tech Stack

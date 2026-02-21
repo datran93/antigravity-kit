@@ -1,8 +1,10 @@
 ---
 name: azure-eventhub-dotnet
-description: |
+description: "|"
   Azure Event Hubs SDK for .NET. Use for high-throughput event streaming: sending events (EventHubProducerClient, EventHubBufferedProducerClient), receiving events (EventProcessorClient with checkpointing), partition management, and real-time data ingestion. Triggers: "Event Hubs", "event streaming", "EventHubProducerClient", "EventProcessorClient", "send events", "receive events", "checkpointing", "partition".
 package: Azure.Messaging.EventHubs
+risk: unknown
+source: community
 ---
 
 # Azure.Messaging.EventHubs (.NET)
@@ -61,19 +63,18 @@ var producer = new EventHubProducerClient(
 ```
 
 **Required RBAC Roles**:
-
 - **Sending**: `Azure Event Hubs Data Sender`
 - **Receiving**: `Azure Event Hubs Data Receiver`
 - **Both**: `Azure Event Hubs Data Owner`
 
 ## Client Types
 
-| Client                           | Purpose                                    | When to Use                                     |
-| -------------------------------- | ------------------------------------------ | ----------------------------------------------- |
-| `EventHubProducerClient`         | Send events immediately in batches         | Real-time sending, full control over batching   |
-| `EventHubBufferedProducerClient` | Automatic batching with background sending | High-volume, fire-and-forget scenarios          |
-| `EventHubConsumerClient`         | Simple event reading                       | Prototyping only, NOT for production            |
-| `EventProcessorClient`           | Production event processing                | **Always use this for receiving in production** |
+| Client | Purpose | When to Use |
+|--------|---------|-------------|
+| `EventHubProducerClient` | Send events immediately in batches | Real-time sending, full control over batching |
+| `EventHubBufferedProducerClient` | Automatic batching with background sending | High-volume, fire-and-forget scenarios |
+| `EventHubConsumerClient` | Simple event reading | Prototyping only, NOT for production |
+| `EventProcessorClient` | Production event processing | **Always use this for receiving in production** |
 
 ## Core Workflow
 
@@ -106,7 +107,7 @@ foreach (var eventData in events)
         // Batch is full - send it and create a new one
         await producer.SendAsync(batch);
         batch = await producer.CreateBatchAsync();
-
+        
         if (!batch.TryAdd(eventData))
         {
             throw new Exception("Event too large for empty batch");
@@ -189,7 +190,7 @@ processor.ProcessEventAsync += async args =>
 {
     Console.WriteLine($"Partition: {args.Partition.PartitionId}");
     Console.WriteLine($"Data: {args.Data.EventBody}");
-
+    
     // Checkpoint after processing (or batch checkpoints)
     await args.UpdateCheckpointAsync();
 };
@@ -267,7 +268,7 @@ builder.Services.AddAzureClients(clientBuilder =>
     clientBuilder.AddEventHubProducerClient(
         builder.Configuration["EventHub:FullyQualifiedNamespace"],
         builder.Configuration["EventHub:Name"]);
-
+    
     clientBuilder.UseCredential(new DefaultAzureCredential());
 });
 
@@ -275,12 +276,12 @@ builder.Services.AddAzureClients(clientBuilder =>
 public class EventService
 {
     private readonly EventHubProducerClient _producer;
-
+    
     public EventService(EventHubProducerClient producer)
     {
         _producer = producer;
     }
-
+    
     public async Task SendAsync(string message)
     {
         using var batch = await _producer.CreateBatchAsync();
@@ -329,11 +330,11 @@ catch (EventHubsException ex)
 
 ## Checkpointing Strategies
 
-| Strategy         | When to Use                      |
-| ---------------- | -------------------------------- |
-| Every event      | Low volume, critical data        |
-| Every N events   | Balanced throughput/reliability  |
-| Time-based       | Consistent checkpoint intervals  |
+| Strategy | When to Use |
+|----------|-------------|
+| Every event | Low volume, critical data |
+| Every N events | Balanced throughput/reliability |
+| Time-based | Consistent checkpoint intervals |
 | Batch completion | After processing a logical batch |
 
 ```csharp
@@ -343,7 +344,7 @@ private int _eventCount = 0;
 processor.ProcessEventAsync += async args =>
 {
     // Process event...
-
+    
     _eventCount++;
     if (_eventCount >= 100)
     {
@@ -355,9 +356,12 @@ processor.ProcessEventAsync += async args =>
 
 ## Related SDKs
 
-| SDK                                            | Purpose                        | Install                                                           |
-| ---------------------------------------------- | ------------------------------ | ----------------------------------------------------------------- |
-| `Azure.Messaging.EventHubs`                    | Core sending/receiving         | `dotnet add package Azure.Messaging.EventHubs`                    |
-| `Azure.Messaging.EventHubs.Processor`          | Production processing          | `dotnet add package Azure.Messaging.EventHubs.Processor`          |
-| `Azure.ResourceManager.EventHubs`              | Management plane (create hubs) | `dotnet add package Azure.ResourceManager.EventHubs`              |
-| `Microsoft.Azure.WebJobs.Extensions.EventHubs` | Azure Functions binding        | `dotnet add package Microsoft.Azure.WebJobs.Extensions.EventHubs` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.Messaging.EventHubs` | Core sending/receiving | `dotnet add package Azure.Messaging.EventHubs` |
+| `Azure.Messaging.EventHubs.Processor` | Production processing | `dotnet add package Azure.Messaging.EventHubs.Processor` |
+| `Azure.ResourceManager.EventHubs` | Management plane (create hubs) | `dotnet add package Azure.ResourceManager.EventHubs` |
+| `Microsoft.Azure.WebJobs.Extensions.EventHubs` | Azure Functions binding | `dotnet add package Microsoft.Azure.WebJobs.Extensions.EventHubs` |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

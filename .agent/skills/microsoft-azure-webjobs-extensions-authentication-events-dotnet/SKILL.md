@@ -1,7 +1,9 @@
 ---
 name: microsoft-azure-webjobs-extensions-authentication-events-dotnet
-description: |
+description: "|"
   Microsoft Entra Authentication Events SDK for .NET. Azure Functions triggers for custom authentication extensions. Use for token enrichment, custom claims, attribute collection, and OTP customization in Entra ID. Triggers: "Authentication Events", "WebJobsAuthenticationEventsTrigger", "OnTokenIssuanceStart", "OnAttributeCollectionStart", "custom claims", "token enrichment", "Entra custom extension", "authentication extension".
+risk: unknown
+source: community
 ---
 
 # Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents (.NET)
@@ -18,12 +20,12 @@ dotnet add package Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents
 
 ## Supported Events
 
-| Event                         | Purpose                                          |
-| ----------------------------- | ------------------------------------------------ |
-| `OnTokenIssuanceStart`        | Add custom claims to tokens during issuance      |
-| `OnAttributeCollectionStart`  | Customize attribute collection UI before display |
+| Event | Purpose |
+|-------|---------|
+| `OnTokenIssuanceStart` | Add custom claims to tokens during issuance |
+| `OnAttributeCollectionStart` | Customize attribute collection UI before display |
 | `OnAttributeCollectionSubmit` | Validate/modify attributes after user submission |
-| `OnOtpSend`                   | Custom OTP delivery (SMS, email, etc.)           |
+| `OnOtpSend` | Custom OTP delivery (SMS, email, etc.) |
 
 ## Core Workflows
 
@@ -44,12 +46,12 @@ public static class TokenEnrichmentFunction
         [WebJobsAuthenticationEventsTrigger] WebJobsTokenIssuanceStartRequest request,
         ILogger log)
     {
-        log.LogInformation("Token issuance event for user: {UserId}",
+        log.LogInformation("Token issuance event for user: {UserId}", 
             request.Data?.AuthenticationContext?.User?.Id);
 
         // Create response with custom claims
         var response = new WebJobsTokenIssuanceStartResponse();
-
+        
         // Add claims to the token
         response.Actions.Add(new WebJobsProvideClaimsForToken
         {
@@ -89,7 +91,7 @@ public static class TokenEnrichmentWithExternalData
         ILogger log)
     {
         string? userId = request.Data?.AuthenticationContext?.User?.Id;
-
+        
         if (string.IsNullOrEmpty(userId))
         {
             log.LogWarning("No user ID in request");
@@ -98,7 +100,7 @@ public static class TokenEnrichmentWithExternalData
 
         // Fetch user data from external API
         var userProfile = await GetUserProfileAsync(userId);
-
+        
         var response = new WebJobsTokenIssuanceStartResponse();
         response.Actions.Add(new WebJobsProvideClaimsForToken
         {
@@ -192,7 +194,7 @@ public static class AttributeCollectionSubmitFunction
 
         // Access submitted attributes
         var attributes = request.Data?.UserSignUpInfo?.Attributes;
-
+        
         string? email = attributes?["email"]?.ToString();
         string? displayName = attributes?["displayName"]?.ToString();
 
@@ -271,7 +273,7 @@ public static class CustomOtpFunction
         {
             // Send OTP via your SMS provider
             await SendSmsAsync(phoneNumber, $"Your verification code is: {otp}");
-
+            
             response.Actions.Add(new WebJobsOnOtpSendSuccess());
             log.LogInformation("OTP sent successfully to {PhoneNumber}", phoneNumber);
         }
@@ -342,25 +344,25 @@ host.Run();
 
 ## Key Types Reference
 
-| Type                                          | Purpose                             |
-| --------------------------------------------- | ----------------------------------- |
-| `WebJobsAuthenticationEventsTriggerAttribute` | Function trigger attribute          |
-| `WebJobsTokenIssuanceStartRequest`            | Token issuance event request        |
-| `WebJobsTokenIssuanceStartResponse`           | Token issuance event response       |
-| `WebJobsProvideClaimsForToken`                | Action to add claims                |
-| `WebJobsAttributeCollectionStartRequest`      | Attribute collection start request  |
-| `WebJobsAttributeCollectionStartResponse`     | Attribute collection start response |
-| `WebJobsAttributeCollectionSubmitRequest`     | Attribute submission request        |
-| `WebJobsAttributeCollectionSubmitResponse`    | Attribute submission response       |
-| `WebJobsSetPrefillValues`                     | Prefill form values                 |
-| `WebJobsShowBlockPage`                        | Block user with message             |
-| `WebJobsShowValidationError`                  | Show validation errors              |
-| `WebJobsModifyAttributeValues`                | Modify submitted values             |
-| `WebJobsOnOtpSendRequest`                     | OTP send event request              |
-| `WebJobsOnOtpSendResponse`                    | OTP send event response             |
-| `WebJobsOnOtpSendSuccess`                     | OTP sent successfully               |
-| `WebJobsOnOtpSendFailed`                      | OTP send failed                     |
-| `WebJobsContinueWithDefaultBehavior`          | Continue with default flow          |
+| Type | Purpose |
+|------|---------|
+| `WebJobsAuthenticationEventsTriggerAttribute` | Function trigger attribute |
+| `WebJobsTokenIssuanceStartRequest` | Token issuance event request |
+| `WebJobsTokenIssuanceStartResponse` | Token issuance event response |
+| `WebJobsProvideClaimsForToken` | Action to add claims |
+| `WebJobsAttributeCollectionStartRequest` | Attribute collection start request |
+| `WebJobsAttributeCollectionStartResponse` | Attribute collection start response |
+| `WebJobsAttributeCollectionSubmitRequest` | Attribute submission request |
+| `WebJobsAttributeCollectionSubmitResponse` | Attribute submission response |
+| `WebJobsSetPrefillValues` | Prefill form values |
+| `WebJobsShowBlockPage` | Block user with message |
+| `WebJobsShowValidationError` | Show validation errors |
+| `WebJobsModifyAttributeValues` | Modify submitted values |
+| `WebJobsOnOtpSendRequest` | OTP send event request |
+| `WebJobsOnOtpSendResponse` | OTP send event response |
+| `WebJobsOnOtpSendSuccess` | OTP sent successfully |
+| `WebJobsOnOtpSendFailed` | OTP send failed |
+| `WebJobsContinueWithDefaultBehavior` | Continue with default flow |
 
 ## Entra ID Configuration
 
@@ -413,7 +415,7 @@ public static WebJobsAuthenticationEventResponse Run(
     catch (Exception ex)
     {
         log.LogError(ex, "Error processing token issuance event");
-
+        
         // Return empty response - authentication continues without custom claims
         // Do NOT throw - this would fail the authentication
         return new WebJobsTokenIssuanceStartResponse();
@@ -423,18 +425,21 @@ public static WebJobsAuthenticationEventResponse Run(
 
 ## Related SDKs
 
-| SDK                                                       | Purpose                | Install                                                                      |
-| --------------------------------------------------------- | ---------------------- | ---------------------------------------------------------------------------- |
+| SDK | Purpose | Install |
+|-----|---------|---------|
 | `Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents` | Auth events (this SDK) | `dotnet add package Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents` |
-| `Microsoft.Identity.Web`                                  | Web app authentication | `dotnet add package Microsoft.Identity.Web`                                  |
-| `Azure.Identity`                                          | Azure authentication   | `dotnet add package Azure.Identity`                                          |
+| `Microsoft.Identity.Web` | Web app authentication | `dotnet add package Microsoft.Identity.Web` |
+| `Azure.Identity` | Azure authentication | `dotnet add package Azure.Identity` |
 
 ## Reference Links
 
-| Resource                    | URL                                                                                                                    |
-| --------------------------- | ---------------------------------------------------------------------------------------------------------------------- |
-| NuGet Package               | https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents                                 |
-| Custom Extensions Overview  | https://learn.microsoft.com/entra/identity-platform/custom-extension-overview                                          |
-| Token Issuance Events       | https://learn.microsoft.com/entra/identity-platform/custom-extension-tokenissuancestart-setup                          |
-| Attribute Collection Events | https://learn.microsoft.com/entra/identity-platform/custom-extension-attribute-collection                              |
-| GitHub Source               | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents |
+| Custom Extensions Overview | https://learn.microsoft.com/entra/identity-platform/custom-extension-overview |
+| Token Issuance Events | https://learn.microsoft.com/entra/identity-platform/custom-extension-tokenissuancestart-setup |
+| Attribute Collection Events | https://learn.microsoft.com/entra/identity-platform/custom-extension-attribute-collection |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/entra/Microsoft.Azure.WebJobs.Extensions.AuthenticationEvents |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

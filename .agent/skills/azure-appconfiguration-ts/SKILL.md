@@ -1,9 +1,9 @@
 ---
 name: azure-appconfiguration-ts
-description:
-  Build applications using Azure App Configuration SDK for JavaScript (@azure/app-configuration). Use when working with
-  configuration settings, feature flags, Key Vault references, dynamic refresh, or centralized configuration management.
+description: "Build applications using Azure App Configuration SDK for JavaScript (@azure/app-configuration). Use when working with configuration settings, feature flags, Key Vault references, dynamic refresh, o..."
 package: "@azure/app-configuration"
+risk: unknown
+source: community
 ---
 
 # Azure App Configuration SDK for TypeScript
@@ -38,10 +38,15 @@ import { AppConfigurationClient } from "@azure/app-configuration";
 import { DefaultAzureCredential } from "@azure/identity";
 
 // DefaultAzureCredential (recommended)
-const client = new AppConfigurationClient(process.env.AZURE_APPCONFIG_ENDPOINT!, new DefaultAzureCredential());
+const client = new AppConfigurationClient(
+  process.env.AZURE_APPCONFIG_ENDPOINT!,
+  new DefaultAzureCredential()
+);
 
 // Connection string
-const client2 = new AppConfigurationClient(process.env.AZURE_APPCONFIG_CONNECTION_STRING!);
+const client2 = new AppConfigurationClient(
+  process.env.AZURE_APPCONFIG_CONNECTION_STRING!
+);
 ```
 
 ## CRUD Operations
@@ -77,7 +82,7 @@ await client.setConfigurationSetting(existing, { onlyIfUnchanged: true });
 // Get single setting
 const setting = await client.getConfigurationSetting({
   key: "app:settings:message",
-  label: "production", // optional
+  label: "production",  // optional
 });
 console.log(setting.value);
 
@@ -119,10 +124,16 @@ await client.setReadOnly({ key: "myKey", label: "prod" }, false);
 import { load } from "@azure/app-configuration-provider";
 import { DefaultAzureCredential } from "@azure/identity";
 
-const appConfig = await load(process.env.AZURE_APPCONFIG_ENDPOINT!, new DefaultAzureCredential(), {
-  selectors: [{ keyFilter: "app:*", labelFilter: "production" }],
-  trimKeyPrefixes: ["app:"],
-});
+const appConfig = await load(
+  process.env.AZURE_APPCONFIG_ENDPOINT!,
+  new DefaultAzureCredential(),
+  {
+    selectors: [
+      { keyFilter: "app:*", labelFilter: "production" },
+    ],
+    trimKeyPrefixes: ["app:"],
+  }
+);
 
 // Map-style access
 const value = appConfig.get("settings:message");
@@ -139,7 +150,7 @@ const appConfig = await load(endpoint, credential, {
   selectors: [{ keyFilter: "app:*" }],
   refreshOptions: {
     enabled: true,
-    refreshIntervalInMs: 30_000, // 30 seconds
+    refreshIntervalInMs: 30_000,  // 30 seconds
   },
 });
 
@@ -165,7 +176,7 @@ const appConfig = await load(endpoint, credential, {
   selectors: [{ keyFilter: "app:*" }],
   keyVaultOptions: {
     credential: new DefaultAzureCredential(),
-    secretRefreshIntervalInMs: 7200_000, // 2 hours
+    secretRefreshIntervalInMs: 7200_000,  // 2 hours
   },
 });
 
@@ -216,7 +227,10 @@ await client.addConfigurationSetting(flag);
 
 ```typescript
 import { load } from "@azure/app-configuration-provider";
-import { ConfigurationMapFeatureFlagProvider, FeatureManager } from "@microsoft/feature-management";
+import {
+  ConfigurationMapFeatureFlagProvider,
+  FeatureManager,
+} from "@microsoft/feature-management";
 
 const appConfig = await load(endpoint, credential, {
   featureFlagOptions: {
@@ -248,7 +262,7 @@ const isEnabledForUser = await featureManager.isEnabled("Beta", {
 // Create snapshot
 const snapshot = await client.beginCreateSnapshotAndWait({
   name: "release-v1.0",
-  retentionPeriod: 2592000, // 30 days
+  retentionPeriod: 2592000,  // 30 days
   filters: [{ keyFilter: "app:*", labelFilter: "production" }],
 });
 
@@ -320,7 +334,10 @@ import {
 
 import { load } from "@azure/app-configuration-provider";
 
-import { FeatureManager, ConfigurationMapFeatureFlagProvider } from "@microsoft/feature-management";
+import {
+  FeatureManager,
+  ConfigurationMapFeatureFlagProvider,
+} from "@microsoft/feature-management";
 ```
 
 ## Best Practices
@@ -332,3 +349,6 @@ import { FeatureManager, ConfigurationMapFeatureFlagProvider } from "@microsoft/
 5. **Use snapshots** - For immutable release configurations
 6. **Sentinel pattern** - Use a sentinel key to trigger full refresh
 7. **RBAC roles** - `App Configuration Data Reader` for read-only access
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

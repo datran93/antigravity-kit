@@ -1,16 +1,13 @@
 ---
 name: angular-best-practices
-description:
-  Angular performance optimization and best practices guide. Use when writing, reviewing, or refactoring Angular code
-  for optimal performance, bundle size, and rendering efficiency.
+description: "Angular performance optimization and best practices guide. Use when writing, reviewing, or refactoring Angular code for optimal performance, bundle size, and rendering efficiency."
 risk: safe
 source: self
 ---
 
 # Angular Best Practices
 
-Comprehensive performance optimization guide for Angular applications. Contains prioritized rules for eliminating
-performance bottlenecks, optimizing bundles, and improving rendering.
+Comprehensive performance optimization guide for Angular applications. Contains prioritized rules for eliminating performance bottlenecks, optimizing bundles, and improving rendering.
 
 ## When to Apply
 
@@ -172,11 +169,15 @@ class ProfileComponent implements OnInit {
 export const routes: Routes = [
   {
     path: "admin",
-    loadChildren: () => import("./admin/admin.routes").then((m) => m.ADMIN_ROUTES),
+    loadChildren: () =>
+      import("./admin/admin.routes").then((m) => m.ADMIN_ROUTES),
   },
   {
     path: "dashboard",
-    loadComponent: () => import("./dashboard/dashboard.component").then((m) => m.DashboardComponent),
+    loadComponent: () =>
+      import("./dashboard/dashboard.component").then(
+        (m) => m.DashboardComponent,
+      ),
   },
 ];
 
@@ -310,10 +311,15 @@ get filteredProducts() {
 
 ```typescript
 // app.config.ts
-import { provideClientHydration, withIncrementalHydration } from "@angular/platform-browser";
+import {
+  provideClientHydration,
+  withIncrementalHydration,
+} from "@angular/platform-browser";
 
 export const appConfig: ApplicationConfig = {
-  providers: [provideClientHydration(withIncrementalHydration(), withEventReplay())],
+  providers: [
+    provideClientHydration(withIncrementalHydration(), withEventReplay()),
+  ],
 };
 ```
 
@@ -551,3 +557,6 @@ export class Component implements OnInit, OnDestroy {
 - [Zoneless Angular](https://angular.dev/guide/experimental/zoneless)
 - [Angular SSR Guide](https://angular.dev/guide/ssr)
 - [Change Detection Deep Dive](https://angular.dev/guide/change-detection)
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

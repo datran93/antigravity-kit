@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # UV Package Manager
 
-Comprehensive guide to using uv, an extremely fast Python package installer and resolver written in Rust, for modern
-Python project management and dependency workflows.
+Comprehensive guide to using uv, an extremely fast Python package installer and resolver written in Rust, for modern Python project management and dependency workflows.
 
 ## When to Use This Skill
 
@@ -23,7 +22,6 @@ Python project management and dependency workflows.
 ## Core Concepts
 
 ### 1. What is uv?
-
 - **Ultra-fast package installer**: 10-100x faster than pip
 - **Written in Rust**: Leverages Rust's performance
 - **Drop-in pip replacement**: Compatible with pip workflows
@@ -33,7 +31,6 @@ Python project management and dependency workflows.
 - **Lockfile support**: Reproducible installations
 
 ### 2. Key Features
-
 - Blazing fast installation speeds
 - Disk space efficient with global cache
 - Compatible with pip, pip-tools, poetry
@@ -43,7 +40,6 @@ Python project management and dependency workflows.
 - Built-in virtual environment support
 
 ### 3. UV vs Traditional Tools
-
 - **vs pip**: 10-100x faster, better resolver
 - **vs pip-tools**: Faster, simpler, better UX
 - **vs poetry**: Faster, less opinionated, lighter

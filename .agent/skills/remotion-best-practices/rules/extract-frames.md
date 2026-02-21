@@ -7,15 +7,20 @@ metadata:
 
 # Extracting frames from videos
 
-Use Mediabunny to extract frames from videos at specific timestamps. This is useful for generating thumbnails,
-filmstrips, or processing individual frames.
+Use Mediabunny to extract frames from videos at specific timestamps. This is useful for generating thumbnails, filmstrips, or processing individual frames.
 
 ## The `extractFrames()` function
 
 This function can be copy-pasted into any project.
 
 ```tsx
-import { ALL_FORMATS, Input, UrlSource, VideoSample, VideoSampleSink } from "mediabunny";
+import {
+  ALL_FORMATS,
+  Input,
+  UrlSource,
+  VideoSample,
+  VideoSampleSink,
+} from "mediabunny";
 
 type Options = {
   track: { width: number; height: number };
@@ -23,7 +28,9 @@ type Options = {
   durationInSeconds: number | null;
 };
 
-export type ExtractFramesTimestampsInSecondsFn = (options: Options) => Promise<number[]> | number[];
+export type ExtractFramesTimestampsInSecondsFn = (
+  options: Options
+) => Promise<number[]> | number[];
 
 export type ExtractFramesProps = {
   src: string;
@@ -125,12 +132,16 @@ await extractFrames({
   src: "https://remotion.media/video.mp4",
   timestampsInSeconds: async ({ track, durationInSeconds }) => {
     const aspectRatio = track.width / track.height;
-    const amountOfFramesFit = Math.ceil(canvasWidth / (canvasHeight * aspectRatio));
+    const amountOfFramesFit = Math.ceil(
+      canvasWidth / (canvasHeight * aspectRatio)
+    );
     const segmentDuration = toSeconds - fromSeconds;
     const timestamps: number[] = [];
 
     for (let i = 0; i < amountOfFramesFit; i++) {
-      timestamps.push(fromSeconds + (segmentDuration / amountOfFramesFit) * (i + 0.5));
+      timestamps.push(
+        fromSeconds + (segmentDuration / amountOfFramesFit) * (i + 0.5)
+      );
     }
 
     return timestamps;

@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # Python Packaging
 
-Comprehensive guide to creating, structuring, and distributing Python packages using modern packaging tools,
-pyproject.toml, and publishing to PyPI.
+Comprehensive guide to creating, structuring, and distributing Python packages using modern packaging tools, pyproject.toml, and publishing to PyPI.
 
 ## When to Use This Skill
 
@@ -22,28 +21,24 @@ pyproject.toml, and publishing to PyPI.
 ## Core Concepts
 
 ### 1. Package Structure
-
 - **Source layout**: `src/package_name/` (recommended)
 - **Flat layout**: `package_name/` (simpler but less flexible)
 - **Package metadata**: pyproject.toml, setup.py, or setup.cfg
 - **Distribution formats**: wheel (.whl) and source distribution (.tar.gz)
 
 ### 2. Modern Packaging Standards
-
 - **PEP 517/518**: Build system requirements
 - **PEP 621**: Metadata in pyproject.toml
 - **PEP 660**: Editable installs
 - **pyproject.toml**: Single source of configuration
 
 ### 3. Build Backends
-
 - **setuptools**: Traditional, widely used
 - **hatchling**: Modern, opinionated
 - **flit**: Lightweight, for pure Python
 - **poetry**: Dependency management + packaging
 
 ### 4. Distribution
-
 - **PyPI**: Python Package Index (public)
 - **TestPyPI**: Testing before production
 - **Private repositories**: JFrog, AWS CodeArtifact, etc.
@@ -115,13 +110,11 @@ my-package/
 ```
 
 **Advantages:**
-
 - Prevents accidentally importing from source
 - Cleaner test imports
 - Better isolation
 
 **pyproject.toml for source layout:**
-
 ```toml
 [tool.setuptools.packages.find]
 where = ["src"]
@@ -141,7 +134,6 @@ my-package/
 ```
 
 **Simpler but:**
-
 - Can import package without installing
 - Less professional for libraries
 
@@ -304,8 +296,7 @@ version = {attr = "my_package.__version__"}
 write_to = "src/my_package/_version.py"
 ```
 
-**In **init**.py:**
-
+**In __init__.py:**
 ```python
 # src/my_package/__init__.py
 __version__ = "1.0.0"
@@ -352,14 +343,12 @@ if __name__ == "__main__":
 ```
 
 **Register in pyproject.toml:**
-
 ```toml
 [project.scripts]
 my-tool = "my_package.cli:main"
 ```
 
 **Usage:**
-
 ```bash
 pip install -e .
 my-tool greet World
@@ -451,7 +440,6 @@ twine upload dist/*
 ```
 
 **Using API tokens (recommended):**
-
 ```bash
 # Create ~/.pypirc
 [distutils]
@@ -522,7 +510,6 @@ my_package = [
 ```
 
 **Accessing data files:**
-
 ```python
 # src/my_package/loader.py
 from importlib.resources import files
@@ -558,7 +545,7 @@ company/
     └── routes.py
 ```
 
-**Do NOT include **init**.py in the namespace directory (company/):**
+**Do NOT include __init__.py in the namespace directory (company/):**
 
 ```toml
 # company-core/pyproject.toml
@@ -579,7 +566,6 @@ include = ["company.api*"]
 ```
 
 **Usage:**
-
 ```python
 # Both packages can be imported under same namespace
 from company.core import models
@@ -600,7 +586,6 @@ ext-modules = [
 ```
 
 **Or with setup.py:**
-
 ```python
 # setup.py
 from setuptools import setup, Extension
@@ -631,7 +616,6 @@ __version__ = "1.2.3"
 ```
 
 **Version constraints in dependencies:**
-
 ```toml
 dependencies = [
     "requests>=2.28.0,<3.0.0",  # Compatible range
@@ -659,7 +643,6 @@ local_scheme = "dirty-tag"
 ```
 
 **Creates versions like:**
-
 - `1.0.0` (from git tag)
 - `1.0.1.dev3+g1234567` (3 commits after tag)
 
@@ -704,7 +687,7 @@ rm -rf test-env
 
 ### Pattern 18: README.md Template
 
-````markdown
+```markdown
 # My Package
 
 [![PyPI version](https://badge.fury.io/py/my-package.svg)](https://pypi.org/project/my-package/)
@@ -718,7 +701,6 @@ Brief description of your package.
 ```bash
 pip install my-package
 ```
-````
 
 ## Quick Start
 
@@ -750,8 +732,7 @@ pytest
 ## License
 
 MIT
-
-````
+```
 
 ## Common Patterns
 
@@ -780,7 +761,7 @@ jobs:
       - uses: actions/upload-artifact@v3
         with:
           path: ./wheelhouse/*.whl
-````
+```
 
 ### Pattern 20: Private Package Index
 

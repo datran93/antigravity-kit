@@ -1,14 +1,12 @@
 # Production Patterns Reference
 
-Practitioner-tested patterns from Hacker News discussions and real-world deployments. These patterns represent what
-actually works in production, not theoretical frameworks.
+Practitioner-tested patterns from Hacker News discussions and real-world deployments. These patterns represent what actually works in production, not theoretical frameworks.
 
 ---
 
 ## Overview
 
 This reference consolidates battle-tested insights from:
-
 - HN discussions on autonomous agents in production (2025)
 - Coding with LLMs practitioner experiences
 - Simon Willison's Superpowers coding agent patterns
@@ -555,7 +553,6 @@ cost_patterns:
 ## Sources
 
 **Hacker News Discussions:**
-
 - [What Actually Works in Production for Autonomous Agents](https://news.ycombinator.com/item?id=44623207)
 - [Coding with LLMs in Summer 2025](https://news.ycombinator.com/item?id=44623953)
 - [Superpowers: How I'm Using Coding Agents](https://news.ycombinator.com/item?id=45547344)
@@ -565,7 +562,6 @@ cost_patterns:
 - [Context Engineering vs Prompt Engineering](https://news.ycombinator.com/item?id=44427757)
 
 **Show HN Projects:**
-
 - [Self-Evolving Agents Repository](https://news.ycombinator.com/item?id=45099226)
 - [Package Manager for Agent Skills](https://news.ycombinator.com/item?id=46422264)
 - [Wispbit - AI Code Review Agent](https://news.ycombinator.com/item?id=44722603)

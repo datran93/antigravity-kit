@@ -7,8 +7,7 @@ tags: workflow, determinism, recovery, reliability
 
 ## Keep Workflows Deterministic
 
-Workflow functions must be deterministic: given the same inputs and step return values, they must invoke the same steps
-in the same order. Non-deterministic operations must be moved to steps.
+Workflow functions must be deterministic: given the same inputs and step return values, they must invoke the same steps in the same order. Non-deterministic operations must be moved to steps.
 
 **Incorrect (non-deterministic workflow):**
 
@@ -45,7 +44,6 @@ def example_workflow():
 ```
 
 Non-deterministic operations that must be in steps:
-
 - Random number generation
 - Getting current time
 - Accessing external APIs

@@ -55,6 +55,6 @@ Analyze results. If tests fail:
 
 Generate coverage report if applicable. Identify gaps.
 
-Save the test report to `TEST-{slug}.md` summarizing Pass/Fail rates, Coverage, and Recommendations.
+Save the test report to `test-{slug}.md` summarizing Pass/Fail rates, Coverage, and Recommendations.
 
-> `✅ Test report saved: TEST-{slug}.md`
+> `✅ Test report saved: test-{slug}.md`

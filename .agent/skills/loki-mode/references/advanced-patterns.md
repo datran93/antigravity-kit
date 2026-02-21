@@ -82,8 +82,8 @@ Each memory note is atomic and linked to related notes:
   "content": "Express route handlers need explicit return types in strict mode",
   "type": "semantic",
   "links": [
-    { "to": "note-2026-01-05-042", "relation": "derived_from" },
-    { "to": "note-2026-01-06-003", "relation": "related_to" }
+    {"to": "note-2026-01-05-042", "relation": "derived_from"},
+    {"to": "note-2026-01-06-003", "relation": "related_to"}
   ],
   "tags": ["typescript", "express", "strict-mode"],
   "confidence": 0.95,
@@ -340,11 +340,11 @@ def iterative_verify_first(task, max_iterations=3):
 
 ### When to Use Each Structure
 
-| Structure         | Use When                                 | Loki Mode Application               |
-| ----------------- | ---------------------------------------- | ----------------------------------- |
-| **Centralized**   | Need consistency, single source of truth | Orchestrator for phase management   |
-| **Decentralized** | Need fault tolerance, parallel execution | Agent swarms for implementation     |
-| **Hierarchical**  | Complex tasks with clear decomposition   | Global planner -> Skill -> Executor |
+| Structure | Use When | Loki Mode Application |
+|-----------|----------|----------------------|
+| **Centralized** | Need consistency, single source of truth | Orchestrator for phase management |
+| **Decentralized** | Need fault tolerance, parallel execution | Agent swarms for implementation |
+| **Hierarchical** | Complex tasks with clear decomposition | Global planner -> Skill -> Executor |
 
 ### Coopetition Pattern
 

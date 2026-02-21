@@ -2,8 +2,8 @@
 
 All notable changes to the youtube-summarizer skill will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
-[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
@@ -16,8 +16,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
   - **Risk:** Broke automation pipelines that rely on exit codes to detect failures
   - **Root Cause:** Return value from `list_available_transcripts()` was ignored
   - **Solution:** Now properly checks return value and exits with code 1 on failure
-  - **Impact:** Scripts in automation can now correctly detect when transcript listing fails (invalid video ID, network
-    errors, etc.)
+  - **Impact:** Scripts in automation can now correctly detect when transcript listing fails (invalid video ID, network errors, etc.)
 
 ### 🔧 Changed
 

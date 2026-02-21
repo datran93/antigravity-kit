@@ -1,10 +1,8 @@
 ---
 name: podcast-generation
-description:
-  Generate AI-powered podcast-style audio narratives using Azure OpenAI's GPT Realtime Mini model via WebSocket. Use
-  when building text-to-speech features, audio narrative generation, podcast creation from content, or integrating with
-  Azure OpenAI Realtime API for real audio output. Covers full-stack implementation from React frontend to Python
-  FastAPI backend with WebSocket streaming.
+description: "Generate AI-powered podcast-style audio narratives using Azure OpenAI's GPT Realtime Mini model via WebSocket. Use when building text-to-speech features, audio narrative generation, podcast creatio..."
+risk: unknown
+source: community
 ---
 
 # Podcast Generation with GPT Realtime Mini
@@ -54,16 +52,16 @@ async with client.realtime.connect(model="gpt-realtime-mini") as conn:
         "output_modalities": ["audio"],
         "instructions": "You are a narrator. Speak naturally."
     })
-
+    
     # Send text to narrate
     await conn.conversation.item.create(item={
         "type": "message",
         "role": "user",
         "content": [{"type": "input_text", "text": prompt}]
     })
-
+    
     await conn.response.create()
-
+    
     # Collect streaming events
     async for event in conn:
         if event.type == "response.output_audio.delta":
@@ -89,21 +87,21 @@ const base64ToBlob = (base64, mimeType) => {
   return new Blob([arr], { type: mimeType });
 };
 
-const audioBlob = base64ToBlob(response.audio_data, "audio/wav");
+const audioBlob = base64ToBlob(response.audio_data, 'audio/wav');
 const audioUrl = URL.createObjectURL(audioBlob);
 new Audio(audioUrl).play();
 ```
 
 ## Voice Options
 
-| Voice   | Character  |
-| ------- | ---------- |
-| alloy   | Neutral    |
-| echo    | Warm       |
-| fable   | Expressive |
-| onyx    | Deep       |
-| nova    | Friendly   |
-| shimmer | Clear      |
+| Voice | Character |
+|-------|-----------|
+| alloy | Neutral |
+| echo | Warm |
+| fable | Expressive |
+| onyx | Deep |
+| nova | Friendly |
+| shimmer | Clear |
 
 ## Realtime API Events
 
@@ -120,6 +118,9 @@ new Audio(audioUrl).play();
 
 ## References
 
-- **Full architecture**: See [references/architecture.md](references/architecture.md) for complete stack design
-- **Code examples**: See [references/code-examples.md](references/code-examples.md) for production patterns
-- **PCM conversion**: Use [scripts/pcm_to_wav.py](scripts/pcm_to_wav.py) for audio format conversion
+- **Full architecture**: See references/architecture.md for complete stack design
+- **Code examples**: See references/code-examples.md for production patterns
+- **PCM conversion**: Use scripts/pcm_to_wav.py for audio format conversion
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

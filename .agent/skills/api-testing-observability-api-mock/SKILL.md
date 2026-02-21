@@ -1,15 +1,13 @@
 ---
 name: api-testing-observability-api-mock
-description:
-  "You are an API mocking expert specializing in realistic mock services for development, testing, and demos. Design
-  mocks that simulate real API behavior and enable parallel development."
+description: "You are an API mocking expert specializing in realistic mock services for development, testing, and demos. Design mocks that simulate real API behavior and enable parallel development."
+risk: unknown
+source: community
 ---
 
 # API Mocking Framework
 
-You are an API mocking expert specializing in creating realistic mock services for development, testing, and
-demonstration purposes. Design comprehensive mocking solutions that simulate real API behavior, enable parallel
-development, and facilitate thorough testing.
+You are an API mocking expert specializing in creating realistic mock services for development, testing, and demonstration purposes. Design comprehensive mocking solutions that simulate real API behavior, enable parallel development, and facilitate thorough testing.
 
 ## Use this skill when
 
@@ -31,8 +29,7 @@ development, and facilitate thorough testing.
 
 ## Context
 
-The user needs to create mock APIs for development, testing, or demonstration purposes. Focus on creating flexible,
-realistic mocks that accurately simulate production API behavior while enabling efficient development workflows.
+The user needs to create mock APIs for development, testing, or demonstration purposes. Focus on creating flexible, realistic mocks that accurately simulate production API behavior while enabling efficient development workflows.
 
 ## Requirements
 

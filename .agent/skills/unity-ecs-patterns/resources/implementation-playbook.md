@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # Unity ECS Patterns
 
-Production patterns for Unity's Data-Oriented Technology Stack (DOTS) including Entity Component System, Job System, and
-Burst Compiler.
+Production patterns for Unity's Data-Oriented Technology Stack (DOTS) including Entity Component System, Job System, and Burst Compiler.
 
 ## When to Use This Skill
 
@@ -20,13 +19,13 @@ Burst Compiler.
 
 ### 1. ECS vs OOP
 
-| Aspect      | Traditional OOP   | ECS/DOTS        |
-| ----------- | ----------------- | --------------- |
-| Data layout | Object-oriented   | Data-oriented   |
-| Memory      | Scattered         | Contiguous      |
-| Processing  | Per-object        | Batched         |
-| Scaling     | Poor with count   | Linear scaling  |
-| Best for    | Complex behaviors | Mass simulation |
+| Aspect | Traditional OOP | ECS/DOTS |
+|--------|-----------------|----------|
+| Data layout | Object-oriented | Data-oriented |
+| Memory | Scattered | Contiguous |
+| Processing | Per-object | Batched |
+| Scaling | Poor with count | Linear scaling |
+| Best for | Complex behaviors | Mass simulation |
 
 ### 2. DOTS Components
 
@@ -606,7 +605,6 @@ public struct Disabled : IComponentData, IEnableableComponent { }
 ## Best Practices
 
 ### Do's
-
 - **Use ISystem over SystemBase** - Better performance
 - **Burst compile everything** - Massive speedup
 - **Batch structural changes** - Use ECB
@@ -614,7 +612,6 @@ public struct Disabled : IComponentData, IEnableableComponent { }
 - **Use Aspects** - Clean component grouping
 
 ### Don'ts
-
 - **Don't use managed types** - Breaks Burst
 - **Don't structural change in jobs** - Use ECB
 - **Don't over-architect** - Start simple

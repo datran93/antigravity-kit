@@ -16,8 +16,7 @@ Use the `{Icon}` markup extension to easily include icons from libraries like Fo
 
 ## 🎨 IconOptions
 
-`IconOptions` allows you to customize icons without manually wrapping them in other controls. It's often used in styles
-to provide a consistent look.
+`IconOptions` allows you to customize icons without manually wrapping them in other controls. It's often used in styles to provide a consistent look.
 
 ```xml
 <Style Selector="HeaderedContainer /template/ ContentPresenter#Header EdgePanel /template/ ContentControl#StartContent">
@@ -29,7 +28,6 @@ to provide a consistent look.
 ```
 
 ### Common Properties:
-
 - `IconOptions.Size`: Sets the width and height of the icon.
 - `IconOptions.Fill`: The color/brush of the icon.
 - `IconOptions.Background`: Background brush for the icon container.
@@ -52,5 +50,4 @@ Then use them with `StaticResource` if they are already defined:
 <Button Content="{StaticResource fa-wallet}" />
 ```
 
-However, the `{Icon ...}` extension is usually preferred for its brevity and ability to create new icon instances on the
-fly.
+However, the `{Icon ...}` extension is usually preferred for its brevity and ability to create new icon instances on the fly.

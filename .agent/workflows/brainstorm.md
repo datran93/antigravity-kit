@@ -73,7 +73,7 @@ Synthesize a recommendation explaining why it best fits the constraints.
 
 **🔔 Only execute this AFTER user selects an option.**
 
-Save the accepted approach to `BRAINSTORM-{slug}.md` and notify the user.
+Save the accepted approach to `brainstorm-{slug}.md` and notify the user.
 
 ### Output Template:
 

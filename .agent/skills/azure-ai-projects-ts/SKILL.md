@@ -1,9 +1,9 @@
 ---
 name: azure-ai-projects-ts
-description:
-  Build AI applications using Azure AI Projects SDK for JavaScript (@azure/ai-projects). Use when working with Foundry
-  project clients, agents, connections, deployments, datasets, indexes, evaluations, or getting OpenAI clients.
+description: "Build AI applications using Azure AI Projects SDK for JavaScript (@azure/ai-projects). Use when working with Foundry project clients, agents, connections, deployments, datasets, indexes, evaluation..."
 package: "@azure/ai-projects"
+risk: unknown
+source: community
 ---
 
 # Azure AI Projects SDK for TypeScript
@@ -17,7 +17,6 @@ npm install @azure/ai-projects @azure/identity
 ```
 
 For tracing:
-
 ```bash
 npm install @azure/monitor-opentelemetry @opentelemetry/api
 ```
@@ -35,20 +34,23 @@ MODEL_DEPLOYMENT_NAME=gpt-4o
 import { AIProjectClient } from "@azure/ai-projects";
 import { DefaultAzureCredential } from "@azure/identity";
 
-const client = new AIProjectClient(process.env.AZURE_AI_PROJECT_ENDPOINT!, new DefaultAzureCredential());
+const client = new AIProjectClient(
+  process.env.AZURE_AI_PROJECT_ENDPOINT!,
+  new DefaultAzureCredential()
+);
 ```
 
 ## Operation Groups
 
-| Group                 | Purpose                          |
-| --------------------- | -------------------------------- |
-| `client.agents`       | Create and manage AI agents      |
-| `client.connections`  | List connected Azure resources   |
-| `client.deployments`  | List model deployments           |
-| `client.datasets`     | Upload and manage datasets       |
-| `client.indexes`      | Create and manage search indexes |
-| `client.evaluators`   | Manage evaluation metrics        |
-| `client.memoryStores` | Manage agent memory              |
+| Group | Purpose |
+|-------|---------|
+| `client.agents` | Create and manage AI agents |
+| `client.connections` | List connected Azure resources |
+| `client.deployments` | List model deployments |
+| `client.datasets` | Upload and manage datasets |
+| `client.indexes` | Create and manage search indexes |
+| `client.evaluators` | Manage evaluation metrics |
+| `client.memoryStores` | Manage agent memory |
 
 ## Getting OpenAI Client
 
@@ -58,12 +60,12 @@ const openAIClient = await client.getOpenAIClient();
 // Use for responses
 const response = await openAIClient.responses.create({
   model: "gpt-4o",
-  input: "What is the capital of France?",
+  input: "What is the capital of France?"
 });
 
 // Use for conversations
 const conversation = await openAIClient.conversations.create({
-  items: [{ type: "message", role: "user", content: "Hello!" }],
+  items: [{ type: "message", role: "user", content: "Hello!" }]
 });
 ```
 
@@ -75,7 +77,7 @@ const conversation = await openAIClient.conversations.create({
 const agent = await client.agents.createVersion("my-agent", {
   kind: "prompt",
   model: "gpt-4o",
-  instructions: "You are a helpful assistant.",
+  instructions: "You are a helpful assistant."
 });
 ```
 
@@ -87,81 +89,71 @@ const agent = await client.agents.createVersion("code-agent", {
   kind: "prompt",
   model: "gpt-4o",
   instructions: "You can execute code.",
-  tools: [{ type: "code_interpreter", container: { type: "auto" } }],
+  tools: [{ type: "code_interpreter", container: { type: "auto" } }]
 });
 
 // File Search
 const agent = await client.agents.createVersion("search-agent", {
   kind: "prompt",
   model: "gpt-4o",
-  tools: [{ type: "file_search", vector_store_ids: [vectorStoreId] }],
+  tools: [{ type: "file_search", vector_store_ids: [vectorStoreId] }]
 });
 
 // Web Search
 const agent = await client.agents.createVersion("web-agent", {
   kind: "prompt",
   model: "gpt-4o",
-  tools: [
-    {
-      type: "web_search_preview",
-      user_location: { type: "approximate", country: "US", city: "Seattle" },
-    },
-  ],
+  tools: [{
+    type: "web_search_preview",
+    user_location: { type: "approximate", country: "US", city: "Seattle" }
+  }]
 });
 
 // Azure AI Search
 const agent = await client.agents.createVersion("aisearch-agent", {
   kind: "prompt",
   model: "gpt-4o",
-  tools: [
-    {
-      type: "azure_ai_search",
-      azure_ai_search: {
-        indexes: [
-          {
-            project_connection_id: connectionId,
-            index_name: "my-index",
-            query_type: "simple",
-          },
-        ],
-      },
-    },
-  ],
+  tools: [{
+    type: "azure_ai_search",
+    azure_ai_search: {
+      indexes: [{
+        project_connection_id: connectionId,
+        index_name: "my-index",
+        query_type: "simple"
+      }]
+    }
+  }]
 });
 
 // Function Tool
 const agent = await client.agents.createVersion("func-agent", {
   kind: "prompt",
   model: "gpt-4o",
-  tools: [
-    {
-      type: "function",
-      function: {
-        name: "get_weather",
-        description: "Get weather for a location",
-        strict: true,
-        parameters: {
-          type: "object",
-          properties: { location: { type: "string" } },
-          required: ["location"],
-        },
-      },
-    },
-  ],
+  tools: [{
+    type: "function",
+    function: {
+      name: "get_weather",
+      description: "Get weather for a location",
+      strict: true,
+      parameters: {
+        type: "object",
+        properties: { location: { type: "string" } },
+        required: ["location"]
+      }
+    }
+  }]
 });
 
 // MCP Tool
 const agent = await client.agents.createVersion("mcp-agent", {
   kind: "prompt",
   model: "gpt-4o",
-  tools: [
-    {
-      type: "mcp",
-      server_label: "my-mcp",
-      server_url: "https://mcp-server.example.com",
-      require_approval: "always",
-    },
-  ],
+  tools: [{
+    type: "mcp",
+    server_label: "my-mcp",
+    server_url: "https://mcp-server.example.com",
+    require_approval: "always"
+  }]
 });
 ```
 
@@ -172,13 +164,13 @@ const openAIClient = await client.getOpenAIClient();
 
 // Create conversation
 const conversation = await openAIClient.conversations.create({
-  items: [{ type: "message", role: "user", content: "Hello!" }],
+  items: [{ type: "message", role: "user", content: "Hello!" }]
 });
 
 // Generate response using agent
 const response = await openAIClient.responses.create(
   { conversation: conversation.id },
-  { body: { agent: { name: agent.name, type: "agent_reference" } } },
+  { body: { agent: { name: agent.name, type: "agent_reference" } } }
 );
 
 // Cleanup
@@ -227,10 +219,18 @@ const deployment = await client.deployments.get("gpt-4o");
 
 ```typescript
 // Upload single file
-const dataset = await client.datasets.uploadFile("my-dataset", "1.0", "./data/training.jsonl");
+const dataset = await client.datasets.uploadFile(
+  "my-dataset",
+  "1.0",
+  "./data/training.jsonl"
+);
 
 // Upload folder
-const dataset = await client.datasets.uploadFolder("my-dataset", "2.0", "./data/documents/");
+const dataset = await client.datasets.uploadFolder(
+  "my-dataset",
+  "2.0",
+  "./data/documents/"
+);
 
 // Get dataset
 const ds = await client.datasets.get("my-dataset", "1.0");
@@ -254,7 +254,7 @@ const indexConfig: AzureAISearchIndex = {
   type: "AzureSearch",
   version: "1",
   indexName: "my-index",
-  connectionName: "search-connection",
+  connectionName: "search-connection"
 };
 
 // Create index
@@ -278,7 +278,7 @@ import {
   Connection,
   ModelDeployment,
   DatasetVersionUnion,
-  AzureAISearchIndex,
+  AzureAISearchIndex
 } from "@azure/ai-projects";
 ```
 
@@ -289,3 +289,6 @@ import {
 3. **Clean up resources** - Delete agents, conversations when done
 4. **Use connections** - Get credentials from project connections, don't hardcode
 5. **Filter deployments** - Use `modelPublisher` filter to find specific models
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

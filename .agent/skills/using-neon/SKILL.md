@@ -1,23 +1,17 @@
 ---
 name: using-neon
-description:
-  "Guides and best practices for working with Neon Serverless Postgres. Covers getting started, local development with
-  Neon, choosing a connection method, Neon features, authentication (@neondatabase/auth), PostgREST-style data API
-  (@neondatabase/neon-js), Neon CLI, and Neon's Platform API/SDKs. Use for any Neon-related questions."
+description: "Guides and best practices for working with Neon Serverless Postgres. Covers getting started, local development with Neon, choosing a connection method, Neon features, authentication (@neondatabase/..."
 source: "https://github.com/neondatabase/agent-skills/tree/main/skills/neon-postgres"
 risk: safe
 ---
 
 # Neon Serverless Postgres
 
-Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant
-restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that
-supports Postgres.
+Neon is a serverless Postgres platform that separates compute and storage to offer autoscaling, branching, instant restore, and scale-to-zero. It's fully compatible with Postgres and works with any language, framework, or ORM that supports Postgres.
 
 ## When to Use This Skill
 
 Use this skill when:
-
 - Working with Neon Serverless Postgres
 - Setting up Neon databases
 - Choosing connection methods for Neon
@@ -27,11 +21,9 @@ Use this skill when:
 
 ## Neon Documentation
 
-Always reference the Neon documentation before making Neon-related claims. The documentation is the source of truth for
-all Neon-related information.
+Always reference the Neon documentation before making Neon-related claims. The documentation is the source of truth for all Neon-related information.
 
-Below you'll find a list of resources organized by area of concern. This is meant to support you find the right
-documentation pages to fetch and add a bit of additonal context.
+Below you'll find a list of resources organized by area of concern. This is meant to support you find the right documentation pages to fetch and add a bit of additonal context.
 
 You can use the `curl` commands to fetch the documentation page as markdown:
 

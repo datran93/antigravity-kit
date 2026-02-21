@@ -1,15 +1,10 @@
 # /last30days
 
-**The AI world reinvents itself every month. This Claude Code skill keeps you current.** /last30days researches your
-topic across Reddit, X, and the web from the last 30 days, finds what the community is actually upvoting and sharing,
-and writes you a prompt that works today, not six months ago. Whether it's Ralph Wiggum loops, Suno music prompts, or
-the latest Midjourney techniques, you'll prompt like someone who's been paying attention.
+**The AI world reinvents itself every month. This Claude Code skill keeps you current.** /last30days researches your topic across Reddit, X, and the web from the last 30 days, finds what the community is actually upvoting and sharing, and writes you a prompt that works today, not six months ago. Whether it's Ralph Wiggum loops, Suno music prompts, or the latest Midjourney techniques, you'll prompt like someone who's been paying attention.
 
-**Best for prompt research**: discover what prompting techniques actually work for any tool (ChatGPT, Midjourney,
-Claude, Figma AI, etc.) by learning from real community discussions and best practices.
+**Best for prompt research**: discover what prompting techniques actually work for any tool (ChatGPT, Midjourney, Claude, Figma AI, etc.) by learning from real community discussions and best practices.
 
-**But also great for anything trending**: music, culture, news, product recommendations, viral trends, or any question
-where "what are people saying right now?" matters.
+**But also great for anything trending**: music, culture, news, product recommendations, viral trends, or any question where "what are people saying right now?" matters.
 
 ## Installation
 
@@ -34,7 +29,6 @@ chmod 600 ~/.config/last30days/.env
 ```
 
 Examples:
-
 - `/last30days prompting techniques for ChatGPT for legal questions`
 - `/last30days iOS app mockups for Nano Banana Pro`
 - `/last30days What are the best rap songs lately`
@@ -44,11 +38,9 @@ Examples:
 
 1. **Researches** - Scans Reddit and X for discussions from the last 30 days
 2. **Synthesizes** - Identifies patterns, best practices, and what actually works
-3. **Delivers** - Either writes copy-paste-ready prompts for your target tool, or gives you a curated expert-level
-   answer
+3. **Delivers** - Either writes copy-paste-ready prompts for your target tool, or gives you a curated expert-level answer
 
 ### Use it for:
-
 - **Prompt research** - "What prompting techniques work for legal questions in ChatGPT?"
 - **Tool best practices** - "How are people using Remotion with Claude Code?"
 - **Trend discovery** - "What are the best rap songs right now?"
@@ -62,15 +54,9 @@ Examples:
 **Query:** `/last30days prompting techniques for chatgpt for legal questions`
 
 **Research Output:**
-
-> The dominant theme is hallucination prevention - multiple sources discuss lawyers being fined or embarrassed for
-> submitting fake case citations that ChatGPT fabricated. Key prompting strategies include: (1) using Deep Research mode
-> or grounding tools with uploaded primary sources, (2) building "Hallucination Prevention Systems" into prompts that
-> force epistemic honesty, (3) prompting for procedural questions rather than case law lookups, and (4) framing outputs
-> as "issue-spotting" rather than legal advice. A major warning: chat logs are discoverable in litigation.
+> The dominant theme is hallucination prevention - multiple sources discuss lawyers being fined or embarrassed for submitting fake case citations that ChatGPT fabricated. Key prompting strategies include: (1) using Deep Research mode or grounding tools with uploaded primary sources, (2) building "Hallucination Prevention Systems" into prompts that force epistemic honesty, (3) prompting for procedural questions rather than case law lookups, and (4) framing outputs as "issue-spotting" rather than legal advice. A major warning: chat logs are discoverable in litigation.
 
 **Key patterns discovered:**
-
 1. Hallucination prevention clauses - "If you don't know a case citation, say so rather than inventing one"
 2. Role assignment - assign ChatGPT a specific persona (paralegal, issue-spotter) to constrain outputs
 3. Structured output requirements - request specific sections (risks, key terms, questions for counsel)
@@ -113,12 +99,9 @@ Important constraints:
 - This is for informational purposes to prepare for a legal consultation
 ```
 
-**The Result:** A comprehensive 2,500+ word analysis covering California's unlawful detainer process, SF Rent Ordinance
-nuances, trespasser vs. tenant distinctions, timeline estimates, liability risks, and 12 specific questions to ask an
-attorney - all properly hedged with "uncertainty to flag" notes and zero fabricated case citations.
+**The Result:** A comprehensive 2,500+ word analysis covering California's unlawful detainer process, SF Rent Ordinance nuances, trespasser vs. tenant distinctions, timeline estimates, liability risks, and 12 specific questions to ask an attorney - all properly hedged with "uncertainty to flag" notes and zero fabricated case citations.
 
-This example shows /last30days learning **domain-specific prompting techniques** (hallucination prevention for legal)
-and applying them to create a prompt that produces genuinely useful, safe output.
+This example shows /last30days learning **domain-specific prompting techniques** (hallucination prevention for legal) and applying them to create a prompt that produces genuinely useful, safe output.
 
 ---
 
@@ -127,10 +110,7 @@ and applying them to create a prompt that produces genuinely useful, safe output
 **Query:** `/last30days best clawdbot use cases`
 
 **Research Output:**
-
-> ClawdBot is a self-hosted AI assistant that runs on your devices and connects via messaging apps (Telegram, WhatsApp,
-> Discord, Slack, iMessage). Unlike ChatGPT/Claude, it has persistent memory and can proactively message you. The killer
-> feature is its 24/7 autonomous operation - it handles multi-day tasks, monitors for replies, and initiates contact.
+> ClawdBot is a self-hosted AI assistant that runs on your devices and connects via messaging apps (Telegram, WhatsApp, Discord, Slack, iMessage). Unlike ChatGPT/Claude, it has persistent memory and can proactively message you. The killer feature is its 24/7 autonomous operation - it handles multi-day tasks, monitors for replies, and initiates contact.
 
 **Most mentioned use cases:**
 
@@ -149,17 +129,14 @@ and applying them to create a prompt that produces genuinely useful, safe output
    - Car negotiation via email/PDF, restaurant reservations via ElevenLabs calls
 
 **Notable single mentions:**
-
 - Custom meditation generation with TTS + ambient audio
 - Built a full website (Stumblereads.com) from phone while putting baby to sleep
 - Ray-Ban Meta glasses integration
 - WhatsApp as control interface for everything
 
-**Research Stats:** 9 Reddit threads (161 upvotes, 95 comments) + 19 X posts (2,018 likes, 96 reposts) from
-r/LocalLLaMA, r/selfhosted, @steipete, @danpeguine, @dreetje
+**Research Stats:** 9 Reddit threads (161 upvotes, 95 comments) + 19 X posts (2,018 likes, 96 reposts) from r/LocalLLaMA, r/selfhosted, @steipete, @danpeguine, @dreetje
 
-This example shows /last30days as a **product research tool** - discovering real-world use cases and community sentiment
-for any tool or product, complete with engagement metrics that tell you what people actually care about.
+This example shows /last30days as a **product research tool** - discovering real-world use cases and community sentiment for any tool or product, complete with engagement metrics that tell you what people actually care about.
 
 ---
 
@@ -168,20 +145,17 @@ for any tool or product, complete with engagement metrics that tell you what peo
 **Query:** `/last30days how to best setup clawdbot`
 
 **Research Output:**
-
-> ClawdBot setup varies by deployment style - Docker is the most recommended path, but users are also deploying via bare
-> metal and cloud VMs. The community has converged on key best practices: use the setup wizard for initial config, start
-> with conservative hardware (you can scale up), and configure authentication before exposing any endpoints.
+> ClawdBot setup varies by deployment style - Docker is the most recommended path, but users are also deploying via bare metal and cloud VMs. The community has converged on key best practices: use the setup wizard for initial config, start with conservative hardware (you can scale up), and configure authentication before exposing any endpoints.
 
 **🛠️ Setup patterns by engagement:**
 
-| Pattern                           | Mentions | Key Sources                    |
-| --------------------------------- | -------- | ------------------------------ |
-| Docker Compose deployment         | 6x       | r/selfhosted, r/LocalLLaMA     |
-| Setup wizard (interactive config) | 5x       | @dreetje, documentation        |
-| API key management                | 4x       | r/selfhosted, security threads |
-| Hardware requirements             | 4x       | r/LocalLLaMA (GPU discussions) |
-| Reverse proxy (Caddy/nginx)       | 3x       | r/selfhosted                   |
+| Pattern | Mentions | Key Sources |
+|---------|----------|-------------|
+| Docker Compose deployment | 6x | r/selfhosted, r/LocalLLaMA |
+| Setup wizard (interactive config) | 5x | @dreetje, documentation |
+| API key management | 4x | r/selfhosted, security threads |
+| Hardware requirements | 4x | r/LocalLLaMA (GPU discussions) |
+| Reverse proxy (Caddy/nginx) | 3x | r/selfhosted |
 
 **Key setup insights from community:**
 
@@ -206,16 +180,13 @@ docker compose up -d
 ```
 
 **Common gotchas mentioned:**
-
 - Don't forget to set `CLAWDBOT_API_KEY` before first run
 - Telegram bot token needs BotFather setup first
 - If using local models, ensure CUDA drivers are installed
 
-**Research Stats:** 8 Reddit threads (128 upvotes) + 22 X posts (24,000+ likes) from r/selfhosted, r/LocalLLaMA,
-@dreetje, @steipete
+**Research Stats:** 8 Reddit threads (128 upvotes) + 22 X posts (24,000+ likes) from r/selfhosted, r/LocalLLaMA, @dreetje, @steipete
 
-This example shows /last30days as a **setup guide aggregator** - pulling together scattered installation advice,
-gotchas, and best practices from real users who've already solved the problems you're about to encounter.
+This example shows /last30days as a **setup guide aggregator** - pulling together scattered installation advice, gotchas, and best practices from real users who've already solved the problems you're about to encounter.
 
 ---
 
@@ -224,19 +195,11 @@ gotchas, and best practices from real users who've already solved the problems y
 **Query:** `/last30days prompting tips for nano banana pro for ios designs`
 
 **Research Output:**
-
-> The community has converged on JSON-structured prompts for UI work - multiple viral posts from @brindleyai,
-> @bananababydoll, and @fofrAI use detailed JSON with nested objects for subject, scene, and style. The key workflow
-> from @fofrAI: take an existing image, have Gemini generate a JSON prompt from it, then iterate. For iOS specifically,
-> @paji_a and @chongdashu both documented using Nano Banana Pro for iOS app mockup designs in "vibe coding" workflows.
+> The community has converged on JSON-structured prompts for UI work - multiple viral posts from @brindleyai, @bananababydoll, and @fofrAI use detailed JSON with nested objects for subject, scene, and style. The key workflow from @fofrAI: take an existing image, have Gemini generate a JSON prompt from it, then iterate. For iOS specifically, @paji_a and @chongdashu both documented using Nano Banana Pro for iOS app mockup designs in "vibe coding" workflows.
 >
-> The web guides emphasize thinking in layers: define the window frame first, then UI layout (sidebars, nav bars,
-> cards), then text on buttons/headings. Google's official prompting guide says to drop the "4k masterpiece trending on
-> artstation" spam - Nano Banana Pro understands natural language. For tight layouts, use an 8pt grid and limit screens
-> to 6-8 elements.
+> The web guides emphasize thinking in layers: define the window frame first, then UI layout (sidebars, nav bars, cards), then text on buttons/headings. Google's official prompting guide says to drop the "4k masterpiece trending on artstation" spam - Nano Banana Pro understands natural language. For tight layouts, use an 8pt grid and limit screens to 6-8 elements.
 
 **Key patterns discovered:**
-
 1. JSON prompt format with nested sections (subject, scene, style, device)
 2. Layer-based structure - frame -> layout regions -> content -> text labels
 3. iOS 18 / Material Design 3 references - rounded corners, soft shadows, vibrant primary
@@ -292,8 +255,7 @@ gotchas, and best practices from real users who've already solved the problems y
   <img src="assets/swimmom-mockup.jpeg" width="400" alt="SwimMom iOS app mockup"/>
 </p>
 
-This example shows /last30days learning **AI image generation prompting patterns** (JSON structure, layer-based
-thinking, iOS design system references) and applying them to create a production-quality app mockup in one shot.
+This example shows /last30days learning **AI image generation prompting patterns** (JSON structure, layer-based thinking, iOS design system references) and applying them to create a production-quality app mockup in one shot.
 
 ---
 
@@ -302,40 +264,32 @@ thinking, iOS design system references) and applying them to create a production
 **Query:** `/last30days top claude code skills`
 
 **Research Output:**
-
-> The Claude Code skills ecosystem has exploded with marketplaces, curated lists, and viral skill announcements. The
-> Remotion video skill got 17.3K likes on X. SkillsMP emerged as a marketplace with 60-87K+ skills. Multiple GitHub
-> repos (awesome-claude-skills, Superpowers) are actively curated.
+> The Claude Code skills ecosystem has exploded with marketplaces, curated lists, and viral skill announcements. The Remotion video skill got 17.3K likes on X. SkillsMP emerged as a marketplace with 60-87K+ skills. Multiple GitHub repos (awesome-claude-skills, Superpowers) are actively curated.
 
 **🏆 Most mentioned skills/resources:**
 
-| Rank | Skill/Resource                 | Mentions | Sources                               | Engagement                  |
-| ---- | ------------------------------ | -------- | ------------------------------------- | --------------------------- |
-| 1    | Remotion skill                 | 4x       | X (@Remotion, @joshua*xu*), web       | 17.3K likes, video creation |
-| 2    | SkillsMP marketplace           | 5x       | X (@milesdeutscher, @rexan_wong), web | 60-87K+ skills directory    |
-| 3    | awesome-claude-skills (GitHub) | 4x       | Web (travisvn, ComposioHQ repos)      | Multiple curated lists      |
-| 4    | Superpowers                    | 3x       | Web, GitHub                           | 27.9K stars                 |
-| 5    | HeyGen avatar skill            | 2x       | X (@joshua*xu*), web                  | 736 likes, AI avatars       |
-| 6    | Trail of Bits Security Skills  | 2x       | Web                                   | CodeQL/Semgrep auditing     |
-| 7    | Claude Command Suite           | 2x       | GitHub, web                           | 148+ commands, 54 agents    |
-| 8    | MCP Builder                    | 2x       | Web                                   | Build MCP servers           |
-| 9    | Test-Driven Development        | 2x       | Web, skill guides                     | Pre-implementation testing  |
-| 10   | Systematic Debugging           | 2x       | Web                                   | Root cause analysis         |
+| Rank | Skill/Resource | Mentions | Sources | Engagement |
+|------|----------------|----------|---------|------------|
+| 1 | Remotion skill | 4x | X (@Remotion, @joshua_xu_), web | 17.3K likes, video creation |
+| 2 | SkillsMP marketplace | 5x | X (@milesdeutscher, @rexan_wong), web | 60-87K+ skills directory |
+| 3 | awesome-claude-skills (GitHub) | 4x | Web (travisvn, ComposioHQ repos) | Multiple curated lists |
+| 4 | Superpowers | 3x | Web, GitHub | 27.9K stars |
+| 5 | HeyGen avatar skill | 2x | X (@joshua_xu_), web | 736 likes, AI avatars |
+| 6 | Trail of Bits Security Skills | 2x | Web | CodeQL/Semgrep auditing |
+| 7 | Claude Command Suite | 2x | GitHub, web | 148+ commands, 54 agents |
+| 8 | MCP Builder | 2x | Web | Build MCP servers |
+| 9 | Test-Driven Development | 2x | Web, skill guides | Pre-implementation testing |
+| 10 | Systematic Debugging | 2x | Web | Root cause analysis |
 
-**Notable single mentions:** UI/UX Pro Max (16.9K stars), SuperClaude framework, Compound Engineering Plugin,
-docx/pdf/pptx document skills, Nano-Banana, Connect (1000+ app integrations)
+**Notable single mentions:** UI/UX Pro Max (16.9K stars), SuperClaude framework, Compound Engineering Plugin, docx/pdf/pptx document skills, Nano-Banana, Connect (1000+ app integrations)
 
-**Marketer skill stack** (from @vibecode_edu): Slack, Email Knowledge, Nano-Banana, Notion, Skill Creator, Twitter post,
-Typefully
+**Marketer skill stack** (from @vibecode_edu): Slack, Email Knowledge, Nano-Banana, Notion, Skill Creator, Twitter post, Typefully
 
-**Key insight from Reddit:** Keep CLAUDE.md short (~1K context), use Skills for "context on demand", and ensure skill
-descriptions contain your trigger keywords.
+**Key insight from Reddit:** Keep CLAUDE.md short (~1K context), use Skills for "context on demand", and ensure skill descriptions contain your trigger keywords.
 
-**Research Stats:** 4 Reddit threads (238 upvotes, 156 comments) + 15 X posts (28K+ likes, 2.8K reposts) from
-r/ClaudeCode, r/ClaudeAI, @Remotion, @milesdeutscher
+**Research Stats:** 4 Reddit threads (238 upvotes, 156 comments) + 15 X posts (28K+ likes, 2.8K reposts) from r/ClaudeCode, r/ClaudeAI, @Remotion, @milesdeutscher
 
-This example shows /last30days as a **discovery tool** - finding the most popular resources in a rapidly evolving
-ecosystem by tracking what the community is actually sharing and upvoting.
+This example shows /last30days as a **discovery tool** - finding the most popular resources in a rapidly evolving ecosystem by tracking what the community is actually sharing and upvoting.
 
 ---
 
@@ -344,13 +298,9 @@ ecosystem by tracking what the community is actually sharing and upvoting.
 **Query:** `/last30days using ChatGPT to make images of dogs`
 
 **Research Output:**
-
-> The Reddit community is obsessed with the "dog as human" trend - uploading photos of their dogs and asking ChatGPT to
-> show what they'd look like as a person (threads with 600-900+ upvotes). Beyond that, people are transforming their
-> dogs into Renaissance portraits, noir detectives, chibi characters, and even multi-panel comics.
+> The Reddit community is obsessed with the "dog as human" trend - uploading photos of their dogs and asking ChatGPT to show what they'd look like as a person (threads with 600-900+ upvotes). Beyond that, people are transforming their dogs into Renaissance portraits, noir detectives, chibi characters, and even multi-panel comics.
 
 **Key patterns discovered:**
-
 1. Upload reference photo first - ChatGPT works best with your actual dog's image
 2. "As a human" transformation - The viral trend
 3. Style/era transformations - Renaissance, noir, chibi, cartoon
@@ -369,7 +319,7 @@ human face, and their overall vibe into human form. Make it a realistic
 portrait photo, not a cartoon.
 ```
 
-_How to use: Upload your dog's photo first, then paste this prompt._
+*How to use: Upload your dog's photo first, then paste this prompt.*
 
 **The Result:**
 
@@ -381,8 +331,7 @@ _How to use: Upload your dog's photo first, then paste this prompt._
 
 Same golden fur → red hair. Same tongue out. Same harness. Same pink tag. ChatGPT nailed it.
 
-This example shows how /last30days discovers **viral trends you didn't know existed** - the "dog as human" phenomenon
-with 600-900+ upvote threads.
+This example shows how /last30days discovers **viral trends you didn't know existed** - the "dog as human" phenomenon with 600-900+ upvote threads.
 
 ---
 
@@ -391,10 +340,7 @@ with 600-900+ upvote threads.
 **Query:** `/last30days research best practices for beautiful remotion animation videos in claude code`
 
 **Research Output:**
-
-> The Remotion + Claude Code combination has emerged as a powerful workflow. Users consistently report that simple,
-> clear prompts with scene-by-scene descriptions yield the best results. Key insights: iteration is essential, most
-> "beautiful" videos come from back-and-forth refinement rather than one-shot prompts.
+> The Remotion + Claude Code combination has emerged as a powerful workflow. Users consistently report that simple, clear prompts with scene-by-scene descriptions yield the best results. Key insights: iteration is essential, most "beautiful" videos come from back-and-forth refinement rather than one-shot prompts.
 
 **Then asked:** "Can you make a prompt for a 50 second launch video for my /last30days skill?"
 
@@ -446,8 +392,7 @@ STYLE NOTES:
 - Music sync points: Scene transitions should land on beats
 ```
 
-This prompt was generated based on research from 10 Reddit threads (294 upvotes) and 18 X posts (1,273 likes) about
-Remotion animation best practices.
+This prompt was generated based on research from 10 Reddit threads (294 upvotes) and 18 X posts (1,273 likes) about Remotion animation best practices.
 
 ---
 
@@ -456,16 +401,11 @@ Remotion animation best practices.
 **Query:** `/last30days photorealistic people in nano banana pro`
 
 **Research Output:**
-
-> JSON prompts are the dominant format for photorealistic people in Nano Banana Pro. Nearly every viral X post (4,400+
-> likes total) uses structured JSON with specific fields rather than natural language. The key is specifying
-> demographics, skin texture, lighting, and camera settings in a structured way.
+> JSON prompts are the dominant format for photorealistic people in Nano Banana Pro. Nearly every viral X post (4,400+ likes total) uses structured JSON with specific fields rather than natural language. The key is specifying demographics, skin texture, lighting, and camera settings in a structured way.
 >
-> Recent caveat: Reddit reports Nano Banana Pro was "nerfed" in early January 2026 with reduced resolution and stricter
-> moderation on faces. Starting a new chat can help if quality drops mid-session.
+> Recent caveat: Reddit reports Nano Banana Pro was "nerfed" in early January 2026 with reduced resolution and stricter moderation on faces. Starting a new chat can help if quality drops mid-session.
 
 **Key patterns discovered:**
-
 1. JSON structure with prompt_type, subject, lighting, camera_settings fields
 2. Skin texture keywords: "natural pores", "realistic skin texture", "8K texture quality"
 3. Face preservation: "preserve_original": true when using reference photos
@@ -473,8 +413,7 @@ Remotion animation best practices.
 5. Wet skin close-ups are trending for maximum realism
 6. Negative prompts: "no cartoon effect, no distortion, correct anatomy"
 
-**Then asked:** "2x2 grid of the same person at age 10, 20, 40 and 80 - a woman with brown hair and a lot of freckles
-and cat eyes that are a different color"
+**Then asked:** "2x2 grid of the same person at age 10, 20, 40 and 80 - a woman with brown hair and a lot of freckles and cat eyes that are a different color"
 
 **Generated Prompt:**
 
@@ -496,20 +435,10 @@ and cat eyes that are a different color"
     }
   },
   "panels": [
-    {
-      "position": "top-left",
-      "age": 10,
-      "expression": "curious childhood smile",
-      "hair": "long brown hair with bangs"
-    },
-    { "position": "top-right", "age": 20, "expression": "confident young adult", "hair": "shoulder-length brown hair" },
-    {
-      "position": "bottom-left",
-      "age": 40,
-      "expression": "warm maternal gaze",
-      "hair": "brown hair with subtle highlights"
-    },
-    { "position": "bottom-right", "age": 80, "expression": "wise gentle smile", "hair": "silver-gray, formerly brown" }
+    {"position": "top-left", "age": 10, "expression": "curious childhood smile", "hair": "long brown hair with bangs"},
+    {"position": "top-right", "age": 20, "expression": "confident young adult", "hair": "shoulder-length brown hair"},
+    {"position": "bottom-left", "age": 40, "expression": "warm maternal gaze", "hair": "brown hair with subtle highlights"},
+    {"position": "bottom-right", "age": 80, "expression": "wise gentle smile", "hair": "silver-gray, formerly brown"}
   ],
   "lighting": "Soft natural window light, consistent across all panels",
   "camera": "85mm portrait lens, shallow depth of field, neutral background",
@@ -526,8 +455,7 @@ and cat eyes that are a different color"
 
 Same freckles. Same heterochromia. Same bone structure. Four life stages in one coherent image.
 
-This example shows /last30days learning **advanced image generation patterns** (multi-panel consistency, face
-preservation across variations) and applying them to create a complex composite image.
+This example shows /last30days learning **advanced image generation patterns** (multi-panel consistency, face preservation across variations) and applying them to create a complex composite image.
 
 ---
 
@@ -536,22 +464,16 @@ preservation across variations) and applying them to create a complex composite 
 **Query:** `/last30days What are the best rap songs lately`
 
 **Research Output:**
-
-> The hip-hop community is buzzing about a strong wave of new releases in early 2026. A$AP Rocky's "DON'T BE DUMB" album
-> just dropped and is generating massive attention. Looking back at 2025, Kendrick Lamar's "GNX" dominated streaming
-> with 2.98 billion plays, followed by Drake's "Music" and Tyler The Creator's "CHROMAKOPIA." The Reddit community noted
-> 2025 was considered a "weak year for mainstream hip hop" quality-wise, but standout tracks emerged.
+> The hip-hop community is buzzing about a strong wave of new releases in early 2026. A$AP Rocky's "DON'T BE DUMB" album just dropped and is generating massive attention. Looking back at 2025, Kendrick Lamar's "GNX" dominated streaming with 2.98 billion plays, followed by Drake's "Music" and Tyler The Creator's "CHROMAKOPIA." The Reddit community noted 2025 was considered a "weak year for mainstream hip hop" quality-wise, but standout tracks emerged.
 
 **Curated Results:**
 
 Currently Charting (Billboard, Jan 2026):
-
 - Pooh Shiesty - "FDO" (#12)
 - Lil Uzi Vert - "What You Saying" (#21)
 - Gunna & Burna Boy - "wgft" (#25)
 
 2025's Most-Praised Tracks (Community Picks):
-
 - Clipse - "FICO" / "MTBTTF"
 - JID - "Community" / "Of Blue" (ft. Mereba)
 - Tyler The Creator - "Big Poe"
@@ -559,16 +481,13 @@ Currently Charting (Billboard, Jan 2026):
 - McKinley Dixon - "We're Outside, Rejoice"
 
 Fresh Drops (Jan 2026):
-
 - A$AP Rocky - "DON'T BE DUMB" (full album)
 - J. Cole - "Disc 2 Track 2" (single)
 - Chief Keef - "Harry Potter"
 
-**Research Stats:** 17 Reddit threads (2,566 upvotes) + 19 X posts (20,000+ likes) from r/hiphopheads, r/rap,
-@HipHopAllDay, @DailyRapFacts
+**Research Stats:** 17 Reddit threads (2,566 upvotes) + 19 X posts (20,000+ likes) from r/hiphopheads, r/rap, @HipHopAllDay, @DailyRapFacts
 
-This example shows /last30days as a **pure research tool** - no target tool needed. Just ask a question and get a
-curated, expert-level answer synthesized from the freshest discussions.
+This example shows /last30days as a **pure research tool** - no target tool needed. Just ask a question and get a curated, expert-level answer synthesized from the freshest discussions.
 
 ---
 
@@ -577,15 +496,9 @@ curated, expert-level answer synthesized from the freshest discussions.
 **Query:** `/last30days what are people saying about DeepSeek R1`
 
 **Research Output:**
-
-> The AI community is divided on DeepSeek R1. Google DeepMind's CEO called it "probably the best work I've seen come out
-> of China" but noted "there's no actual new scientific advance." Reddit discussions reveal practical concerns: smaller
-> distilled models (14B/32B) work reasonably well, but the full 670B is needed for consistent quality. Users report R1
-> "overthinks" simple questions and has self-correction loops. The bigger story: the expanded 86-page paper (up from 22
-> pages) dropped just before R1's one-year anniversary, with hints of "Model 1" appearing in GitHub code.
+> The AI community is divided on DeepSeek R1. Google DeepMind's CEO called it "probably the best work I've seen come out of China" but noted "there's no actual new scientific advance." Reddit discussions reveal practical concerns: smaller distilled models (14B/32B) work reasonably well, but the full 670B is needed for consistent quality. Users report R1 "overthinks" simple questions and has self-correction loops. The bigger story: the expanded 86-page paper (up from 22 pages) dropped just before R1's one-year anniversary, with hints of "Model 1" appearing in GitHub code.
 
 **Key insights discovered:**
-
 1. Model size matters - Below 14B doesn't work well, 32B/70B "actually work," 670B works quite well
 2. Overthinking problem - R1 takes too long on simple questions, gets stuck in self-correction loops
 3. Open source significance - The real story is about RL, distillation, and cost efficiency, not geopolitics
@@ -595,22 +508,18 @@ curated, expert-level answer synthesized from the freshest discussions.
 **Curated Community Sentiment:**
 
 Positive:
-
 - "Anecdotally, the output is wayyy better than competitors"
 - "R1 is insanely good for the price" ($0.55/M tokens vs $60 for o1-pro)
 - "Top-tier performance in Fiction.LiveBench long context test"
 
 Negative:
-
 - "DeepSeek R1 is unusable [for smaller sizes]"
 - "Falls short of o1 in generalization"
 - "Stop using R1 for deep research - it hallucinates"
 
-**Research Stats:** 10 Reddit threads (1,200+ upvotes) + 10 X posts (5,000+ likes) from r/LocalLLaMA, r/DeepSeek,
-r/deeplearning
+**Research Stats:** 10 Reddit threads (1,200+ upvotes) + 10 X posts (5,000+ likes) from r/LocalLLaMA, r/DeepSeek, r/deeplearning
 
-This example shows /last30days as a **news research tool** - getting the real community sentiment on hot AI topics, not
-just headlines.
+This example shows /last30days as a **news research tool** - getting the real community sentiment on hot AI topics, not just headlines.
 
 ---
 
@@ -619,14 +528,9 @@ just headlines.
 **Query:** `/last30days best practices for cursor rules files for Cursor`
 
 **Research Output:**
-
-> The Cursor community has converged on clear best practices for .cursorrules files. The key shift: move from a single
-> .cursorrules file to the .cursor/rules/ directory with multiple .mdc files. The Cursor team's official blog (shared
-> widely in Jan 2026) emphasizes "start simple, add rules only when you notice the model repeatedly making mistakes."
-> Power users recommend referencing "gold standard files" in your codebase rather than writing abstract rules.
+> The Cursor community has converged on clear best practices for .cursorrules files. The key shift: move from a single .cursorrules file to the .cursor/rules/ directory with multiple .mdc files. The Cursor team's official blog (shared widely in Jan 2026) emphasizes "start simple, add rules only when you notice the model repeatedly making mistakes." Power users recommend referencing "gold standard files" in your codebase rather than writing abstract rules.
 
 **Key patterns discovered:**
-
 1. Use .cursor/rules/ directory - Multiple .mdc files beat one monolithic .cursorrules
 2. Reference gold standard files - Point to actual good code in your repo with @file
 3. Start simple, add incrementally - Only add rules when you see repeated mistakes
@@ -634,14 +538,12 @@ just headlines.
 5. Rules are "the constitution for your codebase" - They keep the AI aligned
 
 **Best practices from Cursor's official guide:**
-
 - Plan before coding (use plan mode)
 - Rules = static context that applies to every conversation
 - Add rules only when you notice the model repeatedly making the same mistake
 - Test your tests and run linting checks
 
 **Community-shared rule structure:**
-
 ```markdown
 ---
 alwaysApply: true
@@ -650,7 +552,6 @@ alwaysApply: true
 # STRICT RULES
 
 ## CRITICAL PARTNER MINDSET
-
 - Test your tests
 - Run npm run lint:ci for lint check
 - Follow the conventions used by existing code
@@ -658,8 +559,7 @@ alwaysApply: true
 
 **Research Stats:** 24 Reddit threads (500+ upvotes) + 16 X posts (5,000+ likes) from r/cursor, @cursor_ai, @Hesamation
 
-This example shows /last30days researching **coding AI tool best practices** - getting real-world workflows from
-developers using Cursor, not just documentation.
+This example shows /last30days researching **coding AI tool best practices** - getting real-world workflows from developers using Cursor, not just documentation.
 
 ---
 
@@ -668,14 +568,9 @@ developers using Cursor, not just documentation.
 **Query:** `/last30days prompt advice for using suno to make killer songs in simple mode`
 
 **Research Output:**
-
-> Suno simple mode users get dramatically better results by treating the prompt box like a conversational request rather
-> than just dropping in genre tags. Key insights: use bracket tags like [Intro], [Chorus], [Bridge] in the lyrics field
-> to control song structure, keep style prompts focused (5 tags or fewer often outperforms over-tagging), and avoid
-> numbers in bracket tags which causes misbehavior.
+> Suno simple mode users get dramatically better results by treating the prompt box like a conversational request rather than just dropping in genre tags. Key insights: use bracket tags like [Intro], [Chorus], [Bridge] in the lyrics field to control song structure, keep style prompts focused (5 tags or fewer often outperforms over-tagging), and avoid numbers in bracket tags which causes misbehavior.
 
 **Key patterns discovered:**
-
 1. Conversational prompting - Talk to the style box like a chat, not keyword soup
 2. Bracket structure tags - Use [Intro], [Verse], [Chorus], [Bridge], [Outro] in lyrics
 3. Less is more - 5 or fewer focused style tags outperform over-tagging
@@ -687,14 +582,12 @@ developers using Cursor, not just documentation.
 **Generated Prompt:**
 
 Style/Description box:
-
 ```
 Hard-hitting rap with electronic glitchy production, confident braggadocious
 delivery, deep male vocals, synth bass, trap hi-hats, futuristic cyberpunk energy
 ```
 
 Lyrics box:
-
 ```
 [Intro: glitchy electronic build]
 
@@ -731,8 +624,7 @@ Or am I wide awake and in too deep
 
 **The Result:** 🎵 [Listen to the track](assets/claude-code-rap.mp3)
 
-This example shows /last30days learning **music AI prompting patterns** (bracket structure, conversational style
-descriptions) and generating a complete song prompt that Suno turned into an actual banger.
+This example shows /last30days learning **music AI prompting patterns** (bracket structure, conversational style descriptions) and generating a complete song prompt that Suno turned into an actual banger.
 
 ---
 
@@ -741,14 +633,9 @@ descriptions) and generating a complete song prompt that Suno turned into an act
 **Query:** `/last30days how do I use Codex with Claude Code on same app to make it better`
 
 **Research Output:**
-
-> Developers are combining Claude Code and Codex through MCP integration and custom plugins. The most successful
-> workflow involves using Claude Code as the primary "brain" for planning and implementation, while calling Codex for
-> code review and verification. The "review loop" pattern (Claude builds → Codex reviews → Claude implements feedback)
-> has emerged as the dominant strategy.
+> Developers are combining Claude Code and Codex through MCP integration and custom plugins. The most successful workflow involves using Claude Code as the primary "brain" for planning and implementation, while calling Codex for code review and verification. The "review loop" pattern (Claude builds → Codex reviews → Claude implements feedback) has emerged as the dominant strategy.
 
 **Key patterns discovered:**
-
 1. MCP Integration - Add Codex as an MCP server inside Claude Code
 2. Review Loop Workflow - Claude implements, Codex reviews, Claude fixes
 3. Task Division - Claude for planning/coding, Codex for review/debugging
@@ -759,13 +646,11 @@ descriptions) and generating a complete song prompt that Suno turned into an act
 **Generated Workflow:**
 
 Step 1: Add Codex as MCP Server
-
 ```bash
 claude mcp add codex-cli -- npx -y codex-mcp-server
 ```
 
 Step 2: The Review Loop Pattern
-
 ```
 Phase 1 - Claude Implements
 > Build [feature/fix] following [requirements]
@@ -782,7 +667,6 @@ Phase 4 - Final Verification (optional)
 ```
 
 Step 3: One-Shot Review Loop Prompt
-
 ```
 Complete this task, then run a review loop:
 
@@ -801,20 +685,19 @@ Focus areas for Codex review: bugs, edge cases, security, performance
 
 **Research Stats:** 17 Reddit threads (906 upvotes) + 20 X posts (3,750 likes) from r/ClaudeCode, r/ClaudeAI
 
-This example shows /last30days discovering **emerging developer workflows** - real patterns the community has developed
-for combining AI tools that you wouldn't find in official docs.
+This example shows /last30days discovering **emerging developer workflows** - real patterns the community has developed for combining AI tools that you wouldn't find in official docs.
 
 ---
 
 ## Options
 
-| Flag               | Description                                    |
-| ------------------ | ---------------------------------------------- |
-| `--quick`          | Faster research, fewer sources (8-12 each)     |
-| `--deep`           | Comprehensive research (50-70 Reddit, 40-60 X) |
-| `--debug`          | Verbose logging for troubleshooting            |
-| `--sources=reddit` | Reddit only                                    |
-| `--sources=x`      | X only                                         |
+| Flag | Description |
+|------|-------------|
+| `--quick` | Faster research, fewer sources (8-12 each) |
+| `--deep` | Comprehensive research (50-70 Reddit, 40-60 X) |
+| `--debug` | Verbose logging for troubleshooting |
+| `--sources=reddit` | Reddit only |
+| `--sources=x` | X only |
 
 ## Requirements
 
@@ -826,7 +709,6 @@ At least one key is required.
 ## How It Works
 
 The skill uses:
-
 - OpenAI's Responses API with web search to find Reddit discussions
 - xAI's API with live X search to find posts
 - Real Reddit thread enrichment for engagement metrics
@@ -834,6 +716,6 @@ The skill uses:
 
 ---
 
-_30 days of research. 30 seconds of work._
+*30 days of research. 30 seconds of work.*
 
-_Prompt research. Trend discovery. Expert answers._
+*Prompt research. Trend discovery. Expert answers.*

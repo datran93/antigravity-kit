@@ -1,9 +1,11 @@
 ---
 name: azure-keyvault-py
-description: |
+description: "|"
   Azure Key Vault SDK for Python. Use for secrets, keys, and certificates management with secure storage.
   Triggers: "key vault", "SecretClient", "KeyClient", "CertificateClient", "secrets", "encryption keys".
 package: azure-keyvault-secrets, azure-keyvault-keys, azure-keyvault-certificates
+risk: unknown
+source: community
 ---
 
 # Azure Key Vault SDK for Python
@@ -195,12 +197,12 @@ deleted = poller.result()
 
 ## Client Types Table
 
-| Client               | Package                       | Purpose                     |
-| -------------------- | ----------------------------- | --------------------------- |
-| `SecretClient`       | `azure-keyvault-secrets`      | Store/retrieve secrets      |
-| `KeyClient`          | `azure-keyvault-keys`         | Manage cryptographic keys   |
-| `CryptographyClient` | `azure-keyvault-keys`         | Encrypt/decrypt/sign/verify |
-| `CertificateClient`  | `azure-keyvault-certificates` | Manage certificates         |
+| Client | Package | Purpose |
+|--------|---------|---------|
+| `SecretClient` | `azure-keyvault-secrets` | Store/retrieve secrets |
+| `KeyClient` | `azure-keyvault-keys` | Manage cryptographic keys |
+| `CryptographyClient` | `azure-keyvault-keys` | Encrypt/decrypt/sign/verify |
+| `CertificateClient` | `azure-keyvault-certificates` | Manage certificates |
 
 ## Async Clients
 
@@ -211,7 +213,7 @@ from azure.keyvault.secrets.aio import SecretClient
 async def get_secret():
     credential = DefaultAzureCredential()
     client = SecretClient(vault_url=vault_url, credential=credential)
-
+    
     async with client:
         secret = await client.get_secret("my-secret")
         print(secret.value)
@@ -245,3 +247,6 @@ except HttpResponseError as e:
 6. **Use Key Vault references** in App Service/Functions config
 7. **Cache secrets** appropriately to reduce API calls
 8. **Use async clients** for high-throughput scenarios
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

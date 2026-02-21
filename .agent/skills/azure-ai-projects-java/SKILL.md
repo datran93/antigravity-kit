@@ -1,9 +1,11 @@
 ---
 name: azure-ai-projects-java
-description: |
+description: "|"
   Azure AI Projects SDK for Java. High-level SDK for Azure AI Foundry project management including connections, datasets, indexes, and evaluations.
   Triggers: "AIProjectClient java", "azure ai projects java", "Foundry project java", "ConnectionsClient", "DatasetsClient", "IndexesClient".
 package: com.azure:azure-ai-projects
+risk: unknown
+source: community
 ---
 
 # Azure AI Projects SDK for Java
@@ -41,15 +43,15 @@ AIProjectClientBuilder builder = new AIProjectClientBuilder()
 
 The SDK provides multiple sub-clients for different operations:
 
-| Client              | Purpose                              |
-| ------------------- | ------------------------------------ |
-| `ConnectionsClient` | Enumerate connected Azure resources  |
-| `DatasetsClient`    | Upload documents and manage datasets |
-| `DeploymentsClient` | Enumerate AI model deployments       |
-| `IndexesClient`     | Create and manage search indexes     |
-| `EvaluationsClient` | Run AI model evaluations             |
-| `EvaluatorsClient`  | Manage evaluator configurations      |
-| `SchedulesClient`   | Manage scheduled operations          |
+| Client | Purpose |
+|--------|---------|
+| `ConnectionsClient` | Enumerate connected Azure resources |
+| `DatasetsClient` | Upload documents and manage datasets |
+| `DeploymentsClient` | Enumerate AI model deployments |
+| `IndexesClient` | Create and manage search indexes |
+| `EvaluationsClient` | Run AI model evaluations |
+| `EvaluatorsClient` | Manage evaluator configurations |
+| `SchedulesClient` | Manage scheduled operations |
 
 ```java
 // Build sub-clients from builder
@@ -144,9 +146,12 @@ try {
 
 ## Reference Links
 
-| Resource      | URL                                                                                        |
-| ------------- | ------------------------------------------------------------------------------------------ |
-| Product Docs  | https://learn.microsoft.com/azure/ai-studio/                                               |
-| API Reference | https://learn.microsoft.com/rest/api/aifoundry/aiprojects/                                 |
-| GitHub Source | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-projects             |
-| Samples       | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-projects/src/samples |
+| Resource | URL |
+|----------|-----|
+| Product Docs | https://learn.microsoft.com/azure/ai-studio/ |
+| API Reference | https://learn.microsoft.com/rest/api/aifoundry/aiprojects/ |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-projects |
+| Samples | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-projects/src/samples |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

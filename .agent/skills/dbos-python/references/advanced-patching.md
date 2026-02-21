@@ -62,7 +62,6 @@ def workflow():
 ```
 
 `DBOS.patch(name)` returns:
-
 - `True` for new workflows (started after patch deployed)
 - `False` for old workflows (started before patch deployed)
 

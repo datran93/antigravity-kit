@@ -7,8 +7,7 @@ tags: queue, deduplication, idempotent, duplicate
 
 ## Deduplicate Queued Workflows
 
-Set a deduplication ID when enqueuing to prevent duplicate workflow executions. If a workflow with the same
-deduplication ID is already enqueued or executing, a `DBOSQueueDuplicatedError` is thrown.
+Set a deduplication ID when enqueuing to prevent duplicate workflow executions. If a workflow with the same deduplication ID is already enqueued or executing, a `DBOSQueueDuplicatedError` is thrown.
 
 **Incorrect (no deduplication):**
 
@@ -42,11 +41,9 @@ async function handleClick(userId: string) {
 }
 ```
 
-Deduplication is per-queue. The deduplication ID is active while the workflow has status `ENQUEUED` or `PENDING`. Once
-the workflow completes, a new workflow with the same deduplication ID can be enqueued.
+Deduplication is per-queue. The deduplication ID is active while the workflow has status `ENQUEUED` or `PENDING`. Once the workflow completes, a new workflow with the same deduplication ID can be enqueued.
 
 This is useful for:
-
 - Ensuring one active task per user
 - Preventing duplicate form submissions
 - Idempotent event processing

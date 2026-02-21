@@ -1,8 +1,10 @@
 ---
 name: azure-storage-file-share-ts
-description: |
+description: "|"
   Azure File Share JavaScript/TypeScript SDK (@azure/storage-file-share) for SMB file share operations. Use for creating shares, managing directories, uploading/downloading files, and handling file metadata. Supports Azure Files SMB protocol scenarios. Triggers: "file share", "@azure/storage-file-share", "ShareServiceClient", "ShareClient", "SMB", "Azure Files".
 package: "@azure/storage-file-share"
+risk: unknown
+source: community
 ---
 
 # @azure/storage-file-share (TypeScript/JavaScript)
@@ -34,7 +36,9 @@ AZURE_STORAGE_CONNECTION_STRING=DefaultEndpointsProtocol=https;AccountName=...
 ```typescript
 import { ShareServiceClient } from "@azure/storage-file-share";
 
-const client = ShareServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING!);
+const client = ShareServiceClient.fromConnectionString(
+  process.env.AZURE_STORAGE_CONNECTION_STRING!
+);
 ```
 
 ### StorageSharedKeyCredential (Node.js only)
@@ -46,7 +50,10 @@ const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;
 const accountKey = process.env.AZURE_STORAGE_ACCOUNT_KEY!;
 
 const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
-const client = new ShareServiceClient(`https://${accountName}.file.core.windows.net`, sharedKeyCredential);
+const client = new ShareServiceClient(
+  `https://${accountName}.file.core.windows.net`,
+  sharedKeyCredential
+);
 ```
 
 ### DefaultAzureCredential
@@ -56,7 +63,10 @@ import { ShareServiceClient } from "@azure/storage-file-share";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;
-const client = new ShareServiceClient(`https://${accountName}.file.core.windows.net`, new DefaultAzureCredential());
+const client = new ShareServiceClient(
+  `https://${accountName}.file.core.windows.net`,
+  new DefaultAzureCredential()
+);
 ```
 
 ### SAS Token
@@ -67,7 +77,9 @@ import { ShareServiceClient } from "@azure/storage-file-share";
 const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;
 const sasToken = process.env.AZURE_STORAGE_SAS_TOKEN!;
 
-const client = new ShareServiceClient(`https://${accountName}.file.core.windows.net${sasToken}`);
+const client = new ShareServiceClient(
+  `https://${accountName}.file.core.windows.net${sasToken}`
+);
 ```
 
 ## Client Hierarchy
@@ -177,7 +189,9 @@ if (!exists) {
 ### Upload File (Simple)
 
 ```typescript
-const fileClient = shareClient.getDirectoryClient("my-directory").getFileClient("my-file.txt");
+const fileClient = shareClient
+  .getDirectoryClient("my-directory")
+  .getFileClient("my-file.txt");
 
 // Upload string
 const content = "Hello, World!";
@@ -225,7 +239,9 @@ await fileClient.uploadStream(readStream, fileSize, 4 * 1024 * 1024, 4); // 4MB 
 ### Download File
 
 ```typescript
-const fileClient = shareClient.getDirectoryClient("my-directory").getFileClient("my-file.txt");
+const fileClient = shareClient
+  .getDirectoryClient("my-directory")
+  .getFileClient("my-file.txt");
 
 const downloadResponse = await fileClient.download();
 
@@ -370,7 +386,7 @@ const sasToken = generateFileSASQueryParameters(
     permissions: FileSASPermissions.parse("r"), // read only
     expiresOn: new Date(Date.now() + 3600 * 1000), // 1 hour
   },
-  sharedKeyCredential,
+  sharedKeyCredential
 ).toString();
 
 const sasUrl = `https://${accountName}.file.core.windows.net/my-share/my-directory/my-file.txt?${sasToken}`;
@@ -387,7 +403,7 @@ const sasToken = generateFileSASQueryParameters(
     permissions: ShareSASPermissions.parse("rcwdl"), // read, create, write, delete, list
     expiresOn: new Date(Date.now() + 24 * 3600 * 1000), // 24 hours
   },
-  sharedKeyCredential,
+  sharedKeyCredential
 ).toString();
 ```
 
@@ -467,13 +483,16 @@ import {
 
 ## Platform Differences
 
-| Feature                      | Node.js | Browser |
-| ---------------------------- | ------- | ------- |
-| `StorageSharedKeyCredential` | ✅      | ❌      |
-| `uploadFile()`               | ✅      | ❌      |
-| `uploadStream()`             | ✅      | ❌      |
-| `downloadToFile()`           | ✅      | ❌      |
-| `downloadToBuffer()`         | ✅      | ❌      |
-| SAS generation               | ✅      | ❌      |
-| DefaultAzureCredential       | ✅      | ❌      |
-| Anonymous/SAS access         | ✅      | ✅      |
+| Feature | Node.js | Browser |
+|---------|---------|---------|
+| `StorageSharedKeyCredential` | ✅ | ❌ |
+| `uploadFile()` | ✅ | ❌ |
+| `uploadStream()` | ✅ | ❌ |
+| `downloadToFile()` | ✅ | ❌ |
+| `downloadToBuffer()` | ✅ | ❌ |
+| SAS generation | ✅ | ❌ |
+| DefaultAzureCredential | ✅ | ❌ |
+| Anonymous/SAS access | ✅ | ✅ |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

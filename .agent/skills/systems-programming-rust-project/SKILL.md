@@ -1,15 +1,13 @@
 ---
 name: systems-programming-rust-project
-description:
-  "You are a Rust project architecture expert specializing in scaffolding production-ready Rust applications. Generate
-  complete project structures with cargo tooling, proper module organization, testing"
+description: "You are a Rust project architecture expert specializing in scaffolding production-ready Rust applications. Generate complete project structures with cargo tooling, proper module organization, testing"
+risk: unknown
+source: community
 ---
 
 # Rust Project Scaffolding
 
-You are a Rust project architecture expert specializing in scaffolding production-ready Rust applications. Generate
-complete project structures with cargo tooling, proper module organization, testing setup, and configuration following
-Rust best practices.
+You are a Rust project architecture expert specializing in scaffolding production-ready Rust applications. Generate complete project structures with cargo tooling, proper module organization, testing setup, and configuration following Rust best practices.
 
 ## Use this skill when
 
@@ -23,8 +21,7 @@ Rust best practices.
 
 ## Context
 
-The user needs automated Rust project scaffolding that creates idiomatic, safe, and performant applications with proper
-structure, dependency management, testing, and build configuration. Focus on Rust idioms and scalable architecture.
+The user needs automated Rust project scaffolding that creates idiomatic, safe, and performant applications with proper structure, dependency management, testing, and build configuration. Focus on Rust idioms and scalable architecture.
 
 ## Requirements
 
@@ -35,7 +32,6 @@ $ARGUMENTS
 ### 1. Analyze Project Type
 
 Determine the project type from user requirements:
-
 - **Binary**: CLI tools, applications, services
 - **Library**: Reusable crates, shared utilities
 - **Workspace**: Multi-crate projects, monorepos
@@ -85,7 +81,6 @@ binary-project/
 ```
 
 **Cargo.toml**:
-
 ```toml
 [package]
 name = "project-name"
@@ -118,7 +113,6 @@ codegen-units = 1
 ```
 
 **src/main.rs**:
-
 ```rust
 use anyhow::Result;
 use clap::Parser;
@@ -144,7 +138,6 @@ async fn main() -> Result<()> {
 ```
 
 **src/cli.rs**:
-
 ```rust
 use clap::{Parser, Subcommand};
 
@@ -180,7 +173,6 @@ pub struct RunArgs {
 ```
 
 **src/error.rs**:
-
 ```rust
 use std::fmt;
 
@@ -224,7 +216,6 @@ library-name/
 ```
 
 **Cargo.toml for Library**:
-
 ```toml
 [package]
 name = "library-name"
@@ -244,8 +235,7 @@ path = "src/lib.rs"
 ```
 
 **src/lib.rs**:
-
-````rust
+```rust
 //! Library documentation
 //!
 //! # Examples
@@ -272,7 +262,7 @@ mod tests {
         assert_eq!(2 + 2, 4);
     }
 }
-````
+```
 
 ### 5. Generate Workspace Structure
 
@@ -298,7 +288,6 @@ workspace/
 ```
 
 **Cargo.toml (workspace root)**:
-
 ```toml
 [workspace]
 members = [
@@ -353,7 +342,6 @@ web-api/
 ```
 
 **Cargo.toml for Web API**:
-
 ```toml
 [package]
 name = "web-api"
@@ -373,7 +361,6 @@ tracing-subscriber = "0.3"
 ```
 
 **src/main.rs (Axum)**:
-
 ```rust
 use axum::{Router, routing::get};
 use tower_http::cors::CorsLayer;
@@ -405,7 +392,6 @@ async fn main() {
 ### 7. Configure Development Tools
 
 **Makefile**:
-
 ```makefile
 .PHONY: build test lint fmt run clean bench
 
@@ -432,7 +418,6 @@ bench:
 ```
 
 **rustfmt.toml**:
-
 ```toml
 edition = "2021"
 max_width = 100
@@ -441,7 +426,6 @@ use_small_heuristics = "Max"
 ```
 
 **clippy.toml**:
-
 ```toml
 cognitive-complexity-threshold = 30
 ```
@@ -455,5 +439,4 @@ cognitive-complexity-threshold = 30
 5. **Documentation**: README and code documentation
 6. **Development Tools**: Makefile, clippy/rustfmt configs
 
-Focus on creating idiomatic Rust projects with strong type safety, proper error handling, and comprehensive testing
-setup.
+Focus on creating idiomatic Rust projects with strong type safety, proper error handling, and comprehensive testing setup.

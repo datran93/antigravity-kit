@@ -1,8 +1,6 @@
 ---
 name: fp-ts-react
-description:
-  Practical patterns for using fp-ts with React - hooks, state, forms, data fetching. Use when building React apps with
-  functional programming patterns. Works with React 18/19, Next.js 14/15.
+description: "Practical patterns for using fp-ts with React - hooks, state, forms, data fetching. Use when building React apps with functional programming patterns. Works with React 18/19, Next.js 14/15."
 risk: safe
 source: https://github.com/whatiskadudoing/fp-ts-skills
 ---
@@ -22,13 +20,13 @@ Practical patterns for React apps. No jargon, just code that works.
 
 ## Quick Reference
 
-| Pattern      | Use When                                     |
-| ------------ | -------------------------------------------- |
-| `Option`     | Value might be missing (user not loaded yet) |
-| `Either`     | Operation might fail (form validation)       |
-| `TaskEither` | Async operation might fail (API calls)       |
-| `RemoteData` | Need to show loading/error/success states    |
-| `pipe`       | Chaining multiple transformations            |
+| Pattern | Use When |
+|---------|----------|
+| `Option` | Value might be missing (user not loaded yet) |
+| `Either` | Operation might fail (form validation) |
+| `TaskEither` | Async operation might fail (API calls) |
+| `RemoteData` | Need to show loading/error/success states |
+| `pipe` | Chaining multiple transformations |
 
 ---
 
@@ -83,25 +81,25 @@ function UserProfile() {
 ### Chaining Optional Values
 
 ```typescript
-import * as O from "fp-ts/Option";
-import { pipe } from "fp-ts/function";
+import * as O from 'fp-ts/Option'
+import { pipe } from 'fp-ts/function'
 
 interface Profile {
   user: O.Option<{
-    name: string;
+    name: string
     settings: O.Option<{
-      theme: string;
-    }>;
-  }>;
+      theme: string
+    }>
+  }>
 }
 
 function getTheme(profile: Profile): string {
   return pipe(
     profile.user,
-    O.flatMap((u) => u.settings),
-    O.map((s) => s.theme),
-    O.getOrElse(() => "light"), // default
-  );
+    O.flatMap(u => u.settings),
+    O.map(s => s.theme),
+    O.getOrElse(() => 'light') // default
+  )
 }
 ```
 
@@ -114,19 +112,25 @@ Either is perfect for validation: `Left` = errors, `Right` = valid data.
 ### Simple Form Validation
 
 ```typescript
-import * as E from "fp-ts/Either";
-import * as A from "fp-ts/Array";
-import { pipe } from "fp-ts/function";
+import * as E from 'fp-ts/Either'
+import * as A from 'fp-ts/Array'
+import { pipe } from 'fp-ts/function'
 
 // Validation functions return Either<ErrorMessage, ValidValue>
 const validateEmail = (email: string): E.Either<string, string> =>
-  email.includes("@") ? E.right(email) : E.left("Invalid email address");
+  email.includes('@')
+    ? E.right(email)
+    : E.left('Invalid email address')
 
 const validatePassword = (password: string): E.Either<string, string> =>
-  password.length >= 8 ? E.right(password) : E.left("Password must be at least 8 characters");
+  password.length >= 8
+    ? E.right(password)
+    : E.left('Password must be at least 8 characters')
 
 const validateName = (name: string): E.Either<string, string> =>
-  name.trim().length > 0 ? E.right(name.trim()) : E.left("Name is required");
+  name.trim().length > 0
+    ? E.right(name.trim())
+    : E.left('Name is required')
 ```
 
 ### Collecting All Errors (Not Just First One)
@@ -303,37 +307,33 @@ function UserList() {
 
 ```typescript
 // Fetch user, then fetch their posts
-const fetchUserWithPosts = (userId: string) =>
-  pipe(
-    fetchJson<User>(`/api/users/${userId}`),
-    TE.flatMap((user) =>
-      pipe(
-        fetchJson<Post[]>(`/api/users/${userId}/posts`),
-        TE.map((posts) => ({ ...user, posts })),
-      ),
-    ),
-  );
+const fetchUserWithPosts = (userId: string) => pipe(
+  fetchJson<User>(`/api/users/${userId}`),
+  TE.flatMap(user => pipe(
+    fetchJson<Post[]>(`/api/users/${userId}/posts`),
+    TE.map(posts => ({ ...user, posts }))
+  ))
+)
 ```
 
 ### Parallel API Calls
 
 ```typescript
-import { sequenceT } from "fp-ts/Apply";
+import { sequenceT } from 'fp-ts/Apply'
 
 // Fetch multiple things at once
-const fetchDashboardData = () =>
-  pipe(
-    sequenceT(TE.ApplyPar)(
-      fetchJson<User>("/api/user"),
-      fetchJson<Stats>("/api/stats"),
-      fetchJson<Notifications[]>("/api/notifications"),
-    ),
-    TE.map(([user, stats, notifications]) => ({
-      user,
-      stats,
-      notifications,
-    })),
-  );
+const fetchDashboardData = () => pipe(
+  sequenceT(TE.ApplyPar)(
+    fetchJson<User>('/api/user'),
+    fetchJson<Stats>('/api/stats'),
+    fetchJson<Notifications[]>('/api/notifications')
+  ),
+  TE.map(([user, stats, notifications]) => ({
+    user,
+    stats,
+    notifications
+  }))
+)
 ```
 
 ---
@@ -347,16 +347,16 @@ Stop using `{ data, loading, error }` booleans. Use a proper state machine.
 ```typescript
 // RemoteData has exactly 4 states - no impossible combinations
 type RemoteData<E, A> =
-  | { _tag: "NotAsked" } // Haven't started yet
-  | { _tag: "Loading" } // In progress
-  | { _tag: "Failure"; error: E } // Failed
-  | { _tag: "Success"; data: A }; // Got it!
+  | { _tag: 'NotAsked' }                    // Haven't started yet
+  | { _tag: 'Loading' }                     // In progress
+  | { _tag: 'Failure'; error: E }           // Failed
+  | { _tag: 'Success'; data: A }            // Got it!
 
 // Constructors
-const notAsked = <E, A>(): RemoteData<E, A> => ({ _tag: "NotAsked" });
-const loading = <E, A>(): RemoteData<E, A> => ({ _tag: "Loading" });
-const failure = <E, A>(error: E): RemoteData<E, A> => ({ _tag: "Failure", error });
-const success = <E, A>(data: A): RemoteData<E, A> => ({ _tag: "Success", data });
+const notAsked = <E, A>(): RemoteData<E, A> => ({ _tag: 'NotAsked' })
+const loading = <E, A>(): RemoteData<E, A> => ({ _tag: 'Loading' })
+const failure = <E, A>(error: E): RemoteData<E, A> => ({ _tag: 'Failure', error })
+const success = <E, A>(data: A): RemoteData<E, A> => ({ _tag: 'Success', data })
 
 // Pattern match all states
 function fold<E, A, R>(
@@ -364,17 +364,13 @@ function fold<E, A, R>(
   onNotAsked: () => R,
   onLoading: () => R,
   onFailure: (e: E) => R,
-  onSuccess: (a: A) => R,
+  onSuccess: (a: A) => R
 ): R {
   switch (rd._tag) {
-    case "NotAsked":
-      return onNotAsked();
-    case "Loading":
-      return onLoading();
-    case "Failure":
-      return onFailure(rd.error);
-    case "Success":
-      return onSuccess(rd.data);
+    case 'NotAsked': return onNotAsked()
+    case 'Loading': return onLoading()
+    case 'Failure': return onFailure(rd.error)
+    case 'Success': return onSuccess(rd.data)
   }
 }
 ```
@@ -421,14 +417,14 @@ function UserProfile({ userId }: { userId: string }) {
 ```typescript
 // ❌ BAD: Impossible states are possible
 interface BadState {
-  data: User | null;
-  loading: boolean;
-  error: Error | null;
+  data: User | null
+  loading: boolean
+  error: Error | null
 }
 // Can have: { data: user, loading: true, error: someError } - what does that mean?!
 
 // ✅ GOOD: Only valid states exist
-type GoodState = RemoteData<Error, User>;
+type GoodState = RemoteData<Error, User>
 // Can only be: NotAsked | Loading | Failure | Success
 ```
 
@@ -443,12 +439,12 @@ fp-ts values like `O.some(1)` create new objects each render. React sees them as
 ```typescript
 // ❌ BAD: Creates new Option every render
 function BadComponent() {
-  const [value, setValue] = useState(O.some(1));
+  const [value, setValue] = useState(O.some(1))
 
   useEffect(() => {
     // This runs EVERY render because O.some(1) !== O.some(1)
-    console.log("value changed");
-  }, [value]);
+    console.log('value changed')
+  }, [value])
 }
 ```
 
@@ -457,17 +453,17 @@ function BadComponent() {
 ```typescript
 // ✅ GOOD: Memoize Option creation
 function GoodComponent() {
-  const [rawValue, setRawValue] = useState<number | null>(1);
+  const [rawValue, setRawValue] = useState<number | null>(1)
 
   const value = useMemo(
     () => O.fromNullable(rawValue),
-    [rawValue], // Only recreate when rawValue changes
-  );
+    [rawValue]  // Only recreate when rawValue changes
+  )
 
   useEffect(() => {
     // Now this only runs when rawValue actually changes
-    console.log("value changed");
-  }, [rawValue]); // Depend on raw value, not Option
+    console.log('value changed')
+  }, [rawValue])  // Depend on raw value, not Option
 }
 ```
 
@@ -478,22 +474,20 @@ npm install fp-ts-react-stable-hooks
 ```
 
 ```typescript
-import { useStableO, useStableEffect } from "fp-ts-react-stable-hooks";
-import * as O from "fp-ts/Option";
-import * as Eq from "fp-ts/Eq";
+import { useStableO, useStableEffect } from 'fp-ts-react-stable-hooks'
+import * as O from 'fp-ts/Option'
+import * as Eq from 'fp-ts/Eq'
 
 function StableComponent() {
   // Uses fp-ts equality instead of reference equality
-  const [value, setValue] = useStableO(O.some(1));
+  const [value, setValue] = useStableO(O.some(1))
 
   // Effect that understands Option equality
   useStableEffect(
-    () => {
-      console.log("value changed");
-    },
+    () => { console.log('value changed') },
     [value],
-    Eq.tuple(O.getEq(Eq.eqNumber)), // Custom equality
-  );
+    Eq.tuple(O.getEq(Eq.eqNumber))  // Custom equality
+  )
 }
 ```
 
@@ -541,19 +535,18 @@ function useDeps(): AppDependencies {
 
 ```typescript
 function UserProfile({ userId }: { userId: string }) {
-  const { api, analytics } = useDeps();
-  const [user, setUser] = useState<RemoteData<Error, User>>(notAsked());
+  const { api, analytics } = useDeps()
+  const [user, setUser] = useState<RemoteData<Error, User>>(notAsked())
 
   useEffect(() => {
-    setUser(loading());
-    api
-      .getUser(userId)
-      .then((u) => {
-        setUser(success(u));
-        analytics.track("user_viewed", { userId });
+    setUser(loading())
+    api.getUser(userId)
+      .then(u => {
+        setUser(success(u))
+        analytics.track('user_viewed', { userId })
       })
-      .catch((e) => setUser(failure(e)));
-  }, [userId, api, analytics]);
+      .catch(e => setUser(failure(e)))
+  }, [userId, api, analytics])
 
   // render...
 }
@@ -772,25 +765,25 @@ const modalProps = {
   isOpen: true,
   ...pipe(
     maybeTitle,
-    O.map((title) => ({ title })),
-    O.getOrElse(() => ({})),
-  ),
-};
+    O.map(title => ({ title })),
+    O.getOrElse(() => ({}))
+  )
+}
 ```
 
 ---
 
 ## When to Use What
 
-| Situation                      | Use                                     |
-| ------------------------------ | --------------------------------------- |
-| Value might not exist          | `Option<T>`                             |
-| Operation might fail (sync)    | `Either<E, A>`                          |
-| Async operation might fail     | `TaskEither<E, A>`                      |
-| Need loading/error/success UI  | `RemoteData<E, A>`                      |
-| Form with multiple validations | `Either` with validation applicative    |
-| Dependency injection           | Context + `ReaderTaskEither`            |
-| Prevent re-renders with fp-ts  | `useMemo` or `fp-ts-react-stable-hooks` |
+| Situation | Use |
+|-----------|-----|
+| Value might not exist | `Option<T>` |
+| Operation might fail (sync) | `Either<E, A>` |
+| Async operation might fail | `TaskEither<E, A>` |
+| Need loading/error/success UI | `RemoteData<E, A>` |
+| Form with multiple validations | `Either` with validation applicative |
+| Dependency injection | Context + `ReaderTaskEither` |
+| Prevent re-renders with fp-ts | `useMemo` or `fp-ts-react-stable-hooks` |
 
 ---
 

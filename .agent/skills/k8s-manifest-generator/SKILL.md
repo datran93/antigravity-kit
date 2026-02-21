@@ -1,20 +1,17 @@
 ---
 name: k8s-manifest-generator
-description:
-  Create production-ready Kubernetes manifests for Deployments, Services, ConfigMaps, and Secrets following best
-  practices and security standards. Use when generating Kubernetes YAML manifests, creating K8s resources, or
-  implementing production-grade Kubernetes configurations.
+description: "Create production-ready Kubernetes manifests for Deployments, Services, ConfigMaps, and Secrets following best practices and security standards. Use when generating Kubernetes YAML manifests, creat..."
+risk: unknown
+source: community
 ---
 
 # Kubernetes Manifest Generator
 
-Step-by-step guidance for creating production-ready Kubernetes manifests including Deployments, Services, ConfigMaps,
-Secrets, and PersistentVolumeClaims.
+Step-by-step guidance for creating production-ready Kubernetes manifests including Deployments, Services, ConfigMaps, Secrets, and PersistentVolumeClaims.
 
 ## Use this skill when
 
 Use this skill when you need to:
-
 - Create new Kubernetes Deployment manifests
 - Define Service resources for network connectivity
 - Generate ConfigMap and Secret resources for configuration management

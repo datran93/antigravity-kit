@@ -37,7 +37,6 @@ finally:
 ```
 
 Constructor parameters:
-
 - `system_database_url`: Connection string to DBOS system database
 - `serializer`: Must match the DBOS application's serializer (default: pickle)
 
@@ -45,14 +44,14 @@ Constructor parameters:
 
 Beyond `enqueue`, DBOSClient mirrors the DBOS API. Use the same patterns from other reference files:
 
-| DBOSClient method            | Same as DBOS method                                    |
-| ---------------------------- | ------------------------------------------------------ |
-| `client.send()`              | `DBOS.send()` - add `idempotency_key` for exactly-once |
-| `client.get_event()`         | `DBOS.get_event()`                                     |
-| `client.read_stream()`       | `DBOS.read_stream()`                                   |
-| `client.list_workflows()`    | `DBOS.list_workflows()`                                |
-| `client.cancel_workflow()`   | `DBOS.cancel_workflow()`                               |
-| `client.resume_workflow()`   | `DBOS.resume_workflow()`                               |
-| `client.retrieve_workflow()` | `DBOS.retrieve_workflow()`                             |
+| DBOSClient method | Same as DBOS method |
+|-------------------|---------------------|
+| `client.send()` | `DBOS.send()` - add `idempotency_key` for exactly-once |
+| `client.get_event()` | `DBOS.get_event()` |
+| `client.read_stream()` | `DBOS.read_stream()` |
+| `client.list_workflows()` | `DBOS.list_workflows()` |
+| `client.cancel_workflow()` | `DBOS.cancel_workflow()` |
+| `client.resume_workflow()` | `DBOS.resume_workflow()` |
+| `client.retrieve_workflow()` | `DBOS.retrieve_workflow()` |
 
 Reference: [DBOSClient](https://docs.dbos.dev/python/reference/client)

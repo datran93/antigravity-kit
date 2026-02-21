@@ -1,9 +1,11 @@
 ---
 name: azure-servicebus-py
-description: |
+description: "|"
   Azure Service Bus SDK for Python messaging. Use for queues, topics, subscriptions, and enterprise messaging patterns.
   Triggers: "service bus", "ServiceBusClient", "queue", "topic", "subscription", "message broker".
 package: azure-servicebus
+risk: unknown
+source: community
 ---
 
 # Azure Service Bus SDK for Python
@@ -42,11 +44,11 @@ client = ServiceBusClient(
 
 ## Client Types
 
-| Client               | Purpose               | Get From                                                      |
-| -------------------- | --------------------- | ------------------------------------------------------------- |
-| `ServiceBusClient`   | Connection management | Direct instantiation                                          |
-| `ServiceBusSender`   | Send messages         | `client.get_queue_sender()` / `get_topic_sender()`            |
-| `ServiceBusReceiver` | Receive messages      | `client.get_queue_receiver()` / `get_subscription_receiver()` |
+| Client | Purpose | Get From |
+|--------|---------|----------|
+| `ServiceBusClient` | Connection management | Direct instantiation |
+| `ServiceBusSender` | Send messages | `client.get_queue_sender()` / `get_topic_sender()` |
+| `ServiceBusReceiver` | Receive messages | `client.get_queue_receiver()` / `get_subscription_receiver()` |
 
 ## Send Messages (Async)
 
@@ -58,22 +60,22 @@ from azure.identity.aio import DefaultAzureCredential
 
 async def send_messages():
     credential = DefaultAzureCredential()
-
+    
     async with ServiceBusClient(
         fully_qualified_namespace="<namespace>.servicebus.windows.net",
         credential=credential
     ) as client:
         sender = client.get_queue_sender(queue_name="myqueue")
-
+        
         async with sender:
             # Single message
             message = ServiceBusMessage("Hello, Service Bus!")
             await sender.send_messages(message)
-
+            
             # Batch of messages
             messages = [ServiceBusMessage(f"Message {i}") for i in range(10)]
             await sender.send_messages(messages)
-
+            
             # Message batch (for size control)
             batch = await sender.create_message_batch()
             for i in range(100):
@@ -93,20 +95,20 @@ asyncio.run(send_messages())
 ```python
 async def receive_messages():
     credential = DefaultAzureCredential()
-
+    
     async with ServiceBusClient(
         fully_qualified_namespace="<namespace>.servicebus.windows.net",
         credential=credential
     ) as client:
         receiver = client.get_queue_receiver(queue_name="myqueue")
-
+        
         async with receiver:
             # Receive batch
             messages = await receiver.receive_messages(
                 max_message_count=10,
                 max_wait_time=5  # seconds
             )
-
+            
             for msg in messages:
                 print(f"Received: {str(msg)}")
                 await receiver.complete_message(msg)  # Remove from queue
@@ -116,10 +118,10 @@ asyncio.run(receive_messages())
 
 ## Receive Modes
 
-| Mode                  | Behavior                              | Use Case              |
-| --------------------- | ------------------------------------- | --------------------- |
-| `PEEK_LOCK` (default) | Message locked, must complete/abandon | Reliable processing   |
-| `RECEIVE_AND_DELETE`  | Removed immediately on receive        | At-most-once delivery |
+| Mode | Behavior | Use Case |
+|------|----------|----------|
+| `PEEK_LOCK` (default) | Message locked, must complete/abandon | Reliable processing |
+| `RECEIVE_AND_DELETE` | Removed immediately on receive | At-most-once delivery |
 
 ```python
 from azure.servicebus import ServiceBusReceiveMode
@@ -135,7 +137,7 @@ receiver = client.get_queue_receiver(
 ```python
 async with receiver:
     messages = await receiver.receive_messages(max_message_count=1)
-
+    
     for msg in messages:
         try:
             # Process message...
@@ -150,12 +152,12 @@ async with receiver:
             )
 ```
 
-| Action                  | Effect                                |
-| ----------------------- | ------------------------------------- |
-| `complete_message()`    | Remove from queue (success)           |
-| `abandon_message()`     | Release lock, retry immediately       |
-| `dead_letter_message()` | Move to dead-letter queue             |
-| `defer_message()`       | Set aside, receive by sequence number |
+| Action | Effect |
+|--------|--------|
+| `complete_message()` | Remove from queue (success) |
+| `abandon_message()` | Release lock, retry immediately |
+| `dead_letter_message()` | Move to dead-letter queue |
+| `defer_message()` | Set aside, receive by sequence number |
 
 ## Topics and Subscriptions
 
@@ -241,7 +243,7 @@ with ServiceBusClient(
 ) as client:
     with client.get_queue_sender("myqueue") as sender:
         sender.send_messages(ServiceBusMessage("Sync message"))
-
+    
     with client.get_queue_receiver("myqueue") as receiver:
         for msg in receiver:
             print(str(msg))
@@ -260,8 +262,11 @@ with ServiceBusClient(
 
 ## Reference Files
 
-| File                                                       | Contents                                                                      |
-| ---------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [references/patterns.md](references/patterns.md)           | Competing consumers, sessions, retry patterns, request-response, transactions |
-| [references/dead-letter.md](references/dead-letter.md)     | DLQ handling, poison messages, reprocessing strategies                        |
-| [scripts/setup_servicebus.py](scripts/setup_servicebus.py) | CLI for queue/topic/subscription management and DLQ monitoring                |
+| File | Contents |
+|------|----------|
+| references/patterns.md | Competing consumers, sessions, retry patterns, request-response, transactions |
+| references/dead-letter.md | DLQ handling, poison messages, reprocessing strategies |
+| scripts/setup_servicebus.py | CLI for queue/topic/subscription management and DLQ monitoring |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

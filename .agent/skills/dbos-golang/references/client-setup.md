@@ -7,8 +7,7 @@ tags: client, external, setup, initialization
 
 ## Initialize Client for External Access
 
-Use `dbos.NewClient` to interact with DBOS from external applications like API servers, CLI tools, or separate services.
-The Client connects directly to the DBOS system database.
+Use `dbos.NewClient` to interact with DBOS from external applications like API servers, CLI tools, or separate services. The Client connects directly to the DBOS system database.
 
 **Incorrect (using full DBOS context from an external app):**
 
@@ -56,7 +55,6 @@ ch, err := client.ClientReadStreamAsync(workflowID, "results")
 ```
 
 ClientConfig options:
-
 - `DatabaseURL` (required unless `SystemDBPool` is set): PostgreSQL connection string
 - `SystemDBPool`: Custom `*pgxpool.Pool`
 - `DatabaseSchema`: Schema name (default: `"dbos"`)

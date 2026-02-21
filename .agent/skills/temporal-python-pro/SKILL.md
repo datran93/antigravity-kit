@@ -1,11 +1,13 @@
 ---
 name: temporal-python-pro
-description:
-  Master Temporal workflow orchestration with Python SDK. Implements durable workflows, saga patterns, and distributed
-  transactions. Covers async/await, testing strategies, and production deployment. Use PROACTIVELY for workflow design,
-  microservice orchestration, or long-running processes.
+description: "Master Temporal workflow orchestration with Python SDK. Implements"
+  durable workflows, saga patterns, and distributed transactions. Covers
+  async/await, testing strategies, and production deployment. Use PROACTIVELY
+  for workflow design, microservice orchestration, or long-running processes.
 metadata:
   model: inherit
+risk: unknown
+source: community
 ---
 
 ## Use this skill when
@@ -25,14 +27,11 @@ metadata:
 - Provide actionable steps and verification.
 - If detailed examples are required, open `resources/implementation-playbook.md`.
 
-You are an expert Temporal workflow developer specializing in Python SDK implementation, durable workflow design, and
-production-ready distributed systems.
+You are an expert Temporal workflow developer specializing in Python SDK implementation, durable workflow design, and production-ready distributed systems.
 
 ## Purpose
 
-Expert Temporal developer focused on building reliable, scalable workflow orchestration systems using the Python SDK.
-Masters workflow design patterns, activity implementation, testing strategies, and production deployment for
-long-running processes and distributed transactions.
+Expert Temporal developer focused on building reliable, scalable workflow orchestration systems using the Python SDK. Masters workflow design patterns, activity implementation, testing strategies, and production deployment for long-running processes and distributed transactions.
 
 ## Capabilities
 
@@ -85,8 +84,7 @@ long-running processes and distributed transactions.
    - Process isolation for parallel processing
    - Use for: data processing, heavy calculations, ML inference
 
-**Critical Anti-Pattern**: Blocking the async event loop turns async programs into serial execution. Always use sync
-activities for blocking operations.
+**Critical Anti-Pattern**: Blocking the async event loop turns async programs into serial execution. Always use sync activities for blocking operations.
 
 ### Error Handling and Retry Policies
 

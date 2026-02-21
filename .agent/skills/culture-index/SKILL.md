@@ -16,7 +16,6 @@ Index and search culture documentation to help teams understand organizational v
 Use this skill when you need to index and search culture documentation.
 
 Use this skill when:
-
 - You need to search through organizational culture documentation
 - You want to index culture-related documents for easy retrieval
 - You need to understand team values, practices, or guidelines
@@ -41,5 +40,4 @@ When working with culture documentation:
 
 ## Resources
 
-For more information, see the
-[source repository](https://github.com/trailofbits/skills/tree/main/plugins/culture-index).
+For more information, see the [source repository](https://github.com/trailofbits/skills/tree/main/plugins/culture-index).

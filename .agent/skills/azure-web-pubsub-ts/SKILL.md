@@ -1,10 +1,9 @@
 ---
 name: azure-web-pubsub-ts
-description:
-  Build real-time messaging applications using Azure Web PubSub SDKs for JavaScript (@azure/web-pubsub,
-  @azure/web-pubsub-client). Use when implementing WebSocket-based real-time features, pub/sub messaging, group chat, or
-  live notifications.
+description: "Build real-time messaging applications using Azure Web PubSub SDKs for JavaScript (@azure/web-pubsub, @azure/web-pubsub-client). Use when implementing WebSocket-based real-time features, pub/sub me..."
 package: "@azure/web-pubsub, @azure/web-pubsub-client"
+risk: unknown
+source: community
 ---
 
 # Azure Web PubSub SDKs for TypeScript
@@ -42,17 +41,21 @@ import { DefaultAzureCredential } from "@azure/identity";
 // Connection string
 const client = new WebPubSubServiceClient(
   process.env.WEBPUBSUB_CONNECTION_STRING!,
-  "chat", // hub name
+  "chat"  // hub name
 );
 
 // DefaultAzureCredential (recommended)
-const client2 = new WebPubSubServiceClient(process.env.WEBPUBSUB_ENDPOINT!, new DefaultAzureCredential(), "chat");
+const client2 = new WebPubSubServiceClient(
+  process.env.WEBPUBSUB_ENDPOINT!,
+  new DefaultAzureCredential(),
+  "chat"
+);
 
 // AzureKeyCredential
 const client3 = new WebPubSubServiceClient(
   process.env.WEBPUBSUB_ENDPOINT!,
   new AzureKeyCredential("<access-key>"),
-  "chat",
+  "chat"
 );
 ```
 
@@ -61,7 +64,7 @@ const client3 = new WebPubSubServiceClient(
 ```typescript
 // Basic token
 const token = await client.getClientAccessToken();
-console.log(token.url); // wss://...?access_token=...
+console.log(token.url);  // wss://...?access_token=...
 
 // Token with user ID
 const userToken = await client.getClientAccessToken({
@@ -74,9 +77,9 @@ const permToken = await client.getClientAccessToken({
   roles: [
     "webpubsub.joinLeaveGroup",
     "webpubsub.sendToGroup",
-    "webpubsub.sendToGroup.chat-room", // specific group
+    "webpubsub.sendToGroup.chat-room",  // specific group
   ],
-  groups: ["chat-room"], // auto-join on connect
+  groups: ["chat-room"],  // auto-join on connect
   expirationTimeInMinutes: 60,
 });
 ```
@@ -95,12 +98,9 @@ await client.sendToUser("user123", { message: "Hello!" });
 await client.sendToConnection("connectionId", { data: "Direct message" });
 
 // Send with filter (OData syntax)
-await client.sendToAll(
-  { message: "Filtered" },
-  {
-    filter: "userId ne 'admin'",
-  },
-);
+await client.sendToAll({ message: "Filtered" }, {
+  filter: "userId ne 'admin'",
+});
 ```
 
 ### Group Management
@@ -182,7 +182,7 @@ await client.sendToGroup("chat-room", { type: "message", content: "Hi" }, "json"
 
 // Send options
 await client.sendToGroup("chat-room", "Hello", "text", {
-  noEcho: true, // Don't echo back to sender
+  noEcho: true,        // Don't echo back to sender
   fireAndForget: true, // Don't wait for ack
 });
 
@@ -231,7 +231,7 @@ const app = express();
 
 const handler = new WebPubSubEventHandler("chat", {
   path: "/api/webpubsub/hubs/chat/",
-
+  
   // Blocking: approve/reject connection
   handleConnect: (req, res) => {
     if (!req.claims?.sub) {
@@ -244,18 +244,18 @@ const handler = new WebPubSubEventHandler("chat", {
       roles: ["webpubsub.sendToGroup"],
     });
   },
-
+  
   // Blocking: handle custom events
   handleUserEvent: (req, res) => {
     console.log(`Event from ${req.context.userId}:`, req.data);
     res.success(`Received: ${req.data}`, "text");
   },
-
+  
   // Non-blocking
   onConnected: (req) => {
     console.log(`Client connected: ${req.context.connectionId}`);
   },
-
+  
   onDisconnected: (req) => {
     console.log(`Client disconnected: ${req.context.connectionId}`);
   },
@@ -310,3 +310,6 @@ import {
 4. **Handle reconnection** - Client auto-reconnects by default
 5. **Validate in handleConnect** - Reject unauthorized connections early
 6. **Use noEcho** - Prevent message echo back to sender when needed
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

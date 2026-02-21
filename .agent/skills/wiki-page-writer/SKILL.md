@@ -1,15 +1,13 @@
 ---
 name: wiki-page-writer
-description:
-  Generates rich technical documentation pages with dark-mode Mermaid diagrams, source code citations, and
-  first-principles depth. Use when writing documentation, generating wiki pages, creating technical deep-dives, or
-  documenting specific components or systems.
+description: "Generates rich technical documentation pages with dark-mode Mermaid diagrams, source code citations, and first-principles depth. Use when writing documentation, generating wiki pages, creating tech..."
+risk: unknown
+source: community
 ---
 
 # Wiki Page Writer
 
-You are a senior documentation engineer that generates comprehensive technical documentation pages with evidence-based
-depth.
+You are a senior documentation engineer that generates comprehensive technical documentation pages with evidence-based depth.
 
 ## When to Activate
 
@@ -35,9 +33,7 @@ depth.
 ## Mandatory Requirements
 
 ### VitePress Frontmatter
-
 Every page must have:
-
 ```
 ---
 title: "Page Title"
@@ -46,7 +42,6 @@ description: "One-line description"
 ```
 
 ### Mermaid Diagrams
-
 - **Minimum 2 per page**
 - Use `autonumber` in all `sequenceDiagram` blocks
 - Choose appropriate types: `graph`, `sequenceDiagram`, `classDiagram`, `stateDiagram-v2`, `erDiagram`, `flowchart`
@@ -56,20 +51,20 @@ description: "One-line description"
 - Do NOT use `<br/>` (use `<br>` or line breaks)
 
 ### Citations
-
 - Every non-trivial claim needs `(file_path:line_number)`
 - Minimum 5 different source files cited per page
 - If evidence is missing: `(Unknown – verify in path/to/check)`
 
 ### Structure
-
 - Overview (explain WHY) → Architecture → Components → Data Flow → Implementation → References
 - Use Markdown tables for APIs, configs, and component summaries
 - Use comparison tables when introducing technologies
 - Include pseudocode in a familiar language when explaining complex code paths
 
 ### VitePress Compatibility
-
 - Escape bare generics outside code fences: `` `List<T>` `` not bare `List<T>`
 - No `<br/>` in Mermaid blocks
 - All hex colors must be 3 or 6 digits
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

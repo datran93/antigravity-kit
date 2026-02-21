@@ -1,9 +1,6 @@
 ---
 name: skill-creator
-description:
-  "This skill should be used when the user asks to create a new skill, build a skill, make a custom skill, develop a CLI
-  skill, or wants to extend the CLI with new capabilities. Automates the entire skill creation workflow from
-  brainstorming to installation."
+description: "This skill should be used when the user asks to create a new skill, build a skill, make a custom skill, develop a CLI skill, or wants to extend the CLI with new capabilities. Automates the entire s..."
 version: 1.3.0
 author: Eric Andrade
 created: 2025-02-01
@@ -12,20 +9,18 @@ platforms: [github-copilot-cli, claude-code, codex]
 category: meta
 tags: [automation, scaffolding, skill-creation, meta-skill]
 risk: safe
+source: community
 ---
 
 # skill-creator
 
 ## Purpose
 
-To create new CLI skills following Anthropic's official best practices with zero manual configuration. This skill
-automates brainstorming, template application, validation, and installation processes while maintaining progressive
-disclosure patterns and writing style standards.
+To create new CLI skills following Anthropic's official best practices with zero manual configuration. This skill automates brainstorming, template application, validation, and installation processes while maintaining progressive disclosure patterns and writing style standards.
 
 ## When to Use This Skill
 
 This skill should be used when:
-
 - User wants to extend CLI functionality with custom capabilities
 - User needs to create a skill following official standards
 - User wants to automate repetitive CLI tasks with a reusable skill
@@ -79,7 +74,6 @@ EMAIL=$(git config user.email || echo "")
 ```
 
 **Key Information Needed:**
-
 - Which platforms to target (Copilot, Claude, Codex, or all three)
 - Installation preference (local, global, or both)
 - Skill name and purpose
@@ -89,22 +83,19 @@ EMAIL=$(git config user.email || echo "")
 
 ### Progress Tracking Guidelines
 
-Throughout the workflow, display a visual progress bar before starting each phase to keep the user informed. The
-progress bar format is:
+Throughout the workflow, display a visual progress bar before starting each phase to keep the user informed. The progress bar format is:
 
 ```
 [████████████░░░░░░] 60% - Step 3/5: Creating SKILL.md
 ```
 
 **Format specifications:**
-
 - 20 characters wide (use █ for filled, ░ for empty)
 - Percentage based on current step (Step 1=20%, Step 2=40%, Step 3=60%, Step 4=80%, Step 5=100%)
 - Step counter showing current/total (e.g., "Step 3/5")
 - Brief description of current phase
 
 **Display the progress bar using:**
-
 ```bash
 echo "[████░░░░░░░░░░░░░░] 20% - Step 1/5: Brainstorming & Planning"
 ```
@@ -112,13 +103,11 @@ echo "[████░░░░░░░░░░░░░░] 20% - Step 1/5: B
 ### Phase 1: Brainstorming & Planning
 
 **Progress:** Display before starting this phase:
-
 ```bash
 echo "[████░░░░░░░░░░░░░░] 20% - Step 1/5: Brainstorming & Planning"
 ```
 
 Display progress:
-
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║     🛠️  SKILL CREATOR - Creating New Skill                  ║
@@ -137,6 +126,7 @@ Display progress:
 
 1. **What should this skill do?** (Free-form description)
    - Example: "Help users debug Python code by analyzing stack traces"
+   
 2. **When should it trigger?** (Provide 3-5 trigger phrases)
    - Example: "debug Python error", "analyze stack trace", "fix Python exception"
 
@@ -149,8 +139,8 @@ Display progress:
 4. **Which platforms should support this skill?**
    - [ ] GitHub Copilot CLI
    - [ ] Claude Code
-   - [ ] Codex
-   - [ ] All three (recommended)
+    - [ ] Codex
+    - [ ] All three (recommended)
 
 5. **Provide a one-sentence description** (will appear in metadata)
    - Example: "Analyzes Python stack traces and suggests fixes"
@@ -160,13 +150,11 @@ Display progress:
 ### Phase 2: Prompt Enhancement (Optional)
 
 **Progress:** Display before starting this phase:
-
 ```bash
 echo "[████████░░░░░░░░░░] 40% - Step 2/5: Prompt Enhancement"
 ```
 
 Update progress:
-
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║ ✓ Phase 1: Brainstorming                                     ║
@@ -176,32 +164,28 @@ Update progress:
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-**Ask the user:** "Would you like to refine the skill description using the prompt-engineer skill?"
-
+**Ask the user:**
+"Would you like to refine the skill description using the prompt-engineer skill?"
 - [ ] Yes - Use prompt-engineer to enhance clarity and structure
 - [ ] No - Proceed with current description
 
 If **Yes**:
-
 1. Check if prompt-engineer skill is available
 2. Invoke with current description as input
 3. Review enhanced output with user
 4. Ask: "Accept enhanced version or keep original?"
 
 If **No** or prompt-engineer unavailable:
-
 - Proceed with original user input
 
 ### Phase 3: File Generation
 
 **Progress:** Display before starting this phase:
-
 ```bash
 echo "[████████████░░░░░░] 60% - Step 3/5: File Generation"
 ```
 
 Update progress:
-
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║ ✓ Phase 1: Brainstorming                                     ║
@@ -278,7 +262,7 @@ if [[ "$PLATFORM" =~ "codex" ]]; then
          s/{{DATE}}/$(date +%Y-%m-%d)/g" \
         resources/templates/skill-template-codex.md \
         > ".codex/skills/$SKILL_NAME/SKILL.md"
-
+    
     sed "s/{{SKILL_NAME}}/$SKILL_NAME/g" \
         resources/templates/readme-template.md \
         > ".codex/skills/$SKILL_NAME/README.md"
@@ -286,7 +270,6 @@ fi
 ```
 
 **Display created structure:**
-
 ```
 ✅ Created:
    .github/skills/your-skill-name/ (if Copilot selected)
@@ -302,13 +285,11 @@ fi
 ### Phase 4: Validation
 
 **Progress:** Display before starting this phase:
-
 ```bash
 echo "[████████████████░░] 80% - Step 4/5: Validation"
 ```
 
 Update progress:
-
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║ ✓ Phase 3: File Generation                                   ║
@@ -329,7 +310,6 @@ scripts/validate-skill-content.sh ".github/skills/$SKILL_NAME"
 ```
 
 **Expected output:**
-
 ```
 🔍 Validating YAML frontmatter...
 ✅ YAML frontmatter valid!
@@ -340,13 +320,11 @@ scripts/validate-skill-content.sh ".github/skills/$SKILL_NAME"
 ```
 
 **If validation fails:**
-
 - Display specific errors
 - Offer to fix automatically (common issues)
 - Ask user to manually correct complex issues
 
 **Common auto-fixes:**
-
 - Convert second-person to imperative form
 - Reformat description to third-person
 - Add missing required fields
@@ -354,13 +332,11 @@ scripts/validate-skill-content.sh ".github/skills/$SKILL_NAME"
 ### Phase 5: Installation
 
 **Progress:** Display before starting this phase:
-
 ```bash
 echo "[████████████████████] 100% - Step 5/5: Installation"
 ```
 
 Update progress:
-
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║ ✓ Phase 4: Validation                                        ║
@@ -370,7 +346,8 @@ Update progress:
 ╚══════════════════════════════════════════════════════════════╝
 ```
 
-**Ask the user:** "How would you like to install this skill?"
+**Ask the user:**
+"How would you like to install this skill?"
 
 - [ ] **Repository only** - Files created in `.github/skills/` (works when in repo)
 - [ ] **Global installation** - Create symlinks in `~/.copilot/skills/` (works everywhere)
@@ -437,13 +414,11 @@ ls -la ~/.codex/skills/$SKILL_NAME 2>/dev/null
 ### Phase 6: Completion
 
 **Progress:** Display completion message:
-
 ```bash
 echo "[████████████████████] 100% - ✓ Skill created successfully!"
 ```
 
 Update progress:
-
 ```
 ╔══════════════════════════════════════════════════════════════╗
 ║ ✓ Phase 5: Installation                                      ║
@@ -489,10 +464,9 @@ Update progress:
 ### Platform Detection Issues
 
 If platforms cannot be detected:
-
 ```
 ⚠️  Unable to detect GitHub Copilot CLI or Claude Code
-
+    
 Would you like to:
 1. Install for repository only (works when in repo)
 2. Specify platform manually
@@ -502,7 +476,6 @@ Would you like to:
 ### Template Not Found
 
 If templates are missing:
-
 ```
 ❌ Error: Template not found at resources/templates/
 
@@ -517,14 +490,13 @@ Options:
 ### Validation Failures
 
 If content doesn't meet standards:
-
 ```
 ⚠️  Validation Issues Found:
 
 1. YAML: Description not in third-person format
    Expected: "This skill should be used when..."
    Found: "Use this skill when..."
-
+   
 2. Content: Word count too high (5,342 words, max 5,000)
    Suggestion: Move detailed sections to references/
 
@@ -534,7 +506,6 @@ Fix automatically? [Y/n]
 ### Installation Conflicts
 
 If symlink already exists:
-
 ```
 ⚠️  Skill already installed at ~/.copilot/skills/your-skill-name
 
@@ -552,7 +523,6 @@ This skill includes additional resources in subdirectories:
 ### references/
 
 Detailed documentation loaded when needed:
-
 - `anthropic-best-practices.md` - Official Anthropic skill development guidelines
 - `writing-style-guide.md` - Writing standards and examples
 - `progressive-disclosure.md` - Content organization patterns
@@ -561,7 +531,6 @@ Detailed documentation loaded when needed:
 ### examples/
 
 Working examples demonstrating skill usage:
-
 - `basic-skill-creation.md` - Simple skill creation walkthrough
 - `advanced-skill-bundled-resources.md` - Complex skill with references/
 - `global-installation.md` - Installing skills system-wide
@@ -569,7 +538,6 @@ Working examples demonstrating skill usage:
 ### scripts/
 
 Executable utilities for skill maintenance:
-
 - `validate-all-skills.sh` - Batch validation of all skills in repository
 - `update-skill-version.sh` - Bump version and update changelog
 - `generate-skill-index.sh` - Auto-generate skills catalog
@@ -577,25 +545,21 @@ Executable utilities for skill maintenance:
 ## Technical Implementation Notes
 
 **Template Substitution:**
-
 - Use `sed` for simple replacements
 - Preserve YAML formatting exactly
 - Handle multi-line descriptions with proper escaping
 
 **Symlink Strategy:**
-
 - Always use absolute paths: `ln -sf /full/path/to/source ~/.copilot/skills/name`
 - Verify symlink before considering installation complete
 - Benefits: Auto-updates when repository is pulled
 
 **Validation Integration:**
-
 - Run validation before installation
 - Block installation if critical errors found
 - Warnings are informational only
 
 **Git Integration:**
-
 - Extract author from `git config user.name`
 - Use repository root detection: `git rev-parse --show-toplevel`
 - Respect `.gitignore` patterns
@@ -603,7 +567,6 @@ Executable utilities for skill maintenance:
 ## Quality Standards
 
 **SKILL.md Requirements:**
-
 - 1,500-2,000 words (ideal)
 - Under 5,000 words (maximum)
 - Third-person description format
@@ -611,14 +574,12 @@ Executable utilities for skill maintenance:
 - Progressive disclosure pattern
 
 **README.md Requirements:**
-
 - 300-500 words
 - User-facing language
 - Clear installation instructions
 - Practical usage examples
 
 **Validation Checks:**
-
 - YAML frontmatter completeness
 - Description format (third-person)
 - Word count limits
@@ -627,8 +588,7 @@ Executable utilities for skill maintenance:
 
 ## References
 
-- **Anthropic Official Skill Development Guide:**
-  https://github.com/anthropics/claude-plugins-official/blob/main/plugins/plugin-dev/skills/skill-development/SKILL.md
+- **Anthropic Official Skill Development Guide:** https://github.com/anthropics/claude-plugins-official/blob/main/plugins/plugin-dev/skills/skill-development/SKILL.md
 - **Repository:** https://github.com/yourusername/cli-ai-skills
 - **Writing Style Guide:** `resources/templates/writing-style-guide.md`
 - **Progress Tracker Template:** `resources/templates/progress-tracker.md`

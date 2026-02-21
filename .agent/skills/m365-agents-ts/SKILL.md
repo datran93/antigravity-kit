@@ -1,21 +1,18 @@
 ---
 name: m365-agents-ts
-description: |
+description: "|"
   Microsoft 365 Agents SDK for TypeScript/Node.js. Build multichannel agents for Teams/M365/Copilot Studio with AgentApplication routing, Express hosting, streaming responses, and Copilot Studio client integration. Triggers: "Microsoft 365 Agents SDK", "@microsoft/agents-hosting", "AgentApplication", "startServer", "streamingResponse", "Copilot Studio client", "@microsoft/agents-copilotstudio-client".
-package:
-  "@microsoft/agents-hosting, @microsoft/agents-hosting-express, @microsoft/agents-activity,
-  @microsoft/agents-copilotstudio-client"
+package: "@microsoft/agents-hosting, @microsoft/agents-hosting-express, @microsoft/agents-activity, @microsoft/agents-copilotstudio-client"
+risk: unknown
+source: community
 ---
 
 # Microsoft 365 Agents SDK (TypeScript)
 
-Build enterprise agents for Microsoft 365, Teams, and Copilot Studio using the Microsoft 365 Agents SDK with Express
-hosting, AgentApplication routing, streaming responses, and Copilot Studio client integrations.
+Build enterprise agents for Microsoft 365, Teams, and Copilot Studio using the Microsoft 365 Agents SDK with Express hosting, AgentApplication routing, streaming responses, and Copilot Studio client integrations.
 
 ## Before implementation
-
-- Use the microsoft-docs MCP to verify the latest API signatures for AgentApplication, startServer, and
-  CopilotStudioClient.
+- Use the microsoft-docs MCP to verify the latest API signatures for AgentApplication, startServer, and CopilotStudioClient.
 - Confirm package versions on npm before wiring up samples or templates.
 
 ## Installation
@@ -156,12 +153,9 @@ const directLine = CopilotStudioWebChat.createConnection(client, {
   showTyping: true,
 });
 
-window.WebChat.renderWebChat(
-  {
-    directLine,
-  },
-  document.getElementById("webchat")!,
-);
+window.WebChat.renderWebChat({
+  directLine,
+}, document.getElementById("webchat")!);
 ```
 
 ## Best Practices
@@ -174,17 +168,20 @@ window.WebChat.renderWebChat(
 
 ## Reference Files
 
-| File                                                                   | Contents                                                               |
-| ---------------------------------------------------------------------- | ---------------------------------------------------------------------- |
-| [references/acceptance-criteria.md](references/acceptance-criteria.md) | Import paths, hosting pipeline, streaming, and Copilot Studio patterns |
+| File | Contents |
+| --- | --- |
+| references/acceptance-criteria.md | Import paths, hosting pipeline, streaming, and Copilot Studio patterns |
 
 ## Reference Links
 
-| Resource                               | URL                                                                                                                 |
-| -------------------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| Microsoft 365 Agents SDK               | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/                                                         |
-| JavaScript SDK overview                | https://learn.microsoft.com/en-us/javascript/api/overview/agents-overview?view=agents-sdk-js-latest                 |
-| @microsoft/agents-hosting-express      | https://learn.microsoft.com/en-us/javascript/api/%40microsoft/agents-hosting-express?view=agents-sdk-js-latest      |
+| Resource | URL |
+| --- | --- |
+| Microsoft 365 Agents SDK | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/ |
+| JavaScript SDK overview | https://learn.microsoft.com/en-us/javascript/api/overview/agents-overview?view=agents-sdk-js-latest |
+| @microsoft/agents-hosting-express | https://learn.microsoft.com/en-us/javascript/api/%40microsoft/agents-hosting-express?view=agents-sdk-js-latest |
 | @microsoft/agents-copilotstudio-client | https://learn.microsoft.com/en-us/javascript/api/%40microsoft/agents-copilotstudio-client?view=agents-sdk-js-latest |
-| Integrate with Copilot Studio          | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/integrate-with-mcs                                       |
-| GitHub samples                         | https://github.com/microsoft/Agents/tree/main/samples/nodejs                                                        |
+| Integrate with Copilot Studio | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/integrate-with-mcs |
+| GitHub samples | https://github.com/microsoft/Agents/tree/main/samples/nodejs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

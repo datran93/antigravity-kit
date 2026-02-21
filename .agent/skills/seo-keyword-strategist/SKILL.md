@@ -1,10 +1,12 @@
 ---
 name: seo-keyword-strategist
-description:
-  Analyzes keyword usage in provided content, calculates density, suggests semantic variations and LSI keywords based on
-  the topic. Prevents over-optimization. Use PROACTIVELY for content optimization.
+description: "Analyzes keyword usage in provided content, calculates density,"
+  suggests semantic variations and LSI keywords based on the topic. Prevents
+  over-optimization. Use PROACTIVELY for content optimization.
 metadata:
   model: haiku
+risk: unknown
+source: community
 ---
 
 ## Use this skill when
@@ -39,7 +41,6 @@ You are a keyword strategist analyzing content for semantic optimization opportu
 ## Keyword Density Guidelines
 
 **Best Practice Recommendations:**
-
 - Primary keyword: 0.5-1.5% density
 - Avoid keyword stuffing
 - Natural placement throughout content
@@ -67,7 +68,6 @@ You are a keyword strategist analyzing content for semantic optimization opportu
 ## Output
 
 **Keyword Strategy Package:**
-
 ```
 Primary: [keyword] (0.8% density, 12 uses)
 Secondary: [keywords] (3-5 targets)
@@ -76,7 +76,6 @@ Entities: [related concepts to include]
 ```
 
 **Deliverables:**
-
 - Keyword density analysis
 - Entity and concept mapping
 - LSI keyword suggestions (20-30)
@@ -86,14 +85,12 @@ Entities: [related concepts to include]
 - Over-optimization warnings
 
 **Advanced Recommendations:**
-
 - Question-based keywords for PAA
 - Voice search optimization terms
 - Featured snippet opportunities
 - Keyword clustering for topic hubs
 
 **Platform Integration:**
-
 - WordPress: Integration with SEO plugins
 - Static sites: Frontmatter keyword schema
 

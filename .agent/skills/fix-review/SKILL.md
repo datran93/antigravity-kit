@@ -16,7 +16,6 @@ Verify that fix commits properly address audit findings without introducing new 
 Use this skill when you need to verify fix commits address audit findings without new bugs.
 
 Use this skill when:
-
 - Reviewing commits that address security audit findings
 - Verifying that fixes don't introduce new vulnerabilities
 - Ensuring code changes properly resolve identified issues

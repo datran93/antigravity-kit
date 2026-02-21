@@ -1,11 +1,11 @@
-import { useState, FormEvent } from "react";
+import { useState, FormEvent } from 'react';
 
 interface TodoFormProps {
   onAddTodo: (title: string) => Promise<void>;
 }
 
 export const TodoForm = ({ onAddTodo }: TodoFormProps) => {
-  const [title, setTitle] = useState("");
+  const [title, setTitle] = useState('');
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleSubmit = async (e: FormEvent) => {
@@ -17,9 +17,9 @@ export const TodoForm = ({ onAddTodo }: TodoFormProps) => {
     try {
       setIsSubmitting(true);
       await onAddTodo(trimmedTitle);
-      setTitle("");
+      setTitle('');
     } catch (err) {
-      console.error("Failed to add todo:", err);
+      console.error('Failed to add todo:', err);
     } finally {
       setIsSubmitting(false);
     }
@@ -36,7 +36,7 @@ export const TodoForm = ({ onAddTodo }: TodoFormProps) => {
         className="todo-input"
       />
       <button type="submit" disabled={isSubmitting || !title.trim()} className="add-button">
-        {isSubmitting ? "Adding..." : "Add Todo"}
+        {isSubmitting ? 'Adding...' : 'Add Todo'}
       </button>
     </form>
   );

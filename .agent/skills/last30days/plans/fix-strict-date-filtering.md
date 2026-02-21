@@ -3,7 +3,6 @@
 ## Overview
 
 The `/last30days` skill is returning content older than 30 days, violating its core promise. Analysis shows:
-
 - **Reddit**: Only 40% of results within 30 days (9/15 were older, some from 2022!)
 - **X**: 100% within 30 days (working correctly)
 - **WebSearch**: 90% had unknown dates (can't verify freshness)
@@ -12,8 +11,7 @@ The `/last30days` skill is returning content older than 30 days, violating its c
 
 The skill's name is "last30days" - users expect ONLY content from the last 30 days. Currently:
 
-1. **Reddit search prompt** says "prefer recent threads, but include older relevant ones if recent ones are scarce" -
-   this is too permissive
+1. **Reddit search prompt** says "prefer recent threads, but include older relevant ones if recent ones are scarce" - this is too permissive
 2. **X search prompt** explicitly includes `from_date` and `to_date` - this is why it works
 3. **WebSearch** returns pages without publication dates - we can't verify they're recent
 4. **Scoring penalties** (-10 for low date confidence) don't prevent old content from appearing
@@ -24,11 +22,11 @@ The skill's name is "last30days" - users expect ONLY content from the last 30 da
 
 Instead of penalizing old content, **exclude it entirely**. If it's not from the last 30 days, it shouldn't appear.
 
-| Source    | Current Behavior              | New Behavior                      |
-| --------- | ----------------------------- | --------------------------------- |
-| Reddit    | Weak "prefer recent"          | Explicit date range + hard filter |
-| X         | Explicit date range (working) | No change needed                  |
-| WebSearch | No date awareness             | Require recent markers OR exclude |
+| Source | Current Behavior | New Behavior |
+|--------|------------------|--------------|
+| Reddit | Weak "prefer recent" | Explicit date range + hard filter |
+| X | Explicit date range (working) | No change needed |
+| WebSearch | No date awareness | Require recent markers OR exclude |
 
 ## Technical Approach
 
@@ -37,14 +35,12 @@ Instead of penalizing old content, **exclude it entirely**. If it's not from the
 **File: `scripts/lib/openai_reddit.py`**
 
 Current prompt (line 33):
-
 ```
 Find {min_items}-{max_items} relevant Reddit discussion threads.
 Prefer recent threads, but include older relevant ones if recent ones are scarce.
 ```
 
 New prompt:
-
 ```
 Find {min_items}-{max_items} relevant Reddit discussion threads from {from_date} to {to_date}.
 
@@ -54,7 +50,6 @@ If you cannot find enough recent threads, return fewer results rather than older
 ```
 
 **Changes needed:**
-
 1. Add `from_date` and `to_date` parameters to `search_reddit()` function
 2. Inject dates into `REDDIT_SEARCH_PROMPT` like X does
 3. Update caller in `last30days.py` to pass dates
@@ -104,8 +99,7 @@ def filter_by_date_range(
 
 ### Phase 3: WebSearch Date Intelligence
 
-WebSearch CAN find recent content - Medium posts have dates, GitHub has commit timestamps, news sites have publication
-dates. We should **extract and prioritize** these signals.
+WebSearch CAN find recent content - Medium posts have dates, GitHub has commit timestamps, news sites have publication dates. We should **extract and prioritize** these signals.
 
 **Strategy: "Date Detective"**
 
@@ -239,8 +233,7 @@ def score_websearch_items(items):
         ...
 ```
 
-**Result**: WebSearch results with verifiable recent dates rank well. Results with no dates are heavily penalized but
-still appear as supplementary context. Old verified content is excluded entirely.
+**Result**: WebSearch results with verifiable recent dates rank well. Results with no dates are heavily penalized but still appear as supplementary context. Old verified content is excluded entirely.
 
 ### Phase 4: Update Statistics Display
 
@@ -285,49 +278,45 @@ Only count Reddit and X in "from the last 30 days" claim. WebSearch should be cl
 ### Before/After Test
 
 Run same query before and after fix:
-
 ```
 /last30days remotion launch videos
 ```
 
 **Expected Before:**
-
 - Reddit: 40% within 30 days
 
 **Expected After:**
-
 - Reddit: 100% within 30 days (or fewer results if not enough recent content)
 
 ### Edge Case Tests
 
-| Scenario                     | Expected Behavior                        |
-| ---------------------------- | ---------------------------------------- |
-| Topic with no recent content | Return 0 results + helpful message       |
-| Topic with 5 recent results  | Return 5 results (not pad with old ones) |
-| Mixed old/new results        | Only return new ones                     |
+| Scenario | Expected Behavior |
+|----------|-------------------|
+| Topic with no recent content | Return 0 results + helpful message |
+| Topic with 5 recent results | Return 5 results (not pad with old ones) |
+| Mixed old/new results | Only return new ones |
 
 ### WebSearch Date Extraction Tests
 
-| URL/Snippet                                 | Expected Date | Confidence        |
-| ------------------------------------------- | ------------- | ----------------- |
-| `medium.com/blog/2026/01/15/title`          | 2026-01-15    | high              |
-| `github.com/repo` + "Released Jan 20, 2026" | 2026-01-20    | med               |
-| `docs.example.com/guide` (no date signals)  | None          | low               |
-| `news.site.com/2024/05/old-article`         | 2024-05-XX    | EXCLUDE (too old) |
-| Snippet: "Updated 3 days ago"               | calculated    | med               |
+| URL/Snippet | Expected Date | Confidence |
+|-------------|---------------|------------|
+| `medium.com/blog/2026/01/15/title` | 2026-01-15 | high |
+| `github.com/repo` + "Released Jan 20, 2026" | 2026-01-20 | med |
+| `docs.example.com/guide` (no date signals) | None | low |
+| `news.site.com/2024/05/old-article` | 2024-05-XX | EXCLUDE (too old) |
+| Snippet: "Updated 3 days ago" | calculated | med |
 
 ## Risk Analysis
 
-| Risk                                      | Likelihood | Impact | Mitigation                                        |
-| ----------------------------------------- | ---------- | ------ | ------------------------------------------------- |
-| Fewer results for niche topics            | High       | Medium | Explain why in output                             |
-| User confusion about reduced results      | Medium     | Low    | Clear messaging                                   |
-| Date parsing errors exclude valid content | Low        | Medium | Keep items with unknown dates, just label clearly |
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| Fewer results for niche topics | High | Medium | Explain why in output |
+| User confusion about reduced results | Medium | Low | Clear messaging |
+| Date parsing errors exclude valid content | Low | Medium | Keep items with unknown dates, just label clearly |
 
 ## References
 
 ### Internal References
-
 - Reddit search: `scripts/lib/openai_reddit.py:25-63`
 - X search (working example): `scripts/lib/xai_x.py:26-55`
 - Date confidence: `scripts/lib/dates.py:62-90`
@@ -335,6 +324,5 @@ Run same query before and after fix:
 - Normalization: `scripts/lib/normalize.py:49,99`
 
 ### External References
-
 - OpenAI Responses API lacks native date filtering
 - Must rely on prompt engineering + post-processing

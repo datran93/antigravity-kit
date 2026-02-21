@@ -2,13 +2,11 @@
 
 ## Overview
 
-Chain-of-Thought (CoT) prompting elicits step-by-step reasoning from LLMs, dramatically improving performance on complex
-reasoning, math, and logic tasks.
+Chain-of-Thought (CoT) prompting elicits step-by-step reasoning from LLMs, dramatically improving performance on complex reasoning, math, and logic tasks.
 
 ## Core Techniques
 
 ### Zero-Shot CoT
-
 Add a simple trigger phrase to elicit reasoning:
 
 ```python
@@ -31,7 +29,6 @@ prompt = zero_shot_cot(query)
 ```
 
 ### Few-Shot CoT
-
 Provide examples with explicit reasoning chains:
 
 ```python
@@ -56,7 +53,6 @@ A: Let's think step by step:"""
 ```
 
 ### Self-Consistency
-
 Generate multiple reasoning paths and take the majority vote:
 
 ```python
@@ -89,7 +85,6 @@ def self_consistency_cot(query, n=5, temperature=0.7):
 ## Advanced Patterns
 
 ### Least-to-Most Prompting
-
 Break complex problems into simpler subproblems:
 
 ```python
@@ -130,7 +125,6 @@ Final Answer:"""
 ```
 
 ### Tree-of-Thought (ToT)
-
 Explore multiple reasoning branches:
 
 ```python
@@ -182,7 +176,6 @@ Score:"""
 ```
 
 ### Verification Step
-
 Add explicit verification to catch errors:
 
 ```python
@@ -227,7 +220,6 @@ Corrected solution:"""
 ## Domain-Specific CoT
 
 ### Math Problems
-
 ```python
 math_cot_template = """
 Problem: {problem}
@@ -256,7 +248,6 @@ Answer: {final_answer}
 ```
 
 ### Code Debugging
-
 ```python
 debug_cot_template = """
 Code with error:
@@ -287,7 +278,6 @@ Fixed code:
 ```
 
 ### Logical Reasoning
-
 ```python
 logic_cot_template = """
 Premises:
@@ -315,7 +305,6 @@ Answer: {final_answer}
 ## Performance Optimization
 
 ### Caching Reasoning Patterns
-
 ```python
 class ReasoningCache:
     def __init__(self):
@@ -339,7 +328,6 @@ class ReasoningCache:
 ```
 
 ### Adaptive Reasoning Depth
-
 ```python
 def adaptive_cot(problem, initial_depth=3):
     depth = initial_depth
@@ -390,7 +378,6 @@ def evaluate_cot_quality(reasoning_chain):
 ## When to Use CoT
 
 **Use CoT for:**
-
 - Math and arithmetic problems
 - Logical reasoning tasks
 - Multi-step planning
@@ -398,7 +385,6 @@ def evaluate_cot_quality(reasoning_chain):
 - Complex decision making
 
 **Skip CoT for:**
-
 - Simple factual queries
 - Direct lookups
 - Creative writing

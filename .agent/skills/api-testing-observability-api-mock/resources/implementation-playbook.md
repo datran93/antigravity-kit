@@ -1260,7 +1260,10 @@ class MockDocumentationGenerator:
 {json.dumps(endpoint.get('response_example', {}), indent=2)}
 ```
 
-**Scenarios**: {self.\_format_endpoint_scenarios(endpoint)} """ return doc
+**Scenarios**:
+{self.\_format_endpoint_scenarios(endpoint)}
+"""
+return doc
 
     def create_interactive_docs(self):
         """Create interactive API documentation"""
@@ -1321,5 +1324,4 @@ class MockDocumentationGenerator:
 9. **Deployment Guide**: Mock server deployment configurations
 10. **Documentation**: Auto-generated mock API documentation
 
-Focus on creating flexible, realistic mock services that enable efficient development, thorough testing, and reliable
-API simulation for all stages of the development lifecycle.
+Focus on creating flexible, realistic mock services that enable efficient development, thorough testing, and reliable API simulation for all stages of the development lifecycle.

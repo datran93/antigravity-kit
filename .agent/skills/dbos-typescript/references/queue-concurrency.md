@@ -46,10 +46,8 @@ app.post("/events", async (req, res) => {
 });
 ```
 
-Worker concurrency is recommended for most use cases. Take care with global concurrency as any `PENDING` workflow on the
-queue counts toward the limit, including workflows from previous application versions.
+Worker concurrency is recommended for most use cases. Take care with global concurrency as any `PENDING` workflow on the queue counts toward the limit, including workflows from previous application versions.
 
-When using worker concurrency, each process must have a unique `executorID` set in configuration (this is automatic with
-DBOS Conductor or Cloud).
+When using worker concurrency, each process must have a unique `executorID` set in configuration (this is automatic with DBOS Conductor or Cloud).
 
 Reference: [Managing Concurrency](https://docs.dbos.dev/typescript/tutorials/queue-tutorial#managing-concurrency)

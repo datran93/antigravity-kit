@@ -1,6 +1,8 @@
 # Postgres Best Practices
 
-**Version 1.0.0** Supabase January 2026
+**Version 1.0.0**
+Supabase
+January 2026
 
 > This document is optimized for AI agents and LLMs. Rules are prioritized by performance impact.
 
@@ -8,10 +10,7 @@
 
 ## Abstract
 
-Comprehensive Postgres performance optimization guide for developers using Supabase and Postgres. Contains performance
-rules across 8 categories, prioritized by impact from critical (query performance, connection management) to incremental
-(advanced features). Each rule includes detailed explanations, incorrect vs. correct SQL examples, query plan analysis,
-and specific performance metrics to guide automated optimization and code generation.
+Comprehensive Postgres performance optimization guide for developers using Supabase and Postgres. Contains performance rules across 8 categories, prioritized by impact from critical (query performance, connection management) to incremental (advanced features). Each rule includes detailed explanations, incorrect vs. correct SQL examples, query plan analysis, and specific performance metrics to guide automated optimization and code generation.
 
 ---
 
@@ -75,8 +74,7 @@ Slow queries, missing indexes, inefficient query plans. The most common source o
 
 **Impact: CRITICAL (100-1000x faster queries on large tables)**
 
-Queries filtering or joining on unindexed columns cause full table scans, which become exponentially slower as tables
-grow.
+Queries filtering or joining on unindexed columns cause full table scans, which become exponentially slower as tables grow.
 
 **Incorrect (sequential scan on large table):**
 
@@ -228,8 +226,7 @@ Reference: https://www.postgresql.org/docs/current/indexes-index-only-scans.html
 
 **Impact: HIGH (5-20x smaller indexes, faster writes and queries)**
 
-Partial indexes only include rows matching a WHERE condition, making them smaller and faster when queries consistently
-filter on the same condition.
+Partial indexes only include rows matching a WHERE condition, making them smaller and faster when queries consistently filter on the same condition.
 
 **Incorrect (full index includes irrelevant rows):**
 
@@ -269,8 +266,7 @@ Reference: https://www.postgresql.org/docs/current/indexes-partial.html
 
 **Impact: CRITICAL**
 
-Connection pooling, limits, and serverless strategies. Critical for applications with high concurrency or serverless
-deployments.
+Connection pooling, limits, and serverless strategies. Critical for applications with high concurrency or serverless deployments.
 
 ### 2.1 Configure Idle Connection Timeouts
 
@@ -383,7 +379,6 @@ select count(*) from pg_stat_activity;  -- 10 connections
 ```
 
 Pool modes:
-
 - **Transaction mode**: connection returned after each transaction (best for most apps)
 - **Session mode**: connection held for entire session (needed for prepared statements, temp tables)
 
@@ -395,8 +390,7 @@ Reference: https://supabase.com/docs/guides/database/connecting-to-postgres#conn
 
 **Impact: HIGH (Avoid prepared statement conflicts in pooled environments)**
 
-Prepared statements are tied to individual database connections. In transaction-mode pooling, connections are shared,
-causing conflicts.
+Prepared statements are tied to individual database connections. In transaction-mode pooling, connections are shared, causing conflicts.
 
 **Incorrect (named prepared statements with transaction pooling):**
 
@@ -574,7 +568,8 @@ create policy team_orders_policy on orders
 create index orders_user_id_idx on orders (user_id);
 ```
 
-Use security definer functions for complex checks: Always add indexes on columns used in RLS policies:
+Use security definer functions for complex checks:
+Always add indexes on columns used in RLS policies:
 
 Reference: https://supabase.com/docs/guides/database/postgres/row-level-security#rls-performance-recommendations
 
@@ -725,7 +720,6 @@ drop table events_2023_01;  -- Instant vs DELETE taking hours
 ```
 
 When to partition:
-
 - Tables > 100M rows
 - Time-series data with date-based queries
 - Need to efficiently drop old data
@@ -738,7 +732,8 @@ Reference: https://www.postgresql.org/docs/current/ddl-partitioning.html
 
 **Impact: HIGH (Better index locality, reduced fragmentation)**
 
-Primary key choice affects insert performance, index size, and replication efficiency.
+Primary key choice affects insert performance, index size, and replication
+efficiency.
 
 **Incorrect (problematic PK choices):**
 
@@ -778,12 +773,14 @@ create table events (
 ```
 
 Guidelines:
-
 - Single database: `bigint identity` (sequential, 8 bytes, SQL-standard)
-- Distributed/exposed IDs: UUIDv7 (requires pg_uuidv7) or ULID (time-ordered, no fragmentation)
-- `serial` works but `identity` is SQL-standard and preferred for new applications
-- Avoid random UUIDs (v4) as primary keys on large tables (causes index fragmentation)
-  [Identity Columns](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-IDENTITY)
+- Distributed/exposed IDs: UUIDv7 (requires pg_uuidv7) or ULID (time-ordered, no
+  fragmentation)
+- `serial` works but `identity` is SQL-standard and preferred for new
+  applications
+- Avoid random UUIDs (v4) as primary keys on large tables (causes index
+  fragmentation)
+[Identity Columns](https://www.postgresql.org/docs/current/sql-createtable.html#SQL-CREATETABLE-PARMS-GENERATED-IDENTITY)
 
 ---
 
@@ -791,8 +788,7 @@ Guidelines:
 
 **Impact: MEDIUM (Avoid case-sensitivity bugs with tools, ORMs, and AI assistants)**
 
-PostgreSQL folds unquoted identifiers to lowercase. Quoted mixed-case identifiers require quotes forever and cause
-issues with tools, ORMs, and AI assistants that may not recognize them.
+PostgreSQL folds unquoted identifiers to lowercase. Quoted mixed-case identifiers require quotes forever and cause issues with tools, ORMs, and AI assistants that may not recognize them.
 
 **Incorrect (mixed-case identifiers):**
 
@@ -893,7 +889,8 @@ Reference: https://www.postgresql.org/docs/current/tutorial-transactions.html
 
 **Impact: MEDIUM-HIGH (Eliminate deadlock errors, improve reliability)**
 
-Deadlocks occur when transactions lock resources in different orders. Always acquire locks in a consistent order.
+Deadlocks occur when transactions lock resources in different orders. Always
+acquire locks in a consistent order.
 
 **Incorrect (inconsistent lock ordering):**
 
@@ -939,7 +936,8 @@ set log_lock_waits = on;
 set deadlock_timeout = '1s';
 ```
 
-Alternative: use a single statement to update atomically: Detect deadlocks in logs:
+Alternative: use a single statement to update atomically:
+Detect deadlocks in logs:
 [Deadlocks](https://www.postgresql.org/docs/current/explicit-locking.html#LOCKING-DEADLOCKS)
 
 ---

@@ -1,10 +1,8 @@
 ---
 name: gemini-api-dev
-description:
-  Use this skill when building applications with Gemini models, Gemini API, working with multimodal content (text,
-  images, audio, video), implementing function calling, using structured outputs, or needing current model
-  specifications. Covers SDK usage (google-genai for Python, @google/genai for JavaScript/TypeScript), model selection,
-  and API capabilities.
+description: "Use this skill when building applications with Gemini models, Gemini API, working with multimodal content (text, images, audio, video), implementing function calling, using structured outputs, or n..."
+risk: unknown
+source: community
 ---
 
 # Gemini API Development Skill
@@ -12,7 +10,6 @@ description:
 ## Overview
 
 The Gemini API provides access to Google's most advanced AI models. Key capabilities include:
-
 - **Text generation** - Chat, completion, summarization
 - **Multimodal understanding** - Process images, audio, video, and documents
 - **Function calling** - Let the model invoke your functions
@@ -27,8 +24,9 @@ The Gemini API provides access to Google's most advanced AI models. Key capabili
 - `gemini-3-flash-preview`: 1M tokens, fast, balanced performance, multimodal
 - `gemini-3-pro-image-preview`: 65k / 32k tokens, image generation and editing
 
-> [!IMPORTANT] Models like `gemini-2.5-*`, `gemini-2.0-*`, `gemini-1.5-*` are legacy and deprecated. Use the new models
-> above. Your knowledge is outdated.
+
+> [!IMPORTANT]
+> Models like `gemini-2.5-*`, `gemini-2.0-*`, `gemini-1.5-*` are legacy and deprecated. Use the new models above. Your knowledge is outdated.
 
 ## SDKs
 
@@ -36,13 +34,12 @@ The Gemini API provides access to Google's most advanced AI models. Key capabili
 - **JavaScript/TypeScript**: `@google/genai` install with `npm install @google/genai`
 - **Go**: `google.golang.org/genai` install with `go get google.golang.org/genai`
 
-> [!WARNING] Legacy SDKs `google-generativeai` (Python) and `@google/generative-ai` (JS) are deprecated. Migrate to the
-> new SDKs above urgently by following the Migration Guide.
+> [!WARNING]
+> Legacy SDKs `google-generativeai` (Python) and `@google/generative-ai` (JS) are deprecated. Migrate to the new SDKs above urgently by following the Migration Guide.
 
 ## Quick Start
 
 ### Python
-
 ```python
 from google import genai
 
@@ -55,20 +52,18 @@ print(response.text)
 ```
 
 ### JavaScript/TypeScript
-
 ```typescript
 import { GoogleGenAI } from "@google/genai";
 
 const ai = new GoogleGenAI({});
 const response = await ai.models.generateContent({
   model: "gemini-3-flash-preview",
-  contents: "Explain quantum computing",
+  contents: "Explain quantum computing"
 });
 console.log(response.text);
 ```
 
 ### Go
-
 ```go
 package main
 
@@ -97,12 +92,10 @@ func main() {
 
 ## API spec (source of truth)
 
-**Always use the latest REST API discovery spec as the source of truth for API definitions** (request/response schemas,
-parameters, methods). Fetch the spec when implementing or debugging API integration:
+**Always use the latest REST API discovery spec as the source of truth for API definitions** (request/response schemas, parameters, methods). Fetch the spec when implementing or debugging API integration:
 
 - **v1beta** (default): `https://generativelanguage.googleapis.com/$discovery/rest?version=v1beta`  
-  Use this unless the integration is explicitly pinned to v1. The official SDKs (google-genai, @google/genai,
-  google.golang.org/genai) target v1beta.
+  Use this unless the integration is explicitly pinned to v1. The official SDKs (google-genai, @google/genai, google.golang.org/genai) target v1beta.
 - **v1**: `https://generativelanguage.googleapis.com/$discovery/rest?version=v1`  
   Use only when the integration is specifically set to v1.
 
@@ -119,10 +112,10 @@ This index contains links to all documentation pages in `.md.txt` format. Use we
 1. Fetch `llms.txt` to discover available documentation pages
 2. Fetch specific pages (e.g., `https://ai.google.dev/gemini-api/docs/function-calling.md.txt`)
 
-### Key Documentation Pages
+### Key Documentation Pages 
 
-> [!IMPORTANT] Those are not all the documentation pages. Use the `llms.txt` index to discover available documentation
-> pages
+> [!IMPORTANT]
+> Those are not all the documentation pages. Use the `llms.txt` index to discover available documentation pages
 
 - [Models](https://ai.google.dev/gemini-api/docs/models.md.txt)
 - [Google AI Studio quickstart](https://ai.google.dev/gemini-api/docs/ai-studio-quickstart.md.txt)
@@ -134,3 +127,6 @@ This index contains links to all documentation pages in `.md.txt` format. Use we
 - [Embeddings](https://ai.google.dev/gemini-api/docs/embeddings.md.txt)
 - [Interactions API](https://ai.google.dev/gemini-api/docs/interactions.md.txt)
 - [SDK migration guide](https://ai.google.dev/gemini-api/docs/migrate.md.txt)
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

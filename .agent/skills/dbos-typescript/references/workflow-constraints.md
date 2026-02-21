@@ -32,7 +32,7 @@ async function myWorkflowFn() {
 ```typescript
 async function fetchData() {
   // Steps only do external operations
-  return await fetch("https://api.example.com").then((r) => r.json());
+  return await fetch("https://api.example.com").then(r => r.json());
 }
 
 async function myWorkflowFn() {
@@ -48,7 +48,6 @@ const myWorkflow = DBOS.registerWorkflow(myWorkflowFn);
 ```
 
 Additional constraints:
-
 - Don't modify global variables from workflows or steps
 - Steps in parallel must start in deterministic order:
 

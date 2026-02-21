@@ -1,10 +1,9 @@
 ---
 name: azure-mgmt-mongodbatlas-dotnet
-description:
-  Manage MongoDB Atlas Organizations as Azure ARM resources using Azure.ResourceManager.MongoDBAtlas SDK. Use when
-  creating, updating, listing, or deleting MongoDB Atlas organizations through Azure Marketplace integration. This SDK
-  manages the Azure-side organization resource, not Atlas clusters/databases directly.
+description: "Manage MongoDB Atlas Organizations as Azure ARM resources using Azure.ResourceManager.MongoDBAtlas SDK. Use when creating, updating, listing, or deleting MongoDB Atlas organizations through Azure M..."
 package: Azure.ResourceManager.MongoDBAtlas
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.MongoDBAtlas SDK
@@ -13,13 +12,13 @@ Manage MongoDB Atlas Organizations as Azure ARM resources with unified billing t
 
 ## Package Information
 
-| Property      | Value                                                                                                   |
-| ------------- | ------------------------------------------------------------------------------------------------------- |
-| Package       | `Azure.ResourceManager.MongoDBAtlas`                                                                    |
-| Version       | 1.0.0 (GA)                                                                                              |
-| API Version   | 2025-06-01                                                                                              |
-| Resource Type | `MongoDB.Atlas/organizations`                                                                           |
-| NuGet         | [Azure.ResourceManager.MongoDBAtlas](https://www.nuget.org/packages/Azure.ResourceManager.MongoDBAtlas) |
+| Property | Value |
+|----------|-------|
+| Package | `Azure.ResourceManager.MongoDBAtlas` |
+| Version | 1.0.0 (GA) |
+| API Version | 2025-06-01 |
+| Resource Type | `MongoDB.Atlas/organizations` |
+| NuGet | [Azure.ResourceManager.MongoDBAtlas](https://www.nuget.org/packages/Azure.ResourceManager.MongoDBAtlas) |
 
 ## Installation
 
@@ -31,9 +30,7 @@ dotnet add package Azure.ResourceManager
 
 ## Important Scope Limitation
 
-This SDK manages **MongoDB Atlas Organizations as Azure ARM resources** for marketplace integration. It does NOT
-directly manage:
-
+This SDK manages **MongoDB Atlas Organizations as Azure ARM resources** for marketplace integration. It does NOT directly manage:
 - Atlas clusters
 - Databases
 - Collections
@@ -56,16 +53,16 @@ var armClient = new ArmClient(credential);
 
 ## Core Types
 
-| Type                                 | Purpose                                         |
-| ------------------------------------ | ----------------------------------------------- |
-| `MongoDBAtlasOrganizationResource`   | ARM resource representing an Atlas organization |
+| Type | Purpose |
+|------|---------|
+| `MongoDBAtlasOrganizationResource` | ARM resource representing an Atlas organization |
 | `MongoDBAtlasOrganizationCollection` | Collection of organizations in a resource group |
-| `MongoDBAtlasOrganizationData`       | Data model for organization resource            |
-| `MongoDBAtlasOrganizationProperties` | Organization-specific properties                |
-| `MongoDBAtlasMarketplaceDetails`     | Azure Marketplace subscription details          |
-| `MongoDBAtlasOfferDetails`           | Marketplace offer configuration                 |
-| `MongoDBAtlasUserDetails`            | User information for the organization           |
-| `MongoDBAtlasPartnerProperties`      | MongoDB-specific properties (org name, ID)      |
+| `MongoDBAtlasOrganizationData` | Data model for organization resource |
+| `MongoDBAtlasOrganizationProperties` | Organization-specific properties |
+| `MongoDBAtlasMarketplaceDetails` | Azure Marketplace subscription details |
+| `MongoDBAtlasOfferDetails` | Marketplace offer configuration |
+| `MongoDBAtlasUserDetails` | User information for the organization |
+| `MongoDBAtlasPartnerProperties` | MongoDB-specific properties (org name, ID) |
 
 ## Workflows
 
@@ -77,7 +74,7 @@ var subscription = await armClient.GetDefaultSubscriptionAsync();
 var resourceGroup = await subscription.GetResourceGroupAsync("my-resource-group");
 
 // Get organizations collection
-MongoDBAtlasOrganizationCollection organizations =
+MongoDBAtlasOrganizationCollection organizations = 
     resourceGroup.Value.GetMongoDBAtlasOrganizations();
 ```
 
@@ -135,7 +132,7 @@ Console.WriteLine($"Created: {organization.Id}");
 
 ```csharp
 // Option 1: From collection
-MongoDBAtlasOrganizationResource org =
+MongoDBAtlasOrganizationResource org = 
     await organizations.GetAsync("my-atlas-org");
 
 // Option 2: From resource identifier
@@ -144,7 +141,7 @@ var resourceId = MongoDBAtlasOrganizationResource.CreateResourceIdentifier(
     resourceGroupName: "my-resource-group",
     organizationName: "my-atlas-org"
 );
-MongoDBAtlasOrganizationResource org2 =
+MongoDBAtlasOrganizationResource org2 = 
     armClient.GetMongoDBAtlasOrganizationResource(resourceId);
 await org2.GetAsync(); // Fetch data
 ```
@@ -217,68 +214,68 @@ await organization.DeleteAsync(WaitUntil.Completed);
 
 ### MongoDBAtlasOrganizationProperties
 
-| Property            | Type                                    | Description                                |
-| ------------------- | --------------------------------------- | ------------------------------------------ |
-| `Marketplace`       | `MongoDBAtlasMarketplaceDetails`        | Required. Marketplace subscription details |
-| `User`              | `MongoDBAtlasUserDetails`               | Required. Organization admin user          |
-| `PartnerProperties` | `MongoDBAtlasPartnerProperties`         | MongoDB-specific properties                |
-| `ProvisioningState` | `MongoDBAtlasResourceProvisioningState` | Read-only. Current provisioning state      |
+| Property | Type | Description |
+|----------|------|-------------|
+| `Marketplace` | `MongoDBAtlasMarketplaceDetails` | Required. Marketplace subscription details |
+| `User` | `MongoDBAtlasUserDetails` | Required. Organization admin user |
+| `PartnerProperties` | `MongoDBAtlasPartnerProperties` | MongoDB-specific properties |
+| `ProvisioningState` | `MongoDBAtlasResourceProvisioningState` | Read-only. Current provisioning state |
 
 ### MongoDBAtlasMarketplaceDetails
 
-| Property             | Type                            | Description                                 |
-| -------------------- | ------------------------------- | ------------------------------------------- |
-| `SubscriptionId`     | `string`                        | Required. Azure subscription ID for billing |
-| `OfferDetails`       | `MongoDBAtlasOfferDetails`      | Required. Marketplace offer configuration   |
-| `SubscriptionStatus` | `MarketplaceSubscriptionStatus` | Read-only. Subscription status              |
+| Property | Type | Description |
+|----------|------|-------------|
+| `SubscriptionId` | `string` | Required. Azure subscription ID for billing |
+| `OfferDetails` | `MongoDBAtlasOfferDetails` | Required. Marketplace offer configuration |
+| `SubscriptionStatus` | `MarketplaceSubscriptionStatus` | Read-only. Subscription status |
 
 ### MongoDBAtlasOfferDetails
 
-| Property      | Type     | Description                                  |
-| ------------- | -------- | -------------------------------------------- |
+| Property | Type | Description |
+|----------|------|-------------|
 | `PublisherId` | `string` | Required. Publisher ID (typically "mongodb") |
-| `OfferId`     | `string` | Required. Offer ID                           |
-| `PlanId`      | `string` | Required. Plan ID                            |
-| `PlanName`    | `string` | Required. Display name of the plan           |
-| `TermUnit`    | `string` | Required. Billing term unit (e.g., "P1M")    |
-| `TermId`      | `string` | Required. Term identifier                    |
+| `OfferId` | `string` | Required. Offer ID |
+| `PlanId` | `string` | Required. Plan ID |
+| `PlanName` | `string` | Required. Display name of the plan |
+| `TermUnit` | `string` | Required. Billing term unit (e.g., "P1M") |
+| `TermId` | `string` | Required. Term identifier |
 
 ### MongoDBAtlasUserDetails
 
-| Property       | Type     | Description                   |
-| -------------- | -------- | ----------------------------- |
-| `EmailAddress` | `string` | Required. User email address  |
-| `Upn`          | `string` | Required. User principal name |
-| `FirstName`    | `string` | Optional. User first name     |
-| `LastName`     | `string` | Optional. User last name      |
+| Property | Type | Description |
+|----------|------|-------------|
+| `EmailAddress` | `string` | Required. User email address |
+| `Upn` | `string` | Required. User principal name |
+| `FirstName` | `string` | Optional. User first name |
+| `LastName` | `string` | Optional. User last name |
 
 ### MongoDBAtlasPartnerProperties
 
-| Property           | Type     | Description                              |
-| ------------------ | -------- | ---------------------------------------- |
-| `OrganizationName` | `string` | Name of the MongoDB Atlas organization   |
-| `OrganizationId`   | `string` | Read-only. MongoDB Atlas organization ID |
+| Property | Type | Description |
+|----------|------|-------------|
+| `OrganizationName` | `string` | Name of the MongoDB Atlas organization |
+| `OrganizationId` | `string` | Read-only. MongoDB Atlas organization ID |
 
 ## Provisioning States
 
-| State          | Description                             |
-| -------------- | --------------------------------------- |
-| `Succeeded`    | Resource provisioned successfully       |
-| `Failed`       | Provisioning failed                     |
-| `Canceled`     | Provisioning was canceled               |
-| `Provisioning` | Resource is being provisioned           |
-| `Updating`     | Resource is being updated               |
-| `Deleting`     | Resource is being deleted               |
-| `Accepted`     | Request accepted, provisioning starting |
+| State | Description |
+|-------|-------------|
+| `Succeeded` | Resource provisioned successfully |
+| `Failed` | Provisioning failed |
+| `Canceled` | Provisioning was canceled |
+| `Provisioning` | Resource is being provisioned |
+| `Updating` | Resource is being updated |
+| `Deleting` | Resource is being deleted |
+| `Accepted` | Request accepted, provisioning starting |
 
 ## Marketplace Subscription Status
 
-| Status                    | Description                     |
-| ------------------------- | ------------------------------- |
+| Status | Description |
+|--------|-------------|
 | `PendingFulfillmentStart` | Subscription pending activation |
-| `Subscribed`              | Active subscription             |
-| `Suspended`               | Subscription suspended          |
-| `Unsubscribed`            | Subscription canceled           |
+| `Subscribed` | Active subscription |
+| `Suspended` | Subscription suspended |
+| `Unsubscribed` | Subscription canceled |
 
 ## Best Practices
 
@@ -319,7 +316,7 @@ while (!operation.HasCompleted)
 
 ```csharp
 var org = await organizations.GetAsync("my-org");
-if (org.Value.Data.Properties?.ProvisioningState ==
+if (org.Value.Data.Properties?.ProvisioningState == 
     MongoDBAtlasResourceProvisioningState.Succeeded)
 {
     Console.WriteLine("Organization is ready");
@@ -345,15 +342,18 @@ var response = await orgResource.GetAsync();
 
 ## Common Errors
 
-| Error                 | Cause                          | Solution                              |
-| --------------------- | ------------------------------ | ------------------------------------- |
-| `ResourceNotFound`    | Organization doesn't exist     | Verify name and resource group        |
-| `AuthorizationFailed` | Insufficient permissions       | Check RBAC roles on resource group    |
-| `InvalidParameter`    | Missing required properties    | Ensure all required fields are set    |
-| `MarketplaceError`    | Marketplace subscription issue | Verify offer details and subscription |
+| Error | Cause | Solution |
+|-------|-------|----------|
+| `ResourceNotFound` | Organization doesn't exist | Verify name and resource group |
+| `AuthorizationFailed` | Insufficient permissions | Check RBAC roles on resource group |
+| `InvalidParameter` | Missing required properties | Ensure all required fields are set |
+| `MarketplaceError` | Marketplace subscription issue | Verify offer details and subscription |
 
 ## Related Resources
 
 - [Microsoft Learn: MongoDB Atlas on Azure](https://learn.microsoft.com/en-us/azure/partner-solutions/mongodb-atlas/)
 - [API Reference](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.mongodbatlas)
 - [Azure SDK for .NET](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/mongodbatlas)
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

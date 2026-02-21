@@ -1,27 +1,26 @@
 ---
 name: frontend-ui-dark-ts
-description:
-  Build dark-themed React applications using Tailwind CSS with custom theming, glassmorphism effects, and Framer Motion
-  animations. Use when creating dashboards, admin panels, or data-rich interfaces with a refined dark aesthetic.
+description: "Build dark-themed React applications using Tailwind CSS with custom theming, glassmorphism effects, and Framer Motion animations. Use when creating dashboards, admin panels, or data-rich interfaces..."
+risk: unknown
+source: community
 ---
 
 # Frontend UI Dark Theme (TypeScript)
 
-A modern dark-themed React UI system using **Tailwind CSS** and **Framer Motion**. Designed for dashboards, admin
-panels, and data-rich applications with glassmorphism effects and tasteful animations.
+A modern dark-themed React UI system using **Tailwind CSS** and **Framer Motion**. Designed for dashboards, admin panels, and data-rich applications with glassmorphism effects and tasteful animations.
 
 ## Stack
 
-| Package            | Version | Purpose       |
-| ------------------ | ------- | ------------- |
-| `react`            | ^18.x   | UI framework  |
-| `react-dom`        | ^18.x   | DOM rendering |
-| `react-router-dom` | ^6.x    | Routing       |
-| `framer-motion`    | ^11.x   | Animations    |
-| `clsx`             | ^2.x    | Class merging |
-| `tailwindcss`      | ^3.x    | Styling       |
-| `vite`             | ^5.x    | Build tool    |
-| `typescript`       | ^5.x    | Type safety   |
+| Package | Version | Purpose |
+|---------|---------|---------|
+| `react` | ^18.x | UI framework |
+| `react-dom` | ^18.x | DOM rendering |
+| `react-router-dom` | ^6.x | Routing |
+| `framer-motion` | ^11.x | Animations |
+| `clsx` | ^2.x | Class merging |
+| `tailwindcss` | ^3.x | Styling |
+| `vite` | ^5.x | Build tool |
+| `typescript` | ^5.x | Type safety |
 
 ## Quick Start
 
@@ -80,29 +79,29 @@ The HTML entry point with mobile viewport, favicons, and social meta tags:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
+    
     <!-- Favicons -->
     <link rel="icon" href="/favicon.ico" sizes="32x32" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
     <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
     <link rel="manifest" href="/site.webmanifest" />
-
+    
     <!-- Theme color for mobile browser chrome -->
     <meta name="theme-color" content="#18181B" />
-
+    
     <!-- Open Graph -->
     <meta property="og:type" content="website" />
     <meta property="og:title" content="App Name" />
     <meta property="og:description" content="App description" />
     <meta property="og:image" content="https://example.com/og-image.png" />
     <meta property="og:url" content="https://example.com" />
-
+    
     <!-- Twitter Card -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="App Name" />
     <meta name="twitter:description" content="App description" />
     <meta name="twitter:image" content="https://example.com/og-image.png" />
-
+    
     <title>App Name</title>
   </head>
   <body>
@@ -135,97 +134,97 @@ PWA manifest for installable web apps:
 ```js
 /** @type {import('tailwindcss').Config} */
 export default {
-  content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
+  content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
       fontFamily: {
-        sans: ["Segoe UI", "system-ui", "sans-serif"],
+        sans: ['Segoe UI', 'system-ui', 'sans-serif'],
       },
       colors: {
         brand: {
-          DEFAULT: "#8251EE",
-          hover: "#9366F5",
-          light: "#A37EF5",
-          subtle: "rgba(130, 81, 238, 0.15)",
+          DEFAULT: '#8251EE',
+          hover: '#9366F5',
+          light: '#A37EF5',
+          subtle: 'rgba(130, 81, 238, 0.15)',
         },
         neutral: {
-          bg1: "hsl(240, 6%, 10%)",
-          bg2: "hsl(240, 5%, 12%)",
-          bg3: "hsl(240, 5%, 14%)",
-          bg4: "hsl(240, 4%, 18%)",
-          bg5: "hsl(240, 4%, 22%)",
-          bg6: "hsl(240, 4%, 26%)",
+          bg1: 'hsl(240, 6%, 10%)',
+          bg2: 'hsl(240, 5%, 12%)',
+          bg3: 'hsl(240, 5%, 14%)',
+          bg4: 'hsl(240, 4%, 18%)',
+          bg5: 'hsl(240, 4%, 22%)',
+          bg6: 'hsl(240, 4%, 26%)',
         },
         text: {
-          primary: "#FFFFFF",
-          secondary: "#A1A1AA",
-          muted: "#71717A",
+          primary: '#FFFFFF',
+          secondary: '#A1A1AA',
+          muted: '#71717A',
         },
         border: {
-          subtle: "hsla(0, 0%, 100%, 0.08)",
-          DEFAULT: "hsla(0, 0%, 100%, 0.12)",
-          strong: "hsla(0, 0%, 100%, 0.20)",
+          subtle: 'hsla(0, 0%, 100%, 0.08)',
+          DEFAULT: 'hsla(0, 0%, 100%, 0.12)',
+          strong: 'hsla(0, 0%, 100%, 0.20)',
         },
         status: {
-          success: "#10B981",
-          warning: "#F59E0B",
-          error: "#EF4444",
-          info: "#3B82F6",
+          success: '#10B981',
+          warning: '#F59E0B',
+          error: '#EF4444',
+          info: '#3B82F6',
         },
         dataviz: {
-          purple: "#8251EE",
-          blue: "#3B82F6",
-          green: "#10B981",
-          yellow: "#F59E0B",
-          red: "#EF4444",
-          pink: "#EC4899",
-          cyan: "#06B6D4",
+          purple: '#8251EE',
+          blue: '#3B82F6',
+          green: '#10B981',
+          yellow: '#F59E0B',
+          red: '#EF4444',
+          pink: '#EC4899',
+          cyan: '#06B6D4',
         },
       },
       borderRadius: {
-        DEFAULT: "0.5rem",
-        lg: "0.75rem",
-        xl: "1rem",
+        DEFAULT: '0.5rem',
+        lg: '0.75rem',
+        xl: '1rem',
       },
       boxShadow: {
-        glow: "0 0 20px rgba(130, 81, 238, 0.3)",
-        "glow-lg": "0 0 40px rgba(130, 81, 238, 0.4)",
+        glow: '0 0 20px rgba(130, 81, 238, 0.3)',
+        'glow-lg': '0 0 40px rgba(130, 81, 238, 0.4)',
       },
       backdropBlur: {
-        xs: "2px",
+        xs: '2px',
       },
       animation: {
-        "fade-in": "fadeIn 0.3s ease-out",
-        "slide-up": "slideUp 0.3s ease-out",
-        "slide-down": "slideDown 0.3s ease-out",
+        'fade-in': 'fadeIn 0.3s ease-out',
+        'slide-up': 'slideUp 0.3s ease-out',
+        'slide-down': 'slideDown 0.3s ease-out',
       },
       keyframes: {
         fadeIn: {
-          "0%": { opacity: "0" },
-          "100%": { opacity: "1" },
+          '0%': { opacity: '0' },
+          '100%': { opacity: '1' },
         },
         slideUp: {
-          "0%": { opacity: "0", transform: "translateY(10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+          '0%': { opacity: '0', transform: 'translateY(10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
         slideDown: {
-          "0%": { opacity: "0", transform: "translateY(-10px)" },
-          "100%": { opacity: "1", transform: "translateY(0)" },
+          '0%': { opacity: '0', transform: 'translateY(-10px)' },
+          '100%': { opacity: '1', transform: 'translateY(0)' },
         },
       },
       // Mobile: safe area insets for notched devices
       spacing: {
-        "safe-top": "env(safe-area-inset-top)",
-        "safe-bottom": "env(safe-area-inset-bottom)",
-        "safe-left": "env(safe-area-inset-left)",
-        "safe-right": "env(safe-area-inset-right)",
+        'safe-top': 'env(safe-area-inset-top)',
+        'safe-bottom': 'env(safe-area-inset-bottom)',
+        'safe-left': 'env(safe-area-inset-left)',
+        'safe-right': 'env(safe-area-inset-right)',
       },
       // Mobile: minimum touch target sizes (44px per Apple/Google guidelines)
       minHeight: {
-        touch: "44px",
+        'touch': '44px',
       },
       minWidth: {
-        touch: "44px",
+        'touch': '44px',
       },
     },
   },
@@ -253,32 +252,32 @@ export default {
 
 /* Font faces */
 @font-face {
-  font-family: "Segoe UI";
-  src: url("../assets/fonts/Segoe UI.ttf") format("truetype");
+  font-family: 'Segoe UI';
+  src: url('../assets/fonts/Segoe UI.ttf') format('truetype');
   font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Segoe UI";
-  src: url("../assets/fonts/Segoe UI Bold.ttf") format("truetype");
+  font-family: 'Segoe UI';
+  src: url('../assets/fonts/Segoe UI Bold.ttf') format('truetype');
   font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Segoe UI";
-  src: url("../assets/fonts/Segoe UI Italic.ttf") format("truetype");
+  font-family: 'Segoe UI';
+  src: url('../assets/fonts/Segoe UI Italic.ttf') format('truetype');
   font-weight: 400;
   font-style: italic;
   font-display: swap;
 }
 
 @font-face {
-  font-family: "Segoe UI";
-  src: url("../assets/fonts/Segoe UI Bold Italic.ttf") format("truetype");
+  font-family: 'Segoe UI';
+  src: url('../assets/fonts/Segoe UI Bold Italic.ttf') format('truetype');
   font-weight: 700;
   font-style: italic;
   font-display: swap;
@@ -287,9 +286,9 @@ export default {
 /* CSS Custom Properties */
 :root {
   /* Brand colors */
-  --color-brand: #8251ee;
-  --color-brand-hover: #9366f5;
-  --color-brand-light: #a37ef5;
+  --color-brand: #8251EE;
+  --color-brand-hover: #9366F5;
+  --color-brand-light: #A37EF5;
   --color-brand-subtle: rgba(130, 81, 238, 0.15);
 
   /* Neutral backgrounds */
@@ -301,20 +300,20 @@ export default {
   --color-bg-6: hsl(240, 4%, 26%);
 
   /* Text colors */
-  --color-text-primary: #ffffff;
-  --color-text-secondary: #a1a1aa;
-  --color-text-muted: #71717a;
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #A1A1AA;
+  --color-text-muted: #71717A;
 
   /* Border colors */
   --color-border-subtle: hsla(0, 0%, 100%, 0.08);
   --color-border-default: hsla(0, 0%, 100%, 0.12);
-  --color-border-strong: hsla(0, 0%, 100%, 0.2);
+  --color-border-strong: hsla(0, 0%, 100%, 0.20);
 
   /* Status colors */
-  --color-success: #10b981;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --color-info: #3b82f6;
+  --color-success: #10B981;
+  --color-warning: #F59E0B;
+  --color-error: #EF4444;
+  --color-info: #3B82F6;
 
   /* Spacing */
   --spacing-xs: 0.25rem;
@@ -395,9 +394,7 @@ body {
 /* Animation utilities */
 @layer utilities {
   .animate-in {
-    animation:
-      fadeIn 0.3s ease-out,
-      slideUp 0.3s ease-out;
+    animation: fadeIn 0.3s ease-out, slideUp 0.3s ease-out;
   }
 }
 ```
@@ -405,29 +402,29 @@ body {
 ### src/main.tsx
 
 ```tsx
-import React from "react";
-import ReactDOM from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import App from "./App";
-import "./styles/globals.css";
+import React from 'react';
+import ReactDOM from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+import './styles/globals.css';
 
-ReactDOM.createRoot(document.getElementById("root")!).render(
+ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
     <BrowserRouter>
       <App />
     </BrowserRouter>
-  </React.StrictMode>,
+  </React.StrictMode>
 );
 ```
 
 ### src/App.tsx
 
 ```tsx
-import { Routes, Route } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
-import { AppShell } from "./components/layout/AppShell";
-import { Dashboard } from "./pages/Dashboard";
-import { Settings } from "./pages/Settings";
+import { Routes, Route } from 'react-router-dom';
+import { AnimatePresence } from 'framer-motion';
+import { AppShell } from './components/layout/AppShell';
+import { Dashboard } from './pages/Dashboard';
+import { Settings } from './pages/Settings';
 
 export default function App() {
   return (
@@ -461,14 +458,14 @@ export const slideUp = {
   initial: { opacity: 0, y: 20 },
   animate: { opacity: 1, y: 0 },
   exit: { opacity: 0, y: 20 },
-  transition: { duration: 0.3, ease: "easeOut" },
+  transition: { duration: 0.3, ease: 'easeOut' },
 };
 
 // Scale on hover (for buttons/cards)
 export const scaleOnHover = {
   whileHover: { scale: 1.02 },
   whileTap: { scale: 0.98 },
-  transition: { type: "spring", stiffness: 400, damping: 17 },
+  transition: { type: 'spring', stiffness: 400, damping: 17 },
 };
 
 // Stagger children
@@ -488,7 +485,7 @@ export const staggerItem = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.2, ease: "easeOut" },
+    transition: { duration: 0.2, ease: 'easeOut' },
   },
 };
 ```
@@ -496,8 +493,8 @@ export const staggerItem = {
 ### Page Transition Wrapper
 
 ```tsx
-import { motion } from "framer-motion";
-import { ReactNode } from "react";
+import { motion } from 'framer-motion';
+import { ReactNode } from 'react';
 
 interface PageTransitionProps {
   children: ReactNode;
@@ -509,7 +506,7 @@ export function PageTransition({ children }: PageTransitionProps) {
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, y: -20 }}
-      transition={{ duration: 0.3, ease: "easeOut" }}
+      transition={{ duration: 0.3, ease: 'easeOut' }}
     >
       {children}
     </motion.div>
@@ -532,7 +529,9 @@ export function PageTransition({ children }: PageTransitionProps) {
 
 ```tsx
 <aside className="glass-panel w-64 h-screen p-4">
-  <nav className="space-y-2">{/* Navigation items */}</nav>
+  <nav className="space-y-2">
+    {/* Navigation items */}
+  </nav>
 </aside>
 ```
 
@@ -558,34 +557,37 @@ export function PageTransition({ children }: PageTransitionProps) {
 
 ## Typography
 
-| Element       | Classes                                    |
-| ------------- | ------------------------------------------ |
-| Page title    | `text-2xl font-semibold text-text-primary` |
-| Section title | `text-lg font-semibold text-text-primary`  |
-| Card title    | `text-base font-medium text-text-primary`  |
-| Body text     | `text-sm text-text-secondary`              |
-| Caption       | `text-xs text-text-muted`                  |
-| Label         | `text-sm font-medium text-text-secondary`  |
+| Element | Classes |
+|---------|---------|
+| Page title | `text-2xl font-semibold text-text-primary` |
+| Section title | `text-lg font-semibold text-text-primary` |
+| Card title | `text-base font-medium text-text-primary` |
+| Body text | `text-sm text-text-secondary` |
+| Caption | `text-xs text-text-muted` |
+| Label | `text-sm font-medium text-text-secondary` |
 
 ## Color Usage
 
-| Use Case         | Color          | Class                  |
-| ---------------- | -------------- | ---------------------- |
-| Primary action   | Brand purple   | `bg-brand text-white`  |
-| Primary hover    | Brand hover    | `hover:bg-brand-hover` |
-| Page background  | Neutral bg1    | `bg-neutral-bg1`       |
-| Card background  | Neutral bg2    | `bg-neutral-bg2`       |
-| Elevated surface | Neutral bg3    | `bg-neutral-bg3`       |
-| Input background | Neutral bg2    | `bg-neutral-bg2`       |
-| Input focus      | Neutral bg3    | `focus:bg-neutral-bg3` |
-| Border default   | Border default | `border-border`        |
-| Border subtle    | Border subtle  | `border-border-subtle` |
-| Success          | Status success | `text-status-success`  |
-| Warning          | Status warning | `text-status-warning`  |
-| Error            | Status error   | `text-status-error`    |
+| Use Case | Color | Class |
+|----------|-------|-------|
+| Primary action | Brand purple | `bg-brand text-white` |
+| Primary hover | Brand hover | `hover:bg-brand-hover` |
+| Page background | Neutral bg1 | `bg-neutral-bg1` |
+| Card background | Neutral bg2 | `bg-neutral-bg2` |
+| Elevated surface | Neutral bg3 | `bg-neutral-bg3` |
+| Input background | Neutral bg2 | `bg-neutral-bg2` |
+| Input focus | Neutral bg3 | `focus:bg-neutral-bg3` |
+| Border default | Border default | `border-border` |
+| Border subtle | Border subtle | `border-border-subtle` |
+| Success | Status success | `text-status-success` |
+| Warning | Status warning | `text-status-warning` |
+| Error | Status error | `text-status-error` |
 
 ## Related Files
 
-- [Design Tokens](./references/design-tokens.md) — Complete color system, spacing, typography scales
-- [Components](./references/components.md) — Button, Card, Input, Dialog, Tabs, and more
-- [Patterns](./references/patterns.md) — Page layouts, navigation, lists, forms
+- Design Tokens — Complete color system, spacing, typography scales
+- Components — Button, Card, Input, Dialog, Tabs, and more
+- Patterns — Page layouts, navigation, lists, forms
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

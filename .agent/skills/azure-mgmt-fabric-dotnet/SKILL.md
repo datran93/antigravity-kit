@@ -1,16 +1,18 @@
 ---
 name: azure-mgmt-fabric-dotnet
-description: |
+description: "|"
   Azure Resource Manager SDK for Fabric in .NET. Use for MANAGEMENT PLANE operations: provisioning, scaling, suspending/resuming Microsoft Fabric capacities, checking name availability, and listing SKUs via Azure Resource Manager. Triggers: "Fabric capacity", "create capacity", "suspend capacity", "resume capacity", "Fabric SKU", "provision Fabric", "ARM Fabric", "FabricCapacityResource".
 package: Azure.ResourceManager.Fabric
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.Fabric (.NET)
 
 Management plane SDK for provisioning and managing Microsoft Fabric capacity resources via Azure Resource Manager.
 
-> **Management Plane Only** This SDK manages Fabric _capacities_ (compute resources). For working with Fabric
-> workspaces, lakehouses, warehouses, and data items, use the Microsoft Fabric REST API or data plane SDKs.
+> **Management Plane Only**
+> This SDK manages Fabric *capacities* (compute resources). For working with Fabric workspaces, lakehouses, warehouses, and data items, use the Microsoft Fabric REST API or data plane SDKs.
 
 ## Installation
 
@@ -218,41 +220,40 @@ await foreach (var skuDetails in capacity.Value.GetSkusForCapacityAsync())
 ## SKU Reference
 
 | SKU Name | Capacity Units (CU) | Power BI Equivalent |
-| -------- | ------------------- | ------------------- |
-| F2       | 2                   | -                   |
-| F4       | 4                   | -                   |
-| F8       | 8                   | EM1/A1              |
-| F16      | 16                  | EM2/A2              |
-| F32      | 32                  | EM3/A3              |
-| F64      | 64                  | P1/A4               |
-| F128     | 128                 | P2/A5               |
-| F256     | 256                 | P3/A6               |
-| F512     | 512                 | P4/A7               |
-| F1024    | 1024                | P5/A8               |
-| F2048    | 2048                | -                   |
+|----------|---------------------|---------------------|
+| F2 | 2 | - |
+| F4 | 4 | - |
+| F8 | 8 | EM1/A1 |
+| F16 | 16 | EM2/A2 |
+| F32 | 32 | EM3/A3 |
+| F64 | 64 | P1/A4 |
+| F128 | 128 | P2/A5 |
+| F256 | 256 | P3/A6 |
+| F512 | 512 | P4/A7 |
+| F1024 | 1024 | P5/A8 |
+| F2048 | 2048 | - |
 
 ## Key Types Reference
 
-| Type                            | Purpose                                       |
-| ------------------------------- | --------------------------------------------- |
-| `ArmClient`                     | Entry point for all ARM operations            |
-| `FabricCapacityResource`        | Represents a Fabric capacity instance         |
-| `FabricCapacityCollection`      | Collection for capacity CRUD operations       |
-| `FabricCapacityData`            | Capacity creation/read data model             |
-| `FabricCapacityPatch`           | Capacity update payload                       |
-| `FabricCapacityProperties`      | Capacity properties (administration, state)   |
-| `FabricCapacityAdministration`  | Admin members configuration                   |
-| `FabricSku`                     | SKU configuration (name and tier)             |
-| `FabricSkuTier`                 | Pricing tier (currently only "Fabric")        |
-| `FabricProvisioningState`       | Provisioning states (Succeeded, Failed, etc.) |
-| `FabricResourceState`           | Resource states (Active, Suspended, etc.)     |
-| `FabricNameAvailabilityContent` | Name availability check request               |
-| `FabricNameAvailabilityResult`  | Name availability check response              |
+| Type | Purpose |
+|------|---------|
+| `ArmClient` | Entry point for all ARM operations |
+| `FabricCapacityResource` | Represents a Fabric capacity instance |
+| `FabricCapacityCollection` | Collection for capacity CRUD operations |
+| `FabricCapacityData` | Capacity creation/read data model |
+| `FabricCapacityPatch` | Capacity update payload |
+| `FabricCapacityProperties` | Capacity properties (administration, state) |
+| `FabricCapacityAdministration` | Admin members configuration |
+| `FabricSku` | SKU configuration (name and tier) |
+| `FabricSkuTier` | Pricing tier (currently only "Fabric") |
+| `FabricProvisioningState` | Provisioning states (Succeeded, Failed, etc.) |
+| `FabricResourceState` | Resource states (Active, Suspended, etc.) |
+| `FabricNameAvailabilityContent` | Name availability check request |
+| `FabricNameAvailabilityResult` | Name availability check response |
 
 ## Provisioning and Resource States
 
 ### Provisioning States (`FabricProvisioningState`)
-
 - `Succeeded` - Operation completed successfully
 - `Failed` - Operation failed
 - `Canceled` - Operation was canceled
@@ -261,7 +262,6 @@ await foreach (var skuDetails in capacity.Value.GetSkusForCapacityAsync())
 - `Updating` - Update operation in progress
 
 ### Resource States (`FabricResourceState`)
-
 - `Active` - Capacity is running and available
 - `Provisioning` - Being provisioned
 - `Failed` - In failed state
@@ -325,12 +325,12 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                            | Purpose                      | Install                                                |
-| ------------------------------ | ---------------------------- | ------------------------------------------------------ |
-| `Azure.ResourceManager.Fabric` | Management plane (this SDK)  | `dotnet add package Azure.ResourceManager.Fabric`      |
-| `Microsoft.Fabric.Api`         | Data plane operations (beta) | `dotnet add package Microsoft.Fabric.Api --prerelease` |
-| `Azure.ResourceManager`        | Core ARM SDK                 | `dotnet add package Azure.ResourceManager`             |
-| `Azure.Identity`               | Authentication               | `dotnet add package Azure.Identity`                    |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.ResourceManager.Fabric` | Management plane (this SDK) | `dotnet add package Azure.ResourceManager.Fabric` |
+| `Microsoft.Fabric.Api` | Data plane operations (beta) | `dotnet add package Microsoft.Fabric.Api --prerelease` |
+| `Azure.ResourceManager` | Core ARM SDK | `dotnet add package Azure.ResourceManager` |
+| `Azure.Identity` | Authentication | `dotnet add package Azure.Identity` |
 
 ## References
 
@@ -338,3 +338,6 @@ catch (RequestFailedException ex)
 - [GitHub Source](https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/fabric/Azure.ResourceManager.Fabric)
 - [Microsoft Fabric Documentation](https://learn.microsoft.com/fabric/)
 - [Fabric Capacity Management](https://learn.microsoft.com/fabric/admin/service-admin-portal-capacity-settings)
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

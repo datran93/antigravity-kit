@@ -7,8 +7,7 @@ tags: step, external, api, checkpoint
 
 ## Use Steps for External Operations
 
-Any function that performs complex operations, accesses external APIs, or has side effects should be a step. Step
-results are checkpointed, enabling workflow recovery.
+Any function that performs complex operations, accesses external APIs, or has side effects should be a step. Step results are checkpointed, enabling workflow recovery.
 
 **Incorrect (external call in workflow):**
 
@@ -25,7 +24,7 @@ const myWorkflow = DBOS.registerWorkflow(myWorkflowFn);
 
 ```typescript
 async function fetchData() {
-  return await fetch("https://api.example.com/data").then((r) => r.json());
+  return await fetch("https://api.example.com/data").then(r => r.json());
 }
 
 async function myWorkflowFn() {
@@ -39,24 +38,22 @@ const myWorkflow = DBOS.registerWorkflow(myWorkflowFn);
 
 ```typescript
 async function myWorkflowFn() {
-  const data = await DBOS.runStep(() => fetch("https://api.example.com/data").then((r) => r.json()), {
-    name: "fetchData",
-  });
+  const data = await DBOS.runStep(
+    () => fetch("https://api.example.com/data").then(r => r.json()),
+    { name: "fetchData" }
+  );
   return data;
 }
 ```
 
-Alternatively, you can use `DBOS.registerStep` to pre-register a step or `@DBOS.step()` as a class decorator, but
-`DBOS.runStep` is preferred for most use cases.
+Alternatively, you can use `DBOS.registerStep` to pre-register a step or `@DBOS.step()` as a class decorator, but `DBOS.runStep` is preferred for most use cases.
 
 Step requirements:
-
 - Inputs and outputs must be serializable to JSON
 - Cannot call, start, or enqueue workflows from within steps
 - Calling a step from another step makes the called step part of the calling step's execution
 
 When to use steps:
-
 - API calls to external services
 - File system operations
 - Random number generation

@@ -1,10 +1,9 @@
 ---
 name: azure-ai-contentsafety-ts
-description:
-  Analyze text and images for harmful content using Azure AI Content Safety (@azure-rest/ai-content-safety). Use when
-  moderating user-generated content, detecting hate speech, violence, sexual content, or self-harm, or managing custom
-  blocklists.
+description: "Analyze text and images for harmful content using Azure AI Content Safety (@azure-rest/ai-content-safety). Use when moderating user-generated content, detecting hate speech, violence, sexual conten..."
 package: "@azure-rest/ai-content-safety"
+risk: unknown
+source: community
 ---
 
 # Azure AI Content Safety REST SDK for TypeScript
@@ -36,7 +35,7 @@ import { AzureKeyCredential } from "@azure/core-auth";
 
 const client = ContentSafetyClient(
   process.env.CONTENT_SAFETY_ENDPOINT!,
-  new AzureKeyCredential(process.env.CONTENT_SAFETY_KEY!),
+  new AzureKeyCredential(process.env.CONTENT_SAFETY_KEY!)
 );
 ```
 
@@ -46,7 +45,10 @@ const client = ContentSafetyClient(
 import ContentSafetyClient from "@azure-rest/ai-content-safety";
 import { DefaultAzureCredential } from "@azure/identity";
 
-const client = ContentSafetyClient(process.env.CONTENT_SAFETY_ENDPOINT!, new DefaultAzureCredential());
+const client = ContentSafetyClient(
+  process.env.CONTENT_SAFETY_ENDPOINT!,
+  new DefaultAzureCredential()
+);
 ```
 
 ## Analyze Text
@@ -58,8 +60,8 @@ const result = await client.path("/text:analyze").post({
   body: {
     text: "Text content to analyze",
     categories: ["Hate", "Sexual", "Violence", "SelfHarm"],
-    outputType: "FourSeverityLevels", // or "EightSeverityLevels"
-  },
+    outputType: "FourSeverityLevels"  // or "EightSeverityLevels"
+  }
 });
 
 if (isUnexpected(result)) {
@@ -83,8 +85,8 @@ const base64Image = imageBuffer.toString("base64");
 
 const result = await client.path("/image:analyze").post({
   body: {
-    image: { content: base64Image },
-  },
+    image: { content: base64Image }
+  }
 });
 
 if (isUnexpected(result)) {
@@ -101,8 +103,8 @@ for (const analysis of result.body.categoriesAnalysis) {
 ```typescript
 const result = await client.path("/image:analyze").post({
   body: {
-    image: { blobUrl: "https://storage.blob.core.windows.net/container/image.png" },
-  },
+    image: { blobUrl: "https://storage.blob.core.windows.net/container/image.png" }
+  }
 });
 ```
 
@@ -111,12 +113,14 @@ const result = await client.path("/image:analyze").post({
 ### Create Blocklist
 
 ```typescript
-const result = await client.path("/text/blocklists/{blocklistName}", "my-blocklist").patch({
-  contentType: "application/merge-patch+json",
-  body: {
-    description: "Custom blocklist for prohibited terms",
-  },
-});
+const result = await client
+  .path("/text/blocklists/{blocklistName}", "my-blocklist")
+  .patch({
+    contentType: "application/merge-patch+json",
+    body: {
+      description: "Custom blocklist for prohibited terms"
+    }
+  });
 
 if (isUnexpected(result)) {
   throw result.body;
@@ -128,14 +132,16 @@ console.log(`Created: ${result.body.blocklistName}`);
 ### Add Items to Blocklist
 
 ```typescript
-const result = await client.path("/text/blocklists/{blocklistName}:addOrUpdateBlocklistItems", "my-blocklist").post({
-  body: {
-    blocklistItems: [
-      { text: "prohibited-term-1", description: "First blocked term" },
-      { text: "prohibited-term-2", description: "Second blocked term" },
-    ],
-  },
-});
+const result = await client
+  .path("/text/blocklists/{blocklistName}:addOrUpdateBlocklistItems", "my-blocklist")
+  .post({
+    body: {
+      blocklistItems: [
+        { text: "prohibited-term-1", description: "First blocked term" },
+        { text: "prohibited-term-2", description: "Second blocked term" }
+      ]
+    }
+  });
 
 if (isUnexpected(result)) {
   throw result.body;
@@ -153,8 +159,8 @@ const result = await client.path("/text:analyze").post({
   body: {
     text: "Text that might contain blocked terms",
     blocklistNames: ["my-blocklist"],
-    haltOnBlocklistHit: false,
-  },
+    haltOnBlocklistHit: false
+  }
 });
 
 if (isUnexpected(result)) {
@@ -191,31 +197,33 @@ await client.path("/text/blocklists/{blocklistName}", "my-blocklist").delete();
 
 ## Harm Categories
 
-| Category          | API Term   | Description                                       |
-| ----------------- | ---------- | ------------------------------------------------- |
-| Hate and Fairness | `Hate`     | Discriminatory language targeting identity groups |
-| Sexual            | `Sexual`   | Sexual content, nudity, pornography               |
-| Violence          | `Violence` | Physical harm, weapons, terrorism                 |
-| Self-Harm         | `SelfHarm` | Self-injury, suicide, eating disorders            |
+| Category | API Term | Description |
+|----------|----------|-------------|
+| Hate and Fairness | `Hate` | Discriminatory language targeting identity groups |
+| Sexual | `Sexual` | Sexual content, nudity, pornography |
+| Violence | `Violence` | Physical harm, weapons, terrorism |
+| Self-Harm | `SelfHarm` | Self-injury, suicide, eating disorders |
 
 ## Severity Levels
 
-| Level | Risk   | Recommended Action            |
-| ----- | ------ | ----------------------------- |
-| 0     | Safe   | Allow                         |
-| 2     | Low    | Review or allow with warning  |
-| 4     | Medium | Block or require human review |
-| 6     | High   | Block immediately             |
+| Level | Risk | Recommended Action |
+|-------|------|-------------------|
+| 0 | Safe | Allow |
+| 2 | Low | Review or allow with warning |
+| 4 | Medium | Block or require human review |
+| 6 | High | Block immediately |
 
 **Output Types**:
-
 - `FourSeverityLevels` (default): Returns 0, 2, 4, 6
 - `EightSeverityLevels`: Returns 0-7
 
 ## Content Moderation Helper
 
 ```typescript
-import ContentSafetyClient, { isUnexpected, TextCategoriesAnalysisOutput } from "@azure-rest/ai-content-safety";
+import ContentSafetyClient, { 
+  isUnexpected, 
+  TextCategoriesAnalysisOutput 
+} from "@azure-rest/ai-content-safety";
 
 interface ModerationResult {
   isAllowed: boolean;
@@ -228,10 +236,10 @@ async function moderateContent(
   client: ReturnType<typeof ContentSafetyClient>,
   text: string,
   maxAllowedSeverity = 2,
-  blocklistNames: string[] = [],
+  blocklistNames: string[] = []
 ): Promise<ModerationResult> {
   const result = await client.path("/text:analyze").post({
-    body: { text, blocklistNames, haltOnBlocklistHit: false },
+    body: { text, blocklistNames, haltOnBlocklistHit: false }
   });
 
   if (isUnexpected(result)) {
@@ -239,34 +247,37 @@ async function moderateContent(
   }
 
   const flaggedCategories = result.body.categoriesAnalysis
-    .filter((c) => (c.severity ?? 0) > maxAllowedSeverity)
-    .map((c) => c.category!);
+    .filter(c => (c.severity ?? 0) > maxAllowedSeverity)
+    .map(c => c.category!);
 
-  const maxSeverity = Math.max(...result.body.categoriesAnalysis.map((c) => c.severity ?? 0));
+  const maxSeverity = Math.max(
+    ...result.body.categoriesAnalysis.map(c => c.severity ?? 0)
+  );
 
-  const blocklistMatches = (result.body.blocklistsMatch ?? []).map((m) => m.blocklistItemText!);
+  const blocklistMatches = (result.body.blocklistsMatch ?? [])
+    .map(m => m.blocklistItemText!);
 
   return {
     isAllowed: flaggedCategories.length === 0 && blocklistMatches.length === 0,
     flaggedCategories,
     maxSeverity,
-    blocklistMatches,
+    blocklistMatches
   };
 }
 ```
 
 ## API Endpoints
 
-| Operation               | Method | Path                                                         |
-| ----------------------- | ------ | ------------------------------------------------------------ |
-| Analyze Text            | POST   | `/text:analyze`                                              |
-| Analyze Image           | POST   | `/image:analyze`                                             |
-| Create/Update Blocklist | PATCH  | `/text/blocklists/{blocklistName}`                           |
-| List Blocklists         | GET    | `/text/blocklists`                                           |
-| Delete Blocklist        | DELETE | `/text/blocklists/{blocklistName}`                           |
-| Add Blocklist Items     | POST   | `/text/blocklists/{blocklistName}:addOrUpdateBlocklistItems` |
-| List Blocklist Items    | GET    | `/text/blocklists/{blocklistName}/blocklistItems`            |
-| Remove Blocklist Items  | POST   | `/text/blocklists/{blocklistName}:removeBlocklistItems`      |
+| Operation | Method | Path |
+|-----------|--------|------|
+| Analyze Text | POST | `/text:analyze` |
+| Analyze Image | POST | `/image:analyze` |
+| Create/Update Blocklist | PATCH | `/text/blocklists/{blocklistName}` |
+| List Blocklists | GET | `/text/blocklists` |
+| Delete Blocklist | DELETE | `/text/blocklists/{blocklistName}` |
+| Add Blocklist Items | POST | `/text/blocklists/{blocklistName}:addOrUpdateBlocklistItems` |
+| List Blocklist Items | GET | `/text/blocklists/{blocklistName}/blocklistItems` |
+| Remove Blocklist Items | POST | `/text/blocklists/{blocklistName}:removeBlocklistItems` |
 
 ## Key Types
 
@@ -278,7 +289,7 @@ import ContentSafetyClient, {
   TextCategoriesAnalysisOutput,
   ImageCategoriesAnalysisOutput,
   TextBlocklist,
-  TextBlocklistItem,
+  TextBlocklistItem
 } from "@azure-rest/ai-content-safety";
 ```
 
@@ -289,3 +300,6 @@ import ContentSafetyClient, {
 3. **Use blocklists for domain-specific terms** - Supplement AI detection with custom rules
 4. **Log moderation decisions** - Keep audit trail for compliance
 5. **Handle edge cases** - Empty text, very long text, unsupported image formats
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,23 +1,21 @@
 ---
 name: azure-monitor-query-java
-description: |
+description: "|"
   Azure Monitor Query SDK for Java. Execute Kusto queries against Log Analytics workspaces and query metrics from Azure resources.
   Triggers: "LogsQueryClient java", "MetricsQueryClient java", "kusto query java", "log analytics java", "azure monitor query java".
   Note: This package is deprecated. Migrate to azure-monitor-query-logs and azure-monitor-query-metrics.
 package: com.azure:azure-monitor-query
+risk: unknown
+source: community
 ---
 
 # Azure Monitor Query SDK for Java
 
 > **DEPRECATION NOTICE**: This package is deprecated in favor of:
->
 > - `azure-monitor-query-logs` — For Log Analytics queries
 > - `azure-monitor-query-metrics` — For metrics queries
 >
-> See migration guides:
-> [Logs Migration](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-query-logs/migration-guide.md)
-> |
-> [Metrics Migration](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-query-metrics/migration-guide.md)
+> See migration guides: [Logs Migration](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-query-logs/migration-guide.md) | [Metrics Migration](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-query-metrics/migration-guide.md)
 
 Client library for querying Azure Monitor Logs and Metrics.
 
@@ -130,13 +128,13 @@ MetricsQueryClient metricsClient = new MetricsQueryClientBuilder()
 
 ## Key Concepts
 
-| Concept           | Description                                                            |
-| ----------------- | ---------------------------------------------------------------------- |
-| Logs              | Log and performance data from Azure resources via Kusto Query Language |
-| Metrics           | Numeric time-series data collected at regular intervals                |
-| Workspace ID      | Log Analytics workspace identifier                                     |
-| Resource ID       | Azure resource URI for metrics queries                                 |
-| QueryTimeInterval | Time range for the query                                               |
+| Concept | Description |
+|---------|-------------|
+| Logs | Log and performance data from Azure resources via Kusto Query Language |
+| Metrics | Numeric time-series data collected at regular intervals |
+| Workspace ID | Log Analytics workspace identifier |
+| Resource ID | Azure resource URI for metrics queries |
+| QueryTimeInterval | Time range for the query |
 
 ## Logs Query Operations
 
@@ -180,7 +178,7 @@ for (LogsTableRow row : result.getTable().getRows()) {
 public class ActivityLog {
     private String resourceGroup;
     private String operationName;
-
+    
     public String getResourceGroup() { return resourceGroup; }
     public String getOperationName() { return operationName; }
 }
@@ -388,7 +386,7 @@ import com.azure.monitor.query.models.LogsQueryResultStatus;
 
 try {
     LogsQueryResult result = logsClient.queryWorkspace(workspaceId, query, timeInterval);
-
+    
     // Check partial failure
     if (result.getStatus() == LogsQueryResultStatus.PARTIAL_FAILURE) {
         System.err.println("Partial failure: " + result.getError().getMessage());
@@ -411,11 +409,14 @@ try {
 
 ## Reference Links
 
-| Resource             | URL                                                                                                      |
-| -------------------- | -------------------------------------------------------------------------------------------------------- |
-| Maven Package        | https://central.sonatype.com/artifact/com.azure/azure-monitor-query                                      |
-| GitHub               | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/monitor/azure-monitor-query                    |
-| API Reference        | https://learn.microsoft.com/java/api/com.azure.monitor.query                                             |
-| Kusto Query Language | https://learn.microsoft.com/azure/data-explorer/kusto/query/                                             |
-| Log Analytics Limits | https://learn.microsoft.com/azure/azure-monitor/service-limits#la-query-api                              |
-| Troubleshooting      | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-query/TROUBLESHOOTING.md |
+| Resource | URL |
+|----------|-----|
+| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-monitor-query |
+| GitHub | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/monitor/azure-monitor-query |
+| API Reference | https://learn.microsoft.com/java/api/com.azure.monitor.query |
+| Kusto Query Language | https://learn.microsoft.com/azure/data-explorer/kusto/query/ |
+| Log Analytics Limits | https://learn.microsoft.com/azure/azure-monitor/service-limits#la-query-api |
+| Troubleshooting | https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/monitor/azure-monitor-query/TROUBLESHOOTING.md |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

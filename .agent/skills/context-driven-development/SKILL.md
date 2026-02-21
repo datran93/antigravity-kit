@@ -1,16 +1,17 @@
 ---
 name: context-driven-development
-description:
-  Use this skill when working with Conductor's context-driven development methodology, managing project context
-  artifacts, or understanding the relationship between product.md, tech-stack.md, and workflow.md files.
+description: "Use this skill when working with Conductor's context-driven"
+  development methodology, managing project context artifacts, or understanding
+  the relationship between product.md, tech-stack.md, and workflow.md files.
 metadata:
   version: 1.0.0
+risk: unknown
+source: community
 ---
 
 # Context-Driven Development
 
-Guide for implementing and maintaining context as a managed artifact alongside code, enabling consistent AI interactions
-and team alignment through structured project documentation.
+Guide for implementing and maintaining context as a managed artifact alongside code, enabling consistent AI interactions and team alignment through structured project documentation.
 
 ## Do not use this skill when
 
@@ -35,9 +36,7 @@ and team alignment through structured project documentation.
 
 ## Core Philosophy
 
-Context-Driven Development treats project context as a first-class artifact managed alongside code. Instead of relying
-on ad-hoc prompts or scattered documentation, establish a persistent, structured foundation that informs all AI
-interactions.
+Context-Driven Development treats project context as a first-class artifact managed alongside code. Instead of relying on ad-hoc prompts or scattered documentation, establish a persistent, structured foundation that informs all AI interactions.
 
 Key principles:
 
@@ -314,28 +313,28 @@ Avoid these context management mistakes:
 
 ### Stale Context
 
-Problem: Context documents become outdated and misleading. Solution: Update context as part of each track's completion
-process.
+Problem: Context documents become outdated and misleading.
+Solution: Update context as part of each track's completion process.
 
 ### Context Sprawl
 
-Problem: Information scattered across multiple locations. Solution: Use the defined artifact structure; resist creating
-new document types.
+Problem: Information scattered across multiple locations.
+Solution: Use the defined artifact structure; resist creating new document types.
 
 ### Implicit Context
 
-Problem: Relying on knowledge not captured in artifacts. Solution: If you reference something repeatedly, add it to the
-appropriate artifact.
+Problem: Relying on knowledge not captured in artifacts.
+Solution: If you reference something repeatedly, add it to the appropriate artifact.
 
 ### Context Hoarding
 
-Problem: One person maintains context without team input. Solution: Review context artifacts in pull requests; make
-updates collaborative.
+Problem: One person maintains context without team input.
+Solution: Review context artifacts in pull requests; make updates collaborative.
 
 ### Over-Specification
 
-Problem: Context becomes so detailed it's impossible to maintain. Solution: Keep artifacts focused on decisions that
-affect AI behavior and team alignment.
+Problem: Context becomes so detailed it's impossible to maintain.
+Solution: Keep artifacts focused on decisions that affect AI behavior and team alignment.
 
 ## Integration with Development Tools
 

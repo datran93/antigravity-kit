@@ -7,8 +7,7 @@ tags: client, enqueue, workflow, external
 
 ## Enqueue Workflows from External Applications
 
-Use `client.enqueue()` to submit workflows from outside the DBOS application. Must specify workflow and queue names
-explicitly.
+Use `client.enqueue()` to submit workflows from outside the DBOS application. Must specify workflow and queue names explicitly.
 
 **Incorrect (missing required options):**
 

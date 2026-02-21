@@ -1,8 +1,10 @@
 ---
 name: azure-cosmos-ts
-description: |
+description: "|"
   Azure Cosmos DB JavaScript/TypeScript SDK (@azure/cosmos) for data plane operations. Use for CRUD operations on documents, queries, bulk operations, and container management. Triggers: "Cosmos DB", "@azure/cosmos", "CosmosClient", "document CRUD", "NoSQL queries", "bulk operations", "partition key", "container.items".
 package: "@azure/cosmos"
+risk: unknown
+source: community
 ---
 
 # @azure/cosmos (TypeScript/JavaScript)
@@ -10,7 +12,6 @@ package: "@azure/cosmos"
 Data plane SDK for Azure Cosmos DB NoSQL API operations — CRUD on documents, queries, bulk operations.
 
 > **⚠️ Data vs Management Plane**
->
 > - **This SDK (@azure/cosmos)**: CRUD operations on documents, queries, stored procedures
 > - **Management SDK (@azure/arm-cosmosdb)**: Create accounts, databases, containers via ARM
 
@@ -123,11 +124,15 @@ if (resource) {
 ### Update Document (Replace)
 
 ```typescript
-const { resource: existing } = await container.item("product-1", "electronics").read<Product>();
+const { resource: existing } = await container
+  .item("product-1", "electronics")
+  .read<Product>();
 
 if (existing) {
   existing.price = 899.99;
-  const { resource: updated } = await container.item("product-1", "electronics").replace<Product>(existing);
+  const { resource: updated } = await container
+    .item("product-1", "electronics")
+    .replace<Product>(existing);
 }
 ```
 
@@ -161,7 +166,9 @@ const operations: PatchOperation[] = [
   { op: "remove", path: "/oldField" },
 ];
 
-const { resource } = await container.item("product-1", "electronics").patch<Product>(operations);
+const { resource } = await container
+  .item("product-1", "electronics")
+  .patch<Product>(operations);
 ```
 
 ## Queries
@@ -169,7 +176,9 @@ const { resource } = await container.item("product-1", "electronics").patch<Prod
 ### Simple Query
 
 ```typescript
-const { resources } = await container.items.query<Product>("SELECT * FROM c WHERE c.price < 1000").fetchAll();
+const { resources } = await container.items
+  .query<Product>("SELECT * FROM c WHERE c.price < 1000")
+  .fetchAll();
 ```
 
 ### Parameterized Query (Recommended)
@@ -185,7 +194,9 @@ const querySpec: SqlQuerySpec = {
   ],
 };
 
-const { resources } = await container.items.query<Product>(querySpec).fetchAll();
+const { resources } = await container.items
+  .query<Product>(querySpec)
+  .fetchAll();
 ```
 
 ### Query with Pagination
@@ -206,7 +217,10 @@ while (queryIterator.hasMoreResults()) {
 
 ```typescript
 const { resources } = await container.items
-  .query<Product>("SELECT * FROM c WHERE c.price > 500", { enableCrossPartitionQuery: true })
+  .query<Product>(
+    "SELECT * FROM c WHERE c.price > 500",
+    { enableCrossPartitionQuery: true }
+  )
   .fetchAll();
 ```
 
@@ -298,7 +312,9 @@ const { resource } = await container.items.create({
 });
 
 // Read with hierarchical partition key
-const { resource: order } = await container.item("order-1", ["tenant-a", "user-123", "session-xyz"]).read();
+const { resource: order } = await container
+  .item("order-1", ["tenant-a", "user-123", "session-xyz"])
+  .read();
 ```
 
 ## Error Handling
@@ -335,11 +351,13 @@ try {
 
 ```typescript
 // Read with ETag
-const { resource, etag } = await container.item("product-1", "electronics").read<Product>();
+const { resource, etag } = await container
+  .item("product-1", "electronics")
+  .read<Product>();
 
 if (resource && etag) {
   resource.price = 899.99;
-
+  
   try {
     // Replace only if ETag matches
     await container.item("product-1", "electronics").replace(resource, {
@@ -363,27 +381,27 @@ import {
   Container,
   Item,
   Items,
-
+  
   // Operations
   OperationInput,
   BulkOperationType,
   PatchOperation,
-
+  
   // Queries
   SqlQuerySpec,
   SqlParameter,
   FeedOptions,
-
+  
   // Partition Keys
   PartitionKeyDefinition,
   PartitionKeyDefinitionVersion,
   PartitionKeyKind,
-
+  
   // Responses
   ItemResponse,
   FeedResponse,
   ResourceResponse,
-
+  
   // Errors
   ErrorResponse,
 } from "@azure/cosmos";
@@ -408,12 +426,16 @@ export class ProductService {
   private container: Container;
 
   constructor(client: CosmosClient) {
-    this.container = client.database(process.env.COSMOS_DATABASE!).container(process.env.COSMOS_CONTAINER!);
+    this.container = client
+      .database(process.env.COSMOS_DATABASE!)
+      .container(process.env.COSMOS_CONTAINER!);
   }
 
   async getById(id: string, category: string): Promise<Product | null> {
     try {
-      const { resource } = await this.container.item(id, category).read<Product>();
+      const { resource } = await this.container
+        .item(id, category)
+        .read<Product>();
       return resource ?? null;
     } catch (error) {
       if (error instanceof ErrorResponse && error.code === 404) {
@@ -434,7 +456,9 @@ export class ProductService {
       query: "SELECT * FROM c WHERE c.partitionKey = @category",
       parameters: [{ name: "@category", value: category }],
     };
-    const { resources } = await this.container.items.query<Product>(querySpec).fetchAll();
+    const { resources } = await this.container.items
+      .query<Product>(querySpec)
+      .fetchAll();
     return resources;
   }
 }
@@ -442,8 +466,11 @@ export class ProductService {
 
 ## Related SDKs
 
-| SDK                   | Purpose                | Install                           |
-| --------------------- | ---------------------- | --------------------------------- |
-| `@azure/cosmos`       | Data plane (this SDK)  | `npm install @azure/cosmos`       |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `@azure/cosmos` | Data plane (this SDK) | `npm install @azure/cosmos` |
 | `@azure/arm-cosmosdb` | Management plane (ARM) | `npm install @azure/arm-cosmosdb` |
-| `@azure/identity`     | Authentication         | `npm install @azure/identity`     |
+| `@azure/identity` | Authentication | `npm install @azure/identity` |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -33,7 +33,6 @@ def periodic_cleanup(scheduled_time, actual_time):
 ```
 
 Scheduled workflow requirements:
-
 - Must have `@DBOS.scheduled` decorator with crontab syntax
 - Must accept two arguments: `scheduled_time` and `actual_time` (both `datetime`)
 - Main thread must stay alive for scheduled workflows
@@ -49,7 +48,6 @@ if __name__ == "__main__":
 ```
 
 Crontab format: `minute hour day month weekday`
-
 - `* * * * *` = every minute
 - `0 * * * *` = every hour
 - `0 0 * * *` = daily at midnight

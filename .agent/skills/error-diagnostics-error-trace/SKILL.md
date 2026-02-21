@@ -1,15 +1,13 @@
 ---
 name: error-diagnostics-error-trace
-description:
-  "You are an error tracking and observability expert specializing in implementing comprehensive error monitoring
-  solutions. Set up error tracking systems, configure alerts, implement structured logging,"
+description: "You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging,"
+risk: unknown
+source: community
 ---
 
 # Error Tracking and Monitoring
 
-You are an error tracking and observability expert specializing in implementing comprehensive error monitoring
-solutions. Set up error tracking systems, configure alerts, implement structured logging, and ensure teams can quickly
-identify and resolve production issues.
+You are an error tracking and observability expert specializing in implementing comprehensive error monitoring solutions. Set up error tracking systems, configure alerts, implement structured logging, and ensure teams can quickly identify and resolve production issues.
 
 ## Use this skill when
 
@@ -22,12 +20,9 @@ identify and resolve production issues.
 - You need a different domain or tool outside this scope
 
 ## Context
-
-The user needs to implement or improve error tracking and monitoring. Focus on real-time error detection, meaningful
-alerts, error grouping, performance monitoring, and integration with popular error tracking services.
+The user needs to implement or improve error tracking and monitoring. Focus on real-time error detection, meaningful alerts, error grouping, performance monitoring, and integration with popular error tracking services.
 
 ## Requirements
-
 $ARGUMENTS
 
 ## Instructions

@@ -1,11 +1,14 @@
 ---
 name: c4-container
-description:
-  Expert C4 Container-level documentation specialist. Synthesizes Component-level documentation into Container-level
-  architecture, mapping components to deployment units, documenting container interfaces as APIs, and creating container
-  diagrams. Use when synthesizing components into deployment containers and documenting system deployment architecture.
+description: "Expert C4 Container-level documentation specialist. Synthesizes"
+  Component-level documentation into Container-level architecture, mapping
+  components to deployment units, documenting container interfaces as APIs, and
+  creating container diagrams. Use when synthesizing components into deployment
+  containers and documenting system deployment architecture.
 metadata:
   model: sonnet
+risk: unknown
+source: community
 ---
 
 # C4 Container Level: System Deployment
@@ -46,7 +49,7 @@ metadata:
 This container deploys the following components:
 
 - [Component Name]: [Description]
-  - Documentation: [c4-component-name.md](./c4-component-name.md)
+  - Documentation: c4-component-name.md
 
 ## Interfaces
 
@@ -98,8 +101,7 @@ C4Container
     Rel(api, messageQueue, "Publishes messages to")
     Rel(api, external, "Uses", "API")
 ```
-
-```
+````
 
 **Key Principles** (from [c4model.com](https://c4model.com/diagrams/container)):
 
@@ -109,7 +111,7 @@ C4Container
 - Show **communication protocols** between containers
 - Include **external systems** that containers interact with
 
-```
+````
 
 ## API Specification Template
 
@@ -141,7 +143,7 @@ paths:
             application/json:
               schema:
                 type: object
-```
+````
 
 ## Example Interactions
 

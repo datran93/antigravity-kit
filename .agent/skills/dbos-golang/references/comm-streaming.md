@@ -7,8 +7,7 @@ tags: communication, stream, real-time, channel
 
 ## Use Streams for Real-Time Data
 
-Workflows can stream data to clients in real-time using `dbos.WriteStream`, `dbos.CloseStream`, and
-`dbos.ReadStream`/`dbos.ReadStreamAsync`. Useful for LLM output streaming or progress reporting.
+Workflows can stream data to clients in real-time using `dbos.WriteStream`, `dbos.CloseStream`, and `dbos.ReadStream`/`dbos.ReadStreamAsync`. Useful for LLM output streaming or progress reporting.
 
 **Incorrect (accumulating results then returning at end):**
 
@@ -44,13 +43,13 @@ func processWorkflow(ctx dbos.DBOSContext, items []string) (string, error) {
 
 // Read the stream synchronously (blocks until closed)
 handle, _ := dbos.RunWorkflow(ctx, processWorkflow, items)
-values, closed, err := dbos.ReadStream[string](ctx, handle.GetWorkflowID(), "results")
+values, closed, err := dbos.ReadStreamstring, "results")
 ```
 
 **Async stream reading with channels:**
 
 ```go
-ch, err := dbos.ReadStreamAsync[string](ctx, handle.GetWorkflowID(), "results")
+ch, err := dbos.ReadStreamAsyncstring, "results")
 if err != nil {
 	log.Fatal(err)
 }
@@ -66,7 +65,6 @@ for sv := range ch {
 ```
 
 Key behaviors:
-
 - A workflow may have any number of streams, each identified by a unique key
 - Streams are immutable and append-only
 - Writes from workflows happen exactly-once

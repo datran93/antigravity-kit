@@ -1,8 +1,10 @@
 ---
 name: azure-storage-blob-ts
-description: |
+description: "|"
   Azure Blob Storage JavaScript/TypeScript SDK (@azure/storage-blob) for blob operations. Use for uploading, downloading, listing, and managing blobs and containers. Supports block blobs, append blobs, page blobs, SAS tokens, and streaming. Triggers: "blob storage", "@azure/storage-blob", "BlobServiceClient", "ContainerClient", "upload blob", "download blob", "SAS token", "block blob".
 package: "@azure/storage-blob"
+risk: unknown
+source: community
 ---
 
 # @azure/storage-blob (TypeScript/JavaScript)
@@ -36,7 +38,10 @@ import { BlobServiceClient } from "@azure/storage-blob";
 import { DefaultAzureCredential } from "@azure/identity";
 
 const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;
-const client = new BlobServiceClient(`https://${accountName}.blob.core.windows.net`, new DefaultAzureCredential());
+const client = new BlobServiceClient(
+  `https://${accountName}.blob.core.windows.net`,
+  new DefaultAzureCredential()
+);
 ```
 
 ### Connection String
@@ -44,7 +49,9 @@ const client = new BlobServiceClient(`https://${accountName}.blob.core.windows.n
 ```typescript
 import { BlobServiceClient } from "@azure/storage-blob";
 
-const client = BlobServiceClient.fromConnectionString(process.env.AZURE_STORAGE_CONNECTION_STRING!);
+const client = BlobServiceClient.fromConnectionString(
+  process.env.AZURE_STORAGE_CONNECTION_STRING!
+);
 ```
 
 ### StorageSharedKeyCredential (Node.js only)
@@ -56,7 +63,10 @@ const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;
 const accountKey = process.env.AZURE_STORAGE_ACCOUNT_KEY!;
 
 const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
-const client = new BlobServiceClient(`https://${accountName}.blob.core.windows.net`, sharedKeyCredential);
+const client = new BlobServiceClient(
+  `https://${accountName}.blob.core.windows.net`,
+  sharedKeyCredential
+);
 ```
 
 ### SAS Token
@@ -67,7 +77,9 @@ import { BlobServiceClient } from "@azure/storage-blob";
 const accountName = process.env.AZURE_STORAGE_ACCOUNT_NAME!;
 const sasToken = process.env.AZURE_STORAGE_SAS_TOKEN!; // starts with "?"
 
-const client = new BlobServiceClient(`https://${accountName}.blob.core.windows.net${sasToken}`);
+const client = new BlobServiceClient(
+  `https://${accountName}.blob.core.windows.net${sasToken}`
+);
 ```
 
 ## Client Hierarchy
@@ -284,7 +296,11 @@ await blobClient.setHTTPHeaders({
 ### Generate Blob SAS
 
 ```typescript
-import { BlobSASPermissions, generateBlobSASQueryParameters, StorageSharedKeyCredential } from "@azure/storage-blob";
+import {
+  BlobSASPermissions,
+  generateBlobSASQueryParameters,
+  StorageSharedKeyCredential,
+} from "@azure/storage-blob";
 
 const sharedKeyCredential = new StorageSharedKeyCredential(accountName, accountKey);
 
@@ -296,7 +312,7 @@ const sasToken = generateBlobSASQueryParameters(
     startsOn: new Date(),
     expiresOn: new Date(Date.now() + 3600 * 1000), // 1 hour
   },
-  sharedKeyCredential,
+  sharedKeyCredential
 ).toString();
 
 const sasUrl = `https://${accountName}.blob.core.windows.net/my-container/my-file.txt?${sasToken}`;
@@ -313,7 +329,7 @@ const sasToken = generateBlobSASQueryParameters(
     permissions: ContainerSASPermissions.parse("racwdl"), // read, add, create, write, delete, list
     expiresOn: new Date(Date.now() + 24 * 3600 * 1000), // 24 hours
   },
-  sharedKeyCredential,
+  sharedKeyCredential
 ).toString();
 ```
 
@@ -334,7 +350,7 @@ const sasToken = generateAccountSASQueryParameters(
     permissions: AccountSASPermissions.parse("rwdlacupi"), // all permissions
     expiresOn: new Date(Date.now() + 24 * 3600 * 1000),
   },
-  sharedKeyCredential,
+  sharedKeyCredential
 ).toString();
 ```
 
@@ -455,14 +471,17 @@ import {
 
 ## Platform Differences
 
-| Feature                      | Node.js | Browser |
-| ---------------------------- | ------- | ------- |
-| `StorageSharedKeyCredential` | ✅      | ❌      |
-| `uploadFile()`               | ✅      | ❌      |
-| `uploadStream()`             | ✅      | ❌      |
-| `downloadToFile()`           | ✅      | ❌      |
-| `downloadToBuffer()`         | ✅      | ❌      |
-| `uploadData()`               | ✅      | ✅      |
-| SAS generation               | ✅      | ❌      |
-| DefaultAzureCredential       | ✅      | ❌      |
-| Anonymous/SAS access         | ✅      | ✅      |
+| Feature | Node.js | Browser |
+|---------|---------|---------|
+| `StorageSharedKeyCredential` | ✅ | ❌ |
+| `uploadFile()` | ✅ | ❌ |
+| `uploadStream()` | ✅ | ❌ |
+| `downloadToFile()` | ✅ | ❌ |
+| `downloadToBuffer()` | ✅ | ❌ |
+| `uploadData()` | ✅ | ✅ |
+| SAS generation | ✅ | ❌ |
+| DefaultAzureCredential | ✅ | ❌ |
+| Anonymous/SAS access | ✅ | ✅ |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

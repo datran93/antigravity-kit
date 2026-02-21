@@ -1,9 +1,11 @@
 ---
 name: azure-cosmos-java
-description: |
+description: "|"
   Azure Cosmos DB SDK for Java. NoSQL database operations with global distribution, multi-model support, and reactive patterns.
   Triggers: "CosmosClient java", "CosmosAsyncClient", "cosmos database java", "cosmosdb java", "document database java".
 package: azure-cosmos
+risk: unknown
+source: community
 ---
 
 # Azure Cosmos DB SDK for Java
@@ -95,10 +97,10 @@ CosmosClient client = new CosmosClientBuilder()
 
 ## Client Hierarchy
 
-| Class                                      | Purpose                   |
-| ------------------------------------------ | ------------------------- |
-| `CosmosClient` / `CosmosAsyncClient`       | Account-level operations  |
-| `CosmosDatabase` / `CosmosAsyncDatabase`   | Database operations       |
+| Class | Purpose |
+|-------|---------|
+| `CosmosClient` / `CosmosAsyncClient` | Account-level operations |
+| `CosmosDatabase` / `CosmosAsyncDatabase` | Database operations |
 | `CosmosContainer` / `CosmosAsyncContainer` | Container/item operations |
 
 ## Core Workflow
@@ -193,20 +195,19 @@ results.forEach(user -> System.out.println("User: " + user.getName()));
 ### Partition Keys
 
 Choose a partition key with:
-
 - High cardinality (many distinct values)
 - Even distribution of data and requests
 - Frequently used in queries
 
 ### Consistency Levels
 
-| Level             | Guarantee                           |
-| ----------------- | ----------------------------------- |
-| Strong            | Linearizability                     |
-| Bounded Staleness | Consistent prefix with bounded lag  |
-| Session           | Consistent prefix within session    |
+| Level | Guarantee |
+|-------|-----------|
+| Strong | Linearizability |
+| Bounded Staleness | Consistent prefix with bounded lag |
+| Session | Consistent prefix within session |
 | Consistent Prefix | Reads never see out-of-order writes |
-| Eventual          | No ordering guarantee               |
+| Eventual | No ordering guarantee |
 
 ### Request Units (RUs)
 
@@ -238,7 +239,7 @@ try {
     System.err.println("Status: " + e.getStatusCode());
     System.err.println("Message: " + e.getMessage());
     System.err.println("Request charge: " + e.getRequestCharge());
-
+    
     if (e.getStatusCode() == 409) {
         System.err.println("Item already exists");
     } else if (e.getStatusCode() == 429) {
@@ -249,11 +250,14 @@ try {
 
 ## Reference Links
 
-| Resource          | URL                                                                               |
-| ----------------- | --------------------------------------------------------------------------------- |
-| Maven Package     | https://central.sonatype.com/artifact/com.azure/azure-cosmos                      |
+| Resource | URL |
+|----------|-----|
+| Maven Package | https://central.sonatype.com/artifact/com.azure/azure-cosmos |
 | API Documentation | https://azuresdkdocs.z19.web.core.windows.net/java/azure-cosmos/latest/index.html |
-| Product Docs      | https://learn.microsoft.com/azure/cosmos-db/                                      |
-| Samples           | https://github.com/Azure-Samples/azure-cosmos-java-sql-api-samples                |
-| Performance Guide | https://learn.microsoft.com/azure/cosmos-db/performance-tips-java-sdk-v4-sql      |
-| Troubleshooting   | https://learn.microsoft.com/azure/cosmos-db/troubleshoot-java-sdk-v4-sql          |
+| Product Docs | https://learn.microsoft.com/azure/cosmos-db/ |
+| Samples | https://github.com/Azure-Samples/azure-cosmos-java-sql-api-samples |
+| Performance Guide | https://learn.microsoft.com/azure/cosmos-db/performance-tips-java-sdk-v4-sql |
+| Troubleshooting | https://learn.microsoft.com/azure/cosmos-db/troubleshoot-java-sdk-v4-sql |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

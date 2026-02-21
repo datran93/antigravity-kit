@@ -13,12 +13,10 @@ risk: safe
 
 ## When to Use This Skill
 
-Use this skill when you need to work with -speed read claude's responses at 600+ wpm using rsvp with spritz-style orp
-highlighting.
+Use this skill when you need to work with -speed read claude's responses at 600+ wpm using rsvp with spritz-style orp highlighting.
 
 ## Instructions
 
-This skill provides guidance and patterns for -speed read claude's responses at 600+ wpm using rsvp with spritz-style
-orp highlighting.
+This skill provides guidance and patterns for -speed read claude's responses at 600+ wpm using rsvp with spritz-style orp highlighting.
 
 For more information, see the [source repository](https://github.com/SeanZoR/claude-speed-reader).

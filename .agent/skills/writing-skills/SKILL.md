@@ -1,11 +1,15 @@
 ---
 name: writing-skills
-description: Use when creating, updating, or improving agent skills.
+description: "Use when creating, updating, or improving agent skills."
 metadata:
   category: meta
   author: ozy
-  triggers: new skill, create skill, update skill, skill documentation, skill template, agent skill, writing skill
-  references: anti-rationalization, cso, standards, templates, testing, tier-1-simple, tier-2-expanded, tier-3-platform
+  triggers: new skill, create skill, update skill, skill documentation, skill template,
+    agent skill, writing skill
+  references: anti-rationalization, cso, standards, templates, testing, tier-1-simple,
+    tier-2-expanded, tier-3-platform
+risk: unknown
+source: community
 ---
 
 # Writing Skills (Excellence)
@@ -32,12 +36,12 @@ Dispatcher for skill creation excellence. Use the decision tree below to find th
 
 ## 📚 Component Index
 
-| Component                                                             | Purpose                                                 |
-| --------------------------------------------------------------------- | ------------------------------------------------------- |
-| **[CSO](references/cso/README.md)**                                   | "SEO for LLMs". How to write descriptions that trigger. |
-| **[Standards](references/standards/README.md)**                       | File naming, YAML frontmatter, directory structure.     |
-| **[Anti-Rationalization](references/anti-rationalization/README.md)** | How to write rules that agents won't ignore.            |
-| **[Testing](references/testing/README.md)**                           | How to ensure your skill actually works.                |
+| Component | Purpose |
+|-----------|---------|
+| **[CSO](references/cso/README.md)** | "SEO for LLMs". How to write descriptions that trigger. |
+| **[Standards](references/standards/README.md)** | File naming, YAML frontmatter, directory structure. |
+| **[Anti-Rationalization](references/anti-rationalization/README.md)**| How to write rules that agents won't ignore. |
+| **[Testing](references/testing/README.md)** | How to ensure your skill actually works. |
 
 ## 🛠️ Templates
 
@@ -71,6 +75,7 @@ metadata:
   category: technique
   triggers: error-text, symptom, tool-name
 ---
+
 # My Technique
 
 ## When to Use
@@ -80,12 +85,12 @@ metadata:
 
 ## Common Mistakes
 
-| Mistake                         | Fix                             |
-| ------------------------------- | ------------------------------- |
+| Mistake | Fix |
+|---------|-----|
 | Description summarizes workflow | Use "Use when..." triggers only |
-| No `metadata.triggers`          | Add 3+ keywords                 |
-| Generic name ("helper")         | Use gerund (`creating-skills`)  |
-| Long monolithic SKILL.md        | Split into `references/`        |
+| No `metadata.triggers` | Add 3+ keywords |
+| Generic name ("helper") | Use gerund (`creating-skills`) |
+| Long monolithic SKILL.md | Split into `references/` |
 
 See [gotchas.md](gotchas.md) for more.
 
@@ -103,20 +108,18 @@ Before deploying any skill:
 
 ## 🔗 Related Skills
 
-- **[opencode-expert](skill://opencode-expert)**: For OpenCode environment configuration
+- **opencode-expert**: For OpenCode environment configuration
 - Use `/write-skill` command for guided skill creation
 
 ## Examples
 
 **Create a Tier 1 skill:**
-
 ```bash
 mkdir -p ~/.config/opencode/skills/my-technique
 touch ~/.config/opencode/skills/my-technique/SKILL.md
 ```
 
 **Create a Tier 2 skill:**
-
 ```bash
 mkdir -p ~/.config/opencode/skills/my-skill/references/core
 touch ~/.config/opencode/skills/my-skill/{SKILL.md,gotchas.md}

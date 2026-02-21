@@ -1,8 +1,10 @@
 ---
 name: conductor-implement
-description: Execute tasks from a track's implementation plan following TDD workflow
+description: "Execute tasks from a track's implementation plan following TDD workflow"
 metadata:
   argument-hint: "[track-id] [--task X.Y] [--phase N]"
+risk: unknown
+source: community
 ---
 
 # Implement Track
@@ -351,7 +353,10 @@ Maintain progress in `metadata.json` throughout:
     "total": 12,
     "completed": 7
   },
-  "commits": ["abc1234: feat: add login form (auth_20250115)", "def5678: feat: add password validation (auth_20250115)"]
+  "commits": [
+    "abc1234: feat: add login form (auth_20250115)",
+    "def5678: feat: add password validation (auth_20250115)"
+  ]
 }
 ```
 

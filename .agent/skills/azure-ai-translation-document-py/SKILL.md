@@ -1,15 +1,16 @@
 ---
 name: azure-ai-translation-document-py
-description: |
+description: "|"
   Azure AI Document Translation SDK for batch translation of documents with format preservation. Use for translating Word, PDF, Excel, PowerPoint, and other document formats at scale.
   Triggers: "document translation", "batch translation", "translate documents", "DocumentTranslationClient".
 package: azure-ai-translation-document
+risk: unknown
+source: community
 ---
 
 # Azure AI Document Translation SDK for Python
 
-Client library for Azure AI Translator document translation service for batch document translation with format
-preservation.
+Client library for Azure AI Translator document translation service for batch document translation with format preservation.
 
 ## Installation
 
@@ -226,11 +227,11 @@ async def translate_documents():
 
 ## Supported Formats
 
-| Category     | Formats                               |
-| ------------ | ------------------------------------- |
-| Documents    | DOCX, PDF, PPTX, XLSX, HTML, TXT, RTF |
-| Structured   | CSV, TSV, JSON, XML                   |
-| Localization | XLIFF, XLF, MHTML                     |
+| Category | Formats |
+|----------|---------|
+| Documents | DOCX, PDF, PPTX, XLSX, HTML, TXT, RTF |
+| Structured | CSV, TSV, JSON, XML |
+| Localization | XLIFF, XLF, MHTML |
 
 ## Storage Requirements
 
@@ -248,3 +249,6 @@ async def translate_documents():
 5. **Separate target containers** for each language
 6. **Use async client** for multiple concurrent jobs
 7. **Check supported formats** before submitting documents
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -7,8 +7,7 @@ tags: debounce, throttle, input, optimization
 
 ## Debounce Workflows to Prevent Wasted Work
 
-Debouncing delays workflow execution until some time has passed since the last trigger. Useful for user input
-processing.
+Debouncing delays workflow execution until some time has passed since the last trigger. Useful for user input processing.
 
 **Incorrect (processing every input):**
 

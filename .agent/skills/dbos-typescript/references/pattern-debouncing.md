@@ -7,8 +7,7 @@ tags: pattern, debounce, delay, efficiency
 
 ## Debounce Workflows to Prevent Wasted Work
 
-Use `Debouncer` to delay workflow execution until some time has passed since the last trigger. This prevents wasted work
-when a workflow is triggered multiple times in quick succession.
+Use `Debouncer` to delay workflow execution until some time has passed since the last trigger. This prevents wasted work when a workflow is triggered multiple times in quick succession.
 
 **Incorrect (executing on every trigger):**
 
@@ -47,7 +46,6 @@ async function onInputChange(userId: string, userInput: string) {
 ```
 
 Key behaviors:
-
 - `debounceKey` groups executions that are debounced together (e.g., per user)
 - `debouncePeriodMs` delays execution by this amount from the last call
 - `debounceTimeoutMs` sets a max wait time since the first trigger

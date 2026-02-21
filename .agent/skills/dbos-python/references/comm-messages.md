@@ -48,11 +48,9 @@ def payment_webhook(workflow_id: str, status: str):
 ```
 
 Key points:
-
 - `DBOS.recv()` can only be called from workflows
 - Messages are queued per topic
 - `recv()` returns `None` on timeout
 - Messages are persisted for exactly-once delivery
 
-Reference:
-[Workflow Messaging](https://docs.dbos.dev/python/tutorials/workflow-communication#workflow-messaging-and-notifications)
+Reference: [Workflow Messaging](https://docs.dbos.dev/python/tutorials/workflow-communication#workflow-messaging-and-notifications)

@@ -425,9 +425,9 @@ describe("Security Tests", function () {
     await bank.deposit({ value: ethers.utils.parseEther("10") });
 
     // Attempt reentrancy attack
-    await expect(attackerContract.attack({ value: ethers.utils.parseEther("1") })).to.be.revertedWith(
-      "ReentrancyGuard: reentrant call",
-    );
+    await expect(
+      attackerContract.attack({ value: ethers.utils.parseEther("1") }),
+    ).to.be.revertedWith("ReentrancyGuard: reentrant call");
   });
 
   it("Should prevent integer overflow", async function () {
@@ -435,7 +435,8 @@ describe("Security Tests", function () {
     const token = await Token.deploy();
 
     // Attempt overflow
-    await expect(token.transfer(attacker.address, ethers.constants.MaxUint256)).to.be.reverted;
+    await expect(token.transfer(attacker.address, ethers.constants.MaxUint256))
+      .to.be.reverted;
   });
 
   it("Should enforce access control", async function () {
@@ -445,7 +446,9 @@ describe("Security Tests", function () {
     const contract = await Contract.deploy();
 
     // Attempt unauthorized withdrawal
-    await expect(contract.connect(attacker).withdraw(100)).to.be.revertedWith("Ownable: caller is not the owner");
+    await expect(contract.connect(attacker).withdraw(100)).to.be.revertedWith(
+      "Ownable: caller is not the owner",
+    );
   });
 });
 ```

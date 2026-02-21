@@ -1,14 +1,13 @@
 ---
 name: pci-compliance
-description:
-  Implement PCI DSS compliance requirements for secure handling of payment card data and payment systems. Use when
-  securing payment processing, achieving PCI compliance, or implementing payment card security measures.
+description: "Implement PCI DSS compliance requirements for secure handling of payment card data and payment systems. Use when securing payment processing, achieving PCI compliance, or implementing payment card ..."
+risk: unknown
+source: community
 ---
 
 # PCI Compliance
 
-Master PCI DSS (Payment Card Industry Data Security Standard) compliance for secure payment processing and handling of
-cardholder data.
+Master PCI DSS (Payment Card Industry Data Security Standard) compliance for secure payment processing and handling of cardholder data.
 
 ## Do not use this skill when
 
@@ -35,40 +34,35 @@ cardholder data.
 ## PCI DSS Requirements (12 Core Requirements)
 
 ### Build and Maintain Secure Network
-
 1. Install and maintain firewall configuration
 2. Don't use vendor-supplied defaults for passwords
 
 ### Protect Cardholder Data
-
 3. Protect stored cardholder data
 4. Encrypt transmission of cardholder data across public networks
 
 ### Maintain Vulnerability Management
-
 5. Protect systems against malware
 6. Develop and maintain secure systems and applications
 
 ### Implement Strong Access Control
-
 7. Restrict access to cardholder data by business need-to-know
 8. Identify and authenticate access to system components
 9. Restrict physical access to cardholder data
 
 ### Monitor and Test Networks
-
 10. Track and monitor all access to network resources and cardholder data
 11. Regularly test security systems and processes
 
 ### Maintain Information Security Policy
-
 12. Maintain a policy that addresses information security
 
 ## Compliance Levels
 
-**Level 1**: > 6 million transactions/year (annual ROC required) **Level 2**: 1-6 million transactions/year (annual SAQ)
-**Level 3**: 20,000-1 million e-commerce transactions/year **Level 4**: < 20,000 e-commerce or < 1 million total
-transactions
+**Level 1**: > 6 million transactions/year (annual ROC required)
+**Level 2**: 1-6 million transactions/year (annual SAQ)
+**Level 3**: 20,000-1 million e-commerce transactions/year
+**Level 4**: < 20,000 e-commerce or < 1 million total transactions
 
 ## Data Minimization (Never Store)
 
@@ -119,7 +113,6 @@ class PaymentData:
 ## Tokenization
 
 ### Using Payment Processor Tokens
-
 ```python
 import stripe
 
@@ -182,7 +175,6 @@ class TokenizedPayment:
 ```
 
 ### Custom Tokenization (Advanced)
-
 ```python
 import secrets
 from cryptography.fernet import Fernet
@@ -225,7 +217,6 @@ class TokenVault:
 ## Encryption
 
 ### Data at Rest
-
 ```python
 from cryptography.hazmat.primitives.ciphers.aead import AESGCM
 import os
@@ -268,7 +259,6 @@ encrypted_pan = storage.encrypt("4242424242424242")
 ```
 
 ### Data in Transit
-
 ```python
 # Always use TLS 1.2 or higher
 # Flask/Django example
@@ -363,7 +353,6 @@ audit.log_access(user_id=123, resource='payment_methods', action='read', result=
 ## Security Best Practices
 
 ### Input Validation
-
 ```python
 import re
 
@@ -402,19 +391,16 @@ def sanitize_input(user_input):
 ## PCI DSS SAQ (Self-Assessment Questionnaire)
 
 ### SAQ A (Least Requirements)
-
 - E-commerce using hosted payment page
 - No card data on your systems
 - ~20 questions
 
 ### SAQ A-EP
-
 - E-commerce with embedded payment form
 - Uses JavaScript to handle card data
 - ~180 questions
 
 ### SAQ D (Most Requirements)
-
 - Store, process, or transmit card data
 - Full PCI DSS requirements
 - ~300 questions

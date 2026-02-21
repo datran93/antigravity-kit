@@ -7,8 +7,7 @@ tags: client, enqueue, external, queue
 
 ## Enqueue Workflows from External Applications
 
-Use `client.Enqueue()` to submit workflows from outside your DBOS application. Since the Client runs externally,
-workflow and queue metadata must be specified explicitly by name.
+Use `client.Enqueue()` to submit workflows from outside your DBOS application. Since the Client runs externally, workflow and queue metadata must be specified explicitly by name.
 
 **Incorrect (trying to use RunWorkflow from external code):**
 
@@ -52,7 +51,6 @@ handle, err := client.Enqueue("task_queue", "processTask", "task-data",
 ```
 
 Enqueue options:
-
 - `WithEnqueueWorkflowID`: Custom workflow ID
 - `WithEnqueueDeduplicationID`: Prevent duplicate enqueues
 - `WithEnqueuePriority`: Queue priority (lower = higher priority)

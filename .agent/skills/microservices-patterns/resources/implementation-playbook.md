@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # Microservices Patterns
 
-Master microservices architecture patterns including service boundaries, inter-service communication, data management,
-and resilience patterns for building distributed systems.
+Master microservices architecture patterns including service boundaries, inter-service communication, data management, and resilience patterns for building distributed systems.
 
 ## Use this skill when
 

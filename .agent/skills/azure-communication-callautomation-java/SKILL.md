@@ -1,9 +1,9 @@
 ---
 name: azure-communication-callautomation-java
-description:
-  Build call automation workflows with Azure Communication Services Call Automation Java SDK. Use when implementing IVR
-  systems, call routing, call recording, DTMF recognition, text-to-speech, or AI-powered call flows.
+description: "Build call automation workflows with Azure Communication Services Call Automation Java SDK. Use when implementing IVR systems, call routing, call recording, DTMF recognition, text-to-speech, or AI-..."
 package: com.azure:azure-communication-callautomation
+risk: unknown
+source: community
 ---
 
 # Azure Communication Call Automation (Java)
@@ -41,13 +41,13 @@ CallAutomationClient client = new CallAutomationClientBuilder()
 
 ## Key Concepts
 
-| Class                       | Purpose                                                    |
-| --------------------------- | ---------------------------------------------------------- |
-| `CallAutomationClient`      | Make calls, answer/reject incoming calls, redirect calls   |
-| `CallConnection`            | Actions in established calls (add participants, terminate) |
-| `CallMedia`                 | Media operations (play audio, recognize DTMF/speech)       |
-| `CallRecording`             | Start/stop/pause recording                                 |
-| `CallAutomationEventParser` | Parse webhook events from ACS                              |
+| Class | Purpose |
+|-------|---------|
+| `CallAutomationClient` | Make calls, answer/reject incoming calls, redirect calls |
+| `CallConnection` | Actions in established calls (add participants, terminate) |
+| `CallMedia` | Media operations (play audio, recognize DTMF/speech) |
+| `CallRecording` | Start/stop/pause recording |
+| `CallAutomationEventParser` | Parse webhook events from ACS |
 
 ## Create Outbound Call
 
@@ -191,7 +191,7 @@ import com.azure.communication.callautomation.models.events.*;
 // In your webhook endpoint
 public void handleCallback(String requestBody) {
     List<CallAutomationEventBase> events = CallAutomationEventParser.parseEvents(requestBody);
-
+    
     for (CallAutomationEventBase event : events) {
         if (event instanceof CallConnected) {
             CallConnected connected = (CallConnected) event;
@@ -254,3 +254,6 @@ CALLBACK_BASE_URL=https://your-app.com/api/callbacks
 - "text to speech call", "speech recognition call"
 - "answer incoming call", "transfer call Java"
 - "Azure Communication Services call automation"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

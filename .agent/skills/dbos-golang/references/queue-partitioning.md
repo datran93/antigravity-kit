@@ -7,8 +7,7 @@ tags: queue, partition, per-user, dynamic
 
 ## Partition Queues for Per-Entity Limits
 
-Partitioned queues apply flow control limits per partition key instead of the entire queue. Each partition acts as a
-dynamic "subqueue".
+Partitioned queues apply flow control limits per partition key instead of the entire queue. Each partition acts as a dynamic "subqueue".
 
 **Incorrect (global concurrency for per-user limits):**
 
@@ -38,7 +37,6 @@ func onUserTask(ctx dbos.DBOSContext, userID, task string) error {
 }
 ```
 
-When a queue has `WithPartitionQueue()` enabled, you **must** provide a `WithQueuePartitionKey()` when enqueuing.
-Partition keys and deduplication IDs cannot be used together.
+When a queue has `WithPartitionQueue()` enabled, you **must** provide a `WithQueuePartitionKey()` when enqueuing. Partition keys and deduplication IDs cannot be used together.
 
 Reference: [Partitioning Queues](https://docs.dbos.dev/golang/tutorials/queue-tutorial#partitioning-queues)

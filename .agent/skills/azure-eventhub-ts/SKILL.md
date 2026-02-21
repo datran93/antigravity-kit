@@ -1,10 +1,9 @@
 ---
 name: azure-eventhub-ts
-description:
-  Build event streaming applications using Azure Event Hubs SDK for JavaScript (@azure/event-hubs). Use when
-  implementing high-throughput event ingestion, real-time analytics, IoT telemetry, or event-driven architectures with
-  partitioned consumers.
+description: "Build event streaming applications using Azure Event Hubs SDK for JavaScript (@azure/event-hubs). Use when implementing high-throughput event ingestion, real-time analytics, IoT telemetry, or event..."
 package: "@azure/event-hubs"
+risk: unknown
+source: community
 ---
 
 # Azure Event Hubs SDK for TypeScript
@@ -18,7 +17,6 @@ npm install @azure/event-hubs @azure/identity
 ```
 
 For checkpointing with consumer groups:
-
 ```bash
 npm install @azure/eventhubs-checkpointstore-blob @azure/storage-blob
 ```
@@ -50,7 +48,7 @@ const consumer = new EventHubConsumerClient(
   "$Default", // Consumer group
   fullyQualifiedNamespace,
   eventHubName,
-  credential,
+  credential
 );
 ```
 
@@ -112,12 +110,18 @@ import { BlobCheckpointStore } from "@azure/eventhubs-checkpointstore-blob";
 
 const containerClient = new ContainerClient(
   `https://${storageAccount}.blob.core.windows.net/${containerName}`,
-  credential,
+  credential
 );
 
 const checkpointStore = new BlobCheckpointStore(containerClient);
 
-const consumer = new EventHubConsumerClient("$Default", namespace, eventHubName, credential, checkpointStore);
+const consumer = new EventHubConsumerClient(
+  "$Default",
+  namespace,
+  eventHubName,
+  credential,
+  checkpointStore
+);
 
 const subscription = consumer.subscribe({
   processEvents: async (events, context) => {
@@ -138,28 +142,21 @@ const subscription = consumer.subscribe({
 ### Receive from Specific Position
 
 ```typescript
-const subscription = consumer.subscribe(
-  {
-    processEvents: async (events, context) => {
-      /* ... */
-    },
-    processError: async (err, context) => {
-      /* ... */
-    },
+const subscription = consumer.subscribe({
+  processEvents: async (events, context) => { /* ... */ },
+  processError: async (err, context) => { /* ... */ },
+}, {
+  startPosition: {
+    // Start from beginning
+    "0": { offset: "@earliest" },
+    // Start from end (new events only)
+    "1": { offset: "@latest" },
+    // Start from specific offset
+    "2": { offset: "12345" },
+    // Start from specific time
+    "3": { enqueuedOn: new Date("2024-01-01") },
   },
-  {
-    startPosition: {
-      // Start from beginning
-      "0": { offset: "@earliest" },
-      // Start from end (new events only)
-      "1": { offset: "@latest" },
-      // Start from specific offset
-      "2": { offset: "12345" },
-      // Start from specific time
-      "3": { enqueuedOn: new Date("2024-01-01") },
-    },
-  },
-);
+});
 ```
 
 ## Event Hub Properties
@@ -179,17 +176,13 @@ console.log(`Last sequence: ${partitionProperties.lastEnqueuedSequenceNumber}`);
 ```typescript
 const subscription = consumer.subscribe(
   {
-    processEvents: async (events, context) => {
-      /* ... */
-    },
-    processError: async (err, context) => {
-      /* ... */
-    },
+    processEvents: async (events, context) => { /* ... */ },
+    processError: async (err, context) => { /* ... */ },
   },
   {
-    maxBatchSize: 100, // Max events per batch
-    maxWaitTimeInSeconds: 30, // Max wait for batch
-  },
+    maxBatchSize: 100,           // Max events per batch
+    maxWaitTimeInSeconds: 30,    // Max wait for batch
+  }
 );
 ```
 
@@ -275,3 +268,6 @@ consumer.subscribe({
 5. **Handle errors gracefully** - Don't checkpoint on processing failures
 6. **Close clients** - Always close producer/consumer when done
 7. **Monitor lag** - Track `lastEnqueuedSequenceNumber` vs processed sequence
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

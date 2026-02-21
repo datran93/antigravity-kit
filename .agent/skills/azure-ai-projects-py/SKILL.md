@@ -1,11 +1,9 @@
 ---
 name: azure-ai-projects-py
-description:
-  Build AI applications using the Azure AI Projects Python SDK (azure-ai-projects). Use when working with Foundry
-  project clients, creating versioned agents with PromptAgentDefinition, running evaluations, managing
-  connections/deployments/datasets/indexes, or using OpenAI-compatible clients. This is the high-level Foundry SDK - for
-  low-level agent operations, use azure-ai-agents-python skill.
+description: "Build AI applications using the Azure AI Projects Python SDK (azure-ai-projects). Use when working with Foundry project clients, creating versioned agents with PromptAgentDefinition, running evalua..."
 package: azure-ai-projects
+risk: unknown
+source: community
 ---
 
 # Azure AI Projects Python SDK (Foundry SDK)
@@ -41,15 +39,15 @@ client = AIProjectClient(
 
 ## Client Operations Overview
 
-| Operation            | Access           | Purpose                             |
-| -------------------- | ---------------- | ----------------------------------- |
-| `client.agents`      | `.agents.*`      | Agent CRUD, versions, threads, runs |
-| `client.connections` | `.connections.*` | List/get project connections        |
-| `client.deployments` | `.deployments.*` | List model deployments              |
-| `client.datasets`    | `.datasets.*`    | Dataset management                  |
-| `client.indexes`     | `.indexes.*`     | Index management                    |
-| `client.evaluations` | `.evaluations.*` | Run evaluations                     |
-| `client.red_teams`   | `.red_teams.*`   | Red team operations                 |
+| Operation | Access | Purpose |
+|-----------|--------|---------|
+| `client.agents` | `.agents.*` | Agent CRUD, versions, threads, runs |
+| `client.connections` | `.connections.*` | List/get project connections |
+| `client.deployments` | `.deployments.*` | List model deployments |
+| `client.datasets` | `.datasets.*` | Dataset management |
+| `client.indexes` | `.indexes.*` | Index management |
+| `client.evaluations` | `.evaluations.*` | Run evaluations |
+| `client.red_teams` | `.red_teams.*` | Red team operations |
 
 ## Two Client Approaches
 
@@ -126,23 +124,23 @@ agent_version = client.agents.create_version(
 )
 ```
 
-See [references/agents.md](references/agents.md) for detailed agent patterns.
+See references/agents.md for detailed agent patterns.
 
 ## Tools Overview
 
-| Tool             | Class                     | Use Case                         |
-| ---------------- | ------------------------- | -------------------------------- |
-| Code Interpreter | `CodeInterpreterTool`     | Execute Python, generate files   |
-| File Search      | `FileSearchTool`          | RAG over uploaded documents      |
-| Bing Grounding   | `BingGroundingTool`       | Web search (requires connection) |
-| Azure AI Search  | `AzureAISearchTool`       | Search your indexes              |
-| Function Calling | `FunctionTool`            | Call your Python functions       |
-| OpenAPI          | `OpenApiTool`             | Call REST APIs                   |
-| MCP              | `McpTool`                 | Model Context Protocol servers   |
-| Memory Search    | `MemorySearchTool`        | Search agent memory stores       |
-| SharePoint       | `SharepointGroundingTool` | Search SharePoint content        |
+| Tool | Class | Use Case |
+|------|-------|----------|
+| Code Interpreter | `CodeInterpreterTool` | Execute Python, generate files |
+| File Search | `FileSearchTool` | RAG over uploaded documents |
+| Bing Grounding | `BingGroundingTool` | Web search (requires connection) |
+| Azure AI Search | `AzureAISearchTool` | Search your indexes |
+| Function Calling | `FunctionTool` | Call your Python functions |
+| OpenAPI | `OpenApiTool` | Call REST APIs |
+| MCP | `McpTool` | Model Context Protocol servers |
+| Memory Search | `MemorySearchTool` | Search agent memory stores |
+| SharePoint | `SharepointGroundingTool` | Search SharePoint content |
 
-See [references/tools.md](references/tools.md) for all tool patterns.
+See references/tools.md for all tool patterns.
 
 ## Thread and Message Flow
 
@@ -183,7 +181,7 @@ for conn in connections:
 connection = client.connections.get(connection_name="my-search-connection")
 ```
 
-See [references/connections.md](references/connections.md) for connection patterns.
+See references/connections.md for connection patterns.
 
 ## Deployments
 
@@ -194,7 +192,7 @@ for deployment in deployments:
     print(f"{deployment.name}: {deployment.model}")
 ```
 
-See [references/deployments.md](references/deployments.md) for deployment patterns.
+See references/deployments.md for deployment patterns.
 
 ## Datasets and Indexes
 
@@ -206,7 +204,7 @@ datasets = client.datasets.list()
 indexes = client.indexes.list()
 ```
 
-See [references/datasets-indexes.md](references/datasets-indexes.md) for data operations.
+See references/datasets-indexes.md for data operations.
 
 ## Evaluation
 
@@ -229,7 +227,7 @@ eval_run = openai_client.evals.runs.create(
 )
 ```
 
-See [references/evaluation.md](references/evaluation.md) for evaluation patterns.
+See references/evaluation.md for evaluation patterns.
 
 ## Async Client
 
@@ -244,7 +242,7 @@ async with AIProjectClient(
     # ... async operations
 ```
 
-See [references/async-patterns.md](references/async-patterns.md) for async patterns.
+See references/async-patterns.md for async patterns.
 
 ## Memory Stores
 
@@ -273,27 +271,30 @@ agent = client.agents.create_agent(
 
 ## SDK Comparison
 
-| Feature          | `azure-ai-projects`      | `azure-ai-agents`     |
-| ---------------- | ------------------------ | --------------------- |
-| Level            | High-level (Foundry)     | Low-level (Agents)    |
-| Client           | `AIProjectClient`        | `AgentsClient`        |
-| Versioning       | `create_version()`       | Not available         |
-| Connections      | Yes                      | No                    |
-| Deployments      | Yes                      | No                    |
-| Datasets/Indexes | Yes                      | No                    |
-| Evaluation       | Via OpenAI client        | No                    |
-| When to use      | Full Foundry integration | Standalone agent apps |
+| Feature | `azure-ai-projects` | `azure-ai-agents` |
+|---------|---------------------|-------------------|
+| Level | High-level (Foundry) | Low-level (Agents) |
+| Client | `AIProjectClient` | `AgentsClient` |
+| Versioning | `create_version()` | Not available |
+| Connections | Yes | No |
+| Deployments | Yes | No |
+| Datasets/Indexes | Yes | No |
+| Evaluation | Via OpenAI client | No |
+| When to use | Full Foundry integration | Standalone agent apps |
 
 ## Reference Files
 
-- [references/agents.md](references/agents.md): Agent operations with PromptAgentDefinition
-- [references/tools.md](references/tools.md): All agent tools with examples
-- [references/evaluation.md](references/evaluation.md): Evaluation operations overview
-- [references/built-in-evaluators.md](references/built-in-evaluators.md): Complete built-in evaluator reference
-- [references/custom-evaluators.md](references/custom-evaluators.md): Code and prompt-based evaluator patterns
-- [references/connections.md](references/connections.md): Connection operations
-- [references/deployments.md](references/deployments.md): Deployment enumeration
-- [references/datasets-indexes.md](references/datasets-indexes.md): Dataset and index operations
-- [references/async-patterns.md](references/async-patterns.md): Async client usage
-- [references/api-reference.md](references/api-reference.md): Complete API reference for all 373 SDK exports (v2.0.0b4)
-- [scripts/run_batch_evaluation.py](scripts/run_batch_evaluation.py): CLI tool for batch evaluations
+- references/agents.md: Agent operations with PromptAgentDefinition
+- references/tools.md: All agent tools with examples
+- references/evaluation.md: Evaluation operations overview
+- references/built-in-evaluators.md: Complete built-in evaluator reference
+- references/custom-evaluators.md: Code and prompt-based evaluator patterns
+- references/connections.md: Connection operations
+- references/deployments.md: Deployment enumeration
+- references/datasets-indexes.md: Dataset and index operations
+- references/async-patterns.md: Async client usage
+- references/api-reference.md: Complete API reference for all 373 SDK exports (v2.0.0b4)
+- scripts/run_batch_evaluation.py: CLI tool for batch evaluations
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

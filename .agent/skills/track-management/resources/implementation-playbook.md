@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # Track Management
 
-Guide for creating, managing, and completing Conductor tracks - the logical work units that organize features, bugs, and
-refactors through specification, planning, and implementation phases.
+Guide for creating, managing, and completing Conductor tracks - the logical work units that organize features, bugs, and refactors through specification, planning, and implementation phases.
 
 ## When to Use This Skill
 
@@ -232,7 +231,9 @@ Description of the non-functional requirement (performance, security, etc.)
 ```markdown
 # Implementation Plan: {Track Title}
 
-Track ID: `{track-id}` Created: YYYY-MM-DD Status: pending | in-progress | completed
+Track ID: `{track-id}`
+Created: YYYY-MM-DD
+Status: pending | in-progress | completed
 
 ## Overview
 
@@ -314,20 +315,20 @@ Example:
 
 | Track ID                                         | Type    | Status      | Phase | Started    | Assignee   |
 | ------------------------------------------------ | ------- | ----------- | ----- | ---------- | ---------- |
-| [user-auth_20250115](tracks/user-auth_20250115/) | feature | in-progress | 2/3   | 2025-01-15 | @developer |
-| [fix-login_20250114](tracks/fix-login_20250114/) | bug     | pending     | 0/2   | 2025-01-14 | -          |
+| user-auth_20250115 | feature | in-progress | 2/3   | 2025-01-15 | @developer |
+| fix-login_20250114 | bug     | pending     | 0/2   | 2025-01-14 | -          |
 
 ## Completed Tracks
 
 | Track ID                                       | Type  | Completed  | Duration |
 | ---------------------------------------------- | ----- | ---------- | -------- |
-| [setup-ci_20250110](tracks/setup-ci_20250110/) | chore | 2025-01-12 | 2 days   |
+| setup-ci_20250110 | chore | 2025-01-12 | 2 days   |
 
 ## Archived Tracks
 
 | Track ID                                             | Reason     | Archived   |
 | ---------------------------------------------------- | ---------- | ---------- |
-| [old-feature_20241201](tracks/old-feature_20241201/) | Superseded | 2025-01-05 |
+| old-feature_20241201 | Superseded | 2025-01-05 |
 ```
 
 ## Metadata (metadata.json) Fields

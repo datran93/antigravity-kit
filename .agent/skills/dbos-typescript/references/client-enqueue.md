@@ -7,8 +7,7 @@ tags: client, enqueue, external, queue
 
 ## Enqueue Workflows from External Applications
 
-Use `client.enqueue()` to submit workflows from outside your DBOS application. Since `DBOSClient` runs externally,
-workflow and queue metadata must be specified explicitly.
+Use `client.enqueue()` to submit workflows from outside your DBOS application. Since `DBOSClient` runs externally, workflow and queue metadata must be specified explicitly.
 
 **Incorrect (trying to use DBOS.startWorkflow from external code):**
 
@@ -32,7 +31,7 @@ const handle = await client.enqueue(
     workflowName: "processTask",
     queueName: "task_queue",
   },
-  "task-data",
+  "task-data"
 );
 
 // Wait for the result
@@ -53,7 +52,7 @@ const handle = await client.enqueue<typeof Tasks.processTask>(
     workflowClassName: "Tasks",
     queueName: "task_queue",
   },
-  "task-data",
+  "task-data"
 );
 
 // TypeScript infers the result type
@@ -61,7 +60,6 @@ const result = await handle.getResult(); // type: string
 ```
 
 **Enqueue options:**
-
 - `workflowName` (required): Name of the workflow function
 - `queueName` (required): Name of the queue
 - `workflowClassName`: Class name if the workflow is a class method

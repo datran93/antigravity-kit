@@ -1,8 +1,8 @@
 ---
 name: ml-pipeline-workflow
-description:
-  Build end-to-end MLOps pipelines from data preparation through model training, validation, and production deployment.
-  Use when creating ML pipelines, implementing MLOps practices, or automating model training and deployment workflows.
+description: "Build end-to-end MLOps pipelines from data preparation through model training, validation, and production deployment. Use when creating ML pipelines, implementing MLOps practices, or automating mod..."
+risk: unknown
+source: community
 ---
 
 # ML Pipeline Workflow
@@ -23,8 +23,7 @@ Complete end-to-end MLOps pipeline orchestration from data preparation through m
 
 ## Overview
 
-This skill provides comprehensive guidance for building production ML pipelines that handle the full lifecycle: data
-ingestion → preparation → training → validation → deployment → monitoring.
+This skill provides comprehensive guidance for building production ML pipelines that handle the full lifecycle: data ingestion → preparation → training → validation → deployment → monitoring.
 
 ## Use this skill when
 
@@ -72,7 +71,6 @@ ingestion → preparation → training → validation → deployment → monitor
 ### Reference Documentation
 
 See the `references/` directory for detailed guides:
-
 - **data-preparation.md** - Data cleaning, validation, and feature engineering
 - **model-training.md** - Training workflows and best practices
 - **model-validation.md** - Validation strategies and metrics
@@ -81,7 +79,6 @@ See the `references/` directory for detailed guides:
 ### Assets and Templates
 
 The `assets/` directory contains:
-
 - **pipeline-dag.yaml.template** - DAG template for workflow orchestration
 - **training-config.yaml** - Training configuration template
 - **validation-checklist.md** - Pre-deployment validation checklist

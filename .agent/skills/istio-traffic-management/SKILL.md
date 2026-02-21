@@ -1,8 +1,8 @@
 ---
 name: istio-traffic-management
-description:
-  Configure Istio traffic management including routing, load balancing, circuit breakers, and canary deployments. Use
-  when implementing service mesh traffic policies, progressive delivery, or resilience patterns.
+description: "Configure Istio traffic management including routing, load balancing, circuit breakers, and canary deployments. Use when implementing service mesh traffic policies, progressive delivery, or resilie..."
+risk: unknown
+source: community
 ---
 
 # Istio Traffic Management
@@ -34,12 +34,12 @@ Comprehensive guide to Istio traffic management for production service mesh depl
 
 ### 1. Traffic Management Resources
 
-| Resource            | Purpose                       | Scope         |
-| ------------------- | ----------------------------- | ------------- |
-| **VirtualService**  | Route traffic to destinations | Host-based    |
+| Resource | Purpose | Scope |
+|----------|---------|-------|
+| **VirtualService** | Route traffic to destinations | Host-based |
 | **DestinationRule** | Define policies after routing | Service-based |
-| **Gateway**         | Configure ingress/egress      | Cluster edge  |
-| **ServiceEntry**    | Add external services         | Mesh-wide     |
+| **Gateway** | Configure ingress/egress | Cluster edge |
+| **ServiceEntry** | Add external services | Mesh-wide |
 
 ### 2. Traffic Flow
 
@@ -285,7 +285,7 @@ spec:
   host: my-service
   trafficPolicy:
     loadBalancer:
-      simple: ROUND_ROBIN # or LEAST_CONN, RANDOM, PASSTHROUGH
+      simple: ROUND_ROBIN  # or LEAST_CONN, RANDOM, PASSTHROUGH
 ---
 # Consistent hashing for sticky sessions
 apiVersion: networking.istio.io/v1beta1
@@ -304,7 +304,6 @@ spec:
 ## Best Practices
 
 ### Do's
-
 - **Start simple** - Add complexity incrementally
 - **Use subsets** - Version your services clearly
 - **Set timeouts** - Always configure reasonable timeouts
@@ -312,7 +311,6 @@ spec:
 - **Monitor** - Use Kiali and Jaeger for visibility
 
 ### Don'ts
-
 - **Don't over-retry** - Can cause cascading failures
 - **Don't ignore outlier detection** - Enable circuit breakers
 - **Don't mirror to production** - Mirror to test environments

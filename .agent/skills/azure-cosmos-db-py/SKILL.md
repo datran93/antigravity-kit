@@ -1,11 +1,9 @@
 ---
 name: azure-cosmos-db-py
-description:
-  Build Azure Cosmos DB NoSQL services with Python/FastAPI following production-grade patterns. Use when implementing
-  database client setup with dual auth (DefaultAzureCredential + emulator), service layer classes with CRUD operations,
-  partition key strategies, parameterized queries, or TDD patterns for Cosmos. Triggers on phrases like "Cosmos DB",
-  "NoSQL database", "document store", "add persistence", "database service layer", or "Python Cosmos SDK".
+description: "Build Azure Cosmos DB NoSQL services with Python/FastAPI following production-grade patterns. Use when implementing database client setup with dual auth (DefaultAzureCredential + emulator), service..."
 package: azure-cosmos
+risk: unknown
+source: community
 ---
 
 # Cosmos DB Service Implementation
@@ -31,7 +29,6 @@ COSMOS_KEY=<emulator-key>
 ## Authentication
 
 **DefaultAzureCredential (preferred)**:
-
 ```python
 from azure.cosmos import CosmosClient
 from azure.identity import DefaultAzureCredential
@@ -43,7 +40,6 @@ client = CosmosClient(
 ```
 
 **Emulator (local development)**:
-
 ```python
 from azure.cosmos import CosmosClient
 
@@ -114,7 +110,7 @@ async def get_container():
     return _cosmos_container
 ```
 
-**Full implementation**: See [references/client-setup.md](references/client-setup.md)
+**Full implementation**: See references/client-setup.md
 
 ### 2. Pydantic Model Hierarchy
 
@@ -144,7 +140,7 @@ class ProjectInDB(Project):             # Internal with docType
 class ProjectService:
     def _use_cosmos(self) -> bool:
         return get_container() is not None
-
+    
     async def get_by_id(self, project_id: str, workspace_id: str) -> Project | None:
         if not self._use_cosmos():
             return None
@@ -154,7 +150,7 @@ class ProjectService:
         return self._doc_to_model(doc)
 ```
 
-**Full patterns**: See [references/service-layer.md](references/service-layer.md)
+**Full patterns**: See references/service-layer.md
 
 ## Core Principles
 
@@ -188,63 +184,61 @@ def mock_cosmos_container(mocker):
 async def test_get_project_by_id_returns_project(mock_cosmos_container):
     # Arrange
     mock_cosmos_container.read_item.return_value = {"id": "123", "name": "Test"}
-
+    
     # Act
     result = await project_service.get_by_id("123", "workspace-1")
-
+    
     # Assert
     assert result.id == "123"
     assert result.name == "Test"
 ```
 
-**Full testing guide**: See [references/testing.md](references/testing.md)
+**Full testing guide**: See references/testing.md
 
 ## Reference Files
 
-| File                                                         | When to Read                                                                 |
-| ------------------------------------------------------------ | ---------------------------------------------------------------------------- |
-| [references/client-setup.md](references/client-setup.md)     | Setting up Cosmos client with dual auth, SSL config, singleton pattern       |
-| [references/service-layer.md](references/service-layer.md)   | Implementing full service class with CRUD, conversions, graceful degradation |
-| [references/testing.md](references/testing.md)               | Writing pytest tests, mocking Cosmos, integration test setup                 |
-| [references/partitioning.md](references/partitioning.md)     | Choosing partition keys, cross-partition queries, move operations            |
-| [references/error-handling.md](references/error-handling.md) | Handling CosmosResourceNotFoundError, logging, HTTP error mapping            |
+| File | When to Read |
+|------|--------------|
+| references/client-setup.md | Setting up Cosmos client with dual auth, SSL config, singleton pattern |
+| references/service-layer.md | Implementing full service class with CRUD, conversions, graceful degradation |
+| references/testing.md | Writing pytest tests, mocking Cosmos, integration test setup |
+| references/partitioning.md | Choosing partition keys, cross-partition queries, move operations |
+| references/error-handling.md | Handling CosmosResourceNotFoundError, logging, HTTP error mapping |
 
 ## Template Files
 
-| File                                                                 | Purpose                            |
-| -------------------------------------------------------------------- | ---------------------------------- |
-| [assets/cosmos_client_template.py](assets/cosmos_client_template.py) | Ready-to-use client module         |
-| [assets/service_template.py](assets/service_template.py)             | Service class skeleton             |
-| [assets/conftest_template.py](assets/conftest_template.py)           | pytest fixtures for Cosmos mocking |
+| File | Purpose |
+|------|---------|
+| assets/cosmos_client_template.py | Ready-to-use client module |
+| assets/service_template.py | Service class skeleton |
+| assets/conftest_template.py | pytest fixtures for Cosmos mocking |
 
 ## Quality Attributes (NFRs)
 
 ### Reliability
-
 - Graceful degradation when Cosmos unavailable
 - Retry logic with exponential backoff for transient failures
 - Connection pooling via singleton pattern
 
 ### Security
-
 - Zero secrets in code (RBAC via DefaultAzureCredential)
 - Parameterized queries prevent injection
 - Partition key isolation enforces data boundaries
 
 ### Maintainability
-
 - Five-tier model pattern enables schema evolution
 - Service layer decouples business logic from storage
 - Consistent patterns across all entity services
 
 ### Testability
-
 - Dependency injection via `get_container()`
 - Easy mocking with module-level globals
 - Clear separation enables unit testing without Cosmos
 
 ### Performance
-
 - Partition key queries avoid cross-partition scans
 - Async wrapping prevents blocking FastAPI event loop
 - Minimal document conversion overhead
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

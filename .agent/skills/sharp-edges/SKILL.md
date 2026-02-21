@@ -9,15 +9,13 @@ risk: safe
 
 ## Overview
 
-Identify error-prone APIs and dangerous configurations that could lead to bugs, security vulnerabilities, or system
-failures.
+Identify error-prone APIs and dangerous configurations that could lead to bugs, security vulnerabilities, or system failures.
 
 ## When to Use This Skill
 
 Use this skill when you need to identify error-prone APIs and dangerous configurations.
 
 Use this skill when:
-
 - Reviewing code for potentially dangerous API usage
 - Identifying configurations that could cause issues
 - Analyzing code for error-prone patterns

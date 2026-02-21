@@ -7,8 +7,7 @@ tags: workflow, background, handle, async
 
 ## Start Workflows in Background
 
-Use `dbos.RunWorkflow` to start a workflow and get a handle to track it. The workflow is guaranteed to run to completion
-even if the app is interrupted.
+Use `dbos.RunWorkflow` to start a workflow and get a handle to track it. The workflow is guaranteed to run to completion even if the app is interrupted.
 
 **Incorrect (no way to track background work):**
 
@@ -54,12 +53,11 @@ func main() {
 Retrieve a handle later by workflow ID:
 
 ```go
-handle, err := dbos.RetrieveWorkflow[string](ctx, workflowID)
+handle, err := dbos.RetrieveWorkflowstring
 result, err := handle.GetResult()
 ```
 
 `GetResult` supports options:
-
 - `dbos.WithHandleTimeout(timeout)`: Return a timeout error if the workflow doesn't complete within the duration
 - `dbos.WithHandlePollingInterval(interval)`: Control how often the database is polled for completion
 

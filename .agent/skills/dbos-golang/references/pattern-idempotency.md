@@ -7,8 +7,7 @@ tags: pattern, idempotency, workflow-id, deduplication
 
 ## Use Workflow IDs for Idempotency
 
-Assign a workflow ID to ensure a workflow executes only once, even if called multiple times. This prevents duplicate
-side effects like double payments.
+Assign a workflow ID to ensure a workflow executes only once, even if called multiple times. This prevents duplicate side effects like double payments.
 
 **Incorrect (no idempotency):**
 
@@ -61,5 +60,4 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 
 Workflow IDs must be **globally unique** for your application. If not set, a random UUID is generated.
 
-Reference:
-[Workflow IDs and Idempotency](https://docs.dbos.dev/golang/tutorials/workflow-tutorial#workflow-ids-and-idempotency)
+Reference: [Workflow IDs and Idempotency](https://docs.dbos.dev/golang/tutorials/workflow-tutorial#workflow-ids-and-idempotency)

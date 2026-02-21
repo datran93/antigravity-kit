@@ -1,8 +1,10 @@
 ---
 name: azure-resource-manager-redis-dotnet
-description: |
+description: "|"
   Azure Resource Manager SDK for Redis in .NET. Use for MANAGEMENT PLANE operations: creating/managing Azure Cache for Redis instances, firewall rules, access keys, patch schedules, linked servers (geo-replication), and private endpoints via Azure Resource Manager. NOT for data plane operations (get/set keys, pub/sub) - use StackExchange.Redis for that. Triggers: "Redis cache", "create Redis", "manage Redis", "ARM Redis", "RedisResource", "provision Redis", "Azure Cache for Redis".
 package: Azure.ResourceManager.Redis
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.Redis (.NET)
@@ -10,9 +12,7 @@ package: Azure.ResourceManager.Redis
 Management plane SDK for provisioning and managing Azure Cache for Redis resources via Azure Resource Manager.
 
 > **⚠️ Management vs Data Plane**
->
-> - **This SDK (Azure.ResourceManager.Redis)**: Create caches, configure firewall rules, manage access keys, set up
->   geo-replication
+> - **This SDK (Azure.ResourceManager.Redis)**: Create caches, configure firewall rules, manage access keys, set up geo-replication
 > - **Data Plane SDK (StackExchange.Redis)**: Get/set keys, pub/sub, streams, Lua scripts
 
 ## Installation
@@ -241,14 +241,13 @@ await cache.Value.ForceRebootAsync(rebootContent);
 
 ## SKU Reference
 
-| SKU      | Family | Capacity | Features                                       |
-| -------- | ------ | -------- | ---------------------------------------------- |
-| Basic    | C      | 0-6      | Single node, no SLA, dev/test only             |
-| Standard | C      | 0-6      | Two nodes (primary/replica), SLA               |
-| Premium  | P      | 1-5      | Clustering, geo-replication, VNet, persistence |
+| SKU | Family | Capacity | Features |
+|-----|--------|----------|----------|
+| Basic | C | 0-6 | Single node, no SLA, dev/test only |
+| Standard | C | 0-6 | Two nodes (primary/replica), SLA |
+| Premium | P | 1-5 | Clustering, geo-replication, VNet, persistence |
 
 **Capacity Sizes (Family C - Basic/Standard)**:
-
 - C0: 250 MB
 - C1: 1 GB
 - C2: 2.5 GB
@@ -258,7 +257,6 @@ await cache.Value.ForceRebootAsync(rebootContent);
 - C6: 53 GB
 
 **Capacity Sizes (Family P - Premium)**:
-
 - P1: 6 GB per shard
 - P2: 13 GB per shard
 - P3: 26 GB per shard
@@ -267,21 +265,21 @@ await cache.Value.ForceRebootAsync(rebootContent);
 
 ## Key Types Reference
 
-| Type                                     | Purpose                                    |
-| ---------------------------------------- | ------------------------------------------ |
-| `ArmClient`                              | Entry point for all ARM operations         |
-| `RedisResource`                          | Represents a Redis cache instance          |
-| `RedisCollection`                        | Collection for cache CRUD operations       |
-| `RedisFirewallRuleResource`              | Firewall rule for IP filtering             |
-| `RedisPatchScheduleResource`             | Maintenance window configuration           |
-| `RedisLinkedServerWithPropertyResource`  | Geo-replication linked server              |
-| `RedisPrivateEndpointConnectionResource` | Private endpoint connection                |
-| `RedisCacheAccessPolicyResource`         | RBAC access policy                         |
-| `RedisCreateOrUpdateContent`             | Cache creation payload                     |
-| `RedisPatch`                             | Cache update payload                       |
-| `RedisSku`                               | SKU configuration (name, family, capacity) |
-| `RedisAccessKeys`                        | Primary and secondary access keys          |
-| `RedisRegenerateKeyContent`              | Key regeneration request                   |
+| Type | Purpose |
+|------|---------|
+| `ArmClient` | Entry point for all ARM operations |
+| `RedisResource` | Represents a Redis cache instance |
+| `RedisCollection` | Collection for cache CRUD operations |
+| `RedisFirewallRuleResource` | Firewall rule for IP filtering |
+| `RedisPatchScheduleResource` | Maintenance window configuration |
+| `RedisLinkedServerWithPropertyResource` | Geo-replication linked server |
+| `RedisPrivateEndpointConnectionResource` | Private endpoint connection |
+| `RedisCacheAccessPolicyResource` | RBAC access policy |
+| `RedisCreateOrUpdateContent` | Cache creation payload |
+| `RedisPatch` | Cache update payload |
+| `RedisSku` | SKU configuration (name, family, capacity) |
+| `RedisAccessKeys` | Primary and secondary access keys |
+| `RedisRegenerateKeyContent` | Key regeneration request |
 
 ## Best Practices
 
@@ -353,8 +351,11 @@ var value = await db.StringGetAsync("key");
 
 ## Related SDKs
 
-| SDK                                  | Purpose                                | Install                                                 |
-| ------------------------------------ | -------------------------------------- | ------------------------------------------------------- |
-| `StackExchange.Redis`                | Data plane (get/set, pub/sub, streams) | `dotnet add package StackExchange.Redis`                |
-| `Azure.ResourceManager.Redis`        | Management plane (this SDK)            | `dotnet add package Azure.ResourceManager.Redis`        |
-| `Microsoft.Azure.StackExchangeRedis` | Azure-specific Redis extensions        | `dotnet add package Microsoft.Azure.StackExchangeRedis` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `StackExchange.Redis` | Data plane (get/set, pub/sub, streams) | `dotnet add package StackExchange.Redis` |
+| `Azure.ResourceManager.Redis` | Management plane (this SDK) | `dotnet add package Azure.ResourceManager.Redis` |
+| `Microsoft.Azure.StackExchangeRedis` | Azure-specific Redis extensions | `dotnet add package Microsoft.Azure.StackExchangeRedis` |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

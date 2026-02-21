@@ -1,9 +1,11 @@
 ---
 name: azure-ai-ml-py
-description: |
+description: "|"
   Azure Machine Learning SDK v2 for Python. Use for ML workspaces, jobs, models, datasets, compute, and pipelines.
   Triggers: "azure-ai-ml", "MLClient", "workspace", "model registry", "training jobs", "datasets".
 package: azure-ai-ml
+risk: unknown
+source: community
 ---
 
 # Azure Machine Learning SDK v2 for Python
@@ -249,16 +251,16 @@ print(f"Default: {default_ds.name}")
 
 ## MLClient Operations
 
-| Property       | Operations                                  |
-| -------------- | ------------------------------------------- |
-| `workspaces`   | create, get, list, delete                   |
-| `jobs`         | create_or_update, get, list, stream, cancel |
-| `models`       | create_or_update, get, list, archive        |
-| `data`         | create_or_update, get, list                 |
-| `compute`      | begin_create_or_update, get, list, delete   |
-| `environments` | create_or_update, get, list                 |
-| `datastores`   | create_or_update, get, list, get_default    |
-| `components`   | create_or_update, get, list                 |
+| Property | Operations |
+|----------|------------|
+| `workspaces` | create, get, list, delete |
+| `jobs` | create_or_update, get, list, stream, cancel |
+| `models` | create_or_update, get, list, archive |
+| `data` | create_or_update, get, list |
+| `compute` | begin_create_or_update, get, list, delete |
+| `environments` | create_or_update, get, list |
+| `datastores` | create_or_update, get, list, get_default |
+| `components` | create_or_update, get, list |
 
 ## Best Practices
 
@@ -269,3 +271,6 @@ print(f"Default: {default_ds.name}")
 5. **Register models** after successful training jobs
 6. **Use pipelines** for multi-step workflows
 7. **Tag resources** for organization and cost tracking
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

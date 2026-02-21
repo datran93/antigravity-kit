@@ -20,24 +20,23 @@ Comprehensive reference for creating effective agent skills.
 ```
 
 **Project-local alternative:**
-
 ```
 .agent/skills/{skill-name}/SKILL.md
 ```
 
 ## Naming Rules
 
-| Element      | Rule                      | Example                      |
-| ------------ | ------------------------- | ---------------------------- |
-| Directory    | kebab-case, 1-64 chars    | `react-best-practices`       |
-| `SKILL.md`   | ALL CAPS, exact filename  | `SKILL.md` (not `skill.md`)  |
+| Element | Rule | Example |
+|---------|------|---------|
+| Directory | kebab-case, 1-64 chars | `react-best-practices` |
+| `SKILL.md` | ALL CAPS, exact filename | `SKILL.md` (not `skill.md`) |
 | `name` field | Must match directory name | `name: react-best-practices` |
 
 ## SKILL.md Structure
 
 ```markdown
 ---
-name: { skill-name }
+name: {skill-name}
 description: >-
   Use when [trigger condition].
 metadata:
@@ -82,7 +81,6 @@ metadata:
 ```
 
 **Rules:**
-
 - Start with "Use when..."
 - Put triggers under `metadata.triggers`
 - Keep under 500 characters
@@ -92,12 +90,12 @@ metadata:
 
 Skills load into context on-demand. Optimize for token usage:
 
-| Guideline                       | Reason                         |
-| ------------------------------- | ------------------------------ |
-| Keep SKILL.md < 500 lines       | Reduces context consumption    |
+| Guideline | Reason |
+|-----------|--------|
+| Keep SKILL.md < 500 lines | Reduces context consumption |
 | Put details in supporting files | Agent reads only what's needed |
-| Use tables for reference data   | More compact than prose        |
-| Link to `--help` for CLI tools  | Avoids duplicating docs        |
+| Use tables for reference data | More compact than prose |
+| Link to `--help` for CLI tools | Avoids duplicating docs |
 
 ## Supporting Files
 
@@ -126,22 +124,21 @@ metadata:
 This frontmatter helps the LLM locate the right file when referenced from `SKILL.md`.
 
 Reference from SKILL.md:
-
 ```markdown
 ## Detailed Reference
 
-- [Patterns](patterns.md) - Common usage patterns
-- [Examples](examples.md) - Code samples
+- Patterns - Common usage patterns
+- Examples - Code samples
 ```
 
 ## Skill Types
 
-| Type           | Purpose             | Example                   |
-| -------------- | ------------------- | ------------------------- |
-| **Reference**  | Documentation, APIs | `bigquery-analysis`       |
-| **Technique**  | How-to guides       | `condition-based-waiting` |
-| **Pattern**    | Mental models       | `flatten-with-flags`      |
-| **Discipline** | Rules to enforce    | `test-driven-development` |
+| Type | Purpose | Example |
+|------|---------|---------|
+| **Reference** | Documentation, APIs | `bigquery-analysis` |
+| **Technique** | How-to guides | `condition-based-waiting` |
+| **Pattern** | Mental models | `flatten-with-flags` |
+| **Discipline** | Rules to enforce | `test-driven-development` |
 
 ## Verification Checklist
 

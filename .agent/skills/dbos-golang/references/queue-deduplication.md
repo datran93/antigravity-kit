@@ -7,8 +7,7 @@ tags: queue, deduplication, idempotent, duplicate
 
 ## Deduplicate Queued Workflows
 
-Set a deduplication ID when enqueuing to prevent duplicate workflow executions. If a workflow with the same
-deduplication ID is already enqueued or executing, a `DBOSError` with code `QueueDeduplicated` is returned.
+Set a deduplication ID when enqueuing to prevent duplicate workflow executions. If a workflow with the same deduplication ID is already enqueued or executing, a `DBOSError` with code `QueueDeduplicated` is returned.
 
 **Incorrect (no deduplication):**
 
@@ -43,11 +42,9 @@ func handleClick(ctx dbos.DBOSContext, userID, task string) error {
 }
 ```
 
-Deduplication is per-queue. The deduplication ID is active while the workflow has status `ENQUEUED` or `PENDING`. Once
-the workflow completes, a new workflow with the same deduplication ID can be enqueued.
+Deduplication is per-queue. The deduplication ID is active while the workflow has status `ENQUEUED` or `PENDING`. Once the workflow completes, a new workflow with the same deduplication ID can be enqueued.
 
 This is useful for:
-
 - Ensuring one active task per user
 - Preventing duplicate form submissions
 - Idempotent event processing

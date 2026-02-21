@@ -19,5 +19,4 @@ Use this skill when you need to work with upscale and enhance image and video re
 
 This skill provides guidance and patterns for upscale and enhance image and video resolution using ai.
 
-For more information, see the
-[source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-upscale/SKILL.md).
+For more information, see the [source repository](https://github.com/fal-ai-community/skills/blob/main/skills/claude.ai/fal-upscale/SKILL.md).

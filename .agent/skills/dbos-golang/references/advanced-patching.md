@@ -7,8 +7,7 @@ tags: advanced, patching, upgrade, breaking-change
 
 ## Use Patching for Safe Workflow Upgrades
 
-Use `dbos.Patch` to safely deploy breaking changes to workflow code. Breaking changes alter which steps run or their
-order, which can cause recovery failures.
+Use `dbos.Patch` to safely deploy breaking changes to workflow code. Breaking changes alter which steps run or their order, which can cause recovery failures.
 
 **Incorrect (breaking change without patching):**
 

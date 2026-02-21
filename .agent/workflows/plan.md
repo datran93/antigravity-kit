@@ -67,7 +67,7 @@ Save the output to `PLAN-{slug}.md` containing:
 
 ### Request User Review
 
-> ✅ **Plan saved:** `PLAN-{slug}.md` **Please review the plan and:**
+> ✅ **Plan saved:** `plan-{slug}.md` **Please review the plan and:**
 >
 > 1. ✅ Approve (Run `/create` to start)
 > 2. 📝 Edit

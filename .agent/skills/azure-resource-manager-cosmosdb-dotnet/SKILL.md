@@ -1,8 +1,10 @@
 ---
 name: azure-resource-manager-cosmosdb-dotnet
-description: |
+description: "|"
   Azure Resource Manager SDK for Cosmos DB in .NET. Use for MANAGEMENT PLANE operations: creating/managing Cosmos DB accounts, databases, containers, throughput settings, and RBAC via Azure Resource Manager. NOT for data plane operations (CRUD on documents) - use Microsoft.Azure.Cosmos for that. Triggers: "Cosmos DB account", "create Cosmos account", "manage Cosmos resources", "ARM Cosmos", "CosmosDBAccountResource", "provision Cosmos DB".
 package: Azure.ResourceManager.CosmosDB
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.CosmosDB (.NET)
@@ -10,9 +12,7 @@ package: Azure.ResourceManager.CosmosDB
 Management plane SDK for provisioning and managing Azure Cosmos DB resources via Azure Resource Manager.
 
 > **⚠️ Management vs Data Plane**
->
-> - **This SDK (Azure.ResourceManager.CosmosDB)**: Create accounts, databases, containers, configure throughput, manage
->   RBAC
+> - **This SDK (Azure.ResourceManager.CosmosDB)**: Create accounts, databases, containers, configure throughput, manage RBAC
 > - **Data Plane SDK (Microsoft.Azure.Cosmos)**: CRUD operations on documents, queries, stored procedures execution
 
 ## Installation
@@ -195,17 +195,17 @@ foreach (var cs in connectionStrings.Value.ConnectionStrings)
 
 ## Key Types Reference
 
-| Type                                        | Purpose                            |
-| ------------------------------------------- | ---------------------------------- |
-| `ArmClient`                                 | Entry point for all ARM operations |
-| `CosmosDBAccountResource`                   | Represents a Cosmos DB account     |
-| `CosmosDBAccountCollection`                 | Collection for account CRUD        |
-| `CosmosDBSqlDatabaseResource`               | SQL API database                   |
-| `CosmosDBSqlContainerResource`              | SQL API container                  |
-| `CosmosDBAccountCreateOrUpdateContent`      | Account creation payload           |
-| `CosmosDBSqlDatabaseCreateOrUpdateContent`  | Database creation payload          |
-| `CosmosDBSqlContainerCreateOrUpdateContent` | Container creation payload         |
-| `ThroughputSettingsUpdateData`              | Throughput configuration           |
+| Type | Purpose |
+|------|---------|
+| `ArmClient` | Entry point for all ARM operations |
+| `CosmosDBAccountResource` | Represents a Cosmos DB account |
+| `CosmosDBAccountCollection` | Collection for account CRUD |
+| `CosmosDBSqlDatabaseResource` | SQL API database |
+| `CosmosDBSqlContainerResource` | SQL API container |
+| `CosmosDBAccountCreateOrUpdateContent` | Account creation payload |
+| `CosmosDBSqlDatabaseCreateOrUpdateContent` | Database creation payload |
+| `CosmosDBSqlContainerCreateOrUpdateContent` | Container creation payload |
+| `ThroughputSettingsUpdateData` | Throughput configuration |
 
 ## Best Practices
 
@@ -238,15 +238,18 @@ catch (RequestFailedException ex)
 
 ## Reference Files
 
-| File                                                                 | When to Read                                                 |
-| -------------------------------------------------------------------- | ------------------------------------------------------------ |
-| [references/account-management.md](references/account-management.md) | Account CRUD, failover, keys, connection strings, networking |
-| [references/sql-resources.md](references/sql-resources.md)           | SQL databases, containers, stored procedures, triggers, UDFs |
-| [references/throughput.md](references/throughput.md)                 | Manual/autoscale throughput, migration between modes         |
+| File | When to Read |
+|------|--------------|
+| references/account-management.md | Account CRUD, failover, keys, connection strings, networking |
+| references/sql-resources.md | SQL databases, containers, stored procedures, triggers, UDFs |
+| references/throughput.md | Manual/autoscale throughput, migration between modes |
 
 ## Related SDKs
 
-| SDK                              | Purpose                             | Install                                             |
-| -------------------------------- | ----------------------------------- | --------------------------------------------------- |
-| `Microsoft.Azure.Cosmos`         | Data plane (document CRUD, queries) | `dotnet add package Microsoft.Azure.Cosmos`         |
-| `Azure.ResourceManager.CosmosDB` | Management plane (this SDK)         | `dotnet add package Azure.ResourceManager.CosmosDB` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Microsoft.Azure.Cosmos` | Data plane (document CRUD, queries) | `dotnet add package Microsoft.Azure.Cosmos` |
+| `Azure.ResourceManager.CosmosDB` | Management plane (this SDK) | `dotnet add package Azure.ResourceManager.CosmosDB` |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

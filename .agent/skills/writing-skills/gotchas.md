@@ -15,7 +15,7 @@ Tribal knowledge to avoid common mistakes.
 ```yaml
 # ❌ BAD: Mixed list and map
 metadata:
-  references:
+  references: 
   triggers: a, b, c
   - item1
   - item2
@@ -102,7 +102,6 @@ description: Use when implementing any feature, before writing code
 # ❌ BAD: 50 lines documenting all flags
 
 # ✅ GOOD: One line
-
 Run `mytool --help` for all options.
 ```
 
@@ -112,15 +111,12 @@ Run `mytool --help` for all options.
 
 ```markdown
 # ❌ BAD: Trust agents will "get the spirit"
-
 Write test before code.
 
 # ✅ GOOD: Close every loophole explicitly
-
 Write test before code.
 
 **No exceptions:**
-
 - Don't keep code as "reference"
 - Don't "adapt" existing code
 - Delete means delete
@@ -130,10 +126,10 @@ Write test before code.
 
 Every excuse from baseline testing goes in the table:
 
-| Excuse               | Reality                                    |
-| -------------------- | ------------------------------------------ |
+| Excuse | Reality |
+|--------|---------|
 | "Too simple to test" | Simple code breaks. Test takes 30 seconds. |
-| "I'll test after"    | Tests-after prove nothing immediately.     |
+| "I'll test after" | Tests-after prove nothing immediately. |
 
 ## Cross-References
 
@@ -141,11 +137,9 @@ Every excuse from baseline testing goes in the table:
 
 ```markdown
 # ❌ BAD: Nested chain (A → B → C)
-
 See [patterns.md] → which links to [advanced.md] → which links to [deep.md]
 
 # ✅ GOOD: Flat (A → B, A → C)
-
 See [patterns.md] and [advanced.md]
 ```
 
@@ -153,11 +147,9 @@ See [patterns.md] and [advanced.md]
 
 ```markdown
 # ❌ BAD: Burns context immediately
-
 @skills/my-skill/SKILL.md
 
 # ✅ GOOD: Agent loads when needed
-
 See [my-skill] for details.
 ```
 
@@ -177,12 +169,10 @@ See [my-skill] for details.
 
 ```markdown
 # ❌ BAD: File path (fragile)
-
 See /home/user/.config/opencode/skills/my-skill/SKILL.md
 
 # ✅ GOOD: Skill protocol
-
-See [my-skill](skill://my-skill)
+See my-skill
 ```
 
 ## Tier Selection
@@ -191,19 +181,17 @@ See [my-skill](skill://my-skill)
 
 ```markdown
 # ❌ BAD: Starting with Tier 3 "just in case"
-
 # Result: Wasted effort, empty reference files
 
 # ✅ GOOD: Start with Tier 1, upgrade when needed
-
 # Can always add references/ later
 ```
 
 ### Signals You Need to Upgrade
 
-| Signal                   | Action                  |
-| ------------------------ | ----------------------- |
-| SKILL.md > 200 lines     | → Tier 2                |
-| 3+ related sub-topics    | → Tier 2                |
-| 10+ products/services    | → Tier 3                |
+| Signal | Action |
+|--------|--------|
+| SKILL.md > 200 lines | → Tier 2 |
+| 3+ related sub-topics | → Tier 2 |
+| 10+ products/services | → Tier 3 |
 | "I need X" vs "I want Y" | → Tier 3 decision trees |

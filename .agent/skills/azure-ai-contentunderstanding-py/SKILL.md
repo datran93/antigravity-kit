@@ -1,15 +1,16 @@
 ---
 name: azure-ai-contentunderstanding-py
-description: |
+description: "|"
   Azure AI Content Understanding SDK for Python. Use for multimodal content extraction from documents, images, audio, and video.
   Triggers: "azure-ai-contentunderstanding", "ContentUnderstandingClient", "multimodal analysis", "document extraction", "video analysis", "audio transcription".
 package: azure-ai-contentunderstanding
+risk: unknown
+source: community
 ---
 
 # Azure AI Content Understanding SDK for Python
 
-Multimodal AI service that extracts semantic content from documents, video, audio, and image files for RAG and automated
-workflows.
+Multimodal AI service that extracts semantic content from documents, video, audio, and image files for RAG and automated workflows.
 
 ## Installation
 
@@ -45,13 +46,13 @@ Content Understanding operations are asynchronous long-running operations:
 
 ## Prebuilt Analyzers
 
-| Analyzer                  | Content Type | Purpose                                |
-| ------------------------- | ------------ | -------------------------------------- |
-| `prebuilt-documentSearch` | Documents    | Extract markdown for RAG applications  |
-| `prebuilt-imageSearch`    | Images       | Extract content from images            |
-| `prebuilt-audioSearch`    | Audio        | Transcribe audio with timing           |
-| `prebuilt-videoSearch`    | Video        | Extract frames, transcripts, summaries |
-| `prebuilt-invoice`        | Documents    | Extract invoice fields                 |
+| Analyzer | Content Type | Purpose |
+|----------|--------------|---------|
+| `prebuilt-documentSearch` | Documents | Extract markdown for RAG applications |
+| `prebuilt-imageSearch` | Images | Extract content from images |
+| `prebuilt-audioSearch` | Audio | Transcribe audio with timing |
+| `prebuilt-videoSearch` | Video | Extract frames, transcripts, summaries |
+| `prebuilt-invoice` | Documents | Extract invoice fields |
 
 ## Analyze Document
 
@@ -219,7 +220,7 @@ from azure.identity.aio import DefaultAzureCredential
 async def analyze_document():
     endpoint = os.environ["CONTENTUNDERSTANDING_ENDPOINT"]
     credential = DefaultAzureCredential()
-
+    
     async with ContentUnderstandingClient(
         endpoint=endpoint,
         credential=credential
@@ -237,10 +238,10 @@ asyncio.run(analyze_document())
 
 ## Content Types
 
-| Class                | For                      | Provides                               |
-| -------------------- | ------------------------ | -------------------------------------- |
-| `DocumentContent`    | PDF, images, Office docs | Pages, tables, figures, paragraphs     |
-| `AudioVisualContent` | Audio, video files       | Transcript phrases, timing, key frames |
+| Class | For | Provides |
+|-------|-----|----------|
+| `DocumentContent` | PDF, images, Office docs | Pages, tables, figures, paragraphs |
+| `AudioVisualContent` | Audio, video files | Transcript phrases, timing, key frames |
 
 Both derive from `MediaContent` which provides basic info and markdown representation.
 
@@ -258,9 +259,9 @@ from azure.ai.contentunderstanding.models import (
 
 ## Client Types
 
-| Client                             | Purpose                         |
-| ---------------------------------- | ------------------------------- |
-| `ContentUnderstandingClient`       | Sync client for all operations  |
+| Client | Purpose |
+|--------|---------|
+| `ContentUnderstandingClient` | Sync client for all operations |
 | `ContentUnderstandingClient` (aio) | Async client for all operations |
 
 ## Best Practices
@@ -272,3 +273,6 @@ from azure.ai.contentunderstanding.models import (
 5. **Use async client** for high-throughput scenarios with `azure.identity.aio` credentials
 6. **Handle long-running operations** — video/audio analysis can take minutes
 7. **Use URL sources** when possible to avoid upload overhead
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

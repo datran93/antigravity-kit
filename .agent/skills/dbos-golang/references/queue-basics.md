@@ -7,8 +7,7 @@ tags: queue, concurrency, enqueue, workflow
 
 ## Use Queues for Concurrent Workflows
 
-Queues run many workflows concurrently with managed flow control. Use them when you need to control how many workflows
-run at once.
+Queues run many workflows concurrently with managed flow control. Use them when you need to control how many workflows run at once.
 
 **Incorrect (uncontrolled concurrency):**
 

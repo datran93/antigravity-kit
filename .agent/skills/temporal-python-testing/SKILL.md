@@ -1,14 +1,13 @@
 ---
 name: temporal-python-testing
-description:
-  Test Temporal workflows with pytest, time-skipping, and mocking strategies. Covers unit testing, integration testing,
-  replay testing, and local development setup. Use when implementing Temporal workflow tests or debugging test failures.
+description: "Test Temporal workflows with pytest, time-skipping, and mocking strategies. Covers unit testing, integration testing, replay testing, and local development setup. Use when implementing Temporal wor..."
+risk: unknown
+source: community
 ---
 
 # Temporal Python Testing Strategies
 
-Comprehensive testing approaches for Temporal workflows using pytest, progressive disclosure resources for specific
-testing scenarios.
+Comprehensive testing approaches for Temporal workflows using pytest, progressive disclosure resources for specific testing scenarios.
 
 ## Do not use this skill when
 
@@ -49,12 +48,12 @@ testing scenarios.
 
 ## Available Resources
 
-This skill provides detailed guidance through progressive disclosure. Load specific resources based on your testing
-needs:
+This skill provides detailed guidance through progressive disclosure. Load specific resources based on your testing needs:
 
 ### Unit Testing Resources
 
-**File**: `resources/unit-testing.md` **When to load**: Testing individual workflows or activities in isolation
+**File**: `resources/unit-testing.md`
+**When to load**: Testing individual workflows or activities in isolation
 **Contains**:
 
 - WorkflowEnvironment with time-skipping
@@ -65,7 +64,8 @@ needs:
 
 ### Integration Testing Resources
 
-**File**: `resources/integration-testing.md` **When to load**: Testing workflows with mocked external dependencies
+**File**: `resources/integration-testing.md`
+**When to load**: Testing workflows with mocked external dependencies
 **Contains**:
 
 - Activity mocking strategies
@@ -76,7 +76,8 @@ needs:
 
 ### Replay Testing Resources
 
-**File**: `resources/replay-testing.md` **When to load**: Validating determinism or deploying workflow changes
+**File**: `resources/replay-testing.md`
+**When to load**: Validating determinism or deploying workflow changes
 **Contains**:
 
 - Determinism validation
@@ -86,7 +87,9 @@ needs:
 
 ### Local Development Resources
 
-**File**: `resources/local-setup.md` **When to load**: Setting up development environment **Contains**:
+**File**: `resources/local-setup.md`
+**When to load**: Setting up development environment
+**Contains**:
 
 - Docker Compose configuration
 - pytest setup and configuration

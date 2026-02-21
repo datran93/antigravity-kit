@@ -1,9 +1,9 @@
 ---
 name: azure-keyvault-keys-ts
-description:
-  Manage cryptographic keys using Azure Key Vault Keys SDK for JavaScript (@azure/keyvault-keys). Use when creating,
-  encrypting/decrypting, signing, or rotating keys.
+description: "Manage cryptographic keys using Azure Key Vault Keys SDK for JavaScript (@azure/keyvault-keys). Use when creating, encrypting/decrypting, signing, or rotating keys."
 package: "@azure/keyvault-keys"
+risk: unknown
+source: community
 ---
 
 # Azure Key Vault Keys SDK for TypeScript
@@ -50,7 +50,7 @@ const secretWithAttrs = await secretClient.setSecret("MySecret", "value", {
   enabled: true,
   expiresOn: new Date("2025-12-31"),
   contentType: "application/json",
-  tags: { environment: "production" },
+  tags: { environment: "production" }
 });
 ```
 
@@ -63,7 +63,7 @@ console.log(secret.value);
 
 // Get specific version
 const specificSecret = await secretClient.getSecret("MySecret", {
-  version: secret.properties.version,
+  version: secret.properties.version
 });
 ```
 
@@ -114,7 +114,7 @@ const keyWithAttrs = await keyClient.createKey("MyKey", "RSA", {
   enabled: true,
   expiresOn: new Date("2025-12-31"),
   tags: { purpose: "encryption" },
-  keyOps: ["encrypt", "decrypt", "sign", "verify"],
+  keyOps: ["encrypt", "decrypt", "sign", "verify"]
 });
 ```
 
@@ -142,7 +142,7 @@ const rotatedKey = await keyClient.rotateKey("MyKey");
 // Set rotation policy
 await keyClient.updateKeyRotationPolicy("MyKey", {
   lifetimeActions: [{ action: "Rotate", timeBeforeExpiry: "P30D" }],
-  expiresIn: "P90D",
+  expiresIn: "P90D"
 });
 ```
 
@@ -176,13 +176,13 @@ const cryptoClient = new CryptographyClient(key.id!, credential);
 // Encrypt
 const encryptResult = await cryptoClient.encrypt({
   algorithm: "RSA-OAEP",
-  plaintext: Buffer.from("My secret message"),
+  plaintext: Buffer.from("My secret message")
 });
 
 // Decrypt
 const decryptResult = await cryptoClient.decrypt({
   algorithm: "RSA-OAEP",
-  ciphertext: encryptResult.result,
+  ciphertext: encryptResult.result
 });
 
 console.log(decryptResult.result.toString());
@@ -236,10 +236,15 @@ import {
   DeletedKey,
   CryptographyClient,
   KnownEncryptionAlgorithms,
-  KnownSignatureAlgorithms,
+  KnownSignatureAlgorithms
 } from "@azure/keyvault-keys";
 
-import { SecretClient, KeyVaultSecret, SecretProperties, DeletedSecret } from "@azure/keyvault-secrets";
+import {
+  SecretClient,
+  KeyVaultSecret,
+  SecretProperties,
+  DeletedSecret
+} from "@azure/keyvault-secrets";
 ```
 
 ## Error Handling
@@ -264,3 +269,6 @@ try {
 4. **Use key rotation policies** - Automate key rotation
 5. **Limit key operations** - Only grant needed operations (encrypt, sign, etc.)
 6. **Browser not supported** - These SDKs are Node.js only
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

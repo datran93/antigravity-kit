@@ -1,9 +1,9 @@
 ---
 name: azure-ai-contentsafety-java
-description:
-  Build content moderation applications with Azure AI Content Safety SDK for Java. Use when implementing text/image
-  analysis, blocklist management, or harm detection for hate, violence, sexual content, and self-harm.
+description: "Build content moderation applications with Azure AI Content Safety SDK for Java. Use when implementing text/image analysis, blocklist management, or harm detection for hate, violence, sexual conten..."
 package: com.azure:azure-ai-contentsafety
+risk: unknown
+source: community
 ---
 
 # Azure AI Content Safety SDK for Java
@@ -59,16 +59,14 @@ ContentSafetyClient client = new ContentSafetyClientBuilder()
 ## Key Concepts
 
 ### Harm Categories
-
-| Category  | Description                                      |
-| --------- | ------------------------------------------------ |
-| Hate      | Discriminatory language based on identity groups |
-| Sexual    | Sexual content, relationships, acts              |
-| Violence  | Physical harm, weapons, injury                   |
-| Self-harm | Self-injury, suicide-related content             |
+| Category | Description |
+|----------|-------------|
+| Hate | Discriminatory language based on identity groups |
+| Sexual | Sexual content, relationships, acts |
+| Violence | Physical harm, weapons, injury |
+| Self-harm | Self-injury, suicide-related content |
 
 ### Severity Levels
-
 - Text: 0-7 scale (default outputs 0, 2, 4, 6)
 - Image: 0, 2, 4, 6 (trimmed scale)
 
@@ -220,7 +218,7 @@ System.out.println("Name: " + blocklist.getName());
 ### List Block Items
 
 ```java
-PagedIterable<TextBlocklistItem> items =
+PagedIterable<TextBlocklistItem> items = 
     blocklistClient.listTextBlocklistItems("my-blocklist");
 
 for (TextBlocklistItem item : items) {
@@ -284,3 +282,6 @@ CONTENT_SAFETY_KEY=<your-api-key>
 - "blocklist management"
 - "hate speech detection"
 - "harmful content filter"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

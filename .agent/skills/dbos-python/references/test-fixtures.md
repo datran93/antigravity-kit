@@ -53,7 +53,6 @@ def test_workflow_two(reset_dbos):
 ```
 
 The fixture:
-
 1. Destroys any existing DBOS instance
 2. Creates fresh configuration
 3. Resets the system database

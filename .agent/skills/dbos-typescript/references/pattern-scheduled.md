@@ -7,8 +7,7 @@ tags: pattern, scheduled, cron, recurring
 
 ## Create Scheduled Workflows
 
-Use `DBOS.registerScheduled` to run workflows on a cron schedule. Each scheduled invocation runs exactly once per
-interval.
+Use `DBOS.registerScheduled` to run workflows on a cron schedule. Each scheduled invocation runs exactly once per interval.
 
 **Incorrect (manual scheduling with setInterval):**
 
@@ -40,7 +39,6 @@ DBOS.registerScheduled(dailyReport, { crontab: "0 9 * * *" });
 Scheduled workflows must accept exactly two parameters: `scheduledTime` (Date) and `actualTime` (Date).
 
 DBOS crontab supports 5 or 6 fields (optional seconds):
-
 ```text
 ┌────────────── second (optional)
 │ ┌──────────── minute

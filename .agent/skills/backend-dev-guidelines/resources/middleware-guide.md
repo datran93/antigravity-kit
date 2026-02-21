@@ -21,22 +21,22 @@ Complete guide to creating and using middleware in backend microservices.
 
 ```typescript
 export class SSOMiddlewareClient {
-  static verifyLoginStatus(req: Request, res: Response, next: NextFunction): void {
-    const token = req.cookies.refresh_token;
+    static verifyLoginStatus(req: Request, res: Response, next: NextFunction): void {
+        const token = req.cookies.refresh_token;
 
-    if (!token) {
-      return res.status(401).json({ error: "Not authenticated" });
-    }
+        if (!token) {
+            return res.status(401).json({ error: 'Not authenticated' });
+        }
 
-    try {
-      const decoded = jwt.verify(token, config.tokens.jwt);
-      res.locals.claims = decoded;
-      res.locals.effectiveUserId = decoded.sub;
-      next();
-    } catch (error) {
-      res.status(401).json({ error: "Invalid token" });
+        try {
+            const decoded = jwt.verify(token, config.tokens.jwt);
+            res.locals.claims = decoded;
+            res.locals.effectiveUserId = decoded.sub;
+            next();
+        } catch (error) {
+            res.status(401).json({ error: 'Invalid token' });
+        }
     }
-  }
 }
 ```
 
@@ -49,54 +49,52 @@ export class SSOMiddlewareClient {
 **File:** `/form/src/middleware/auditMiddleware.ts`
 
 ```typescript
-import { AsyncLocalStorage } from "async_hooks";
+import { AsyncLocalStorage } from 'async_hooks';
 
 export interface AuditContext {
-  userId: string;
-  userName?: string;
-  impersonatedBy?: string;
-  sessionId?: string;
-  timestamp: Date;
-  requestId: string;
+    userId: string;
+    userName?: string;
+    impersonatedBy?: string;
+    sessionId?: string;
+    timestamp: Date;
+    requestId: string;
 }
 
 export const auditContextStorage = new AsyncLocalStorage<AuditContext>();
 
 export function auditMiddleware(req: Request, res: Response, next: NextFunction): void {
-  const context: AuditContext = {
-    userId: res.locals.effectiveUserId || "anonymous",
-    userName: res.locals.claims?.preferred_username,
-    impersonatedBy: res.locals.isImpersonating ? res.locals.originalUserId : undefined,
-    timestamp: new Date(),
-    requestId: req.id || uuidv4(),
-  };
+    const context: AuditContext = {
+        userId: res.locals.effectiveUserId || 'anonymous',
+        userName: res.locals.claims?.preferred_username,
+        impersonatedBy: res.locals.isImpersonating ? res.locals.originalUserId : undefined,
+        timestamp: new Date(),
+        requestId: req.id || uuidv4(),
+    };
 
-  auditContextStorage.run(context, () => {
-    next();
-  });
+    auditContextStorage.run(context, () => {
+        next();
+    });
 }
 
 // Getter for current context
 export function getAuditContext(): AuditContext | null {
-  return auditContextStorage.getStore() || null;
+    return auditContextStorage.getStore() || null;
 }
 ```
 
 **Benefits:**
-
 - Context propagates through entire request
 - No need to pass context through every function
 - Automatically available in services, repositories
 - Type-safe context access
 
 **Usage in Services:**
-
 ```typescript
-import { getAuditContext } from "../middleware/auditMiddleware";
+import { getAuditContext } from '../middleware/auditMiddleware';
 
 async function someOperation() {
-  const context = getAuditContext();
-  console.log("Operation by:", context?.userId);
+    const context = getAuditContext();
+    console.log('Operation by:', context?.userId);
 }
 ```
 
@@ -109,41 +107,48 @@ async function someOperation() {
 **File:** `/form/src/middleware/errorBoundary.ts`
 
 ```typescript
-export function errorBoundary(error: Error, req: Request, res: Response, next: NextFunction): void {
-  // Determine status code
-  const statusCode = getStatusCodeForError(error);
+export function errorBoundary(
+    error: Error,
+    req: Request,
+    res: Response,
+    next: NextFunction
+): void {
+    // Determine status code
+    const statusCode = getStatusCodeForError(error);
 
-  // Capture to Sentry
-  Sentry.withScope((scope) => {
-    scope.setLevel(statusCode >= 500 ? "error" : "warning");
-    scope.setTag("error_type", error.name);
-    scope.setContext("error_details", {
-      message: error.message,
-      stack: error.stack,
+    // Capture to Sentry
+    Sentry.withScope((scope) => {
+        scope.setLevel(statusCode >= 500 ? 'error' : 'warning');
+        scope.setTag('error_type', error.name);
+        scope.setContext('error_details', {
+            message: error.message,
+            stack: error.stack,
+        });
+        Sentry.captureException(error);
     });
-    Sentry.captureException(error);
-  });
 
-  // User-friendly response
-  res.status(statusCode).json({
-    success: false,
-    error: {
-      message: getUserFriendlyMessage(error),
-      code: error.name,
-    },
-    requestId: Sentry.getCurrentScope().getPropagationContext().traceId,
-  });
+    // User-friendly response
+    res.status(statusCode).json({
+        success: false,
+        error: {
+            message: getUserFriendlyMessage(error),
+            code: error.name,
+        },
+        requestId: Sentry.getCurrentScope().getPropagationContext().traceId,
+    });
 }
 
 // Async wrapper
-export function asyncErrorWrapper(handler: (req: Request, res: Response, next: NextFunction) => Promise<any>) {
-  return async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      await handler(req, res, next);
-    } catch (error) {
-      next(error);
-    }
-  };
+export function asyncErrorWrapper(
+    handler: (req: Request, res: Response, next: NextFunction) => Promise<any>
+) {
+    return async (req: Request, res: Response, next: NextFunction) => {
+        try {
+            await handler(req, res, next);
+        } catch (error) {
+            next(error);
+        }
+    };
 }
 ```
 
@@ -155,12 +160,16 @@ export function asyncErrorWrapper(handler: (req: Request, res: Response, next: N
 
 ```typescript
 export function withAuthAndAudit(...authMiddleware: any[]) {
-  return [...authMiddleware, auditMiddleware];
+    return [
+        ...authMiddleware,
+        auditMiddleware,
+    ];
 }
 
 // Usage
-router.post("/:formID/submit", ...withAuthAndAudit(SSOMiddlewareClient.verifyLoginStatus), async (req, res) =>
-  controller.submit(req, res),
+router.post('/:formID/submit',
+    ...withAuthAndAudit(SSOMiddlewareClient.verifyLoginStatus),
+    async (req, res) => controller.submit(req, res)
 );
 ```
 
@@ -185,7 +194,7 @@ app.use(cookieParser());
 app.use(SSOMiddleware.initialize());
 
 // 5. Routes registered here
-app.use("/api/users", userRoutes);
+app.use('/api/users', userRoutes);
 
 // 6. Error handler (AFTER routes)
 app.use(errorBoundary);
@@ -199,7 +208,6 @@ app.use(Sentry.Handlers.errorHandler());
 ---
 
 **Related Files:**
-
-- [SKILL.md](SKILL.md)
+- SKILL.md
 - [routing-and-controllers.md](routing-and-controllers.md)
 - [async-and-errors.md](async-and-errors.md)

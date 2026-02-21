@@ -1,7 +1,6 @@
 # Wizards & Flows
 
-Complex multi-step processes are handled using the `SlimWizard` pattern. This provides a declarative way to define
-steps, navigation logic, and final results.
+Complex multi-step processes are handled using the `SlimWizard` pattern. This provides a declarative way to define steps, navigation logic, and final results.
 
 ## Defining a Wizard
 
@@ -44,5 +43,5 @@ public async Task CreateSomething()
 - **WithCompletionFinalStep()**: Marks the wizard as finished when the last step completes.
 - **WithCommitFinalStep()**: Typically used for wizards that perform a final "Save" or "Deploy" action.
 
-> [!NOTE] The `SlimWizard` handles the "Back" command automatically, providing a consistent user experience across
-> different flows.
+> [!NOTE]
+> The `SlimWizard` handles the "Back" command automatically, providing a consistent user experience across different flows.

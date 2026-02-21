@@ -1,10 +1,8 @@
 ---
 name: shopify-apps
-description:
-  "Expert patterns for Shopify app development including Remix/React Router apps, embedded apps with App Bridge, webhook
-  handling, GraphQL Admin API, Polaris components, billing, and app extensions. Use when: shopify app, shopify, embedded
-  app, polaris, app bridge."
+description: "Expert patterns for Shopify app development including Remix/React Router apps, embedded apps with App Bridge, webhook handling, GraphQL Admin API, Polaris components, billing, and app extensions. U..."
 source: vibeship-spawner-skills (Apache 2.0)
+risk: unknown
 ---
 
 # Shopify Apps
@@ -33,13 +31,16 @@ Secure webhook processing with HMAC verification
 
 ## ⚠️ Sharp Edges
 
-| Issue | Severity | Solution                                       |
-| ----- | -------- | ---------------------------------------------- |
-| Issue | high     | ## Respond immediately, process asynchronously |
-| Issue | high     | ## Check rate limit headers                    |
-| Issue | high     | ## Request protected customer data access      |
-| Issue | medium   | ## Use TOML only (recommended)                 |
-| Issue | medium   | ## Handle both URL formats                     |
-| Issue | high     | ## Use GraphQL for all new code                |
-| Issue | high     | ## Use latest App Bridge via script tag        |
-| Issue | high     | ## Implement all GDPR handlers                 |
+| Issue | Severity | Solution |
+|-------|----------|----------|
+| Issue | high | ## Respond immediately, process asynchronously |
+| Issue | high | ## Check rate limit headers |
+| Issue | high | ## Request protected customer data access |
+| Issue | medium | ## Use TOML only (recommended) |
+| Issue | medium | ## Handle both URL formats |
+| Issue | high | ## Use GraphQL for all new code |
+| Issue | high | ## Use latest App Bridge via script tag |
+| Issue | high | ## Implement all GDPR handlers |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

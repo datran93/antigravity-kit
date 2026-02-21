@@ -1,24 +1,22 @@
 ---
 name: last30days
-description:
-  Research a topic from the last 30 days on Reddit + X + Web, become an expert, and write copy-paste-ready prompts for
-  the user's target tool.
+description: "Research a topic from the last 30 days on Reddit + X + Web, become an expert, and write copy-paste-ready prompts for the user's target tool."
 argument-hint: "[topic] for [tool] or [topic]"
 context: fork
 agent: Explore
 disable-model-invocation: true
 allowed-tools: Bash, Read, Write, AskUserQuestion, WebSearch
+risk: unknown
+source: community
 ---
 
 # last30days: Research Any Topic from the Last 30 Days
 
-Research ANY topic across Reddit, X, and the web. Surface what people are actually discussing, recommending, and
-debating right now.
+Research ANY topic across Reddit, X, and the web. Surface what people are actually discussing, recommending, and debating right now.
 
 Use cases:
 
-- **Prompting**: "photorealistic people in Nano Banana Pro", "Midjourney prompts", "ChatGPT image generation" → learn
-  techniques, get copy-paste prompts
+- **Prompting**: "photorealistic people in Nano Banana Pro", "Midjourney prompts", "ChatGPT image generation" → learn techniques, get copy-paste prompts
 - **Recommendations**: "best Claude Code skills", "top AI tools" → get a LIST of specific things people mention
 - **News**: "what's happening with OpenAI", "latest AI announcements" → current events and updates
 - **General**: any topic you're curious about → understand what the community is saying
@@ -30,10 +28,8 @@ Before doing anything, parse the user's input for:
 1. **TOPIC**: What they want to learn about (e.g., "web app mockups", "Claude Code skills", "image generation")
 2. **TARGET TOOL** (if specified): Where they'll use the prompts (e.g., "Nano Banana Pro", "ChatGPT", "Midjourney")
 3. **QUERY TYPE**: What kind of research they want:
-   - **PROMPTING** - "X prompts", "prompting for X", "X best practices" → User wants to learn techniques and get
-     copy-paste prompts
-   - **RECOMMENDATIONS** - "best X", "top X", "what X should I use", "recommended X" → User wants a LIST of specific
-     things
+   - **PROMPTING** - "X prompts", "prompting for X", "X best practices" → User wants to learn techniques and get copy-paste prompts
+   - **RECOMMENDATIONS** - "best X", "top X", "what X should I use", "recommended X" → User wants a LIST of specific things
    - **NEWS** - "what's happening with X", "X news", "latest on X" → User wants current events/updates
    - **GENERAL** - anything else → User wants broad understanding of the topic
 
@@ -159,8 +155,8 @@ For ALL query types:
 - INCLUDE: blogs, tutorials, docs, news, GitHub repos
 - **DO NOT output "Sources:" list** - this is noise, we'll show stats at the end
 
-**Step 3: Wait for background script to complete** Use TaskOutput to get the script results before proceeding to
-synthesis.
+**Step 3: Wait for background script to complete**
+Use TaskOutput to get the script results before proceeding to synthesis.
 
 **Depth options** (passed through from user's command):
 
@@ -192,14 +188,11 @@ The Judge Agent must:
 
 Read the research output carefully. Pay attention to:
 
-- **Exact product/tool names** mentioned (e.g., if research mentions "ClawdBot" or "@clawdbot", that's a DIFFERENT
-  product than "Claude Code" - don't conflate them)
+- **Exact product/tool names** mentioned (e.g., if research mentions "ClawdBot" or "@clawdbot", that's a DIFFERENT product than "Claude Code" - don't conflate them)
 - **Specific quotes and insights** from the sources - use THESE, not generic knowledge
 - **What the sources actually say**, not what you assume the topic is about
 
-**ANTI-PATTERN TO AVOID**: If user asks about "clawdbot skills" and research returns ClawdBot content (self-hosted AI
-agent), do NOT synthesize this as "Claude Code skills" just because both involve "skills". Read what the research
-actually says.
+**ANTI-PATTERN TO AVOID**: If user asks about "clawdbot skills" and research returns ClawdBot content (self-hosted AI agent), do NOT synthesize this as "Claude Code skills" just because both involve "skills". Read what the research actually says.
 
 ### If QUERY_TYPE = RECOMMENDATIONS
 
@@ -218,8 +211,7 @@ When user asks "best X" or "top X", they want a LIST of specific things:
 
 **GOOD synthesis for "best Claude Code skills":**
 
-> "Most mentioned skills: /commit (5 mentions), remotion skill (4x), git-worktree (3x), /pr (3x). The Remotion
-> announcement got 16K likes on X."
+> "Most mentioned skills: /commit (5 mentions), remotion skill (4x), git-worktree (3x), /pr (3x). The Remotion announcement got 16K likes on X."
 
 ### For all QUERY_TYPEs
 
@@ -301,12 +293,9 @@ For **web-only mode** (no API keys):
 Share your vision for what you want to create and I'll write a thoughtful prompt you can copy-paste directly into {TARGET_TOOL}.
 ```
 
-**Use real numbers from the research output.** The patterns should be actual insights from the research, not generic
-advice.
+**Use real numbers from the research output.** The patterns should be actual insights from the research, not generic advice.
 
-**SELF-CHECK before displaying**: Re-read your "What I learned" section. Does it match what the research ACTUALLY says?
-If the research was about ClawdBot (a self-hosted AI agent), your summary should be about ClawdBot, not Claude Code. If
-you catch yourself projecting your own knowledge instead of the research, rewrite it.
+**SELF-CHECK before displaying**: Re-read your "What I learned" section. Does it match what the research ACTUALLY says? If the research was about ClawdBot (a self-hosted AI agent), your summary should be about ClawdBot, not Claude Code. If you catch yourself projecting your own knowledge instead of the research, rewrite it.
 
 **IF TARGET_TOOL is still unknown after showing results**, ask NOW (not before research):
 
@@ -326,11 +315,9 @@ Options:
 
 ## WAIT FOR USER'S VISION
 
-After showing the stats summary with your invitation, **STOP and wait** for the user to tell you what they want to
-create.
+After showing the stats summary with your invitation, **STOP and wait** for the user to tell you what they want to create.
 
-When they respond with their vision (e.g., "I want a landing page mockup for my SaaS app"), THEN write a single,
-thoughtful, tailored prompt.
+When they respond with their vision (e.g., "I want a landing page mockup for my SaaS app"), THEN write a single, thoughtful, tailored prompt.
 
 ---
 
@@ -347,8 +334,7 @@ Based on what they want to create, write a **single, highly-tailored prompt** us
 - Research says "natural language" → Use conversational prose
 - Research says "keyword lists" → Use comma-separated keywords
 
-**ANTI-PATTERN**: Research says "use JSON prompts with device specs" but you write plain prose. This defeats the entire
-purpose of the research.
+**ANTI-PATTERN**: Research says "use JSON prompts with device specs" but you write plain prose. This defeats the entire purpose of the research.
 
 ### Output Format:
 
@@ -435,3 +421,6 @@ Want another prompt? Just tell me what you're creating next.
 
 💡 Unlock Reddit & X data: Add API keys to ~/.config/last30days/.env
 ```
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

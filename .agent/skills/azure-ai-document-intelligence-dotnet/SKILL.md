@@ -1,8 +1,10 @@
 ---
 name: azure-ai-document-intelligence-dotnet
-description: |
+description: "|"
   Azure AI Document Intelligence SDK for .NET. Extract text, tables, and structured data from documents using prebuilt and custom models. Use for invoice processing, receipt extraction, ID document analysis, and custom document models. Triggers: "Document Intelligence", "DocumentIntelligenceClient", "form recognizer", "invoice extraction", "receipt OCR", "document analysis .NET".
 package: Azure.AI.DocumentIntelligence
+risk: unknown
+source: community
 ---
 
 # Azure.AI.DocumentIntelligence (.NET)
@@ -39,8 +41,7 @@ var credential = new DefaultAzureCredential();
 var client = new DocumentIntelligenceClient(new Uri(endpoint), credential);
 ```
 
-> **Note**: Entra ID requires a **custom subdomain** (e.g., `https://<resource-name>.cognitiveservices.azure.com/`), not
-> a regional endpoint.
+> **Note**: Entra ID requires a **custom subdomain** (e.g., `https://<resource-name>.cognitiveservices.azure.com/`), not a regional endpoint.
 
 ### API Key
 
@@ -52,23 +53,23 @@ var client = new DocumentIntelligenceClient(new Uri(endpoint), new AzureKeyCrede
 
 ## Client Types
 
-| Client                                     | Purpose                                    |
-| ------------------------------------------ | ------------------------------------------ |
-| `DocumentIntelligenceClient`               | Analyze documents, classify documents      |
+| Client | Purpose |
+|--------|---------|
+| `DocumentIntelligenceClient` | Analyze documents, classify documents |
 | `DocumentIntelligenceAdministrationClient` | Build/manage custom models and classifiers |
 
 ## Prebuilt Models
 
-| Model ID                          | Description                                      |
-| --------------------------------- | ------------------------------------------------ |
-| `prebuilt-read`                   | Extract text, languages, handwriting             |
-| `prebuilt-layout`                 | Extract text, tables, selection marks, structure |
-| `prebuilt-invoice`                | Extract invoice fields (vendor, items, totals)   |
-| `prebuilt-receipt`                | Extract receipt fields (merchant, items, total)  |
-| `prebuilt-idDocument`             | Extract ID document fields (name, DOB, address)  |
-| `prebuilt-businessCard`           | Extract business card fields                     |
-| `prebuilt-tax.us.w2`              | Extract W-2 tax form fields                      |
-| `prebuilt-healthInsuranceCard.us` | Extract health insurance card fields             |
+| Model ID | Description |
+|----------|-------------|
+| `prebuilt-read` | Extract text, languages, handwriting |
+| `prebuilt-layout` | Extract text, tables, selection marks, structure |
+| `prebuilt-invoice` | Extract invoice fields (vendor, items, totals) |
+| `prebuilt-receipt` | Extract receipt fields (merchant, items, total) |
+| `prebuilt-idDocument` | Extract ID document fields (name, DOB, address) |
+| `prebuilt-businessCard` | Extract business card fields |
+| `prebuilt-tax.us.w2` | Extract W-2 tax form fields |
+| `prebuilt-healthInsuranceCard.us` | Extract health insurance card fields |
 
 ## Core Workflows
 
@@ -80,8 +81,8 @@ using Azure.AI.DocumentIntelligence;
 Uri invoiceUri = new Uri("https://example.com/invoice.pdf");
 
 Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(
-    WaitUntil.Completed,
-    "prebuilt-invoice",
+    WaitUntil.Completed, 
+    "prebuilt-invoice", 
     invoiceUri);
 
 AnalyzeResult result = operation.Value;
@@ -101,7 +102,7 @@ foreach (AnalyzedDocument document in result.Documents)
         CurrencyValue invoiceTotal = invoiceTotalField.ValueCurrency;
         Console.WriteLine($"Invoice Total: '{invoiceTotal.CurrencySymbol}{invoiceTotal.Amount}'");
     }
-
+    
     // Extract line items
     if (document.Fields.TryGetValue("Items", out DocumentField itemsField)
         && itemsField.FieldType == DocumentFieldType.List)
@@ -122,8 +123,8 @@ foreach (AnalyzedDocument document in result.Documents)
 Uri fileUri = new Uri("https://example.com/document.pdf");
 
 Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(
-    WaitUntil.Completed,
-    "prebuilt-layout",
+    WaitUntil.Completed, 
+    "prebuilt-layout", 
     fileUri);
 
 AnalyzeResult result = operation.Value;
@@ -132,7 +133,7 @@ AnalyzeResult result = operation.Value;
 foreach (DocumentPage page in result.Pages)
 {
     Console.WriteLine($"Page {page.PageNumber}: {page.Lines.Count} lines, {page.Words.Count} words");
-
+    
     foreach (DocumentLine line in page.Lines)
     {
         Console.WriteLine($"  Line: '{line.Content}'");
@@ -154,8 +155,8 @@ foreach (DocumentTable table in result.Tables)
 
 ```csharp
 Operation<AnalyzeResult> operation = await client.AnalyzeDocumentAsync(
-    WaitUntil.Completed,
-    "prebuilt-receipt",
+    WaitUntil.Completed, 
+    "prebuilt-receipt", 
     receiptUri);
 
 AnalyzeResult result = operation.Value;
@@ -164,10 +165,10 @@ foreach (AnalyzedDocument document in result.Documents)
 {
     if (document.Fields.TryGetValue("MerchantName", out DocumentField merchantField))
         Console.WriteLine($"Merchant: {merchantField.ValueString}");
-
+        
     if (document.Fields.TryGetValue("Total", out DocumentField totalField))
         Console.WriteLine($"Total: {totalField.ValueCurrency.Amount}");
-
+        
     if (document.Fields.TryGetValue("TransactionDate", out DocumentField dateField))
         Console.WriteLine($"Date: {dateField.ValueDate}");
 }
@@ -177,7 +178,7 @@ foreach (AnalyzedDocument document in result.Documents)
 
 ```csharp
 var adminClient = new DocumentIntelligenceAdministrationClient(
-    new Uri(endpoint),
+    new Uri(endpoint), 
     new AzureKeyCredential(apiKey));
 
 string modelId = "my-custom-model";
@@ -187,7 +188,7 @@ var blobSource = new BlobContentSource(blobContainerUri);
 var options = new BuildDocumentModelOptions(modelId, DocumentBuildMode.Template, blobSource);
 
 Operation<DocumentModelDetails> operation = await adminClient.BuildDocumentModelAsync(
-    WaitUntil.Completed,
+    WaitUntil.Completed, 
     options);
 
 DocumentModelDetails model = operation.Value;
@@ -223,7 +224,7 @@ var docTypes = new Dictionary<string, ClassifierDocumentTypeDetails>()
 var options = new BuildClassifierOptions(classifierId, docTypes);
 
 Operation<DocumentClassifierDetails> operation = await adminClient.BuildClassifierAsync(
-    WaitUntil.Completed,
+    WaitUntil.Completed, 
     options);
 
 DocumentClassifierDetails classifier = operation.Value;
@@ -239,7 +240,7 @@ Uri documentUri = new Uri("https://example.com/document.pdf");
 var options = new ClassifyDocumentOptions(classifierId, documentUri);
 
 Operation<AnalyzeResult> operation = await client.ClassifyDocumentAsync(
-    WaitUntil.Completed,
+    WaitUntil.Completed, 
     options);
 
 AnalyzeResult result = operation.Value;
@@ -273,25 +274,25 @@ await adminClient.DeleteModelAsync("my-model-id");
 
 ## Key Types Reference
 
-| Type                                       | Description                               |
-| ------------------------------------------ | ----------------------------------------- |
-| `DocumentIntelligenceClient`               | Main client for analysis                  |
-| `DocumentIntelligenceAdministrationClient` | Model management                          |
-| `AnalyzeResult`                            | Result of document analysis               |
-| `AnalyzedDocument`                         | Single document within result             |
-| `DocumentField`                            | Extracted field with value and confidence |
-| `DocumentFieldType`                        | String, Date, Number, Currency, etc.      |
-| `DocumentPage`                             | Page info (lines, words, selection marks) |
-| `DocumentTable`                            | Extracted table with cells                |
-| `DocumentModelDetails`                     | Custom model metadata                     |
-| `BlobContentSource`                        | Training data source                      |
+| Type | Description |
+|------|-------------|
+| `DocumentIntelligenceClient` | Main client for analysis |
+| `DocumentIntelligenceAdministrationClient` | Model management |
+| `AnalyzeResult` | Result of document analysis |
+| `AnalyzedDocument` | Single document within result |
+| `DocumentField` | Extracted field with value and confidence |
+| `DocumentFieldType` | String, Date, Number, Currency, etc. |
+| `DocumentPage` | Page info (lines, words, selection marks) |
+| `DocumentTable` | Extracted table with cells |
+| `DocumentModelDetails` | Custom model metadata |
+| `BlobContentSource` | Training data source |
 
 ## Build Modes
 
-| Mode                         | Use Case                       |
-| ---------------------------- | ------------------------------ |
+| Mode | Use Case |
+|------|----------|
 | `DocumentBuildMode.Template` | Fixed layout documents (forms) |
-| `DocumentBuildMode.Neural`   | Variable layout documents      |
+| `DocumentBuildMode.Neural` | Variable layout documents |
 
 ## Best Practices
 
@@ -310,8 +311,8 @@ using Azure;
 try
 {
     var operation = await client.AnalyzeDocumentAsync(
-        WaitUntil.Completed,
-        "prebuilt-invoice",
+        WaitUntil.Completed, 
+        "prebuilt-invoice", 
         documentUri);
 }
 catch (RequestFailedException ex)
@@ -322,17 +323,20 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                             | Purpose                      | Install                                            |
-| ------------------------------- | ---------------------------- | -------------------------------------------------- |
+| SDK | Purpose | Install |
+|-----|---------|---------|
 | `Azure.AI.DocumentIntelligence` | Document analysis (this SDK) | `dotnet add package Azure.AI.DocumentIntelligence` |
-| `Azure.AI.FormRecognizer`       | Legacy SDK (deprecated)      | Use DocumentIntelligence instead                   |
+| `Azure.AI.FormRecognizer` | Legacy SDK (deprecated) | Use DocumentIntelligence instead |
 
 ## Reference Links
 
-| Resource                     | URL                                                                                                                 |
-| ---------------------------- | ------------------------------------------------------------------------------------------------------------------- |
-| NuGet Package                | https://www.nuget.org/packages/Azure.AI.DocumentIntelligence                                                        |
-| API Reference                | https://learn.microsoft.com/dotnet/api/azure.ai.documentintelligence                                                |
-| GitHub Samples               | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples |
-| Document Intelligence Studio | https://documentintelligence.ai.azure.com/                                                                          |
-| Prebuilt Models              | https://aka.ms/azsdk/formrecognizer/models                                                                          |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.AI.DocumentIntelligence |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.documentintelligence |
+| GitHub Samples | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/documentintelligence/Azure.AI.DocumentIntelligence/samples |
+| Document Intelligence Studio | https://documentintelligence.ai.azure.com/ |
+| Prebuilt Models | https://aka.ms/azsdk/formrecognizer/models |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

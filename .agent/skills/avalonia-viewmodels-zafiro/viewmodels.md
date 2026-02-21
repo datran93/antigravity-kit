@@ -4,8 +4,7 @@ In a Zafiro-based application, ViewModels should be functional, reactive, and re
 
 ## Reactive ViewModels
 
-Use `ReactiveObject` as the base class. Properties should be defined using the `[Reactive]` attribute (from
-ReactiveUI.SourceGenerators) for brevity.
+Use `ReactiveObject` as the base class. Properties should be defined using the `[Reactive]` attribute (from ReactiveUI.SourceGenerators) for brevity.
 
 ```csharp
 public partial class MyViewModel : ReactiveObject
@@ -27,8 +26,7 @@ this.WhenAnyValue(x => x.Name)
 
 ## Enhanced Commands
 
-Zafiro uses `IEnhancedCommand`, which extends `ICommand` and `IReactiveCommand` with additional metadata like `Name` and
-`Text`.
+Zafiro uses `IEnhancedCommand`, which extends `ICommand` and `IReactiveCommand` with additional metadata like `Name` and `Text`.
 
 ### Creating a Command
 
@@ -66,4 +64,5 @@ public class MyViewModel : ReactiveObject, IDisposable
 }
 ```
 
-> [!TIP] Use `.DisposeWith(disposables)` on any observable subscription or command to ensure proper cleanup.
+> [!TIP]
+> Use `.DisposeWith(disposables)` on any observable subscription or command to ensure proper cleanup.

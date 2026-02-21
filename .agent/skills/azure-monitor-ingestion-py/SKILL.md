@@ -1,9 +1,11 @@
 ---
 name: azure-monitor-ingestion-py
-description: |
+description: "|"
   Azure Monitor Ingestion SDK for Python. Use for sending custom logs to Log Analytics workspace via Logs Ingestion API.
   Triggers: "azure-monitor-ingestion", "LogsIngestionClient", "custom logs", "DCR", "data collection rule", "Log Analytics".
 package: azure-monitor-ingestion
+risk: unknown
+source: community
 ---
 
 # Azure Monitor Ingestion SDK for Python
@@ -164,7 +166,6 @@ client = LogsIngestionClient(
 ## Batching Behavior
 
 The SDK automatically:
-
 - Splits logs into chunks of 1MB or less
 - Compresses each chunk with gzip
 - Uploads chunks in parallel
@@ -173,24 +174,23 @@ No manual batching needed for large log sets.
 
 ## Client Types
 
-| Client                      | Purpose                         |
-| --------------------------- | ------------------------------- |
-| `LogsIngestionClient`       | Sync client for uploading logs  |
+| Client | Purpose |
+|--------|---------|
+| `LogsIngestionClient` | Sync client for uploading logs |
 | `LogsIngestionClient` (aio) | Async client for uploading logs |
 
 ## Key Concepts
 
-| Concept          | Description                                                         |
-| ---------------- | ------------------------------------------------------------------- |
-| **DCE**          | Data Collection Endpoint — ingestion URL                            |
-| **DCR**          | Data Collection Rule — defines schema, transformations, destination |
-| **Stream**       | Named data flow within a DCR                                        |
-| **Custom Table** | Target table in Log Analytics (ends with `_CL`)                     |
+| Concept | Description |
+|---------|-------------|
+| **DCE** | Data Collection Endpoint — ingestion URL |
+| **DCR** | Data Collection Rule — defines schema, transformations, destination |
+| **Stream** | Named data flow within a DCR |
+| **Custom Table** | Target table in Log Analytics (ends with `_CL`) |
 
 ## DCR Stream Name Format
 
 Stream names follow patterns:
-
 - `Custom-<TableName>_CL` — For custom tables
 - `Microsoft-<TableName>` — For built-in tables
 
@@ -204,3 +204,6 @@ Stream names follow patterns:
 6. **Batch uploads** — SDK handles batching, but send reasonable chunks
 7. **Monitor ingestion** — Check Log Analytics for ingestion status
 8. **Use context manager** — Ensures proper client cleanup
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

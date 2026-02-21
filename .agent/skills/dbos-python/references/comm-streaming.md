@@ -7,8 +7,7 @@ tags: streaming, write_stream, read_stream, realtime
 
 ## Use Streams for Real-Time Data
 
-Workflows can stream data in real-time to clients. Useful for LLM responses, progress reporting, or long-running
-results.
+Workflows can stream data in real-time to clients. Useful for LLM responses, progress reporting, or long-running results.
 
 **Incorrect (returning all data at end):**
 
@@ -40,7 +39,6 @@ def stream_response(workflow_id: str):
 ```
 
 Stream characteristics:
-
 - Streams are immutable and append-only
 - Writes from workflows happen exactly-once
 - Writes from steps happen at-least-once (may duplicate on retry)

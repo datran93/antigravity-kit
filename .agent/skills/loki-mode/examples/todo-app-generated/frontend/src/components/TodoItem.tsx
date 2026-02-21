@@ -1,4 +1,4 @@
-import { Todo } from "../api/todos";
+import { Todo } from '../api/todos';
 
 interface TodoItemProps {
   todo: Todo;
@@ -18,8 +18,15 @@ export const TodoItem = ({ todo, onToggle, onDelete }: TodoItemProps) => {
   return (
     <div className="todo-item">
       <div className="todo-content">
-        <input type="checkbox" checked={todo.completed} onChange={handleToggle} className="todo-checkbox" />
-        <span className={todo.completed ? "todo-title completed" : "todo-title"}>{todo.title}</span>
+        <input
+          type="checkbox"
+          checked={todo.completed}
+          onChange={handleToggle}
+          className="todo-checkbox"
+        />
+        <span className={todo.completed ? 'todo-title completed' : 'todo-title'}>
+          {todo.title}
+        </span>
       </div>
       <button onClick={handleDelete} className="delete-button">
         Delete

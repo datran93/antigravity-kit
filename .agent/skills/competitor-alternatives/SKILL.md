@@ -1,17 +1,13 @@
 ---
 name: competitor-alternatives
-description:
-  "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when
-  the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'comparison page,' '[Product] vs [Product],'
-  '[Product] alternative,' or 'competitive landing pages.' Covers four formats: singular alternative, plural
-  alternatives, you vs competitor, and competitor vs competitor. Emphasizes deep research, modular content architecture,
-  and varied section types beyond feature tables."
+description: "When the user wants to create competitor comparison or alternative pages for SEO and sales enablement. Also use when the user mentions 'alternative page,' 'vs page,' 'competitor comparison,' 'compa..."
+risk: unknown
+source: community
 ---
 
 # Competitor & Alternative Pages
 
-You are an expert in creating competitor comparison and alternative pages. Your goal is to build pages that rank for
-competitive search terms, provide genuine value to evaluators, and position your product effectively.
+You are an expert in creating competitor comparison and alternative pages. Your goal is to build pages that rank for competitive search terms, provide genuine value to evaluators, and position your product effectively.
 
 ## Initial Assessment
 
@@ -41,28 +37,24 @@ Before creating competitor pages, understand:
 ## Core Principles
 
 ### 1. Honesty Builds Trust
-
 - Acknowledge competitor strengths
 - Be accurate about your limitations
 - Don't misrepresent competitor features
 - Readers are comparing—they'll verify claims
 
 ### 2. Depth Over Surface
-
 - Go beyond feature checklists
-- Explain _why_ differences matter
+- Explain *why* differences matter
 - Include use cases and scenarios
 - Show, don't just tell
 
 ### 3. Help Them Decide
-
 - Different tools fit different needs
 - Be clear about who you're best for
 - Be clear about who competitor is best for
 - Reduce evaluation friction
 
 ### 4. Modular Content Architecture
-
 - Competitor data should be centralized
 - Updates propagate to all pages
 - Avoid duplicating research
@@ -79,14 +71,12 @@ Before creating competitor pages, understand:
 **URL pattern**: `/alternatives/[competitor]` or `/[competitor]-alternative`
 
 **Target keywords**:
-
 - "[Competitor] alternative"
 - "alternative to [Competitor]"
 - "switch from [Competitor]"
 - "[Competitor] replacement"
 
 **Page structure**:
-
 1. Why people look for alternatives (validate their pain)
 2. Summary: You as the alternative (quick positioning)
 3. Detailed comparison (features, service, pricing)
@@ -106,14 +96,12 @@ Before creating competitor pages, understand:
 **URL pattern**: `/alternatives/[competitor]-alternatives` or `/best-[competitor]-alternatives`
 
 **Target keywords**:
-
 - "[Competitor] alternatives"
 - "best [Competitor] alternatives"
 - "tools like [Competitor]"
 - "[Competitor] competitors"
 
 **Page structure**:
-
 1. Why people look for alternatives (common pain points)
 2. What to look for in an alternative (criteria framework)
 3. List of alternatives (you first, but include real options)
@@ -135,14 +123,12 @@ Before creating competitor pages, understand:
 **URL pattern**: `/vs/[competitor]` or `/compare/[you]-vs-[competitor]`
 
 **Target keywords**:
-
 - "[You] vs [Competitor]"
 - "[Competitor] vs [You]"
 - "[You] compared to [Competitor]"
 - "[You] or [Competitor]"
 
 **Page structure**:
-
 1. TL;DR summary (key differences in 2-3 sentences)
 2. At-a-glance comparison table
 3. Detailed comparison by category:
@@ -168,13 +154,11 @@ Before creating competitor pages, understand:
 **URL pattern**: `/compare/[competitor-a]-vs-[competitor-b]`
 
 **Target keywords**:
-
 - "[Competitor A] vs [Competitor B]"
 - "[Competitor A] or [Competitor B]"
 - "[Competitor A] compared to [Competitor B]"
 
 **Page structure**:
-
 1. Overview of both products
 2. Comparison by category
 3. Who each is best for
@@ -184,15 +168,13 @@ Before creating competitor pages, understand:
 
 **Tone**: Objective analyst, earn trust through fairness, then introduce yourself
 
-**Why this works**: Captures search traffic for competitor terms, positions you as knowledgeable, introduces you to
-qualified audience.
+**Why this works**: Captures search traffic for competitor terms, positions you as knowledgeable, introduces you to qualified audience.
 
 ---
 
 ## Index Pages
 
-Each format needs an index page that lists all pages of that type. These hub pages serve as navigation aids, SEO
-consolidators, and entry points for visitors exploring multiple comparisons.
+Each format needs an index page that lists all pages of that type. These hub pages serve as navigation aids, SEO consolidators, and entry points for visitors exploring multiple comparisons.
 
 ### Alternatives Index
 
@@ -201,7 +183,6 @@ consolidators, and entry points for visitors exploring multiple comparisons.
 **Purpose**: Lists all "[Competitor] Alternative" pages
 
 **Page structure**:
-
 1. Headline: "[Your Product] as an Alternative"
 2. Brief intro on why people switch to you
 3. List of all alternative pages with:
@@ -212,7 +193,6 @@ consolidators, and entry points for visitors exploring multiple comparisons.
 5. CTA
 
 **Example**:
-
 ```markdown
 ## Explore [Your Product] as an Alternative
 
@@ -232,7 +212,6 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 **Purpose**: Lists all "[Competitor] Alternatives" roundup pages
 
 **Page structure**:
-
 1. Headline: "Software Alternatives & Comparisons"
 2. Brief intro on your comparison methodology
 3. List of all alternatives roundup pages with:
@@ -242,7 +221,6 @@ Looking to switch? See how [Your Product] compares to the tools you're evaluatin
 4. CTA
 
 **Example**:
-
 ```markdown
 ## Find the Right Tool
 
@@ -262,7 +240,6 @@ Comparing your options? Our guides cover the top alternatives:
 **Purpose**: Lists all "You vs [Competitor]" and "[A] vs [B]" pages
 
 **Page structure**:
-
 1. Headline: "Compare [Your Product]"
 2. Section: "[Your Product] vs Competitors" — list of direct comparisons
 3. Section: "Head-to-Head Comparisons" — list of [A] vs [B] pages
@@ -270,7 +247,6 @@ Comparing your options? Our guides cover the top alternatives:
 5. CTA
 
 **Example**:
-
 ```markdown
 ## Compare [Your Product]
 
@@ -296,26 +272,22 @@ Evaluating tools we compete with? We've done the research:
 **Keep them updated**: When you add a new comparison page, add it to the relevant index.
 
 **Internal linking**:
-
 - Link from index → individual pages
 - Link from individual pages → back to index
 - Cross-link between related comparisons
 
 **SEO value**:
-
 - Index pages can rank for broad terms like "project management tool comparisons"
 - Pass link equity to individual comparison pages
 - Help search engines discover all comparison content
 
 **Sorting options**:
-
 - By popularity (search volume)
 - Alphabetically
 - By category/use case
 - By date added (show freshness)
 
 **Include on index pages**:
-
 - Last updated date for credibility
 - Number of pages/comparisons available
 - Quick filters if you have many comparisons
@@ -443,7 +415,6 @@ Each page pulls from centralized data:
 - **[A] vs [B] page**: Pulls both competitor data + your data
 
 **Benefits**:
-
 - Update competitor pricing once, updates everywhere
 - Add new feature comparison once, appears on all pages
 - Consistent accuracy across pages
@@ -458,8 +429,9 @@ Each page pulls from centralized data:
 Start every page with a quick summary for scanners:
 
 ```markdown
-**TL;DR**: [Competitor] excels at [strength] but struggles with [weakness]. [Your product] is built for [your focus],
-offering [key differentiator]. Choose [Competitor] if [their ideal use case]. Choose [You] if [your ideal use case].
+**TL;DR**: [Competitor] excels at [strength] but struggles with [weakness].
+[Your product] is built for [your focus], offering [key differentiator].
+Choose [Competitor] if [their ideal use case]. Choose [You] if [your ideal use case].
 ```
 
 ### Paragraph Comparison (Not Just Tables)
@@ -469,11 +441,13 @@ For each major dimension, write a paragraph:
 ```markdown
 ## Features
 
-[Competitor] offers [description of their feature approach]. Their strength is [specific strength], which works well for
-[use case]. However, [limitation] can be challenging for [user type].
+[Competitor] offers [description of their feature approach].
+Their strength is [specific strength], which works well for [use case].
+However, [limitation] can be challenging for [user type].
 
-[Your product] takes a different approach with [your approach]. This means [benefit], though [honest tradeoff]. Teams
-who [specific need] often find this more effective.
+[Your product] takes a different approach with [your approach].
+This means [benefit], though [honest tradeoff].
+Teams who [specific need] often find this more effective.
 ```
 
 ### Feature Comparison Section
@@ -486,12 +460,10 @@ Go beyond checkmarks:
 ### [Feature Category]
 
 **[Competitor]**: [2-3 sentence description of how they handle this]
-
 - Strengths: [specific]
 - Limitations: [specific]
 
 **[Your product]**: [2-3 sentence description]
-
 - Strengths: [specific]
 - Limitations: [specific]
 
@@ -503,20 +475,22 @@ Go beyond checkmarks:
 ```markdown
 ## Pricing
 
-|                | [Competitor] | [Your Product] |
-| -------------- | ------------ | -------------- |
-| Free tier      | [Details]    | [Details]      |
-| Starting price | $X/user/mo   | $X/user/mo     |
-| Business tier  | $X/user/mo   | $X/user/mo     |
-| Enterprise     | Custom       | Custom         |
+| | [Competitor] | [Your Product] |
+|---|---|---|
+| Free tier | [Details] | [Details] |
+| Starting price | $X/user/mo | $X/user/mo |
+| Business tier | $X/user/mo | $X/user/mo |
+| Enterprise | Custom | Custom |
 
-**What's included**: [Competitor]'s $X plan includes [features], while [Your product]'s $X plan includes [features].
+**What's included**: [Competitor]'s $X plan includes [features], while
+[Your product]'s $X plan includes [features].
 
-**Total cost consideration**: Beyond per-seat pricing, consider [hidden costs, add-ons, implementation]. [Competitor]
-charges extra for [X], while [Your product] includes [Y] in base pricing.
+**Total cost consideration**: Beyond per-seat pricing, consider [hidden costs,
+add-ons, implementation]. [Competitor] charges extra for [X], while
+[Your product] includes [Y] in base pricing.
 
-**Value comparison**: For a 10-person team, [Competitor] costs approximately $X/year while [Your product] costs $Y/year,
-with [key differences in what you get].
+**Value comparison**: For a 10-person team, [Competitor] costs approximately
+$X/year while [Your product] costs $Y/year, with [key differences in what you get].
 ```
 
 ### Service & Support Comparison
@@ -524,19 +498,20 @@ with [key differences in what you get].
 ```markdown
 ## Service & Support
 
-|                  | [Competitor]         | [Your Product]       |
-| ---------------- | -------------------- | -------------------- |
-| Documentation    | [Quality assessment] | [Quality assessment] |
-| Response time    | [SLA if known]       | [Your SLA]           |
-| Support channels | [List]               | [List]               |
-| Onboarding       | [What they offer]    | [What you offer]     |
-| CSM included     | [At what tier]       | [At what tier]       |
+| | [Competitor] | [Your Product] |
+|---|---|---|
+| Documentation | [Quality assessment] | [Quality assessment] |
+| Response time | [SLA if known] | [Your SLA] |
+| Support channels | [List] | [List] |
+| Onboarding | [What they offer] | [What you offer] |
+| CSM included | [At what tier] | [At what tier] |
 
-**Support quality**: Based on [G2/Capterra reviews, your research], [Competitor] support is described as [assessment].
-Common feedback includes [quotes or themes].
+**Support quality**: Based on [G2/Capterra reviews, your research],
+[Competitor] support is described as [assessment]. Common feedback includes
+[quotes or themes].
 
-[Your product] offers [your support approach]. [Specific differentiator like response time, dedicated CSM,
-implementation help].
+[Your product] offers [your support approach]. [Specific differentiator like
+response time, dedicated CSM, implementation help].
 ```
 
 ### Who It's For Section
@@ -545,7 +520,6 @@ implementation help].
 ## Who Should Choose [Competitor]
 
 [Competitor] is the right choice if:
-
 - [Specific use case or need]
 - [Team type or size]
 - [Workflow or requirement]
@@ -556,7 +530,6 @@ implementation help].
 ## Who Should Choose [Your Product]
 
 [Your product] is built for teams who:
-
 - [Specific use case or need]
 - [Team type or size]
 - [Workflow or requirement]
@@ -571,19 +544,16 @@ implementation help].
 ## Switching from [Competitor]
 
 ### What transfers
-
 - [Data type]: [How easily, any caveats]
 - [Data type]: [How easily, any caveats]
 
 ### What needs reconfiguration
-
 - [Thing]: [Why and effort level]
 - [Thing]: [Why and effort level]
 
 ### Migration support
 
 We offer [migration support details]:
-
 - [Free data import tool / white-glove migration]
 - [Documentation / migration guide]
 - [Timeline expectation]
@@ -591,7 +561,8 @@ We offer [migration support details]:
 
 ### What customers say about switching
 
-> "[Quote from customer who switched]" — [Name], [Role] at [Company]
+> "[Quote from customer who switched]"
+> — [Name], [Role] at [Company]
 ```
 
 ### Social Proof Section
@@ -603,12 +574,13 @@ Focus on switchers:
 
 ### Switched from [Competitor]
 
-> "[Specific quote about why they switched and outcome]" — [Name], [Role] at [Company]
+> "[Specific quote about why they switched and outcome]"
+> — [Name], [Role] at [Company]
 
-> "[Another quote]" — [Name], [Role] at [Company]
+> "[Another quote]"
+> — [Name], [Role] at [Company]
 
 ### Results after switching
-
 - [Company] saw [specific result]
 - [Company] reduced [metric] by [amount]
 ```
@@ -619,15 +591,21 @@ Focus on switchers:
 
 ### Beyond Checkmarks
 
-Instead of: | Feature | You | Competitor | |---------|-----|-----------| | Feature A | ✓ | ✓ | | Feature B | ✓ | ✗ |
+Instead of:
+| Feature | You | Competitor |
+|---------|-----|-----------|
+| Feature A | ✓ | ✓ |
+| Feature B | ✓ | ✗ |
 
-Do this: | Feature | You | Competitor | |---------|-----|-----------| | Feature A | Full support with [detail] | Basic
-support, [limitation] | | Feature B | [Specific capability] | Not available |
+Do this:
+| Feature | You | Competitor |
+|---------|-----|-----------|
+| Feature A | Full support with [detail] | Basic support, [limitation] |
+| Feature B | [Specific capability] | Not available |
 
 ### Organize by Category
 
 Group features into meaningful categories:
-
 - Core functionality
 - Collaboration
 - Integrations
@@ -636,10 +614,10 @@ Group features into meaningful categories:
 
 ### Include Ratings Where Useful
 
-| Category      | You        | Competitor | Notes        |
-| ------------- | ---------- | ---------- | ------------ |
-| Ease of use   | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐   | [Brief note] |
-| Feature depth | ⭐⭐⭐⭐   | ⭐⭐⭐⭐⭐ | [Brief note] |
+| Category | You | Competitor | Notes |
+|----------|-----|-----------|-------|
+| Ease of use | ⭐⭐⭐⭐⭐ | ⭐⭐⭐⭐ | [Brief note] |
+| Feature depth | ⭐⭐⭐⭐ | ⭐⭐⭐⭐⭐ | [Brief note] |
 
 ---
 
@@ -692,12 +670,12 @@ Competitor pages need maintenance:
 
 ### Keyword Targeting
 
-| Format                   | Primary Keywords          | Secondary Keywords                                                                |
-| ------------------------ | ------------------------- | --------------------------------------------------------------------------------- |
-| Alternative (singular)   | [Competitor] alternative  | alternative to [Competitor], switch from [Competitor], [Competitor] replacement   |
-| Alternatives (plural)    | [Competitor] alternatives | best [Competitor] alternatives, tools like [Competitor], [Competitor] competitors |
-| You vs Competitor        | [You] vs [Competitor]     | [Competitor] vs [You], [You] compared to [Competitor]                             |
-| Competitor vs Competitor | [A] vs [B]                | [B] vs [A], [A] or [B], [A] compared to [B]                                       |
+| Format | Primary Keywords | Secondary Keywords |
+|--------|-----------------|-------------------|
+| Alternative (singular) | [Competitor] alternative | alternative to [Competitor], switch from [Competitor], [Competitor] replacement |
+| Alternatives (plural) | [Competitor] alternatives | best [Competitor] alternatives, tools like [Competitor], [Competitor] competitors |
+| You vs Competitor | [You] vs [Competitor] | [Competitor] vs [You], [You] compared to [Competitor] |
+| Competitor vs Competitor | [A] vs [B] | [B] vs [A], [A] or [B], [A] compared to [B] |
 
 ### Internal Linking
 
@@ -740,7 +718,6 @@ Consider FAQ schema for common questions:
 ### Page Content
 
 For each page:
-
 - URL and meta tags
 - Full page copy organized by section
 - Comparison tables
@@ -749,7 +726,6 @@ For each page:
 ### Page Set Plan
 
 Recommended pages to create:
-
 1. [List of alternative pages]
 2. [List of vs pages]
 3. Priority order based on search volume
@@ -759,7 +735,6 @@ Recommended pages to create:
 ## Questions to Ask
 
 If you need more context:
-
 1. Who are your top 3-5 competitors?
 2. What's your core differentiator?
 3. What are common reasons people switch to you?
@@ -775,3 +750,6 @@ If you need more context:
 - **copywriting**: For writing compelling comparison copy
 - **seo-audit**: For optimizing competitor pages
 - **schema-markup**: For FAQ and comparison schema
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

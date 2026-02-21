@@ -1,20 +1,15 @@
 ---
 name: c4-architecture-c4-architecture
-description:
-  "Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis
-  approach."
+description: "Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis approach."
+risk: unknown
+source: community
 ---
 
 # C4 Architecture Documentation Workflow
 
-Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis
-approach.
+Generate comprehensive C4 architecture documentation for an existing repository/codebase using a bottom-up analysis approach.
 
-[Extended thinking: This workflow implements a complete C4 architecture documentation process following the C4 model
-(Context, Container, Component, Code). It uses a bottom-up approach, starting from the deepest code directories and
-working upward, ensuring every code element is documented before synthesizing into higher-level abstractions. The
-workflow coordinates four specialized C4 agents (Code, Component, Container, Context) to create a complete architectural
-documentation set that serves both technical and non-technical stakeholders.]
+[Extended thinking: This workflow implements a complete C4 architecture documentation process following the C4 model (Context, Container, Component, Code). It uses a bottom-up approach, starting from the deepest code directories and working upward, ensuring every code element is documented before synthesizing into higher-level abstractions. The workflow coordinates four specialized C4 agents (Code, Component, Container, Context) to create a complete architectural documentation set that serves both technical and non-technical stakeholders.]
 
 ## Use this skill when
 
@@ -35,19 +30,14 @@ documentation set that serves both technical and non-technical stakeholders.]
 
 ## Overview
 
-This workflow creates comprehensive C4 architecture documentation following the
-[official C4 model](https://c4model.com/diagrams) by:
+This workflow creates comprehensive C4 architecture documentation following the [official C4 model](https://c4model.com/diagrams) by:
 
 1. **Code Level**: Analyzing every subdirectory bottom-up to create code-level documentation
 2. **Component Level**: Synthesizing code documentation into logical components within containers
-3. **Container Level**: Mapping components to deployment containers with API documentation (shows high-level technology
-   choices)
-4. **Context Level**: Creating high-level system context with personas and user journeys (focuses on people and software
-   systems, not technologies)
+3. **Container Level**: Mapping components to deployment containers with API documentation (shows high-level technology choices)
+4. **Context Level**: Creating high-level system context with personas and user journeys (focuses on people and software systems, not technologies)
 
-**Note**: According to the [C4 model](https://c4model.com/diagrams), you don't need to use all 4 levels of diagram - the
-system context and container diagrams are sufficient for most software development teams. This workflow generates all
-levels for completeness, but teams can choose which levels to use.
+**Note**: According to the [C4 model](https://c4model.com/diagrams), you don't need to use all 4 levels of diagram - the system context and container diagrams are sufficient for most software development teams. This workflow generates all levels for completeness, but teams can choose which levels to use.
 
 All documentation is written to a new `C4-Documentation/` directory in the repository root.
 
@@ -65,7 +55,8 @@ All documentation is written to a new `C4-Documentation/` directory in the repos
 For each directory, starting from the deepest:
 
 - Use Task tool with subagent_type="c4-architecture::c4-code"
-- Prompt: | Analyze the code in directory: [directory_path]
+- Prompt: |
+  Analyze the code in directory: [directory_path]
 
   Create comprehensive C4 Code-level documentation following this structure:
   1. **Overview Section**:
@@ -90,8 +81,8 @@ For each directory, starting from the deepest:
   4. **Relationships Section**:
      - Optional Mermaid diagram if relationships are complex
 
-  Save the output as: C4-Documentation/c4-code-[directory-name].md Use a sanitized directory name (replace / with -,
-  remove special chars) for the filename.
+  Save the output as: C4-Documentation/c4-code-[directory-name].md
+  Use a sanitized directory name (replace / with -, remove special chars) for the filename.
 
   Ensure the documentation includes:
   - Complete function signatures with all parameters and types
@@ -120,9 +111,11 @@ For each directory, starting from the deepest:
 For each identified component:
 
 - Use Task tool with subagent_type="c4-architecture::c4-component"
-- Prompt: | Synthesize the following C4 Code-level documentation files into a logical component:
+- Prompt: |
+  Synthesize the following C4 Code-level documentation files into a logical component:
 
-  Code files to analyze: [List of c4-code-*.md file paths]
+  Code files to analyze:
+  [List of c4-code-*.md file paths]
 
   Create comprehensive C4 Component-level documentation following this structure:
   1. **Overview Section**:
@@ -152,7 +145,8 @@ For each identified component:
   7. **Component Diagram**:
      - Mermaid diagram showing this component and its relationships
 
-  Save the output as: C4-Documentation/c4-component-[component-name].md Use a sanitized component name for the filename.
+  Save the output as: C4-Documentation/c4-component-[component-name].md
+  Use a sanitized component name for the filename.
 
 - Expected output: c4-component-<name>.md file for each component
 - Context: All relevant c4-code-\*.md files for this component
@@ -160,7 +154,8 @@ For each identified component:
 ### 2.3 Create Master Component Index
 
 - Use Task tool with subagent_type="c4-architecture::c4-component"
-- Prompt: | Create a master component index that lists all components in the system.
+- Prompt: |
+  Create a master component index that lists all components in the system.
 
   Based on all c4-component-\*.md files created, generate:
   1. **System Components Section**:
@@ -194,11 +189,14 @@ For each identified component:
 ### 3.2 Map Components to Containers
 
 - Use Task tool with subagent_type="c4-architecture::c4-container"
-- Prompt: | Synthesize components into containers based on deployment definitions.
+- Prompt: |
+  Synthesize components into containers based on deployment definitions.
 
-  Component documentation: [List of all c4-component-*.md file paths]
+  Component documentation:
+  [List of all c4-component-*.md file paths]
 
-  Deployment definitions found: [List of deployment config files: Dockerfiles, K8s manifests, etc.]
+  Deployment definitions found:
+  [List of deployment config files: Dockerfiles, K8s manifests, etc.]
 
   Create comprehensive C4 Container-level documentation following this structure:
   1. **Containers Section** (for each container):
@@ -264,11 +262,13 @@ For each identified component:
 ### 4.2 Create Context Documentation
 
 - Use Task tool with subagent_type="c4-architecture::c4-context"
-- Prompt: | Create comprehensive C4 Context-level documentation for the system.
+- Prompt: |
+  Create comprehensive C4 Context-level documentation for the system.
 
-  Container documentation: C4-Documentation/c4-container.md Component documentation: C4-Documentation/c4-component.md
-  System documentation: [List of README, architecture docs, requirements, etc.] Test files: [List of test files that
-  show system behavior]
+  Container documentation: C4-Documentation/c4-container.md
+  Component documentation: C4-Documentation/c4-component.md
+  System documentation: [List of README, architecture docs, requirements, etc.]
+  Test files: [List of test files that show system behavior]
 
   Create comprehensive C4 Context-level documentation following this structure:
   1. **System Overview Section**:
@@ -292,7 +292,8 @@ For each identified component:
        - Journey name: [Feature Name] - [Persona Name] Journey
        - Step-by-step journey:
          1. [Step 1]: [Description]
-         2. [Step 2]: [Description] ...
+         2. [Step 2]: [Description]
+            ...
        - Include all system touchpoints
      - For programmatic users (external systems, APIs):
        - Integration journey with step-by-step process

@@ -1,10 +1,6 @@
 ---
 name: content-creator
-description:
-  Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer,
-  content frameworks, and social media templates. Use when writing blog posts, creating social media content, analyzing
-  brand voice, optimizing SEO, planning content calendars, or when user mentions content creation, brand voice, SEO
-  optimization, social media marketing, or content strategy.
+description: "Create SEO-optimized marketing content with consistent brand voice. Includes brand voice analyzer, SEO optimizer, content frameworks, and social media templates. Use when writing blog posts, creati..."
 license: MIT
 metadata:
   version: 1.0.0
@@ -14,28 +10,29 @@ metadata:
   updated: 2025-10-20
   python-tools: brand_voice_analyzer.py, seo_optimizer.py
   tech-stack: SEO, social-media-platforms
+risk: unknown
+source: community
 ---
 
 # Content Creator
 
 Professional-grade brand voice analysis, SEO optimization, and platform-specific content frameworks.
 
-## Keywords
+## When to Use
 
-content creation, blog posts, SEO, brand voice, social media, content calendar, marketing content, content strategy,
-content marketing, brand consistency, content optimization, social media marketing, content planning, blog writing,
-content frameworks, brand guidelines, social media strategy
+Use this skill when writing blog posts, creating social media content, establishing brand voice, optimizing content for SEO, or planning content calendars.
+
+## Keywords
+content creation, blog posts, SEO, brand voice, social media, content calendar, marketing content, content strategy, content marketing, brand consistency, content optimization, social media marketing, content planning, blog writing, content frameworks, brand guidelines, social media strategy
 
 ## Quick Start
 
 ### For Brand Voice Development
-
 1. Run `scripts/brand_voice_analyzer.py` on existing content to establish baseline
 2. Review `references/brand_guidelines.md` to select voice attributes
 3. Apply chosen voice consistently across all content
 
 ### For Blog Content Creation
-
 1. Choose template from `references/content_frameworks.md`
 2. Research keywords for topic
 3. Write content following template structure
@@ -43,7 +40,6 @@ content frameworks, brand guidelines, social media strategy
 5. Apply recommendations before publishing
 
 ### For Social Media Content
-
 1. Review platform best practices in `references/social_media_optimization.md`
 2. Use appropriate template from `references/content_frameworks.md`
 3. Optimize based on platform-specific guidelines
@@ -59,6 +55,7 @@ When creating content for a new brand or client:
    ```bash
    python scripts/brand_voice_analyzer.py existing_content.txt
    ```
+   
 2. **Define Voice Attributes**
    - Review brand personality archetypes in `references/brand_guidelines.md`
    - Select primary and secondary archetypes
@@ -83,7 +80,6 @@ When creating content for a new brand or client:
    - Aim for 1,500-2,500 words for comprehensive coverage
 
 3. **Optimization Check**
-
    ```bash
    python scripts/seo_optimizer.py blog_post.md "primary keyword" "secondary,keywords,list"
    ```
@@ -132,26 +128,22 @@ When creating content for a new brand or client:
 ## Key Scripts
 
 ### brand_voice_analyzer.py
-
 Analyzes text content for voice characteristics, readability, and consistency.
 
 **Usage**: `python scripts/brand_voice_analyzer.py <file> [json|text]`
 
 **Returns**:
-
 - Voice profile (formality, tone, perspective)
 - Readability score
 - Sentence structure analysis
 - Improvement recommendations
 
 ### seo_optimizer.py
-
 Analyzes content for SEO optimization and provides actionable recommendations.
 
 **Usage**: `python scripts/seo_optimizer.py <file> [primary_keyword] [secondary_keywords]`
 
 **Returns**:
-
 - SEO score (0-100)
 - Keyword density analysis
 - Structure assessment
@@ -163,21 +155,18 @@ Analyzes content for SEO optimization and provides actionable recommendations.
 ### When to Use Each Reference
 
 **references/brand_guidelines.md**
-
 - Setting up new brand voice
 - Ensuring consistency across content
 - Training new team members
 - Resolving voice/tone questions
 
 **references/content_frameworks.md**
-
 - Starting any new content piece
 - Structuring different content types
 - Creating content templates
 - Planning content repurposing
 
 **references/social_media_optimization.md**
-
 - Platform-specific optimization
 - Hashtag strategy development
 - Understanding algorithm factors
@@ -186,7 +175,6 @@ Analyzes content for SEO optimization and provides actionable recommendations.
 ## Best Practices
 
 ### Content Creation Process
-
 1. Always start with audience need/pain point
 2. Research before writing
 3. Create outline using templates
@@ -198,7 +186,6 @@ Analyzes content for SEO optimization and provides actionable recommendations.
 9. Schedule strategically
 
 ### Quality Indicators
-
 - SEO score above 75/100
 - Readability appropriate for audience
 - Consistent brand voice throughout
@@ -208,7 +195,6 @@ Analyzes content for SEO optimization and provides actionable recommendations.
 - Platform-optimized
 
 ### Common Pitfalls to Avoid
-
 - Writing before researching keywords
 - Ignoring platform-specific requirements
 - Inconsistent brand voice
@@ -222,7 +208,6 @@ Analyzes content for SEO optimization and provides actionable recommendations.
 Track these KPIs for content success:
 
 ### Content Metrics
-
 - Organic traffic growth
 - Average time on page
 - Bounce rate
@@ -230,7 +215,6 @@ Track these KPIs for content success:
 - Backlinks earned
 
 ### Engagement Metrics
-
 - Comments and discussions
 - Email click-through rates
 - Social media engagement rate
@@ -238,7 +222,6 @@ Track these KPIs for content success:
 - Form submissions
 
 ### Business Metrics
-
 - Leads generated
 - Conversion rate
 - Customer acquisition cost
@@ -248,7 +231,6 @@ Track these KPIs for content success:
 ## Integration Points
 
 This skill works best with:
-
 - Analytics platforms (Google Analytics, social media insights)
 - SEO tools (for keyword research)
 - Design tools (for visual content)

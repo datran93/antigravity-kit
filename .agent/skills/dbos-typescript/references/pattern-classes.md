@@ -7,8 +7,7 @@ tags: pattern, class, instance, ConfiguredInstance
 
 ## Use DBOS with Class Instances
 
-Class instance methods can be workflows and steps. Classes with workflow methods must extend `ConfiguredInstance` to
-enable recovery.
+Class instance methods can be workflows and steps. Classes with workflow methods must extend `ConfiguredInstance` to enable recovery.
 
 **Incorrect (instance workflows without ConfiguredInstance):**
 
@@ -43,7 +42,10 @@ class MyWorker extends ConfiguredInstance {
   @DBOS.workflow()
   async processTask(task: string): Promise<void> {
     // Can use this.cfg safely - instance is recoverable
-    const result = await DBOS.runStep(() => fetch(this.cfg.apiUrl).then((r) => r.text()), { name: "callApi" });
+    const result = await DBOS.runStep(
+      () => fetch(this.cfg.apiUrl).then(r => r.text()),
+      { name: "callApi" }
+    );
   }
 }
 
@@ -56,7 +58,6 @@ await DBOS.launch();
 ```
 
 Key requirements:
-
 - `ConfiguredInstance` constructor requires a unique `name` per class
 - All instances must be created **before** `DBOS.launch()`
 - The `initialize()` method is called during launch for validation

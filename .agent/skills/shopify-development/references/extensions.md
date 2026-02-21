@@ -45,9 +45,17 @@ api_access = true
 ### Basic Example
 
 ```javascript
-import { reactExtension, BlockStack, TextField, Checkbox, useApi } from "@shopify/ui-extensions-react/checkout";
+import {
+  reactExtension,
+  BlockStack,
+  TextField,
+  Checkbox,
+  useApi,
+} from "@shopify/ui-extensions-react/checkout";
 
-export default reactExtension("purchase.checkout.block.render", () => <Extension />);
+export default reactExtension("purchase.checkout.block.render", () => (
+  <Extension />
+));
 
 function Extension() {
   const [message, setMessage] = useState("");
@@ -69,7 +77,14 @@ function Extension() {
       <Checkbox checked={isGift} onChange={setIsGift}>
         This is a gift
       </Checkbox>
-      {isGift && <TextField label="Gift Message" value={message} onChange={setMessage} multiline={3} />}
+      {isGift && (
+        <TextField
+          label="Gift Message"
+          value={message}
+          onChange={setMessage}
+          multiline={3}
+        />
+      )}
     </BlockStack>
   );
 }
@@ -159,9 +174,15 @@ shopify app generate extension --type admin_action
 ```
 
 ```javascript
-import { reactExtension, AdminAction, Button } from "@shopify/ui-extensions-react/admin";
+import {
+  reactExtension,
+  AdminAction,
+  Button,
+} from "@shopify/ui-extensions-react/admin";
 
-export default reactExtension("admin.product-details.action.render", () => <Extension />);
+export default reactExtension("admin.product-details.action.render", () => (
+  <Extension />
+));
 
 function Extension() {
   const { data } = useData();
@@ -174,7 +195,12 @@ function Extension() {
     console.log("Exported:", await response.json());
   }
 
-  return <AdminAction title="Export Product" primaryAction={<Button onPress={handleExport}>Export</Button>} />;
+  return (
+    <AdminAction
+      title="Export Product"
+      primaryAction={<Button onPress={handleExport}>Export</Button>}
+    />
+  );
 }
 ```
 
@@ -189,9 +215,16 @@ function Extension() {
 Embedded content in admin pages.
 
 ```javascript
-import { reactExtension, BlockStack, Text, Badge } from "@shopify/ui-extensions-react/admin";
+import {
+  reactExtension,
+  BlockStack,
+  Text,
+  Badge,
+} from "@shopify/ui-extensions-react/admin";
 
-export default reactExtension("admin.product-details.block.render", () => <Extension />);
+export default reactExtension("admin.product-details.block.render", () => (
+  <Extension />
+));
 
 function Extension() {
   const { data } = useData();
@@ -206,7 +239,9 @@ function Extension() {
       <Text variant="headingMd">Product Analytics</Text>
       <Text>Views: {analytics?.views || 0}</Text>
       <Text>Conversions: {analytics?.conversions || 0}</Text>
-      <Badge tone={analytics?.trending ? "success" : "info"}>{analytics?.trending ? "Trending" : "Normal"}</Badge>
+      <Badge tone={analytics?.trending ? "success" : "info"}>
+        {analytics?.trending ? "Trending" : "Normal"}
+      </Badge>
     </BlockStack>
   );
 }
@@ -227,7 +262,10 @@ Customize Point of Sale experience.
 Quick access action on POS home screen.
 
 ```javascript
-import { reactExtension, SmartGridTile } from "@shopify/ui-extensions-react/pos";
+import {
+  reactExtension,
+  SmartGridTile,
+} from "@shopify/ui-extensions-react/pos";
 
 export default reactExtension("pos.home.tile.render", () => <Extension />);
 
@@ -236,7 +274,13 @@ function Extension() {
     // Navigate to custom workflow
   }
 
-  return <SmartGridTile title="Gift Cards" subtitle="Manage gift cards" onPress={handlePress} />;
+  return (
+    <SmartGridTile
+      title="Gift Cards"
+      subtitle="Manage gift cards"
+      onPress={handlePress}
+    />
+  );
 }
 ```
 
@@ -245,7 +289,13 @@ function Extension() {
 Full-screen workflow.
 
 ```javascript
-import { reactExtension, Screen, BlockStack, Button, TextField } from "@shopify/ui-extensions-react/pos";
+import {
+  reactExtension,
+  Screen,
+  BlockStack,
+  Button,
+  TextField,
+} from "@shopify/ui-extensions-react/pos";
 
 export default reactExtension("pos.home.modal.render", () => <Extension />);
 
@@ -277,9 +327,17 @@ Customize customer account pages.
 ### Order Status Extension
 
 ```javascript
-import { reactExtension, BlockStack, Text, Button } from "@shopify/ui-extensions-react/customer-account";
+import {
+  reactExtension,
+  BlockStack,
+  Text,
+  Button,
+} from "@shopify/ui-extensions-react/customer-account";
 
-export default reactExtension("customer-account.order-status.block.render", () => <Extension />);
+export default reactExtension(
+  "customer-account.order-status.block.render",
+  () => <Extension />,
+);
 
 function Extension() {
   const { order } = useApi();
@@ -384,7 +442,9 @@ export default function orderDiscount(input) {
 
 ```javascript
 export default function paymentCustomization(input) {
-  const hidePaymentMethods = input.cart.lines.some((line) => line.merchandise.product.hasTag);
+  const hidePaymentMethods = input.cart.lines.some(
+    (line) => line.merchandise.product.hasTag,
+  );
 
   if (!hidePaymentMethods) {
     return { operations: [] };
@@ -417,7 +477,9 @@ export default function cartValidation(input) {
   }
 
   // Min $50 for wholesale
-  const isWholesale = input.cart.lines.some((line) => line.merchandise.product.hasTag);
+  const isWholesale = input.cart.lines.some(
+    (line) => line.merchandise.product.hasTag,
+  );
 
   if (isWholesale && input.cart.cost.totalAmount.amount < 50) {
     errors.push({

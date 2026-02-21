@@ -1,9 +1,9 @@
 ---
 name: azure-identity-java
-description:
-  Azure Identity Java SDK for authentication with Azure services. Use when implementing DefaultAzureCredential, managed
-  identity, service principal, or any Azure authentication pattern in Java applications.
+description: "Azure Identity Java SDK for authentication with Azure services. Use when implementing DefaultAzureCredential, managed identity, service principal, or any Azure authentication pattern in Java applic..."
 package: com.azure:azure-identity
+risk: unknown
+source: community
 ---
 
 # Azure Identity (Java)
@@ -22,16 +22,16 @@ Authenticate Java applications with Azure services using Microsoft Entra ID (Azu
 
 ## Key Concepts
 
-| Credential                     | Use Case                                        |
-| ------------------------------ | ----------------------------------------------- |
-| `DefaultAzureCredential`       | **Recommended** - Works in dev and production   |
-| `ManagedIdentityCredential`    | Azure-hosted apps (App Service, Functions, VMs) |
-| `EnvironmentCredential`        | CI/CD pipelines with env vars                   |
-| `ClientSecretCredential`       | Service principals with secret                  |
-| `ClientCertificateCredential`  | Service principals with certificate             |
-| `AzureCliCredential`           | Local dev using `az login`                      |
-| `InteractiveBrowserCredential` | Interactive login flow                          |
-| `DeviceCodeCredential`         | Headless device authentication                  |
+| Credential | Use Case |
+|------------|----------|
+| `DefaultAzureCredential` | **Recommended** - Works in dev and production |
+| `ManagedIdentityCredential` | Azure-hosted apps (App Service, Functions, VMs) |
+| `EnvironmentCredential` | CI/CD pipelines with env vars |
+| `ClientSecretCredential` | Service principals with secret |
+| `ClientCertificateCredential` | Service principals with certificate |
+| `AzureCliCredential` | Local dev using `az login` |
+| `InteractiveBrowserCredential` | Interactive login flow |
+| `DeviceCodeCredential` | Headless device authentication |
 
 ## DefaultAzureCredential (Recommended)
 
@@ -153,7 +153,6 @@ EnvironmentCredential credential = new EnvironmentCredentialBuilder().build();
 ### Required Environment Variables
 
 **For service principal with secret:**
-
 ```bash
 AZURE_TENANT_ID=<tenant-id>
 AZURE_CLIENT_ID=<client-id>
@@ -161,7 +160,6 @@ AZURE_CLIENT_SECRET=<client-secret>
 ```
 
 **For service principal with certificate:**
-
 ```bash
 AZURE_TENANT_ID=<tenant-id>
 AZURE_CLIENT_ID=<client-id>
@@ -170,7 +168,6 @@ AZURE_CLIENT_CERTIFICATE_PASSWORD=<optional-password>
 ```
 
 **For username/password:**
-
 ```bash
 AZURE_TENANT_ID=<tenant-id>
 AZURE_CLIENT_ID=<client-id>
@@ -352,16 +349,16 @@ AZURE_AUTHORITY_HOST=https://login.microsoftonline.com/
 
 ## Credential Selection Matrix
 
-| Environment              | Recommended Credential                           |
-| ------------------------ | ------------------------------------------------ |
-| Local Development        | `DefaultAzureCredential` (uses Azure CLI)        |
-| Azure App Service        | `DefaultAzureCredential` (uses Managed Identity) |
-| Azure Functions          | `DefaultAzureCredential` (uses Managed Identity) |
-| Azure Kubernetes Service | `WorkloadIdentityCredential`                     |
-| Azure VMs                | `DefaultAzureCredential` (uses Managed Identity) |
-| CI/CD Pipeline           | `EnvironmentCredential`                          |
-| Desktop App              | `InteractiveBrowserCredential`                   |
-| CLI Tool                 | `DeviceCodeCredential`                           |
+| Environment | Recommended Credential |
+|-------------|----------------------|
+| Local Development | `DefaultAzureCredential` (uses Azure CLI) |
+| Azure App Service | `DefaultAzureCredential` (uses Managed Identity) |
+| Azure Functions | `DefaultAzureCredential` (uses Managed Identity) |
+| Azure Kubernetes Service | `WorkloadIdentityCredential` |
+| Azure VMs | `DefaultAzureCredential` (uses Managed Identity) |
+| CI/CD Pipeline | `EnvironmentCredential` |
+| Desktop App | `InteractiveBrowserCredential` |
+| CLI Tool | `DeviceCodeCredential` |
 
 ## Trigger Phrases
 
@@ -369,3 +366,6 @@ AZURE_AUTHORITY_HOST=https://login.microsoftonline.com/
 - "managed identity Java", "service principal Java"
 - "Azure login Java", "Azure credentials Java"
 - "AZURE_CLIENT_ID", "AZURE_TENANT_ID"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

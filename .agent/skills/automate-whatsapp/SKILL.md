@@ -1,9 +1,6 @@
 ---
 name: automate-whatsapp
-description:
-  "Build WhatsApp automations with Kapso workflows: configure WhatsApp triggers, edit workflow graphs, manage
-  executions, deploy functions, and use databases/integrations for state. Use when automating WhatsApp conversations and
-  event handling."
+description: "Build WhatsApp automations with Kapso workflows: configure WhatsApp triggers, edit workflow graphs, manage executions, deploy functions, and use databases/integrations for state. Use when automatin..."
 source: "https://github.com/gokapso/agent-skills/tree/master/skills/automate-whatsapp"
 risk: safe
 ---
@@ -12,13 +9,11 @@ risk: safe
 
 ## When to use
 
-Use this skill to build and run WhatsApp automations: workflow CRUD, graph edits, triggers, executions, function
-management, app integrations, and D1 database operations.
+Use this skill to build and run WhatsApp automations: workflow CRUD, graph edits, triggers, executions, function management, app integrations, and D1 database operations.
 
 ## Setup
 
 Env vars:
-
 - `KAPSO_API_BASE_URL` (host only, no `/platform/v1`)
 - `KAPSO_API_KEY`
 
@@ -64,8 +59,7 @@ For inbound_message triggers, first run `node scripts/list-whatsapp-phone-number
 1. Find model: `node scripts/list-provider-models.js`
 2. Find account: `node scripts/list-accounts.js --app-slug <slug>` (use `pipedream_account_id`)
 3. Find action: `node scripts/search-actions.js --query <word> --app-slug <slug>` (action_id = key)
-4. Create integration:
-   `node scripts/create-integration.js --action-id <id> --app-slug <slug> --account-id <id> --configured-props <json>`
+4. Create integration: `node scripts/create-integration.js --action-id <id> --app-slug <slug> --account-id <id> --configured-props <json>`
 5. Add tools to agent node via `flow_agent_app_integration_tools`
 
 ### Database CRUD
@@ -102,7 +96,6 @@ async function handler(request, env) {
 ## Execution context
 
 Always use this structure:
-
 - `vars` - user-defined variables
 - `system` - system variables
 - `context` - channel data
@@ -112,97 +105,95 @@ Always use this structure:
 
 ### Workflows
 
-| Script                        | Purpose                        |
-| ----------------------------- | ------------------------------ |
-| `list-workflows.js`           | List workflows (metadata only) |
-| `get-workflow.js`             | Get workflow metadata          |
-| `create-workflow.js`          | Create a workflow              |
-| `update-workflow-settings.js` | Update workflow settings       |
+| Script | Purpose |
+|--------|---------|
+| `list-workflows.js` | List workflows (metadata only) |
+| `get-workflow.js` | Get workflow metadata |
+| `create-workflow.js` | Create a workflow |
+| `update-workflow-settings.js` | Update workflow settings |
 
 ### Graph
 
-| Script              | Purpose                            |
-| ------------------- | ---------------------------------- |
-| `get-graph.js`      | Get workflow graph + lock_version  |
-| `edit-graph.js`     | Patch graph via string replacement |
-| `update-graph.js`   | Replace entire graph               |
-| `validate-graph.js` | Validate graph structure locally   |
+| Script | Purpose |
+|--------|---------|
+| `get-graph.js` | Get workflow graph + lock_version |
+| `edit-graph.js` | Patch graph via string replacement |
+| `update-graph.js` | Replace entire graph |
+| `validate-graph.js` | Validate graph structure locally |
 
 ### Triggers
 
-| Script                           | Purpose                              |
-| -------------------------------- | ------------------------------------ |
-| `list-triggers.js`               | List triggers for a workflow         |
-| `create-trigger.js`              | Create a trigger                     |
-| `update-trigger.js`              | Enable/disable a trigger             |
-| `delete-trigger.js`              | Delete a trigger                     |
+| Script | Purpose |
+|--------|---------|
+| `list-triggers.js` | List triggers for a workflow |
+| `create-trigger.js` | Create a trigger |
+| `update-trigger.js` | Enable/disable a trigger |
+| `delete-trigger.js` | Delete a trigger |
 | `list-whatsapp-phone-numbers.js` | List phone numbers for trigger setup |
 
 ### Executions
 
-| Script                       | Purpose                           |
-| ---------------------------- | --------------------------------- |
-| `list-executions.js`         | List executions                   |
-| `get-execution.js`           | Get execution details             |
-| `get-context-value.js`       | Read value from execution context |
-| `update-execution-status.js` | Force execution state             |
-| `resume-execution.js`        | Resume waiting execution          |
-| `list-execution-events.js`   | List execution events             |
+| Script | Purpose |
+|--------|---------|
+| `list-executions.js` | List executions |
+| `get-execution.js` | Get execution details |
+| `get-context-value.js` | Read value from execution context |
+| `update-execution-status.js` | Force execution state |
+| `resume-execution.js` | Resume waiting execution |
+| `list-execution-events.js` | List execution events |
 
 ### Functions
 
-| Script                         | Purpose                      |
-| ------------------------------ | ---------------------------- |
-| `list-functions.js`            | List project functions       |
-| `get-function.js`              | Get function details + code  |
-| `create-function.js`           | Create a function            |
-| `update-function.js`           | Update function code         |
-| `deploy-function.js`           | Deploy function to runtime   |
-| `invoke-function.js`           | Invoke function with payload |
-| `list-function-invocations.js` | List function invocations    |
+| Script | Purpose |
+|--------|---------|
+| `list-functions.js` | List project functions |
+| `get-function.js` | Get function details + code |
+| `create-function.js` | Create a function |
+| `update-function.js` | Update function code |
+| `deploy-function.js` | Deploy function to runtime |
+| `invoke-function.js` | Invoke function with payload |
+| `list-function-invocations.js` | List function invocations |
 
 ### App integrations
 
-| Script                    | Purpose                           |
-| ------------------------- | --------------------------------- |
-| `list-apps.js`            | Search integration apps           |
-| `search-actions.js`       | Search actions (action_id = key)  |
-| `get-action-schema.js`    | Get action JSON schema            |
-| `list-accounts.js`        | List connected accounts           |
-| `create-connect-token.js` | Create OAuth connect link         |
-| `configure-prop.js`       | Resolve remote_options for a prop |
-| `reload-props.js`         | Reload dynamic props              |
-| `list-integrations.js`    | List saved integrations           |
-| `create-integration.js`   | Create an integration             |
-| `update-integration.js`   | Update an integration             |
-| `delete-integration.js`   | Delete an integration             |
+| Script | Purpose |
+|--------|---------|
+| `list-apps.js` | Search integration apps |
+| `search-actions.js` | Search actions (action_id = key) |
+| `get-action-schema.js` | Get action JSON schema |
+| `list-accounts.js` | List connected accounts |
+| `create-connect-token.js` | Create OAuth connect link |
+| `configure-prop.js` | Resolve remote_options for a prop |
+| `reload-props.js` | Reload dynamic props |
+| `list-integrations.js` | List saved integrations |
+| `create-integration.js` | Create an integration |
+| `update-integration.js` | Update an integration |
+| `delete-integration.js` | Delete an integration |
 
 ### Databases
 
-| Script           | Purpose                        |
-| ---------------- | ------------------------------ |
-| `list-tables.js` | List D1 tables                 |
-| `get-table.js`   | Get table schema + sample rows |
-| `query-rows.js`  | Query rows with filters        |
-| `create-row.js`  | Create a row                   |
-| `update-row.js`  | Update rows                    |
-| `upsert-row.js`  | Upsert a row                   |
-| `delete-row.js`  | Delete rows                    |
+| Script | Purpose |
+|--------|---------|
+| `list-tables.js` | List D1 tables |
+| `get-table.js` | Get table schema + sample rows |
+| `query-rows.js` | Query rows with filters |
+| `create-row.js` | Create a row |
+| `update-row.js` | Update rows |
+| `upsert-row.js` | Upsert a row |
+| `delete-row.js` | Delete rows |
 
 ### OpenAPI
 
-| Script                | Purpose                                  |
-| --------------------- | ---------------------------------------- |
+| Script | Purpose |
+|--------|---------|
 | `openapi-explore.mjs` | Explore OpenAPI (search/op/schema/where) |
 
 Install deps (once):
-
 ```bash
 npm i
 ```
 
 Examples:
-
 ```bash
 node scripts/openapi-explore.mjs --spec workflows search "variables"
 node scripts/openapi-explore.mjs --spec workflows op getWorkflowVariables
@@ -220,33 +211,31 @@ node scripts/openapi-explore.mjs --spec platform op queryDatabaseRows
 ## References
 
 Read before editing:
-
-- [references/graph-contract.md](references/graph-contract.md) - Graph schema, computed vs editable fields, lock_version
-- [references/node-types.md](references/node-types.md) - Node types and config shapes
-- [references/workflow-overview.md](references/workflow-overview.md) - Execution flow and states
+- references/graph-contract.md - Graph schema, computed vs editable fields, lock_version
+- references/node-types.md - Node types and config shapes
+- references/workflow-overview.md - Execution flow and states
 
 Other references:
-
-- [references/execution-context.md](references/execution-context.md) - Context structure and variable substitution
-- [references/triggers.md](references/triggers.md) - Trigger types and setup
-- [references/app-integrations.md](references/app-integrations.md) - App integration and variable_definitions
-- [references/functions-reference.md](references/functions-reference.md) - Function management
-- [references/functions-payloads.md](references/functions-payloads.md) - Payload shapes for functions
-- [references/databases-reference.md](references/databases-reference.md) - Database operations
+- references/execution-context.md - Context structure and variable substitution
+- references/triggers.md - Trigger types and setup
+- references/app-integrations.md - App integration and variable_definitions
+- references/functions-reference.md - Function management
+- references/functions-payloads.md - Payload shapes for functions
+- references/databases-reference.md - Database operations
 
 ## Assets
 
-| File                                                | Description                             |
-| --------------------------------------------------- | --------------------------------------- |
-| `workflow-linear.json`                              | Minimal linear workflow                 |
-| `workflow-decision.json`                            | Minimal branching workflow              |
-| `workflow-agent-simple.json`                        | Minimal agent workflow                  |
-| `workflow-customer-support-intake-agent.json`       | Customer support intake                 |
+| File | Description |
+|------|-------------|
+| `workflow-linear.json` | Minimal linear workflow |
+| `workflow-decision.json` | Minimal branching workflow |
+| `workflow-agent-simple.json` | Minimal agent workflow |
+| `workflow-customer-support-intake-agent.json` | Customer support intake |
 | `workflow-interactive-buttons-decide-function.json` | Interactive buttons + decide (function) |
-| `workflow-interactive-buttons-decide-ai.json`       | Interactive buttons + decide (AI)       |
-| `workflow-api-template-wait-agent.json`             | API trigger + template + agent          |
-| `function-decide-route-interactive-buttons.json`    | Function for button routing             |
-| `agent-app-integration-example.json`                | Agent node with app integrations        |
+| `workflow-interactive-buttons-decide-ai.json` | Interactive buttons + decide (AI) |
+| `workflow-api-template-wait-agent.json` | API trigger + template + agent |
+| `function-decide-route-interactive-buttons.json` | Function for button routing |
+| `agent-app-integration-example.json` | Agent node with app integrations |
 
 ## Related skills
 
@@ -254,7 +243,6 @@ Other references:
 - `observe-whatsapp` - Debugging, logs, health checks
 
 <!-- FILEMAP:BEGIN -->
-
 ```text
 [automate-whatsapp file map]|root: .
 |.:{package.json,SKILL.md}
@@ -265,5 +253,5 @@ Other references:
 |scripts/lib/functions:{args.js,kapso-api.js}
 |scripts/lib/workflows:{args.js,kapso-api.js,result.js}
 ```
-
 <!-- FILEMAP:END -->
+

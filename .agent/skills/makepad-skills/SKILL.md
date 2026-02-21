@@ -13,12 +13,10 @@ Makepad UI development skills for Rust apps: setup, patterns, shaders, packaging
 
 ## When to Use This Skill
 
-Use this skill when you need to work with makepad ui development skills for rust apps: setup, patterns, shaders,
-packaging, and troubleshooting..
+Use this skill when you need to work with makepad ui development skills for rust apps: setup, patterns, shaders, packaging, and troubleshooting..
 
 ## Instructions
 
-This skill provides guidance and patterns for makepad ui development skills for rust apps: setup, patterns, shaders,
-packaging, and troubleshooting..
+This skill provides guidance and patterns for makepad ui development skills for rust apps: setup, patterns, shaders, packaging, and troubleshooting..
 
 For more information, see the [source repository](https://github.com/ZhangHanDong/makepad-skills).

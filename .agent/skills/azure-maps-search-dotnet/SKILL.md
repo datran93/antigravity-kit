@@ -1,8 +1,10 @@
 ---
 name: azure-maps-search-dotnet
-description: |
+description: "|"
   Azure Maps SDK for .NET. Location-based services including geocoding, routing, rendering, geolocation, and weather. Use for address search, directions, map tiles, IP geolocation, and weather data. Triggers: "Azure Maps", "MapsSearchClient", "MapsRoutingClient", "MapsRenderingClient", "geocoding .NET", "route directions", "map tiles", "geolocation".
 package: Azure.Maps.Search
+risk: unknown
+source: community
 ---
 
 # Azure Maps (.NET)
@@ -35,7 +37,6 @@ dotnet add package Azure.Identity
 ```
 
 **Current Versions**:
-
 - `Azure.Maps.Search`: v2.0.0-beta.5
 - `Azure.Maps.Routing`: v1.0.0-beta.4
 - `Azure.Maps.Rendering`: v2.0.0-beta.1
@@ -96,10 +97,10 @@ MapsAccountResource mapsAccount = armClient.GetMapsAccountResource(mapsAccountRe
 
 // Generate SAS token
 MapsAccountSasContent sasContent = new MapsAccountSasContent(
-    MapsSigningKey.PrimaryKey,
-    principalId,
-    maxRatePerSecond: 500,
-    start: DateTime.UtcNow.ToString("O"),
+    MapsSigningKey.PrimaryKey, 
+    principalId, 
+    maxRatePerSecond: 500, 
+    start: DateTime.UtcNow.ToString("O"), 
     expiry: DateTime.UtcNow.AddDays(1).ToString("O"));
 
 Response<MapsAccountSasToken> sas = mapsAccount.GetSas(sasContent);
@@ -245,7 +246,7 @@ foreach (var route in result.Value.Routes)
 {
     Console.WriteLine($"Distance: {route.Summary.LengthInMeters} meters");
     Console.WriteLine($"Duration: {route.Summary.TravelTimeDuration}");
-
+    
     foreach (RouteLeg leg in route.Legs)
     {
         Console.WriteLine($"Leg points: {leg.Points.Count}");
@@ -283,8 +284,8 @@ RouteMatrixQuery routeMatrixQuery = new RouteMatrixQuery
         new GeoPosition(-122.34, 47.61),
         new GeoPosition(-122.13, 47.64)
     },
-    Destinations = new List<GeoPosition>()
-    {
+    Destinations = new List<GeoPosition>() 
+    { 
         new GeoPosition(-122.20, 47.62),
         new GeoPosition(-122.40, 47.65)
     },
@@ -392,49 +393,49 @@ foreach (var condition in result.Value.Results)
 
 ### Search Package
 
-| Type                     | Purpose                                       |
-| ------------------------ | --------------------------------------------- |
-| `MapsSearchClient`       | Main client for search operations             |
-| `GeocodingResponse`      | Geocoding result                              |
-| `GeocodingBatchResponse` | Batch geocoding result                        |
-| `GeocodingQuery`         | Query for batch geocoding                     |
-| `ReverseGeocodingQuery`  | Query for batch reverse geocoding             |
-| `GetPolygonOptions`      | Options for polygon retrieval                 |
-| `Boundary`               | Boundary polygon result                       |
+| Type | Purpose |
+|------|---------|
+| `MapsSearchClient` | Main client for search operations |
+| `GeocodingResponse` | Geocoding result |
+| `GeocodingBatchResponse` | Batch geocoding result |
+| `GeocodingQuery` | Query for batch geocoding |
+| `ReverseGeocodingQuery` | Query for batch reverse geocoding |
+| `GetPolygonOptions` | Options for polygon retrieval |
+| `Boundary` | Boundary polygon result |
 | `BoundaryResultTypeEnum` | Boundary type (Locality, AdminDistrict, etc.) |
-| `ResolutionEnum`         | Polygon resolution (Small, Medium, Large)     |
+| `ResolutionEnum` | Polygon resolution (Small, Medium, Large) |
 
 ### Routing Package
 
-| Type                    | Purpose                                        |
-| ----------------------- | ---------------------------------------------- |
-| `MapsRoutingClient`     | Main client for routing operations             |
-| `RouteDirectionQuery`   | Query for route directions                     |
-| `RouteDirectionOptions` | Route calculation options                      |
-| `RouteDirections`       | Route directions result                        |
-| `RouteLeg`              | Segment of a route                             |
-| `RouteMatrixQuery`      | Query for route matrix                         |
-| `RouteMatrixResult`     | Route matrix result                            |
-| `RouteRangeOptions`     | Options for isochrone                          |
-| `RouteRangeResult`      | Isochrone result                               |
-| `RouteType`             | Route type (Fastest, Shortest, Eco, Thrilling) |
-| `TravelMode`            | Travel mode (Car, Truck, Bicycle, Pedestrian)  |
+| Type | Purpose |
+|------|---------|
+| `MapsRoutingClient` | Main client for routing operations |
+| `RouteDirectionQuery` | Query for route directions |
+| `RouteDirectionOptions` | Route calculation options |
+| `RouteDirections` | Route directions result |
+| `RouteLeg` | Segment of a route |
+| `RouteMatrixQuery` | Query for route matrix |
+| `RouteMatrixResult` | Route matrix result |
+| `RouteRangeOptions` | Options for isochrone |
+| `RouteRangeResult` | Isochrone result |
+| `RouteType` | Route type (Fastest, Shortest, Eco, Thrilling) |
+| `TravelMode` | Travel mode (Car, Truck, Bicycle, Pedestrian) |
 
 ### Rendering Package
 
-| Type                  | Purpose                       |
-| --------------------- | ----------------------------- |
-| `MapsRenderingClient` | Main client for rendering     |
-| `GetMapTileOptions`   | Map tile options              |
-| `MapTileIndex`        | Tile coordinates (X, Y, Zoom) |
-| `MapTileSetId`        | Tile set identifier           |
+| Type | Purpose |
+|------|---------|
+| `MapsRenderingClient` | Main client for rendering |
+| `GetMapTileOptions` | Map tile options |
+| `MapTileIndex` | Tile coordinates (X, Y, Zoom) |
+| `MapTileSetId` | Tile set identifier |
 
 ### Common Types
 
-| Type             | Purpose                                   |
-| ---------------- | ----------------------------------------- |
-| `GeoPosition`    | Geographic position (longitude, latitude) |
-| `GeoBoundingBox` | Bounding box for geographic area          |
+| Type | Purpose |
+|------|---------|
+| `GeoPosition` | Geographic position (longitude, latitude) |
+| `GeoBoundingBox` | Bounding box for geographic area |
 
 ## Best Practices
 
@@ -457,7 +458,7 @@ catch (RequestFailedException ex)
 {
     Console.WriteLine($"Status: {ex.Status}");
     Console.WriteLine($"Error: {ex.Message}");
-
+    
     switch (ex.Status)
     {
         case 400:
@@ -475,21 +476,24 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                          | Purpose            | Install                                                      |
-| ---------------------------- | ------------------ | ------------------------------------------------------------ |
-| `Azure.Maps.Search`          | Geocoding, search  | `dotnet add package Azure.Maps.Search --prerelease`          |
-| `Azure.Maps.Routing`         | Directions, matrix | `dotnet add package Azure.Maps.Routing --prerelease`         |
-| `Azure.Maps.Rendering`       | Map tiles, images  | `dotnet add package Azure.Maps.Rendering --prerelease`       |
-| `Azure.Maps.Geolocation`     | IP geolocation     | `dotnet add package Azure.Maps.Geolocation --prerelease`     |
-| `Azure.Maps.Weather`         | Weather data       | `dotnet add package Azure.Maps.Weather --prerelease`         |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.Maps.Search` | Geocoding, search | `dotnet add package Azure.Maps.Search --prerelease` |
+| `Azure.Maps.Routing` | Directions, matrix | `dotnet add package Azure.Maps.Routing --prerelease` |
+| `Azure.Maps.Rendering` | Map tiles, images | `dotnet add package Azure.Maps.Rendering --prerelease` |
+| `Azure.Maps.Geolocation` | IP geolocation | `dotnet add package Azure.Maps.Geolocation --prerelease` |
+| `Azure.Maps.Weather` | Weather data | `dotnet add package Azure.Maps.Weather --prerelease` |
 | `Azure.ResourceManager.Maps` | Account management | `dotnet add package Azure.ResourceManager.Maps --prerelease` |
 
 ## Reference Links
 
-| Resource                 | URL                                                           |
-| ------------------------ | ------------------------------------------------------------- |
-| Azure Maps Documentation | https://learn.microsoft.com/azure/azure-maps/                 |
-| Search API Reference     | https://learn.microsoft.com/dotnet/api/azure.maps.search      |
-| Routing API Reference    | https://learn.microsoft.com/dotnet/api/azure.maps.routing     |
-| GitHub Source            | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/maps |
-| Pricing                  | https://azure.microsoft.com/pricing/details/azure-maps/       |
+| Resource | URL |
+|----------|-----|
+| Azure Maps Documentation | https://learn.microsoft.com/azure/azure-maps/ |
+| Search API Reference | https://learn.microsoft.com/dotnet/api/azure.maps.search |
+| Routing API Reference | https://learn.microsoft.com/dotnet/api/azure.maps.routing |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/maps |
+| Pricing | https://azure.microsoft.com/pricing/details/azure-maps/ |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

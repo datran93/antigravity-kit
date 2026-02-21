@@ -39,7 +39,6 @@ def enqueue_task(task, is_urgent: bool):
 ```
 
 Priority behavior:
-
 - Range: 1 to 2,147,483,647 (lower = higher priority)
 - Workflows without priority have highest priority (run first)
 - Same priority = FIFO order

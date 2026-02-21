@@ -1,9 +1,9 @@
 ---
 name: azure-communication-sms-java
-description:
-  Send SMS messages with Azure Communication Services SMS Java SDK. Use when implementing SMS notifications, alerts, OTP
-  delivery, bulk messaging, or delivery reports.
+description: "Send SMS messages with Azure Communication Services SMS Java SDK. Use when implementing SMS notifications, alerts, OTP delivery, bulk messaging, or delivery reports."
 package: com.azure:azure-communication-sms
+risk: unknown
+source: community
 ---
 
 # Azure Communication SMS (Java)
@@ -141,7 +141,7 @@ System.out.println("Headers: " + response.getHeaders());
 for (SmsSendResult result : response.getValue()) {
     System.out.println("Message ID: " + result.getMessageId());
     System.out.println("Successful: " + result.isSuccessful());
-
+    
     if (!result.isSuccessful()) {
         System.out.println("HTTP Status: " + result.getHttpStatusCode());
         System.out.println("Error: " + result.getErrorMessage());
@@ -192,12 +192,12 @@ try {
         "+14255551234",
         "Test message"
     );
-
+    
     // Individual message errors don't throw exceptions
     if (!result.isSuccessful()) {
         handleMessageError(result);
     }
-
+    
 } catch (HttpResponseException e) {
     // Request-level failures (auth, network, etc.)
     System.out.println("Request failed: " + e.getMessage());
@@ -209,7 +209,7 @@ try {
 private void handleMessageError(SmsSendResult result) {
     int status = result.getHttpStatusCode();
     String error = result.getErrorMessage();
-
+    
     if (status == 400) {
         System.out.println("Invalid phone number: " + result.getTo());
     } else if (status == 429) {
@@ -229,7 +229,7 @@ Delivery reports are sent via Azure Event Grid. Configure an Event Grid subscrip
 public void handleDeliveryReport(String eventJson) {
     // Parse Event Grid event
     // Event type: Microsoft.Communication.SMSDeliveryReportReceived
-
+    
     // Event data contains:
     // - messageId: correlates to SmsSendResult.getMessageId()
     // - from: sender number
@@ -243,14 +243,14 @@ public void handleDeliveryReport(String eventJson) {
 
 ## SmsSendResult Properties
 
-| Property                   | Type                | Description                    |
-| -------------------------- | ------------------- | ------------------------------ |
-| `getMessageId()`           | String              | Unique message identifier      |
-| `getTo()`                  | String              | Recipient phone number         |
-| `isSuccessful()`           | boolean             | Whether send succeeded         |
-| `getHttpStatusCode()`      | int                 | HTTP status for this recipient |
-| `getErrorMessage()`        | String              | Error details if failed        |
-| `getRepeatabilityResult()` | RepeatabilityResult | Idempotency result             |
+| Property | Type | Description |
+|----------|------|-------------|
+| `getMessageId()` | String | Unique message identifier |
+| `getTo()` | String | Recipient phone number |
+| `isSuccessful()` | boolean | Whether send succeeded |
+| `getHttpStatusCode()` | int | HTTP status for this recipient |
+| `getErrorMessage()` | String | Error details if failed |
+| `getRepeatabilityResult()` | RepeatabilityResult | Idempotency result |
 
 ## Environment Variables
 
@@ -274,3 +274,6 @@ SMS_FROM_NUMBER=+14255550100
 - "send SMS Java", "text message Java"
 - "SMS notification", "OTP SMS", "bulk SMS"
 - "delivery report SMS", "Azure Communication Services SMS"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -24,15 +24,13 @@ handle, _ := dbos.RunWorkflow(ctx, processTask, "data")
 err := dbos.CancelWorkflow(ctx, workflowID)
 
 // Resume from the last completed step
-handle, err := dbos.ResumeWorkflow[string](ctx, workflowID)
+handle, err := dbos.ResumeWorkflowstring
 result, err := handle.GetResult()
 ```
 
-Cancellation sets the workflow status to `CANCELLED` and preempts execution at the beginning of the next step.
-Cancelling also cancels all child workflows.
+Cancellation sets the workflow status to `CANCELLED` and preempts execution at the beginning of the next step. Cancelling also cancels all child workflows.
 
-Resume restarts a workflow from its last completed step. Use this for workflows that are cancelled or have exceeded
-their maximum recovery attempts. You can also use this to start an enqueued workflow immediately, bypassing its queue.
+Resume restarts a workflow from its last completed step. Use this for workflows that are cancelled or have exceeded their maximum recovery attempts. You can also use this to start an enqueued workflow immediately, bypassing its queue.
 
 Fork a workflow from a specific step:
 
@@ -41,16 +39,10 @@ Fork a workflow from a specific step:
 steps, err := dbos.GetWorkflowSteps(ctx, workflowID)
 
 // Fork from a specific step
-forkHandle, err := dbos.ForkWorkflow[string](ctx, dbos.ForkWorkflowInput{
-	OriginalWorkflowID: workflowID,
-	StartStep:          2, // Fork from step 2
-	ForkedWorkflowID:   "new-wf-id",       // Optional
-	ApplicationVersion: "2.0.0",            // Optional
-})
+forkHandle, err := dbos.ForkWorkflowstring
 result, err := forkHandle.GetResult()
 ```
 
-Forking creates a new workflow with a new ID, copying the original workflow's inputs and step outputs up to the selected
-step.
+Forking creates a new workflow with a new ID, copying the original workflow's inputs and step outputs up to the selected step.
 
 Reference: [Workflow Management](https://docs.dbos.dev/golang/tutorials/workflow-management)

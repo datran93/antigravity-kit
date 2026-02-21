@@ -1,14 +1,13 @@
 ---
 name: sast-configuration
-description:
-  Configure Static Application Security Testing (SAST) tools for automated vulnerability detection in application code.
-  Use when setting up security scanning, implementing DevSecOps practices, or automating code vulnerability detection.
+description: "Configure Static Application Security Testing (SAST) tools for automated vulnerability detection in application code. Use when setting up security scanning, implementing DevSecOps practices, or aut..."
+risk: unknown
+source: community
 ---
 
 # SAST Configuration
 
-Static Application Security Testing (SAST) tool setup, configuration, and custom rule creation for comprehensive
-security scanning across multiple programming languages.
+Static Application Security Testing (SAST) tool setup, configuration, and custom rule creation for comprehensive security scanning across multiple programming languages.
 
 ## Use this skill when
 
@@ -39,13 +38,11 @@ security scanning across multiple programming languages.
 
 ## Overview
 
-This skill provides comprehensive guidance for setting up and configuring SAST tools including Semgrep, SonarQube, and
-CodeQL.
+This skill provides comprehensive guidance for setting up and configuring SAST tools including Semgrep, SonarQube, and CodeQL.
 
 ## Core Capabilities
 
 ### 1. Semgrep Configuration
-
 - Custom rule creation with pattern matching
 - Language-specific security rules (Python, JavaScript, Go, Java, etc.)
 - CI/CD integration (GitHub Actions, GitLab CI, Jenkins)
@@ -53,7 +50,6 @@ CodeQL.
 - Organizational policy enforcement
 
 ### 2. SonarQube Setup
-
 - Quality gate configuration
 - Security hotspot analysis
 - Code coverage and technical debt tracking
@@ -61,7 +57,6 @@ CodeQL.
 - Enterprise integration with LDAP/SAML
 
 ### 3. CodeQL Analysis
-
 - GitHub Advanced Security integration
 - Custom query development
 - Vulnerability variant analysis
@@ -71,14 +66,12 @@ CodeQL.
 ## Quick Start
 
 ### Initial Assessment
-
 1. Identify primary programming languages in your codebase
 2. Determine compliance requirements (PCI-DSS, SOC 2, etc.)
 3. Choose SAST tool based on language support and integration needs
 4. Review baseline scan to understand current security posture
 
 ### Basic Setup
-
 ```bash
 # Semgrep quick start
 pip install semgrep
@@ -94,31 +87,30 @@ codeql database create mydb --language=python
 
 ## Reference Documentation
 
-- [Semgrep Rule Creation](references/semgrep-rules.md) - Pattern-based security rule development
-- [SonarQube Configuration](references/sonarqube-config.md) - Quality gates and profiles
-- [CodeQL Setup Guide](references/codeql-setup.md) - Query development and workflows
+- Semgrep Rule Creation - Pattern-based security rule development
+- SonarQube Configuration - Quality gates and profiles
+- CodeQL Setup Guide - Query development and workflows
 
 ## Templates & Assets
 
-- [semgrep-config.yml](assets/semgrep-config.yml) - Production-ready Semgrep configuration
-- [sonarqube-settings.xml](assets/sonarqube-settings.xml) - SonarQube quality profile template
-- [run-sast.sh](scripts/run-sast.sh) - Automated SAST execution script
+- semgrep-config.yml - Production-ready Semgrep configuration
+- sonarqube-settings.xml - SonarQube quality profile template
+- run-sast.sh - Automated SAST execution script
 
 ## Integration Patterns
 
 ### CI/CD Pipeline Integration
-
 ```yaml
 # GitHub Actions example
 - name: Run Semgrep
   uses: returntocorp/semgrep-action@v1
   with:
     config: >-
-      p/security-audit p/owasp-top-ten
+      p/security-audit
+      p/owasp-top-ten
 ```
 
 ### Pre-commit Hook
-
 ```bash
 # .pre-commit-config.yaml
 - repo: https://github.com/returntocorp/semgrep
@@ -158,13 +150,11 @@ codeql database create mydb --language=python
 ## Common Use Cases
 
 ### New Project Setup
-
 ```bash
 ./scripts/run-sast.sh --setup --language python --tools semgrep,sonarqube
 ```
 
 ### Custom Rule Development
-
 ```yaml
 # See references/semgrep-rules.md for detailed examples
 rules:
@@ -175,7 +165,6 @@ rules:
 ```
 
 ### Compliance Scanning
-
 ```bash
 # PCI-DSS focused scan
 semgrep --config p/pci-dss --json -o pci-scan-results.json
@@ -184,21 +173,18 @@ semgrep --config p/pci-dss --json -o pci-scan-results.json
 ## Troubleshooting
 
 ### High False Positive Rate
-
 - Review and tune rule sensitivity
 - Add path filters to exclude test files
 - Use nostmt metadata for noisy patterns
 - Create organization-specific rule exceptions
 
 ### Performance Issues
-
 - Enable incremental scanning
 - Parallelize scans across modules
 - Optimize rule patterns for efficiency
 - Cache dependencies and scan results
 
 ### Integration Failures
-
 - Verify API tokens and credentials
 - Check network connectivity and proxy settings
 - Review SARIF output format compatibility
@@ -206,17 +192,17 @@ semgrep --config p/pci-dss --json -o pci-scan-results.json
 
 ## Related Skills
 
-- [OWASP Top 10 Checklist](../owasp-top10-checklist/SKILL.md)
-- [Container Security](../container-security/SKILL.md)
-- [Dependency Scanning](../dependency-scanning/SKILL.md)
+- OWASP Top 10 Checklist
+- Container Security
+- Dependency Scanning
 
 ## Tool Comparison
 
-| Tool      | Best For                 | Language Support | Cost            | Integration   |
-| --------- | ------------------------ | ---------------- | --------------- | ------------- |
-| Semgrep   | Custom rules, fast scans | 30+ languages    | Free/Enterprise | Excellent     |
-| SonarQube | Code quality + security  | 25+ languages    | Free/Commercial | Good          |
-| CodeQL    | Deep analysis, research  | 10+ languages    | Free (OSS)      | GitHub native |
+| Tool | Best For | Language Support | Cost | Integration |
+|------|----------|------------------|------|-------------|
+| Semgrep | Custom rules, fast scans | 30+ languages | Free/Enterprise | Excellent |
+| SonarQube | Code quality + security | 25+ languages | Free/Commercial | Good |
+| CodeQL | Deep analysis, research | 10+ languages | Free (OSS) | GitHub native |
 
 ## Next Steps
 

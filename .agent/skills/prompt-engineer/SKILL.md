@@ -1,8 +1,6 @@
 ---
 name: prompt-engineer
-description:
-  "Transforms user prompts into optimized prompts using frameworks (RTF, RISEN, Chain of Thought, RODES, Chain of
-  Density, RACE, RISE, STAR, SOAP, CLEAR, GROW)"
+description: "Transforms user prompts into optimized prompts using frameworks (RTF, RISEN, Chain of Thought, RODES, Chain of Density, RACE, RISE, STAR, SOAP, CLEAR, GROW)"
 version: 1.1.0
 author: Eric Andrade
 created: 2025-02-01
@@ -11,19 +9,16 @@ platforms: [github-copilot-cli, claude-code, codex]
 category: automation
 tags: [prompt-engineering, optimization, frameworks, ai-enhancement]
 risk: safe
+source: community
 ---
 
 ## Purpose
 
-This skill transforms raw, unstructured user prompts into highly optimized prompts using established prompting
-frameworks. It analyzes user intent, identifies task complexity, and intelligently selects the most appropriate
-framework(s) to maximize Claude/ChatGPT output quality.
+This skill transforms raw, unstructured user prompts into highly optimized prompts using established prompting frameworks. It analyzes user intent, identifies task complexity, and intelligently selects the most appropriate framework(s) to maximize Claude/ChatGPT output quality.
 
-The skill operates in "magic mode" - it works silently behind the scenes, only interacting with users when clarification
-is critically needed. Users receive polished, ready-to-use prompts without technical explanations or framework jargon.
+The skill operates in "magic mode" - it works silently behind the scenes, only interacting with users when clarification is critically needed. Users receive polished, ready-to-use prompts without technical explanations or framework jargon.
 
-This is a **universal skill** that works in any terminal context, not limited to Obsidian vaults or specific project
-structures.
+This is a **universal skill** that works in any terminal context, not limited to Obsidian vaults or specific project structures.
 
 ## When to Use
 
@@ -44,7 +39,6 @@ Invoke this skill when:
 **Objective:** Understand what the user truly wants to accomplish.
 
 **Actions:**
-
 1. Read the raw prompt provided by the user
 2. Detect task characteristics:
    - **Type:** coding, writing, analysis, design, learning, planning, decision-making, creative, etc.
@@ -58,11 +52,11 @@ Invoke this skill when:
    - Is this exploratory or execution-focused?
 
 **Detection Patterns:**
-
 - **Simple tasks:** Short prompts (<50 chars), single verb, no context
 - **Complex tasks:** Long prompts (>200 chars), multiple requirements, conditional logic
 - **Ambiguous tasks:** Generic verbs ("help", "improve"), missing object/context
 - **Structured tasks:** Mentions steps, phases, deliverables, stakeholders
+
 
 ### Step 3: Select Framework(s)
 
@@ -70,28 +64,26 @@ Invoke this skill when:
 
 **Framework Mapping Logic:**
 
-| Task Type                                                   | Recommended Framework(s)                                              | Rationale                                    |
-| ----------------------------------------------------------- | --------------------------------------------------------------------- | -------------------------------------------- |
-| **Role-based tasks** (act as expert, consultant)            | **RTF** (Role-Task-Format)                                            | Clear role definition + task + output format |
-| **Step-by-step reasoning** (debugging, proof, logic)        | **Chain of Thought**                                                  | Encourages explicit reasoning steps          |
-| **Structured projects** (multi-phase, deliverables)         | **RISEN** (Role, Instructions, Steps, End goal, Narrowing)            | Comprehensive structure for complex work     |
-| **Complex design/analysis** (systems, architecture)         | **RODES** (Role, Objective, Details, Examples, Sense check)           | Balances detail with validation              |
-| **Summarization** (compress, synthesize)                    | **Chain of Density**                                                  | Iterative refinement to essential info       |
-| **Communication** (reports, presentations, storytelling)    | **RACE** (Role, Audience, Context, Expectation)                       | Audience-aware messaging                     |
-| **Investigation/analysis** (research, diagnosis)            | **RISE** (Research, Investigate, Synthesize, Evaluate)                | Systematic analytical approach               |
-| **Contextual situations** (problem-solving with background) | **STAR** (Situation, Task, Action, Result)                            | Context-rich problem framing                 |
-| **Documentation** (medical, technical, records)             | **SOAP** (Subjective, Objective, Assessment, Plan)                    | Structured information capture               |
-| **Goal-setting** (OKRs, objectives, targets)                | **CLEAR** (Collaborative, Limited, Emotional, Appreciable, Refinable) | Goal clarity and actionability               |
-| **Coaching/development** (mentoring, growth)                | **GROW** (Goal, Reality, Options, Will)                               | Developmental conversation structure         |
+| Task Type | Recommended Framework(s) | Rationale |
+|-----------|-------------------------|-----------|
+| **Role-based tasks** (act as expert, consultant) | **RTF** (Role-Task-Format) | Clear role definition + task + output format |
+| **Step-by-step reasoning** (debugging, proof, logic) | **Chain of Thought** | Encourages explicit reasoning steps |
+| **Structured projects** (multi-phase, deliverables) | **RISEN** (Role, Instructions, Steps, End goal, Narrowing) | Comprehensive structure for complex work |
+| **Complex design/analysis** (systems, architecture) | **RODES** (Role, Objective, Details, Examples, Sense check) | Balances detail with validation |
+| **Summarization** (compress, synthesize) | **Chain of Density** | Iterative refinement to essential info |
+| **Communication** (reports, presentations, storytelling) | **RACE** (Role, Audience, Context, Expectation) | Audience-aware messaging |
+| **Investigation/analysis** (research, diagnosis) | **RISE** (Research, Investigate, Synthesize, Evaluate) | Systematic analytical approach |
+| **Contextual situations** (problem-solving with background) | **STAR** (Situation, Task, Action, Result) | Context-rich problem framing |
+| **Documentation** (medical, technical, records) | **SOAP** (Subjective, Objective, Assessment, Plan) | Structured information capture |
+| **Goal-setting** (OKRs, objectives, targets) | **CLEAR** (Collaborative, Limited, Emotional, Appreciable, Refinable) | Goal clarity and actionability |
+| **Coaching/development** (mentoring, growth) | **GROW** (Goal, Reality, Options, Will) | Developmental conversation structure |
 
 **Blending Strategy:**
-
 - **Combine 2-3 frameworks** when task spans multiple types
 - Example: Complex technical project → **RODES + Chain of Thought** (structure + reasoning)
 - Example: Leadership decision → **CLEAR + GROW** (goal clarity + development)
 
 **Selection Criteria:**
-
 - Primary framework = best match to core task type
 - Secondary framework(s) = address additional complexity dimensions
 - Avoid over-engineering: simple tasks get simple frameworks
@@ -103,23 +95,21 @@ Role: You are a senior software architect. [RTF - Role]
 Objective: Design a microservices architecture for [system]. [RODES - Objective]
 
 Approach this step-by-step: [Chain of Thought]
-
 1. Analyze current monolithic constraints
 2. Identify service boundaries
 3. Design inter-service communication
 4. Plan data consistency strategy
 
 Details: [RODES - Details]
-
 - Expected traffic: [X]
 - Data volume: [Y]
 - Team size: [Z]
 
-Output Format: [RTF - Format] Provide architecture diagram description, service definitions, and migration roadmap.
+Output Format: [RTF - Format]
+Provide architecture diagram description, service definitions, and migration roadmap.
 
-Sense Check: [RODES - Sense check] Validate that services are loosely coupled, independently deployable, and aligned
-with business domains.
-
+Sense Check: [RODES - Sense check]
+Validate that services are loosely coupled, independently deployable, and aligned with business domains.
 ```
 
 **4.5. Language Adaptation**
@@ -167,11 +157,8 @@ Before finalizing, verify:
 
 **User Input:**
 ```
-
-copilot> create prompt for: I need to build a product recommendation system considering purchase history, user
-preferences, and market trends
-
-`````
+copilot> create prompt for: I need to build a product recommendation system considering purchase history, user preferences, and market trends
+```
 
 **Skill Internal Process:**
 1. **Analyze:** Clear intent, complex task (ML system design), technical domain
@@ -181,14 +168,12 @@ preferences, and market trends
 **Skill Output:**
 
 ````markdown
-`````
-
+```
 Role: You are a senior machine learning engineer specializing in recommendation systems.
 
 Objective: Design a product recommendation system that combines user purchase history, preferences, and market trends.
 
 Details:
-
 - Input data sources: user transaction logs, preference surveys, market trend APIs
 - Algorithm considerations: collaborative filtering, content-based filtering, hybrid approaches
 - Performance metrics: precision, recall, diversity, novelty
@@ -196,7 +181,6 @@ Details:
 - Real-time constraints: recommendations updated within 500ms
 
 Approach step-by-step:
-
 1. Analyze the three data sources and their relationships
 2. Propose 2-3 algorithm approaches with trade-offs analysis
 3. Design data pipeline architecture (ingestion, processing, serving)
@@ -204,31 +188,25 @@ Approach step-by-step:
 5. Outline implementation roadmap with phases
 
 Examples:
-
 - Show pseudocode for core recommendation logic
 - Illustrate data flow diagram
 - Provide sample API response structure
 
-Sense Check: Validate that the proposed solution balances personalization with discovery, scales to production load, and
-incorporates real-time market trends effectively.
+Sense Check: Validate that the proposed solution balances personalization with discovery, scales to production load, and incorporates real-time market trends effectively.
 
-Output format: Technical design document with architecture diagrams, algorithm justification, and implementation
-roadmap.
-
+Output format: Technical design document with architecture diagrams, algorithm justification, and implementation roadmap.
 ```
+````
 
-```
 
 ### **Example 4: Code Debugging → Chain of Thought**
 
 **User Input:**
-
 ```
 copilot> optimize prompt: my Python code isn't working, needs debugging
 ```
 
 **Skill Internal Process:**
-
 1. **Analyze:** Debugging task, needs step-by-step reasoning
 2. **Clarify:** Skip (user will provide code context later)
 3. **Select:** Chain of Thought
@@ -264,11 +242,10 @@ Include a working example to verify the fix.
 ```
 ````
 
+
 ## Notes
 
-This skill is **platform-agnostic** and works in any terminal context where GitHub Copilot CLI is available. It does not
-depend on:
-
+This skill is **platform-agnostic** and works in any terminal context where GitHub Copilot CLI is available. It does not depend on:
 - Obsidian vault structure
 - Specific project configurations
 - External files or templates

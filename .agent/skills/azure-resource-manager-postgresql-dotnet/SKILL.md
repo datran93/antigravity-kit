@@ -1,8 +1,10 @@
 ---
 name: azure-resource-manager-postgresql-dotnet
-description: |
+description: "|"
   Azure PostgreSQL Flexible Server SDK for .NET. Database management for PostgreSQL Flexible Server deployments. Use for creating servers, databases, firewall rules, configurations, backups, and high availability. Triggers: "PostgreSQL", "PostgreSqlFlexibleServer", "PostgreSQL Flexible Server", "Azure Database for PostgreSQL", "PostgreSQL database management", "PostgreSQL firewall", "PostgreSQL backup", "Postgres".
 package: Azure.ResourceManager.PostgreSql
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.PostgreSql (.NET)
@@ -172,10 +174,10 @@ ArmOperation<PostgreSqlFlexibleServerConfigurationResource> operation = await co
     .CreateOrUpdateAsync(WaitUntil.Completed, "max_connections", configData);
 
 // Common PostgreSQL configurations to tune
-string[] commonParams = {
-    "max_connections",
-    "shared_buffers",
-    "work_mem",
+string[] commonParams = { 
+    "max_connections", 
+    "shared_buffers", 
+    "work_mem", 
     "maintenance_work_mem",
     "effective_cache_size",
     "log_min_duration_statement"
@@ -185,10 +187,10 @@ string[] commonParams = {
 ### 5. Configure Entra ID Administrator
 
 ```csharp
-PostgreSqlFlexibleServerActiveDirectoryAdministratorCollection admins =
+PostgreSqlFlexibleServerActiveDirectoryAdministratorCollection admins = 
     server.GetPostgreSqlFlexibleServerActiveDirectoryAdministrators();
 
-PostgreSqlFlexibleServerActiveDirectoryAdministratorData adminData =
+PostgreSqlFlexibleServerActiveDirectoryAdministratorData adminData = 
     new PostgreSqlFlexibleServerActiveDirectoryAdministratorData
 {
     PrincipalType = PostgreSqlFlexibleServerPrincipalType.User,
@@ -309,48 +311,48 @@ await server.DeleteAsync(WaitUntil.Completed);
 
 ## Key Types Reference
 
-| Type                                                           | Purpose                   |
-| -------------------------------------------------------------- | ------------------------- |
-| `PostgreSqlFlexibleServerResource`                             | Flexible Server instance  |
-| `PostgreSqlFlexibleServerData`                                 | Server configuration data |
-| `PostgreSqlFlexibleServerCollection`                           | Collection of servers     |
-| `PostgreSqlFlexibleServerDatabaseResource`                     | Database within server    |
-| `PostgreSqlFlexibleServerFirewallRuleResource`                 | IP firewall rule          |
-| `PostgreSqlFlexibleServerConfigurationResource`                | Server parameter          |
-| `PostgreSqlFlexibleServerBackupResource`                       | Backup metadata           |
-| `PostgreSqlFlexibleServerActiveDirectoryAdministratorResource` | Entra ID admin            |
-| `PostgreSqlFlexibleServerSku`                                  | SKU (compute tier + size) |
-| `PostgreSqlFlexibleServerStorage`                              | Storage configuration     |
-| `PostgreSqlFlexibleServerHighAvailability`                     | HA configuration          |
-| `PostgreSqlFlexibleServerBackupProperties`                     | Backup settings           |
-| `PostgreSqlFlexibleServerAuthConfig`                           | Authentication settings   |
+| Type | Purpose |
+|------|---------|
+| `PostgreSqlFlexibleServerResource` | Flexible Server instance |
+| `PostgreSqlFlexibleServerData` | Server configuration data |
+| `PostgreSqlFlexibleServerCollection` | Collection of servers |
+| `PostgreSqlFlexibleServerDatabaseResource` | Database within server |
+| `PostgreSqlFlexibleServerFirewallRuleResource` | IP firewall rule |
+| `PostgreSqlFlexibleServerConfigurationResource` | Server parameter |
+| `PostgreSqlFlexibleServerBackupResource` | Backup metadata |
+| `PostgreSqlFlexibleServerActiveDirectoryAdministratorResource` | Entra ID admin |
+| `PostgreSqlFlexibleServerSku` | SKU (compute tier + size) |
+| `PostgreSqlFlexibleServerStorage` | Storage configuration |
+| `PostgreSqlFlexibleServerHighAvailability` | HA configuration |
+| `PostgreSqlFlexibleServerBackupProperties` | Backup settings |
+| `PostgreSqlFlexibleServerAuthConfig` | Authentication settings |
 
 ## SKU Tiers
 
-| Tier              | Use Case                  | SKU Examples                       |
-| ----------------- | ------------------------- | ---------------------------------- |
-| `Burstable`       | Dev/test, light workloads | Standard_B1ms, Standard_B2s        |
-| `GeneralPurpose`  | Production workloads      | Standard_D2ds_v4, Standard_D4ds_v4 |
-| `MemoryOptimized` | High memory requirements  | Standard_E2ds_v4, Standard_E4ds_v4 |
+| Tier | Use Case | SKU Examples |
+|------|----------|--------------|
+| `Burstable` | Dev/test, light workloads | Standard_B1ms, Standard_B2s |
+| `GeneralPurpose` | Production workloads | Standard_D2ds_v4, Standard_D4ds_v4 |
+| `MemoryOptimized` | High memory requirements | Standard_E2ds_v4, Standard_E4ds_v4 |
 
 ## PostgreSQL Versions
 
-| Version       | Enum Value |
-| ------------- | ---------- |
-| PostgreSQL 11 | `Ver11`    |
-| PostgreSQL 12 | `Ver12`    |
-| PostgreSQL 13 | `Ver13`    |
-| PostgreSQL 14 | `Ver14`    |
-| PostgreSQL 15 | `Ver15`    |
-| PostgreSQL 16 | `Ver16`    |
+| Version | Enum Value |
+|---------|------------|
+| PostgreSQL 11 | `Ver11` |
+| PostgreSQL 12 | `Ver12` |
+| PostgreSQL 13 | `Ver13` |
+| PostgreSQL 14 | `Ver14` |
+| PostgreSQL 15 | `Ver15` |
+| PostgreSQL 16 | `Ver16` |
 
 ## High Availability Modes
 
-| Mode            | Description                      |
-| --------------- | -------------------------------- |
-| `Disabled`      | No HA (single server)            |
-| `SameZone`      | HA within same availability zone |
-| `ZoneRedundant` | HA across availability zones     |
+| Mode | Description |
+|------|-------------|
+| `Disabled` | No HA (single server) |
+| `SameZone` | HA within same availability zone |
+| `ZoneRedundant` | HA across availability zones |
 
 ## Best Practices
 
@@ -415,18 +417,21 @@ string connectionString = $"Host={server.Data.FullyQualifiedDomainName};" +
 
 ## Related SDKs
 
-| SDK                                     | Purpose                          | Install                                                    |
-| --------------------------------------- | -------------------------------- | ---------------------------------------------------------- |
-| `Azure.ResourceManager.PostgreSql`      | PostgreSQL management (this SDK) | `dotnet add package Azure.ResourceManager.PostgreSql`      |
-| `Azure.ResourceManager.MySql`           | MySQL management                 | `dotnet add package Azure.ResourceManager.MySql`           |
-| `Npgsql`                                | PostgreSQL data access           | `dotnet add package Npgsql`                                |
-| `Npgsql.EntityFrameworkCore.PostgreSQL` | EF Core provider                 | `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.ResourceManager.PostgreSql` | PostgreSQL management (this SDK) | `dotnet add package Azure.ResourceManager.PostgreSql` |
+| `Azure.ResourceManager.MySql` | MySQL management | `dotnet add package Azure.ResourceManager.MySql` |
+| `Npgsql` | PostgreSQL data access | `dotnet add package Npgsql` |
+| `Npgsql.EntityFrameworkCore.PostgreSQL` | EF Core provider | `dotnet add package Npgsql.EntityFrameworkCore.PostgreSQL` |
 
 ## Reference Links
 
-| Resource              | URL                                                                                                  |
-| --------------------- | ---------------------------------------------------------------------------------------------------- |
-| NuGet Package         | https://www.nuget.org/packages/Azure.ResourceManager.PostgreSql                                      |
-| API Reference         | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.postgresql                              |
-| Product Documentation | https://learn.microsoft.com/azure/postgresql/flexible-server/                                        |
-| GitHub Source         | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/postgresql/Azure.ResourceManager.PostgreSql |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.PostgreSql |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.postgresql |
+| Product Documentation | https://learn.microsoft.com/azure/postgresql/flexible-server/ |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/postgresql/Azure.ResourceManager.PostgreSql |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

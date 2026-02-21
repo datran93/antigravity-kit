@@ -7,7 +7,6 @@ Reducing nesting and complexity is achieved by breaking down views into generic,
 Instead of building large, complex views, extract recurring patterns into small `UserControl`s.
 
 ### Example: A generic "Summary Item"
-
 Instead of repeating a `Grid` with labels and values:
 
 ```xml

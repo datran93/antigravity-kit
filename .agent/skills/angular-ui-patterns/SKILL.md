@@ -1,8 +1,6 @@
 ---
 name: angular-ui-patterns
-description:
-  Modern Angular UI patterns for loading states, error handling, and data display. Use when building UI components,
-  handling async data, or managing component states.
+description: "Modern Angular UI patterns for loading states, error handling, and data display. Use when building UI components, handling async data, or managing component states."
 risk: safe
 source: self
 ---
@@ -96,7 +94,12 @@ Do we have data?
 @for (item of items(); track item.id) {
 <app-item-card [item]="item" (delete)="remove(item.id)" />
 } @empty {
-<app-empty-state icon="inbox" message="No items yet" actionLabel="Create Item" (action)="create()" />
+<app-empty-state
+  icon="inbox"
+  message="No items yet"
+  actionLabel="Create Item"
+  (action)="create()"
+/>
 }
 ```
 
@@ -197,7 +200,11 @@ export class ErrorStateComponent {
 ### Button Loading State
 
 ```html
-<button (click)="handleSubmit()" [disabled]="isSubmitting() || !form.valid" class="btn-primary">
+<button
+  (click)="handleSubmit()"
+  [disabled]="isSubmitting() || !form.valid"
+  class="btn-primary"
+>
   @if (isSubmitting()) {
   <app-spinner size="small" class="mr-2" />
   Saving... } @else { Save Changes }
@@ -304,7 +311,11 @@ export class EmptyStateComponent {
     <form [formGroup]="form" (ngSubmit)="onSubmit()">
       <div class="form-field">
         <label for="name">Name</label>
-        <input id="name" formControlName="name" [class.error]="isFieldInvalid('name')" />
+        <input
+          id="name"
+          formControlName="name"
+          [class.error]="isFieldInvalid('name')"
+        />
         @if (isFieldInvalid("name")) {
           <span class="error-text">
             {{ getFieldError("name") }}
@@ -495,3 +506,6 @@ Before completing any UI component:
 - **angular-state-management**: Use Signal stores for state
 - **angular**: Apply modern patterns (Signals, @defer)
 - **testing-patterns**: Test all UI states
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

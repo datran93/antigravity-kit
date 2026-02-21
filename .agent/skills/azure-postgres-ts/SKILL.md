@@ -1,14 +1,15 @@
 ---
 name: azure-postgres-ts
-description: |
+description: "|"
   Connect to Azure Database for PostgreSQL Flexible Server from Node.js/TypeScript using the pg (node-postgres) package. Use for PostgreSQL queries, connection pooling, transactions, and Microsoft Entra ID (passwordless) authentication. Triggers: "PostgreSQL", "postgres", "pg client", "node-postgres", "Azure PostgreSQL connection", "PostgreSQL TypeScript", "pg Pool", "passwordless postgres".
 package: pg
+risk: unknown
+source: community
 ---
 
 # Azure PostgreSQL for TypeScript (node-postgres)
 
-Connect to Azure Database for PostgreSQL Flexible Server using the `pg` (node-postgres) package with support for
-password and Microsoft Entra ID (passwordless) authentication.
+Connect to Azure Database for PostgreSQL Flexible Server using the `pg` (node-postgres) package with support for password and Microsoft Entra ID (passwordless) authentication.
 
 ## Installation
 
@@ -47,7 +48,7 @@ const client = new Client({
   user: process.env.AZURE_POSTGRESQL_USER,
   password: process.env.AZURE_POSTGRESQL_PASSWORD,
   port: Number(process.env.AZURE_POSTGRESQL_PORT) || 5432,
-  ssl: { rejectUnauthorized: true }, // Required for Azure
+  ssl: { rejectUnauthorized: true }  // Required for Azure
 });
 
 await client.connect();
@@ -68,15 +69,17 @@ const credential = new DefaultAzureCredential();
 // });
 
 // Acquire access token for Azure PostgreSQL
-const tokenResponse = await credential.getToken("https://ossrdbms-aad.database.windows.net/.default");
+const tokenResponse = await credential.getToken(
+  "https://ossrdbms-aad.database.windows.net/.default"
+);
 
 const client = new Client({
   host: process.env.AZURE_POSTGRESQL_HOST,
   database: process.env.AZURE_POSTGRESQL_DATABASE,
-  user: process.env.AZURE_POSTGRESQL_USER, // Entra ID user
-  password: tokenResponse.token, // Token as password
+  user: process.env.AZURE_POSTGRESQL_USER,  // Entra ID user
+  password: tokenResponse.token,             // Token as password
   port: Number(process.env.AZURE_POSTGRESQL_PORT) || 5432,
-  ssl: { rejectUnauthorized: true },
+  ssl: { rejectUnauthorized: true }
 });
 
 await client.connect();
@@ -95,16 +98,16 @@ const client = new Client({
   user: process.env.AZURE_POSTGRESQL_USER,
   password: process.env.AZURE_POSTGRESQL_PASSWORD,
   port: 5432,
-  ssl: { rejectUnauthorized: true },
+  ssl: { rejectUnauthorized: true }
 });
 
 try {
   await client.connect();
-
+  
   const result = await client.query("SELECT NOW() as current_time");
   console.log(result.rows[0].current_time);
 } finally {
-  await client.end(); // Always close connection
+  await client.end();  // Always close connection
 }
 ```
 
@@ -120,11 +123,11 @@ const pool = new Pool({
   password: process.env.AZURE_POSTGRESQL_PASSWORD,
   port: 5432,
   ssl: { rejectUnauthorized: true },
-
+  
   // Pool configuration
-  max: 20, // Maximum connections in pool
-  idleTimeoutMillis: 30000, // Close idle connections after 30s
-  connectionTimeoutMillis: 10000, // Timeout for new connections
+  max: 20,                    // Maximum connections in pool
+  idleTimeoutMillis: 30000,   // Close idle connections after 30s
+  connectionTimeoutMillis: 10000  // Timeout for new connections
 });
 
 // Query using pool (automatically acquires and releases connection)
@@ -136,7 +139,7 @@ try {
   const res1 = await client.query("SELECT * FROM users");
   const res2 = await client.query("SELECT * FROM orders");
 } finally {
-  client.release(); // Return connection to pool
+  client.release();  // Return connection to pool
 }
 
 // Cleanup on shutdown
@@ -151,17 +154,23 @@ const userId = 123;
 const email = "user@example.com";
 
 // Single parameter
-const result = await pool.query("SELECT * FROM users WHERE id = $1", [userId]);
+const result = await pool.query(
+  "SELECT * FROM users WHERE id = $1",
+  [userId]
+);
 
 // Multiple parameters
-const result = await pool.query("INSERT INTO users (email, name, created_at) VALUES ($1, $2, NOW()) RETURNING *", [
-  email,
-  "John Doe",
-]);
+const result = await pool.query(
+  "INSERT INTO users (email, name, created_at) VALUES ($1, $2, NOW()) RETURNING *",
+  [email, "John Doe"]
+);
 
 // Array parameter
 const ids = [1, 2, 3, 4, 5];
-const result = await pool.query("SELECT * FROM users WHERE id = ANY($1::int[])", [ids]);
+const result = await pool.query(
+  "SELECT * FROM users WHERE id = ANY($1::int[])",
+  [ids]
+);
 ```
 
 ### 4. Transactions
@@ -171,12 +180,18 @@ const client = await pool.connect();
 
 try {
   await client.query("BEGIN");
-
-  const userResult = await client.query("INSERT INTO users (email) VALUES ($1) RETURNING id", ["user@example.com"]);
+  
+  const userResult = await client.query(
+    "INSERT INTO users (email) VALUES ($1) RETURNING id",
+    ["user@example.com"]
+  );
   const userId = userResult.rows[0].id;
-
-  await client.query("INSERT INTO orders (user_id, total) VALUES ($1, $2)", [userId, 99.99]);
-
+  
+  await client.query(
+    "INSERT INTO orders (user_id, total) VALUES ($1, $2)",
+    [userId, 99.99]
+  );
+  
   await client.query("COMMIT");
 } catch (error) {
   await client.query("ROLLBACK");
@@ -189,7 +204,10 @@ try {
 ### 5. Transaction Helper Function
 
 ```typescript
-async function withTransaction<T>(pool: Pool, fn: (client: PoolClient) => Promise<T>): Promise<T> {
+async function withTransaction<T>(
+  pool: Pool,
+  fn: (client: PoolClient) => Promise<T>
+): Promise<T> {
   const client = await pool.connect();
   try {
     await client.query("BEGIN");
@@ -206,11 +224,14 @@ async function withTransaction<T>(pool: Pool, fn: (client: PoolClient) => Promis
 
 // Usage
 const order = await withTransaction(pool, async (client) => {
-  const user = await client.query("INSERT INTO users (email) VALUES ($1) RETURNING *", ["user@example.com"]);
-  const order = await client.query("INSERT INTO orders (user_id, total) VALUES ($1, $2) RETURNING *", [
-    user.rows[0].id,
-    99.99,
-  ]);
+  const user = await client.query(
+    "INSERT INTO users (email) VALUES ($1) RETURNING *",
+    ["user@example.com"]
+  );
+  const order = await client.query(
+    "INSERT INTO orders (user_id, total) VALUES ($1, $2) RETURNING *",
+    [user.rows[0].id, 99.99]
+  );
   return order.rows[0];
 });
 ```
@@ -228,13 +249,23 @@ interface User {
 }
 
 // Type the query result
-const result: QueryResult<User> = await pool.query<User>("SELECT * FROM users WHERE id = $1", [userId]);
+const result: QueryResult<User> = await pool.query<User>(
+  "SELECT * FROM users WHERE id = $1",
+  [userId]
+);
 
 const user: User | undefined = result.rows[0];
 
 // Type-safe insert
-async function createUser(pool: Pool, email: string, name: string): Promise<User> {
-  const result = await pool.query<User>("INSERT INTO users (email, name) VALUES ($1, $2) RETURNING *", [email, name]);
+async function createUser(
+  pool: Pool,
+  email: string,
+  name: string
+): Promise<User> {
+  const result = await pool.query<User>(
+    "INSERT INTO users (email, name) VALUES ($1, $2) RETURNING *",
+    [email, name]
+  );
   return result.rows[0];
 }
 ```
@@ -259,7 +290,9 @@ class AzurePostgresPool {
   }
 
   private async getToken(): Promise<string> {
-    const tokenResponse = await this.credential.getToken("https://ossrdbms-aad.database.windows.net/.default");
+    const tokenResponse = await this.credential.getToken(
+      "https://ossrdbms-aad.database.windows.net/.default"
+    );
     this.tokenExpiry = new Date(tokenResponse.expiresOnTimestamp);
     return tokenResponse.token;
   }
@@ -283,7 +316,7 @@ class AzurePostgresPool {
     const token = await this.getToken();
     this.pool = new Pool({
       ...this.config,
-      password: token,
+      password: token
     });
 
     return this.pool;
@@ -309,7 +342,7 @@ const azurePool = new AzurePostgresPool({
   user: process.env.AZURE_POSTGRESQL_USER!,
   port: 5432,
   ssl: { rejectUnauthorized: true },
-  max: 20,
+  max: 20
 });
 
 const result = await azurePool.query("SELECT NOW()");
@@ -325,19 +358,19 @@ try {
 } catch (error) {
   if (error instanceof DatabaseError) {
     switch (error.code) {
-      case "23505": // unique_violation
+      case "23505":  // unique_violation
         console.error("Duplicate entry:", error.detail);
         break;
-      case "23503": // foreign_key_violation
+      case "23503":  // foreign_key_violation
         console.error("Foreign key constraint failed:", error.detail);
         break;
-      case "42P01": // undefined_table
+      case "42P01":  // undefined_table
         console.error("Table does not exist:", error.message);
         break;
-      case "28P01": // invalid_password
+      case "28P01":  // invalid_password
         console.error("Authentication failed");
         break;
-      case "57P03": // cannot_connect_now (server starting)
+      case "57P03":  // cannot_connect_now (server starting)
         console.error("Server unavailable, retry later");
         break;
       default:
@@ -353,19 +386,18 @@ try {
 ```typescript
 // Alternative: Use connection string
 const pool = new Pool({
-  connectionString: `postgres://${user}:${password}@${host}:${port}/${database}?sslmode=require`,
+  connectionString: `postgres://${user}:${password}@${host}:${port}/${database}?sslmode=require`
 });
 
 // With SSL required (Azure)
-const connectionString = `postgres://user:password@server.postgres.database.azure.com:5432/mydb?sslmode=require`;
+const connectionString = 
+  `postgres://user:password@server.postgres.database.azure.com:5432/mydb?sslmode=require`;
 ```
 
 ## Pool Events
 
 ```typescript
-const pool = new Pool({
-  /* config */
-});
+const pool = new Pool({ /* config */ });
 
 pool.on("connect", (client) => {
   console.log("New client connected to pool");
@@ -390,21 +422,21 @@ pool.on("error", (err, client) => {
 
 ## Azure-Specific Configuration
 
-| Setting                  | Value                                                | Description                |
-| ------------------------ | ---------------------------------------------------- | -------------------------- |
-| `ssl.rejectUnauthorized` | `true`                                               | Always use SSL for Azure   |
-| Default port             | `5432`                                               | Standard PostgreSQL port   |
-| PgBouncer port           | `6432`                                               | Use when PgBouncer enabled |
-| Token scope              | `https://ossrdbms-aad.database.windows.net/.default` | Entra ID token scope       |
-| Token lifetime           | ~1 hour                                              | Refresh before expiry      |
+| Setting | Value | Description |
+|---------|-------|-------------|
+| `ssl.rejectUnauthorized` | `true` | Always use SSL for Azure |
+| Default port | `5432` | Standard PostgreSQL port |
+| PgBouncer port | `6432` | Use when PgBouncer enabled |
+| Token scope | `https://ossrdbms-aad.database.windows.net/.default` | Entra ID token scope |
+| Token lifetime | ~1 hour | Refresh before expiry |
 
 ## Pool Sizing Guidelines
 
-| Workload                 | `max`  | `idleTimeoutMillis` |
-| ------------------------ | ------ | ------------------- |
-| Light (dev/test)         | 5-10   | 30000               |
-| Medium (production)      | 20-30  | 30000               |
-| Heavy (high concurrency) | 50-100 | 10000               |
+| Workload | `max` | `idleTimeoutMillis` |
+|----------|-------|---------------------|
+| Light (dev/test) | 5-10 | 30000 |
+| Medium (production) | 20-30 | 30000 |
+| Heavy (high concurrency) | 50-100 | 10000 |
 
 > **Note**: Azure PostgreSQL has connection limits based on SKU. Check your tier's max connections.
 
@@ -424,15 +456,27 @@ pool.on("error", (err, client) => {
 ## Key Types
 
 ```typescript
-import { Client, Pool, PoolClient, PoolConfig, QueryResult, QueryResultRow, DatabaseError, QueryConfig } from "pg";
+import {
+  Client,
+  Pool,
+  PoolClient,
+  PoolConfig,
+  QueryResult,
+  QueryResultRow,
+  DatabaseError,
+  QueryConfig
+} from "pg";
 ```
 
 ## Reference Links
 
-| Resource                | URL                                                                                               |
-| ----------------------- | ------------------------------------------------------------------------------------------------- |
-| node-postgres Docs      | https://node-postgres.com                                                                         |
-| npm Package             | https://www.npmjs.com/package/pg                                                                  |
-| GitHub Repository       | https://github.com/brianc/node-postgres                                                           |
-| Azure PostgreSQL Docs   | https://learn.microsoft.com/azure/postgresql/flexible-server/                                     |
+| Resource | URL |
+|----------|-----|
+| node-postgres Docs | https://node-postgres.com |
+| npm Package | https://www.npmjs.com/package/pg |
+| GitHub Repository | https://github.com/brianc/node-postgres |
+| Azure PostgreSQL Docs | https://learn.microsoft.com/azure/postgresql/flexible-server/ |
 | Passwordless Connection | https://learn.microsoft.com/azure/postgresql/flexible-server/how-to-connect-with-managed-identity |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

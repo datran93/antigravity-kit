@@ -7,8 +7,7 @@ tags: queue, rate-limit, throttle, api
 
 ## Rate Limit Queue Execution
 
-Set rate limits on a queue to control how many workflows start in a given period. Rate limits are global across all DBOS
-processes.
+Set rate limits on a queue to control how many workflows start in a given period. Rate limits are global across all DBOS processes.
 
 **Incorrect (no rate limiting):**
 
@@ -44,7 +43,6 @@ queue := dbos.NewWorkflowQueue(ctx, "api_tasks",
 ```
 
 Common use cases:
-
 - LLM API rate limiting (OpenAI, Anthropic, etc.)
 - Third-party API throttling
 - Preventing database overload

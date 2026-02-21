@@ -61,7 +61,6 @@ def child_workflow(data):
 ```
 
 Key constraints:
-
 - Do NOT call `DBOS.start_workflow` from a step
 - Do NOT call `DBOS.recv` from a step
 - Do NOT call `DBOS.set_event` from outside a workflow

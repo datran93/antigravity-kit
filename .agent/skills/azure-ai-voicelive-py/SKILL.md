@@ -1,12 +1,9 @@
 ---
 name: azure-ai-voicelive-py
-description:
-  Build real-time voice AI applications using Azure AI Voice Live SDK (azure-ai-voicelive). Use this skill when creating
-  Python applications that need real-time bidirectional audio communication with Azure AI, including voice assistants,
-  voice-enabled chatbots, real-time speech-to-speech translation, voice-driven avatars, or any WebSocket-based audio
-  streaming with AI models. Supports Server VAD (Voice Activity Detection), turn-based conversation, function calling,
-  MCP tools, avatar integration, and transcription.
+description: "Build real-time voice AI applications using Azure AI Voice Live SDK (azure-ai-voicelive). Use this skill when creating Python applications that need real-time bidirectional audio communication with..."
 package: azure-ai-voicelive
+risk: unknown
+source: community
 ---
 
 # Azure AI Voice Live SDK
@@ -30,7 +27,6 @@ AZURE_COGNITIVE_SERVICES_KEY=<api-key>
 ## Authentication
 
 **DefaultAzureCredential (preferred)**:
-
 ```python
 from azure.ai.voicelive.aio import connect
 from azure.identity.aio import DefaultAzureCredential
@@ -45,7 +41,6 @@ async with connect(
 ```
 
 **API Key**:
-
 ```python
 from azure.ai.voicelive.aio import connect
 from azure.core.credentials import AzureKeyCredential
@@ -79,7 +74,7 @@ async def main():
             "modalities": ["text", "audio"],
             "voice": "alloy"
         })
-
+        
         # Listen for events
         async for event in conn:
             print(f"Event: {event.type}")
@@ -97,14 +92,14 @@ asyncio.run(main())
 
 The `VoiceLiveConnection` exposes these resources:
 
-| Resource                     | Purpose               | Key Methods                                         |
-| ---------------------------- | --------------------- | --------------------------------------------------- |
-| `conn.session`               | Session configuration | `update(session=...)`                               |
-| `conn.response`              | Model responses       | `create()`, `cancel()`                              |
-| `conn.input_audio_buffer`    | Audio input           | `append()`, `commit()`, `clear()`                   |
-| `conn.output_audio_buffer`   | Audio output          | `clear()`                                           |
-| `conn.conversation`          | Conversation state    | `item.create()`, `item.delete()`, `item.truncate()` |
-| `conn.transcription_session` | Transcription config  | `update(session=...)`                               |
+| Resource | Purpose | Key Methods |
+|----------|---------|-------------|
+| `conn.session` | Session configuration | `update(session=...)` |
+| `conn.response` | Model responses | `create()`, `cancel()` |
+| `conn.input_audio_buffer` | Audio input | `append()`, `commit()`, `clear()` |
+| `conn.output_audio_buffer` | Audio output | `clear()` |
+| `conn.conversation` | Conversation state | `item.create()`, `item.delete()`, `item.truncate()` |
+| `conn.transcription_session` | Transcription config | `update(session=...)` |
 
 ## Session Configuration
 
@@ -175,19 +170,19 @@ async for event in conn:
             print(f"Session: {event.session}")
         case "session.updated":
             print("Session updated")
-
+        
         # Audio input events
         case "input_audio_buffer.speech_started":
             print(f"Speech started at {event.audio_start_ms}ms")
         case "input_audio_buffer.speech_stopped":
             print(f"Speech stopped at {event.audio_end_ms}ms")
-
+        
         # Transcription events
         case "conversation.item.input_audio_transcription.completed":
             print(f"User said: {event.transcript}")
         case "conversation.item.input_audio_transcription.delta":
             print(f"Partial: {event.delta}")
-
+        
         # Response events
         case "response.created":
             print(f"Response started: {event.response.id}")
@@ -197,7 +192,7 @@ async for event in conn:
             audio = base64.b64decode(event.delta)
         case "response.done":
             print(f"Response complete: {event.response.status}")
-
+        
         # Function calls
         case "response.function_call_arguments.done":
             result = handle_function(event.name, event.arguments)
@@ -207,7 +202,7 @@ async for event in conn:
                 "output": json.dumps(result)
             })
             await conn.response.create()
-
+        
         # Errors
         case "error":
             print(f"Error: {event.error.message}")
@@ -249,7 +244,7 @@ await conn.conversation.item.create(item={
 # Add user message
 await conn.conversation.item.create(item={
     "type": "message",
-    "role": "user",
+    "role": "user", 
     "content": [{"type": "input_text", "text": "Hello!"}]
 })
 
@@ -258,28 +253,28 @@ await conn.response.create()
 
 ## Voice Options
 
-| Voice     | Description          |
-| --------- | -------------------- |
-| `alloy`   | Neutral, balanced    |
-| `echo`    | Warm, conversational |
-| `shimmer` | Clear, professional  |
-| `sage`    | Calm, authoritative  |
-| `coral`   | Friendly, upbeat     |
-| `ash`     | Deep, measured       |
-| `ballad`  | Expressive           |
-| `verse`   | Storytelling         |
+| Voice | Description |
+|-------|-------------|
+| `alloy` | Neutral, balanced |
+| `echo` | Warm, conversational |
+| `shimmer` | Clear, professional |
+| `sage` | Calm, authoritative |
+| `coral` | Friendly, upbeat |
+| `ash` | Deep, measured |
+| `ballad` | Expressive |
+| `verse` | Storytelling |
 
 Azure voices: Use `AzureStandardVoice`, `AzureCustomVoice`, or `AzurePersonalVoice` models.
 
 ## Audio Formats
 
-| Format          | Sample Rate | Use Case              |
-| --------------- | ----------- | --------------------- |
-| `pcm16`         | 24kHz       | Default, high quality |
-| `pcm16-8000hz`  | 8kHz        | Telephony             |
-| `pcm16-16000hz` | 16kHz       | Voice assistants      |
-| `g711_ulaw`     | 8kHz        | Telephony (US)        |
-| `g711_alaw`     | 8kHz        | Telephony (EU)        |
+| Format | Sample Rate | Use Case |
+|--------|-------------|----------|
+| `pcm16` | 24kHz | Default, high quality |
+| `pcm16-8000hz` | 8kHz | Telephony |
+| `pcm16-16000hz` | 16kHz | Voice assistants |
+| `g711_ulaw` | 8kHz | Telephony (US) |
+| `g711_alaw` | 8kHz | Telephony (EU) |
 
 ## Turn Detection Options
 
@@ -311,6 +306,9 @@ except ConnectionError as e:
 
 ## References
 
-- **Detailed API Reference**: See [references/api-reference.md](references/api-reference.md)
-- **Complete Examples**: See [references/examples.md](references/examples.md)
-- **All Models & Types**: See [references/models.md](references/models.md)
+- **Detailed API Reference**: See references/api-reference.md
+- **Complete Examples**: See references/examples.md
+- **All Models & Types**: See references/models.md
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -16,7 +16,6 @@ Deploy Expo applications to production environments, including app stores and ov
 Use this skill when you need to deploy Expo apps to production.
 
 Use this skill when:
-
 - Deploying Expo apps to production
 - Publishing to app stores (iOS App Store, Google Play)
 - Setting up over-the-air (OTA) updates

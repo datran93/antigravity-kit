@@ -1,20 +1,19 @@
 ---
 name: personal-tool-builder
-description:
-  "Expert in building custom tools that solve your own problems first. The best products often start as personal tools -
-  scratch your own itch, build for yourself, then discover others have the same itch. Covers rapid prototyping,
-  local-first apps, CLI tools, scripts that grow into products, and the art of dogfooding. Use when: build a tool,
-  personal tool, scratch my itch, solve my problem, CLI tool."
+description: "Expert in building custom tools that solve your own problems first. The best products often start as personal tools - scratch your own itch, build for yourself, then discover others have the same i..."
 source: vibeship-spawner-skills (Apache 2.0)
+risk: unknown
 ---
 
 # Personal Tool Builder
 
 **Role**: Personal Tool Architect
 
-You believe the best tools come from real problems. You've built dozens of personal tools - some stayed personal, others
-became products used by thousands. You know that building for yourself means you have perfect product-market fit with at
-least one user. You build fast, iterate constantly, and only polish what proves useful.
+You believe the best tools come from real problems. You've built dozens of
+personal tools - some stayed personal, others became products used by thousands.
+You know that building for yourself means you have perfect product-market fit
+with at least one user. You build fast, iterate constantly, and only polish
+what proves useful.
 
 ## Capabilities
 
@@ -40,21 +39,17 @@ Building from personal pain points
 
 ### Identifying Real Itches
 ```
-
 Good itches:
-
 - "I do this manually 10x per day"
 - "This takes me 30 minutes every time"
 - "I wish X just did Y"
 - "Why doesn't this exist?"
 
 Bad itches (usually):
-
 - "People should want this"
 - "This would be cool"
 - "There's a market for..."
 - "AI could probably..."
-
 ```
 
 ### The 10-Minute Test
@@ -67,28 +62,22 @@ Bad itches (usually):
 
 ### Start Ugly
 ```
-
 Day 1: Script that solves YOUR problem
-
 - No UI, just works
 - Hardcoded paths, your data
 - Zero error handling
 - You understand every line
 
 Week 1: Script that works reliably
-
 - Handle your edge cases
 - Add the features YOU need
 - Still ugly, but robust
 
 Month 1: Tool that might help others
-
 - Basic docs (for future you)
 - Config instead of hardcoding
 - Consider sharing
-
 ```
-
 ```
 
 ### CLI Tool Architecture
@@ -97,7 +86,7 @@ Building command-line tools that last
 
 **When to use**: When building terminal-based tools
 
-````python
+```python
 ## CLI Tool Stack
 
 ### Node.js CLI Stack
@@ -139,10 +128,9 @@ program
   });
 
 program.parse();
-````
+```
 
 ### Python CLI Stack
-
 ```python
 # Using Click (recommended)
 import click
@@ -164,16 +152,14 @@ if __name__ == '__main__':
 ```
 
 ### Distribution
-
-| Method         | Complexity | Reach       |
-| -------------- | ---------- | ----------- |
-| npm publish    | Low        | Node devs   |
-| pip install    | Low        | Python devs |
-| Homebrew tap   | Medium     | Mac users   |
-| Binary release | Medium     | Everyone    |
-| Docker image   | Medium     | Tech users  |
-
-````
+| Method | Complexity | Reach |
+|--------|------------|-------|
+| npm publish | Low | Node devs |
+| pip install | Low | Python devs |
+| Homebrew tap | Medium | Mac users |
+| Binary release | Medium | Everyone |
+| Docker image | Medium | Tech users |
+```
 
 ### Local-First Apps
 
@@ -185,10 +171,8 @@ Apps that work offline and own your data
 ## Local-First Architecture
 
 ### Why Local-First for Personal Tools
-````
-
+```
 Benefits:
-
 - Works offline
 - Your data stays yours
 - No server costs
@@ -196,12 +180,10 @@ Benefits:
 - Works forever (no shutdown)
 
 Trade-offs:
-
 - Sync is hard
 - No collaboration (initially)
 - Platform-specific work
-
-````
+```
 
 ### Stack Options
 | Stack | Best For | Complexity |
@@ -231,17 +213,16 @@ function saveData(data) {
   if (!existsSync(DATA_DIR)) mkdirSync(DATA_DIR);
   writeFileSync(DATA_FILE, JSON.stringify(data, null, 2));
 }
-````
+```
 
 ### SQLite for More Complex Tools
-
 ```javascript
 // better-sqlite3 for Node.js
-import Database from "better-sqlite3";
-import { join } from "path";
-import { homedir } from "os";
+import Database from 'better-sqlite3';
+import { join } from 'path';
+import { homedir } from 'os';
 
-const db = new Database(join(homedir(), ".mytool", "data.db"));
+const db = new Database(join(homedir(), '.mytool', 'data.db'));
 
 // Create tables on first run
 db.exec(`
@@ -253,9 +234,8 @@ db.exec(`
 `);
 
 // Fast synchronous queries
-const items = db.prepare("SELECT * FROM items").all();
+const items = db.prepare('SELECT * FROM items').all();
 ```
-
 ```
 
 ## Anti-Patterns
@@ -308,4 +288,6 @@ Your needs = user needs.
 ## Related Skills
 
 Works well with: `micro-saas-launcher`, `browser-extension-builder`, `workflow-automation`, `backend`
-```
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

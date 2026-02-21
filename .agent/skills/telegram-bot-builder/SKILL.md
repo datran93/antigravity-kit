@@ -1,19 +1,18 @@
 ---
 name: telegram-bot-builder
-description:
-  "Expert in building Telegram bots that solve real problems - from simple automation to complex AI-powered bots. Covers
-  bot architecture, the Telegram Bot API, user experience, monetization strategies, and scaling bots to thousands of
-  users. Use when: telegram bot, bot api, telegram automation, chat bot telegram, tg bot."
+description: "Expert in building Telegram bots that solve real problems - from simple automation to complex AI-powered bots. Covers bot architecture, the Telegram Bot API, user experience, monetization strategie..."
 source: vibeship-spawner-skills (Apache 2.0)
+risk: unknown
 ---
 
 # Telegram Bot Builder
 
 **Role**: Telegram Bot Architect
 
-You build bots that people actually use daily. You understand that bots should feel like helpful assistants, not clunky
-interfaces. You know the Telegram ecosystem deeply - what's possible, what's popular, and what makes money. You design
-conversations that feel natural.
+You build bots that people actually use daily. You understand that bots
+should feel like helpful assistants, not clunky interfaces. You know
+the Telegram ecosystem deeply - what's possible, what's popular, and
+what makes money. You design conversations that feel natural.
 
 ## Capabilities
 
@@ -34,7 +33,7 @@ Structure for maintainable Telegram bots
 
 **When to use**: When starting a new bot project
 
-````python
+```python
 ## Bot Architecture
 
 ### Stack Options
@@ -66,10 +65,9 @@ bot.launch();
 // Graceful shutdown
 process.once('SIGINT', () => bot.stop('SIGINT'));
 process.once('SIGTERM', () => bot.stop('SIGTERM'));
-````
+```
 
 ### Project Structure
-
 ```
 telegram-bot/
 ├── src/
@@ -85,8 +83,7 @@ telegram-bot/
 ├── .env
 └── package.json
 ```
-
-````
+```
 
 ### Inline Keyboards
 
@@ -117,35 +114,34 @@ bot.action('opt_1', (ctx) => {
   ctx.answerCbQuery('You chose Option 1');
   ctx.editMessageText('You selected Option 1');
 });
-````
+```
 
 ### Keyboard Patterns
-
-| Pattern       | Use Case           |
-| ------------- | ------------------ |
-| Single column | Simple menus       |
-| Multi column  | Yes/No, pagination |
-| Grid          | Category selection |
-| URL buttons   | Links, payments    |
+| Pattern | Use Case |
+|---------|----------|
+| Single column | Simple menus |
+| Multi column | Yes/No, pagination |
+| Grid | Category selection |
+| URL buttons | Links, payments |
 
 ### Pagination
-
 ```javascript
 function getPaginatedKeyboard(items, page, perPage = 5) {
   const start = page * perPage;
   const pageItems = items.slice(start, start + perPage);
 
-  const buttons = pageItems.map((item) => [Markup.button.callback(item.name, `item_${item.id}`)]);
+  const buttons = pageItems.map(item =>
+    [Markup.button.callback(item.name, `item_${item.id}`)]
+  );
 
   const nav = [];
-  if (page > 0) nav.push(Markup.button.callback("◀️", `page_${page - 1}`));
-  if (start + perPage < items.length) nav.push(Markup.button.callback("▶️", `page_${page + 1}`));
+  if (page > 0) nav.push(Markup.button.callback('◀️', `page_${page-1}`));
+  if (start + perPage < items.length) nav.push(Markup.button.callback('▶️', `page_${page+1}`));
 
   return Markup.inlineKeyboard([...buttons, nav]);
 }
 ```
-
-````
+```
 
 ### Bot Monetization
 
@@ -186,10 +182,9 @@ bot.on('successful_payment', (ctx) => {
   await activatePremium(ctx.from.id);
   ctx.reply('🎉 Premium activated!');
 });
-````
+```
 
 ### Freemium Strategy
-
 ```
 Free tier:
 - 10 uses per day
@@ -204,19 +199,17 @@ Premium ($5/month):
 ```
 
 ### Usage Limits
-
 ```javascript
 async function checkUsage(userId) {
   const usage = await getUsage(userId);
   const isPremium = await checkPremium(userId);
 
   if (!isPremium && usage >= 10) {
-    return { allowed: false, message: "Daily limit reached. Upgrade?" };
+    return { allowed: false, message: 'Daily limit reached. Upgrade?' };
   }
   return { allowed: true };
 }
 ```
-
 ```
 
 ## Anti-Patterns
@@ -260,4 +253,6 @@ Quality over quantity.
 ## Related Skills
 
 Works well with: `telegram-mini-app`, `backend`, `ai-wrapper-product`, `workflow-automation`
-```
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

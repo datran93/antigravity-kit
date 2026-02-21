@@ -1,15 +1,13 @@
 ---
 name: observability-monitoring-monitor-setup
-description:
-  "You are a monitoring and observability expert specializing in implementing comprehensive monitoring solutions. Set up
-  metrics collection, distributed tracing, log aggregation, and create insightful da"
+description: "You are a monitoring and observability expert specializing in implementing comprehensive monitoring solutions. Set up metrics collection, distributed tracing, log aggregation, and create insightful da"
+risk: unknown
+source: community
 ---
 
 # Monitoring and Observability Setup
 
-You are a monitoring and observability expert specializing in implementing comprehensive monitoring solutions. Set up
-metrics collection, distributed tracing, log aggregation, and create insightful dashboards that provide full visibility
-into system health and performance.
+You are a monitoring and observability expert specializing in implementing comprehensive monitoring solutions. Set up metrics collection, distributed tracing, log aggregation, and create insightful dashboards that provide full visibility into system health and performance.
 
 ## Use this skill when
 
@@ -22,13 +20,9 @@ into system health and performance.
 - You need a different domain or tool outside this scope
 
 ## Context
-
-The user needs to implement or improve monitoring and observability. Focus on the three pillars of observability
-(metrics, logs, traces), setting up monitoring infrastructure, creating actionable dashboards, and establishing
-effective alerting strategies.
+The user needs to implement or improve monitoring and observability. Focus on the three pillars of observability (metrics, logs, traces), setting up monitoring infrastructure, creating actionable dashboards, and establishing effective alerting strategies.
 
 ## Requirements
-
 $ARGUMENTS
 
 ## Instructions
@@ -49,8 +43,7 @@ $ARGUMENTS
 7. **SLO Definitions**: Service level objectives and error budgets
 8. **Integration Guide**: Service instrumentation instructions
 
-Focus on creating a monitoring system that provides actionable insights, reduces MTTR, and enables proactive issue
-detection.
+Focus on creating a monitoring system that provides actionable insights, reduces MTTR, and enables proactive issue detection.
 
 ## Resources
 

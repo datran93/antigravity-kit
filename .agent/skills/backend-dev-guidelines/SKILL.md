@@ -1,25 +1,23 @@
 ---
 name: backend-dev-guidelines
-description:
-  Opinionated backend development standards for Node.js + Express + TypeScript microservices. Covers layered
-  architecture, BaseController pattern, dependency injection, Prisma repositories, Zod validation, unifiedConfig, Sentry
-  error tracking, async safety, and testing discipline.
+description: "Opinionated backend development standards for Node.js + Express + TypeScript microservices. Covers layered architecture, BaseController pattern, dependency injection, Prisma repositories, Zod valid..."
+risk: unknown
+source: community
 ---
 
 # Backend Development Guidelines
 
 **(Node.js · Express · TypeScript · Microservices)**
 
-You are a **senior backend engineer** operating production-grade services under strict architectural and reliability
-constraints.
+You are a **senior backend engineer** operating production-grade services under strict architectural and reliability constraints.
 
 Your goal is to build **predictable, observable, and maintainable backend systems** using:
 
-- Layered architecture
-- Explicit error boundaries
-- Strong typing and validation
-- Centralized configuration
-- First-class observability
+* Layered architecture
+* Explicit error boundaries
+* Strong typing and validation
+* Centralized configuration
+* First-class observability
 
 This skill defines **how backend code must be written**, not merely suggestions.
 
@@ -62,13 +60,13 @@ BFRI = (Architectural Fit + Testability) − (Complexity + Data Risk + Operation
 
 Automatically applies when working on:
 
-- Routes, controllers, services, repositories
-- Express middleware
-- Prisma database access
-- Zod validation
-- Sentry error tracking
-- Configuration management
-- Backend refactors or migrations
+* Routes, controllers, services, repositories
+* Express middleware
+* Prisma database access
+* Zod validation
+* Sentry error tracking
+* Configuration management
+* Backend refactors or migrations
 
 ---
 
@@ -80,9 +78,9 @@ Automatically applies when working on:
 Routes → Controllers → Services → Repositories → Database
 ```
 
-- No layer skipping
-- No cross-layer leakage
-- Each layer has **one responsibility**
+* No layer skipping
+* No cross-layer leakage
+* Each layer has **one responsibility**
 
 ---
 
@@ -106,17 +104,19 @@ Routes must contain **zero business logic**.
 
 ### 3. Controllers Coordinate, Services Decide
 
-- Controllers:
-  - Parse request
-  - Call services
-  - Handle response formatting
-  - Handle errors via BaseController
+* Controllers:
 
-- Services:
-  - Contain business rules
-  - Are framework-agnostic
-  - Use DI
-  - Are unit-testable
+  * Parse request
+  * Call services
+  * Handle response formatting
+  * Handle errors via BaseController
+
+* Services:
+
+  * Contain business rules
+  * Are framework-agnostic
+  * Use DI
+  * Are unit-testable
 
 ---
 
@@ -129,7 +129,7 @@ export class UserController extends BaseController {
       const user = await this.userService.getById(req.params.id);
       this.handleSuccess(res, user);
     } catch (error) {
-      this.handleError(error, res, "getUser");
+      this.handleError(error, res, 'getUser');
     }
   }
 }
@@ -148,7 +148,9 @@ catch (error) {
 }
 ```
 
-❌ `console.log` ❌ silent failures ❌ swallowed errors
+❌ `console.log`
+❌ silent failures
+❌ swallowed errors
 
 ---
 
@@ -159,7 +161,7 @@ catch (error) {
 process.env.JWT_SECRET;
 
 // ✅ ALWAYS
-import { config } from "@/config/unifiedConfig";
+import { config } from '@/config/unifiedConfig';
 config.auth.jwtSecret;
 ```
 
@@ -167,10 +169,10 @@ config.auth.jwtSecret;
 
 ### 7. Validate All External Input with Zod
 
-- Request bodies
-- Query params
-- Route params
-- Webhook payloads
+* Request bodies
+* Query params
+* Route params
+* Webhook payloads
 
 ```ts
 const schema = z.object({
@@ -219,13 +221,15 @@ src/
 
 ## 6. Dependency Injection Rules
 
-- Services receive dependencies via constructor
-- No importing repositories directly inside controllers
-- Enables mocking and testing
+* Services receive dependencies via constructor
+* No importing repositories directly inside controllers
+* Enables mocking and testing
 
 ```ts
 export class UserService {
-  constructor(private readonly userRepository: UserRepository) {}
+  constructor(
+    private readonly userRepository: UserRepository
+  ) {}
 }
 ```
 
@@ -233,11 +237,12 @@ export class UserService {
 
 ## 7. Prisma & Repository Rules
 
-- Prisma client **never used directly in controllers**
-- Repositories:
-  - Encapsulate queries
-  - Handle transactions
-  - Expose intent-based methods
+* Prisma client **never used directly in controllers**
+* Repositories:
+
+  * Encapsulate queries
+  * Handle transactions
+  * Expose intent-based methods
 
 ```ts
 await userRepository.findActiveUsers();
@@ -253,8 +258,10 @@ All async route handlers must be wrapped.
 
 ```ts
 router.get(
-  "/users",
-  asyncErrorWrapper((req, res) => controller.list(req, res)),
+  '/users',
+  asyncErrorWrapper((req, res) =>
+    controller.list(req, res)
+  )
 );
 ```
 
@@ -266,9 +273,9 @@ No unhandled promise rejections.
 
 ### Required
 
-- Sentry error tracking
-- Sentry performance tracing
-- Structured logs (where applicable)
+* Sentry error tracking
+* Sentry performance tracing
+* Structured logs (where applicable)
 
 Every critical path must be observable.
 
@@ -278,13 +285,13 @@ Every critical path must be observable.
 
 ### Required Tests
 
-- **Unit tests** for services
-- **Integration tests** for routes
-- **Repository tests** for complex queries
+* **Unit tests** for services
+* **Integration tests** for routes
+* **Repository tests** for complex queries
 
 ```ts
-describe("UserService", () => {
-  it("creates a user", async () => {
+describe('UserService', () => {
+  it('creates a user', async () => {
     expect(user).toBeDefined();
   });
 });
@@ -296,18 +303,23 @@ No tests → no merge.
 
 ## 11. Anti-Patterns (Immediate Rejection)
 
-❌ Business logic in routes ❌ Skipping service layer ❌ Direct Prisma in controllers ❌ Missing validation ❌
-process.env usage ❌ console.log instead of Sentry ❌ Untested business logic
+❌ Business logic in routes
+❌ Skipping service layer
+❌ Direct Prisma in controllers
+❌ Missing validation
+❌ process.env usage
+❌ console.log instead of Sentry
+❌ Untested business logic
 
 ---
 
 ## 12. Integration With Other Skills
 
-- **frontend-dev-guidelines** → API contract alignment
-- **error-tracking** → Sentry standards
-- **database-verification** → Schema correctness
-- **analytics-tracking** → Event pipelines
-- **skill-developer** → Skill governance
+* **frontend-dev-guidelines** → API contract alignment
+* **error-tracking** → Sentry standards
+* **database-verification** → Schema correctness
+* **analytics-tracking** → Event pipelines
+* **skill-developer** → Skill governance
 
 ---
 
@@ -315,19 +327,21 @@ process.env usage ❌ console.log instead of Sentry ❌ Untested business logic
 
 Before finalizing backend work:
 
-- [ ] BFRI ≥ 3
-- [ ] Layered architecture respected
-- [ ] Input validated
-- [ ] Errors captured in Sentry
-- [ ] unifiedConfig used
-- [ ] Tests written
-- [ ] No anti-patterns present
+* [ ] BFRI ≥ 3
+* [ ] Layered architecture respected
+* [ ] Input validated
+* [ ] Errors captured in Sentry
+* [ ] unifiedConfig used
+* [ ] Tests written
+* [ ] No anti-patterns present
 
 ---
 
 ## 14. Skill Status
 
-**Status:** Stable · Enforceable · Production-grade **Intended Use:** Long-lived Node.js microservices with real traffic
-and real risk
-
+**Status:** Stable · Enforceable · Production-grade
+**Intended Use:** Long-lived Node.js microservices with real traffic and real risk
 ---
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

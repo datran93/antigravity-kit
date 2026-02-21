@@ -1,9 +1,8 @@
 ---
 name: file-organizer
-description:
-  Intelligently organizes files and folders by understanding context, finding duplicates, and suggesting better
-  organizational structures. Use when user wants to clean up directories, organize downloads, remove duplicates, or
-  restructure projects.
+description: "Intelligently organizes files and folders by understanding context, finding duplicates, and suggesting better organizational structures. Use when user wants to clean up directories, organize downlo..."
+risk: unknown
+source: community
 ---
 
 # File Organizer
@@ -34,6 +33,7 @@ When a user requests file organization help:
 1. **Understand the Scope**
 
    Ask clarifying questions:
+
    - Which directory needs organization? (Downloads, Documents, entire home folder?)
    - What's the main problem? (Can't find things, duplicates, too messy, no structure?)
    - Any files or folders to avoid? (Current projects, sensitive data?)
@@ -58,6 +58,7 @@ When a user requests file organization help:
    ```
 
    Summarize findings:
+
    - Total files and folders
    - File type breakdown
    - Size distribution
@@ -69,6 +70,7 @@ When a user requests file organization help:
    Based on the files, determine logical groupings:
 
    **By Type**:
+
    - Documents (PDFs, DOCX, TXT)
    - Images (JPG, PNG, SVG)
    - Videos (MP4, MOV)
@@ -78,6 +80,7 @@ When a user requests file organization help:
    - Presentations (PPTX, KEY)
 
    **By Purpose**:
+
    - Work vs. Personal
    - Active vs. Archive
    - Project-specific
@@ -85,6 +88,7 @@ When a user requests file organization help:
    - Temporary/scratch files
 
    **By Date**:
+
    - Current year/month
    - Previous years
    - Very old (archive candidates)
@@ -105,6 +109,7 @@ When a user requests file organization help:
    ```
 
    For each set of duplicates:
+
    - Show all file paths
    - Display sizes and modification dates
    - Recommend which to keep (usually newest or best-named)
@@ -126,8 +131,18 @@ When a user requests file organization help:
 
    ## Proposed Structure
 
-   [Directory]/ ├── Work/ │ ├── Projects/ │ ├── Documents/ │ └── Archive/ ├── Personal/ │ ├── Photos/ │ ├── Documents/ │
-   └── Media/ └── Downloads/ ├── To-Sort/ └── Archive/
+   [Directory]/
+   ├── Work/
+   │ ├── Projects/
+   │ ├── Documents/
+   │ └── Archive/
+   ├── Personal/
+   │ ├── Photos/
+   │ ├── Documents/
+   │ └── Media/
+   └── Downloads/
+   ├── To-Sort/
+   └── Archive/
 
    ## Changes I'll Make
 
@@ -162,6 +177,7 @@ When a user requests file organization help:
    ```
 
    **Important Rules**:
+
    - Always confirm before deleting anything
    - Log all moves for potential undo
    - Preserve original modification dates

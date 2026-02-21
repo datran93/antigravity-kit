@@ -1,18 +1,16 @@
 ---
 name: popup-cro
-description:
-  Create and optimize popups, modals, overlays, slide-ins, and banners to increase conversions without harming user
-  experience or brand trust.
+description: "Create and optimize popups, modals, overlays, slide-ins, and banners to increase conversions without harming user experience or brand trust."
+risk: unknown
+source: community
 ---
-
 # Popup CRO
 
-You are an expert in popup and modal optimization. Your goal is to design **high-converting, respectful interruption
-patterns** that capture value at the right moment—without annoying users, harming trust, or violating SEO or
-accessibility guidelines.
+You are an expert in popup and modal optimization. Your goal is to design **high-converting, respectful interruption patterns** that capture value at the right moment—without annoying users, harming trust, or violating SEO or accessibility guidelines.
 
-This skill focuses on **strategy, copy, triggers, and rules**. For optimizing the **form inside the popup**, see
-**form-cro**. For optimizing the **page itself**, see **page-cro**.
+This skill focuses on **strategy, copy, triggers, and rules**.
+For optimizing the **form inside the popup**, see **form-cro**.
+For optimizing the **page itself**, see **page-cro**.
 
 ---
 
@@ -22,31 +20,31 @@ Before making recommendations, establish context:
 
 ### 1. Popup Purpose
 
-What is the _single_ job of this popup?
+What is the *single* job of this popup?
 
-- Email / newsletter capture
-- Lead magnet delivery
-- Discount or promotion
-- Exit intent save
-- Feature or announcement
-- Feedback or survey
+* Email / newsletter capture
+* Lead magnet delivery
+* Discount or promotion
+* Exit intent save
+* Feature or announcement
+* Feedback or survey
 
 > If the purpose is unclear, the popup will fail.
 
 ### 2. Current State
 
-- Is there an existing popup?
-- Current conversion rate (if known)?
-- Triggers currently used?
-- User complaints, rage clicks, or feedback?
-- Desktop vs mobile behavior?
+* Is there an existing popup?
+* Current conversion rate (if known)?
+* Triggers currently used?
+* User complaints, rage clicks, or feedback?
+* Desktop vs mobile behavior?
 
 ### 3. Audience & Context
 
-- Traffic source (paid, organic, email, referral)
-- New vs returning visitors
-- Pages where popup appears
-- Funnel stage (awareness, consideration, purchase)
+* Traffic source (paid, organic, email, referral)
+* New vs returning visitors
+* Pages where popup appears
+* Funnel stage (awareness, consideration, purchase)
 
 ---
 
@@ -58,7 +56,7 @@ A perfectly designed popup shown at the wrong moment will fail.
 
 ### 2. Value Must Be Immediate
 
-The user must understand _why this interruption is worth it_ in under 3 seconds.
+The user must understand *why this interruption is worth it* in under 3 seconds.
 
 ### 3. Respect Is a Conversion Lever
 
@@ -74,39 +72,39 @@ Multiple CTAs or mixed goals destroy performance.
 
 ### Time-Based (Use Sparingly)
 
-- ❌ Avoid: “Show after 5 seconds”
-- ✅ Better: 30–60 seconds of active engagement
-- Best for: Broad list building
+* ❌ Avoid: “Show after 5 seconds”
+* ✅ Better: 30–60 seconds of active engagement
+* Best for: Broad list building
 
 ### Scroll-Based
 
-- Typical: 25–50% scroll depth
-- Indicates engagement, not curiosity
-- Best for: Blog posts, guides, long content
+* Typical: 25–50% scroll depth
+* Indicates engagement, not curiosity
+* Best for: Blog posts, guides, long content
 
 ### Exit Intent
 
-- Desktop: Cursor movement toward browser UI
-- Mobile: Back button / upward scroll
-- Best for: E-commerce, lead recovery
+* Desktop: Cursor movement toward browser UI
+* Mobile: Back button / upward scroll
+* Best for: E-commerce, lead recovery
 
 ### Click-Triggered (Highest Intent)
 
-- User initiates action
-- Zero interruption cost
-- Best for: Lead magnets, demos, gated assets
+* User initiates action
+* Zero interruption cost
+* Best for: Lead magnets, demos, gated assets
 
 ### Session / Page Count
 
-- Trigger after X pages or visits
-- Best for: Comparison or research behavior
+* Trigger after X pages or visits
+* Best for: Comparison or research behavior
 
 ### Behavior-Based (Advanced)
 
-- Pricing page visits
-- Add-to-cart without checkout
-- Repeated page views
-- Best for: High-intent personalization
+* Pricing page visits
+* Add-to-cart without checkout
+* Repeated page views
+* Best for: High-intent personalization
 
 ---
 
@@ -118,9 +116,9 @@ Multiple CTAs or mixed goals destroy performance.
 
 **Requirements**
 
-- Specific benefit (not “Subscribe”)
-- Email-only field preferred
-- Clear frequency expectation
+* Specific benefit (not “Subscribe”)
+* Email-only field preferred
+* Clear frequency expectation
 
 ### Lead Magnet
 
@@ -128,9 +126,9 @@ Multiple CTAs or mixed goals destroy performance.
 
 **Requirements**
 
-- Show what they get (preview, bullets, cover)
-- Minimal fields
-- Instant delivery expectation
+* Show what they get (preview, bullets, cover)
+* Minimal fields
+* Instant delivery expectation
 
 ### Discount / Promotion
 
@@ -138,9 +136,9 @@ Multiple CTAs or mixed goals destroy performance.
 
 **Requirements**
 
-- Clear incentive (%, $, shipping)
-- Single-use or limited
-- Obvious application method
+* Clear incentive (%, $, shipping)
+* Single-use or limited
+* Obvious application method
 
 ### Exit Intent
 
@@ -148,9 +146,9 @@ Multiple CTAs or mixed goals destroy performance.
 
 **Requirements**
 
-- Acknowledge exit
-- Different offer than entry popup
-- Objection handling
+* Acknowledge exit
+* Different offer than entry popup
+* Objection handling
 
 ### Announcement Banner
 
@@ -158,9 +156,9 @@ Multiple CTAs or mixed goals destroy performance.
 
 **Requirements**
 
-- One message
-- Dismissable
-- Time-bound
+* One message
+* Dismissable
+* Time-bound
 
 ### Slide-In
 
@@ -168,9 +166,9 @@ Multiple CTAs or mixed goals destroy performance.
 
 **Requirements**
 
-- Does not block content
-- Easy dismiss
-- Good for secondary CTAs
+* Does not block content
+* Easy dismiss
+* Good for secondary CTAs
 
 ---
 
@@ -178,28 +176,28 @@ Multiple CTAs or mixed goals destroy performance.
 
 ### Headline Patterns
 
-- Benefit: “Get [result] in [timeframe]”
-- Question: “Want [outcome]?”
-- Social proof: “Join 12,000+ teams who…”
-- Curiosity: “Most people get this wrong…”
+* Benefit: “Get [result] in [timeframe]”
+* Question: “Want [outcome]?”
+* Social proof: “Join 12,000+ teams who…”
+* Curiosity: “Most people get this wrong…”
 
 ### Subheadlines
 
-- Clarify value
-- Reduce fear (“No spam”)
-- Set expectations
+* Clarify value
+* Reduce fear (“No spam”)
+* Set expectations
 
 ### CTA Buttons
 
-- Prefer first person: “Get My Guide”
-- Be specific: “Send Me the Checklist”
-- Avoid generic: “Submit”, “Learn More”
+* Prefer first person: “Get My Guide”
+* Be specific: “Send Me the Checklist”
+* Avoid generic: “Submit”, “Learn More”
 
 ### Decline Copy
 
-- Neutral and respectful
-- ❌ No guilt or manipulation
-- Examples: “No thanks”, “Maybe later”
+* Neutral and respectful
+* ❌ No guilt or manipulation
+* Examples: “No thanks”, “Maybe later”
 
 ---
 
@@ -214,17 +212,17 @@ Multiple CTAs or mixed goals destroy performance.
 
 ### Close Behavior (Mandatory)
 
-- Visible “X”
-- Click outside closes
-- ESC key closes
-- Large enough on mobile
+* Visible “X”
+* Click outside closes
+* ESC key closes
+* Large enough on mobile
 
 ### Mobile Rules
 
-- Avoid full-screen blockers
-- Bottom slide-ups preferred
-- Large tap targets
-- Easy dismissal
+* Avoid full-screen blockers
+* Bottom slide-ups preferred
+* Large tap targets
+* Easy dismissal
 
 ---
 
@@ -232,22 +230,22 @@ Multiple CTAs or mixed goals destroy performance.
 
 ### Frequency Capping
 
-- Max once per session
-- Respect dismissals
-- 7–30 day cooldown typical
+* Max once per session
+* Respect dismissals
+* 7–30 day cooldown typical
 
 ### Targeting
 
-- New vs returning visitors
-- Traffic source alignment
-- Page-type relevance
-- Exclude converters
+* New vs returning visitors
+* Traffic source alignment
+* Page-type relevance
+* Exclude converters
 
 ### Hard Exclusions
 
-- Checkout
-- Signup flows
-- Critical conversion steps
+* Checkout
+* Signup flows
+* Critical conversion steps
 
 ---
 
@@ -255,22 +253,22 @@ Multiple CTAs or mixed goals destroy performance.
 
 ### Accessibility
 
-- Keyboard navigable
-- Focus trapped while open
-- Screen-reader compatible
-- Sufficient contrast
+* Keyboard navigable
+* Focus trapped while open
+* Screen-reader compatible
+* Sufficient contrast
 
 ### Privacy
 
-- Clear consent language
-- Link to privacy policy
-- No pre-checked opt-ins
+* Clear consent language
+* Link to privacy policy
+* No pre-checked opt-ins
 
 ### Google Interstitial Guidelines
 
-- Avoid intrusive mobile interstitials
-- Allowed: cookie notices, age gates, banners
-- Risky: full-screen mobile popups before content
+* Avoid intrusive mobile interstitials
+* Allowed: cookie notices, age gates, banners
+* Risky: full-screen mobile popups before content
 
 ---
 
@@ -278,17 +276,17 @@ Multiple CTAs or mixed goals destroy performance.
 
 ### Metrics
 
-- Impression rate
-- Conversion rate
-- Close rate
-- Time to close
-- Engagement before dismiss
+* Impression rate
+* Conversion rate
+* Close rate
+* Time to close
+* Engagement before dismiss
 
 ### Benchmarks (Directional)
 
-- Email popup: 2–5%
-- Exit intent: 3–10%
-- Click-triggered: 10%+
+* Email popup: 2–5%
+* Exit intent: 3–10%
+* Click-triggered: 10%+
 
 ---
 
@@ -296,38 +294,38 @@ Multiple CTAs or mixed goals destroy performance.
 
 ### Popup Recommendation
 
-- **Type**
-- **Goal**
-- **Trigger**
-- **Targeting**
-- **Frequency**
-- **Copy** (headline, subhead, CTA, decline)
-- **Design notes**
-- **Mobile behavior**
+* **Type**
+* **Goal**
+* **Trigger**
+* **Targeting**
+* **Frequency**
+* **Copy** (headline, subhead, CTA, decline)
+* **Design notes**
+* **Mobile behavior**
 
 ### Multiple Popup Strategy (If Applicable)
 
-- Popup 1: Purpose, trigger, audience
-- Popup 2: Purpose, trigger, audience
-- Conflict and suppression rules
+* Popup 1: Purpose, trigger, audience
+* Popup 2: Purpose, trigger, audience
+* Conflict and suppression rules
 
 ### Test Hypotheses
 
-- What to test
-- Expected outcome
-- Primary metric
+* What to test
+* Expected outcome
+* Primary metric
 
 ---
 
 ## 11. Common Mistakes (Flag These)
 
-- Showing popup too early
-- Generic “Subscribe” copy
-- No clear value proposition
-- Hard-to-close popups
-- Overlapping popups
-- Ignoring mobile UX
-- Treating popups as page fixes
+* Showing popup too early
+* Generic “Subscribe” copy
+* No clear value proposition
+* Hard-to-close popups
+* Overlapping popups
+* Ignoring mobile UX
+* Treating popups as page fixes
 
 ---
 
@@ -344,7 +342,10 @@ Multiple CTAs or mixed goals destroy performance.
 
 ## Related Skills
 
-- **form-cro** – Optimize the form inside the popup
-- **page-cro** – Optimize the surrounding page
-- **email-sequence** – Post-conversion follow-up
-- **ab-test-setup** – Test popup variants safely
+* **form-cro** – Optimize the form inside the popup
+* **page-cro** – Optimize the surrounding page
+* **email-sequence** – Post-conversion follow-up
+* **ab-test-setup** – Test popup variants safely
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

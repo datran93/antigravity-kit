@@ -7,8 +7,7 @@ tags: advanced, versioning, blue-green, deployment
 
 ## Use Versioning for Blue-Green Deployments
 
-Set `applicationVersion` in configuration to tag workflows with a version. DBOS only recovers workflows matching the
-current application version, preventing code mismatches during recovery.
+Set `applicationVersion` in configuration to tag workflows with a version. DBOS only recovers workflows matching the current application version, preventing code mismatches during recovery.
 
 **Incorrect (deploying new code that breaks in-progress workflows):**
 
@@ -30,8 +29,7 @@ DBOS.setConfig({
 });
 ```
 
-By default, the application version is automatically computed from a hash of workflow source code. Set it explicitly for
-more control.
+By default, the application version is automatically computed from a hash of workflow source code. Set it explicitly for more control.
 
 **Blue-green deployment strategy:**
 
@@ -53,7 +51,11 @@ const oldWorkflows = await DBOS.listWorkflows({
 
 ```typescript
 // Fork a workflow from a failed step to run on the new version
-const handle = await DBOS.forkWorkflow<string>(workflowID, failedStepID, { applicationVersion: "2.0.0" });
+const handle = await DBOS.forkWorkflow<string>(
+  workflowID,
+  failedStepID,
+  { applicationVersion: "2.0.0" }
+);
 ```
 
 Reference: [Versioning](https://docs.dbos.dev/typescript/tutorials/upgrading-workflows#versioning)

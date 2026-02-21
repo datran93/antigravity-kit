@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # Competitive Landscape Analysis
 
-Comprehensive frameworks for analyzing competition, identifying differentiation opportunities, and developing winning
-market positioning strategies.
+Comprehensive frameworks for analyzing competition, identifying differentiation opportunities, and developing winning market positioning strategies.
 
 ## Use this skill when
 
@@ -26,8 +25,7 @@ market positioning strategies.
 
 ## Overview
 
-Understand competitive dynamics using proven frameworks (Porter's Five Forces, Blue Ocean Strategy, positioning maps) to
-identify opportunities and craft defensible competitive advantages.
+Understand competitive dynamics using proven frameworks (Porter's Five Forces, Blue Ocean Strategy, positioning maps) to identify opportunities and craft defensible competitive advantages.
 
 ## Porter's Five Forces
 
@@ -36,7 +34,6 @@ Analyze industry attractiveness and competitive intensity.
 ### Force 1: Threat of New Entrants
 
 **Barriers to Entry:**
-
 - Capital requirements
 - Economies of scale
 - Switching costs
@@ -45,11 +42,10 @@ Analyze industry attractiveness and competitive intensity.
 - Access to distribution
 - Network effects
 
-**High Threat:** Low barriers, easy to enter (e.g., simple SaaS tools) **Low Threat:** High barriers (e.g., regulated
-industries, hardware)
+**High Threat:** Low barriers, easy to enter (e.g., simple SaaS tools)
+**Low Threat:** High barriers (e.g., regulated industries, hardware)
 
 **Analysis Questions:**
-
 - How easy is it for new competitors to enter?
 - What would it cost to launch a competing product?
 - Are there network effects or switching costs protecting incumbents?
@@ -57,18 +53,16 @@ industries, hardware)
 ### Force 2: Bargaining Power of Suppliers
 
 **Supplier Power Factors:**
-
 - Supplier concentration
 - Availability of substitutes
 - Importance to supplier
 - Switching costs
 - Forward integration threat
 
-**High Power:** Few suppliers, critical inputs (e.g., cloud infrastructure providers) **Low Power:** Many alternatives,
-commoditized (e.g., generic services)
+**High Power:** Few suppliers, critical inputs (e.g., cloud infrastructure providers)
+**Low Power:** Many alternatives, commoditized (e.g., generic services)
 
 **Analysis Questions:**
-
 - Who are our critical suppliers?
 - Could they raise prices or reduce quality?
 - Can we switch suppliers easily?
@@ -76,18 +70,16 @@ commoditized (e.g., generic services)
 ### Force 3: Bargaining Power of Buyers
 
 **Buyer Power Factors:**
-
 - Buyer concentration
 - Volume purchased
 - Product differentiation
 - Price sensitivity
 - Backward integration threat
 
-**High Power:** Few large customers, standardized products (e.g., enterprise deals) **Low Power:** Many small customers,
-differentiated product (e.g., consumer subscriptions)
+**High Power:** Few large customers, standardized products (e.g., enterprise deals)
+**Low Power:** Many small customers, differentiated product (e.g., consumer subscriptions)
 
 **Analysis Questions:**
-
 - Can customers easily switch to competitors?
 - Do few customers generate most revenue?
 - How price-sensitive are buyers?
@@ -95,17 +87,15 @@ differentiated product (e.g., consumer subscriptions)
 ### Force 4: Threat of Substitutes
 
 **Substitute Considerations:**
-
 - Alternative solutions
 - Price-performance tradeoff
 - Switching costs
 - Buyer propensity to substitute
 
-**High Threat:** Many alternatives, low switching cost (e.g., productivity software) **Low Threat:** Unique solution,
-high switching cost (e.g., ERP systems)
+**High Threat:** Many alternatives, low switching cost (e.g., productivity software)
+**Low Threat:** Unique solution, high switching cost (e.g., ERP systems)
 
 **Analysis Questions:**
-
 - What alternative ways can customers solve this problem?
 - How do substitutes compare on price and performance?
 - What's the cost to switch to a substitute?
@@ -113,18 +103,16 @@ high switching cost (e.g., ERP systems)
 ### Force 5: Competitive Rivalry
 
 **Rivalry Intensity Factors:**
-
 - Number of competitors
 - Industry growth rate
 - Product differentiation
 - Exit barriers
 - Strategic stakes
 
-**High Rivalry:** Many competitors, slow growth, commoditized (e.g., email marketing) **Low Rivalry:** Few competitors,
-fast growth, differentiated (e.g., emerging AI tools)
+**High Rivalry:** Many competitors, slow growth, commoditized (e.g., email marketing)
+**Low Rivalry:** Few competitors, fast growth, differentiated (e.g., emerging AI tools)
 
 **Analysis Questions:**
-
 - How many direct competitors exist?
 - Is the market growing or stagnant?
 - How differentiated are offerings?
@@ -134,13 +122,13 @@ fast growth, differentiated (e.g., emerging AI tools)
 
 Create a scorecard:
 
-| Force          | Intensity (1-5) | Impact | Key Factors                       |
-| -------------- | --------------- | ------ | --------------------------------- |
-| New Entrants   | 3               | Medium | Low barriers but network effects  |
-| Supplier Power | 2               | Low    | Many cloud providers              |
-| Buyer Power    | 4               | High   | Enterprise customers concentrated |
-| Substitutes    | 3               | Medium | Manual processes alternative      |
-| Rivalry        | 4               | High   | 10+ direct competitors            |
+| Force | Intensity (1-5) | Impact | Key Factors |
+|-------|-----------------|--------|-------------|
+| New Entrants | 3 | Medium | Low barriers but network effects |
+| Supplier Power | 2 | Low | Many cloud providers |
+| Buyer Power | 4 | High | Enterprise customers concentrated |
+| Substitutes | 3 | Medium | Manual processes alternative |
+| Rivalry | 4 | High | 10+ direct competitors |
 
 **Overall Assessment:** Moderate industry attractiveness with high rivalry and buyer power
 
@@ -150,13 +138,17 @@ Identify uncontested market space through value innovation.
 
 ### Four Actions Framework
 
-**Eliminate:** What factors can be eliminated that the industry takes for granted?
+**Eliminate:**
+What factors can be eliminated that the industry takes for granted?
 
-**Reduce:** What factors can be reduced well below industry standard?
+**Reduce:**
+What factors can be reduced well below industry standard?
 
-**Raise:** What factors can be raised well above industry standard?
+**Raise:**
+What factors can be raised well above industry standard?
 
-**Create:** What factors can be created that the industry never offered?
+**Create:**
+What factors can be created that the industry never offered?
 
 ### Strategy Canvas
 
@@ -183,7 +175,6 @@ Budget Hotel Strategy:
 Find the sweet spot: Lower cost + higher value
 
 **Steps:**
-
 1. Map industry competing factors
 2. Identify factors to eliminate/reduce (cost savings)
 3. Identify factors to raise/create (differentiation)
@@ -196,7 +187,6 @@ Find the sweet spot: Lower cost + higher value
 Plot competitors on 2-3 key dimensions.
 
 **Example Dimensions:**
-
 - Price vs. Features
 - Complexity vs. Ease of Use
 - Enterprise vs. SMB Focus
@@ -204,14 +194,12 @@ Plot competitors on 2-3 key dimensions.
 - Generalist vs. Specialist
 
 **How to Create:**
-
 1. Choose 2 dimensions most important to customers
 2. Plot all competitors
 3. Identify gaps (white space)
 4. Validate gap represents real customer need
 
 **Example:**
-
 ```
 High Price
     |
@@ -265,7 +253,6 @@ Our product [statement of primary differentiation]
 ```
 
 **Example:**
-
 ```
 For e-commerce companies
 Who struggle with email marketing automation
@@ -280,7 +267,6 @@ Our product uses AI to personalize at scale
 ### Information Gathering
 
 **Public Sources:**
-
 - Company websites and blogs
 - Press releases and news
 - Job postings (hint at strategy)
@@ -291,7 +277,6 @@ Our product uses AI to personalize at scale
 - Patent filings
 
 **Direct Research:**
-
 - Customer interviews
 - Win/loss analysis
 - Sales team feedback
@@ -303,13 +288,11 @@ Our product uses AI to personalize at scale
 For each key competitor, document:
 
 **Company Overview:**
-
 - Founded, HQ, funding, size
 - Leadership team
 - Company stage and trajectory
 
 **Product:**
-
 - Core features
 - Target customers
 - Pricing and packaging
@@ -317,26 +300,22 @@ For each key competitor, document:
 - Recent launches
 
 **Go-to-Market:**
-
 - Sales model (self-serve, sales-led)
 - Marketing strategy
 - Distribution channels
 - Partnerships
 
 **Strengths:**
-
 - What they do better than anyone
 - Key competitive advantages
 - Market position
 
 **Weaknesses:**
-
 - Gaps in product
 - Customer complaints
 - Operational challenges
 
 **Strategy:**
-
 - Stated direction
 - Inferred priorities
 - Likely next moves
@@ -346,21 +325,18 @@ For each key competitor, document:
 ### Price Positioning
 
 **Premium (Top 25%):**
-
 - Superior product/service
 - Strong brand
 - High-touch sales
 - Enterprise focus
 
 **Mid-Market (Middle 50%):**
-
 - Balanced value
 - Standard features
 - Mixed sales model
 - Broad market
 
 **Value (Bottom 25%):**
-
 - Basic functionality
 - Self-service
 - Cost leadership
@@ -368,14 +344,13 @@ For each key competitor, document:
 
 ### Pricing Comparison Matrix
 
-| Competitor   | Entry Price | Mid Tier | Enterprise | Model        |
-| ------------ | ----------- | -------- | ---------- | ------------ |
-| Competitor A | $29/mo      | $99/mo   | Custom     | Subscription |
-| Competitor B | $49/mo      | $199/mo  | $499/mo    | Subscription |
-| Us           | $39/mo      | $129/mo  | Custom     | Subscription |
+| Competitor | Entry Price | Mid Tier | Enterprise | Model |
+|-----------|-------------|----------|------------|-------|
+| Competitor A | $29/mo | $99/mo | Custom | Subscription |
+| Competitor B | $49/mo | $199/mo | $499/mo | Subscription |
+| Us | $39/mo | $129/mo | Custom | Subscription |
 
 **Analysis:**
-
 - Are we priced competitively?
 - What does our pricing signal?
 - Are there gaps in our packaging?
@@ -385,25 +360,21 @@ For each key competitor, document:
 ### Market Entry Strategies
 
 **Direct Competition:**
-
 - Head-to-head against established players
 - Requires differentiation and resources
 - Example: Better features at lower price
 
 **Niche Focus:**
-
 - Target underserved segment
 - Become specialist vs. generalist
 - Example: "Salesforce for real estate"
 
 **Disruptive Innovation:**
-
 - Target non-consumers or low end
 - Improve over time to move upmarket
 - Example: Freemium model disrupting enterprise
 
 **Platform Play:**
-
 - Build ecosystem and network effects
 - Aggregate complementary services
 - Example: Marketplace or API platform
@@ -411,53 +382,46 @@ For each key competitor, document:
 ### Beachhead Market
 
 **Characteristics of Good Beachhead:**
-
 - Specific, reachable segment
 - Acute pain you solve well
 - Limited competition
 - Willing to pay
 - Can lead to expansion
 
-**Example:** Instead of "project management software", target "project management for construction teams"
+**Example:**
+Instead of "project management software", target "project management for construction teams"
 
 ## Competitive Advantage
 
 ### Sustainable Advantages
 
 **Network Effects:**
-
 - Value increases with users
 - Example: Slack, marketplaces
 
 **Switching Costs:**
-
 - High cost to change
 - Example: CRM systems with data
 
 **Economies of Scale:**
-
 - Unit costs decrease with volume
 - Example: Cloud infrastructure
 
 **Brand:**
-
 - Trust and reputation
 - Example: Security software
 
 **Proprietary Technology:**
-
 - Patents or trade secrets
 - Example: Algorithms, data
 
 **Regulatory:**
-
 - Licenses or approvals
 - Example: Fintech, healthcare
 
 ### Testing Your Advantage
 
 Ask:
-
 - Can competitors copy this in < 2 years?
 - Does this matter to customers?
 - Do we execute this better than anyone?
@@ -470,20 +434,17 @@ If "no" to any, it's not a sustainable advantage.
 ### What to Track
 
 **Product Changes:**
-
 - New features
 - Pricing changes
 - Packaging adjustments
 
 **Market Signals:**
-
 - Funding announcements
 - Key hires (especially leadership)
 - Customer wins/losses
 - Partnerships
 
 **Performance Metrics:**
-
 - Revenue (if public or disclosed)
 - Customer count
 - Growth rate
@@ -492,34 +453,28 @@ If "no" to any, it's not a sustainable advantage.
 ### Monitoring Cadence
 
 **Weekly:**
-
 - Product release notes
 - News mentions
 
 **Monthly:**
-
 - Win/loss analysis review
 - Positioning map updates
 
 **Quarterly:**
-
 - Deep competitive review
 - Strategy adjustment
 
 **Annually:**
-
 - Major strategy reassessment
 - Market trends analysis
 
 ## Additional Resources
 
 ### Reference Files
-
 - **`references/frameworks-deep-dive.md`** - Detailed application of each framework with worksheets
 - **`references/intel-sources.md`** - Comprehensive list of competitive intelligence sources
 
 ### Example Files
-
 - **`examples/competitor-analysis.md`** - Complete competitive analysis for a SaaS startup
 - **`examples/positioning-workshop.md`** - Step-by-step positioning development process
 

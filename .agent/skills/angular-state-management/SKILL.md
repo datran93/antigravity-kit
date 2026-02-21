@@ -1,16 +1,13 @@
 ---
 name: angular-state-management
-description:
-  Master modern Angular state management with Signals, NgRx, and RxJS. Use when setting up global state, managing
-  component stores, choosing between state solutions, or migrating from legacy patterns.
+description: "Master modern Angular state management with Signals, NgRx, and RxJS. Use when setting up global state, managing component stores, choosing between state solutions, or migrating from legacy patterns."
 risk: safe
 source: self
 ---
 
 # Angular State Management
 
-Comprehensive guide to modern Angular state management patterns, from Signal-based local state to global stores and
-server state synchronization.
+Comprehensive guide to modern Angular state management patterns, from Signal-based local state to global stores and server state synchronization.
 
 ## When to Use This Skill
 
@@ -163,7 +160,13 @@ export class UserStore {
 
 ```typescript
 // stores/products.store.ts
-import { signalStore, withState, withMethods, withComputed, patchState } from "@ngrx/signals";
+import {
+  signalStore,
+  withState,
+  withMethods,
+  withComputed,
+  patchState,
+} from "@ngrx/signals";
 import { inject } from "@angular/core";
 import { ProductService } from "./product.service";
 
@@ -187,7 +190,9 @@ export const ProductStore = signalStore(
   withComputed((store) => ({
     filteredProducts: computed(() => {
       const filter = store.filter().toLowerCase();
-      return store.products().filter((p) => p.name.toLowerCase().includes(filter));
+      return store
+        .products()
+        .filter((p) => p.name.toLowerCase().includes(filter));
     }),
     totalCount: computed(() => store.products().length),
   })),
@@ -260,7 +265,11 @@ export const reducers: ActionReducerMap<AppState> = {
 
 // main.ts
 bootstrapApplication(AppComponent, {
-  providers: [provideStore(reducers), provideEffects([UserEffects, CartEffects]), provideStoreDevtools({ maxAge: 25 })],
+  providers: [
+    provideStore(reducers),
+    provideEffects([UserEffects, CartEffects]),
+    provideStoreDevtools({ maxAge: 25 }),
+  ],
 });
 ```
 
@@ -331,11 +340,20 @@ import { UserState } from "./user.reducer";
 
 export const selectUserState = createFeatureSelector<UserState>("user");
 
-export const selectUser = createSelector(selectUserState, (state) => state.user);
+export const selectUser = createSelector(
+  selectUserState,
+  (state) => state.user,
+);
 
-export const selectUserLoading = createSelector(selectUserState, (state) => state.loading);
+export const selectUserLoading = createSelector(
+  selectUserState,
+  (state) => state.loading,
+);
 
-export const selectIsAuthenticated = createSelector(selectUser, (user) => user !== null);
+export const selectIsAuthenticated = createSelector(
+  selectUser,
+  (user) => user !== null,
+);
 ```
 
 ```typescript
@@ -355,7 +373,9 @@ export class UserEffects {
       switchMap(({ userId }) =>
         this.userService.getUser(userId).pipe(
           map((user) => UserActions.loadUserSuccess({ user })),
-          catchError((error) => of(UserActions.loadUserFailure({ error: error.message }))),
+          catchError((error) =>
+            of(UserActions.loadUserFailure({ error: error.message })),
+          ),
         ),
       ),
     ),
@@ -414,7 +434,10 @@ export class TodoStore extends ComponentStore<TodoState> {
   // Selectors
   readonly todos$ = this.select((state) => state.todos);
   readonly loading$ = this.select((state) => state.loading);
-  readonly completedCount$ = this.select(this.todos$, (todos) => todos.filter((t) => t.completed).length);
+  readonly completedCount$ = this.select(
+    this.todos$,
+    (todos) => todos.filter((t) => t.completed).length,
+  );
 
   // Updaters
   readonly addTodo = this.updater((state, todo: Todo) => ({
@@ -424,7 +447,9 @@ export class TodoStore extends ComponentStore<TodoState> {
 
   readonly toggleTodo = this.updater((state, id: string) => ({
     ...state,
-    todos: state.todos.map((t) => (t.id === id ? { ...t, completed: !t.completed } : t)),
+    todos: state.todos.map((t) =>
+      t.id === id ? { ...t, completed: !t.completed } : t,
+    ),
   }));
 
   // Effects
@@ -481,7 +506,9 @@ export class ProductApiService {
     this._state.update((s) => ({ ...s, loading: true, error: null }));
 
     try {
-      const data = await firstValueFrom(this.http.get<Product[]>("/api/products"));
+      const data = await firstValueFrom(
+        this.http.get<Product[]>("/api/products"),
+      );
       this._state.update((s) => ({ ...s, data, loading: false }));
     } catch (e) {
       this._state.update((s) => ({

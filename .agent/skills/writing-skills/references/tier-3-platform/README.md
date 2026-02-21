@@ -37,21 +37,25 @@ my-platform/
 
 Each product directory has exactly 5 files:
 
-| File               | Purpose               | When to Load          |
-| ------------------ | --------------------- | --------------------- |
-| `README.md`        | Overview, when to use | Always first          |
-| `api.md`           | Runtime APIs, methods | Implementing features |
-| `configuration.md` | Config, environment   | Setting up            |
-| `patterns.md`      | Common workflows      | Best practices        |
-| `gotchas.md`       | Pitfalls, limits      | Debugging             |
+| File | Purpose | When to Load |
+|------|---------|--------------|
+| `README.md` | Overview, when to use | Always first |
+| `api.md` | Runtime APIs, methods | Implementing features |
+| `configuration.md` | Config, environment | Setting up |
+| `patterns.md` | Common workflows | Best practices |
+| `gotchas.md` | Pitfalls, limits | Debugging |
 
 ## Decision Trees
 
 The power of Tier 3 is decision trees that help the AI **choose**:
 
 ```markdown
-Need to store data? ├─ Simple key-value → kv/ ├─ Relational queries → d1/ ├─ Large files/blobs → r2/ ├─ Per-user state →
-durable-objects/ └─ Vector embeddings → vectorize/
+Need to store data?
+├─ Simple key-value → kv/
+├─ Relational queries → d1/
+├─ Large files/blobs → r2/
+├─ Per-user state → durable-objects/
+└─ Vector embeddings → vectorize/
 ```
 
 ## Slash Command Integration
@@ -69,11 +73,11 @@ description: Load platform skill and get contextual guidance
 2. Identify product from decision tree
 3. Load relevant reference files based on task
 
-| Task              | Files                        |
-| ----------------- | ---------------------------- |
-| New setup         | README.md + configuration.md |
-| Implement feature | api.md + patterns.md         |
-| Debug issue       | gotchas.md                   |
+| Task | Files |
+|------|-------|
+| New setup | README.md + configuration.md |
+| Implement feature | api.md + patterns.md |
+| Debug issue | gotchas.md |
 ```
 
 ## Progressive Disclosure in Action

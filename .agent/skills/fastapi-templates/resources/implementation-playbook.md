@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # FastAPI Project Templates
 
-Production-ready FastAPI project structures with async patterns, dependency injection, middleware, and best practices
-for building high-performance APIs.
+Production-ready FastAPI project structures with async patterns, dependency injection, middleware, and best practices for building high-performance APIs.
 
 ## When to Use This Skill
 

@@ -1,14 +1,13 @@
 ---
 name: employment-contract-templates
-description:
-  Create employment contracts, offer letters, and HR policy documents following legal best practices. Use when drafting
-  employment agreements, creating HR policies, or standardizing employment documentation.
+description: "Create employment contracts, offer letters, and HR policy documents following legal best practices. Use when drafting employment agreements, creating HR policies, or standardizing employment docume..."
+risk: unknown
+source: community
 ---
 
 # Employment Contract Templates
 
-Templates and patterns for creating legally sound employment documentation including contracts, offer letters, and HR
-policies.
+Templates and patterns for creating legally sound employment documentation including contracts, offer letters, and HR policies.
 
 ## Use this skill when
 

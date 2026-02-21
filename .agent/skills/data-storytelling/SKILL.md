@@ -1,8 +1,8 @@
 ---
 name: data-storytelling
-description:
-  Transform data into compelling narratives using visualization, context, and persuasive structure. Use when presenting
-  analytics to stakeholders, creating data reports, or building executive presentations.
+description: "Transform data into compelling narratives using visualization, context, and persuasive structure. Use when presenting analytics to stakeholders, creating data reports, or building executive present..."
+risk: unknown
+source: community
 ---
 
 # Data Storytelling
@@ -88,7 +88,9 @@ Analysis of churned customers reveals a pattern:
 
 ## The Insight
 
-[Show engagement curve visualization] Customers who don't engage in the first 14 days are 4x more likely to churn.
+[Show engagement curve visualization]
+Customers who don't engage in the first 14 days
+are 4x more likely to churn.
 
 ## The Solution
 
@@ -114,7 +116,8 @@ Approve $50K budget for onboarding automation.
 
 ## Where We Started
 
-Q3 ended with $1.2M MRR, 15% below target. Team morale was low after missed goals.
+Q3 ended with $1.2M MRR, 15% below target.
+Team morale was low after missed goals.
 
 ## What Changed
 
@@ -126,17 +129,23 @@ Q3 ended with $1.2M MRR, 15% below target. Team morale was low after missed goal
 
 ## The Transformation
 
-[Before/after comparison chart] | Metric | Q3 | Q4 | Change | |----------------|--------|--------|--------| | Trial →
-Paid | 8% | 15% | +87% | | Time to Value | 14 days| 5 days | -64% | | Expansion Rate | 2% | 8% | +300% |
+[Before/after comparison chart]
+| Metric | Q3 | Q4 | Change |
+|----------------|--------|--------|--------|
+| Trial → Paid | 8% | 15% | +87% |
+| Time to Value | 14 days| 5 days | -64% |
+| Expansion Rate | 2% | 8% | +300% |
 
 ## Key Insight
 
-Self-serve + high-touch creates compound growth. Customers who self-serve AND get a success call have 3x higher
-expansion rate.
+Self-serve + high-touch creates compound growth.
+Customers who self-serve AND get a success call
+have 3x higher expansion rate.
 
 ## Going Forward
 
-Double down on hybrid model. Target: $1.8M MRR by Q2.
+Double down on hybrid model.
+Target: $1.8M MRR by Q2.
 ```
 
 ### Framework 3: The Comparison Story
@@ -182,8 +191,9 @@ Should we expand into EMEA or APAC first?
 
 ## The Recommendation
 
-APAC first. Higher growth, less competition. Start with Singapore hub (English, business-friendly). Enter EMEA in Year 2
-with localization ready.
+APAC first. Higher growth, less competition.
+Start with Singapore hub (English, business-friendly).
+Enter EMEA in Year 2 with localization ready.
 
 ## Risk Mitigation
 
@@ -199,20 +209,35 @@ with localization ready.
 ```markdown
 Start simple, add layers:
 
-Slide 1: "Revenue is growing" [single line chart] Slide 2: "But growth is slowing" [add growth rate overlay] Slide 3:
-"Driven by one segment" [add segment breakdown] Slide 4: "Which is saturating" [add market share] Slide 5: "We need new
-segments" [add opportunity zones]
+Slide 1: "Revenue is growing" [single line chart]
+Slide 2: "But growth is slowing" [add growth rate overlay]
+Slide 3: "Driven by one segment" [add segment breakdown]
+Slide 4: "Which is saturating" [add market share]
+Slide 5: "We need new segments" [add opportunity zones]
 ```
 
 ### Technique 2: Contrast and Compare
 
 ```markdown
-Before/After: ┌─────────────────┬─────────────────┐ │ BEFORE │ AFTER │ │ │ │ │ Process: 5 days│ Process: 1 day │ │
-Errors: 15% │ Errors: 2% │ │ Cost: $50/unit │ Cost: $20/unit │ └─────────────────┴─────────────────┘
+Before/After:
+┌─────────────────┬─────────────────┐
+│ BEFORE │ AFTER │
+│ │ │
+│ Process: 5 days│ Process: 1 day │
+│ Errors: 15% │ Errors: 2% │
+│ Cost: $50/unit │ Cost: $20/unit │
+└─────────────────┴─────────────────┘
 
-This/That (emphasize difference): ┌─────────────────────────────────────┐ │ CUSTOMER A vs B │ │ ┌──────────┐
-┌──────────┐ │ │ │ ████████ │ │ ██ │ │ │ │ $45,000 │ │ $8,000 │ │ │ │ LTV │ │ LTV │ │ │ └──────────┘ └──────────┘ │ │
-Onboarded No onboarding │ └─────────────────────────────────────┘
+This/That (emphasize difference):
+┌─────────────────────────────────────┐
+│ CUSTOMER A vs B │
+│ ┌──────────┐ ┌──────────┐ │
+│ │ ████████ │ │ ██ │ │
+│ │ $45,000 │ │ $8,000 │ │
+│ │ LTV │ │ LTV │ │
+│ └──────────┘ └──────────┘ │
+│ Onboarded No onboarding │
+└─────────────────────────────────────┘
 ```
 
 ### Technique 3: Annotation and Highlight
@@ -325,21 +350,29 @@ Revenue up 15% but CAC increasing faster than LTV
 
 ## KEY METRICS AT A GLANCE
 
-┌────────┬────────┬────────┬────────┐ │ MRR │ NRR │ CAC │ LTV │ │ $125K │ 108% │ $450 │ $2,200 │ │ ▲15% │ ▲3% │ ▲22% │
-▲8% │ └────────┴────────┴────────┴────────┘
+┌────────┬────────┬────────┬────────┐
+│ MRR │ NRR │ CAC │ LTV │
+│ $125K │ 108% │ $450 │ $2,200 │
+│ ▲15% │ ▲3% │ ▲22% │ ▲8% │
+└────────┴────────┴────────┴────────┘
 
 ## WHAT'S WORKING
 
-✓ Enterprise segment growing 25% MoM ✓ Referral program driving 30% of new logos ✓ Support satisfaction at all-time high
-(94%)
+✓ Enterprise segment growing 25% MoM
+✓ Referral program driving 30% of new logos
+✓ Support satisfaction at all-time high (94%)
 
 ## WHAT NEEDS ATTENTION
 
-✗ SMB acquisition cost up 40% ✗ Trial conversion down 5 points ✗ Time-to-value increased by 3 days
+✗ SMB acquisition cost up 40%
+✗ Trial conversion down 5 points
+✗ Time-to-value increased by 3 days
 
 ## ROOT CAUSE
 
-[Mini chart showing SMB vs Enterprise CAC trend] SMB paid ads becoming less efficient. CPC up 35% while conversion flat.
+[Mini chart showing SMB vs Enterprise CAC trend]
+SMB paid ads becoming less efficient.
+CPC up 35% while conversion flat.
 
 ## RECOMMENDATION
 
@@ -359,36 +392,54 @@ Revenue up 15% but CAC increasing faster than LTV
 ### Headlines That Work
 
 ```markdown
-BAD: "Q4 Sales Analysis" GOOD: "Q4 Sales Beat Target by 23% - Here's Why"
+BAD: "Q4 Sales Analysis"
+GOOD: "Q4 Sales Beat Target by 23% - Here's Why"
 
-BAD: "Customer Churn Report" GOOD: "We're Losing $2.4M to Preventable Churn"
+BAD: "Customer Churn Report"
+GOOD: "We're Losing $2.4M to Preventable Churn"
 
-BAD: "Marketing Performance" GOOD: "Content Marketing Delivers 4x ROI vs. Paid"
+BAD: "Marketing Performance"
+GOOD: "Content Marketing Delivers 4x ROI vs. Paid"
 
-Formula: [Specific Number] + [Business Impact] + [Actionable Context]
+Formula:
+[Specific Number] + [Business Impact] + [Actionable Context]
 ```
 
 ### Transition Phrases
 
 ```markdown
-Building the narrative: • "This leads us to ask..." • "When we dig deeper..." • "The pattern becomes clear when..." •
-"Contrast this with..."
+Building the narrative:
+• "This leads us to ask..."
+• "When we dig deeper..."
+• "The pattern becomes clear when..."
+• "Contrast this with..."
 
-Introducing insights: • "The data reveals..." • "What surprised us was..." • "The inflection point came when..." • "The
-key finding is..."
+Introducing insights:
+• "The data reveals..."
+• "What surprised us was..."
+• "The inflection point came when..."
+• "The key finding is..."
 
-Moving to action: • "This insight suggests..." • "Based on this analysis..." • "The implication is clear..." • "Our
-recommendation is..."
+Moving to action:
+• "This insight suggests..."
+• "Based on this analysis..."
+• "The implication is clear..."
+• "Our recommendation is..."
 ```
 
 ### Handling Uncertainty
 
 ```markdown
-Acknowledge limitations: • "With 95% confidence, we can say..." • "The sample size of 500 shows..." • "While correlation
-is strong, causation requires..." • "This trend holds for [segment], though [caveat]..."
+Acknowledge limitations:
+• "With 95% confidence, we can say..."
+• "The sample size of 500 shows..."
+• "While correlation is strong, causation requires..."
+• "This trend holds for [segment], though [caveat]..."
 
-Present ranges: • "Impact estimate: $400K-$600K" • "Confidence interval: 15-20% improvement" • "Best case: X,
-Conservative: Y"
+Present ranges:
+• "Impact estimate: $400K-$600K"
+• "Confidence interval: 15-20% improvement"
+• "Best case: X, Conservative: Y"
 ```
 
 ## Best Practices

@@ -1,14 +1,13 @@
 ---
 name: codebase-cleanup-tech-debt
-description:
-  "You are a technical debt expert specializing in identifying, quantifying, and prioritizing technical debt in software
-  projects. Analyze the codebase to uncover debt, assess its impact, and create acti"
+description: "You are a technical debt expert specializing in identifying, quantifying, and prioritizing technical debt in software projects. Analyze the codebase to uncover debt, assess its impact, and create acti"
+risk: unknown
+source: community
 ---
 
 # Technical Debt Analysis and Remediation
 
-You are a technical debt expert specializing in identifying, quantifying, and prioritizing technical debt in software
-projects. Analyze the codebase to uncover debt, assess its impact, and create actionable remediation plans.
+You are a technical debt expert specializing in identifying, quantifying, and prioritizing technical debt in software projects. Analyze the codebase to uncover debt, assess its impact, and create actionable remediation plans.
 
 ## Use this skill when
 
@@ -21,12 +20,9 @@ projects. Analyze the codebase to uncover debt, assess its impact, and create ac
 - You need a different domain or tool outside this scope
 
 ## Context
-
-The user needs a comprehensive technical debt analysis to understand what's slowing down development, increasing bugs,
-and creating maintenance challenges. Focus on practical, measurable improvements with clear ROI.
+The user needs a comprehensive technical debt analysis to understand what's slowing down development, increasing bugs, and creating maintenance challenges. Focus on practical, measurable improvements with clear ROI.
 
 ## Requirements
-
 $ARGUMENTS
 
 ## Instructions
@@ -36,12 +32,12 @@ $ARGUMENTS
 Conduct a thorough scan for all types of technical debt:
 
 **Code Debt**
-
 - **Duplicated Code**
   - Exact duplicates (copy-paste)
   - Similar logic patterns
   - Repeated business rules
   - Quantify: Lines duplicated, locations
+  
 - **Complex Code**
   - High cyclomatic complexity (>10)
   - Deeply nested conditionals (>3 levels)
@@ -57,7 +53,6 @@ Conduct a thorough scan for all types of technical debt:
   - Quantify: Coupling metrics, change frequency
 
 **Architecture Debt**
-
 - **Design Flaws**
   - Missing abstractions
   - Leaky abstractions
@@ -73,7 +68,6 @@ Conduct a thorough scan for all types of technical debt:
   - Quantify: Version lag, security vulnerabilities
 
 **Testing Debt**
-
 - **Coverage Gaps**
   - Untested code paths
   - Missing edge cases
@@ -89,7 +83,6 @@ Conduct a thorough scan for all types of technical debt:
   - Quantify: Test runtime, failure rate
 
 **Documentation Debt**
-
 - **Missing Documentation**
   - No API documentation
   - Undocumented complex logic
@@ -98,7 +91,6 @@ Conduct a thorough scan for all types of technical debt:
   - Quantify: Undocumented public APIs
 
 **Infrastructure Debt**
-
 - **Deployment Issues**
   - Manual deployment steps
   - No rollback procedures
@@ -111,11 +103,10 @@ Conduct a thorough scan for all types of technical debt:
 Calculate the real cost of each debt item:
 
 **Development Velocity Impact**
-
 ```
 Debt Item: Duplicate user validation logic
 Locations: 5 files
-Time Impact:
+Time Impact: 
 - 2 hours per bug fix (must fix in 5 places)
 - 4 hours per feature change
 - Monthly impact: ~20 hours
@@ -123,13 +114,12 @@ Annual Cost: 240 hours × $150/hour = $36,000
 ```
 
 **Quality Impact**
-
 ```
 Debt Item: No integration tests for payment flow
 Bug Rate: 3 production bugs/month
 Average Bug Cost:
 - Investigation: 4 hours
-- Fix: 2 hours
+- Fix: 2 hours  
 - Testing: 2 hours
 - Deployment: 1 hour
 Monthly Cost: 3 bugs × 9 hours × $150 = $4,050
@@ -137,7 +127,6 @@ Annual Cost: $48,600
 ```
 
 **Risk Assessment**
-
 - **Critical**: Security vulnerabilities, data loss risk
 - **High**: Performance degradation, frequent outages
 - **Medium**: Developer frustration, slow feature delivery
@@ -148,27 +137,26 @@ Annual Cost: $48,600
 Create measurable KPIs:
 
 **Code Quality Metrics**
-
 ```yaml
 Metrics:
   cyclomatic_complexity:
     current: 15.2
     target: 10.0
     files_above_threshold: 45
-
+    
   code_duplication:
     percentage: 23%
     target: 5%
     duplication_hotspots:
       - src/validation: 850 lines
       - src/api/handlers: 620 lines
-
+      
   test_coverage:
     unit: 45%
     integration: 12%
     e2e: 5%
     target: 80% / 60% / 30%
-
+    
   dependency_health:
     outdated_major: 12
     outdated_minor: 34
@@ -177,7 +165,6 @@ Metrics:
 ```
 
 **Trend Analysis**
-
 ```python
 debt_trends = {
     "2024_Q1": {"score": 750, "items": 125},
@@ -192,8 +179,8 @@ debt_trends = {
 
 Create an actionable roadmap based on ROI:
 
-**Quick Wins (High Value, Low Effort)** Week 1-2:
-
+**Quick Wins (High Value, Low Effort)**
+Week 1-2:
 ```
 1. Extract duplicate validation logic to shared module
    Effort: 8 hours
@@ -212,7 +199,6 @@ Create an actionable roadmap based on ROI:
 ```
 
 **Medium-Term Improvements (Month 1-3)**
-
 ```
 1. Refactor OrderService (God class)
    - Split into 4 focused services
@@ -226,13 +212,12 @@ Create an actionable roadmap based on ROI:
    - Update component patterns
    - Migrate to hooks
    - Fix breaking changes
-   Effort: 80 hours
+   Effort: 80 hours  
    Benefits: Performance +30%, Better DX
    ROI: Positive after 3 months
 ```
 
 **Long-Term Initiatives (Quarter 2-4)**
-
 ```
 1. Implement Domain-Driven Design
    - Define bounded contexts
@@ -254,13 +239,12 @@ Create an actionable roadmap based on ROI:
 ### 5. Implementation Strategy
 
 **Incremental Refactoring**
-
 ```python
 # Phase 1: Add facade over legacy code
 class PaymentFacade:
     def __init__(self):
         self.legacy_processor = LegacyPaymentProcessor()
-
+    
     def process_payment(self, order):
         # New clean interface
         return self.legacy_processor.doPayment(order.to_legacy())
@@ -276,7 +260,7 @@ class PaymentFacade:
     def __init__(self):
         self.new_service = PaymentService()
         self.legacy = LegacyPaymentProcessor()
-
+        
     def process_payment(self, order):
         if feature_flag("use_new_payment"):
             return self.new_service.process_payment(order)
@@ -284,16 +268,15 @@ class PaymentFacade:
 ```
 
 **Team Allocation**
-
 ```yaml
 Debt_Reduction_Team:
   dedicated_time: "20% sprint capacity"
-
+  
   roles:
     - tech_lead: "Architecture decisions"
-    - senior_dev: "Complex refactoring"
+    - senior_dev: "Complex refactoring"  
     - dev: "Testing and documentation"
-
+    
   sprint_goals:
     - sprint_1: "Quick wins completed"
     - sprint_2: "God class refactoring started"
@@ -305,18 +288,17 @@ Debt_Reduction_Team:
 Implement gates to prevent new debt:
 
 **Automated Quality Gates**
-
 ```yaml
 pre_commit_hooks:
   - complexity_check: "max 10"
   - duplication_check: "max 5%"
   - test_coverage: "min 80% for new code"
-
+  
 ci_pipeline:
   - dependency_audit: "no high vulnerabilities"
   - performance_test: "no regression >10%"
   - architecture_check: "no new violations"
-
+  
 code_review:
   - requires_two_approvals: true
   - must_include_tests: true
@@ -324,7 +306,6 @@ code_review:
 ```
 
 **Debt Budget**
-
 ```python
 debt_budget = {
     "allowed_monthly_increase": "2%",
@@ -340,10 +321,8 @@ debt_budget = {
 ### 7. Communication Plan
 
 **Stakeholder Reports**
-
 ```markdown
 ## Executive Summary
-
 - Current debt score: 890 (High)
 - Monthly velocity loss: 35%
 - Bug rate increase: 45%
@@ -351,23 +330,19 @@ debt_budget = {
 - Expected ROI: 280% over 12 months
 
 ## Key Risks
-
 1. Payment system: 3 critical vulnerabilities
 2. Data layer: No backup strategy
 3. API: Rate limiting not implemented
 
 ## Proposed Actions
-
 1. Immediate: Security patches (this week)
 2. Short-term: Core refactoring (1 month)
 3. Long-term: Architecture modernization (6 months)
 ```
 
 **Developer Documentation**
-
 ```markdown
 ## Refactoring Guide
-
 1. Always maintain backward compatibility
 2. Write tests before refactoring
 3. Use feature flags for gradual rollout
@@ -375,7 +350,6 @@ debt_budget = {
 5. Measure impact with metrics
 
 ## Code Standards
-
 - Complexity limit: 10
 - Method length: 20 lines
 - Class length: 200 lines
@@ -388,7 +362,6 @@ debt_budget = {
 Track progress with clear KPIs:
 
 **Monthly Metrics**
-
 - Debt score reduction: Target -5%
 - New bug rate: Target -20%
 - Deployment frequency: Target +50%
@@ -396,7 +369,6 @@ Track progress with clear KPIs:
 - Test coverage: Target +10%
 
 **Quarterly Reviews**
-
 - Architecture health score
 - Developer satisfaction survey
 - Performance benchmarks
@@ -413,5 +385,4 @@ Track progress with clear KPIs:
 6. **Prevention Plan**: Processes to avoid accumulating new debt
 7. **ROI Projections**: Expected returns on debt reduction investment
 
-Focus on delivering measurable improvements that directly impact development velocity, system reliability, and team
-morale.
+Focus on delivering measurable improvements that directly impact development velocity, system reliability, and team morale.

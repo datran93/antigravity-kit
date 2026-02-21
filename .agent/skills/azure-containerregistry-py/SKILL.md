@@ -1,9 +1,11 @@
 ---
 name: azure-containerregistry-py
-description: |
+description: "|"
   Azure Container Registry SDK for Python. Use for managing container images, artifacts, and repositories.
   Triggers: "azure-containerregistry", "ContainerRegistryClient", "container images", "docker registry", "ACR".
 package: azure-containerregistry
+risk: unknown
+source: community
 ---
 
 # Azure Container Registry SDK for Python
@@ -204,10 +206,10 @@ from azure.identity.aio import DefaultAzureCredential
 async def list_repos():
     credential = DefaultAzureCredential()
     client = ContainerRegistryClient(endpoint, credential)
-
+    
     async for repo in client.list_repository_names():
         print(repo)
-
+    
     await client.close()
     await credential.close()
 ```
@@ -227,19 +229,19 @@ for manifest in client.list_manifest_properties("my-image"):
 
 ## Client Operations
 
-| Operation                   | Description                      |
-| --------------------------- | -------------------------------- |
-| `list_repository_names`     | List all repositories            |
-| `get_repository_properties` | Get repository metadata          |
-| `delete_repository`         | Delete repository and all images |
-| `list_tag_properties`       | List tags in repository          |
-| `get_tag_properties`        | Get tag metadata                 |
-| `delete_tag`                | Delete specific tag              |
-| `list_manifest_properties`  | List manifests in repository     |
-| `get_manifest_properties`   | Get manifest metadata            |
-| `delete_manifest`           | Delete manifest by digest        |
-| `download_manifest`         | Download manifest content        |
-| `download_blob`             | Download layer blob              |
+| Operation | Description |
+|-----------|-------------|
+| `list_repository_names` | List all repositories |
+| `get_repository_properties` | Get repository metadata |
+| `delete_repository` | Delete repository and all images |
+| `list_tag_properties` | List tags in repository |
+| `get_tag_properties` | Get tag metadata |
+| `delete_tag` | Delete specific tag |
+| `list_manifest_properties` | List manifests in repository |
+| `get_manifest_properties` | Get manifest metadata |
+| `delete_manifest` | Delete manifest by digest |
+| `download_manifest` | Download manifest content |
+| `download_blob` | Download layer blob |
 
 ## Best Practices
 
@@ -250,3 +252,6 @@ for manifest in client.list_manifest_properties("my-image"):
 5. **Use async client** for high-throughput operations
 6. **Order by last_updated** to find recent/old images
 7. **Check manifest.tags** before deleting to avoid removing tagged images
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

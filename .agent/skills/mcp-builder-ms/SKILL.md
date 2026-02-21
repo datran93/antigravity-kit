@@ -1,56 +1,56 @@
 ---
-name: mcp-builder
-description:
-  Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external
-  services through well-designed tools. Use when building MCP servers to integrate external APIs or services, whether in
-  Python (FastMCP), Node/TypeScript (MCP SDK), or C#/.NET (Microsoft MCP SDK).
+name: mcp-builder-ms
+description: "Guide for creating high-quality MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. Use when building MCP servers to integrate exte..."
+risk: unknown
+source: community
 ---
 
 # MCP Server Development Guide
 
+## When to Use
+
+Use this skill when building MCP servers to integrate external APIs or services, whether in Python (FastMCP) or Node/TypeScript (MCP SDK).
+
 ## Overview
 
-Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed
-tools. The quality of an MCP server is measured by how well it enables LLMs to accomplish real-world tasks.
+Create MCP (Model Context Protocol) servers that enable LLMs to interact with external services through well-designed tools. The quality of an MCP server is measured by how well it enables LLMs to accomplish real-world tasks.
 
 ---
 
 ## Microsoft MCP Ecosystem
 
-Microsoft provides extensive MCP infrastructure for Azure and Foundry services. Understanding this ecosystem helps you
-decide whether to build custom servers or leverage existing ones.
+Microsoft provides extensive MCP infrastructure for Azure and Foundry services. Understanding this ecosystem helps you decide whether to build custom servers or leverage existing ones.
 
 ### Server Types
 
-| Type       | Transport       | Use Case                                    | Example                              |
-| ---------- | --------------- | ------------------------------------------- | ------------------------------------ |
-| **Local**  | stdio           | Desktop apps, single-user, local dev        | Azure MCP Server via NPM/Docker      |
+| Type | Transport | Use Case | Example |
+|------|-----------|----------|---------|
+| **Local** | stdio | Desktop apps, single-user, local dev | Azure MCP Server via NPM/Docker |
 | **Remote** | Streamable HTTP | Cloud services, multi-tenant, Agent Service | `https://mcp.ai.azure.com` (Foundry) |
 
 ### Microsoft MCP Servers
 
 Before building a custom server, check if Microsoft already provides one:
 
-| Server             | Type   | Description                                                     |
-| ------------------ | ------ | --------------------------------------------------------------- |
-| **Azure MCP**      | Local  | 48+ Azure services (Storage, KeyVault, Cosmos, SQL, etc.)       |
-| **Foundry MCP**    | Remote | `https://mcp.ai.azure.com` - Models, deployments, evals, agents |
-| **Fabric MCP**     | Local  | Microsoft Fabric APIs, OneLake, item definitions                |
-| **Playwright MCP** | Local  | Browser automation and testing                                  |
-| **GitHub MCP**     | Remote | `https://api.githubcopilot.com/mcp`                             |
+| Server | Type | Description |
+|--------|------|-------------|
+| **Azure MCP** | Local | 48+ Azure services (Storage, KeyVault, Cosmos, SQL, etc.) |
+| **Foundry MCP** | Remote | `https://mcp.ai.azure.com` - Models, deployments, evals, agents |
+| **Fabric MCP** | Local | Microsoft Fabric APIs, OneLake, item definitions |
+| **Playwright MCP** | Local | Browser automation and testing |
+| **GitHub MCP** | Remote | `https://api.githubcopilot.com/mcp` |
 
-**Full ecosystem:** See [🔷 Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) for complete server catalog
-and patterns.
+**Full ecosystem:** See 🔷 Microsoft MCP Patterns for complete server catalog and patterns.
 
 ### When to Use Microsoft vs Custom
 
-| Scenario                     | Recommendation                                                         |
-| ---------------------------- | ---------------------------------------------------------------------- |
-| Azure service integration    | Use **Azure MCP Server** (48 services covered)                         |
-| AI Foundry agents/evals      | Use **Foundry MCP** remote server                                      |
-| Custom internal APIs         | Build **custom server** (this guide)                                   |
-| Third-party SaaS integration | Build **custom server** (this guide)                                   |
-| Extending Azure MCP          | Follow [Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) |
+| Scenario | Recommendation |
+|----------|----------------|
+| Azure service integration | Use **Azure MCP Server** (48 services covered) |
+| AI Foundry agents/evals | Use **Foundry MCP** remote server |
+| Custom internal APIs | Build **custom server** (this guide) |
+| Third-party SaaS integration | Build **custom server** (this guide) |
+| Extending Azure MCP | Follow Microsoft MCP Patterns
 
 ---
 
@@ -64,20 +64,17 @@ Creating a high-quality MCP server involves four main phases:
 
 #### 1.1 Understand Modern MCP Design
 
-**API Coverage vs. Workflow Tools:** Balance comprehensive API endpoint coverage with specialized workflow tools.
-Workflow tools can be more convenient for specific tasks, while comprehensive coverage gives agents flexibility to
-compose operations. Performance varies by client—some clients benefit from code execution that combines basic tools,
-while others work better with higher-level workflows. When uncertain, prioritize comprehensive API coverage.
+**API Coverage vs. Workflow Tools:**
+Balance comprehensive API endpoint coverage with specialized workflow tools. Workflow tools can be more convenient for specific tasks, while comprehensive coverage gives agents flexibility to compose operations. Performance varies by client—some clients benefit from code execution that combines basic tools, while others work better with higher-level workflows. When uncertain, prioritize comprehensive API coverage.
 
-**Tool Naming and Discoverability:** Clear, descriptive tool names help agents find the right tools quickly. Use
-consistent prefixes (e.g., `github_create_issue`, `github_list_repos`) and action-oriented naming.
+**Tool Naming and Discoverability:**
+Clear, descriptive tool names help agents find the right tools quickly. Use consistent prefixes (e.g., `github_create_issue`, `github_list_repos`) and action-oriented naming.
 
-**Context Management:** Agents benefit from concise tool descriptions and the ability to filter/paginate results. Design
-tools that return focused, relevant data. Some clients support code execution which can help agents filter and process
-data efficiently.
+**Context Management:**
+Agents benefit from concise tool descriptions and the ability to filter/paginate results. Design tools that return focused, relevant data. Some clients support code execution which can help agents filter and process data efficiently.
 
-**Actionable Error Messages:** Error messages should guide agents toward solutions with specific suggestions and next
-steps.
+**Actionable Error Messages:**
+Error messages should guide agents toward solutions with specific suggestions and next steps.
 
 #### 1.2 Study MCP Protocol Documentation
 
@@ -85,11 +82,9 @@ steps.
 
 Start with the sitemap to find relevant pages: `https://modelcontextprotocol.io/sitemap.xml`
 
-Then fetch specific pages with `.md` suffix for markdown format (e.g.,
-`https://modelcontextprotocol.io/specification/draft.md`).
+Then fetch specific pages with `.md` suffix for markdown format (e.g., `https://modelcontextprotocol.io/specification/draft.md`).
 
 Key pages to review:
-
 - Specification overview and architecture
 - Transport mechanisms (streamable HTTP, stdio)
 - Tool, resource, and prompt definitions
@@ -98,47 +93,41 @@ Key pages to review:
 
 **Language Selection:**
 
-| Language                     | Best For                                 | SDK                         |
-| ---------------------------- | ---------------------------------------- | --------------------------- |
+| Language | Best For | SDK |
+|----------|----------|-----|
 | **TypeScript** (recommended) | General MCP servers, broad compatibility | `@modelcontextprotocol/sdk` |
-| **Python**                   | Data/ML pipelines, FastAPI integration   | `mcp` (FastMCP)             |
-| **C#/.NET**                  | Azure/Microsoft ecosystem, enterprise    | `Microsoft.Mcp.Core`        |
+| **Python** | Data/ML pipelines, FastAPI integration | `mcp` (FastMCP) |
+| **C#/.NET** | Azure/Microsoft ecosystem, enterprise | `Microsoft.Mcp.Core` |
 
 **Transport Selection:**
 
-| Transport           | Use Case                                    | Characteristics                    |
-| ------------------- | ------------------------------------------- | ---------------------------------- |
+| Transport | Use Case | Characteristics |
+|-----------|----------|-----------------|
 | **Streamable HTTP** | Remote servers, multi-tenant, Agent Service | Stateless, scalable, requires auth |
-| **stdio**           | Local servers, desktop apps                 | Simple, single-user, no network    |
+| **stdio** | Local servers, desktop apps | Simple, single-user, no network |
 
 **Load framework documentation:**
 
-- **MCP Best Practices**: [📋 View Best Practices](./reference/mcp_best_practices.md) - Core guidelines
+- **MCP Best Practices**: 📋 View Best Practices - Core guidelines
 
 **For TypeScript (recommended):**
-
-- **TypeScript SDK**: Use WebFetch to load
-  `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`
-- [⚡ TypeScript Guide](./reference/node_mcp_server.md) - TypeScript patterns and examples
+- **TypeScript SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`
+- ⚡ TypeScript Guide - TypeScript patterns and examples
 
 **For Python:**
-
-- **Python SDK**: Use WebFetch to load
-  `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
-- [🐍 Python Guide](./reference/python_mcp_server.md) - Python patterns and examples
+- **Python SDK**: Use WebFetch to load `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
+- 🐍 Python Guide - Python patterns and examples
 
 **For C#/.NET (Microsoft ecosystem):**
-
-- [🔷 Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) - C# patterns, Azure MCP architecture, command
-  hierarchy
+- 🔷 Microsoft MCP Patterns - C# patterns, Azure MCP architecture, command hierarchy
 
 #### 1.4 Plan Your Implementation
 
-**Understand the API:** Review the service's API documentation to identify key endpoints, authentication requirements,
-and data models. Use web search and WebFetch as needed.
+**Understand the API:**
+Review the service's API documentation to identify key endpoints, authentication requirements, and data models. Use web search and WebFetch as needed.
 
-**Tool Selection:** Prioritize comprehensive API coverage. List endpoints to implement, starting with the most common
-operations.
+**Tool Selection:**
+Prioritize comprehensive API coverage. List endpoints to implement, starting with the most common operations.
 
 ---
 
@@ -147,15 +136,13 @@ operations.
 #### 2.1 Set Up Project Structure
 
 See language-specific guides for project setup:
-
-- [⚡ TypeScript Guide](./reference/node_mcp_server.md) - Project structure, package.json, tsconfig.json
-- [🐍 Python Guide](./reference/python_mcp_server.md) - Module organization, dependencies
-- [🔷 Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) - C# project structure, command hierarchy
+- ⚡ TypeScript Guide - Project structure, package.json, tsconfig.json
+- 🐍 Python Guide - Module organization, dependencies
+- 🔷 Microsoft MCP Patterns - C# project structure, command hierarchy
 
 #### 2.2 Implement Core Infrastructure
 
 Create shared utilities:
-
 - API client with authentication
 - Error handling helpers
 - Response formatting (JSON/Markdown)
@@ -166,32 +153,27 @@ Create shared utilities:
 For each tool:
 
 **Input Schema:**
-
 - Use Zod (TypeScript) or Pydantic (Python)
 - Include constraints and clear descriptions
 - Add examples in field descriptions
 
 **Output Schema:**
-
 - Define `outputSchema` where possible for structured data
 - Use `structuredContent` in tool responses (TypeScript SDK feature)
 - Helps clients understand and process tool outputs
 
 **Tool Description:**
-
 - Concise summary of functionality
 - Parameter descriptions
 - Return type schema
 
 **Implementation:**
-
 - Async/await for I/O operations
 - Proper error handling with actionable messages
 - Support pagination where applicable
 - Return both text content and structured data when using modern SDKs
 
 **Annotations:**
-
 - `readOnlyHint`: true/false
 - `destructiveHint`: true/false
 - `idempotentHint`: true/false
@@ -204,7 +186,6 @@ For each tool:
 #### 3.1 Code Quality
 
 Review for:
-
 - No duplicated code (DRY principle)
 - Consistent error handling
 - Full type coverage
@@ -213,12 +194,10 @@ Review for:
 #### 3.2 Build and Test
 
 **TypeScript:**
-
 - Run `npm run build` to verify compilation
 - Test with MCP Inspector: `npx @modelcontextprotocol/inspector`
 
 **Python:**
-
 - Verify syntax: `python -m py_compile your_server.py`
 - Test with MCP Inspector
 
@@ -230,7 +209,7 @@ See language-specific guides for detailed testing approaches and quality checkli
 
 After implementing your MCP server, create comprehensive evaluations to test its effectiveness.
 
-**Load [✅ Evaluation Guide](./reference/evaluation.md) for complete evaluation guidelines.**
+**Load ✅ Evaluation Guide for complete evaluation guidelines.**
 
 #### 4.1 Understand Evaluation Purpose
 
@@ -248,7 +227,6 @@ To create effective evaluations, follow the process outlined in the evaluation g
 #### 4.3 Evaluation Requirements
 
 Ensure each question is:
-
 - **Independent**: Not dependent on other questions
 - **Read-only**: Only non-destructive operations required
 - **Complex**: Requiring multiple tool calls and deep exploration
@@ -279,10 +257,8 @@ Create an XML file with this structure:
 Load these resources as needed during development:
 
 ### Core MCP Documentation (Load First)
-
-- **MCP Protocol**: Start with sitemap at `https://modelcontextprotocol.io/sitemap.xml`, then fetch specific pages with
-  `.md` suffix
-- [📋 MCP Best Practices](./reference/mcp_best_practices.md) - Universal MCP guidelines including:
+- **MCP Protocol**: Start with sitemap at `https://modelcontextprotocol.io/sitemap.xml`, then fetch specific pages with `.md` suffix
+- 📋 MCP Best Practices - Universal MCP guidelines including:
   - Server and tool naming conventions
   - Response format guidelines (JSON vs Markdown)
   - Pagination best practices
@@ -290,8 +266,7 @@ Load these resources as needed during development:
   - Security and error handling standards
 
 ### Microsoft MCP Documentation (For Azure/Foundry)
-
-- [🔷 Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) - Microsoft-specific patterns including:
+- 🔷 Microsoft MCP Patterns - Microsoft-specific patterns including:
   - Azure MCP Server architecture (48+ Azure services)
   - C#/.NET command implementation patterns
   - Remote MCP with Foundry Agent Service
@@ -299,28 +274,26 @@ Load these resources as needed during development:
   - Testing infrastructure with Bicep templates
 
 ### SDK Documentation (Load During Phase 1/2)
-
 - **Python SDK**: Fetch from `https://raw.githubusercontent.com/modelcontextprotocol/python-sdk/main/README.md`
 - **TypeScript SDK**: Fetch from `https://raw.githubusercontent.com/modelcontextprotocol/typescript-sdk/main/README.md`
-- **Microsoft MCP SDK**: See [Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) for C#/.NET
+- **Microsoft MCP SDK**: See Microsoft MCP Patterns for C#/.NET
 
 ### Language-Specific Implementation Guides (Load During Phase 2)
-
-- [🐍 Python Implementation Guide](./reference/python_mcp_server.md) - Complete Python/FastMCP guide with:
+- 🐍 Python Implementation Guide - Complete Python/FastMCP guide with:
   - Server initialization patterns
   - Pydantic model examples
   - Tool registration with `@mcp.tool`
   - Complete working examples
   - Quality checklist
 
-- [⚡ TypeScript Implementation Guide](./reference/node_mcp_server.md) - Complete TypeScript guide with:
+- ⚡ TypeScript Implementation Guide - Complete TypeScript guide with:
   - Project structure
   - Zod schema patterns
   - Tool registration with `server.registerTool`
   - Complete working examples
   - Quality checklist
 
-- [🔷 Microsoft MCP Patterns](./reference/microsoft_mcp_patterns.md) - Complete C#/.NET guide with:
+- 🔷 Microsoft MCP Patterns - Complete C#/.NET guide with:
   - Command hierarchy (BaseCommand → GlobalCommand → SubscriptionCommand)
   - Naming conventions (`{Resource}{Operation}Command`)
   - Option handling with `.AsRequired()` / `.AsOptional()`
@@ -328,8 +301,7 @@ Load these resources as needed during development:
   - Live test patterns with Bicep
 
 ### Evaluation Guide (Load During Phase 4)
-
-- [✅ Evaluation Guide](./reference/evaluation.md) - Complete evaluation creation guide with:
+- ✅ Evaluation Guide - Complete evaluation creation guide with:
   - Question creation guidelines
   - Answer verification strategies
   - XML format specifications

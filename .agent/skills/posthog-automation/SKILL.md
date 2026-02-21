@@ -1,10 +1,10 @@
 ---
 name: posthog-automation
-description:
-  "Automate PostHog tasks via Rube MCP (Composio): events, feature flags, projects, user profiles, annotations. Always
-  search tools first for current schemas."
+description: "Automate PostHog tasks via Rube MCP (Composio): events, feature flags, projects, user profiles, annotations. Always search tools first for current schemas."
 requires:
   mcp: [rube]
+risk: unknown
+source: community
 ---
 
 # PostHog Automation via Rube MCP
@@ -19,8 +19,8 @@ Automate PostHog product analytics and feature flag management through Composio'
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just
-add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `posthog`
@@ -34,18 +34,15 @@ add the endpoint and it works.
 **When to use**: User wants to send event data to PostHog for analytics tracking
 
 **Tool sequence**:
-
 1. `POSTHOG_CAPTURE_EVENT` - Send one or more events to PostHog [Required]
 
 **Key parameters**:
-
 - `event`: Event name (e.g., '$pageview', 'user_signed_up', 'purchase_completed')
 - `distinct_id`: Unique user identifier (required)
 - `properties`: Object with event-specific properties
 - `timestamp`: ISO 8601 timestamp (optional; defaults to server time)
 
 **Pitfalls**:
-
 - `distinct_id` is required for every event; identifies the user/device
 - PostHog system events use `$` prefix (e.g., '$pageview', '$identify')
 - Custom events should NOT use the `$` prefix
@@ -57,11 +54,9 @@ add the endpoint and it works.
 **When to use**: User wants to browse or search through captured events
 
 **Tool sequence**:
-
 1. `POSTHOG_LIST_AND_FILTER_PROJECT_EVENTS` - Query events with filters [Required]
 
 **Key parameters**:
-
 - `project_id`: PostHog project ID (required)
 - `event`: Filter by event name
 - `person_id`: Filter by person ID
@@ -71,7 +66,6 @@ add the endpoint and it works.
 - `offset`: Pagination offset
 
 **Pitfalls**:
-
 - `project_id` is required; resolve via LIST_PROJECTS first
 - Date filters use ISO 8601 format (e.g., '2024-01-15T00:00:00Z')
 - Large event volumes require pagination; use `offset` and `limit`
@@ -83,13 +77,11 @@ add the endpoint and it works.
 **When to use**: User wants to create, view, or manage feature flags
 
 **Tool sequence**:
-
 1. `POSTHOG_LIST_AND_MANAGE_PROJECT_FEATURE_FLAGS` - List existing feature flags [Required]
 2. `POSTHOG_RETRIEVE_FEATURE_FLAG_DETAILS` - Get detailed flag configuration [Optional]
 3. `POSTHOG_CREATE_FEATURE_FLAGS_FOR_PROJECT` - Create a new feature flag [Optional]
 
 **Key parameters**:
-
 - For listing: `project_id` (required)
 - For details: `project_id`, `id` (feature flag ID)
 - For creation:
@@ -100,7 +92,6 @@ add the endpoint and it works.
   - `active`: Whether the flag is enabled
 
 **Pitfalls**:
-
 - Feature flag `key` must be unique within a project
 - Flag keys should use kebab-case (e.g., 'my-feature-flag')
 - `filters` define targeting groups with properties and rollout percentages
@@ -112,17 +103,14 @@ add the endpoint and it works.
 **When to use**: User wants to list or inspect PostHog projects and organizations
 
 **Tool sequence**:
-
 1. `POSTHOG_LIST_PROJECTS_IN_ORGANIZATION_WITH_PAGINATION` - List all projects [Required]
 
 **Key parameters**:
-
 - `organization_id`: Organization identifier (may be optional depending on auth)
 - `limit`: Number of results per page
 - `offset`: Pagination offset
 
 **Pitfalls**:
-
 - Project IDs are numeric; used as parameters in most other endpoints
 - Organization ID may be required; check your PostHog setup
 - Pagination is offset-based; iterate until results are empty
@@ -133,17 +121,14 @@ add the endpoint and it works.
 **When to use**: User wants to check current user details or verify API access
 
 **Tool sequence**:
-
 1. `POSTHOG_WHOAMI` - Get current API user information [Optional]
 2. `POSTHOG_RETRIEVE_CURRENT_USER_PROFILE` - Get detailed user profile [Optional]
 
 **Key parameters**:
-
 - No required parameters for either call
 - Returns current authenticated user's details, permissions, and organization info
 
 **Pitfalls**:
-
 - WHOAMI is a lightweight check; use for verifying API connectivity
 - User profile includes organization membership and permissions
 - These endpoints confirm the API key's access level and scope
@@ -153,7 +138,6 @@ add the endpoint and it works.
 ### ID Resolution
 
 **Organization -> Project ID**:
-
 ```
 1. Call POSTHOG_LIST_PROJECTS_IN_ORGANIZATION_WITH_PAGINATION
 2. Find project by name in results
@@ -161,7 +145,6 @@ add the endpoint and it works.
 ```
 
 **Feature flag name -> Flag ID**:
-
 ```
 1. Call POSTHOG_LIST_AND_MANAGE_PROJECT_FEATURE_FLAGS with project_id
 2. Find flag by key or name
@@ -171,13 +154,14 @@ add the endpoint and it works.
 ### Feature Flag Targeting
 
 Feature flags support sophisticated targeting:
-
 ```json
 {
   "filters": {
     "groups": [
       {
-        "properties": [{ "key": "email", "value": "@company.com", "operator": "icontains" }],
+        "properties": [
+          {"key": "email", "value": "@company.com", "operator": "icontains"}
+        ],
         "rollout_percentage": 100
       },
       {
@@ -188,7 +172,6 @@ Feature flags support sophisticated targeting:
   }
 }
 ```
-
 - Groups are evaluated in order; first matching group determines the rollout
 - Properties filter users by their traits
 - Rollout percentage determines what fraction of matching users see the flag
@@ -203,32 +186,27 @@ Feature flags support sophisticated targeting:
 ## Known Pitfalls
 
 **Project IDs**:
-
 - Required for most API endpoints
 - Always resolve project names to numeric IDs first
 - Multiple projects can exist in one organization
 
 **Event Naming**:
-
 - System events use `$` prefix ($pageview, $identify, $autocapture)
 - Custom events should NOT use `$` prefix
 - Event names are case-sensitive; maintain consistency
 
 **Feature Flags**:
-
 - Flag keys must be unique within a project
 - Use kebab-case for flag keys
 - Changes propagate within seconds
 - Deleting a flag is permanent; consider disabling instead
 
 **Rate Limits**:
-
 - Event ingestion has throughput limits
 - Batch events where possible for efficiency
 - API endpoints have per-minute rate limits
 
 **Response Parsing**:
-
 - Response data may be nested under `data` or `results` key
 - Paginated responses include `count`, `next`, `previous` fields
 - Event properties are nested objects; access carefully
@@ -236,13 +214,16 @@ Feature flags support sophisticated targeting:
 
 ## Quick Reference
 
-| Task               | Tool Slug                                             | Key Params                       |
-| ------------------ | ----------------------------------------------------- | -------------------------------- |
-| Capture event      | POSTHOG_CAPTURE_EVENT                                 | event, distinct_id, properties   |
-| List events        | POSTHOG_LIST_AND_FILTER_PROJECT_EVENTS                | project_id, event, after, before |
-| List feature flags | POSTHOG_LIST_AND_MANAGE_PROJECT_FEATURE_FLAGS         | project_id                       |
-| Get flag details   | POSTHOG_RETRIEVE_FEATURE_FLAG_DETAILS                 | project_id, id                   |
-| Create flag        | POSTHOG_CREATE_FEATURE_FLAGS_FOR_PROJECT              | project_id, key, filters         |
-| List projects      | POSTHOG_LIST_PROJECTS_IN_ORGANIZATION_WITH_PAGINATION | organization_id                  |
-| Who am I           | POSTHOG_WHOAMI                                        | (none)                           |
-| User profile       | POSTHOG_RETRIEVE_CURRENT_USER_PROFILE                 | (none)                           |
+| Task | Tool Slug | Key Params |
+|------|-----------|------------|
+| Capture event | POSTHOG_CAPTURE_EVENT | event, distinct_id, properties |
+| List events | POSTHOG_LIST_AND_FILTER_PROJECT_EVENTS | project_id, event, after, before |
+| List feature flags | POSTHOG_LIST_AND_MANAGE_PROJECT_FEATURE_FLAGS | project_id |
+| Get flag details | POSTHOG_RETRIEVE_FEATURE_FLAG_DETAILS | project_id, id |
+| Create flag | POSTHOG_CREATE_FEATURE_FLAGS_FOR_PROJECT | project_id, key, filters |
+| List projects | POSTHOG_LIST_PROJECTS_IN_ORGANIZATION_WITH_PAGINATION | organization_id |
+| Who am I | POSTHOG_WHOAMI | (none) |
+| User profile | POSTHOG_RETRIEVE_CURRENT_USER_PROFILE | (none) |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

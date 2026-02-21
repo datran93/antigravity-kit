@@ -1,7 +1,6 @@
 # Composition & Mapping
 
-Ensuring your ViewModels are correctly instantiated and mapped to their corresponding Views is crucial for a
-maintainable application.
+Ensuring your ViewModels are correctly instantiated and mapped to their corresponding Views is crucial for a maintainable application.
 
 ## ViewModel-to-View Mapping
 
@@ -20,8 +19,7 @@ Register the `DataTypeViewLocator` in your application's data templates:
 
 ### Registration
 
-Mappings can be registered globally or locally. Common practice in Zafiro projects is to use naming conventions or
-explicit registrations made by source generators.
+Mappings can be registered globally or locally. Common practice in Zafiro projects is to use naming conventions or explicit registrations made by source generators.
 
 ## Composition Root
 
@@ -33,11 +31,11 @@ public static class CompositionRoot
     public static IShellViewModel CreateMainViewModel(Control topLevelView)
     {
         var services = new ServiceCollection();
-
+        
         services
             .AddViewModels()
             .AddUIServices(topLevelView);
-
+            
         var serviceProvider = services.BuildServiceProvider();
         return serviceProvider.GetRequiredService<IShellViewModel>();
     }
@@ -73,5 +71,5 @@ public override void OnFrameworkInitializationCompleted()
 }
 ```
 
-> [!TIP] Use `ActivatorUtilities.CreateInstance` when you need to manually instantiate a class while still resolving its
-> dependencies from the `IServiceProvider`.
+> [!TIP]
+> Use `ActivatorUtilities.CreateInstance` when you need to manually instantiate a class while still resolving its dependencies from the `IServiceProvider`.

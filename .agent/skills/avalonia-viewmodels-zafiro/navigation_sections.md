@@ -49,5 +49,5 @@ You can switch the current active section via the `IShellViewModel`:
 shellViewModel.SetSection("Browse");
 ```
 
-> [!IMPORTANT] The `icon` parameter in the `[Section]` attribute supports FontAwesome icons (e.g., `fa-home`) when
-> configured with `ProjektankerIconControlProvider`.
+> [!IMPORTANT]
+> The `icon` parameter in the `[Section]` attribute supports FontAwesome icons (e.g., `fa-home`) when configured with `ProjektankerIconControlProvider`.

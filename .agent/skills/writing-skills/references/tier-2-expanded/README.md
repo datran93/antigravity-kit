@@ -54,12 +54,12 @@ writing-skills/
 
 ## Key Differences from Tier 1
 
-| Aspect         | Tier 1  | Tier 2               |
-| -------------- | ------- | -------------------- |
-| Files          | 1       | 5-20                 |
-| Total lines    | <200    | 200-1000             |
-| Decision logic | None    | Simple tree          |
-| Token cost     | Minimal | Medium (progressive) |
+| Aspect | Tier 1 | Tier 2 |
+|--------|--------|--------|
+| Files | 1 | 5-20 |
+| Total lines | <200 | 200-1000 |
+| Decision logic | None | Simple tree |
+| Token cost | Minimal | Medium (progressive) |
 
 ## Checklist
 

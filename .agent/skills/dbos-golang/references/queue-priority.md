@@ -37,7 +37,6 @@ dbos.RunWorkflow(ctx, processTask, "background-task",
 ```
 
 Priority rules:
-
 - Range: `1` to `2,147,483,647`
 - Lower number = higher priority
 - Workflows **without** assigned priorities have the highest priority (run first)

@@ -7,8 +7,7 @@ tags: pattern, debounce, delay, efficiency
 
 ## Debounce Workflows to Prevent Wasted Work
 
-Use `dbos.NewDebouncer` to delay workflow execution until some time has passed since the last trigger. This prevents
-wasted work when a workflow is triggered multiple times in quick succession.
+Use `dbos.NewDebouncer` to delay workflow execution until some time has passed since the last trigger. This prevents wasted work when a workflow is triggered multiple times in quick succession.
 
 **Incorrect (executing on every trigger):**
 
@@ -36,7 +35,6 @@ func onInputChange(ctx dbos.DBOSContext, userID, userInput string) error {
 ```
 
 Key behaviors:
-
 - First argument to `Debounce` is the debounce key, grouping executions together (e.g., per user)
 - Second argument is the delay duration from the last call
 - `WithDebouncerTimeout` sets a max wait time since the first trigger

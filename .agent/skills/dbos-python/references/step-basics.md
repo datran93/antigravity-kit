@@ -7,8 +7,7 @@ tags: step, external, api, checkpoint
 
 ## Use Steps for External Operations
 
-Any function that performs complex operations, accesses external APIs, or has side effects should be a step. Step
-results are checkpointed, enabling workflow recovery.
+Any function that performs complex operations, accesses external APIs, or has side effects should be a step. Step results are checkpointed, enabling workflow recovery.
 
 **Incorrect (external call in workflow):**
 
@@ -40,13 +39,11 @@ def my_workflow():
 ```
 
 Step requirements:
-
 - Inputs and outputs must be serializable
 - Should not modify global state
 - Can be retried on failure (configurable)
 
 When to use steps:
-
 - API calls to external services
 - File system operations
 - Random number generation

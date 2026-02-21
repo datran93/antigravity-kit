@@ -1,15 +1,13 @@
 ---
 name: moodle-external-api-development
-description:
-  Create custom external web service APIs for Moodle LMS. Use when implementing web services for course management, user
-  tracking, quiz operations, or custom plugin functionality. Covers parameter validation, database operations, error
-  handling, service registration, and Moodle coding standards.
+description: "Create custom external web service APIs for Moodle LMS. Use when implementing web services for course management, user tracking, quiz operations, or custom plugin functionality. Covers parameter va..."
+risk: unknown
+source: community
 ---
 
 # Moodle External API Development
 
-This skill guides you through creating custom external web service APIs for Moodle LMS, following Moodle's external API
-framework and coding standards.
+This skill guides you through creating custom external web service APIs for Moodle LMS, following Moodle's external API framework and coding standards.
 
 ## When to Use This Skill
 
@@ -46,14 +44,13 @@ use external_single_structure;
 use external_value;
 
 class your_api_name extends external_api {
-
+    
     // Three required methods will go here
-
+    
 }
 ```
 
 **Key Points**:
-
 - Class must extend `external_api`
 - Namespace follows: `local_pluginname\external` or `mod_modname\external`
 - Include the security check: `defined('MOODLE_INTERNAL') || die();`
@@ -75,7 +72,6 @@ public static function execute_parameters() {
 ```
 
 **Common Parameter Types**:
-
 - `PARAM_INT` - Integers
 - `PARAM_TEXT` - Plain text (HTML stripped)
 - `PARAM_RAW` - Raw text (no cleaning)
@@ -84,13 +80,11 @@ public static function execute_parameters() {
 - `PARAM_ALPHANUMEXT` - Alphanumeric with extended chars
 
 **Structures**:
-
 - `external_value` - Single value
 - `external_single_structure` - Object with named fields
 - `external_multiple_structure` - Array of items
 
 **Value Flags**:
-
 - `VALUE_REQUIRED` - Parameter must be provided
 - `VALUE_OPTIONAL` - Parameter is optional
 - `VALUE_DEFAULT, defaultvalue` - Optional with default
@@ -124,7 +118,7 @@ public static function execute($userid, $courseid, $options = []) {
             WHERE userid = :userid
               AND courseid = :courseid
             LIMIT :limit";
-
+    
     $records = $DB->get_records_sql($sql, [
         'userid' => $params['userid'],
         'courseid' => $params['courseid'],
@@ -149,7 +143,6 @@ public static function execute($userid, $courseid, $options = []) {
 ```
 
 **Critical Steps**:
-
 1. **Always validate parameters** using `validate_parameters()`
 2. **Check context** using `validate_context()`
 3. **Verify capabilities** using `require_capability()`
@@ -174,7 +167,6 @@ public static function execute_returns() {
 ```
 
 **Return Structure Rules**:
-
 - Must match exactly what `execute()` returns
 - Use appropriate parameter types
 - Document each field with description
@@ -213,7 +205,6 @@ $services = [
 ```
 
 **Service Registration Keys**:
-
 - `classname` - Full namespaced class name
 - `methodname` - Always 'execute'
 - `type` - 'read' (SELECT) or 'write' (INSERT/UPDATE/DELETE)
@@ -240,7 +231,7 @@ public static function execute($userid, $courseid) {
 
     try {
         self::log_debug("API called: userid=$userid, courseid=$courseid");
-
+        
         // Validate parameters
         $params = self::validate_parameters(self::execute_parameters(), [
             'userid' => $userid,
@@ -248,7 +239,7 @@ public static function execute($userid, $courseid) {
         ]);
 
         // Your logic here
-
+        
         self::log_debug("API completed successfully");
         return $result;
 
@@ -270,7 +261,6 @@ public static function execute($userid, $courseid) {
 ```
 
 **Error Handling Best Practices**:
-
 - Wrap logic in try-catch blocks
 - Log errors with timestamps and context
 - Capture SQL queries on database errors
@@ -288,10 +278,10 @@ $transaction = $DB->start_delegated_transaction();
 try {
     // Insert record
     $recordid = $DB->insert_record('your_table', $dataobject);
-
+    
     // Update related records
     $DB->set_field('another_table', 'status', 1, ['recordid' => $recordid]);
-
+    
     // Commit transaction
     $transaction->allow_commit();
 } catch (\Exception $e) {
@@ -375,7 +365,7 @@ $DB->set_field('course_modules', 'availability', json_encode($restriction), ['id
 ```php
 private static function get_random_questions($categoryid, $tagname, $limit) {
     global $DB;
-
+    
     $sql = "SELECT q.id
             FROM {question} q
             INNER JOIN {question_versions} qv ON qv.questionid = q.id
@@ -387,12 +377,12 @@ private static function get_random_questions($categoryid, $tagname, $limit) {
               AND qc.id = :categoryid
               AND ti.itemtype = 'question'
               AND q.qtype = 'multichoice'";
-
+    
     $qids = $DB->get_fieldset_sql($sql, [
         'categoryid' => $categoryid,
         'tagname' => strtolower($tagname)
     ]);
-
+    
     shuffle($qids);
     return array_slice($qids, 0, $limit);
 }
@@ -428,23 +418,19 @@ curl -X POST "https://yourmoodle.com/webservice/rest/server.php" \
 ### 3. Via JavaScript (AJAX)
 
 ```javascript
-require(["core/ajax"], function (ajax) {
-  var promises = ajax.call([
-    {
-      methodname: "local_yourplugin_your_api_name",
-      args: {
-        userid: 2,
-        courseid: 3,
-      },
-    },
-  ]);
+require(['core/ajax'], function(ajax) {
+    var promises = ajax.call([{
+        methodname: 'local_yourplugin_your_api_name',
+        args: {
+            userid: 2,
+            courseid: 3
+        }
+    }]);
 
-  promises[0]
-    .done(function (response) {
-      console.log("Success:", response);
-    })
-    .fail(function (error) {
-      console.error("Error:", error);
+    promises[0].done(function(response) {
+        console.log('Success:', response);
+    }).fail(function(error) {
+        console.error('Error:', error);
     });
 });
 ```
@@ -452,41 +438,31 @@ require(["core/ajax"], function (ajax) {
 ## Common Pitfalls & Solutions
 
 ### 1. "Function not found" Error
-
-**Solution**:
-
+**Solution**: 
 - Purge caches: **Site administration > Development > Purge all caches**
 - Verify function name in services.php matches exactly
 - Check namespace and class name are correct
 
 ### 2. "Invalid parameter value detected"
-
 **Solution**:
-
 - Ensure parameter types match between definition and usage
 - Check required vs optional parameters
 - Validate nested structure definitions
 
 ### 3. SQL Injection Vulnerabilities
-
 **Solution**:
-
 - Always use placeholder parameters (`:paramname`)
 - Never concatenate user input into SQL strings
 - Use Moodle's database methods: `get_record()`, `get_records()`, etc.
 
 ### 4. Permission Denied Errors
-
 **Solution**:
-
 - Call `self::validate_context($context)` early in execute()
 - Check required capabilities match user's permissions
 - Verify user has role assignments in the context
 
 ### 5. Transaction Deadlocks
-
 **Solution**:
-
 - Keep transactions short
 - Always commit or rollback in finally blocks
 - Avoid nested transactions
@@ -576,7 +552,6 @@ class get_quiz_attempts extends external_api {
 ### Complex Write API (Create Quiz from Categories)
 
 See attached `create_quiz_from_categories.php` for a comprehensive example including:
-
 - Multiple database insertions
 - Course module creation
 - Quiz instance configuration
@@ -587,21 +562,21 @@ See attached `create_quiz_from_categories.php` for a comprehensive example inclu
 
 ## Quick Reference: Common Moodle Tables
 
-| Table                     | Purpose                                      |
-| ------------------------- | -------------------------------------------- |
-| `{user}`                  | User accounts                                |
-| `{course}`                | Courses                                      |
-| `{course_modules}`        | Activity instances in courses                |
-| `{modules}`               | Available activity types (quiz, forum, etc.) |
-| `{quiz}`                  | Quiz configurations                          |
-| `{quiz_attempts}`         | Quiz attempt records                         |
-| `{question}`              | Question bank                                |
-| `{question_categories}`   | Question categories                          |
-| `{grade_items}`           | Gradebook items                              |
-| `{grade_grades}`          | Student grades                               |
-| `{groups}`                | Course groups                                |
-| `{groups_members}`        | Group memberships                            |
-| `{logstore_standard_log}` | Activity logs                                |
+| Table | Purpose |
+|-------|---------|
+| `{user}` | User accounts |
+| `{course}` | Courses |
+| `{course_modules}` | Activity instances in courses |
+| `{modules}` | Available activity types (quiz, forum, etc.) |
+| `{quiz}` | Quiz configurations |
+| `{quiz_attempts}` | Quiz attempt records |
+| `{question}` | Question bank |
+| `{question_categories}` | Question categories |
+| `{grade_items}` | Gradebook items |
+| `{grade_grades}` | Student grades |
+| `{groups}` | Course groups |
+| `{groups_members}` | Group memberships |
+| `{logstore_standard_log}` | Activity logs |
 
 ## Additional Resources
 

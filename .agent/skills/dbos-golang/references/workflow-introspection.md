@@ -57,8 +57,7 @@ for _, step := range steps {
 }
 ```
 
-Workflow status values: `WorkflowStatusPending`, `WorkflowStatusEnqueued`, `WorkflowStatusSuccess`,
-`WorkflowStatusError`, `WorkflowStatusCancelled`, `WorkflowStatusMaxRecoveryAttemptsExceeded`
+Workflow status values: `WorkflowStatusPending`, `WorkflowStatusEnqueued`, `WorkflowStatusSuccess`, `WorkflowStatusError`, `WorkflowStatusCancelled`, `WorkflowStatusMaxRecoveryAttemptsExceeded`
 
 To optimize performance, avoid loading inputs/outputs when you don't need them (they are not loaded by default).
 

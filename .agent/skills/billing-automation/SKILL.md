@@ -1,14 +1,13 @@
 ---
 name: billing-automation
-description:
-  Build automated billing systems for recurring payments, invoicing, subscription lifecycle, and dunning management. Use
-  when implementing subscription billing, automating invoicing, or managing recurring payment systems.
+description: "Build automated billing systems for recurring payments, invoicing, subscription lifecycle, and dunning management. Use when implementing subscription billing, automating invoicing, or managing recu..."
+risk: unknown
+source: community
 ---
 
 # Billing Automation
 
-Master automated billing systems including recurring billing, invoice generation, dunning management, proration, and tax
-calculation.
+Master automated billing systems including recurring billing, invoice generation, dunning management, proration, and tax calculation.
 
 ## Use this skill when
 

@@ -32,7 +32,6 @@ def delayed_task(delay_seconds, task):
 ```
 
 Use cases for durable sleep:
-
 - Schedule a task for the future
 - Wait between retries
 - Implement delays spanning hours, days, or weeks

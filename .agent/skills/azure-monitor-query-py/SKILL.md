@@ -1,9 +1,11 @@
 ---
 name: azure-monitor-query-py
-description: |
+description: "|"
   Azure Monitor Query SDK for Python. Use for querying Log Analytics workspaces and Azure Monitor metrics.
   Triggers: "azure-monitor-query", "LogsQueryClient", "MetricsQueryClient", "Log Analytics", "Kusto queries", "Azure metrics".
 package: azure-monitor-query
+risk: unknown
+source: community
 ---
 
 # Azure Monitor Query SDK for Python
@@ -198,13 +200,13 @@ from azure.identity.aio import DefaultAzureCredential
 async def query_logs():
     credential = DefaultAzureCredential()
     client = LogsQueryClient(credential)
-
+    
     response = await client.query_workspace(
         workspace_id=workspace_id,
         query="AppRequests | take 10",
         timespan=timedelta(hours=1)
     )
-
+    
     await client.close()
     await credential.close()
     return response
@@ -236,10 +238,10 @@ AppExceptions
 
 ## Client Types
 
-| Client               | Purpose                        |
-| -------------------- | ------------------------------ |
-| `LogsQueryClient`    | Query Log Analytics workspaces |
-| `MetricsQueryClient` | Query Azure Monitor metrics    |
+| Client | Purpose |
+|--------|---------|
+| `LogsQueryClient` | Query Log Analytics workspaces |
+| `MetricsQueryClient` | Query Azure Monitor metrics |
 
 ## Best Practices
 
@@ -250,3 +252,6 @@ AppExceptions
 5. **Convert to DataFrame** for easier data analysis
 6. **Use aggregations** to summarize metric data
 7. **Filter by dimensions** to narrow metric results
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

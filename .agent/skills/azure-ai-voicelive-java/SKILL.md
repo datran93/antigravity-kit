@@ -1,9 +1,11 @@
 ---
 name: azure-ai-voicelive-java
-description: |
+description: "|"
   Azure AI VoiceLive SDK for Java. Real-time bidirectional voice conversations with AI assistants using WebSocket.
   Triggers: "VoiceLiveClient java", "voice assistant java", "real-time voice java", "audio streaming java", "voice activity detection java".
 package: com.azure:azure-ai-voicelive
+risk: unknown
+source: community
 ---
 
 # Azure AI VoiceLive SDK for Java
@@ -55,11 +57,11 @@ VoiceLiveAsyncClient client = new VoiceLiveClientBuilder()
 
 ## Key Concepts
 
-| Concept                       | Description                               |
-| ----------------------------- | ----------------------------------------- |
-| `VoiceLiveAsyncClient`        | Main entry point for voice sessions       |
+| Concept | Description |
+|---------|-------------|
+| `VoiceLiveAsyncClient` | Main entry point for voice sessions |
 | `VoiceLiveSessionAsyncClient` | Active WebSocket connection for streaming |
-| `VoiceLiveSessionOptions`     | Configuration for session behavior        |
+| `VoiceLiveSessionOptions` | Configuration for session behavior |
 
 ### Audio Requirements
 
@@ -78,14 +80,14 @@ import reactor.core.publisher.Mono;
 client.startSession("gpt-4o-realtime-preview")
     .flatMap(session -> {
         System.out.println("Session started");
-
+        
         // Subscribe to events
         session.receiveEvents()
             .subscribe(
                 event -> System.out.println("Event: " + event.getType()),
                 error -> System.err.println("Error: " + error.getMessage())
             );
-
+        
         return Mono.just(session);
     })
     .block();
@@ -137,7 +139,7 @@ session.sendInputAudio(BinaryData.fromBytes(audioData)).subscribe();
 ```java
 session.receiveEvents().subscribe(event -> {
     ServerEventType eventType = event.getType();
-
+    
     if (ServerEventType.SESSION_CREATED.equals(eventType)) {
         System.out.println("Session created");
     } else if (ServerEventType.INPUT_AUDIO_BUFFER_SPEECH_STARTED.equals(eventType)) {
@@ -219,7 +221,10 @@ session.receiveEvents()
 
 ## Reference Links
 
-| Resource      | URL                                                                                         |
-| ------------- | ------------------------------------------------------------------------------------------- |
-| GitHub Source | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-voicelive             |
-| Samples       | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-voicelive/src/samples |
+| Resource | URL |
+|----------|-----|
+| GitHub Source | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-voicelive |
+| Samples | https://github.com/Azure/azure-sdk-for-java/tree/main/sdk/ai/azure-ai-voicelive/src/samples |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

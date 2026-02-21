@@ -1,11 +1,9 @@
 ---
 name: agent-framework-azure-ai-py
-description:
-  Build Azure AI Foundry agents using the Microsoft Agent Framework Python SDK (agent-framework-azure-ai). Use when
-  creating persistent agents with AzureAIAgentsProvider, using hosted tools (code interpreter, file search, web search),
-  integrating MCP servers, managing conversation threads, or implementing streaming responses. Covers function tools,
-  structured outputs, and multi-tool agents.
+description: "Build Azure AI Foundry agents using the Microsoft Agent Framework Python SDK (agent-framework-azure-ai). Use when creating persistent agents with AzureAIAgentsProvider, using hosted tools (code int..."
 package: agent-framework-azure-ai
+risk: unknown
+source: community
 ---
 
 # Agent Framework Azure Hosted Agents
@@ -72,7 +70,7 @@ async def main():
             name="MyAgent",
             instructions="You are a helpful assistant.",
         )
-
+        
         result = await agent.run("Hello!")
         print(result.text)
 
@@ -108,7 +106,7 @@ async def main():
             instructions="You help with weather and time queries.",
             tools=[get_weather, get_current_time],  # Pass functions directly
         )
-
+        
         result = await agent.run("What's the weather in Seattle?")
         print(result.text)
 ```
@@ -137,7 +135,7 @@ async def main():
                 HostedWebSearchTool(name="Bing"),
             ],
         )
-
+        
         result = await agent.run("Calculate the factorial of 20 in Python")
         print(result.text)
 ```
@@ -154,7 +152,7 @@ async def main():
             name="StreamingAgent",
             instructions="You are a helpful assistant.",
         )
-
+        
         print("Agent: ", end="", flush=True)
         async for chunk in agent.run_stream("Tell me a short story"):
             if chunk.text:
@@ -178,18 +176,18 @@ async def main():
             instructions="You are a helpful assistant.",
             tools=[get_weather],
         )
-
+        
         # Create thread for conversation persistence
         thread = agent.get_new_thread()
-
+        
         # First turn
         result1 = await agent.run("What's the weather in Seattle?", thread=thread)
         print(f"Agent: {result1.text}")
-
+        
         # Second turn - context is maintained
         result2 = await agent.run("What about Portland?", thread=thread)
         print(f"Agent: {result2.text}")
-
+        
         # Save thread ID for later resumption
         print(f"Conversation ID: {thread.conversation_id}")
 ```
@@ -203,7 +201,7 @@ from azure.identity.aio import AzureCliCredential
 
 class WeatherResponse(BaseModel):
     model_config = ConfigDict(extra="forbid")
-
+    
     location: str
     temperature: float
     unit: str
@@ -219,7 +217,7 @@ async def main():
             instructions="Provide weather information in structured format.",
             response_format=WeatherResponse,
         )
-
+        
         result = await agent.run("Weather in Seattle?")
         weather = WeatherResponse.model_validate_json(result.text)
         print(f"{weather.location}: {weather.temperature}°{weather.unit}")
@@ -227,21 +225,21 @@ async def main():
 
 ## Provider Methods
 
-| Method                | Description                          |
-| --------------------- | ------------------------------------ |
-| `create_agent()`      | Create new agent on Azure AI service |
-| `get_agent(agent_id)` | Retrieve existing agent by ID        |
+| Method | Description |
+|--------|-------------|
+| `create_agent()` | Create new agent on Azure AI service |
+| `get_agent(agent_id)` | Retrieve existing agent by ID |
 | `as_agent(sdk_agent)` | Wrap SDK Agent object (no HTTP call) |
 
 ## Hosted Tools Quick Reference
 
-| Tool                        | Import                                                  | Purpose              |
-| --------------------------- | ------------------------------------------------------- | -------------------- |
-| `HostedCodeInterpreterTool` | `from agent_framework import HostedCodeInterpreterTool` | Execute Python code  |
-| `HostedFileSearchTool`      | `from agent_framework import HostedFileSearchTool`      | Search vector stores |
-| `HostedWebSearchTool`       | `from agent_framework import HostedWebSearchTool`       | Bing web search      |
-| `HostedMCPTool`             | `from agent_framework import HostedMCPTool`             | Service-managed MCP  |
-| `MCPStreamableHTTPTool`     | `from agent_framework import MCPStreamableHTTPTool`     | Client-managed MCP   |
+| Tool | Import | Purpose |
+|------|--------|---------|
+| `HostedCodeInterpreterTool` | `from agent_framework import HostedCodeInterpreterTool` | Execute Python code |
+| `HostedFileSearchTool` | `from agent_framework import HostedFileSearchTool` | Search vector stores |
+| `HostedWebSearchTool` | `from agent_framework import HostedWebSearchTool` | Bing web search |
+| `HostedMCPTool` | `from agent_framework import HostedMCPTool` | Service-managed MCP |
+| `MCPStreamableHTTPTool` | `from agent_framework import MCPStreamableHTTPTool` | Client-managed MCP |
 
 ## Complete Example
 
@@ -290,23 +288,23 @@ async def main():
                 mcp_tool,
             ],
         )
-
+        
         thread = agent.get_new_thread()
-
+        
         # Non-streaming
         result = await agent.run(
             "Search for Python best practices and summarize",
             thread=thread,
         )
         print(f"Response: {result.text}")
-
+        
         # Streaming
         print("\nStreaming: ", end="")
         async for chunk in agent.run_stream("Continue with examples", thread=thread):
             if chunk.text:
                 print(chunk.text, end="", flush=True)
         print()
-
+        
         # Structured output
         result = await agent.run(
             "Analyze findings",
@@ -331,7 +329,10 @@ if __name__ == "__main__":
 
 ## Reference Files
 
-- [references/tools.md](references/tools.md): Detailed hosted tool patterns
-- [references/mcp.md](references/mcp.md): MCP integration (hosted + local)
-- [references/threads.md](references/threads.md): Thread and conversation management
-- [references/advanced.md](references/advanced.md): OpenAPI, citations, structured outputs
+- references/tools.md: Detailed hosted tool patterns
+- references/mcp.md: MCP integration (hosted + local)
+- references/threads.md: Thread and conversation management
+- references/advanced.md: OpenAPI, citations, structured outputs
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -1,8 +1,10 @@
 ---
 name: conductor-new-track
-description: Create a new track with specification and phased implementation plan
+description: "Create a new track with specification and phased implementation plan"
 metadata:
   argument-hint: <feature|bug|chore|refactor> <name>
+risk: unknown
+source: community
 ---
 
 # New Track
@@ -192,7 +194,10 @@ Create `conductor/tracks/{trackId}/spec.md`:
 ```markdown
 # Specification: {Track Title}
 
-**Track ID:** {trackId} **Type:** {Feature|Bug|Chore|Refactor} **Created:** {YYYY-MM-DD} **Status:** Draft
+**Track ID:** {trackId}
+**Type:** {Feature|Bug|Chore|Refactor}
+**Created:** {YYYY-MM-DD}
+**Status:** Draft
 
 ## Summary
 
@@ -257,7 +262,10 @@ After spec approval, generate `conductor/tracks/{trackId}/plan.md`:
 ```markdown
 # Implementation Plan: {Track Title}
 
-**Track ID:** {trackId} **Spec:** [spec.md](./spec.md) **Created:** {YYYY-MM-DD} **Status:** [ ] Not Started
+**Track ID:** {trackId}
+**Spec:** spec.md
+**Created:** {YYYY-MM-DD}
+**Status:** [ ] Not Started
 
 ## Overview
 
@@ -374,12 +382,13 @@ After plan approval:
    ```markdown
    # Track: {Track Title}
 
-   **ID:** {trackId} **Status:** Pending
+   **ID:** {trackId}
+   **Status:** Pending
 
    ## Documents
 
-   - [Specification](./spec.md)
-   - [Implementation Plan](./plan.md)
+   - Specification
+   - Implementation Plan
 
    ## Progress
 
@@ -388,8 +397,8 @@ After plan approval:
 
    ## Quick Links
 
-   - [Back to Tracks](../../tracks.md)
-   - [Product Context](../../product.md)
+   - Back to Tracks
+   - Product Context
    ```
 
 4. Register in `conductor/tracks.md`:

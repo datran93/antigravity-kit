@@ -1,8 +1,6 @@
 ---
 name: n8n-code-python
-description:
-  "Write Python code in n8n Code nodes. Use when writing Python in n8n, using _input/_json/_node syntax, working with
-  standard library, or need to understand Python limitations in n8n Code nodes."
+description: "Write Python code in n8n Code nodes. Use when writing Python in n8n, using _input/_json/_node syntax, working with standard library, or need to understand Python limitations in n8n Code nodes."
 source: "https://github.com/czlonkowski/n8n-skills/tree/main/skills/n8n-code-python"
 risk: safe
 ---
@@ -16,13 +14,11 @@ Expert guidance for writing Python code in n8n Code nodes.
 ## ⚠️ Important: JavaScript First
 
 **Recommendation**: Use **JavaScript for 95% of use cases**. Only use Python when:
-
 - You need specific Python standard library functions
 - You're significantly more comfortable with Python syntax
 - You're doing data transformations better suited to Python
 
 **Why JavaScript is preferred:**
-
 - Full n8n helper functions ($helpers.httpRequest, etc.)
 - Luxon DateTime library for advanced date/time operations
 - No external library limitations
@@ -117,7 +113,6 @@ return [{
 n8n offers two Python execution modes:
 
 ### Python (Beta) - Recommended
-
 - **Use**: `_input`, `_json`, `_node` helper syntax
 - **Best for**: Most Python use cases
 - **Helpers available**: `_now`, `_today`, `_jmespath()`
@@ -137,7 +132,6 @@ return [{
 ```
 
 ### Python (Native) (Beta)
-
 - **Use**: `_items`, `_item` variables only
 - **No helpers**: No `_input`, `_now`, etc.
 - **More limited**: Standard Python only
@@ -164,7 +158,7 @@ return processed
 
 ## Data Access Patterns
 
-### Pattern 1: \_input.all() - Most Common
+### Pattern 1: _input.all() - Most Common
 
 **Use when**: Processing arrays, batch operations, aggregations
 
@@ -187,7 +181,7 @@ for item in valid:
 return processed
 ```
 
-### Pattern 2: \_input.first() - Very Common
+### Pattern 2: _input.first() - Very Common
 
 **Use when**: Working with single objects, API responses
 
@@ -204,7 +198,7 @@ return [{
 }]
 ```
 
-### Pattern 3: \_input.item - Each Item Mode Only
+### Pattern 3: _input.item - Each Item Mode Only
 
 **Use when**: In "Run Once for Each Item" mode
 
@@ -220,7 +214,7 @@ return [{
 }]
 ```
 
-### Pattern 4: \_node - Reference Other Nodes
+### Pattern 4: _node - Reference Other Nodes
 
 **Use when**: Need data from specific nodes in workflow
 
@@ -239,7 +233,7 @@ return [{
 }]
 ```
 
-**See**: [DATA_ACCESS.md](DATA_ACCESS.md) for comprehensive guide
+**See**: DATA_ACCESS.md for comprehensive guide
 
 ---
 
@@ -261,10 +255,9 @@ webhook_data = _json.get("body", {})
 name = webhook_data.get("name")
 ```
 
-**Why**: Webhook node wraps all request data under `body` property. This includes POST data, query parameters, and JSON
-payloads.
+**Why**: Webhook node wraps all request data under `body` property. This includes POST data, query parameters, and JSON payloads.
 
-**See**: [DATA_ACCESS.md](DATA_ACCESS.md) for full webhook structure details
+**See**: DATA_ACCESS.md for full webhook structure details
 
 ---
 
@@ -327,7 +320,7 @@ return [{"data": value}]  # Should be {"json": value}
 
 **Why it matters**: Next nodes expect list format. Incorrect format causes workflow execution to fail.
 
-**See**: [ERROR_PATTERNS.md](ERROR_PATTERNS.md) #2 for detailed error solutions
+**See**: ERROR_PATTERNS.md #2 for detailed error solutions
 
 ---
 
@@ -365,22 +358,19 @@ import statistics  # ✅ Statistical functions
 ### Workarounds
 
 **Need HTTP requests?**
-
 - ✅ Use **HTTP Request node** before Code node
 - ✅ Or switch to **JavaScript** and use `$helpers.httpRequest()`
 
 **Need data analysis (pandas/numpy)?**
-
 - ✅ Use Python **statistics** module for basic stats
 - ✅ Or switch to **JavaScript** for most operations
 - ✅ Manual calculations with lists and dictionaries
 
 **Need web scraping (BeautifulSoup)?**
-
 - ✅ Use **HTTP Request node** + **HTML Extract node**
 - ✅ Or switch to **JavaScript** with regex/string methods
 
-**See**: [STANDARD_LIBRARY.md](STANDARD_LIBRARY.md) for complete reference
+**See**: STANDARD_LIBRARY.md for complete reference
 
 ---
 
@@ -389,7 +379,6 @@ import statistics  # ✅ Statistical functions
 Based on production workflows, here are the most useful Python patterns:
 
 ### 1. Data Transformation
-
 Transform all items with list comprehensions
 
 ```python
@@ -408,7 +397,6 @@ return [
 ```
 
 ### 2. Filtering & Aggregation
-
 Sum, filter, count with built-in functions
 
 ```python
@@ -425,7 +413,6 @@ return [{
 ```
 
 ### 3. String Processing with Regex
-
 Extract patterns from text
 
 ```python
@@ -452,7 +439,6 @@ return [{
 ```
 
 ### 4. Data Validation
-
 Validate and clean data
 
 ```python
@@ -481,7 +467,6 @@ return validated
 ```
 
 ### 5. Statistical Analysis
-
 Calculate statistics with statistics module
 
 ```python
@@ -505,7 +490,7 @@ else:
     return [{"json": {"error": "No values found"}}]
 ```
 
-**See**: [COMMON_PATTERNS.md](COMMON_PATTERNS.md) for 10 detailed Python patterns
+**See**: COMMON_PATTERNS.md for 10 detailed Python patterns
 
 ---
 
@@ -569,7 +554,7 @@ email = _json["body"]["email"]
 email = _json.get("body", {}).get("email", "no-email")
 ```
 
-**See**: [ERROR_PATTERNS.md](ERROR_PATTERNS.md) for comprehensive error guide
+**See**: ERROR_PATTERNS.md for comprehensive error guide
 
 ---
 
@@ -613,7 +598,7 @@ from statistics import mean, median, stdev
 average = mean([1, 2, 3, 4, 5])
 ```
 
-**See**: [STANDARD_LIBRARY.md](STANDARD_LIBRARY.md) for complete reference
+**See**: STANDARD_LIBRARY.md for complete reference
 
 ---
 
@@ -677,21 +662,18 @@ print(f"First item: {items[0] if items else 'None'}")
 ## When to Use Python vs JavaScript
 
 ### Use Python When:
-
 - ✅ You need `statistics` module for statistical operations
 - ✅ You're significantly more comfortable with Python syntax
 - ✅ Your logic maps well to list comprehensions
 - ✅ You need specific standard library functions
 
 ### Use JavaScript When:
-
 - ✅ You need HTTP requests ($helpers.httpRequest())
 - ✅ You need advanced date/time (DateTime/Luxon)
 - ✅ You want better n8n integration
 - ✅ **For 95% of use cases** (recommended)
 
 ### Consider Other Nodes When:
-
 - ❌ Simple field mapping → Use **Set** node
 - ❌ Basic filtering → Use **Filter** node
 - ❌ Simple conditionals → Use **IF** or **Switch** node
@@ -704,36 +686,30 @@ print(f"First item: {items[0] if items else 'None'}")
 ### Works With:
 
 **n8n Expression Syntax**:
-
 - Expressions use `{{ }}` syntax in other nodes
 - Code nodes use Python directly (no `{{ }}`)
 - When to use expressions vs code
 
 **n8n MCP Tools Expert**:
-
 - How to find Code node: `search_nodes({query: "code"})`
 - Get configuration help: `get_node_essentials("nodes-base.code")`
 - Validate code: `validate_node_operation()`
 
 **n8n Node Configuration**:
-
 - Mode selection (All Items vs Each Item)
 - Language selection (Python vs JavaScript)
 - Understanding property dependencies
 
 **n8n Workflow Patterns**:
-
 - Code nodes in transformation step
 - When to use Python vs JavaScript in patterns
 
 **n8n Validation Expert**:
-
 - Validate Code node configuration
 - Handle validation errors
 - Auto-fix common issues
 
 **n8n Code JavaScript**:
-
 - When to use JavaScript instead
 - Comparison of JavaScript vs Python features
 - Migration from Python to JavaScript
@@ -760,18 +736,15 @@ Before deploying Python Code nodes, verify:
 ## Additional Resources
 
 ### Related Files
-
-- [DATA_ACCESS.md](DATA_ACCESS.md) - Comprehensive Python data access patterns
-- [COMMON_PATTERNS.md](COMMON_PATTERNS.md) - 10 Python patterns for n8n
-- [ERROR_PATTERNS.md](ERROR_PATTERNS.md) - Top 5 errors and solutions
-- [STANDARD_LIBRARY.md](STANDARD_LIBRARY.md) - Complete standard library reference
+- DATA_ACCESS.md - Comprehensive Python data access patterns
+- COMMON_PATTERNS.md - 10 Python patterns for n8n
+- ERROR_PATTERNS.md - Top 5 errors and solutions
+- STANDARD_LIBRARY.md - Complete standard library reference
 
 ### n8n Documentation
-
 - Code Node Guide: https://docs.n8n.io/code/code-node/
 - Python in n8n: https://docs.n8n.io/code/builtin/python-modules/
 
 ---
 
-**Ready to write Python in n8n Code nodes - but consider JavaScript first!** Use Python for specific needs, reference
-the error patterns guide to avoid common mistakes, and leverage the standard library effectively.
+**Ready to write Python in n8n Code nodes - but consider JavaScript first!** Use Python for specific needs, reference the error patterns guide to avoid common mistakes, and leverage the standard library effectively.

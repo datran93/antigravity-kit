@@ -1,8 +1,10 @@
 ---
 name: azure-resource-manager-playwright-dotnet
-description: |
+description: "|"
   Azure Resource Manager SDK for Microsoft Playwright Testing in .NET. Use for MANAGEMENT PLANE operations: creating/managing Playwright Testing workspaces, checking name availability, and managing workspace quotas via Azure Resource Manager. NOT for running Playwright tests - use Azure.Developer.MicrosoftPlaywrightTesting.NUnit for that. Triggers: "Playwright workspace", "create Playwright Testing workspace", "manage Playwright resources", "ARM Playwright", "PlaywrightWorkspaceResource", "provision Playwright Testing".
 package: Azure.ResourceManager.Playwright
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.Playwright (.NET)
@@ -10,10 +12,8 @@ package: Azure.ResourceManager.Playwright
 Management plane SDK for provisioning and managing Microsoft Playwright Testing workspaces via Azure Resource Manager.
 
 > **⚠️ Management vs Test Execution**
->
 > - **This SDK (Azure.ResourceManager.Playwright)**: Create workspaces, manage quotas, check name availability
-> - **Test Execution SDK (Azure.Developer.MicrosoftPlaywrightTesting.NUnit)**: Run Playwright tests at scale on cloud
->   browsers
+> - **Test Execution SDK (Azure.Developer.MicrosoftPlaywrightTesting.NUnit)**: Run Playwright tests at scale on cloud browsers
 
 ## Installation
 
@@ -203,27 +203,27 @@ await workspace.Value.DeleteAsync(WaitUntil.Completed);
 
 ## Key Types Reference
 
-| Type                                     | Purpose                                   |
-| ---------------------------------------- | ----------------------------------------- |
-| `ArmClient`                              | Entry point for all ARM operations        |
-| `PlaywrightWorkspaceResource`            | Represents a Playwright Testing workspace |
-| `PlaywrightWorkspaceCollection`          | Collection for workspace CRUD             |
-| `PlaywrightWorkspaceData`                | Workspace creation/response payload       |
-| `PlaywrightWorkspacePatch`               | Workspace update payload                  |
-| `PlaywrightQuotaResource`                | Subscription-level quota information      |
-| `PlaywrightWorkspaceQuotaResource`       | Workspace-level quota information         |
-| `PlaywrightExtensions`                   | Extension methods for ARM resources       |
-| `PlaywrightCheckNameAvailabilityContent` | Name availability check request           |
+| Type | Purpose |
+|------|---------|
+| `ArmClient` | Entry point for all ARM operations |
+| `PlaywrightWorkspaceResource` | Represents a Playwright Testing workspace |
+| `PlaywrightWorkspaceCollection` | Collection for workspace CRUD |
+| `PlaywrightWorkspaceData` | Workspace creation/response payload |
+| `PlaywrightWorkspacePatch` | Workspace update payload |
+| `PlaywrightQuotaResource` | Subscription-level quota information |
+| `PlaywrightWorkspaceQuotaResource` | Workspace-level quota information |
+| `PlaywrightExtensions` | Extension methods for ARM resources |
+| `PlaywrightCheckNameAvailabilityContent` | Name availability check request |
 
 ## Workspace Properties
 
-| Property            | Description                                                             |
-| ------------------- | ----------------------------------------------------------------------- |
-| `DataplaneUri`      | URI for running tests (e.g., `https://api.dataplane.{guid}.domain.com`) |
-| `WorkspaceId`       | Unique workspace identifier (GUID)                                      |
-| `RegionalAffinity`  | Enable/disable regional affinity for test execution                     |
-| `LocalAuth`         | Enable/disable local authentication (access tokens)                     |
-| `ProvisioningState` | Current provisioning state (Succeeded, Failed, etc.)                    |
+| Property | Description |
+|----------|-------------|
+| `DataplaneUri` | URI for running tests (e.g., `https://api.dataplane.{guid}.domain.com`) |
+| `WorkspaceId` | Unique workspace identifier (GUID) |
+| `RegionalAffinity` | Enable/disable regional affinity for test execution |
+| `LocalAuth` | Enable/disable local authentication (access tokens) |
+| `ProvisioningState` | Current provisioning state (Succeeded, Failed, etc.) |
 
 ## Best Practices
 
@@ -280,11 +280,11 @@ Environment.SetEnvironmentVariable("PLAYWRIGHT_SERVICE_URL", serviceUrl.ToString
 
 ## Related SDKs
 
-| SDK                                                | Purpose                             | Install                                                                            |
-| -------------------------------------------------- | ----------------------------------- | ---------------------------------------------------------------------------------- |
-| `Azure.ResourceManager.Playwright`                 | Management plane (this SDK)         | `dotnet add package Azure.ResourceManager.Playwright`                              |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.ResourceManager.Playwright` | Management plane (this SDK) | `dotnet add package Azure.ResourceManager.Playwright` |
 | `Azure.Developer.MicrosoftPlaywrightTesting.NUnit` | Run NUnit Playwright tests at scale | `dotnet add package Azure.Developer.MicrosoftPlaywrightTesting.NUnit --prerelease` |
-| `Azure.Developer.Playwright`                       | Playwright client library           | `dotnet add package Azure.Developer.Playwright`                                    |
+| `Azure.Developer.Playwright` | Playwright client library | `dotnet add package Azure.Developer.Playwright` |
 
 ## API Information
 
@@ -297,3 +297,6 @@ Environment.SetEnvironmentVariable("PLAYWRIGHT_SERVICE_URL", serviceUrl.ToString
 - [Azure.ResourceManager.Playwright API Reference](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.playwright)
 - [Microsoft Playwright Testing Overview](https://learn.microsoft.com/en-us/azure/playwright-testing/overview-what-is-microsoft-playwright-testing)
 - [Quickstart: Run Playwright Tests at Scale](https://learn.microsoft.com/en-us/azure/playwright-testing/quickstart-run-end-to-end-tests)
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

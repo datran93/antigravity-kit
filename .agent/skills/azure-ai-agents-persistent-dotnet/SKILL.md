@@ -1,8 +1,10 @@
 ---
 name: azure-ai-agents-persistent-dotnet
-description: |
+description: "|"
   Azure AI Agents Persistent SDK for .NET. Low-level SDK for creating and managing AI agents with threads, messages, runs, and tools. Use for agent CRUD, conversation threads, streaming responses, function calling, file search, and code interpreter. Triggers: "PersistentAgentsClient", "persistent agents", "agent threads", "agent runs", "streaming agents", "function calling agents .NET".
 package: Azure.AI.Agents.Persistent
+risk: unknown
+source: community
 ---
 
 # Azure.AI.Agents.Persistent (.NET)
@@ -98,7 +100,7 @@ while (run.Status == RunStatus.Queued || run.Status == RunStatus.InProgress);
 
 // Retrieve messages
 await foreach (PersistentThreadMessage message in client.Messages.GetMessagesAsync(
-    threadId: thread.Id,
+    threadId: thread.Id, 
     order: ListSortOrder.Ascending))
 {
     Console.Write($"{message.Role}: ");
@@ -114,7 +116,7 @@ await foreach (PersistentThreadMessage message in client.Messages.GetMessagesAsy
 
 ```csharp
 AsyncCollectionResult<StreamingUpdate> stream = client.Runs.CreateRunStreamingAsync(
-    thread.Id,
+    thread.Id, 
     agent.Id
 );
 
@@ -168,7 +170,7 @@ do
     await Task.Delay(500);
     run = await client.Runs.GetRunAsync(thread.Id, run.Id);
 
-    if (run.Status == RunStatus.RequiresAction
+    if (run.Status == RunStatus.RequiresAction 
         && run.RequiredAction is SubmitToolOutputsAction submitAction)
     {
         List<ToolOutput> outputs = [];
@@ -266,42 +268,42 @@ await client.Files.DeleteFileAsync(file.Id);
 
 ## Available Tools
 
-| Tool             | Class                           | Purpose                                      |
-| ---------------- | ------------------------------- | -------------------------------------------- |
+| Tool | Class | Purpose |
+|------|-------|---------|
 | Code Interpreter | `CodeInterpreterToolDefinition` | Execute Python code, generate visualizations |
-| File Search      | `FileSearchToolDefinition`      | Search uploaded files via vector stores      |
-| Function Calling | `FunctionToolDefinition`        | Call custom functions                        |
-| Bing Grounding   | `BingGroundingToolDefinition`   | Web search via Bing                          |
-| Azure AI Search  | `AzureAISearchToolDefinition`   | Search Azure AI Search indexes               |
-| OpenAPI          | `OpenApiToolDefinition`         | Call external APIs via OpenAPI spec          |
-| Azure Functions  | `AzureFunctionToolDefinition`   | Invoke Azure Functions                       |
-| MCP              | `MCPToolDefinition`             | Model Context Protocol tools                 |
-| SharePoint       | `SharepointToolDefinition`      | Access SharePoint content                    |
-| Microsoft Fabric | `MicrosoftFabricToolDefinition` | Access Fabric data                           |
+| File Search | `FileSearchToolDefinition` | Search uploaded files via vector stores |
+| Function Calling | `FunctionToolDefinition` | Call custom functions |
+| Bing Grounding | `BingGroundingToolDefinition` | Web search via Bing |
+| Azure AI Search | `AzureAISearchToolDefinition` | Search Azure AI Search indexes |
+| OpenAPI | `OpenApiToolDefinition` | Call external APIs via OpenAPI spec |
+| Azure Functions | `AzureFunctionToolDefinition` | Invoke Azure Functions |
+| MCP | `MCPToolDefinition` | Model Context Protocol tools |
+| SharePoint | `SharepointToolDefinition` | Access SharePoint content |
+| Microsoft Fabric | `MicrosoftFabricToolDefinition` | Access Fabric data |
 
 ## Streaming Update Types
 
-| Update Type                           | Description        |
-| ------------------------------------- | ------------------ |
-| `StreamingUpdateReason.RunCreated`    | Run started        |
-| `StreamingUpdateReason.RunInProgress` | Run processing     |
-| `StreamingUpdateReason.RunCompleted`  | Run finished       |
-| `StreamingUpdateReason.RunFailed`     | Run errored        |
-| `MessageContentUpdate`                | Text content chunk |
-| `RunStepUpdate`                       | Step status change |
+| Update Type | Description |
+|-------------|-------------|
+| `StreamingUpdateReason.RunCreated` | Run started |
+| `StreamingUpdateReason.RunInProgress` | Run processing |
+| `StreamingUpdateReason.RunCompleted` | Run finished |
+| `StreamingUpdateReason.RunFailed` | Run errored |
+| `MessageContentUpdate` | Text content chunk |
+| `RunStepUpdate` | Step status change |
 
 ## Key Types Reference
 
-| Type                      | Purpose                                               |
-| ------------------------- | ----------------------------------------------------- |
-| `PersistentAgentsClient`  | Main entry point                                      |
-| `PersistentAgent`         | Agent with model, instructions, tools                 |
-| `PersistentAgentThread`   | Conversation thread                                   |
-| `PersistentThreadMessage` | Message in thread                                     |
-| `ThreadRun`               | Execution of agent against thread                     |
-| `RunStatus`               | Queued, InProgress, RequiresAction, Completed, Failed |
-| `ToolResources`           | Combined tool resources                               |
-| `ToolOutput`              | Function call response                                |
+| Type | Purpose |
+|------|---------|
+| `PersistentAgentsClient` | Main entry point |
+| `PersistentAgent` | Agent with model, instructions, tools |
+| `PersistentAgentThread` | Conversation thread |
+| `PersistentThreadMessage` | Message in thread |
+| `ThreadRun` | Execution of agent against thread |
+| `RunStatus` | Queued, InProgress, RequiresAction, Completed, Failed |
+| `ToolResources` | Combined tool resources |
+| `ToolOutput` | Function call response |
 
 ## Best Practices
 
@@ -334,16 +336,19 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                          | Purpose                     | Install                                         |
-| ---------------------------- | --------------------------- | ----------------------------------------------- |
+| SDK | Purpose | Install |
+|-----|---------|---------|
 | `Azure.AI.Agents.Persistent` | Low-level agents (this SDK) | `dotnet add package Azure.AI.Agents.Persistent` |
-| `Azure.AI.Projects`          | High-level project client   | `dotnet add package Azure.AI.Projects`          |
+| `Azure.AI.Projects` | High-level project client | `dotnet add package Azure.AI.Projects` |
 
 ## Reference Links
 
-| Resource      | URL                                                                                            |
-| ------------- | ---------------------------------------------------------------------------------------------- |
-| NuGet Package | https://www.nuget.org/packages/Azure.AI.Agents.Persistent                                      |
-| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.agents.persistent                              |
-| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent         |
-| Samples       | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent/samples |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.AI.Agents.Persistent |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.agents.persistent |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent |
+| Samples | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/ai/Azure.AI.Agents.Persistent/samples |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

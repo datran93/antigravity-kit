@@ -7,8 +7,7 @@ tags: communication, events, status, key-value
 
 ## Use Events for Workflow Status Publishing
 
-Workflows can publish events (key-value pairs) with `DBOS.setEvent`. Other code can read events with `DBOS.getEvent`.
-Events are persisted and useful for real-time progress monitoring.
+Workflows can publish events (key-value pairs) with `DBOS.setEvent`. Other code can read events with `DBOS.getEvent`. Events are persisted and useful for real-time progress monitoring.
 
 **Incorrect (using external state for progress):**
 
@@ -40,8 +39,7 @@ const progress = await DBOS.getEvent<number>(workflowID, "progress", 0);
 // Returns null if the event doesn't exist within the timeout (default 60s)
 ```
 
-Events are useful for interactive workflows. For example, a checkout workflow can publish a payment URL for the caller
-to redirect to:
+Events are useful for interactive workflows. For example, a checkout workflow can publish a payment URL for the caller to redirect to:
 
 ```typescript
 async function checkoutWorkflowFn() {

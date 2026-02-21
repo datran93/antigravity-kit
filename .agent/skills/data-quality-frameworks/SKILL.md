@@ -1,14 +1,13 @@
 ---
 name: data-quality-frameworks
-description:
-  Implement data quality validation with Great Expectations, dbt tests, and data contracts. Use when building data
-  quality pipelines, implementing validation rules, or establishing data contracts.
+description: "Implement data quality validation with Great Expectations, dbt tests, and data contracts. Use when building data quality pipelines, implementing validation rules, or establishing data contracts."
+risk: unknown
+source: community
 ---
 
 # Data Quality Frameworks
 
-Production patterns for implementing data quality with Great Expectations, dbt tests, and data contracts to ensure
-reliable data pipelines.
+Production patterns for implementing data quality with Great Expectations, dbt tests, and data contracts to ensure reliable data pipelines.
 
 ## Use this skill when
 

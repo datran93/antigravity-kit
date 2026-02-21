@@ -7,8 +7,7 @@ tags: communication, messages, send, recv, notification
 
 ## Use Messages for Workflow Notifications
 
-Use `DBOS.send` to send messages to a workflow and `DBOS.recv` to receive them. Messages are queued per topic and
-persisted for reliable delivery.
+Use `DBOS.send` to send messages to a workflow and `DBOS.recv` to receive them. Messages are queued per topic and persisted for reliable delivery.
 
 **Incorrect (using external messaging for workflow communication):**
 
@@ -39,14 +38,12 @@ async function paymentWebhook(workflowID: string, status: string) {
 ```
 
 Key behaviors:
-
 - `recv` waits for and consumes the next message for the specified topic
 - Returns `null` if the wait times out (default timeout: 60 seconds)
 - Messages without a topic can only be received by `recv` without a topic
 - Messages are queued per-topic (FIFO)
 
 **Reliability guarantees:**
-
 - All messages are persisted to the database
 - Messages sent from workflows are delivered exactly-once
 - Messages sent from non-workflow code can use an idempotency key:
@@ -55,5 +52,4 @@ Key behaviors:
 await DBOS.send(workflowID, message, "topic", "idempotency-key-123");
 ```
 
-Reference:
-[Workflow Messaging](https://docs.dbos.dev/typescript/tutorials/workflow-communication#workflow-messaging-and-notifications)
+Reference: [Workflow Messaging](https://docs.dbos.dev/typescript/tutorials/workflow-communication#workflow-messaging-and-notifications)

@@ -1,18 +1,22 @@
 ---
 name: schema-markup
-description: >
-  Design, validate, and optimize schema.org structured data for eligibility, correctness, and measurable SEO impact. Use
-  when the user wants to add, fix, audit, or scale schema markup (JSON-LD) for rich results. This skill evaluates
-  whether schema should be implemented, what types are valid, and how to deploy safely according to Google guidelines.
+description: ">"
+  Design, validate, and optimize schema.org structured data for eligibility,
+  correctness, and measurable SEO impact. Use when the user wants to add, fix,
+  audit, or scale schema markup (JSON-LD) for rich results. This skill evaluates
+  whether schema should be implemented, what types are valid, and how to deploy
+  safely according to Google guidelines.
 allowed-tools: Read, Glob, Grep
+risk: unknown
+source: community
 ---
 
 ---
 
 # Schema Markup & Structured Data
 
-You are an expert in **structured data and schema markup** with a focus on **Google rich result eligibility, accuracy,
-and impact**.
+You are an expert in **structured data and schema markup** with a focus on
+**Google rich result eligibility, accuracy, and impact**.
 
 Your responsibility is to:
 
@@ -22,7 +26,8 @@ Your responsibility is to:
 - Design **maintainable, correct JSON-LD**
 - Avoid over-markup that creates false expectations
 
-You do **not** guarantee rich results. You do **not** add schema that misrepresents content.
+You do **not** guarantee rich results.
+You do **not** add schema that misrepresents content.
 
 ---
 
@@ -201,7 +206,8 @@ Use for: editorial content with authorship
 
 ### Product
 
-Use for: real purchasable products **Must show price, availability, and offers visibly**
+Use for: real purchasable products
+**Must show price, availability, and offers visibly**
 
 ---
 
@@ -354,3 +360,6 @@ Where and how to add it
 - **seo-audit** – Full SEO review including schema
 - **programmatic-seo** – Templated schema at scale
 - **analytics-tracking** – Measure rich result impact
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

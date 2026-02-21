@@ -1,10 +1,10 @@
 ---
 name: gmail-automation
-description:
-  "Automate Gmail tasks via Rube MCP (Composio): send/reply, search, labels, drafts, attachments. Always search tools
-  first for current schemas."
+description: "Automate Gmail tasks via Rube MCP (Composio): send/reply, search, labels, drafts, attachments. Always search tools first for current schemas."
 requires:
   mcp: [rube]
+risk: unknown
+source: community
 ---
 
 # Gmail Automation via Rube MCP
@@ -19,8 +19,8 @@ Automate Gmail operations through Composio's Gmail toolkit via Rube MCP.
 
 ## Setup
 
-**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just
-add the endpoint and it works.
+**Get Rube MCP**: Add `https://rube.app/mcp` as an MCP server in your client configuration. No API keys needed — just add the endpoint and it works.
+
 
 1. Verify Rube MCP is available by confirming `RUBE_SEARCH_TOOLS` responds
 2. Call `RUBE_MANAGE_CONNECTIONS` with toolkit `gmail`
@@ -34,12 +34,10 @@ add the endpoint and it works.
 **When to use**: User wants to compose and send a new email
 
 **Tool sequence**:
-
 1. `GMAIL_SEARCH_PEOPLE` - Resolve contact name to email address [Optional]
 2. `GMAIL_SEND_EMAIL` - Send the email [Required]
 
 **Key parameters**:
-
 - `recipient_email`: Email address or 'me' for self
 - `subject`: Email subject line
 - `body`: Email content (plain text or HTML)
@@ -48,7 +46,6 @@ add the endpoint and it works.
 - `attachment`: Object with `{s3key, mimetype, name}` from prior download
 
 **Pitfalls**:
-
 - At least one of `recipient_email`, `cc`, or `bcc` required
 - At least one of `subject` or `body` required
 - Attachment `mimetype` MUST contain '/' (e.g., 'application/pdf', not 'pdf')
@@ -60,19 +57,16 @@ add the endpoint and it works.
 **When to use**: User wants to reply to an existing email conversation
 
 **Tool sequence**:
-
 1. `GMAIL_FETCH_EMAILS` - Find the email/thread to reply to [Prerequisite]
 2. `GMAIL_REPLY_TO_THREAD` - Send reply within the thread [Required]
 
 **Key parameters**:
-
 - `thread_id`: Hex string from FETCH_EMAILS (e.g., '169eefc8138e68ca')
 - `message_body`: Reply content
 - `recipient_email`: Reply recipient
 - `is_html`: Set `true` for HTML content
 
 **Pitfalls**:
-
 - `thread_id` must be hex string; prefixes like 'msg-f:' are auto-stripped
 - Legacy Gmail web UI IDs (e.g., 'FMfcgz...') are NOT supported
 - Subject is inherited from original thread; setting it creates a new thread instead
@@ -83,12 +77,10 @@ add the endpoint and it works.
 **When to use**: User wants to find specific emails by sender, subject, date, label, etc.
 
 **Tool sequence**:
-
 1. `GMAIL_FETCH_EMAILS` - Search with Gmail query syntax [Required]
 2. `GMAIL_FETCH_MESSAGE_BY_MESSAGE_ID` - Get full message details for selected results [Optional]
 
 **Key parameters**:
-
 - `query`: Gmail search syntax (from:, to:, subject:, is:unread, has:attachment, after:YYYY/MM/DD, before:YYYY/MM/DD)
 - `max_results`: 1-500 messages per page
 - `label_ids`: System IDs like 'INBOX', 'UNREAD'
@@ -97,7 +89,6 @@ add the endpoint and it works.
 - `page_token`: For pagination (from `nextPageToken`)
 
 **Pitfalls**:
-
 - Returns max ~500 per page; follow `nextPageToken` via `page_token` until absent
 - `resultSizeEstimate` is approximate, not exact count
 - Use 'is:' for states (is:unread, is:snoozed, is:starred)
@@ -111,21 +102,18 @@ add the endpoint and it works.
 **When to use**: User wants to create, modify, or organize labels
 
 **Tool sequence**:
-
 1. `GMAIL_LIST_LABELS` - List all labels to find IDs and detect conflicts [Required]
 2. `GMAIL_CREATE_LABEL` - Create a new label [Optional]
 3. `GMAIL_PATCH_LABEL` - Rename or change label colors/visibility [Optional]
 4. `GMAIL_DELETE_LABEL` - Delete a user-created label (irreversible) [Optional]
 
 **Key parameters**:
-
 - `label_name`: Max 225 chars, no commas, '/' for nesting (e.g., 'Work/Projects')
 - `background_color`/`text_color`: Hex values from Gmail's predefined palette
 - `id`: Label ID for PATCH/DELETE operations
 
 **Pitfalls**:
-
-- 400/409 error if name is blank, duplicate, or reserved (INBOX, SPAM, CATEGORY\_\*)
+- 400/409 error if name is blank, duplicate, or reserved (INBOX, SPAM, CATEGORY_*)
 - Color specs must use Gmail's predefined palette of 102 hex values
 - DELETE is permanent and removes label from all messages
 - Cannot delete system labels (INBOX, SENT, DRAFT, etc.)
@@ -135,21 +123,18 @@ add the endpoint and it works.
 **When to use**: User wants to label, archive, or mark emails as read/unread
 
 **Tool sequence**:
-
 1. `GMAIL_LIST_LABELS` - Get label IDs for custom labels [Prerequisite]
 2. `GMAIL_FETCH_EMAILS` - Find target messages [Prerequisite]
 3. `GMAIL_BATCH_MODIFY_MESSAGES` - Bulk add/remove labels (up to 1000 messages) [Required]
 4. `GMAIL_ADD_LABEL_TO_EMAIL` - Single-message label changes [Fallback]
 
 **Key parameters**:
-
 - `messageIds`: Array of message IDs (max 1000)
 - `addLabelIds`: Array of label IDs to add
 - `removeLabelIds`: Array of label IDs to remove
 - `message_id`: 15-16 char hex string for single operations
 
 **Pitfalls**:
-
 - Max 1000 messageIds per BATCH call; chunk larger sets
 - Use 'CATEGORY_UPDATES' not 'UPDATES'; full prefix required for category labels
 - SENT, DRAFT, CHAT are immutable — cannot be added/removed
@@ -161,7 +146,6 @@ add the endpoint and it works.
 **When to use**: User wants to create, edit, or send email drafts, possibly with attachments
 
 **Tool sequence**:
-
 1. `GMAIL_CREATE_EMAIL_DRAFT` - Create a new draft [Required]
 2. `GMAIL_UPDATE_DRAFT` - Edit draft content [Optional]
 3. `GMAIL_LIST_DRAFTS` - List existing drafts [Optional]
@@ -169,7 +153,6 @@ add the endpoint and it works.
 5. `GMAIL_GET_ATTACHMENT` - Download attachment from existing message [Optional]
 
 **Key parameters**:
-
 - `recipient_email`: Draft recipient
 - `subject`: Draft subject (omit for reply drafts to stay in thread)
 - `body`: Draft content
@@ -178,7 +161,6 @@ add the endpoint and it works.
 - `thread_id`: For reply drafts (leave subject empty to stay in thread)
 
 **Pitfalls**:
-
 - Response includes `data.id` (draft_id) AND `data.message.id`; use `data.id` for draft operations
 - Setting subject on a thread reply draft creates a NEW thread instead
 - Attachment capped at ~25MB; base64 overhead can push near-limit files over
@@ -190,7 +172,6 @@ add the endpoint and it works.
 ### ID Resolution
 
 **Label name → Label ID**:
-
 ```
 1. Call GMAIL_LIST_LABELS
 2. Find label by name in response
@@ -198,14 +179,12 @@ add the endpoint and it works.
 ```
 
 **Contact name → Email**:
-
 ```
 1. Call GMAIL_SEARCH_PEOPLE with query=contact_name
 2. Extract emailAddresses from response
 ```
 
 **Thread ID from search**:
-
 ```
 1. Call GMAIL_FETCH_EMAILS or GMAIL_LIST_THREADS
 2. Extract threadId (15-16 char hex string)
@@ -222,7 +201,6 @@ add the endpoint and it works.
 ### Gmail Query Syntax
 
 **Operators**:
-
 - `from:sender@example.com` - Emails from sender
 - `to:recipient@example.com` - Emails to recipient
 - `subject:"exact phrase"` - Subject contains exact phrase
@@ -237,14 +215,12 @@ add the endpoint and it works.
 - `category:primary` - Primary category
 
 **Combinators**:
-
 - `AND` - Both conditions (default)
 - `OR` - Either condition
 - `NOT` - Exclude condition
 - `()` - Group conditions
 
 **Examples**:
-
 - `from:boss@company.com is:unread` - Unread emails from boss
 - `subject:invoice has:attachment after:2024/01/01` - Invoices with attachments this year
 - `(from:alice OR from:bob) is:starred` - Starred emails from Alice or Bob
@@ -252,50 +228,48 @@ add the endpoint and it works.
 ## Known Pitfalls
 
 **ID Formats**:
-
 - Custom label operations require label IDs (e.g., 'Label_123'), not display names
 - Always call LIST_LABELS first to resolve names to IDs
 - Message IDs are 15-16 char hex strings
 - Do NOT use UUIDs, web UI IDs, or 'thread-f:' prefixes
 
 **Query Syntax**:
-
 - Use 'is:' for states (unread, snoozed, starred)
 - Use 'label:' ONLY for user-created labels
 - System labels use 'is:' or 'in:' (e.g., 'is:sent', 'in:inbox')
 
 **Rate Limits**:
-
 - BATCH_MODIFY_MESSAGES max 1000 messages per call
 - Heavy use triggers 403/429 rate limits
 - Implement exponential backoff for bulk operations
 
 **Response Parsing**:
-
 - Response data may be nested under `data_preview` or `data.messages`
 - Parse defensively with fallbacks
 - Timestamp `messageTimestamp` uses RFC3339 with 'Z' suffix
 - Normalize to '+00:00' for parsing if needed
 
 **Attachments**:
-
 - Attachment `s3key` from prior download may expire
 - Use promptly after retrieval
 - Mimetype must include '/' separator
 
 ## Quick Reference
 
-| Task                | Tool Slug                         | Key Params                                |
-| ------------------- | --------------------------------- | ----------------------------------------- |
-| Send email          | GMAIL_SEND_EMAIL                  | recipient_email, subject, body, is_html   |
-| Reply to thread     | GMAIL_REPLY_TO_THREAD             | thread_id, message_body, recipient_email  |
-| Search emails       | GMAIL_FETCH_EMAILS                | query, max_results, label_ids, page_token |
-| Get message details | GMAIL_FETCH_MESSAGE_BY_MESSAGE_ID | message_id                                |
-| List labels         | GMAIL_LIST_LABELS                 | (none)                                    |
-| Create label        | GMAIL_CREATE_LABEL                | label_name, background_color, text_color  |
-| Modify labels bulk  | GMAIL_BATCH_MODIFY_MESSAGES       | messageIds, addLabelIds, removeLabelIds   |
-| Create draft        | GMAIL_CREATE_EMAIL_DRAFT          | recipient_email, subject, body, thread_id |
-| Send draft          | GMAIL_SEND_DRAFT                  | draft_id                                  |
-| Get attachment      | GMAIL_GET_ATTACHMENT              | message_id, attachment_id                 |
-| Search contacts     | GMAIL_SEARCH_PEOPLE               | query                                     |
-| Get profile         | GMAIL_GET_PROFILE                 | (none)                                    |
+| Task | Tool Slug | Key Params |
+|------|-----------|------------|
+| Send email | GMAIL_SEND_EMAIL | recipient_email, subject, body, is_html |
+| Reply to thread | GMAIL_REPLY_TO_THREAD | thread_id, message_body, recipient_email |
+| Search emails | GMAIL_FETCH_EMAILS | query, max_results, label_ids, page_token |
+| Get message details | GMAIL_FETCH_MESSAGE_BY_MESSAGE_ID | message_id |
+| List labels | GMAIL_LIST_LABELS | (none) |
+| Create label | GMAIL_CREATE_LABEL | label_name, background_color, text_color |
+| Modify labels bulk | GMAIL_BATCH_MODIFY_MESSAGES | messageIds, addLabelIds, removeLabelIds |
+| Create draft | GMAIL_CREATE_EMAIL_DRAFT | recipient_email, subject, body, thread_id |
+| Send draft | GMAIL_SEND_DRAFT | draft_id |
+| Get attachment | GMAIL_GET_ATTACHMENT | message_id, attachment_id |
+| Search contacts | GMAIL_SEARCH_PEOPLE | query |
+| Get profile | GMAIL_GET_PROFILE | (none) |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

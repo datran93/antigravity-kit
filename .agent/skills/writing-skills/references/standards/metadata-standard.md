@@ -14,10 +14,10 @@ metadata:
 ---
 ```
 
-| Field         | Rules                                                          |
-| ------------- | -------------------------------------------------------------- |
-| `name`        | 1-64 chars, lowercase, hyphens only, must match directory name |
-| `description` | 1-1024 chars, should describe when to use                      |
+| Field | Rules |
+|-------|-------|
+| `name` | 1-64 chars, lowercase, hyphens only, must match directory name |
+| `description` | 1-1024 chars, should describe when to use |
 
 ## Optional Fields
 
@@ -35,11 +35,11 @@ metadata:
 ---
 ```
 
-| Field           | Purpose                                    |
-| --------------- | ------------------------------------------ |
-| `license`       | License identifier (e.g., MIT, Apache-2.0) |
-| `compatibility` | Tool compatibility marker                  |
-| `metadata`      | String-to-string map for custom key-values |
+| Field | Purpose |
+|-------|---------|
+| `license` | License identifier (e.g., MIT, Apache-2.0) |
+| `compatibility` | Tool compatibility marker |
+| `metadata` | String-to-string map for custom key-values |
 
 ## Name Validation
 
@@ -54,11 +54,12 @@ metadata:
 
 Use these conventions for consistency across skills:
 
-| Key        | Example          | Purpose                                         |
-| ---------- | ---------------- | ----------------------------------------------- |
-| `author`   | `"your-name"`    | Skill creator                                   |
-| `version`  | `"1.0.0"`        | Semantic version                                |
-| `category` | `"reference"`    | Type: reference, technique, discipline, pattern |
-| `tags`     | `"react, hooks"` | Searchable keywords                             |
+| Key | Example | Purpose |
+|-----|---------|---------|
+| `author` | `"your-name"` | Skill creator |
+| `version` | `"1.0.0"` | Semantic version |
+| `category` | `"reference"` | Type: reference, technique, discipline, pattern |
+| `tags` | `"react, hooks"` | Searchable keywords |
 
-> [!IMPORTANT] Any field not listed here is **ignored** by OpenCode's skill loader.
+> [!IMPORTANT]
+> Any field not listed here is **ignored** by OpenCode's skill loader.

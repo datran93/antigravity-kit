@@ -27,8 +27,7 @@ export const MyComposition = () => {
 - Next.js `<Image>` component
 - CSS `background-image`
 
-The `<Img>` component ensures images are fully loaded before rendering, preventing flickering and blank frames during
-video export.
+The `<Img>` component ensures images are fully loaded before rendering, preventing flickering and blank frames during video export.
 
 ## Local images with staticFile()
 
@@ -47,7 +46,7 @@ my-video/
 ```tsx
 import { Img, staticFile } from "remotion";
 
-<Img src={staticFile("logo.png")} />;
+<Img src={staticFile("logo.png")} />
 ```
 
 ## Remote images

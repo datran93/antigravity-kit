@@ -7,8 +7,7 @@ tags: express, http, integration, server
 
 ## Integrate DBOS with Express
 
-Configure and launch DBOS before starting your Express server. Register all workflows and steps before calling
-`DBOS.launch()`.
+Configure and launch DBOS before starting your Express server. Register all workflows and steps before calling `DBOS.launch()`.
 
 **Incorrect (DBOS not launched before server starts):**
 

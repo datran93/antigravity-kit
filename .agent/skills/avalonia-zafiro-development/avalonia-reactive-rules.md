@@ -10,16 +10,14 @@
 
 ## Zafiro Guidelines
 
-- **Prefer Abstractions**: Always look for existing Zafiro helpers, extension methods, and abstractions before
-  re-implementing logic.
+- **Prefer Abstractions**: Always look for existing Zafiro helpers, extension methods, and abstractions before re-implementing logic.
 - **Validation**: Use Zafiro's `ValidationRule` and validation extensions instead of ad-hoc reactive logic.
 
 ## DynamicData & Reactive Rules
 
 ### The Mandatory Approach
 
-- **Operator Preference**: Always prefer **DynamicData** operators (`Connect`, `Filter`, `Transform`, `Sort`, `Bind`,
-  `DisposeMany`) over plain Rx operators when working with collections.
+- **Operator Preference**: Always prefer **DynamicData** operators (`Connect`, `Filter`, `Transform`, `Sort`, `Bind`, `DisposeMany`) over plain Rx operators when working with collections.
 - **Readable Pipelines**: Build and maintain pipelines as a single, readable chain.
 - **Lifecycle**: Use `DisposeWith` for lifecycle management.
 - **Minimal Subscriptions**: Subscriptions should be minimal, centralized, and strictly for side-effects.
@@ -33,7 +31,6 @@
 ### Canonical Patterns
 
 **Validation of Dynamic Collections:**
-
 ```csharp
 this.ValidationRule(
         StagesSource
@@ -45,8 +42,8 @@ this.ValidationRule(
     .DisposeWith(Disposables);
 ```
 
-**Filtering Nulls:** Use `WhereNotNull()` in reactive pipelines.
-
+**Filtering Nulls:**
+Use `WhereNotNull()` in reactive pipelines.
 ```csharp
 this.WhenAnyValue(x => x.DurationPreset).WhereNotNull()
 ```

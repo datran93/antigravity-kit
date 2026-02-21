@@ -1,8 +1,10 @@
 ---
 name: azure-mgmt-apimanagement-dotnet
-description: |
+description: "|"
   Azure Resource Manager SDK for API Management in .NET. Use for MANAGEMENT PLANE operations: creating/managing APIM services, APIs, products, subscriptions, policies, users, groups, gateways, and backends via Azure Resource Manager. Triggers: "API Management", "APIM service", "create APIM", "manage APIs", "ApiManagementServiceResource", "API policies", "APIM products", "APIM subscriptions".
 package: Azure.ResourceManager.ApiManagement
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.ApiManagement (.NET)
@@ -10,9 +12,7 @@ package: Azure.ResourceManager.ApiManagement
 Management plane SDK for provisioning and managing Azure API Management resources via Azure Resource Manager.
 
 > **⚠️ Management vs Data Plane**
->
-> - **This SDK (Azure.ResourceManager.ApiManagement)**: Create services, APIs, products, subscriptions, policies, users,
->   groups
+> - **This SDK (Azure.ResourceManager.ApiManagement)**: Create services, APIs, products, subscriptions, policies, users, groups
 > - **Data Plane**: Direct API calls to your APIM gateway endpoints
 
 ## Installation
@@ -95,7 +95,7 @@ var resourceGroup = await subscription
 var serviceData = new ApiManagementServiceData(
     location: AzureLocation.EastUS,
     sku: new ApiManagementServiceSkuProperties(
-        ApiManagementServiceSkuType.Developer,
+        ApiManagementServiceSkuType.Developer, 
         capacity: 1),
     publisherEmail: "admin@contoso.com",
     publisherName: "Contoso");
@@ -234,30 +234,30 @@ await service.RestoreAsync(WaitUntil.Completed, backupParams);
 
 ## Key Types Reference
 
-| Type                                | Purpose                             |
-| ----------------------------------- | ----------------------------------- |
-| `ArmClient`                         | Entry point for all ARM operations  |
-| `ApiManagementServiceResource`      | Represents an APIM service instance |
-| `ApiManagementServiceCollection`    | Collection for service CRUD         |
-| `ApiResource`                       | Represents an API                   |
-| `ApiManagementProductResource`      | Represents a product                |
-| `ApiManagementSubscriptionResource` | Represents a subscription           |
-| `ApiManagementPolicyResource`       | Service-level policy                |
-| `ApiPolicyResource`                 | API-level policy                    |
-| `ApiManagementUserResource`         | Represents a user                   |
-| `ApiManagementGroupResource`        | Represents a group                  |
-| `ApiManagementBackendResource`      | Represents a backend service        |
-| `ApiManagementGatewayResource`      | Represents a self-hosted gateway    |
+| Type | Purpose |
+|------|---------|
+| `ArmClient` | Entry point for all ARM operations |
+| `ApiManagementServiceResource` | Represents an APIM service instance |
+| `ApiManagementServiceCollection` | Collection for service CRUD |
+| `ApiResource` | Represents an API |
+| `ApiManagementProductResource` | Represents a product |
+| `ApiManagementSubscriptionResource` | Represents a subscription |
+| `ApiManagementPolicyResource` | Service-level policy |
+| `ApiPolicyResource` | API-level policy |
+| `ApiManagementUserResource` | Represents a user |
+| `ApiManagementGroupResource` | Represents a group |
+| `ApiManagementBackendResource` | Represents a backend service |
+| `ApiManagementGatewayResource` | Represents a self-hosted gateway |
 
 ## SKU Types
 
-| SKU           | Purpose                         | Capacity        |
-| ------------- | ------------------------------- | --------------- |
-| `Developer`   | Development/testing (no SLA)    | 1               |
-| `Basic`       | Entry-level production          | 1-2             |
-| `Standard`    | Medium workloads                | 1-4             |
-| `Premium`     | High availability, multi-region | 1-12 per region |
-| `Consumption` | Serverless, pay-per-call        | N/A             |
+| SKU | Purpose | Capacity |
+|-----|---------|----------|
+| `Developer` | Development/testing (no SLA) | 1 |
+| `Basic` | Entry-level production | 1-2 |
+| `Standard` | Medium workloads | 1-4 |
+| `Premium` | High availability, multi-region | 1-12 per region |
+| `Consumption` | Serverless, pay-per-call | N/A |
 
 ## Best Practices
 
@@ -296,17 +296,20 @@ catch (RequestFailedException ex)
 
 ## Reference Files
 
-| File                                                                         | When to Read                                   |
-| ---------------------------------------------------------------------------- | ---------------------------------------------- |
-| [references/service-management.md](references/service-management.md)         | Service CRUD, SKUs, networking, backup/restore |
-| [references/apis-operations.md](references/apis-operations.md)               | APIs, operations, schemas, versioning          |
-| [references/products-subscriptions.md](references/products-subscriptions.md) | Products, subscriptions, access control        |
-| [references/policies.md](references/policies.md)                             | Policy XML patterns, scopes, common policies   |
+| File | When to Read |
+|------|--------------|
+| references/service-management.md | Service CRUD, SKUs, networking, backup/restore |
+| references/apis-operations.md | APIs, operations, schemas, versioning |
+| references/products-subscriptions.md | Products, subscriptions, access control |
+| references/policies.md | Policy XML patterns, scopes, common policies |
 
 ## Related Resources
 
-| Resource                                                                                           | Purpose                   |
-| -------------------------------------------------------------------------------------------------- | ------------------------- |
-| [API Management Documentation](https://learn.microsoft.com/en-us/azure/api-management/)            | Official Azure docs       |
+| Resource | Purpose |
+|----------|---------|
+| [API Management Documentation](https://learn.microsoft.com/en-us/azure/api-management/) | Official Azure docs |
 | [Policy Reference](https://learn.microsoft.com/en-us/azure/api-management/api-management-policies) | Complete policy reference |
-| [SDK Reference](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.apimanagement)  | .NET API reference        |
+| [SDK Reference](https://learn.microsoft.com/en-us/dotnet/api/azure.resourcemanager.apimanagement) | .NET API reference |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

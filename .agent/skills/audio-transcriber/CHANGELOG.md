@@ -2,8 +2,8 @@
 
 All notable changes to the audio-transcriber skill will be documented in this file.
 
-The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/), and this project adheres to
-[Semantic Versioning](https://semver.org/spec/v2.0.0.html).
+The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
+and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ---
 
@@ -69,8 +69,7 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 
 - **Python Implementation** - Complete refactor
   - Created `scripts/transcribe.py` (516 lines)
-  - Functions: `detect_cli_tool()`, `invoke_prompt_engineer()`, `handle_prompt_workflow()`, `process_with_llm()`,
-    `transcribe_audio()`, `save_outputs()`, `cleanup_temp_files()`
+  - Functions: `detect_cli_tool()`, `invoke_prompt_engineer()`, `handle_prompt_workflow()`, `process_with_llm()`, `transcribe_audio()`, `save_outputs()`, `cleanup_temp_files()`
   - Command-line arguments: `--prompt`, `--model`, `--output-dir`, `--keep-temp`
   - Auto-installs `rich` and `tqdm` if missing
 

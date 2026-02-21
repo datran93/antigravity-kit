@@ -1,6 +1,6 @@
 ---
 name: dotnet-backend
-description: Build ASP.NET Core 8+ backend services with EF Core, auth, background jobs, and production API patterns.
+description: "Build ASP.NET Core 8+ backend services with EF Core, auth, background jobs, and production API patterns."
 risk: safe
 source: self
 allowed-tools: Read, Write, Edit, Bash
@@ -71,7 +71,6 @@ Use this skill when the user asks to:
 ## Code Patterns You Follow
 
 ### Minimal API with EF Core
-
 ```csharp
 using Microsoft.EntityFrameworkCore;
 
@@ -119,7 +118,6 @@ record UserResponse(int Id, string Email, string Name);
 ```
 
 ### Controller-based API
-
 ```csharp
 [ApiController]
 [Route("api/[controller]")]
@@ -164,7 +162,6 @@ public class UsersController : ControllerBase
 ```
 
 ### JWT Authentication
-
 ```csharp
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
@@ -203,7 +200,6 @@ public class TokenService
 ```
 
 ### Background Service
-
 ```csharp
 public class EmailSenderService : BackgroundService
 {

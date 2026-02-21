@@ -1,27 +1,23 @@
 ---
 name: m365-agents-py
-description: |
+description: "|"
   Microsoft 365 Agents SDK for Python. Build multichannel agents for Teams/M365/Copilot Studio with aiohttp hosting, AgentApplication routing, streaming responses, and MSAL-based auth. Triggers: "Microsoft 365 Agents SDK", "microsoft_agents", "AgentApplication", "start_agent_process", "TurnContext", "Copilot Studio client", "CloudAdapter".
-package:
-  microsoft-agents-hosting-core, microsoft-agents-hosting-aiohttp, microsoft-agents-activity,
-  microsoft-agents-authentication-msal, microsoft-agents-copilotstudio-client
+package: microsoft-agents-hosting-core, microsoft-agents-hosting-aiohttp, microsoft-agents-activity, microsoft-agents-authentication-msal, microsoft-agents-copilotstudio-client
+risk: unknown
+source: community
 ---
 
 # Microsoft 365 Agents SDK (Python)
 
-Build enterprise agents for Microsoft 365, Teams, and Copilot Studio using the Microsoft Agents SDK with aiohttp
-hosting, AgentApplication routing, streaming responses, and MSAL-based authentication.
+Build enterprise agents for Microsoft 365, Teams, and Copilot Studio using the Microsoft Agents SDK with aiohttp hosting, AgentApplication routing, streaming responses, and MSAL-based authentication.
 
 ## Before implementation
-
-- Use the microsoft-docs MCP to verify the latest API signatures for AgentApplication, start_agent_process, and
-  authentication options.
-- Confirm package versions on PyPI for the microsoft-agents-\* packages you plan to use.
+- Use the microsoft-docs MCP to verify the latest API signatures for AgentApplication, start_agent_process, and authentication options.
+- Confirm package versions on PyPI for the microsoft-agents-* packages you plan to use.
 
 ## Important Notice - Import Changes
 
-> **⚠️ Breaking Change**: Recent updates have changed the Python import structure from `microsoft.agents` to
-> `microsoft_agents` (using underscores instead of dots).
+> **⚠️ Breaking Change**: Recent updates have changed the Python import structure from `microsoft.agents` to `microsoft_agents` (using underscores instead of dots).
 
 ## Installation
 
@@ -96,9 +92,7 @@ ADAPTER = CloudAdapter(connection_manager=CONNECTION_MANAGER)
 AUTHORIZATION = Authorization(STORAGE, CONNECTION_MANAGER, **agents_sdk_config)
 
 # Create AgentApplication
-AGENT_APP = AgentApplication[TurnState](
-    storage=STORAGE, adapter=ADAPTER, authorization=AUTHORIZATION, **agents_sdk_config
-)
+AGENT_APP = AgentApplicationTurnState
 
 
 @AGENT_APP.conversation_update("membersAdded")
@@ -142,9 +136,7 @@ from microsoft_agents.hosting.core import (
 )
 from microsoft_agents.activity import ActivityTypes
 
-AGENT_APP = AgentApplication[TurnState](
-    storage=STORAGE, adapter=ADAPTER, authorization=AUTHORIZATION, **agents_sdk_config
-)
+AGENT_APP = AgentApplicationTurnState
 
 # Welcome handler
 @AGENT_APP.conversation_update("membersAdded")
@@ -223,7 +215,7 @@ async def on_poem_message(context: TurnContext, _state: TurnState):
         ],
         stream=True,
     )
-
+    
     try:
         async for chunk in streamed_response:
             if chunk.choices and chunk.choices[0].delta.content:
@@ -282,10 +274,10 @@ def acquire_token(settings, app_client_id, tenant_id):
         client_id=app_client_id,
         authority=f"https://login.microsoftonline.com/{tenant_id}",
     )
-
+    
     token_request = {"scopes": ["https://api.powerplatform.com/.default"]}
     accounts = pca.get_accounts()
-
+    
     if accounts:
         response = pca.acquire_token_silent(token_request["scopes"], account=accounts[0])
         return response.get("access_token")
@@ -299,21 +291,21 @@ async def main():
         environment_id=environ.get("COPILOTSTUDIOAGENT__ENVIRONMENTID"),
         agent_identifier=environ.get("COPILOTSTUDIOAGENT__SCHEMANAME"),
     )
-
+    
     token = acquire_token(
         settings,
         app_client_id=environ.get("COPILOTSTUDIOAGENT__AGENTAPPID"),
         tenant_id=environ.get("COPILOTSTUDIOAGENT__TENANTID"),
     )
-
+    
     copilot_client = CopilotClient(settings, token)
-
+    
     # Start conversation
     act = copilot_client.start_conversation(True)
     async for action in act:
         if action.text:
             print(action.text)
-
+    
     # Ask question
     replies = copilot_client.ask_question("Hello!", action.conversation.id)
     async for reply in replies:
@@ -337,15 +329,18 @@ asyncio.run(main())
 
 ## Reference Files
 
-| File                                                                   | Contents                                                                      |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------- |
-| [references/acceptance-criteria.md](references/acceptance-criteria.md) | Import paths, hosting pipeline, streaming, OAuth, and Copilot Studio patterns |
+| File | Contents |
+| --- | --- |
+| references/acceptance-criteria.md | Import paths, hosting pipeline, streaming, OAuth, and Copilot Studio patterns |
 
 ## Reference Links
 
-| Resource                      | URL                                                                           |
-| ----------------------------- | ----------------------------------------------------------------------------- |
-| Microsoft 365 Agents SDK      | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/                   |
-| GitHub samples (Python)       | https://github.com/microsoft/Agents-for-python                                |
-| PyPI packages                 | https://pypi.org/search/?q=microsoft-agents                                   |
+| Resource | URL |
+| --- | --- |
+| Microsoft 365 Agents SDK | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/ |
+| GitHub samples (Python) | https://github.com/microsoft/Agents-for-python |
+| PyPI packages | https://pypi.org/search/?q=microsoft-agents |
 | Integrate with Copilot Studio | https://learn.microsoft.com/en-us/microsoft-365/agents-sdk/integrate-with-mcs |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

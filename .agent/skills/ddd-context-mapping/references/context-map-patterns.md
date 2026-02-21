@@ -12,10 +12,10 @@
 
 ## Mapping template
 
-| Upstream context | Downstream context | Pattern           | Contract owner | Translation needed |
-| ---------------- | ------------------ | ----------------- | -------------- | ------------------ |
-| Billing          | Checkout           | Customer-Supplier | Billing        | Yes                |
-| Identity         | Checkout           | Conformist        | Identity       | No                 |
+| Upstream context | Downstream context | Pattern | Contract owner | Translation needed |
+| --- | --- | --- | --- | --- |
+| Billing | Checkout | Customer-Supplier | Billing | Yes |
+| Identity | Checkout | Conformist | Identity | No |
 
 ## ACL checklist
 

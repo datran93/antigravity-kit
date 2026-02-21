@@ -37,8 +37,7 @@ Define the style in a shared `axaml` file:
 
 ## 🧩 Shared Icons and Resources
 
-Centralize icon definitions and other shared resources in `Icons.axaml` and include them in the `MergedDictionaries` of
-your theme or `App.axaml`.
+Centralize icon definitions and other shared resources in `Icons.axaml` and include them in the `MergedDictionaries` of your theme or `App.axaml`.
 
 ```xml
 <Application.Resources>

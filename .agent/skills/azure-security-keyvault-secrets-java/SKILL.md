@@ -1,9 +1,9 @@
 ---
 name: azure-security-keyvault-secrets-java
-description:
-  Azure Key Vault Secrets Java SDK for secret management. Use when storing, retrieving, or managing passwords, API keys,
-  connection strings, or other sensitive configuration data.
+description: "Azure Key Vault Secrets Java SDK for secret management. Use when storing, retrieving, or managing passwords, API keys, connection strings, or other sensitive configuration data."
 package: com.azure:azure-security-keyvault-secrets
+risk: unknown
+source: community
 ---
 
 # Azure Key Vault Secrets (Java)
@@ -111,7 +111,7 @@ for (SecretProperties secretProps : secretClient.listPropertiesOfSecrets()) {
     System.out.println("  Enabled: " + secretProps.isEnabled());
     System.out.println("  Created: " + secretProps.getCreatedOn());
     System.out.println("  Content-Type: " + secretProps.getContentType());
-
+    
     // Get value if needed
     if (secretProps.isEnabled()) {
         KeyVaultSecret fullSecret = secretClient.getSecret(secretProps.getName());
@@ -220,14 +220,14 @@ asyncClient.listPropertiesOfSecrets()
 ```java
 public class ConfigLoader {
     private final SecretClient client;
-
+    
     public ConfigLoader(String vaultUrl) {
         this.client = new SecretClientBuilder()
             .vaultUrl(vaultUrl)
             .credential(new DefaultAzureCredentialBuilder().build())
             .buildClient();
     }
-
+    
     public Map<String, String> loadSecrets(List<String> secretNames) {
         Map<String, String> secrets = new HashMap<>();
         for (String name : secretNames) {
@@ -255,11 +255,11 @@ Map<String, String> config = loader.loadSecrets(
 public void rotateSecret(String secretName, String newValue) {
     // Get current secret
     KeyVaultSecret current = secretClient.getSecret(secretName);
-
+    
     // Disable old version
     current.getProperties().setEnabled(false);
     secretClient.updateSecretProperties(current.getProperties());
-
+    
     // Create new version with new value
     KeyVaultSecret newSecret = secretClient.setSecret(secretName, newValue);
     System.out.println("Rotated to version: " + newSecret.getProperties().getVersion());
@@ -291,19 +291,19 @@ try {
 
 ## Secret Properties
 
-| Property        | Description                     |
-| --------------- | ------------------------------- |
-| `name`          | Secret name                     |
-| `value`         | Secret value (string)           |
-| `id`            | Full identifier URL             |
-| `contentType`   | MIME type hint                  |
-| `enabled`       | Whether secret can be retrieved |
-| `notBefore`     | Activation time                 |
-| `expiresOn`     | Expiration time                 |
-| `createdOn`     | Creation timestamp              |
-| `updatedOn`     | Last update timestamp           |
-| `recoveryLevel` | Soft-delete recovery level      |
-| `tags`          | User-defined metadata           |
+| Property | Description |
+|----------|-------------|
+| `name` | Secret name |
+| `value` | Secret value (string) |
+| `id` | Full identifier URL |
+| `contentType` | MIME type hint |
+| `enabled` | Whether secret can be retrieved |
+| `notBefore` | Activation time |
+| `expiresOn` | Expiration time |
+| `createdOn` | Creation timestamp |
+| `updatedOn` | Last update timestamp |
+| `recoveryLevel` | Soft-delete recovery level |
+| `tags` | User-defined metadata |
 
 ## Environment Variables
 
@@ -325,7 +325,7 @@ AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net
 
 ```java
 // Database connection string
-secretClient.setSecret(new KeyVaultSecret("db-connection",
+secretClient.setSecret(new KeyVaultSecret("db-connection", 
     "Server=myserver.database.windows.net;Database=mydb;...")
     .setProperties(new SecretProperties()
         .setContentType("text/plain")
@@ -338,7 +338,7 @@ secretClient.setSecret(new KeyVaultSecret("stripe-api-key", "sk_live_...")
         .setExpiresOn(OffsetDateTime.now().plusYears(1))));
 
 // JSON configuration
-secretClient.setSecret(new KeyVaultSecret("app-config",
+secretClient.setSecret(new KeyVaultSecret("app-config", 
     "{\"endpoint\":\"https://...\",\"key\":\"...\"}")
     .setProperties(new SecretProperties()
         .setContentType("application/json")));
@@ -356,3 +356,6 @@ secretClient.setSecret(new KeyVaultSecret("cert-password", "CertP@ss!")
 - "store password", "store API key", "connection string"
 - "retrieve secret", "rotate secret"
 - "Azure secrets", "vault secrets"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -7,8 +7,7 @@ tags: communication, messages, send, recv, notification
 
 ## Use Messages for Workflow Notifications
 
-Use `dbos.Send` to send messages to a workflow and `dbos.Recv` to receive them. Messages are queued per topic and
-persisted for reliable delivery.
+Use `dbos.Send` to send messages to a workflow and `dbos.Recv` to receive them. Messages are queued per topic and persisted for reliable delivery.
 
 **Incorrect (using external messaging for workflow communication):**
 
@@ -22,7 +21,7 @@ ch := make(chan string) // Not durable!
 ```go
 func checkoutWorkflow(ctx dbos.DBOSContext, orderID string) (string, error) {
 	// Wait for payment notification (timeout 120 seconds)
-	notification, err := dbos.Recv[string](ctx, "payment_status", 120*time.Second)
+	notification, err := dbos.Recvstring
 	if err != nil {
 		return "", err
 	}
@@ -46,16 +45,13 @@ func paymentWebhook(ctx dbos.DBOSContext, workflowID, status string) error {
 ```
 
 Key behaviors:
-
 - `Recv` waits for and consumes the next message for the specified topic
 - Returns the zero value if the wait times out, with a `DBOSError` with code `TimeoutError`
 - Messages without a topic can only be received by `Recv` without a topic
 - Messages are queued per-topic (FIFO)
 
 **Reliability guarantees:**
-
 - All messages are persisted to the database
 - Messages sent from workflows are delivered exactly-once
 
-Reference:
-[Workflow Messaging and Notifications](https://docs.dbos.dev/golang/tutorials/workflow-communication#workflow-messaging-and-notifications)
+Reference: [Workflow Messaging and Notifications](https://docs.dbos.dev/golang/tutorials/workflow-communication#workflow-messaging-and-notifications)

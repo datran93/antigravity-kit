@@ -27,8 +27,7 @@ shopify-development/
 
 ## Validated GraphQL
 
-All GraphQL queries and mutations in this skill have been validated against Shopify Admin API 2026-01 schema using the
-official Shopify MCP.
+All GraphQL queries and mutations in this skill have been validated against Shopify Admin API 2026-01 schema using the official Shopify MCP.
 
 ## Quick Start
 

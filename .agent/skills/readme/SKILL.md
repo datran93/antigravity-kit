@@ -1,17 +1,13 @@
 ---
 name: readme
-description:
-  "When the user wants to create or update a README.md file for a project. Also use when the user says 'write readme,'
-  'create readme,' 'document this project,' 'project documentation,' or asks for help with README.md. This skill creates
-  absurdly thorough documentation covering local setup, architecture, and deployment."
+description: "When the user wants to create or update a README.md file for a project. Also use when the user says 'write readme,' 'create readme,' 'document this project,' 'project documentation,' or asks for he..."
 source: "https://github.com/Shpigford/skills/tree/main/readme"
 risk: safe
 ---
 
 # README Generator
 
-You are an expert technical writer creating comprehensive project documentation. Your goal is to write a README.md that
-is absurdly thorough—the kind of documentation you wish every project had.
+You are an expert technical writer creating comprehensive project documentation. Your goal is to write a README.md that is absurdly thorough—the kind of documentation you wish every project had.
 
 ## When to Use This Skill
 
@@ -160,23 +156,32 @@ The complete local development guide:
 
 ### 1. Clone the Repository
 
-\`\`\`bash git clone https://github.com/user/repo.git cd repo \`\`\`
+\`\`\`bash
+git clone https://github.com/user/repo.git
+cd repo
+\`\`\`
 
 ### 2. Install Ruby Dependencies
 
 Ensure you have Ruby 3.3+ installed (via rbenv, asdf, or mise):
 
-\`\`\`bash bundle install \`\`\`
+\`\`\`bash
+bundle install
+\`\`\`
 
 ### 3. Install JavaScript Dependencies
 
-\`\`\`bash yarn install \`\`\`
+\`\`\`bash
+yarn install
+\`\`\`
 
 ### 4. Environment Setup
 
 Copy the example environment file:
 
-\`\`\`bash cp .env.example .env \`\`\`
+\`\`\`bash
+cp .env.example .env
+\`\`\`
 
 Configure the following variables:
 
@@ -191,23 +196,31 @@ Configure the following variables:
 
 Start PostgreSQL (if using Docker):
 
-\`\`\`bash docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16 \`\`\`
+\`\`\`bash
+docker run --name postgres -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
+\`\`\`
 
 Create and set up the database:
 
-\`\`\`bash bin/rails db:setup \`\`\`
+\`\`\`bash
+bin/rails db:setup
+\`\`\`
 
 This runs `db:create`, `db:schema:load`, and `db:seed`.
 
 For existing databases, run migrations:
 
-\`\`\`bash bin/rails db:migrate \`\`\`
+\`\`\`bash
+bin/rails db:migrate
+\`\`\`
 
 ### 6. Start Development Server
 
 Using Foreman/Overmind (recommended, runs Rails + Vite):
 
-\`\`\`bash bin/dev \`\`\`
+\`\`\`bash
+bin/dev
+\`\`\`
 
 Or manually:
 
@@ -219,7 +232,8 @@ bin/rails server
 
 # Terminal 2: Vite dev server (for Inertia/React)
 
-bin/vite dev \`\`\`
+bin/vite dev
+\`\`\`
 
 Open [http://localhost:3000](http://localhost:3000) in your browser.
 ```
@@ -235,14 +249,33 @@ This is where you go absurdly deep:
 
 ### Directory Structure
 
-\`\`\` ├── app/ │ ├── controllers/ # Rails controllers │ │ ├── concerns/ # Shared controller modules │ │ └── api/ #
-API-specific controllers │ ├── models/ # ActiveRecord models │ │ └── concerns/ # Shared model modules │ ├── jobs/ #
-Background jobs (Solid Queue) │ ├── mailers/ # Email templates │ ├── views/ # Rails views (minimal with Inertia) │ └──
-frontend/ # Inertia.js React components │ ├── components/ # Reusable UI components │ ├── layouts/ # Page layouts │ ├──
-pages/ # Inertia page components │ └── lib/ # Frontend utilities ├── config/ │ ├── routes.rb # Route definitions │ ├──
-database.yml # Database configuration │ └── initializers/ # App initializers ├── db/ │ ├── migrate/ # Database
-migrations │ ├── schema.rb # Current schema │ └── seeds.rb # Seed data ├── lib/ │ └── tasks/ # Custom Rake tasks └──
-public/ # Static assets \`\`\`
+\`\`\`
+├── app/
+│ ├── controllers/ # Rails controllers
+│ │ ├── concerns/ # Shared controller modules
+│ │ └── api/ # API-specific controllers
+│ ├── models/ # ActiveRecord models
+│ │ └── concerns/ # Shared model modules
+│ ├── jobs/ # Background jobs (Solid Queue)
+│ ├── mailers/ # Email templates
+│ ├── views/ # Rails views (minimal with Inertia)
+│ └── frontend/ # Inertia.js React components
+│ ├── components/ # Reusable UI components
+│ ├── layouts/ # Page layouts
+│ ├── pages/ # Inertia page components
+│ └── lib/ # Frontend utilities
+├── config/
+│ ├── routes.rb # Route definitions
+│ ├── database.yml # Database configuration
+│ └── initializers/ # App initializers
+├── db/
+│ ├── migrate/ # Database migrations
+│ ├── schema.rb # Current schema
+│ └── seeds.rb # Seed data
+├── lib/
+│ └── tasks/ # Custom Rake tasks
+└── public/ # Static assets
+\`\`\`
 
 ### Request Lifecycle
 
@@ -255,8 +288,11 @@ public/ # Static assets \`\`\`
 
 ### Data Flow
 
-\`\`\` User Action → React Component → Inertia Visit → Rails Controller → ActiveRecord → PostgreSQL ↓ React Props ←
-Inertia Response ← \`\`\`
+\`\`\`
+User Action → React Component → Inertia Visit → Rails Controller → ActiveRecord → PostgreSQL
+↓
+React Props ← Inertia Response ←
+\`\`\`
 
 ### Key Components
 
@@ -286,14 +322,32 @@ Inertia Response ← \`\`\`
 
 ### Database Schema
 
-\`\`\` users ├── id (bigint, PK) ├── email (string, unique, not null) ├── encrypted_password (string) ├── name (string)
-├── created_at (datetime) └── updated_at (datetime)
+\`\`\`
+users
+├── id (bigint, PK)
+├── email (string, unique, not null)
+├── encrypted_password (string)
+├── name (string)
+├── created_at (datetime)
+└── updated_at (datetime)
 
-posts ├── id (bigint, PK) ├── title (string, not null) ├── content (text) ├── published (boolean, default: false) ├──
-user_id (bigint, FK → users) ├── created_at (datetime) └── updated_at (datetime)
+posts
+├── id (bigint, PK)
+├── title (string, not null)
+├── content (text)
+├── published (boolean, default: false)
+├── user_id (bigint, FK → users)
+├── created_at (datetime)
+└── updated_at (datetime)
 
-solid_queue_jobs (background jobs) ├── id (bigint, PK) ├── queue_name (string) ├── class_name (string) ├── arguments
-(json) ├── scheduled_at (datetime) └── ... \`\`\`
+solid_queue_jobs (background jobs)
+├── id (bigint, PK)
+├── queue_name (string)
+├── class_name (string)
+├── arguments (json)
+├── scheduled_at (datetime)
+└── ...
+\`\`\`
 ```
 
 ### 6. Environment Variables
@@ -334,18 +388,35 @@ bin/rails credentials:edit
 
 # Or for environment-specific credentials
 
-RAILS_ENV=production bin/rails credentials:edit \`\`\`
+RAILS_ENV=production bin/rails credentials:edit
+\`\`\`
 
-Credentials file structure: \`\`\`yaml secret_key_base: xxx stripe: public_key: pk_xxx secret_key: sk_xxx google:
-client_id: xxx client_secret: xxx \`\`\`
+Credentials file structure:
+\`\`\`yaml
+secret_key_base: xxx
+stripe:
+public_key: pk_xxx
+secret_key: sk_xxx
+google:
+client_id: xxx
+client_secret: xxx
+\`\`\`
 
 Access in code: `Rails.application.credentials.stripe[:secret_key]`
 
 ### Environment-Specific
 
-**Development** \`\`\` DATABASE_URL=postgresql://localhost/myapp_development REDIS_URL=redis://localhost:6379/0 \`\`\`
+**Development**
+\`\`\`
+DATABASE_URL=postgresql://localhost/myapp_development
+REDIS_URL=redis://localhost:6379/0
+\`\`\`
 
-**Production** \`\`\` DATABASE_URL=<production-connection-string> RAILS_ENV=production RAILS_SERVE_STATIC_FILES=true
+**Production**
+\`\`\`
+DATABASE_URL=<production-connection-string>
+RAILS_ENV=production
+RAILS_SERVE_STATIC_FILES=true
 \`\`\`
 ```
 
@@ -391,11 +462,13 @@ bundle exec rspec
 
 # Run specific test file
 
-bin/rails test test/models/user_test.rb bundle exec rspec spec/models/user_spec.rb
+bin/rails test test/models/user_test.rb
+bundle exec rspec spec/models/user_spec.rb
 
 # Run tests matching a pattern
 
-bin/rails test -n /creates_user/ bundle exec rspec -e "creates user"
+bin/rails test -n /creates_user/
+bundle exec rspec -e "creates user"
 
 # Run system tests (browser tests)
 
@@ -403,30 +476,59 @@ bin/rails test:system
 
 # Run with coverage (SimpleCov)
 
-COVERAGE=true bin/rails test \`\`\`
+COVERAGE=true bin/rails test
+\`\`\`
 
 ### Test Structure
 
-\`\`\` test/ # Minitest structure ├── controllers/ # Controller tests ├── models/ # Model unit tests ├── integration/ #
-Integration tests ├── system/ # System/browser tests ├── fixtures/ # Test data └── test_helper.rb # Test configuration
+\`\`\`
+test/ # Minitest structure
+├── controllers/ # Controller tests
+├── models/ # Model unit tests
+├── integration/ # Integration tests
+├── system/ # System/browser tests
+├── fixtures/ # Test data
+└── test_helper.rb # Test configuration
 
-spec/ # RSpec structure (if used) ├── models/ ├── requests/ ├── system/ ├── factories/ # FactoryBot factories ├──
-support/ └── rails_helper.rb \`\`\`
+spec/ # RSpec structure (if used)
+├── models/
+├── requests/
+├── system/
+├── factories/ # FactoryBot factories
+├── support/
+└── rails_helper.rb
+\`\`\`
 
 ### Writing Tests
 
-**Minitest example:** \`\`\`ruby require "test_helper"
+**Minitest example:**
+\`\`\`ruby
+require "test_helper"
 
-class UserTest < ActiveSupport::TestCase test "creates user with valid attributes" do user = User.new(email:
-"test@example.com", name: "Test User") assert user.valid? end
+class UserTest < ActiveSupport::TestCase
+test "creates user with valid attributes" do
+user = User.new(email: "test@example.com", name: "Test User")
+assert user.valid?
+end
 
-test "requires email" do user = User.new(name: "Test User") assert_not user.valid? assert_includes user.errors[:email],
-"can't be blank" end end \`\`\`
+test "requires email" do
+user = User.new(name: "Test User")
+assert_not user.valid?
+assert_includes user.errors[:email], "can't be blank"
+end
+end
+\`\`\`
 
-**RSpec example:** \`\`\`ruby require "rails_helper"
+**RSpec example:**
+\`\`\`ruby
+require "rails_helper"
 
-RSpec.describe User, type: :model do describe "validations" do it "is valid with valid attributes" do user =
-build(:user) expect(user).to be_valid end
+RSpec.describe User, type: :model do
+describe "validations" do
+it "is valid with valid attributes" do
+user = build(:user)
+expect(user).to be_valid
+end
 
     it "requires an email" do
       user = build(:user, email: nil)
@@ -434,18 +536,29 @@ build(:user) expect(user).to be_valid end
       expect(user.errors[:email]).to include("can't be blank")
     end
 
-end end \`\`\`
+end
+end
+\`\`\`
 
 ### Frontend Testing
 
 For Inertia/React components:
 
-\`\`\`bash yarn test \`\`\`
+\`\`\`bash
+yarn test
+\`\`\`
 
-\`\`\`typescript import { render, screen } from '@testing-library/react' import { Dashboard } from './Dashboard'
+\`\`\`typescript
+import { render, screen } from '@testing-library/react'
+import { Dashboard } from './Dashboard'
 
-describe('Dashboard', () => { it('renders user name', () => { render(<Dashboard user={{ name: 'Josh' }} />)
-expect(screen.getByText('Josh')).toBeInTheDocument() }) }) \`\`\`
+describe('Dashboard', () => {
+it('renders user name', () => {
+render(<Dashboard user={{ name: 'Josh' }} />)
+expect(screen.getByText('Josh')).toBeInTheDocument()
+})
+})
+\`\`\`
 ```
 
 ### 9. Deployment
@@ -479,7 +592,8 @@ kamal app logs
 
 # Run console on production
 
-kamal app exec --interactive 'bin/rails console' \`\`\`
+kamal app exec --interactive 'bin/rails console'
+\`\`\`
 
 Configuration lives in `config/deploy.yml`.
 
@@ -499,7 +613,8 @@ docker run -p 3000:3000 \
  -e DATABASE_URL=postgresql://... \
  -e SECRET_KEY_BASE=... \
  -e RAILS_ENV=production \
- myapp \`\`\`
+ myapp
+\`\`\`
 
 ### Heroku
 
@@ -524,7 +639,8 @@ git push heroku main
 
 # Run migrations
 
-heroku run bin/rails db:migrate \`\`\`
+heroku run bin/rails db:migrate
+\`\`\`
 
 ### Fly.io
 
@@ -544,7 +660,8 @@ fly ssh console -C "bin/rails db:migrate"
 
 # Open console
 
-fly ssh console -C "bin/rails console" \`\`\`
+fly ssh console -C "bin/rails console"
+\`\`\`
 
 ### Render
 
@@ -582,7 +699,8 @@ RAILS_ENV=production bin/rails db:migrate
 
 # Restart application server (e.g., Puma via systemd)
 
-sudo systemctl restart myapp \`\`\`
+sudo systemctl restart myapp
+\`\`\`
 ```
 
 ### 10. Troubleshooting
@@ -604,17 +722,23 @@ sudo systemctl restart myapp \`\`\`
 
 **Error:** `Migrations are pending`
 
-**Solution:** \`\`\`bash bin/rails db:migrate \`\`\`
+**Solution:**
+\`\`\`bash
+bin/rails db:migrate
+\`\`\`
 
 ### Asset Compilation Issues
 
 **Error:** `The asset "application.css" is not present in the asset pipeline`
 
-**Solution:** \`\`\`bash
+**Solution:**
+\`\`\`bash
 
 # Clear and recompile assets
 
-bin/rails assets:clobber bin/rails assets:precompile \`\`\`
+bin/rails assets:clobber
+bin/rails assets:precompile
+\`\`\`
 
 ### Bundle Install Failures
 
@@ -622,7 +746,8 @@ bin/rails assets:clobber bin/rails assets:precompile \`\`\`
 
 **Solution:**
 
-1. Ensure system dependencies are installed: \`\`\`bash
+1. Ensure system dependencies are installed:
+   \`\`\`bash
 
    # macOS
 
@@ -630,7 +755,8 @@ bin/rails assets:clobber bin/rails assets:precompile \`\`\`
 
    # Ubuntu
 
-   sudo apt-get install libpq-dev \`\`\`
+   sudo apt-get install libpq-dev
+   \`\`\`
 
 2. Try again: `bundle install`
 
@@ -638,7 +764,8 @@ bin/rails assets:clobber bin/rails assets:precompile \`\`\`
 
 **Error:** `ActiveSupport::MessageEncryptor::InvalidMessage`
 
-**Solution:** The master key doesn't match the credentials file. Either:
+**Solution:**
+The master key doesn't match the credentials file. Either:
 
 1. Get the correct `config/master.key` from another team member
 2. Or regenerate credentials: `rm config/credentials.yml.enc && bin/rails credentials:edit`
@@ -647,7 +774,8 @@ bin/rails assets:clobber bin/rails assets:precompile \`\`\`
 
 **Error:** `Vite Ruby - Build failed`
 
-**Solution:** \`\`\`bash
+**Solution:**
+\`\`\`bash
 
 # Clear Vite cache
 
@@ -655,17 +783,22 @@ rm -rf node_modules/.vite
 
 # Reinstall JS dependencies
 
-rm -rf node_modules && yarn install \`\`\`
+rm -rf node_modules && yarn install
+\`\`\`
 
 ### Solid Queue Issues
 
 **Error:** Jobs not processing
 
-**Solution:** Ensure the queue worker is running: \`\`\`bash bin/jobs
+**Solution:**
+Ensure the queue worker is running:
+\`\`\`bash
+bin/jobs
 
 # or
 
-bin/rails solid_queue:start \`\`\`
+bin/rails solid_queue:start
+\`\`\`
 ```
 
 ### 11. Contributing (Optional)

@@ -1,11 +1,6 @@
 ---
 name: hugging-face-jobs
-description:
-  "This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts,
-  Docker-based jobs, hardware selection, cost estimation, authentication with tokens, secrets management, timeout
-  configuration, and result persistence. Designed for general-purpose compute workloads including data processing,
-  inference, experiments, batch jobs, and any Python-based tasks. Should be invoked for tasks involving cloud compute,
-  GPU workloads, or when users mention running jobs on Hugging Face infrastructure without local setup."
+description: "This skill should be used when users want to run any workload on Hugging Face Jobs infrastructure. Covers UV scripts, Docker-based jobs, hardware selection, cost estimation, authentication with tok..."
 license: "Complete terms in LICENSE.txt"
 source: "https://github.com/huggingface/skills/tree/main/skills/hugging-face-jobs"
 risk: safe
@@ -15,11 +10,9 @@ risk: safe
 
 ## Overview
 
-Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or
-TPUs and can persist results to the Hugging Face Hub.
+Run any workload on fully managed Hugging Face infrastructure. No local setup required—jobs run on cloud CPUs, GPUs, or TPUs and can persist results to the Hugging Face Hub.
 
 **Common use cases:**
-
 - **Data Processing** - Transform, filter, or analyze large datasets
 - **Batch Inference** - Run inference on thousands of samples
 - **Experiments & Benchmarks** - Reproducible ML experiments
@@ -33,7 +26,6 @@ TPUs and can persist results to the Hugging Face Hub.
 ## When to Use This Skill
 
 Use this skill when users want to:
-
 - Run Python workloads on cloud infrastructure
 - Execute jobs without local GPU/TPU setup
 - Process data at scale
@@ -46,15 +38,11 @@ Use this skill when users want to:
 
 When assisting with jobs:
 
-1. **ALWAYS use `hf_jobs()` MCP tool** - Submit jobs using `hf_jobs("uv", {...})` or `hf_jobs("run", {...})`. The
-   `script` parameter accepts Python code directly. Do NOT save to local files unless the user explicitly requests it.
-   Pass the script content as a string to `hf_jobs()`.
+1. **ALWAYS use `hf_jobs()` MCP tool** - Submit jobs using `hf_jobs("uv", {...})` or `hf_jobs("run", {...})`. The `script` parameter accepts Python code directly. Do NOT save to local files unless the user explicitly requests it. Pass the script content as a string to `hf_jobs()`.
 
-2. **Always handle authentication** - Jobs that interact with the Hub require `HF_TOKEN` via secrets. See Token Usage
-   section below.
+2. **Always handle authentication** - Jobs that interact with the Hub require `HF_TOKEN` via secrets. See Token Usage section below.
 
-3. **Provide job details after submission** - After submitting, provide job ID, monitoring URL, estimated time, and note
-   that the user can request status checks later.
+3. **Provide job details after submission** - After submitting, provide job ID, monitoring URL, estimated time, and note that the user can request status checks later.
 
 4. **Set appropriate timeouts** - Default 30min may be insufficient for long-running tasks.
 
@@ -63,46 +51,38 @@ When assisting with jobs:
 Before starting any job, verify:
 
 ### ✅ **Account & Authentication**
-
-- Hugging Face Account with [Pro](https://hf.co/pro), [Team](https://hf.co/enterprise), or
-  [Enterprise](https://hf.co/enterprise) plan (Jobs require paid plan)
+- Hugging Face Account with [Pro](https://hf.co/pro), [Team](https://hf.co/enterprise), or [Enterprise](https://hf.co/enterprise) plan (Jobs require paid plan)
 - Authenticated login: Check with `hf_whoami()`
-- **HF_TOKEN for Hub Access** ⚠️ CRITICAL - Required for any Hub operations (push models/datasets, download private
-  repos, etc.)
+- **HF_TOKEN for Hub Access** ⚠️ CRITICAL - Required for any Hub operations (push models/datasets, download private repos, etc.)
 - Token must have appropriate permissions (read for downloads, write for uploads)
 
 ### ✅ **Token Usage** (See Token Usage section for details)
 
 **When tokens are required:**
-
 - Pushing models/datasets to Hub
 - Accessing private repositories
 - Using Hub APIs in scripts
 - Any authenticated Hub operations
 
 **How to provide tokens:**
-
 ```python
 {
     "secrets": {"HF_TOKEN": "$HF_TOKEN"}  # Recommended: automatic token
 }
 ```
 
-**⚠️ CRITICAL:** The `$HF_TOKEN` placeholder is automatically replaced with your logged-in token. Never hardcode tokens
-in scripts.
+**⚠️ CRITICAL:** The `$HF_TOKEN` placeholder is automatically replaced with your logged-in token. Never hardcode tokens in scripts.
 
 ## Token Usage Guide
 
 ### Understanding Tokens
 
 **What are HF Tokens?**
-
 - Authentication credentials for Hugging Face Hub
 - Required for authenticated operations (push, private repos, API access)
 - Stored securely on your machine after `hf auth login`
 
 **Token Types:**
-
 - **Read Token** - Can download models/datasets, read private repos
 - **Write Token** - Can push models/datasets, create repos, modify content
 - **Organization Token** - Can act on behalf of an organization
@@ -110,7 +90,6 @@ in scripts.
 ### When Tokens Are Required
 
 **Always Required:**
-
 - Pushing models/datasets to Hub
 - Accessing private repositories
 - Creating new repositories
@@ -118,7 +97,6 @@ in scripts.
 - Using Hub APIs programmatically
 
 **Not Required:**
-
 - Downloading public models/datasets
 - Running jobs that don't interact with Hub
 - Reading public repository information
@@ -135,14 +113,12 @@ hf_jobs("uv", {
 ```
 
 **How it works:**
-
 - `$HF_TOKEN` is a placeholder that gets replaced with your actual token
 - Uses the token from your logged-in session (`hf auth login`)
 - Most secure and convenient method
 - Token is encrypted server-side when passed as a secret
 
 **Benefits:**
-
 - No token exposure in code
 - Uses your current login session
 - Automatically updated if you re-login
@@ -158,13 +134,11 @@ hf_jobs("uv", {
 ```
 
 **When to use:**
-
 - Only if automatic token doesn't work
 - Testing with a specific token
 - Organization tokens (use with caution)
 
 **Security concerns:**
-
 - Token visible in code/logs
 - Must manually update if token rotates
 - Risk of token exposure
@@ -179,7 +153,6 @@ hf_jobs("uv", {
 ```
 
 **Difference from secrets:**
-
 - `env` variables are visible in job logs
 - `secrets` are encrypted server-side
 - Always prefer `secrets` for tokens
@@ -207,7 +180,6 @@ api = HfApi()  # Automatically uses HF_TOKEN env var
 ```
 
 **Best practices:**
-
 - Don't hardcode tokens in scripts
 - Use `os.environ.get("HF_TOKEN")` to access
 - Let `huggingface_hub` auto-detect when possible
@@ -216,14 +188,12 @@ api = HfApi()  # Automatically uses HF_TOKEN env var
 ### Token Verification
 
 **Check if you're logged in:**
-
 ```python
 from huggingface_hub import whoami
 user_info = whoami()  # Returns your username if authenticated
 ```
 
 **Verify token in job:**
-
 ```python
 import os
 assert "HF_TOKEN" in os.environ, "HF_TOKEN not found!"
@@ -234,25 +204,21 @@ print(f"Token starts with: {token[:7]}...")  # Should start with "hf_"
 ### Common Token Issues
 
 **Error: 401 Unauthorized**
-
 - **Cause:** Token missing or invalid
 - **Fix:** Add `secrets={"HF_TOKEN": "$HF_TOKEN"}` to job config
 - **Verify:** Check `hf_whoami()` works locally
 
 **Error: 403 Forbidden**
-
 - **Cause:** Token lacks required permissions
 - **Fix:** Ensure token has write permissions for push operations
 - **Check:** Token type at https://huggingface.co/settings/tokens
 
 **Error: Token not found in environment**
-
 - **Cause:** `secrets` not passed or wrong key name
 - **Fix:** Use `secrets={"HF_TOKEN": "$HF_TOKEN"}` (not `env`)
 - **Verify:** Script checks `os.environ.get("HF_TOKEN")`
 
 **Error: Repository access denied**
-
 - **Cause:** Token doesn't have access to private repo
 - **Fix:** Use token from account with access
 - **Check:** Verify repo visibility and your permissions
@@ -306,7 +272,6 @@ print("✅ Dataset pushed successfully!")
 UV scripts use PEP 723 inline dependencies for clean, self-contained workloads.
 
 **MCP Tool:**
-
 ```python
 hf_jobs("uv", {
     "script": """
@@ -328,13 +293,11 @@ print(result)
 ```
 
 **CLI Equivalent:**
-
 ```bash
 hf jobs uv run my_script.py --flavor cpu-basic --timeout 30m
 ```
 
 **Python API:**
-
 ```python
 from huggingface_hub import run_uv_job
 run_uv_job("my_script.py", flavor="cpu-basic", timeout="30m")
@@ -346,8 +309,7 @@ run_uv_job("my_script.py", flavor="cpu-basic", timeout="30m")
 
 #### Custom Docker Images for UV Scripts
 
-By default, UV scripts use `ghcr.io/astral-sh/uv:python3.12-bookworm-slim`. For ML workloads with complex dependencies,
-use pre-built images:
+By default, UV scripts use `ghcr.io/astral-sh/uv:python3.12-bookworm-slim`. For ML workloads with complex dependencies, use pre-built images:
 
 ```python
 hf_jobs("uv", {
@@ -358,7 +320,6 @@ hf_jobs("uv", {
 ```
 
 **CLI:**
-
 ```bash
 hf jobs uv run --image vllm/vllm-openai:latest --flavor a10g-large inference.py
 ```
@@ -378,7 +339,6 @@ hf_jobs("uv", {
 ```
 
 **Python API:**
-
 ```python
 from huggingface_hub import run_uv_job
 run_uv_job("my_script.py", python="3.11")
@@ -386,10 +346,9 @@ run_uv_job("my_script.py", python="3.11")
 
 #### Working with Scripts
 
-⚠️ **Important:** There are _two_ "script path" stories depending on how you run Jobs:
+⚠️ **Important:** There are *two* "script path" stories depending on how you run Jobs:
 
-- **Using the `hf_jobs()` MCP tool (recommended in this repo)**: the `script` value must be **inline code** (a string)
-  or a **URL**. A local filesystem path (like `"./scripts/foo.py"`) won't exist inside the remote container.
+- **Using the `hf_jobs()` MCP tool (recommended in this repo)**: the `script` value must be **inline code** (a string) or a **URL**. A local filesystem path (like `"./scripts/foo.py"`) won't exist inside the remote container.
 - **Using the `hf jobs uv run` CLI**: local file paths **do work** (the CLI uploads your script).
 
 **Common mistake with `hf_jobs()` MCP tool:**
@@ -433,7 +392,6 @@ hf_jobs("uv", {
 ```
 
 **Python API:**
-
 ```python
 from huggingface_hub import run_uv_job
 run_uv_job("inference.py", dependencies=["transformers", "torch>=2.0"])
@@ -444,7 +402,6 @@ run_uv_job("inference.py", dependencies=["transformers", "torch>=2.0"])
 Run jobs with custom Docker images and commands.
 
 **MCP Tool:**
-
 ```python
 hf_jobs("run", {
     "image": "python:3.12",
@@ -455,23 +412,20 @@ hf_jobs("run", {
 ```
 
 **CLI Equivalent:**
-
 ```bash
 hf jobs run python:3.12 python -c "print('Hello from HF Jobs!')"
 ```
 
 **Python API:**
-
 ```python
 from huggingface_hub import run_job
 run_job(image="python:3.12", command=["python", "-c", "print('Hello!')"], flavor="cpu-basic")
 ```
 
-**Benefits:** Full Docker control, use pre-built images, run any command **When to use:** Need specific Docker images,
-non-Python workloads, complex environments
+**Benefits:** Full Docker control, use pre-built images, run any command
+**When to use:** Need specific Docker images, non-Python workloads, complex environments
 
 **Example with GPU:**
-
 ```python
 hf_jobs("run", {
     "image": "pytorch/pytorch:2.6.0-cuda12.4-cudnn9-devel",
@@ -484,7 +438,6 @@ hf_jobs("run", {
 **Using Hugging Face Spaces as Images:**
 
 You can use Docker images from HF Spaces:
-
 ```python
 hf_jobs("run", {
     "image": "hf.co/spaces/lhoestq/duckdb",  # Space as Docker image
@@ -494,7 +447,6 @@ hf_jobs("run", {
 ```
 
 **CLI:**
-
 ```bash
 hf jobs run hf.co/spaces/lhoestq/duckdb duckdb -c "SELECT 'Hello!'"
 ```
@@ -517,26 +469,23 @@ hub_repo_details(["uv-scripts/classification"], repo_type="dataset", include_rea
 
 > **Reference:** [HF Jobs Hardware Docs](https://huggingface.co/docs/hub/en/spaces-config-reference) (updated 07/2025)
 
-| Workload Type            | Recommended Hardware                   | Use Case                |
-| ------------------------ | -------------------------------------- | ----------------------- |
-| Data processing, testing | `cpu-basic`, `cpu-upgrade`             | Lightweight tasks       |
-| Small models, demos      | `t4-small`                             | <1B models, quick tests |
-| Medium models            | `t4-medium`, `l4x1`                    | 1-7B models             |
-| Large models, production | `a10g-small`, `a10g-large`             | 7-13B models            |
-| Very large models        | `a100-large`                           | 13B+ models             |
-| Batch inference          | `a10g-large`, `a100-large`             | High-throughput         |
-| Multi-GPU workloads      | `l4x4`, `a10g-largex2`, `a10g-largex4` | Parallel/large models   |
-| TPU workloads            | `v5e-1x1`, `v5e-2x2`, `v5e-2x4`        | JAX/Flax, TPU-optimized |
+| Workload Type | Recommended Hardware | Use Case |
+|---------------|---------------------|----------|
+| Data processing, testing | `cpu-basic`, `cpu-upgrade` | Lightweight tasks |
+| Small models, demos | `t4-small` | <1B models, quick tests |
+| Medium models | `t4-medium`, `l4x1` | 1-7B models |
+| Large models, production | `a10g-small`, `a10g-large` | 7-13B models |
+| Very large models | `a100-large` | 13B+ models |
+| Batch inference | `a10g-large`, `a100-large` | High-throughput |
+| Multi-GPU workloads | `l4x4`, `a10g-largex2`, `a10g-largex4` | Parallel/large models |
+| TPU workloads | `v5e-1x1`, `v5e-2x2`, `v5e-2x4` | JAX/Flax, TPU-optimized |
 
 **All Available Flavors:**
-
 - **CPU:** `cpu-basic`, `cpu-upgrade`
-- **GPU:** `t4-small`, `t4-medium`, `l4x1`, `l4x4`, `a10g-small`, `a10g-large`, `a10g-largex2`, `a10g-largex4`,
-  `a100-large`
+- **GPU:** `t4-small`, `t4-medium`, `l4x1`, `l4x4`, `a10g-small`, `a10g-large`, `a10g-largex2`, `a10g-largex4`, `a100-large`
 - **TPU:** `v5e-1x1`, `v5e-2x2`, `v5e-2x4`
 
 **Guidelines:**
-
 - Start with smaller hardware for testing
 - Scale up based on actual needs
 - Use multi-GPU for parallel workloads or large models
@@ -547,8 +496,7 @@ hub_repo_details(["uv-scripts/classification"], repo_type="dataset", include_rea
 
 **⚠️ EPHEMERAL ENVIRONMENT—MUST PERSIST RESULTS**
 
-The Jobs environment is temporary. All files are deleted when the job ends. If results aren't persisted, **ALL WORK IS
-LOST**.
+The Jobs environment is temporary. All files are deleted when the job ends. If results aren't persisted, **ALL WORK IS LOST**.
 
 ### Persistence Options
 
@@ -590,7 +538,6 @@ requests.post("https://your-api.com/results", json=results)
 ### Required Configuration for Hub Push
 
 **In job submission:**
-
 ```python
 {
     "secrets": {"HF_TOKEN": "$HF_TOKEN"}  # Enables authentication
@@ -598,7 +545,6 @@ requests.post("https://your-api.com/results", json=results)
 ```
 
 **In script:**
-
 ```python
 import os
 from huggingface_hub import HfApi
@@ -613,7 +559,6 @@ api.upload_file(...)
 ### Verification Checklist
 
 Before submitting:
-
 - [ ] Results persistence method chosen
 - [ ] `secrets={"HF_TOKEN": "$HF_TOKEN"}` if using Hub
 - [ ] Script handles missing token gracefully
@@ -630,7 +575,6 @@ Jobs automatically stop after the timeout. For long-running tasks like training,
 ### Setting Timeouts
 
 **MCP Tool:**
-
 ```python
 {
     "timeout": "2h"   # 2 hours
@@ -638,13 +582,11 @@ Jobs automatically stop after the timeout. For long-running tasks like training,
 ```
 
 **Supported formats:**
-
 - Integer/float: seconds (e.g., `300` = 5 minutes)
 - String with suffix: `"5m"` (minutes), `"2h"` (hours), `"1d"` (days)
 - Examples: `"90m"`, `"2h"`, `"1.5h"`, `300`, `"1d"`
 
 **Python API:**
-
 ```python
 from huggingface_hub import run_job, run_uv_job
 
@@ -654,13 +596,13 @@ run_uv_job("script.py", timeout=7200)  # 2 hours in seconds
 
 ### Timeout Guidelines
 
-| Scenario        | Recommended | Notes                |
-| --------------- | ----------- | -------------------- |
-| Quick test      | 10-30 min   | Verify setup         |
-| Data processing | 1-2 hours   | Depends on data size |
-| Batch inference | 2-4 hours   | Large batches        |
-| Experiments     | 4-8 hours   | Multiple runs        |
-| Long-running    | 8-24 hours  | Production workloads |
+| Scenario | Recommended | Notes |
+|----------|-------------|-------|
+| Quick test | 10-30 min | Verify setup |
+| Data processing | 1-2 hours | Depends on data size |
+| Batch inference | 2-4 hours | Large batches |
+| Experiments | 4-8 hours | Multiple runs |
+| Long-running | 8-24 hours | Production workloads |
 
 **Always add 20-30% buffer** for setup, network delays, and cleanup.
 
@@ -677,25 +619,21 @@ Total Cost = (Hours of runtime) × (Cost per hour)
 **Example calculations:**
 
 **Quick test:**
-
 - Hardware: cpu-basic ($0.10/hour)
 - Time: 15 minutes (0.25 hours)
 - Cost: $0.03
 
 **Data processing:**
-
 - Hardware: l4x1 ($2.50/hour)
 - Time: 2 hours
 - Cost: $5.00
 
 **Batch inference:**
-
 - Hardware: a10g-large ($5/hour)
 - Time: 4 hours
 - Cost: $20.00
 
 **Cost optimization tips:**
-
 1. Start small - Test on cpu-basic or t4-small
 2. Monitor runtime - Set appropriate timeouts
 3. Use checkpoints - Resume if job fails
@@ -707,7 +645,6 @@ Total Cost = (Hours of runtime) × (Cost per hour)
 ### Check Job Status
 
 **MCP Tool:**
-
 ```python
 # List all jobs
 hf_jobs("ps")
@@ -723,7 +660,6 @@ hf_jobs("cancel", {"job_id": "your-job-id"})
 ```
 
 **Python API:**
-
 ```python
 from huggingface_hub import list_jobs, inspect_job, fetch_job_logs, cancel_job
 
@@ -745,7 +681,6 @@ cancel_job(job_id="your-job-id")
 ```
 
 **CLI:**
-
 ```bash
 hf jobs ps                    # List jobs
 hf jobs logs <job-id>         # View logs
@@ -757,7 +692,6 @@ hf jobs cancel <job-id>       # Cancel job
 ### Job URLs
 
 After submission, jobs have monitoring URLs:
-
 ```
 https://huggingface.co/jobs/username/job-id
 ```
@@ -784,7 +718,6 @@ for job in jobs:
 Run jobs on a schedule using CRON expressions or predefined schedules.
 
 **MCP Tool:**
-
 ```python
 # Schedule a UV script that runs every hour
 hf_jobs("scheduled uv", {
@@ -810,7 +743,6 @@ hf_jobs("scheduled run", {
 ```
 
 **Python API:**
-
 ```python
 from huggingface_hub import create_scheduled_job, create_scheduled_uv_job
 
@@ -833,7 +765,6 @@ create_scheduled_uv_job(
 ```
 
 **Available schedules:**
-
 - `@annually`, `@yearly` - Once per year
 - `@monthly` - Once per month
 - `@weekly` - Once per week
@@ -842,7 +773,6 @@ create_scheduled_uv_job(
 - CRON expression - Custom schedule (e.g., `"*/5 * * * *"` for every 5 minutes)
 
 **Manage scheduled jobs:**
-
 ```python
 # MCP Tool
 hf_jobs("scheduled ps")                              # List scheduled jobs
@@ -853,7 +783,6 @@ hf_jobs("scheduled delete", {"job_id": "..."})      # Delete
 ```
 
 **Python API for management:**
-
 ```python
 from huggingface_hub import (
     list_scheduled_jobs,
@@ -884,7 +813,6 @@ delete_scheduled_job(scheduled_job_id)
 Trigger jobs automatically when changes happen in Hugging Face repositories.
 
 **Python API:**
-
 ```python
 from huggingface_hub import create_webhook
 
@@ -901,20 +829,17 @@ webhook = create_webhook(
 ```
 
 **How it works:**
-
 1. Webhook listens for changes in watched repositories
 2. When triggered, the job runs with `WEBHOOK_PAYLOAD` environment variable
 3. Your script can parse the payload to understand what changed
 
 **Use cases:**
-
 - Auto-process new datasets when uploaded
 - Trigger inference when models are updated
 - Run tests when code changes
 - Generate reports on repository activity
 
 **Access webhook payload in script:**
-
 ```python
 import os
 import json
@@ -927,13 +852,11 @@ See [Webhooks Documentation](https://huggingface.co/docs/huggingface_hub/guides/
 
 ## Common Workload Patterns
 
-This repository ships ready-to-run UV scripts in `hf-jobs/scripts/`. Prefer using them instead of inventing new
-templates.
+This repository ships ready-to-run UV scripts in `hf-jobs/scripts/`. Prefer using them instead of inventing new templates.
 
 ### Pattern 1: Dataset → Model Responses (vLLM) — `scripts/generate-responses.py`
 
-**What it does:** loads a Hub dataset (chat `messages` or a `prompt` column), applies a model chat template, generates
-responses with vLLM, and **pushes** the output dataset + dataset card back to the Hub.
+**What it does:** loads a Hub dataset (chat `messages` or a `prompt` column), applies a model chat template, generates responses with vLLM, and **pushes** the output dataset + dataset card back to the Hub.
 
 **Requires:** GPU + **write** token (it pushes a dataset).
 
@@ -960,8 +883,7 @@ hf_jobs("uv", {
 
 ### Pattern 2: CoT Self-Instruct Synthetic Data — `scripts/cot-self-instruct.py`
 
-**What it does:** generates synthetic prompts/answers via CoT Self-Instruct, optionally filters outputs
-(answer-consistency / RIP), then **pushes** the generated dataset + dataset card to the Hub.
+**What it does:** generates synthetic prompts/answers via CoT Self-Instruct, optionally filters outputs (answer-consistency / RIP), then **pushes** the generated dataset + dataset card to the Hub.
 
 **Requires:** GPU + **write** token (it pushes a dataset).
 
@@ -986,8 +908,7 @@ hf_jobs("uv", {
 
 ### Pattern 3: Streaming Dataset Stats (Polars + HF Hub) — `scripts/finepdfs-stats.py`
 
-**What it does:** scans parquet directly from Hub (no 300GB download), computes temporal stats, and (optionally) uploads
-results to a Hub dataset repo.
+**What it does:** scans parquet directly from Hub (no 300GB download), computes temporal stats, and (optionally) uploads results to a Hub dataset repo.
 
 **Requires:** CPU is often enough; token needed **only** if you pass `--output-repo` (upload).
 
@@ -1014,7 +935,6 @@ hf_jobs("uv", {
 ### Out of Memory (OOM)
 
 **Fix:**
-
 1. Reduce batch size or data chunk size
 2. Process data in smaller batches
 3. Upgrade hardware: cpu → t4 → a10g → a100
@@ -1022,7 +942,6 @@ hf_jobs("uv", {
 ### Job Timeout
 
 **Fix:**
-
 1. Check logs for actual runtime
 2. Increase timeout with buffer: `"timeout": "3h"`
 3. Optimize code for faster execution
@@ -1031,7 +950,6 @@ hf_jobs("uv", {
 ### Hub Push Failures
 
 **Fix:**
-
 1. Add to job: `secrets={"HF_TOKEN": "$HF_TOKEN"}`
 2. Verify token in script: `assert "HF_TOKEN" in os.environ`
 3. Check token permissions
@@ -1039,8 +957,8 @@ hf_jobs("uv", {
 
 ### Missing Dependencies
 
-**Fix:** Add to PEP 723 header:
-
+**Fix:**
+Add to PEP 723 header:
 ```python
 # /// script
 # dependencies = ["package1", "package2>=1.0.0"]
@@ -1050,7 +968,6 @@ hf_jobs("uv", {
 ### Authentication Errors
 
 **Fix:**
-
 1. Check `hf_whoami()` works locally
 2. Verify `secrets={"HF_TOKEN": "$HF_TOKEN"}` in job config
 3. Re-login: `hf auth login`
@@ -1059,7 +976,6 @@ hf_jobs("uv", {
 ## Troubleshooting
 
 **Common issues:**
-
 - Job times out → Increase timeout, optimize code
 - Results not saved → Check persistence method, verify HF_TOKEN
 - Out of Memory → Reduce batch size, upgrade hardware
@@ -1071,14 +987,12 @@ hf_jobs("uv", {
 ## Resources
 
 ### References (In This Skill)
-
 - `references/token_usage.md` - Complete token usage guide
 - `references/hardware_guide.md` - Hardware specs and selection
 - `references/hub_saving.md` - Hub persistence guide
 - `references/troubleshooting.md` - Common issues and solutions
 
 ### Scripts (In This Skill)
-
 - `scripts/generate-responses.py` - vLLM batch generation: dataset → responses → push to Hub
 - `scripts/cot-self-instruct.py` - CoT Self-Instruct synthetic data generation + filtering → push to Hub
 - `scripts/finepdfs-stats.py` - Polars streaming stats over `finepdfs-edu` parquet on Hub (optional push)
@@ -1086,14 +1000,12 @@ hf_jobs("uv", {
 ### External Links
 
 **Official Documentation:**
-
 - [HF Jobs Guide](https://huggingface.co/docs/huggingface_hub/guides/jobs) - Main documentation
 - [HF Jobs CLI Reference](https://huggingface.co/docs/huggingface_hub/guides/cli#hf-jobs) - Command line interface
 - [HF Jobs API Reference](https://huggingface.co/docs/huggingface_hub/package_reference/hf_api) - Python API details
 - [Hardware Flavors Reference](https://huggingface.co/docs/hub/en/spaces-config-reference) - Available hardware
 
 **Related Tools:**
-
 - [UV Scripts Guide](https://docs.astral.sh/uv/guides/scripts/) - PEP 723 inline dependencies
 - [UV Scripts Organization](https://huggingface.co/uv-scripts) - Community UV script collection
 - [HF Hub Authentication](https://huggingface.co/docs/huggingface_hub/quick-start#authentication) - Token setup
@@ -1101,8 +1013,7 @@ hf_jobs("uv", {
 
 ## Key Takeaways
 
-1. **Submit scripts inline** - The `script` parameter accepts Python code directly; no file saving required unless user
-   requests
+1. **Submit scripts inline** - The `script` parameter accepts Python code directly; no file saving required unless user requests
 2. **Jobs are asynchronous** - Don't wait/poll; let user check when ready
 3. **Always set timeout** - Default 30 min may be insufficient; set appropriate timeout
 4. **Always persist results** - Environment is ephemeral; without persistence, all work is lost
@@ -1115,12 +1026,13 @@ hf_jobs("uv", {
 
 ## Quick Reference: MCP Tool vs CLI vs Python API
 
-| Operation       | MCP Tool                          | CLI                        | Python API                  |
-| --------------- | --------------------------------- | -------------------------- | --------------------------- |
-| Run UV script   | `hf_jobs("uv", {...})`            | `hf jobs uv run script.py` | `run_uv_job("script.py")`   |
-| Run Docker job  | `hf_jobs("run", {...})`           | `hf jobs run image cmd`    | `run_job(image, command)`   |
-| List jobs       | `hf_jobs("ps")`                   | `hf jobs ps`               | `list_jobs()`               |
-| View logs       | `hf_jobs("logs", {...})`          | `hf jobs logs <id>`        | `fetch_job_logs(job_id)`    |
-| Cancel job      | `hf_jobs("cancel", {...})`        | `hf jobs cancel <id>`      | `cancel_job(job_id)`        |
-| Schedule UV     | `hf_jobs("scheduled uv", {...})`  | -                          | `create_scheduled_uv_job()` |
-| Schedule Docker | `hf_jobs("scheduled run", {...})` | -                          | `create_scheduled_job()`    |
+| Operation | MCP Tool | CLI | Python API |
+|-----------|----------|-----|------------|
+| Run UV script | `hf_jobs("uv", {...})` | `hf jobs uv run script.py` | `run_uv_job("script.py")` |
+| Run Docker job | `hf_jobs("run", {...})` | `hf jobs run image cmd` | `run_job(image, command)` |
+| List jobs | `hf_jobs("ps")` | `hf jobs ps` | `list_jobs()` |
+| View logs | `hf_jobs("logs", {...})` | `hf jobs logs <id>` | `fetch_job_logs(job_id)` |
+| Cancel job | `hf_jobs("cancel", {...})` | `hf jobs cancel <id>` | `cancel_job(job_id)` |
+| Schedule UV | `hf_jobs("scheduled uv", {...})` | - | `create_scheduled_uv_job()` |
+| Schedule Docker | `hf_jobs("scheduled run", {...})` | - | `create_scheduled_job()` |
+

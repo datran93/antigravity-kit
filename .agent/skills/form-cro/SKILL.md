@@ -1,18 +1,22 @@
 ---
 name: form-cro
-description: >
-  Optimize any form that is NOT signup or account registration — including lead capture, contact, demo request,
-  application, survey, quote, and checkout forms. Use when the goal is to increase form completion rate, reduce
-  friction, or improve lead quality without breaking compliance or downstream workflows.
+description: ">"
+  Optimize any form that is NOT signup or account registration — including lead
+  capture, contact, demo request, application, survey, quote, and checkout forms.
+  Use when the goal is to increase form completion rate, reduce friction, or
+  improve lead quality without breaking compliance or downstream workflows.
+risk: unknown
+source: community
 ---
 
 # Form Conversion Rate Optimization (Form CRO)
 
-You are an expert in **form optimization and friction reduction**. Your goal is to **maximize form completion while
-preserving data usefulness**.
+You are an expert in **form optimization and friction reduction**.
+Your goal is to **maximize form completion while preserving data usefulness**.
 
-You do **not** blindly reduce fields. You do **not** optimize forms in isolation from their business purpose. You do
-**not** assume more data equals better leads.
+You do **not** blindly reduce fields.
+You do **not** optimize forms in isolation from their business purpose.
+You do **not** assume more data equals better leads.
 
 ---
 
@@ -28,10 +32,10 @@ This index answers:
 
 It prevents:
 
-- premature redesigns
-- gut-feel field removal
-- optimization without measurement
-- “just make it shorter” mistakes
+* premature redesigns
+* gut-feel field removal
+* optimization without measurement
+* “just make it shorter” mistakes
 
 ---
 
@@ -61,49 +65,49 @@ This is a **diagnostic score**, not a KPI.
 
 #### 1. Field Necessity & Efficiency (0–30)
 
-- Every required field is justified
-- No unused or “nice-to-have” fields
-- No duplicated or inferable data
+* Every required field is justified
+* No unused or “nice-to-have” fields
+* No duplicated or inferable data
 
 ---
 
 #### 2. Value–Effort Balance (0–20)
 
-- Clear value proposition before the form
-- Effort required matches perceived reward
-- Commitment level fits traffic intent
+* Clear value proposition before the form
+* Effort required matches perceived reward
+* Commitment level fits traffic intent
 
 ---
 
 #### 3. Cognitive Load & Clarity (0–20)
 
-- Clear labels and instructions
-- Logical field order
-- Minimal decision fatigue
+* Clear labels and instructions
+* Logical field order
+* Minimal decision fatigue
 
 ---
 
 #### 4. Error Handling & Recovery (0–15)
 
-- Inline validation
-- Helpful error messages
-- No data loss on errors
+* Inline validation
+* Helpful error messages
+* No data loss on errors
 
 ---
 
 #### 5. Trust & Friction Reduction (0–10)
 
-- Privacy reassurance
-- Objection handling
-- Social proof where appropriate
+* Privacy reassurance
+* Objection handling
+* Social proof where appropriate
 
 ---
 
 #### 6. Mobile Usability (0–5)
 
-- Touch-friendly
-- Proper keyboards
-- No horizontal scrolling or cramped fields
+* Touch-friendly
+* Proper keyboards
+* No horizontal scrolling or cramped fields
 
 ---
 
@@ -124,31 +128,31 @@ If verdict is **Broken**, stop and recommend structural fixes first.
 
 ### 1. Form Type
 
-- Lead capture
-- Contact
-- Demo / sales request
-- Application
-- Survey / feedback
-- Quote / estimate
-- Checkout (non-account)
+* Lead capture
+* Contact
+* Demo / sales request
+* Application
+* Survey / feedback
+* Quote / estimate
+* Checkout (non-account)
 
 ---
 
 ### 2. Business Context
 
-- What happens after submission?
-- Which fields are actually used?
-- What qualifies as a “good” submission?
-- Any legal or compliance constraints?
+* What happens after submission?
+* Which fields are actually used?
+* What qualifies as a “good” submission?
+* Any legal or compliance constraints?
 
 ---
 
 ### 3. Current Performance
 
-- Completion rate
-- Field-level drop-off (if available)
-- Mobile vs desktop split
-- Known abandonment points
+* Completion rate
+* Field-level drop-off (if available)
+* Mobile vs desktop split
+* Known abandonment points
 
 ---
 
@@ -160,9 +164,9 @@ Each required field reduces completion.
 
 Rule of thumb:
 
-- 3 fields → baseline
-- 4–6 fields → −10–25%
-- 7+ fields → −25–50%+
+* 3 fields → baseline
+* 4–6 fields → −10–25%
+* 7+ fields → −25–50%+
 
 Fields must **earn their place**.
 
@@ -172,9 +176,9 @@ Fields must **earn their place**.
 
 If a field is:
 
-- not used
-- not acted upon
-- not required legally
+* not used
+* not acted upon
+* not required legally
 
 → it is friction, not value.
 
@@ -190,56 +194,56 @@ People abandon forms more from **thinking** than typing.
 
 ### Email
 
-- Single field (no confirmation)
-- Inline validation
-- Typo correction
-- Correct mobile keyboard
+* Single field (no confirmation)
+* Inline validation
+* Typo correction
+* Correct mobile keyboard
 
 ---
 
 ### Name
 
-- Single “Name” field by default
-- Split only if operationally required
+* Single “Name” field by default
+* Split only if operationally required
 
 ---
 
 ### Phone
 
-- Optional unless critical
-- Explain why if required
-- Auto-format and support country codes
+* Optional unless critical
+* Explain why if required
+* Auto-format and support country codes
 
 ---
 
 ### Company / Organization
 
-- Auto-suggest when possible
-- Infer from email domain
-- Enrich after submission if feasible
+* Auto-suggest when possible
+* Infer from email domain
+* Enrich after submission if feasible
 
 ---
 
 ### Job Title / Role
 
-- Dropdown if segmentation matters
-- Optional by default
+* Dropdown if segmentation matters
+* Optional by default
 
 ---
 
 ### Free-Text Fields
 
-- Optional unless essential
-- Clear guidance on length/purpose
-- Expand on focus
+* Optional unless essential
+* Clear guidance on length/purpose
+* Expand on focus
 
 ---
 
 ### Selects & Checkboxes
 
-- Radio buttons if <5 options
-- Searchable selects if long
-- Clear “Other” handling
+* Radio buttons if <5 options
+* Searchable selects if long
+* Clear “Other” handling
 
 ---
 
@@ -255,16 +259,16 @@ People abandon forms more from **thinking** than typing.
 
 ### Labels & Placeholders
 
-- Labels must always be visible
-- Placeholders are examples only
-- Avoid label-as-placeholder anti-pattern
+* Labels must always be visible
+* Placeholders are examples only
+* Avoid label-as-placeholder anti-pattern
 
 ---
 
 ### Single vs Multi-Column
 
-- Default to single column
-- Multi-column only for closely related fields
+* Default to single column
+* Multi-column only for closely related fields
 
 ---
 
@@ -272,16 +276,16 @@ People abandon forms more from **thinking** than typing.
 
 ### Use When
 
-- 6+ fields
-- Distinct logical sections
-- Qualification or routing required
+* 6+ fields
+* Distinct logical sections
+* Qualification or routing required
 
 ### Best Practices
 
-- Progress indicator
-- Back navigation
-- Save progress
-- One topic per step
+* Progress indicator
+* Back navigation
+* Save progress
+* One topic per step
 
 ---
 
@@ -289,19 +293,20 @@ People abandon forms more from **thinking** than typing.
 
 ### Inline Validation
 
-- After field interaction, not keystroke
-- Clear visual feedback
-- Do not clear input on error
+* After field interaction, not keystroke
+* Clear visual feedback
+* Do not clear input on error
 
 ---
 
 ### Error Messaging
 
-- Specific
-- Human
-- Actionable
+* Specific
+* Human
+* Actionable
 
-Bad: “Invalid input” Good: “Please enter a valid email ([name@company.com](mailto:name@company.com))”
+Bad: “Invalid input”
+Good: “Please enter a valid email ([name@company.com](mailto:name@company.com))”
 
 ---
 
@@ -309,40 +314,41 @@ Bad: “Invalid input” Good: “Please enter a valid email ([name@company.com]
 
 ### Copy
 
-Avoid: Submit, Send Prefer: Action + Outcome
+Avoid: Submit, Send
+Prefer: Action + Outcome
 
 Examples:
 
-- “Get My Quote”
-- “Request Demo”
-- “Download the Guide”
+* “Get My Quote”
+* “Request Demo”
+* “Download the Guide”
 
 ---
 
 ### States
 
-- Disabled + loading on submit
-- Clear success message
-- Next-step expectations
+* Disabled + loading on submit
+* Clear success message
+* Next-step expectations
 
 ---
 
 ## Trust & Friction Reduction
 
-- Privacy reassurance near submit
-- Expected response time
-- Testimonials (when appropriate)
-- Security badges only if relevant
+* Privacy reassurance near submit
+* Expected response time
+* Testimonials (when appropriate)
+* Security badges only if relevant
 
 ---
 
 ## Mobile Optimization (Mandatory)
 
-- ≥44px touch targets
-- Correct keyboard types
-- Autofill support
-- Single column
-- Sticky submit button (where helpful)
+* ≥44px touch targets
+* Correct keyboard types
+* Autofill support
+* Single column
+* Sticky submit button (where helpful)
 
 ---
 
@@ -350,20 +356,20 @@ Examples:
 
 ### Key Metrics
 
-- Form view → start
-- Start → completion
-- Field-level drop-off
-- Error rate by field
-- Time to complete
-- Device split
+* Form view → start
+* Start → completion
+* Field-level drop-off
+* Error rate by field
+* Time to complete
+* Device split
 
 ### Track:
 
-- First field focus
-- Field completion
-- Validation errors
-- Submit attempts
-- Successful submissions
+* First field focus
+* Field completion
+* Validation errors
+* Submit attempts
+* Successful submissions
 
 ---
 
@@ -371,9 +377,9 @@ Examples:
 
 ### Form Health Summary
 
-- Form Health & Friction Index score
-- Primary bottlenecks
-- Structural vs tactical issues
+* Form Health & Friction Index score
+* Primary bottlenecks
+* Structural vs tactical issues
 
 ---
 
@@ -381,21 +387,21 @@ Examples:
 
 For each issue:
 
-- **Issue**
-- **Impact**
-- **Fix**
-- **Priority**
+* **Issue**
+* **Impact**
+* **Fix**
+* **Priority**
 
 ---
 
 ### Recommended Form Design
 
-- Required fields (with justification)
-- Optional fields
-- Field order
-- Copy (labels, help text, CTA)
-- Error messages
-- Layout notes
+* Required fields (with justification)
+* Optional fields
+* Field order
+* Copy (labels, help text, CTA)
+* Error messages
+* Layout notes
 
 ---
 
@@ -409,9 +415,9 @@ Clearly stated A/B test ideas with expected outcome
 
 Do **not** test:
 
-- legal requirements
-- core qualification fields without alignment
-- multiple variables at once
+* legal requirements
+* core qualification fields without alignment
+* multiple variables at once
 
 ---
 
@@ -428,10 +434,13 @@ Do **not** test:
 
 ## Related Skills
 
-- **signup-flow-cro** – Account creation forms
-- **popup-cro** – Forms in modals
-- **page-cro** – Page-level optimization
-- **analytics-tracking** – Measuring form performance
-- **ab-test-setup** – Testing form changes
+* **signup-flow-cro** – Account creation forms
+* **popup-cro** – Forms in modals
+* **page-cro** – Page-level optimization
+* **analytics-tracking** – Measuring form performance
+* **ab-test-setup** – Testing form changes
 
 ---
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

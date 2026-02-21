@@ -19,54 +19,56 @@ Complete guide to testing backend services with Jest and best practices.
 
 ```typescript
 // services/userService.test.ts
-import { UserService } from "./userService";
-import { UserRepository } from "../repositories/UserRepository";
+import { UserService } from './userService';
+import { UserRepository } from '../repositories/UserRepository';
 
-jest.mock("../repositories/UserRepository");
+jest.mock('../repositories/UserRepository');
 
-describe("UserService", () => {
-  let service: UserService;
-  let mockRepository: jest.Mocked<UserRepository>;
+describe('UserService', () => {
+    let service: UserService;
+    let mockRepository: jest.Mocked<UserRepository>;
 
-  beforeEach(() => {
-    mockRepository = {
-      findByEmail: jest.fn(),
-      create: jest.fn(),
-    } as any;
+    beforeEach(() => {
+        mockRepository = {
+            findByEmail: jest.fn(),
+            create: jest.fn(),
+        } as any;
 
-    service = new UserService();
-    (service as any).userRepository = mockRepository;
-  });
-
-  afterEach(() => {
-    jest.clearAllMocks();
-  });
-
-  describe("create", () => {
-    it("should throw error if email exists", async () => {
-      mockRepository.findByEmail.mockResolvedValue({ id: "123" } as any);
-
-      await expect(service.create({ email: "test@test.com" })).rejects.toThrow("Email already in use");
+        service = new UserService();
+        (service as any).userRepository = mockRepository;
     });
 
-    it("should create user if email is unique", async () => {
-      mockRepository.findByEmail.mockResolvedValue(null);
-      mockRepository.create.mockResolvedValue({ id: "123" } as any);
-
-      const user = await service.create({
-        email: "test@test.com",
-        firstName: "John",
-        lastName: "Doe",
-      });
-
-      expect(user).toBeDefined();
-      expect(mockRepository.create).toHaveBeenCalledWith(
-        expect.objectContaining({
-          email: "test@test.com",
-        }),
-      );
+    afterEach(() => {
+        jest.clearAllMocks();
     });
-  });
+
+    describe('create', () => {
+        it('should throw error if email exists', async () => {
+            mockRepository.findByEmail.mockResolvedValue({ id: '123' } as any);
+
+            await expect(
+                service.create({ email: 'test@test.com' })
+            ).rejects.toThrow('Email already in use');
+        });
+
+        it('should create user if email is unique', async () => {
+            mockRepository.findByEmail.mockResolvedValue(null);
+            mockRepository.create.mockResolvedValue({ id: '123' } as any);
+
+            const user = await service.create({
+                email: 'test@test.com',
+                firstName: 'John',
+                lastName: 'Doe',
+            });
+
+            expect(user).toBeDefined();
+            expect(mockRepository.create).toHaveBeenCalledWith(
+                expect.objectContaining({
+                    email: 'test@test.com'
+                })
+            );
+        });
+    });
 });
 ```
 
@@ -77,31 +79,31 @@ describe("UserService", () => {
 ### Test with Real Database
 
 ```typescript
-import { PrismaService } from "@project-lifecycle-portal/database";
+import { PrismaService } from '@project-lifecycle-portal/database';
 
-describe("UserService Integration", () => {
-  let testUser: any;
+describe('UserService Integration', () => {
+    let testUser: any;
 
-  beforeAll(async () => {
-    // Create test data
-    testUser = await PrismaService.main.user.create({
-      data: {
-        email: "test@test.com",
-        profile: { create: { firstName: "Test", lastName: "User" } },
-      },
+    beforeAll(async () => {
+        // Create test data
+        testUser = await PrismaService.main.user.create({
+            data: {
+                email: 'test@test.com',
+                profile: { create: { firstName: 'Test', lastName: 'User' } },
+            },
+        });
     });
-  });
 
-  afterAll(async () => {
-    // Cleanup
-    await PrismaService.main.user.delete({ where: { id: testUser.id } });
-  });
+    afterAll(async () => {
+        // Cleanup
+        await PrismaService.main.user.delete({ where: { id: testUser.id } });
+    });
 
-  it("should find user by email", async () => {
-    const user = await userService.findByEmail("test@test.com");
-    expect(user).toBeDefined();
-    expect(user?.email).toBe("test@test.com");
-  });
+    it('should find user by email', async () => {
+        const user = await userService.findByEmail('test@test.com');
+        expect(user).toBeDefined();
+        expect(user?.email).toBe('test@test.com');
+    });
 });
 ```
 
@@ -112,18 +114,18 @@ describe("UserService Integration", () => {
 ### Mock PrismaService
 
 ```typescript
-jest.mock("@project-lifecycle-portal/database", () => ({
-  PrismaService: {
-    main: {
-      user: {
-        findMany: jest.fn(),
-        findUnique: jest.fn(),
-        create: jest.fn(),
-        update: jest.fn(),
-      },
+jest.mock('@project-lifecycle-portal/database', () => ({
+    PrismaService: {
+        main: {
+            user: {
+                findMany: jest.fn(),
+                findUnique: jest.fn(),
+                create: jest.fn(),
+                update: jest.fn(),
+            },
+        },
+        isAvailable: true,
     },
-    isAvailable: true,
-  },
 }));
 ```
 
@@ -131,9 +133,9 @@ jest.mock("@project-lifecycle-portal/database", () => ({
 
 ```typescript
 const mockUserService = {
-  findById: jest.fn(),
-  create: jest.fn(),
-  update: jest.fn(),
+    findById: jest.fn(),
+    create: jest.fn(),
+    update: jest.fn(),
 } as jest.Mocked<UserService>;
 ```
 
@@ -144,33 +146,37 @@ const mockUserService = {
 ### Setup and Teardown
 
 ```typescript
-describe("PermissionService", () => {
-  let instanceId: number;
+describe('PermissionService', () => {
+    let instanceId: number;
 
-  beforeAll(async () => {
-    // Create test post
-    const post = await PrismaService.main.post.create({
-      data: { title: "Test Post", content: "Test", authorId: "test-user" },
+    beforeAll(async () => {
+        // Create test post
+        const post = await PrismaService.main.post.create({
+            data: { title: 'Test Post', content: 'Test', authorId: 'test-user' },
+        });
+        instanceId = post.id;
     });
-    instanceId = post.id;
-  });
 
-  afterAll(async () => {
-    // Cleanup
-    await PrismaService.main.post.delete({
-      where: { id: instanceId },
+    afterAll(async () => {
+        // Cleanup
+        await PrismaService.main.post.delete({
+            where: { id: instanceId },
+        });
     });
-  });
 
-  beforeEach(() => {
-    // Clear caches
-    permissionService.clearCache();
-  });
+    beforeEach(() => {
+        // Clear caches
+        permissionService.clearCache();
+    });
 
-  it("should check permissions", async () => {
-    const hasPermission = await permissionService.checkPermission("user-id", instanceId, "VIEW_WORKFLOW");
-    expect(hasPermission).toBeDefined();
-  });
+    it('should check permissions', async () => {
+        const hasPermission = await permissionService.checkPermission(
+            'user-id',
+            instanceId,
+            'VIEW_WORKFLOW'
+        );
+        expect(hasPermission).toBeDefined();
+    });
 });
 ```
 
@@ -192,16 +198,16 @@ node scripts/test-auth-route.js http://localhost:3002/form/api/users POST '{"ema
 
 ```typescript
 // Mock auth middleware
-jest.mock("../middleware/SSOMiddleware", () => ({
-  SSOMiddlewareClient: {
-    verifyLoginStatus: (req, res, next) => {
-      res.locals.claims = {
-        sub: "test-user-id",
-        preferred_username: "testuser",
-      };
-      next();
+jest.mock('../middleware/SSOMiddleware', () => ({
+    SSOMiddlewareClient: {
+        verifyLoginStatus: (req, res, next) => {
+            res.locals.claims = {
+                sub: 'test-user-id',
+                preferred_username: 'testuser',
+            };
+            next();
+        },
     },
-  },
 }));
 ```
 
@@ -224,7 +230,6 @@ npm test -- --coverage
 ---
 
 **Related Files:**
-
-- [SKILL.md](SKILL.md)
+- SKILL.md
 - [services-and-repositories.md](services-and-repositories.md)
 - [complete-examples.md](complete-examples.md)

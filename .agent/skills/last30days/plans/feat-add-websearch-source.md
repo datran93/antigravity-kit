@@ -2,20 +2,15 @@
 
 ## Overview
 
-Add Claude's built-in WebSearch tool as a third research source for `/last30days`. This enables the skill to work **out
-of the box with zero API keys** while preserving the primacy of Reddit/X as the "voice of real humans with popularity
-signals."
+Add Claude's built-in WebSearch tool as a third research source for `/last30days`. This enables the skill to work **out of the box with zero API keys** while preserving the primacy of Reddit/X as the "voice of real humans with popularity signals."
 
-**Key principle**: WebSearch is supplementary, not primary. Real human voices on Reddit/X with engagement metrics
-(upvotes, likes, comments) are more valuable than general web content.
+**Key principle**: WebSearch is supplementary, not primary. Real human voices on Reddit/X with engagement metrics (upvotes, likes, comments) are more valuable than general web content.
 
 ## Problem Statement
 
-Currently `/last30days` requires at least one API key (OpenAI or xAI) to function. Users without API keys get an error.
-Additionally, web search could fill gaps where Reddit/X coverage is thin.
+Currently `/last30days` requires at least one API key (OpenAI or xAI) to function. Users without API keys get an error. Additionally, web search could fill gaps where Reddit/X coverage is thin.
 
 **User requirements**:
-
 - Work out of the box (no API key needed)
 - Must NOT overpower Reddit/X results
 - Needs proper weighting
@@ -26,36 +21,33 @@ Additionally, web search could fill gaps where Reddit/X coverage is thin.
 ### Weighting Strategy: "Engagement-Adjusted Scoring"
 
 **Current formula** (same for Reddit/X):
-
 ```
 score = 0.45*relevance + 0.25*recency + 0.30*engagement - penalties
 ```
 
-**Problem**: WebSearch has NO engagement metrics. Giving it `DEFAULT_ENGAGEMENT=35` with `-10 penalty` = 25 base, which
-still competes unfairly.
+**Problem**: WebSearch has NO engagement metrics. Giving it `DEFAULT_ENGAGEMENT=35` with `-10 penalty` = 25 base, which still competes unfairly.
 
 **Solution**: Source-specific scoring with **engagement substitution**:
 
-| Source    | Relevance | Recency | Engagement         | Source Penalty |
-| --------- | --------- | ------- | ------------------ | -------------- |
-| Reddit    | 45%       | 25%     | 30% (real metrics) | 0              |
-| X         | 45%       | 25%     | 30% (real metrics) | 0              |
-| WebSearch | 55%       | 35%     | 0% (no data)       | -15 points     |
+| Source | Relevance | Recency | Engagement | Source Penalty |
+|--------|-----------|---------|------------|----------------|
+| Reddit | 45% | 25% | 30% (real metrics) | 0 |
+| X | 45% | 25% | 30% (real metrics) | 0 |
+| WebSearch | 55% | 35% | 0% (no data) | -15 points |
 
 **Rationale**:
-
 - WebSearch items compete on relevance + recency only (reweighted to 100%)
 - `-15 point source penalty` ensures WebSearch ranks below comparable Reddit/X items
 - High-quality WebSearch can still surface (score 60-70) but won't dominate (Reddit/X score 70-85)
 
 ### Mode Behavior
 
-| API Keys Available | Default Behavior   | `--include-web`        |
-| ------------------ | ------------------ | ---------------------- |
-| None               | **WebSearch only** | n/a                    |
-| OpenAI only        | Reddit only        | Reddit + WebSearch     |
-| xAI only           | X only             | X + WebSearch          |
-| Both               | Reddit + X         | Reddit + X + WebSearch |
+| API Keys Available | Default Behavior | `--include-web` |
+|--------------------|------------------|-----------------|
+| None | **WebSearch only** | n/a |
+| OpenAI only | Reddit only | Reddit + WebSearch |
+| xAI only | X only | X + WebSearch |
+| Both | Reddit + X | Reddit + X + WebSearch |
 
 **CLI flag**: `--include-web` (default: false when other sources available)
 
@@ -355,12 +347,12 @@ def test_websearch_weighting():
 
 ### Manual Test Scenarios
 
-| Scenario                                             | Expected Outcome                               |
-| ---------------------------------------------------- | ---------------------------------------------- |
-| No API keys, run `/last30days AI tools`              | WebSearch-only results, useful output          |
+| Scenario | Expected Outcome |
+|----------|------------------|
+| No API keys, run `/last30days AI tools` | WebSearch-only results, useful output |
 | Both keys + `--include-web`, run `/last30days react` | Mix of all 3 sources, Reddit/X dominate top 10 |
-| Niche topic (no Reddit/X coverage)                   | WebSearch fills gap, becomes primary           |
-| Popular topic (lots of Reddit/X)                     | WebSearch present but lower-ranked             |
+| Niche topic (no Reddit/X coverage) | WebSearch fills gap, becomes primary |
+| Popular topic (lots of Reddit/X) | WebSearch present but lower-ranked |
 
 ## Dependencies & Prerequisites
 
@@ -370,12 +362,12 @@ def test_websearch_weighting():
 
 ## Risk Analysis & Mitigation
 
-| Risk                            | Likelihood | Impact | Mitigation                                           |
-| ------------------------------- | ---------- | ------ | ---------------------------------------------------- |
-| WebSearch returns stale content | Medium     | Medium | Enforce date in prompt, apply low-confidence penalty |
-| WebSearch dominates rankings    | Low        | High   | Source penalty (-15pts), testing validates           |
-| WebSearch adds spam/low-quality | Medium     | Medium | Exclude social media domains, domain filtering       |
-| Date parsing unreliable         | High       | Medium | Accept "low" confidence as normal for WebSearch      |
+| Risk | Likelihood | Impact | Mitigation |
+|------|------------|--------|------------|
+| WebSearch returns stale content | Medium | Medium | Enforce date in prompt, apply low-confidence penalty |
+| WebSearch dominates rankings | Low | High | Source penalty (-15pts), testing validates |
+| WebSearch adds spam/low-quality | Medium | Medium | Exclude social media domains, domain filtering |
+| Date parsing unreliable | High | Medium | Accept "low" confidence as normal for WebSearch |
 
 ## Future Considerations
 
@@ -387,20 +379,17 @@ def test_websearch_weighting():
 ## References
 
 ### Internal References
-
 - Scoring algorithm: `scripts/lib/score.py:8-15`
 - Source detection: `scripts/lib/env.py:57-72`
 - Schema patterns: `scripts/lib/schema.py:76-138`
 - Orchestrator: `scripts/last30days.py:54-164`
 
 ### External References
-
 - Claude WebSearch docs: https://platform.claude.com/docs/en/agents-and-tools/tool-use/web-search-tool
 - WebSearch pricing: $10/1K searches + token costs
 - Date filtering limitation: No explicit date params, use natural language
 
 ### Research Findings
-
 - Reddit upvotes are ~12% of ranking value in SEO (strong signal)
 - E-E-A-T framework: Engagement metrics = trust signal
 - MSA2C2 approach: Dynamic weight learning for multi-source aggregation

@@ -1,14 +1,15 @@
 ---
 name: address-github-comments
-description: Use when you need to address review or issue comments on an open GitHub Pull Request using the gh CLI.
+description: "Use when you need to address review or issue comments on an open GitHub Pull Request using the gh CLI."
+risk: unknown
+source: community
 ---
 
 # Address GitHub Comments
 
 ## Overview
 
-Efficiently address PR review comments or issue feedback using the GitHub CLI (`gh`). This skill ensures all feedback is
-addressed systematically.
+Efficiently address PR review comments or issue feedback using the GitHub CLI (`gh`). This skill ensures all feedback is addressed systematically.
 
 ## Prerequisites
 
@@ -54,3 +55,6 @@ gh pr comment <PR_NUMBER> --body "Addressed in latest commit."
 
 - **Applying fixes without understanding context**: Always read the surrounding code of a comment.
 - **Not verifying auth**: Check `gh auth status` before starting.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

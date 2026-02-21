@@ -16,7 +16,6 @@ Upgrade Expo SDK versions safely, handling breaking changes, dependencies, and c
 Use this skill when you need to upgrade Expo SDK versions.
 
 Use this skill when:
-
 - Upgrading to a new Expo SDK version
 - Handling breaking changes between SDK versions
 - Updating dependencies for compatibility

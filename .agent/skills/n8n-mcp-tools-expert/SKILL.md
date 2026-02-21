@@ -1,9 +1,6 @@
 ---
 name: n8n-mcp-tools-expert
-description:
-  "Expert guide for using n8n-mcp MCP tools effectively. Use when searching for nodes, validating configurations,
-  accessing templates, managing workflows, or using any n8n-mcp tool. Provides tool selection guidance, parameter
-  formats, and common patterns."
+description: "Expert guide for using n8n-mcp MCP tools effectively. Use when searching for nodes, validating configurations, accessing templates, managing workflows, or using any n8n-mcp tool. Provides tool sele..."
 source: "https://github.com/czlonkowski/n8n-skills/tree/main/skills/n8n-mcp-tools-expert"
 risk: safe
 ---
@@ -15,7 +12,6 @@ Master guide for using n8n-mcp MCP server tools to build workflows.
 ## When to Use This Skill
 
 Use this skill when:
-
 - Searching for n8n nodes
 - Validating n8n configurations
 - Accessing n8n templates
@@ -29,9 +25,9 @@ Use this skill when:
 
 n8n-mcp provides tools organized into categories:
 
-1. **Node Discovery** → [SEARCH_GUIDE.md](SEARCH_GUIDE.md)
-2. **Configuration Validation** → [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md)
-3. **Workflow Management** → [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md)
+1. **Node Discovery** → SEARCH_GUIDE.md
+2. **Configuration Validation** → VALIDATION_GUIDE.md
+3. **Workflow Management** → WORKFLOW_GUIDE.md
 4. **Template Library** - Search and deploy 2,700+ real workflows
 5. **Documentation & Guides** - Tool docs, AI agent guide, Code node guides
 
@@ -41,15 +37,15 @@ n8n-mcp provides tools organized into categories:
 
 ### Most Used Tools (by success rate)
 
-| Tool                          | Use When                                          | Speed     |
-| ----------------------------- | ------------------------------------------------- | --------- |
-| `search_nodes`                | Finding nodes by keyword                          | <20ms     |
-| `get_node`                    | Understanding node operations (detail="standard") | <10ms     |
-| `validate_node`               | Checking configurations (mode="full")             | <100ms    |
-| `n8n_create_workflow`         | Creating workflows                                | 100-500ms |
-| `n8n_update_partial_workflow` | Editing workflows (MOST USED!)                    | 50-200ms  |
-| `validate_workflow`           | Checking complete workflow                        | 100-500ms |
-| `n8n_deploy_template`         | Deploy template to n8n instance                   | 200-500ms |
+| Tool | Use When | Speed |
+|------|----------|-------|
+| `search_nodes` | Finding nodes by keyword | <20ms |
+| `get_node` | Understanding node operations (detail="standard") | <10ms |
+| `validate_node` | Checking configurations (mode="full") | <100ms |
+| `n8n_create_workflow` | Creating workflows | 100-500ms |
+| `n8n_update_partial_workflow` | Editing workflows (MOST USED!) | 50-200ms |
+| `validate_workflow` | Checking complete workflow | 100-500ms |
+| `n8n_deploy_template` | Deploy template to n8n instance | 200-500ms |
 
 ---
 
@@ -58,7 +54,6 @@ n8n-mcp provides tools organized into categories:
 ### Finding the Right Node
 
 **Workflow**:
-
 ```
 1. search_nodes({query: "keyword"})
 2. get_node({nodeType: "nodes-base.name"})
@@ -66,18 +61,17 @@ n8n-mcp provides tools organized into categories:
 ```
 
 **Example**:
-
 ```javascript
 // Step 1: Search
-search_nodes({ query: "slack" });
+search_nodes({query: "slack"})
 // Returns: nodes-base.slack
 
 // Step 2: Get details
-get_node({ nodeType: "nodes-base.slack" });
+get_node({nodeType: "nodes-base.slack"})
 // Returns: operations, properties, examples (standard detail)
 
 // Step 3: Get readable documentation
-get_node({ nodeType: "nodes-base.slack", mode: "docs" });
+get_node({nodeType: "nodes-base.slack", mode: "docs"})
 // Returns: markdown documentation
 ```
 
@@ -86,7 +80,6 @@ get_node({ nodeType: "nodes-base.slack", mode: "docs" });
 ### Validating Configuration
 
 **Workflow**:
-
 ```
 1. validate_node({nodeType, config: {}, mode: "minimal"}) - Check required fields
 2. validate_node({nodeType, config, profile: "runtime"}) - Full validation
@@ -98,7 +91,6 @@ get_node({ nodeType: "nodes-base.slack", mode: "docs" });
 ### Managing Workflows
 
 **Workflow**:
-
 ```
 1. n8n_create_workflow({name, nodes, connections})
 2. n8n_validate_workflow({id})
@@ -116,34 +108,30 @@ get_node({ nodeType: "nodes-base.slack", mode: "docs" });
 **Two different formats** for different tools!
 
 ### Format 1: Search/Validate Tools
-
 ```javascript
 // Use SHORT prefix
-"nodes-base.slack";
-"nodes-base.httpRequest";
-"nodes-base.webhook";
-"nodes-langchain.agent";
+"nodes-base.slack"
+"nodes-base.httpRequest"
+"nodes-base.webhook"
+"nodes-langchain.agent"
 ```
 
 **Tools that use this**:
-
 - search_nodes (returns this format)
 - get_node
 - validate_node
 - validate_workflow
 
 ### Format 2: Workflow Tools
-
 ```javascript
 // Use FULL prefix
-"n8n-nodes-base.slack";
-"n8n-nodes-base.httpRequest";
-"n8n-nodes-base.webhook";
-"@n8n/n8n-nodes-langchain.agent";
+"n8n-nodes-base.slack"
+"n8n-nodes-base.httpRequest"
+"n8n-nodes-base.webhook"
+"@n8n/n8n-nodes-langchain.agent"
 ```
 
 **Tools that use this**:
-
 - n8n_create_workflow
 - n8n_update_partial_workflow
 
@@ -167,11 +155,11 @@ get_node({ nodeType: "nodes-base.slack", mode: "docs" });
 
 ```javascript
 // WRONG
-get_node({ nodeType: "slack" }); // Missing prefix
-get_node({ nodeType: "n8n-nodes-base.slack" }); // Wrong prefix
+get_node({nodeType: "slack"})  // Missing prefix
+get_node({nodeType: "n8n-nodes-base.slack"})  // Wrong prefix
 
 // CORRECT
-get_node({ nodeType: "nodes-base.slack" });
+get_node({nodeType: "nodes-base.slack"})
 ```
 
 ### Mistake 2: Using detail="full" by Default
@@ -180,21 +168,19 @@ get_node({ nodeType: "nodes-base.slack" });
 
 ```javascript
 // WRONG - Returns 3-8K tokens, use sparingly
-get_node({ nodeType: "nodes-base.slack", detail: "full" });
+get_node({nodeType: "nodes-base.slack", detail: "full"})
 
 // CORRECT - Returns 1-2K tokens, covers 95% of use cases
-get_node({ nodeType: "nodes-base.slack" }); // detail="standard" is default
-get_node({ nodeType: "nodes-base.slack", detail: "standard" });
+get_node({nodeType: "nodes-base.slack"})  // detail="standard" is default
+get_node({nodeType: "nodes-base.slack", detail: "standard"})
 ```
 
 **When to use detail="full"**:
-
 - Debugging complex configuration issues
 - Need complete property schema with all nested options
 - Exploring advanced features
 
 **Better alternatives**:
-
 1. `get_node({detail: "standard"})` - for operations list (default)
 2. `get_node({mode: "docs"})` - for readable documentation
 3. `get_node({mode: "search_properties", propertyQuery: "auth"})` - for specific property
@@ -204,7 +190,6 @@ get_node({ nodeType: "nodes-base.slack", detail: "standard" });
 **Problem**: Too many false positives OR missing real errors
 
 **Profiles**:
-
 - `minimal` - Only required fields (fast, permissive)
 - `runtime` - Values + types (recommended for pre-deployment)
 - `ai-friendly` - Reduce false positives (for AI configuration)
@@ -212,10 +197,10 @@ get_node({ nodeType: "nodes-base.slack", detail: "standard" });
 
 ```javascript
 // WRONG - Uses default profile
-validate_node({ nodeType, config });
+validate_node({nodeType, config})
 
 // CORRECT - Explicit profile
-validate_node({ nodeType, config, profile: "runtime" });
+validate_node({nodeType, config, profile: "runtime"})
 ```
 
 ### Mistake 4: Ignoring Auto-Sanitization
@@ -223,13 +208,11 @@ validate_node({ nodeType, config, profile: "runtime" });
 **What happens**: ALL nodes sanitized on ANY workflow update
 
 **Auto-fixes**:
-
 - Binary operators (equals, contains) → removes singleValue
 - Unary operators (isEmpty, isNotEmpty) → adds singleValue: true
 - IF/Switch nodes → adds missing metadata
 
 **Cannot fix**:
-
 - Broken connections
 - Branch count mismatches
 - Paradoxical corrupt states
@@ -245,7 +228,6 @@ n8n_update_partial_workflow({id, operations: [...]})
 **Problem**: Complex sourceIndex calculations for multi-output nodes
 
 **Old way** (manual):
-
 ```javascript
 // IF node connection
 {
@@ -257,7 +239,6 @@ n8n_update_partial_workflow({id, operations: [...]})
 ```
 
 **New way** (smart parameters):
-
 ```javascript
 // IF node - semantic branch names
 {
@@ -314,15 +295,15 @@ n8n_update_partial_workflow({
 // Step 1: Search (fast!)
 const results = await search_nodes({
   query: "slack",
-  mode: "OR", // Default: any word matches
-  limit: 20,
+  mode: "OR",  // Default: any word matches
+  limit: 20
 });
 // → Returns: nodes-base.slack, nodes-base.slackTrigger
 
 // Step 2: Get details (~18s later, user reviewing results)
 const details = await get_node({
   nodeType: "nodes-base.slack",
-  includeExamples: true, // Get real template configs
+  includeExamples: true  // Get real template configs
 });
 // → Returns: operations, properties, metadata
 ```
@@ -394,17 +375,13 @@ await n8n_update_partial_workflow({
 ## Detailed Guides
 
 ### Node Discovery Tools
-
-See [SEARCH_GUIDE.md](SEARCH_GUIDE.md) for:
-
+See SEARCH_GUIDE.md for:
 - search_nodes
 - get_node with detail levels (minimal, standard, full)
 - get_node modes (info, docs, search_properties, versions)
 
 ### Validation Tools
-
-See [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md) for:
-
+See VALIDATION_GUIDE.md for:
 - Validation profiles explained
 - validate_node with modes (minimal, full)
 - validate_workflow complete structure
@@ -412,9 +389,7 @@ See [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md) for:
 - Handling validation errors
 
 ### Workflow Management
-
-See [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) for:
-
+See WORKFLOW_GUIDE.md for:
 - n8n_create_workflow
 - n8n_update_partial_workflow (17 operation types!)
 - Smart parameters (branch, case)
@@ -433,26 +408,26 @@ See [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) for:
 // Search by keyword (default mode)
 search_templates({
   query: "webhook slack",
-  limit: 20,
+  limit: 20
 });
 
 // Search by node types
 search_templates({
   searchMode: "by_nodes",
-  nodeTypes: ["n8n-nodes-base.httpRequest", "n8n-nodes-base.slack"],
+  nodeTypes: ["n8n-nodes-base.httpRequest", "n8n-nodes-base.slack"]
 });
 
 // Search by task type
 search_templates({
   searchMode: "by_task",
-  task: "webhook_processing",
+  task: "webhook_processing"
 });
 
 // Search by metadata (complexity, setup time)
 search_templates({
   searchMode: "by_metadata",
   complexity: "simple",
-  maxSetupMinutes: 15,
+  maxSetupMinutes: 15
 });
 ```
 
@@ -461,12 +436,12 @@ search_templates({
 ```javascript
 get_template({
   templateId: 2947,
-  mode: "structure", // nodes+connections only
+  mode: "structure"  // nodes+connections only
 });
 
 get_template({
   templateId: 2947,
-  mode: "full", // complete workflow JSON
+  mode: "full"  // complete workflow JSON
 });
 ```
 
@@ -476,9 +451,9 @@ get_template({
 // Deploy template to your n8n instance
 n8n_deploy_template({
   templateId: 2947,
-  name: "My Weather to Slack", // Custom name (optional)
-  autoFix: true, // Auto-fix common issues (default)
-  autoUpgradeVersions: true, // Upgrade node versions (default)
+  name: "My Weather to Slack",  // Custom name (optional)
+  autoFix: true,  // Auto-fix common issues (default)
+  autoUpgradeVersions: true  // Upgrade node versions (default)
 });
 // Returns: workflow ID, required credentials, fixes applied
 ```
@@ -491,24 +466,24 @@ n8n_deploy_template({
 
 ```javascript
 // Overview of all tools
-tools_documentation();
+tools_documentation()
 
 // Specific tool details
 tools_documentation({
   topic: "search_nodes",
-  depth: "full",
-});
+  depth: "full"
+})
 
 // Code node guides
-tools_documentation({ topic: "javascript_code_node_guide", depth: "full" });
-tools_documentation({ topic: "python_code_node_guide", depth: "full" });
+tools_documentation({topic: "javascript_code_node_guide", depth: "full"})
+tools_documentation({topic: "python_code_node_guide", depth: "full"})
 ```
 
 ### AI Agent Guide
 
 ```javascript
 // Comprehensive AI workflow guide
-ai_agents_guide();
+ai_agents_guide()
 // Returns: Architecture, connections, tools, validation, best practices
 ```
 
@@ -516,10 +491,10 @@ ai_agents_guide();
 
 ```javascript
 // Quick health check
-n8n_health_check();
+n8n_health_check()
 
 // Detailed diagnostics
-n8n_health_check({ mode: "diagnostic" });
+n8n_health_check({mode: "diagnostic"})
 // → Returns: status, env vars, tool status, API connectivity
 ```
 
@@ -528,14 +503,12 @@ n8n_health_check({ mode: "diagnostic" });
 ## Tool Availability
 
 **Always Available** (no n8n API needed):
-
 - search_nodes, get_node
 - validate_node, validate_workflow
 - search_templates, get_template
 - tools_documentation, ai_agents_guide
 
 **Requires n8n API** (N8N_API_URL + N8N_API_KEY):
-
 - n8n_create_workflow
 - n8n_update_partial_workflow
 - n8n_validate_workflow (by ID)
@@ -555,13 +528,11 @@ If API tools unavailable, use templates and validation-only workflows.
 ### get_node (Unified Node Information)
 
 **Detail Levels** (mode="info", default):
-
 - `minimal` (~200 tokens) - Basic metadata only
 - `standard` (~1-2K tokens) - Essential properties + operations (RECOMMENDED)
 - `full` (~3-8K tokens) - Complete schema (use sparingly)
 
 **Operation Modes**:
-
 - `info` (default) - Node schema with detail level
 - `docs` - Readable markdown documentation
 - `search_properties` - Find specific properties (use with propertyQuery)
@@ -572,27 +543,25 @@ If API tools unavailable, use templates and validation-only workflows.
 
 ```javascript
 // Standard (recommended)
-get_node({ nodeType: "nodes-base.httpRequest" });
+get_node({nodeType: "nodes-base.httpRequest"})
 
 // Get documentation
-get_node({ nodeType: "nodes-base.webhook", mode: "docs" });
+get_node({nodeType: "nodes-base.webhook", mode: "docs"})
 
 // Search for properties
-get_node({ nodeType: "nodes-base.httpRequest", mode: "search_properties", propertyQuery: "auth" });
+get_node({nodeType: "nodes-base.httpRequest", mode: "search_properties", propertyQuery: "auth"})
 
 // Check versions
-get_node({ nodeType: "nodes-base.executeWorkflow", mode: "versions" });
+get_node({nodeType: "nodes-base.executeWorkflow", mode: "versions"})
 ```
 
 ### validate_node (Unified Validation)
 
 **Modes**:
-
 - `full` (default) - Comprehensive validation with errors/warnings/suggestions
 - `minimal` - Quick required fields check only
 
 **Profiles** (for mode="full"):
-
 - `minimal` - Very lenient
 - `runtime` - Standard (default, recommended)
 - `ai-friendly` - Balanced for AI workflows
@@ -610,24 +579,23 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 
 ## Performance Characteristics
 
-| Tool                        | Response Time | Payload Size |
-| --------------------------- | ------------- | ------------ |
-| search_nodes                | <20ms         | Small        |
-| get_node (standard)         | <10ms         | ~1-2KB       |
-| get_node (full)             | <100ms        | 3-8KB        |
-| validate_node (minimal)     | <50ms         | Small        |
-| validate_node (full)        | <100ms        | Medium       |
-| validate_workflow           | 100-500ms     | Medium       |
-| n8n_create_workflow         | 100-500ms     | Medium       |
-| n8n_update_partial_workflow | 50-200ms      | Small        |
-| n8n_deploy_template         | 200-500ms     | Medium       |
+| Tool | Response Time | Payload Size |
+|------|---------------|--------------|
+| search_nodes | <20ms | Small |
+| get_node (standard) | <10ms | ~1-2KB |
+| get_node (full) | <100ms | 3-8KB |
+| validate_node (minimal) | <50ms | Small |
+| validate_node (full) | <100ms | Medium |
+| validate_workflow | 100-500ms | Medium |
+| n8n_create_workflow | 100-500ms | Medium |
+| n8n_update_partial_workflow | 50-200ms | Small |
+| n8n_deploy_template | 200-500ms | Medium |
 
 ---
 
 ## Best Practices
 
 ### Do
-
 - Use `get_node({detail: "standard"})` for most use cases
 - Specify validation profile explicitly (`profile: "runtime"`)
 - Use smart parameters (`branch`, `case`) for clarity
@@ -639,7 +607,6 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 - Use `n8n_deploy_template` for quick starts
 
 ### Don't
-
 - Use `detail: "full"` unless necessary (wastes tokens)
 - Forget nodeType prefix (`nodes-base.*`)
 - Skip validation profiles
@@ -653,7 +620,6 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 ## Summary
 
 **Most Important**:
-
 1. Use **get_node** with `detail: "standard"` (default) - covers 95% of use cases
 2. nodeType formats differ: `nodes-base.*` (search/validate) vs `n8n-nodes-base.*` (workflows)
 3. Specify **validation profiles** (`runtime` recommended)
@@ -664,7 +630,6 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 8. Workflows are built **iteratively** (56s avg between edits)
 
 **Common Workflow**:
-
 1. search_nodes → find node
 2. get_node → understand config
 3. validate_node → check config
@@ -674,15 +639,13 @@ validate_node({nodeType: "nodes-base.webhook", config: {}, mode: "minimal"})
 7. activateWorkflow → go live!
 
 For details, see:
-
-- [SEARCH_GUIDE.md](SEARCH_GUIDE.md) - Node discovery
-- [VALIDATION_GUIDE.md](VALIDATION_GUIDE.md) - Configuration validation
-- [WORKFLOW_GUIDE.md](WORKFLOW_GUIDE.md) - Workflow management
+- SEARCH_GUIDE.md - Node discovery
+- VALIDATION_GUIDE.md - Configuration validation
+- WORKFLOW_GUIDE.md - Workflow management
 
 ---
 
 **Related Skills**:
-
 - n8n Expression Syntax - Write expressions in workflow fields
 - n8n Workflow Patterns - Architectural patterns from templates
 - n8n Validation Expert - Interpret validation errors

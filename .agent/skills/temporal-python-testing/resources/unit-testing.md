@@ -1,7 +1,6 @@
 # Unit Testing Temporal Workflows and Activities
 
-Focused guide for testing individual workflows and activities in isolation using WorkflowEnvironment and
-ActivityEnvironment.
+Focused guide for testing individual workflows and activities in isolation using WorkflowEnvironment and ActivityEnvironment.
 
 ## WorkflowEnvironment with Time-Skipping
 

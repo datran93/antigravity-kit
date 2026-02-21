@@ -56,7 +56,6 @@ func main() {
 ```
 
 Config fields:
-
 - `AppName` (required): Application identifier
 - `DatabaseURL` (required unless `SystemDBPool` is set): PostgreSQL connection string
 - `SystemDBPool`: Custom `*pgxpool.Pool` (takes precedence over `DatabaseURL`)

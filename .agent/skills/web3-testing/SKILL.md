@@ -1,8 +1,8 @@
 ---
 name: web3-testing
-description:
-  Test smart contracts comprehensively using Hardhat and Foundry with unit tests, integration tests, and mainnet
-  forking. Use when testing Solidity contracts, setting up blockchain test suites, or validating DeFi protocols.
+description: "Test smart contracts comprehensively using Hardhat and Foundry with unit tests, integration tests, and mainnet forking. Use when testing Solidity contracts, setting up blockchain test suites, or va..."
+risk: unknown
+source: community
 ---
 
 # Web3 Smart Contract Testing
@@ -78,7 +78,10 @@ module.exports = {
 ```javascript
 const { expect } = require("chai");
 const { ethers } = require("hardhat");
-const { loadFixture, time } = require("@nomicfoundation/hardhat-network-helpers");
+const {
+  loadFixture,
+  time,
+} = require("@nomicfoundation/hardhat-network-helpers");
 
 describe("Token Contract", function () {
   // Fixture for test setup
@@ -108,14 +111,20 @@ describe("Token Contract", function () {
     it("Should transfer tokens between accounts", async function () {
       const { token, owner, addr1 } = await loadFixture(deployTokenFixture);
 
-      await expect(token.transfer(addr1.address, 50)).to.changeTokenBalances(token, [owner, addr1], [-50, 50]);
+      await expect(token.transfer(addr1.address, 50)).to.changeTokenBalances(
+        token,
+        [owner, addr1],
+        [-50, 50],
+      );
     });
 
     it("Should fail if sender doesn't have enough tokens", async function () {
       const { token, addr1 } = await loadFixture(deployTokenFixture);
       const initialBalance = await token.balanceOf(addr1.address);
 
-      await expect(token.connect(addr1).transfer(owner.address, 1)).to.be.revertedWith("Insufficient balance");
+      await expect(
+        token.connect(addr1).transfer(owner.address, 1),
+      ).to.be.revertedWith("Insufficient balance");
     });
 
     it("Should emit Transfer event", async function () {
@@ -273,9 +282,15 @@ describe("Mainnet Fork Tests", function () {
     });
 
     // Connect to existing mainnet contracts
-    uniswapRouter = await ethers.getContractAt("IUniswapV2Router", "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D");
+    uniswapRouter = await ethers.getContractAt(
+      "IUniswapV2Router",
+      "0x7a250d5630B4cF539739dF2C5dAcb4c659F2488D",
+    );
 
-    dai = await ethers.getContractAt("IERC20", "0x6B175474E89094C44Da98b954EedeAC495271d0F");
+    dai = await ethers.getContractAt(
+      "IERC20",
+      "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+    );
   });
 
   it("Should swap on Uniswap", async function () {
@@ -298,7 +313,9 @@ it("Should impersonate whale account", async function () {
   const whale = await ethers.getSigner(whaleAddress);
 
   // Use whale's tokens
-  await dai.connect(whale).transfer(addr1.address, ethers.utils.parseEther("1000"));
+  await dai
+    .connect(whale)
+    .transfer(addr1.address, ethers.utils.parseEther("1000"));
 });
 ```
 
@@ -309,8 +326,11 @@ const { expect } = require("chai");
 
 describe("Gas Optimization", function () {
   it("Compare gas usage between implementations", async function () {
-    const Implementation1 = await ethers.getContractFactory("OptimizedContract");
-    const Implementation2 = await ethers.getContractFactory("UnoptimizedContract");
+    const Implementation1 =
+      await ethers.getContractFactory("OptimizedContract");
+    const Implementation2 = await ethers.getContractFactory(
+      "UnoptimizedContract",
+    );
 
     const contract1 = await Implementation1.deploy();
     const contract2 = await Implementation2.deploy();

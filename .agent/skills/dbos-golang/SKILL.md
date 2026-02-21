@@ -1,9 +1,6 @@
 ---
 name: dbos-golang
-description:
-  DBOS Go SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing Go
-  code with DBOS, creating workflows and steps, using queues, using the DBOS Client from external applications, or
-  building Go applications that need to be resilient to failures.
+description: "DBOS Go SDK for building reliable, fault-tolerant applications with durable workflows. Use this skill when writing Go code with DBOS, creating workflows and steps, using queues, using the DBOS Clie..."
 risk: safe
 source: https://docs.dbos.dev/
 license: MIT
@@ -12,9 +9,7 @@ metadata:
   version: "1.0.0"
   organization: DBOS
   date: February 2026
-  abstract:
-    Comprehensive guide for building fault-tolerant Go applications with DBOS. Covers workflows, steps, queues,
-    communication patterns, and best practices for durable execution.
+  abstract: Comprehensive guide for building fault-tolerant Go applications with DBOS. Covers workflows, steps, queues, communication patterns, and best practices for durable execution.
 ---
 
 # DBOS Go Best Practices
@@ -24,7 +19,6 @@ Guide for building reliable, fault-tolerant Go applications with DBOS durable wo
 ## When to Use
 
 Reference these guidelines when:
-
 - Adding DBOS to existing Go code
 - Creating workflows and steps
 - Using queues for concurrency control
@@ -35,17 +29,17 @@ Reference these guidelines when:
 
 ## Rule Categories by Priority
 
-| Priority | Category      | Impact     | Prefix       |
-| -------- | ------------- | ---------- | ------------ |
-| 1        | Lifecycle     | CRITICAL   | `lifecycle-` |
-| 2        | Workflow      | CRITICAL   | `workflow-`  |
-| 3        | Step          | HIGH       | `step-`      |
-| 4        | Queue         | HIGH       | `queue-`     |
-| 5        | Communication | MEDIUM     | `comm-`      |
-| 6        | Pattern       | MEDIUM     | `pattern-`   |
-| 7        | Testing       | LOW-MEDIUM | `test-`      |
-| 8        | Client        | MEDIUM     | `client-`    |
-| 9        | Advanced      | LOW        | `advanced-`  |
+| Priority | Category | Impact | Prefix |
+|----------|----------|--------|--------|
+| 1 | Lifecycle | CRITICAL | `lifecycle-` |
+| 2 | Workflow | CRITICAL | `workflow-` |
+| 3 | Step | HIGH | `step-` |
+| 4 | Queue | HIGH | `queue-` |
+| 5 | Communication | MEDIUM | `comm-` |
+| 6 | Pattern | MEDIUM | `pattern-` |
+| 7 | Testing | LOW-MEDIUM | `test-` |
+| 8 | Client | MEDIUM | `client-` |
+| 9 | Advanced | LOW | `advanced-` |
 
 ## Critical Rules
 
@@ -93,8 +87,7 @@ func main() {
 
 ### Workflow and Step Structure
 
-Workflows are comprised of steps. Any function performing complex operations or accessing external services must be run
-as a step using `dbos.RunAsStep`:
+Workflows are comprised of steps. Any function performing complex operations or accessing external services must be run as a step using `dbos.RunAsStep`:
 
 ```go
 func fetchData(ctx context.Context) (string, error) {
@@ -119,8 +112,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 ### Key Constraints
 
 - Do NOT start or enqueue workflows from within steps
-- Do NOT use uncontrolled goroutines to start workflows - use `dbos.RunWorkflow` with queues or `dbos.Go`/`dbos.Select`
-  for concurrent steps
+- Do NOT use uncontrolled goroutines to start workflows - use `dbos.RunWorkflow` with queues or `dbos.Go`/`dbos.Select` for concurrent steps
 - Workflows MUST be deterministic - non-deterministic operations go in steps
 - Do NOT modify global variables from workflows or steps
 - All workflows and queues MUST be registered before calling `Launch()`

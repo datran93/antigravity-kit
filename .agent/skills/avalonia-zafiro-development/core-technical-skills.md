@@ -3,7 +3,6 @@
 ## Mandatory Expertise
 
 The developer must possess strong expertise in:
-
 - **C# and modern .NET**: Utilizing the latest features of the language and framework.
 - **Avalonia UI**: For cross-platform UI development.
 - **MVVM Architecture**: Maintaining strict separation between UI and business logic.

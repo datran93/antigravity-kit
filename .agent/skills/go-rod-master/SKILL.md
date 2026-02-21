@@ -1,8 +1,6 @@
 ---
 name: go-rod-master
-description:
-  "Comprehensive guide for browser automation and web scraping with go-rod (Chrome DevTools Protocol) including stealth
-  anti-bot-detection patterns."
+description: "Comprehensive guide for browser automation and web scraping with go-rod (Chrome DevTools Protocol) including stealth anti-bot-detection patterns."
 risk: safe
 source: https://github.com/go-rod/rod
 ---
@@ -11,22 +9,15 @@ source: https://github.com/go-rod/rod
 
 ## Overview
 
-[Rod](https://github.com/go-rod/rod) is a high-level Go driver built directly on the
-[Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) for browser automation and web scraping.
-Unlike wrappers around other tools, Rod communicates with the browser natively via CDP, providing thread-safe
-operations, chained context design for timeouts/cancellation, auto-wait for elements, correct iframe/shadow DOM
-handling, and zero zombie browser processes.
+[Rod](https://github.com/go-rod/rod) is a high-level Go driver built directly on the [Chrome DevTools Protocol](https://chromedevtools.github.io/devtools-protocol/) for browser automation and web scraping. Unlike wrappers around other tools, Rod communicates with the browser natively via CDP, providing thread-safe operations, chained context design for timeouts/cancellation, auto-wait for elements, correct iframe/shadow DOM handling, and zero zombie browser processes.
 
-The companion library [go-rod/stealth](https://github.com/go-rod/stealth) injects anti-bot-detection evasions based on
-[puppeteer-extra stealth](https://github.com/nichochar/puppeteer-extra/tree/master/packages/extract-stealth-evasions),
-hiding headless browser fingerprints from detection systems.
+The companion library [go-rod/stealth](https://github.com/go-rod/stealth) injects anti-bot-detection evasions based on [puppeteer-extra stealth](https://github.com/nichochar/puppeteer-extra/tree/master/packages/extract-stealth-evasions), hiding headless browser fingerprints from detection systems.
 
 ## When to Use This Skill
 
 - Use when the user asks to **scrape**, **automate**, or **test** a website using Go.
 - Use when the user needs a **headless browser** for dynamic/SPA content (React, Vue, Angular).
-- Use when the user mentions **stealth**, **anti-bot**, **avoiding detection**, **Cloudflare**, or **bot detection
-  bypass**.
+- Use when the user mentions **stealth**, **anti-bot**, **avoiding detection**, **Cloudflare**, or **bot detection bypass**.
 - Use when the user wants to work with the **Chrome DevTools Protocol (CDP)** directly from Go.
 - Use when the user needs to **intercept** or **hijack** network requests in a browser context.
 - Use when the user asks about **concurrent browser scraping** or **page pooling** in Go.
@@ -80,10 +71,10 @@ fmt.Println(el.MustText())
 
 Rod provides two API styles for every operation:
 
-| Style     | Method                                       | Use Case                                                |
-| :-------- | :------------------------------------------- | :------------------------------------------------------ |
-| **Must**  | `MustElement()`, `MustClick()`, `MustText()` | Scripting, debugging, prototyping. Panics on error.     |
-| **Error** | `Element()`, `Click()`, `Text()`             | Production code. Returns `error` for explicit handling. |
+| Style | Method | Use Case |
+|:------|:-------|:---------|
+| **Must** | `MustElement()`, `MustClick()`, `MustText()` | Scripting, debugging, prototyping. Panics on error. |
+| **Error** | `Element()`, `Click()`, `Text()` | Production code. Returns `error` for explicit handling. |
 
 **Production pattern:**
 
@@ -142,8 +133,7 @@ page.MustSearch(".deeply-nested-element")
 
 ### Auto-Wait
 
-Rod automatically retries element queries until the element appears or the context times out. You do not need manual
-sleeps:
+Rod automatically retries element queries until the element appears or the context times out. You do not need manual sleeps:
 
 ```go
 // This will automatically wait until the element exists
@@ -162,16 +152,14 @@ wait()
 
 ## Stealth & Anti-Bot Detection (go-rod/stealth)
 
-> **IMPORTANT:** For any production scraping or automation against real websites, ALWAYS use `stealth.MustPage()`
-> instead of `browser.MustPage()`. This is the single most important step for avoiding bot detection.
+> **IMPORTANT:** For any production scraping or automation against real websites, ALWAYS use `stealth.MustPage()` instead of `browser.MustPage()`. This is the single most important step for avoiding bot detection.
 
 ### How Stealth Works
 
 The `go-rod/stealth` package injects JavaScript evasions into every new page that:
 
 - **Remove `navigator.webdriver`** — the primary headless detection signal.
-- **Spoof WebGL vendor/renderer** — presents real GPU info (e.g., "Intel Inc." / "Intel Iris OpenGL Engine") instead of
-  headless markers like "Google SwiftShader".
+- **Spoof WebGL vendor/renderer** — presents real GPU info (e.g., "Intel Inc." / "Intel Iris OpenGL Engine") instead of headless markers like "Google SwiftShader".
 - **Fix Chrome plugin array** — reports proper `PluginArray` type with realistic plugin count.
 - **Patch permissions API** — returns `"prompt"` instead of bot-revealing values.
 - **Set realistic languages** — reports `en-US,en` instead of empty arrays.
@@ -226,7 +214,6 @@ page.MustScreenshot("stealth_test.png")
 ```
 
 Expected results for a properly stealth-configured browser:
-
 - **WebDriver**: `missing (passed)`
 - **Chrome**: `present (passed)`
 - **Plugins Length**: `3` (not `0`)
@@ -492,7 +479,6 @@ browser := rod.New().ControlURL(u).MustConnect()
 ## Examples
 
 See the `examples/` directory for complete, runnable Go files:
-
 - `examples/basic_scrape.go` — Minimal scraping example
 - `examples/stealth_page.go` — Anti-detection with go-rod/stealth
 - `examples/request_hijacking.go` — Intercepting and modifying network requests
@@ -519,38 +505,31 @@ See the `examples/` directory for complete, runnable Go files:
 
 ## Common Pitfalls
 
-- **Problem:** Element not found even though it exists on the page. **Solution:** The element may be inside an iframe or
-  shadow DOM. Use `page.MustSearch()` instead of `page.MustElement()` — it searches across all iframes and shadow DOMs.
+- **Problem:** Element not found even though it exists on the page.
+  **Solution:** The element may be inside an iframe or shadow DOM. Use `page.MustSearch()` instead of `page.MustElement()` — it searches across all iframes and shadow DOMs.
 
-- **Problem:** Click doesn't work because the element is animating. **Solution:** Call `el.MustWaitStable()` before
-  `el.MustClick()`.
+- **Problem:** Click doesn't work because the element is animating.
+  **Solution:** Call `el.MustWaitStable()` before `el.MustClick()`.
 
-- **Problem:** Bot detection despite using stealth. **Solution:** Combine `stealth.MustPage()` with: randomized viewport
-  sizes, realistic User-Agent strings, human-like input delays between keystrokes, and random idle behaviors (scroll,
-  hover).
+- **Problem:** Bot detection despite using stealth.
+  **Solution:** Combine `stealth.MustPage()` with: randomized viewport sizes, realistic User-Agent strings, human-like input delays between keystrokes, and random idle behaviors (scroll, hover).
 
-- **Problem:** Browser process leaks (zombie processes). **Solution:** Always `defer browser.MustClose()`. Rod uses
-  [leakless](https://github.com/ysmood/leakless) to kill zombies after main process crash, but explicit cleanup is
-  preferred.
+- **Problem:** Browser process leaks (zombie processes).
+  **Solution:** Always `defer browser.MustClose()`. Rod uses [leakless](https://github.com/ysmood/leakless) to kill zombies after main process crash, but explicit cleanup is preferred.
 
-- **Problem:** Timeout errors on slow pages. **Solution:** Use chained context:
-  `page.Timeout(30 * time.Second).MustWaitLoad()`. For AJAX-heavy pages, use `MustWaitRequestIdle()` instead of
-  `MustWaitLoad()`.
+- **Problem:** Timeout errors on slow pages.
+  **Solution:** Use chained context: `page.Timeout(30 * time.Second).MustWaitLoad()`. For AJAX-heavy pages, use `MustWaitRequestIdle()` instead of `MustWaitLoad()`.
 
-- **Problem:** HijackRequests router not intercepting requests. **Solution:** You must call `go router.Run()` after
-  setting up routes, and `defer router.MustStop()` for cleanup.
+- **Problem:** HijackRequests router not intercepting requests.
+  **Solution:** You must call `go router.Run()` after setting up routes, and `defer router.MustStop()` for cleanup.
 
 ## Limitations
 
 - **CAPTCHAs:** Rod does not include CAPTCHA solving. External services (2captcha, etc.) must be integrated separately.
-- **Extreme Anti-Bot:** While `go-rod/stealth` handles common detection (WebDriver, plugin fingerprints, WebGL),
-  extremely strict systems (some Cloudflare configurations, Akamai Bot Manager) may still detect automation. Additional
-  measures (residential proxies, human-like behavioral patterns) may be needed.
+- **Extreme Anti-Bot:** While `go-rod/stealth` handles common detection (WebDriver, plugin fingerprints, WebGL), extremely strict systems (some Cloudflare configurations, Akamai Bot Manager) may still detect automation. Additional measures (residential proxies, human-like behavioral patterns) may be needed.
 - **DRM Content:** Cannot interact with DRM-protected media (e.g., Widevine).
-- **Resource Usage:** Each browser instance consumes significant RAM (~100-300MB+). Use `PagePool` and limit concurrency
-  on memory-constrained systems.
-- **Extensions in Headless:** Chrome extensions do not work in headless mode. Use `Headless(false)` with XVFB for server
-  environments.
+- **Resource Usage:** Each browser instance consumes significant RAM (~100-300MB+). Use `PagePool` and limit concurrency on memory-constrained systems.
+- **Extensions in Headless:** Chrome extensions do not work in headless mode. Use `Headless(false)` with XVFB for server environments.
 - **Platform:** Requires a Chromium-compatible browser. Does not support Firefox or Safari.
 
 ## Documentation References
@@ -559,9 +538,7 @@ See the `examples/` directory for complete, runnable Go files:
 - [Go API Reference](https://pkg.go.dev/github.com/go-rod/rod) — Complete type and method documentation
 - [go-rod/stealth](https://github.com/go-rod/stealth) — Anti-bot detection plugin
 - [Examples (source)](https://github.com/go-rod/rod/blob/main/examples_test.go) — Official example tests
-- [Rod vs Chromedp Comparison](https://github.com/nichochar/go-rod.github.io/blob/main/lib/examples/compare-chromedp) —
-  Migration reference
+- [Rod vs Chromedp Comparison](https://github.com/nichochar/go-rod.github.io/blob/main/lib/examples/compare-chromedp) — Migration reference
 - [Chrome DevTools Protocol Docs](https://chromedevtools.github.io/devtools-protocol/) — Underlying protocol reference
-- [Chrome CLI Flags Reference](https://peter.sh/experiments/chromium-command-line-switches) — Launcher flag
-  documentation
+- [Chrome CLI Flags Reference](https://peter.sh/experiments/chromium-command-line-switches) — Launcher flag documentation
 - `references/api-reference.md` — Quick-reference cheat sheet

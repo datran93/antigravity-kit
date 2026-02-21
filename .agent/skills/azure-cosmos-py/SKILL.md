@@ -1,9 +1,11 @@
 ---
 name: azure-cosmos-py
-description: |
+description: "|"
   Azure Cosmos DB SDK for Python (NoSQL API). Use for document CRUD, queries, containers, and globally distributed data.
   Triggers: "cosmos db", "CosmosClient", "container", "document", "NoSQL", "partition key".
 package: azure-cosmos
+risk: unknown
+source: community
 ---
 
 # Azure Cosmos DB SDK for Python
@@ -38,10 +40,10 @@ client = CosmosClient(url=endpoint, credential=credential)
 
 ## Client Hierarchy
 
-| Client           | Purpose                   | Get From                          |
-| ---------------- | ------------------------- | --------------------------------- |
-| `CosmosClient`   | Account-level operations  | Direct instantiation              |
-| `DatabaseProxy`  | Database operations       | `client.get_database_client()`    |
+| Client | Purpose | Get From |
+|--------|---------|----------|
+| `CosmosClient` | Account-level operations | Direct instantiation |
+| `DatabaseProxy` | Database operations | `client.get_database_client()` |
 | `ContainerProxy` | Container/item operations | `database.get_container_client()` |
 
 ## Core Workflow
@@ -223,17 +225,17 @@ from azure.identity.aio import DefaultAzureCredential
 
 async def cosmos_operations():
     credential = DefaultAzureCredential()
-
+    
     async with CosmosClient(endpoint, credential=credential) as client:
         database = client.get_database_client("mydb")
         container = database.get_container_client("mycontainer")
-
+        
         # Create
         await container.create_item(body={"id": "1", "pk": "test"})
-
+        
         # Read
         item = await container.read_item(item="1", partition_key="test")
-
+        
         # Query
         async for item in container.query_items(
             query="SELECT * FROM c",
@@ -273,8 +275,11 @@ except CosmosHttpResponseError as e:
 
 ## Reference Files
 
-| File                                                                   | Contents                                                                            |
-| ---------------------------------------------------------------------- | ----------------------------------------------------------------------------------- |
-| [references/partitioning.md](references/partitioning.md)               | Partition key strategies, hierarchical keys, hot partition detection and mitigation |
-| [references/query-patterns.md](references/query-patterns.md)           | Query optimization, aggregations, pagination, transactions, change feed             |
-| [scripts/setup_cosmos_container.py](scripts/setup_cosmos_container.py) | CLI tool for creating containers with partitioning, throughput, and indexing        |
+| File | Contents |
+|------|----------|
+| references/partitioning.md | Partition key strategies, hierarchical keys, hot partition detection and mitigation |
+| references/query-patterns.md | Query optimization, aggregations, pagination, transactions, change feed |
+| scripts/setup_cosmos_container.py | CLI tool for creating containers with partitioning, throughput, and indexing |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

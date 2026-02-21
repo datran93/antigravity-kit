@@ -1,14 +1,15 @@
 ---
 name: azure-ai-openai-dotnet
-description: |
+description: "|"
   Azure OpenAI SDK for .NET. Client library for Azure OpenAI and OpenAI services. Use for chat completions, embeddings, image generation, audio transcription, and assistants. Triggers: "Azure OpenAI", "AzureOpenAIClient", "ChatClient", "chat completions .NET", "GPT-4", "embeddings", "DALL-E", "Whisper", "OpenAI .NET".
 package: Azure.AI.OpenAI
+risk: unknown
+source: community
 ---
 
 # Azure.AI.OpenAI (.NET)
 
-Client library for Azure OpenAI Service providing access to OpenAI models including GPT-4, GPT-4o, embeddings, DALL-E,
-and Whisper.
+Client library for Azure OpenAI Service providing access to OpenAI models including GPT-4, GPT-4o, embeddings, DALL-E, and Whisper.
 
 ## Installation
 
@@ -126,7 +127,7 @@ Console.WriteLine($"Tokens used: {completion.Usage.TotalTokenCount}");
 ### Streaming Chat
 
 ```csharp
-await foreach (StreamingChatCompletionUpdate update
+await foreach (StreamingChatCompletionUpdate update 
     in chatClient.CompleteChatStreamingAsync(messages))
 {
     if (update.ContentUpdate.Count > 0)
@@ -383,23 +384,23 @@ if (completion.FinishReason == ChatFinishReason.ToolCalls)
 
 ## Key Types Reference
 
-| Type                            | Purpose                              |
-| ------------------------------- | ------------------------------------ |
-| `AzureOpenAIClient`             | Top-level client for Azure OpenAI    |
-| `ChatClient`                    | Chat completions                     |
-| `EmbeddingClient`               | Text embeddings                      |
-| `ImageClient`                   | Image generation (DALL-E)            |
-| `AudioClient`                   | Audio transcription/TTS              |
-| `ChatCompletion`                | Chat response                        |
-| `ChatCompletionOptions`         | Request configuration                |
-| `StreamingChatCompletionUpdate` | Streaming response chunk             |
-| `ChatMessage`                   | Base message type                    |
-| `SystemChatMessage`             | System prompt                        |
-| `UserChatMessage`               | User input                           |
-| `AssistantChatMessage`          | Assistant response                   |
-| `DeveloperChatMessage`          | Developer message (reasoning models) |
-| `ChatTool`                      | Function/tool definition             |
-| `ChatToolCall`                  | Tool invocation request              |
+| Type | Purpose |
+|------|---------|
+| `AzureOpenAIClient` | Top-level client for Azure OpenAI |
+| `ChatClient` | Chat completions |
+| `EmbeddingClient` | Text embeddings |
+| `ImageClient` | Image generation (DALL-E) |
+| `AudioClient` | Audio transcription/TTS |
+| `ChatCompletion` | Chat response |
+| `ChatCompletionOptions` | Request configuration |
+| `StreamingChatCompletionUpdate` | Streaming response chunk |
+| `ChatMessage` | Base message type |
+| `SystemChatMessage` | System prompt |
+| `UserChatMessage` | User input |
+| `AssistantChatMessage` | Assistant response |
+| `DeveloperChatMessage` | Developer message (reasoning models) |
+| `ChatTool` | Function/tool definition |
+| `ChatToolCall` | Tool invocation request |
 
 ## Best Practices
 
@@ -438,19 +439,22 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                      | Purpose                        | Install                                     |
-| ------------------------ | ------------------------------ | ------------------------------------------- |
-| `Azure.AI.OpenAI`        | Azure OpenAI client (this SDK) | `dotnet add package Azure.AI.OpenAI`        |
-| `OpenAI`                 | OpenAI compatibility           | `dotnet add package OpenAI`                 |
-| `Azure.Identity`         | Authentication                 | `dotnet add package Azure.Identity`         |
-| `Azure.Search.Documents` | AI Search for RAG              | `dotnet add package Azure.Search.Documents` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.AI.OpenAI` | Azure OpenAI client (this SDK) | `dotnet add package Azure.AI.OpenAI` |
+| `OpenAI` | OpenAI compatibility | `dotnet add package OpenAI` |
+| `Azure.Identity` | Authentication | `dotnet add package Azure.Identity` |
+| `Azure.Search.Documents` | AI Search for RAG | `dotnet add package Azure.Search.Documents` |
 
 ## Reference Links
 
-| Resource                  | URL                                                                             |
-| ------------------------- | ------------------------------------------------------------------------------- |
-| NuGet Package             | https://www.nuget.org/packages/Azure.AI.OpenAI                                  |
-| API Reference             | https://learn.microsoft.com/dotnet/api/azure.ai.openai                          |
-| Migration Guide (1.0→2.0) | https://learn.microsoft.com/azure/ai-services/openai/how-to/dotnet-migration    |
-| Quickstart                | https://learn.microsoft.com/azure/ai-services/openai/quickstart                 |
-| GitHub Source             | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/openai/Azure.AI.OpenAI |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.AI.OpenAI |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.ai.openai |
+| Migration Guide (1.0→2.0) | https://learn.microsoft.com/azure/ai-services/openai/how-to/dotnet-migration |
+| Quickstart | https://learn.microsoft.com/azure/ai-services/openai/quickstart |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/openai/Azure.AI.OpenAI |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

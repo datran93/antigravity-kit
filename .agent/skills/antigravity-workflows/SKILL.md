@@ -1,8 +1,6 @@
 ---
 name: antigravity-workflows
-description:
-  "Orchestrate multiple Antigravity skills through guided workflows for SaaS MVP delivery, security audits, AI agent
-  builds, and browser QA."
+description: "Orchestrate multiple Antigravity skills through guided workflows for SaaS MVP delivery, security audits, AI agent builds, and browser QA."
 source: self
 risk: none
 ---
@@ -14,7 +12,6 @@ Use this skill to turn a complex objective into a guided sequence of skill invoc
 ## When to Use This Skill
 
 Use this skill when:
-
 - The user wants to combine several skills without manually selecting each one.
 - The goal is multi-phase (for example: plan, build, test, ship).
 - The user asks for best-practice execution for common scenarios like:
@@ -26,7 +23,6 @@ Use this skill when:
 ## Workflow Source of Truth
 
 Read workflows in this order:
-
 1. `docs/WORKFLOWS.md` for human-readable playbooks.
 2. `data/workflows.json` for machine-readable workflow metadata.
 
@@ -74,8 +70,7 @@ Use @antigravity-workflows to execute the "QA and Browser Automation" workflow a
 - This skill orchestrates; it does not replace specialized skills.
 - It depends on the local availability of referenced skills.
 - It does not guarantee success without environment access, credentials, or required infrastructure.
-- For stack-specific browser automation in Go, `go-playwright` may require the corresponding skill to be present in your
-  local skills repository.
+- For stack-specific browser automation in Go, `go-playwright` may require the corresponding skill to be present in your local skills repository.
 
 ## Related Skills
 

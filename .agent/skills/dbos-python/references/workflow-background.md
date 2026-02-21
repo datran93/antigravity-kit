@@ -55,5 +55,4 @@ handle = DBOS.retrieve_workflow(workflow_id)
 result = handle.get_result()
 ```
 
-Reference:
-[Starting Workflows](https://docs.dbos.dev/python/tutorials/workflow-tutorial#starting-workflows-in-the-background)
+Reference: [Starting Workflows](https://docs.dbos.dev/python/tutorials/workflow-tutorial#starting-workflows-in-the-background)

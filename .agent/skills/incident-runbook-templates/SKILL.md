@@ -1,14 +1,13 @@
 ---
 name: incident-runbook-templates
-description:
-  Create structured incident response runbooks with step-by-step procedures, escalation paths, and recovery actions. Use
-  when building runbooks, responding to incidents, or establishing incident response procedures.
+description: "Create structured incident response runbooks with step-by-step procedures, escalation paths, and recovery actions. Use when building runbooks, responding to incidents, or establishing incident resp..."
+risk: unknown
+source: community
 ---
 
 # Incident Runbook Templates
 
-Production-ready templates for incident response runbooks covering detection, triage, mitigation, resolution, and
-communication.
+Production-ready templates for incident response runbooks covering detection, triage, mitigation, resolution, and communication.
 
 ## Do not use this skill when
 
@@ -35,12 +34,12 @@ communication.
 
 ### 1. Incident Severity Levels
 
-| Severity | Impact                     | Response Time     | Example                 |
-| -------- | -------------------------- | ----------------- | ----------------------- |
-| **SEV1** | Complete outage, data loss | 15 min            | Production down         |
-| **SEV2** | Major degradation          | 30 min            | Critical feature broken |
-| **SEV3** | Minor impact               | 2 hours           | Non-critical bug        |
-| **SEV4** | Minimal impact             | Next business day | Cosmetic issue          |
+| Severity | Impact | Response Time | Example |
+|----------|--------|---------------|---------|
+| **SEV1** | Complete outage, data loss | 15 min | Production down |
+| **SEV2** | Major degradation | 30 min | Critical feature broken |
+| **SEV3** | Minor impact | 2 hours | Non-critical bug |
+| **SEV4** | Minimal impact | Next business day | Cosmetic issue |
 
 ### 2. Runbook Structure
 
@@ -60,31 +59,28 @@ communication.
 
 ### Template 1: Service Outage Runbook
 
-````markdown
+```markdown
 # [Service Name] Outage Runbook
 
 ## Overview
-
-**Service**: Payment Processing Service **Owner**: Platform Team **Slack**: #payments-incidents **PagerDuty**:
-payments-oncall
+**Service**: Payment Processing Service
+**Owner**: Platform Team
+**Slack**: #payments-incidents
+**PagerDuty**: payments-oncall
 
 ## Impact Assessment
-
 - [ ] Which customers are affected?
 - [ ] What percentage of traffic is impacted?
 - [ ] Are there financial implications?
 - [ ] What's the blast radius?
 
 ## Detection
-
 ### Alerts
-
 - `payment_error_rate > 5%` (PagerDuty)
 - `payment_latency_p99 > 2s` (Slack)
 - `payment_success_rate < 95%` (PagerDuty)
 
 ### Dashboards
-
 - [Payment Service Dashboard](https://grafana/d/payments)
 - [Error Tracking](https://sentry.io/payments)
 - [Dependency Status](https://status.stripe.com)
@@ -92,7 +88,6 @@ payments-oncall
 ## Initial Triage (First 5 Minutes)
 
 ### 1. Assess Scope
-
 ```bash
 # Check service health
 kubectl get pods -n payments -l app=payment-service
@@ -103,28 +98,24 @@ kubectl rollout history deployment/payment-service -n payments
 # Check error rates
 curl -s "http://prometheus:9090/api/v1/query?query=sum(rate(http_requests_total{status=~'5..'}[5m]))"
 ```
-````
 
 ### 2. Quick Health Checks
-
 - [ ] Can you reach the service? `curl -I https://api.company.com/payments/health`
 - [ ] Database connectivity? Check connection pool metrics
 - [ ] External dependencies? Check Stripe, bank API status
 - [ ] Recent changes? Check deploy history
 
 ### 3. Initial Classification
-
-| Symptom              | Likely Cause        | Go To Section |
-| -------------------- | ------------------- | ------------- |
-| All requests failing | Service down        | Section 4.1   |
-| High latency         | Database/dependency | Section 4.2   |
-| Partial failures     | Code bug            | Section 4.3   |
-| Spike in errors      | Traffic surge       | Section 4.4   |
+| Symptom | Likely Cause | Go To Section |
+|---------|--------------|---------------|
+| All requests failing | Service down | Section 4.1 |
+| High latency | Database/dependency | Section 4.2 |
+| Partial failures | Code bug | Section 4.3 |
+| Spike in errors | Traffic surge | Section 4.4 |
 
 ## Mitigation Procedures
 
 ### 4.1 Service Completely Down
-
 ```bash
 # Step 1: Check pod status
 kubectl get pods -n payments
@@ -146,7 +137,6 @@ kubectl rollout status deployment/payment-service -n payments
 ```
 
 ### 4.2 High Latency
-
 ```bash
 # Step 1: Check database connections
 kubectl exec -n payments deploy/payment-service -- \
@@ -171,7 +161,6 @@ kubectl set env deployment/payment-service \
 ```
 
 ### 4.3 Partial Failures (Specific Errors)
-
 ```bash
 # Step 1: Identify error pattern
 kubectl logs -n payments -l app=payment-service --tail=500 | \
@@ -192,7 +181,6 @@ psql -h $DB_HOST -c "
 ```
 
 ### 4.4 Traffic Surge
-
 ```bash
 # Step 1: Check current request rate
 kubectl top pods -n payments
@@ -226,7 +214,6 @@ EOF
 ```
 
 ## Verification Steps
-
 ```bash
 # Verify service is healthy
 curl -s https://api.company.com/payments/health | jq
@@ -242,7 +229,6 @@ curl -s "http://prometheus:9090/api/v1/query?query=histogram_quantile(0.99,sum(r
 ```
 
 ## Rollback Procedures
-
 ```bash
 # Rollback Kubernetes deployment
 kubectl rollout undo deployment/payment-service -n payments
@@ -257,17 +243,16 @@ curl -X POST https://api.company.com/internal/feature-flags \
 
 ## Escalation Matrix
 
-| Condition                     | Escalate To         | Contact             |
-| ----------------------------- | ------------------- | ------------------- |
-| > 15 min unresolved SEV1      | Engineering Manager | @manager (Slack)    |
-| Data breach suspected         | Security Team       | #security-incidents |
-| Financial impact > $10k       | Finance + Legal     | @finance-oncall     |
-| Customer communication needed | Support Lead        | @support-lead       |
+| Condition | Escalate To | Contact |
+|-----------|-------------|---------|
+| > 15 min unresolved SEV1 | Engineering Manager | @manager (Slack) |
+| Data breach suspected | Security Team | #security-incidents |
+| Financial impact > $10k | Finance + Legal | @finance-oncall |
+| Customer communication needed | Support Lead | @support-lead |
 
 ## Communication Templates
 
 ### Initial Notification (Internal)
-
 ```
 🚨 INCIDENT: Payment Service Degradation
 
@@ -286,7 +271,6 @@ Updates in #payments-incidents
 ```
 
 ### Status Update
-
 ```
 📊 UPDATE: Payment Service Incident
 
@@ -306,7 +290,6 @@ ETA to Resolution: ~15 minutes
 ```
 
 ### Resolution Notification
-
 ```
 ✅ RESOLVED: Payment Service Incident
 
@@ -322,8 +305,7 @@ Follow-up:
 - Postmortem scheduled for [DATE]
 - Bug fix in progress
 ```
-
-````
+```
 
 ### Template 2: Database Incident Runbook
 
@@ -357,10 +339,9 @@ SELECT pg_terminate_backend(pid)
 FROM pg_stat_activity
 WHERE state = 'idle'
 AND query_start < now() - interval '10 minutes';
-````
+```
 
 ## Replication Lag
-
 ```sql
 -- Check lag on replica
 SELECT
@@ -376,7 +357,6 @@ SELECT
 ```
 
 ## Disk Space Critical
-
 ```bash
 # Check disk usage
 df -h /var/lib/postgresql/data
@@ -392,7 +372,6 @@ psql -c "VACUUM FULL large_table;"
 
 # If emergency, delete old data or expand disk
 ```
-
 ```
 
 ## Best Practices
@@ -416,4 +395,3 @@ psql -c "VACUUM FULL large_table;"
 - [Google SRE Book - Incident Management](https://sre.google/sre-book/managing-incidents/)
 - [PagerDuty Incident Response](https://response.pagerduty.com/)
 - [Atlassian Incident Management](https://www.atlassian.com/incident-management)
-```

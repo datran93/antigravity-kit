@@ -1,10 +1,9 @@
 ---
 name: azure-ai-translation-ts
-description:
-  Build translation applications using Azure Translation SDKs for JavaScript (@azure-rest/ai-translation-text,
-  @azure-rest/ai-translation-document). Use when implementing text translation, transliteration, language detection, or
-  batch document translation.
+description: "Build translation applications using Azure Translation SDKs for JavaScript (@azure-rest/ai-translation-text, @azure-rest/ai-translation-document). Use when implementing text translation, transliter..."
 package: "@azure-rest/ai-translation-text, @azure-rest/ai-translation-document"
+risk: unknown
+source: community
 ---
 
 # Azure Translation SDKs for TypeScript
@@ -57,8 +56,11 @@ const response = await client.path("/translate").post({
     inputs: [
       {
         text: "Hello, how are you?",
-        language: "en", // source (optional, auto-detect)
-        targets: [{ language: "es" }, { language: "fr" }],
+        language: "en",  // source (optional, auto-detect)
+        targets: [
+          { language: "es" },
+          { language: "fr" },
+        ],
       },
     ],
   },
@@ -84,12 +86,12 @@ const response = await client.path("/translate").post({
       {
         text: "Hello world",
         language: "en",
-        textType: "Plain", // or "Html"
+        textType: "Plain",  // or "Html"
         targets: [
           {
             language: "de",
-            profanityAction: "NoAction", // "Marked" | "Deleted"
-            tone: "formal", // LLM-specific
+            profanityAction: "NoAction",  // "Marked" | "Deleted"
+            tone: "formal",  // LLM-specific
           },
         ],
       },
@@ -127,7 +129,7 @@ const response = await client.path("/transliterate").post({
 
 if (!isUnexpected(response)) {
   for (const t of response.body.value) {
-    console.log(`${t.script}: ${t.text}`); // Latn: zhè shì gè cè shì
+    console.log(`${t.script}: ${t.text}`);  // Latn: zhè shì gè cè shì
   }
 }
 ```
@@ -169,24 +171,21 @@ const client2 = DocumentTranslationClient(endpoint, { key: "<api-key>" });
 import DocumentTranslationClient from "@azure-rest/ai-translation-document";
 import { writeFile } from "node:fs/promises";
 
-const response = await client
-  .path("/document:translate")
-  .post({
-    queryParameters: {
-      targetLanguage: "es",
-      sourceLanguage: "en", // optional
+const response = await client.path("/document:translate").post({
+  queryParameters: {
+    targetLanguage: "es",
+    sourceLanguage: "en",  // optional
+  },
+  contentType: "multipart/form-data",
+  body: [
+    {
+      name: "document",
+      body: "Hello, this is a test document.",
+      filename: "test.txt",
+      contentType: "text/plain",
     },
-    contentType: "multipart/form-data",
-    body: [
-      {
-        name: "document",
-        body: "Hello, this is a test document.",
-        filename: "test.txt",
-        contentType: "text/plain",
-      },
-    ],
-  })
-  .asNodeStream();
+  ],
+}).asNodeStream();
 
 if (response.status === "200") {
   await writeFile("translated.txt", response.body);
@@ -215,14 +214,17 @@ const response = await client.path("/document/batches").post({
     inputs: [
       {
         source: { sourceUrl: sourceSas },
-        targets: [{ targetUrl: targetSas, language: "fr" }],
+        targets: [
+          { targetUrl: targetSas, language: "fr" },
+        ],
       },
     ],
   },
 });
 
 // Get operation ID from header
-const operationId = new URL(response.headers["operation-location"]).pathname.split("/").pop();
+const operationId = new URL(response.headers["operation-location"])
+  .pathname.split("/").pop();
 ```
 
 ### Get Translation Status
@@ -264,7 +266,10 @@ if (!isUnexpected(response)) {
 
 ```typescript
 // Text Translation
-import type { TranslatorCredential, TranslatorTokenCredential } from "@azure-rest/ai-translation-text";
+import type {
+  TranslatorCredential,
+  TranslatorTokenCredential,
+} from "@azure-rest/ai-translation-text";
 
 // Document Translation
 import type {
@@ -281,3 +286,6 @@ import type {
 3. **Use SAS tokens** - For document translation, use time-limited SAS URLs
 4. **Handle errors** - Always check `isUnexpected(response)` before accessing body
 5. **Regional endpoints** - Use regional endpoints for lower latency
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

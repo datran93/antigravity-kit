@@ -4,16 +4,12 @@ Expert guidance for creating effective prompts in Google Stitch, the AI-powered 
 
 ## Overview
 
-This skill provides comprehensive guidance for crafting precise, actionable prompts that generate high-quality UI
-designs in Google Stitch. It covers prompt structure, specificity techniques, iteration strategies, and design-to-code
-workflows.
+This skill provides comprehensive guidance for crafting precise, actionable prompts that generate high-quality UI designs in Google Stitch. It covers prompt structure, specificity techniques, iteration strategies, and design-to-code workflows.
 
 ## What's Included
 
 ### SKILL.md
-
 Core prompting principles and techniques:
-
 - Specificity and detail requirements
 - Visual style definition
 - Multi-screen flow structuring
@@ -27,9 +23,7 @@ Core prompting principles and techniques:
 ### References
 
 #### prompt-examples.md
-
 Comprehensive library of effective Stitch prompts organized by category:
-
 - Landing pages
 - Mobile apps
 - Dashboards
@@ -41,9 +35,7 @@ Comprehensive library of effective Stitch prompts organized by category:
 Each example includes detailed component breakdowns, style specifications, and platform requirements.
 
 #### advanced-techniques.md
-
 Advanced strategies for production-ready designs:
-
 - Image-to-UI workflows
 - Design system integration
 - Responsive design strategies
@@ -56,7 +48,6 @@ Advanced strategies for production-ready designs:
 ## When to Use This Skill
 
 Use this skill when:
-
 - Creating UI designs in Google Stitch
 - Generating mobile or web app interfaces
 - Crafting effective Stitch prompts
@@ -117,7 +108,6 @@ Platform: Responsive web (desktop-first)
 ## Best Practices
 
 ### Do's ✅
-
 - Provide specific component details
 - Define clear visual direction
 - Specify responsive behavior
@@ -128,7 +118,6 @@ Platform: Responsive web (desktop-first)
 - Consider accessibility from the start
 
 ### Don'ts ❌
-
 - Use vague descriptions ("nice website")
 - Omit visual style guidance
 - Forget platform specifications
@@ -139,14 +128,12 @@ Platform: Responsive web (desktop-first)
 ## Integration with Development
 
 ### Stitch → Figma → Code
-
 1. Generate UI in Stitch with detailed prompts
 2. Export to Figma for design system integration
 3. Hand off to developers with design specs
 4. Implement with production-ready code
 
 ### Stitch → HTML → Framework
-
 1. Generate and refine UI in Stitch
 2. Export HTML/CSS code
 3. Convert to React/Vue/Svelte components
@@ -171,12 +158,8 @@ Platform: Responsive web (desktop-first)
 
 ## About Google Stitch
 
-Google Stitch is an experimental AI UI generator powered by Gemini 2.5 Flash that transforms text prompts and visual
-references into functional UI designs. It supports text-to-UI generation, image-to-UI conversion, multi-screen flows,
-and exports to HTML/CSS, Figma, and code.
+Google Stitch is an experimental AI UI generator powered by Gemini 2.5 Flash that transforms text prompts and visual references into functional UI designs. It supports text-to-UI generation, image-to-UI conversion, multi-screen flows, and exports to HTML/CSS, Figma, and code.
 
 ---
 
-**Note:** This skill is designed to help you create effective prompts for Stitch. The quality of your output depends on
-the specificity and clarity of your prompts. Use the templates and examples as starting points, then customize for your
-unique requirements.
+**Note:** This skill is designed to help you create effective prompts for Stitch. The quality of your output depends on the specificity and clarity of your prompts. Use the templates and examples as starting points, then customize for your unique requirements.

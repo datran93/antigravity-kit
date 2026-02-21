@@ -7,8 +7,7 @@ tags: pattern, scheduled, cron, recurring
 
 ## Create Scheduled Workflows
 
-Use `dbos.WithSchedule` when registering a workflow to run it on a cron schedule. Each scheduled invocation runs exactly
-once per interval.
+Use `dbos.WithSchedule` when registering a workflow to run it on a cron schedule. Each scheduled invocation runs exactly once per interval.
 
 **Incorrect (manual scheduling with goroutine):**
 
@@ -57,7 +56,6 @@ func main() {
 Scheduled workflows must accept exactly one parameter of type `time.Time` representing the scheduled execution time.
 
 DBOS crontab uses 6 fields with second precision:
-
 ```text
 ┌────────────── second
 │ ┌──────────── minute

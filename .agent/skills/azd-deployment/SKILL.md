@@ -1,17 +1,13 @@
 ---
 name: azd-deployment
-description:
-  Deploy containerized applications to Azure Container Apps using Azure Developer CLI (azd). Use when setting up azd
-  projects, writing azure.yaml configuration, creating Bicep infrastructure for Container Apps, configuring remote
-  builds with ACR, implementing idempotent deployments, managing environment variables across local/.azure/Bicep, or
-  troubleshooting azd up failures. Triggers on requests for azd configuration, Container Apps deployment, multi-service
-  deployments, and infrastructure-as-code with Bicep.
+description: "Deploy containerized applications to Azure Container Apps using Azure Developer CLI (azd). Use when setting up azd projects, writing azure.yaml configuration, creating Bicep infrastructure for Cont..."
+risk: unknown
+source: community
 ---
 
 # Azure Developer CLI (azd) Container Apps Deployment
 
-Deploy containerized frontend + backend applications to Azure Container Apps with remote builds, managed identity, and
-idempotent infrastructure.
+Deploy containerized frontend + backend applications to Azure Container Apps with remote builds, managed identity, and idempotent infrastructure.
 
 ## Quick Start
 
@@ -98,12 +94,12 @@ hooks:
     shell: sh
     run: |
       echo "Before provisioning..."
-
+      
   postprovision:
     shell: sh
     run: |
       echo "After provisioning - set up RBAC, etc."
-
+      
   postdeploy:
     shell: sh
     run: |
@@ -113,12 +109,12 @@ hooks:
 
 ### Key azure.yaml Options
 
-| Option                  | Description                                            |
-| ----------------------- | ------------------------------------------------------ |
-| `remoteBuild: true`     | Build images in Azure Container Registry (recommended) |
-| `context: .`            | Docker build context relative to project path          |
-| `host: containerapp`    | Deploy to Azure Container Apps                         |
-| `infra.provider: bicep` | Use Bicep for infrastructure                           |
+| Option | Description |
+|--------|-------------|
+| `remoteBuild: true` | Build images in Azure Container Registry (recommended) |
+| `context: .` | Docker build context relative to project path |
+| `host: containerapp` | Deploy to Azure Container Apps |
+| `infra.provider: bicep` | Use Bicep for infrastructure |
 
 ## Environment Variables Flow
 
@@ -152,7 +148,7 @@ azd env set AZURE_SEARCH_ENDPOINT "https://my-search.search.windows.net"
 
 # Set during init
 azd env new prod
-azd env set AZURE_OPENAI_ENDPOINT "..."
+azd env set AZURE_OPENAI_ENDPOINT "..." 
 ```
 
 ### Bicep Output → Environment Variable
@@ -224,7 +220,6 @@ env: [
 ```
 
 Frontend nginx proxies to internal URL:
-
 ```nginx
 location /api {
     proxy_pass $BACKEND_URL;
@@ -253,14 +248,14 @@ hooks:
     shell: sh
     run: |
       PRINCIPAL_ID="${BACKEND_PRINCIPAL_ID}"
-
+      
       # Azure OpenAI access
       az role assignment create \
         --assignee-object-id "$PRINCIPAL_ID" \
         --assignee-principal-type ServicePrincipal \
         --role "Cognitive Services OpenAI User" \
         --scope "$OPENAI_RESOURCE_ID" 2>/dev/null || true
-
+      
       # Azure AI Search access
       az role assignment create \
         --assignee-object-id "$PRINCIPAL_ID" \
@@ -290,9 +285,9 @@ az containerapp logs show -n <app> -g <rg> --follow  # Stream logs
 
 ## Reference Files
 
-- **Bicep patterns**: See [references/bicep-patterns.md](references/bicep-patterns.md) for Container Apps modules
-- **Troubleshooting**: See [references/troubleshooting.md](references/troubleshooting.md) for common issues
-- **azure.yaml schema**: See [references/azure-yaml-schema.md](references/azure-yaml-schema.md) for full options
+- **Bicep patterns**: See references/bicep-patterns.md for Container Apps modules
+- **Troubleshooting**: See references/troubleshooting.md for common issues
+- **azure.yaml schema**: See references/azure-yaml-schema.md for full options
 
 ## Critical Reminders
 
@@ -301,3 +296,6 @@ az containerapp logs show -n <app> -g <rg> --follow  # Stream logs
 3. **Use `azd env set` for secrets** - Not main.parameters.json defaults
 4. **Service tags (`azd-service-name`)** - Required for azd to find Container Apps
 5. **`|| true` in hooks** - Prevent RBAC "already exists" errors from failing deploy
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

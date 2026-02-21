@@ -11,16 +11,13 @@ This directory contains screenshots for the Loki Mode README.
 **What to capture:** The agent monitoring section of the Loki Mode dashboard showing active agents.
 
 **How to create:**
-
 1. Run Loki Mode with a test project:
-
    ```bash
    cd /path/to/test/project
    ../../autonomy/run.sh examples/simple-todo-app.md
    ```
 
 2. Open the dashboard:
-
    ```bash
    open .loki/dashboard/index.html
    ```
@@ -46,7 +43,6 @@ This directory contains screenshots for the Loki Mode README.
 **What to capture:** The task queue kanban board section.
 
 **How to create:**
-
 1. Using the same running Loki Mode instance from above
 
 2. Scroll down to the **"Task Queue" section**
@@ -89,7 +85,6 @@ open README.md
 ```
 
 Check that:
-
 - [ ] Images load without errors
 - [ ] Resolution is clear and readable
 - [ ] Colors match the Loki Mode design (cream background, coral accents)
@@ -147,7 +142,6 @@ This gives you polished screenshots without waiting for a full Loki Mode run.
 ---
 
 **Note:** Screenshots should demonstrate Loki Mode's capabilities while being clean and professional. Avoid showing:
-
 - Personal information or API keys
 - Error states (unless specifically demonstrating error handling)
 - Cluttered or confusing data

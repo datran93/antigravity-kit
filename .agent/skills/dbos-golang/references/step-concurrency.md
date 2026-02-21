@@ -7,8 +7,7 @@ tags: step, concurrency, goroutine, select, parallel
 
 ## Run Concurrent Steps with Go and Select
 
-Use `dbos.Go` to run steps concurrently in goroutines and `dbos.Select` to durably select the first completed result.
-Both operations are checkpointed for recovery.
+Use `dbos.Go` to run steps concurrently in goroutines and `dbos.Select` to durably select the first completed result. Both operations are checkpointed for recovery.
 
 **Incorrect (raw goroutines without checkpointing):**
 
@@ -72,7 +71,6 @@ func myWorkflow(ctx dbos.DBOSContext, input string) ([]string, error) {
 ```
 
 Key behaviors:
-
 - `dbos.Go` starts a step in a goroutine and returns a channel of `StepOutcome[R]`
 - `dbos.Select` durably selects the first completed result and checkpoints which channel was selected
 - On recovery, `Select` replays the same selection, maintaining determinism

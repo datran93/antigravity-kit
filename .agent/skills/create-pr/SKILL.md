@@ -1,8 +1,6 @@
 ---
 name: create-pr
-description:
-  "Create pull requests following Sentry conventions. Use when opening PRs, writing PR descriptions, or preparing
-  changes for review. Follows Sentry's code review guidelines."
+description: "Create pull requests following Sentry conventions. Use when opening PRs, writing PR descriptions, or preparing changes for review. Follows Sentry's code review guidelines."
 source: "https://github.com/getsentry/skills/tree/main/plugins/sentry-skills/skills/create-pr"
 risk: safe
 ---
@@ -14,7 +12,6 @@ Create pull requests following Sentry's engineering practices.
 ## When to Use This Skill
 
 Use this skill when:
-
 - Opening pull requests
 - Writing PR descriptions
 - Preparing changes for review
@@ -25,16 +22,14 @@ Use this skill when:
 
 ## Prerequisites
 
-Before creating a PR, ensure all changes are committed. If there are uncommitted changes, run the `sentry-skills:commit`
-skill first to commit them properly.
+Before creating a PR, ensure all changes are committed. If there are uncommitted changes, run the `sentry-skills:commit` skill first to commit them properly.
 
 ```bash
 # Check for uncommitted changes
 git status --porcelain
 ```
 
-If the output shows any uncommitted changes (modified, added, or untracked files that should be included), invoke the
-`sentry-skills:commit` skill before proceeding.
+If the output shows any uncommitted changes (modified, added, or untracked files that should be included), invoke the `sentry-skills:commit` skill before proceeding.
 
 ## Process
 
@@ -50,7 +45,6 @@ git log $BASE..HEAD --oneline
 ```
 
 Ensure:
-
 - All changes are committed
 - Branch is up to date with remote
 - Changes are rebased on the base branch if needed
@@ -84,13 +78,11 @@ Use this structure for PR descriptions (ignoring any repository PR templates):
 ```
 
 **Do NOT include:**
-
 - "Test plan" sections
 - Checkbox lists of testing steps
 - Redundant summaries of the diff
 
 **Do include:**
-
 - Clear explanation of what and why
 - Links to relevant issues or tickets
 - Context that isn't obvious from the code
@@ -106,7 +98,6 @@ EOF
 ```
 
 **Title format** follows commit conventions:
-
 - `feat(scope): Add new feature`
 - `fix(scope): Fix the bug`
 - `ref: Refactor something`
@@ -118,11 +109,13 @@ EOF
 ```markdown
 Add Slack thread replies for alert notifications
 
-When an alert is updated or resolved, we now post a reply to the original Slack thread instead of creating a new
-message. This keeps related notifications grouped and reduces channel noise.
+When an alert is updated or resolved, we now post a reply to the original
+Slack thread instead of creating a new message. This keeps related
+notifications grouped and reduces channel noise.
 
-Previously considered posting edits to the original message, but threading better preserves the timeline of events and
-works when the original message is older than Slack's edit window.
+Previously considered posting edits to the original message, but threading
+better preserves the timeline of events and works when the original message
+is older than Slack's edit window.
 
 Refs SENTRY-1234
 ```
@@ -132,8 +125,9 @@ Refs SENTRY-1234
 ```markdown
 Handle null response in user API endpoint
 
-The user endpoint could return null for soft-deleted accounts, causing dashboard crashes when accessing user properties.
-This adds a null check and returns a proper 404 response.
+The user endpoint could return null for soft-deleted accounts, causing
+dashboard crashes when accessing user properties. This adds a null check
+and returns a proper 404 response.
 
 Found while investigating SENTRY-5678.
 
@@ -145,22 +139,23 @@ Fixes SENTRY-5678
 ```markdown
 Extract validation logic to shared module
 
-Moves duplicate validation code from the alerts, issues, and projects endpoints into a shared validator class. No
-behavior change.
+Moves duplicate validation code from the alerts, issues, and projects
+endpoints into a shared validator class. No behavior change.
 
-This prepares for adding new validation rules in SENTRY-9999 without duplicating logic across endpoints.
+This prepares for adding new validation rules in SENTRY-9999 without
+duplicating logic across endpoints.
 ```
 
 ## Issue References
 
 Reference issues in the PR body:
 
-| Syntax                | Effect                       |
-| --------------------- | ---------------------------- |
-| `Fixes #1234`         | Closes GitHub issue on merge |
-| `Fixes SENTRY-1234`   | Closes Sentry issue          |
-| `Refs GH-1234`        | Links without closing        |
-| `Refs LINEAR-ABC-123` | Links Linear issue           |
+| Syntax | Effect |
+|--------|--------|
+| `Fixes #1234` | Closes GitHub issue on merge |
+| `Fixes SENTRY-1234` | Closes Sentry issue |
+| `Refs GH-1234` | Links without closing |
+| `Refs LINEAR-ABC-123` | Links Linear issue |
 
 ## Guidelines
 

@@ -7,8 +7,7 @@ tags: workflow, cancel, resume, fork, control
 
 ## Cancel, Resume, and Fork Workflows
 
-Use these methods to control workflow execution: stop runaway workflows, retry failed ones, or restart from a specific
-step.
+Use these methods to control workflow execution: stop runaway workflows, retry failed ones, or restart from a specific step.
 
 **Incorrect (expecting immediate cancellation):**
 

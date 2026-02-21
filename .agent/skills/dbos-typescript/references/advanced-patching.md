@@ -7,8 +7,7 @@ tags: advanced, patching, upgrade, breaking-change
 
 ## Use Patching for Safe Workflow Upgrades
 
-Use `DBOS.patch()` to safely deploy breaking changes to workflow code. Breaking changes alter which steps run or their
-order, which can cause recovery failures.
+Use `DBOS.patch()` to safely deploy breaking changes to workflow code. Breaking changes alter which steps run or their order, which can cause recovery failures.
 
 **Incorrect (breaking change without patching):**
 
@@ -48,8 +47,7 @@ const workflow = DBOS.registerWorkflow(workflowFn);
 
 ```typescript
 async function workflowFn() {
-  if (await DBOS.deprecatePatch("use-baz")) {
-    // Always returns true
+  if (await DBOS.deprecatePatch("use-baz")) { // Always returns true
     await baz();
   }
   await bar();

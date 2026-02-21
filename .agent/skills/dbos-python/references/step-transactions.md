@@ -7,8 +7,7 @@ tags: transaction, database, postgres, sqlalchemy
 
 ## Use Transactions for Database Operations
 
-Transactions are a special type of step optimized for database access. They execute as a single database transaction.
-Only use with Postgres.
+Transactions are a special type of step optimized for database access. They execute as a single database transaction. Only use with Postgres.
 
 **Incorrect (database access in regular step):**
 
@@ -52,7 +51,6 @@ def insert_greeting(name: str, note: str) -> None:
 ```
 
 Important:
-
 - Only use transactions with Postgres databases
 - For other databases, use regular steps
 - Never use `async def` with transactions

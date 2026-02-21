@@ -7,8 +7,7 @@ tags: configuration, launch, setup, initialization
 
 ## Configure and Launch DBOS Properly
 
-Every DBOS application must configure and launch DBOS before running any workflows. All workflows and steps must be
-registered before calling `DBOS.launch()`.
+Every DBOS application must configure and launch DBOS before running any workflows. All workflows and steps must be registered before calling `DBOS.launch()`.
 
 **Incorrect (missing configuration or launch):**
 

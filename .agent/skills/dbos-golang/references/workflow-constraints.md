@@ -53,7 +53,7 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 		return "", err
 	}
 	// Receive messages from the workflow
-	msg, err := dbos.Recv[string](ctx, "topic", 60*time.Second)
+	msg, err := dbos.Recvstring
 	// Set events from the workflow
 	dbos.SetEvent(ctx, "status", "done")
 	return data, nil
@@ -61,7 +61,6 @@ func myWorkflow(ctx dbos.DBOSContext, input string) (string, error) {
 ```
 
 Additional constraints:
-
 - Don't modify global variables from workflows or steps
 - All workflows and queues must be registered **before** `Launch()`
 - Concurrent steps must start in deterministic order using `dbos.Go`/`dbos.Select`

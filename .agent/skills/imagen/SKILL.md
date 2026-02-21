@@ -1,6 +1,6 @@
 ---
 name: imagen
-description: |
+description: "|"
 source: "https://github.com/sanjay3290/ai-skills/tree/main/skills/imagen"
 risk: safe
 ---
@@ -9,16 +9,13 @@ risk: safe
 
 ## Overview
 
-This skill generates images using Google Gemini's image generation model (`gemini-3-pro-image-preview`). It enables
-seamless image creation during any Claude Code session - whether you're building frontend UIs, creating documentation,
-or need visual representations of concepts.
+This skill generates images using Google Gemini's image generation model (`gemini-3-pro-image-preview`). It enables seamless image creation during any Claude Code session - whether you're building frontend UIs, creating documentation, or need visual representations of concepts.
 
 **Cross-Platform**: Works on Windows, macOS, and Linux.
 
 ## When to Use This Skill
 
 Automatically activate this skill when:
-
 - User requests image generation (e.g., "generate an image of...", "create a picture...")
 - Frontend development requires placeholder or actual images
 - Documentation needs illustrations or diagrams
@@ -56,28 +53,24 @@ python scripts/generate_image.py --size 2K "High resolution landscape" "./wallpa
 ## Output
 
 Generated images are saved as PNG files. The script returns:
-
 - Success: Path to the generated image
 - Failure: Error message with details
 
 ## Examples
 
 ### Frontend Development
-
 ```
 User: "I need a hero image for my landing page - something abstract and tech-focused"
 -> Generates and saves image, provides path for use in HTML/CSS
 ```
 
 ### Documentation
-
 ```
 User: "Create a diagram showing microservices architecture"
 -> Generates visual representation, ready for README or docs
 ```
 
 ### UI Assets
-
 ```
 User: "Generate a placeholder avatar image for the user profile component"
 -> Creates image in appropriate size for component use

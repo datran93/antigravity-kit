@@ -1,12 +1,15 @@
 ---
 name: c4-context
-description:
-  Expert C4 Context-level documentation specialist. Creates high-level system context diagrams, documents personas, user
-  journeys, system features, and external dependencies. Synthesizes container and component documentation with system
-  documentation to create comprehensive context-level architecture. Use when creating the highest-level C4 system
-  context documentation.
+description: "Expert C4 Context-level documentation specialist. Creates"
+  high-level system context diagrams, documents personas, user journeys, system
+  features, and external dependencies. Synthesizes container and component
+  documentation with system documentation to create comprehensive context-level
+  architecture. Use when creating the highest-level C4 system context
+  documentation.
 metadata:
   model: sonnet
+risk: unknown
+source: community
 ---
 
 # C4 Context Level: System Context
@@ -61,12 +64,14 @@ metadata:
 
 1. [Step 1]: [Description]
 2. [Step 2]: [Description]
-3. [Step 3]: [Description] ...
+3. [Step 3]: [Description]
+   ...
 
 ### [External System] Integration Journey
 
 1. [Step 1]: [Description]
-2. [Step 2]: [Description] ...
+2. [Step 2]: [Description]
+   ...
 
 ## External Systems and Dependencies
 
@@ -83,10 +88,9 @@ metadata:
 
 ## Related Documentation
 
-- [Container Documentation](./c4-container.md)
-- [Component Documentation](./c4-component.md)
-
-````
+- Container Documentation
+- Component Documentation
+```
 
 ## Context Diagram Template
 
@@ -108,7 +112,7 @@ C4Context
     Rel(system, external1, "Uses", "API")
     Rel(system, external2, "Sends events to")
     Rel(system, externalDb, "Reads from and writes to")
-````
+```
 
 **Key Principles** (from [c4model.com](https://c4model.com/diagrams/system-context)):
 

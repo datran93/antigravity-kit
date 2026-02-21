@@ -1,8 +1,8 @@
 ---
 name: test-fixing
-description:
-  Run tests and systematically fix all failing tests using smart error grouping. Use when user asks to fix failing
-  tests, mentions test failures, runs test suite and failures occur, or requests to make tests pass.
+description: "Run tests and systematically fix all failing tests using smart error grouping. Use when user asks to fix failing tests, mentions test failures, runs test suite and failures occur, or requests to ma..."
+risk: unknown
+source: community
 ---
 
 # Test Fixing
@@ -46,16 +46,19 @@ Prioritize groups by:
 For each group (starting with highest impact):
 
 1. **Identify root cause**
+
    - Read relevant code
    - Check recent changes with `git diff`
    - Understand the error pattern
 
 2. **Implement fix**
+
    - Use Edit tool for code changes
    - Follow project conventions (see CLAUDE.md)
    - Make minimal, focused changes
 
 3. **Verify fix**
+
    - Run subset of tests for this group
    - Use pytest markers or file patterns:
      ```bash

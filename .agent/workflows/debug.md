@@ -74,7 +74,7 @@ patterns.
 
 Ensure the fix is verified (tests pass, bug is gone). Add prevention measures (tests, validations, documentation).
 
-Save the report to `DEBUG-{slug}.md`.
+Save the report to `debug-{slug}.md`.
 
 ### Output Template
 

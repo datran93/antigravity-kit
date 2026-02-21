@@ -1,8 +1,10 @@
 ---
 name: azure-mgmt-botservice-dotnet
-description: |
+description: "|"
   Azure Resource Manager SDK for Bot Service in .NET. Management plane operations for creating and managing Azure Bot resources, channels (Teams, DirectLine, Slack), and connection settings. Triggers: "Bot Service", "BotResource", "Azure Bot", "DirectLine channel", "Teams channel", "bot management .NET", "create bot".
 package: Azure.ResourceManager.BotService
+risk: unknown
+source: community
 ---
 
 # Azure.ResourceManager.BotService (.NET)
@@ -84,10 +86,10 @@ var botData = new BotData(AzureLocation.WestUS2)
 
 // Create or update the bot
 ArmOperation<BotResource> operation = await botCollection.CreateOrUpdateAsync(
-    WaitUntil.Completed,
-    "myBotName",
+    WaitUntil.Completed, 
+    "myBotName", 
     botData);
-
+    
 BotResource bot = operation.Value;
 Console.WriteLine($"Bot created: {bot.Data.Name}");
 ```
@@ -108,7 +110,7 @@ var channelData = new BotChannelData(AzureLocation.WestUS2)
     {
         Properties = new DirectLineChannelProperties()
         {
-            Sites =
+            Sites = 
             {
                 new DirectLineSite("Default Site")
                 {
@@ -233,55 +235,55 @@ await bot.DeleteAsync(WaitUntil.Completed);
 
 ## Supported Channel Types
 
-| Channel            | Constant                                 | Class                     |
-| ------------------ | ---------------------------------------- | ------------------------- |
-| Direct Line        | `BotChannelName.DirectLineChannel`       | `DirectLineChannel`       |
+| Channel | Constant | Class |
+|---------|----------|-------|
+| Direct Line | `BotChannelName.DirectLineChannel` | `DirectLineChannel` |
 | Direct Line Speech | `BotChannelName.DirectLineSpeechChannel` | `DirectLineSpeechChannel` |
-| Microsoft Teams    | `BotChannelName.MsTeamsChannel`          | `MsTeamsChannel`          |
-| Web Chat           | `BotChannelName.WebChatChannel`          | `WebChatChannel`          |
-| Slack              | `BotChannelName.SlackChannel`            | `SlackChannel`            |
-| Facebook           | `BotChannelName.FacebookChannel`         | `FacebookChannel`         |
-| Email              | `BotChannelName.EmailChannel`            | `EmailChannel`            |
-| Telegram           | `BotChannelName.TelegramChannel`         | `TelegramChannel`         |
-| Telephony          | `BotChannelName.TelephonyChannel`        | `TelephonyChannel`        |
+| Microsoft Teams | `BotChannelName.MsTeamsChannel` | `MsTeamsChannel` |
+| Web Chat | `BotChannelName.WebChatChannel` | `WebChatChannel` |
+| Slack | `BotChannelName.SlackChannel` | `SlackChannel` |
+| Facebook | `BotChannelName.FacebookChannel` | `FacebookChannel` |
+| Email | `BotChannelName.EmailChannel` | `EmailChannel` |
+| Telegram | `BotChannelName.TelegramChannel` | `TelegramChannel` |
+| Telephony | `BotChannelName.TelephonyChannel` | `TelephonyChannel` |
 
 ## Key Types Reference
 
-| Type                           | Purpose                            |
-| ------------------------------ | ---------------------------------- |
-| `ArmClient`                    | Entry point for all ARM operations |
-| `BotResource`                  | Represents an Azure Bot resource   |
-| `BotCollection`                | Collection for bot CRUD            |
-| `BotData`                      | Bot resource definition            |
-| `BotProperties`                | Bot configuration properties       |
-| `BotChannelResource`           | Channel configuration              |
-| `BotChannelCollection`         | Collection of channels             |
-| `BotChannelData`               | Channel configuration data         |
-| `BotConnectionSettingResource` | OAuth connection settings          |
+| Type | Purpose |
+|------|---------|
+| `ArmClient` | Entry point for all ARM operations |
+| `BotResource` | Represents an Azure Bot resource |
+| `BotCollection` | Collection for bot CRUD |
+| `BotData` | Bot resource definition |
+| `BotProperties` | Bot configuration properties |
+| `BotChannelResource` | Channel configuration |
+| `BotChannelCollection` | Collection of channels |
+| `BotChannelData` | Channel configuration data |
+| `BotConnectionSettingResource` | OAuth connection settings |
 
 ## BotServiceKind Values
 
-| Value                     | Description              |
-| ------------------------- | ------------------------ |
-| `BotServiceKind.Azurebot` | Azure Bot (recommended)  |
-| `BotServiceKind.Bot`      | Legacy Bot Framework bot |
-| `BotServiceKind.Designer` | Composer bot             |
-| `BotServiceKind.Function` | Function bot             |
-| `BotServiceKind.Sdk`      | SDK bot                  |
+| Value | Description |
+|-------|-------------|
+| `BotServiceKind.Azurebot` | Azure Bot (recommended) |
+| `BotServiceKind.Bot` | Legacy Bot Framework bot |
+| `BotServiceKind.Designer` | Composer bot |
+| `BotServiceKind.Function` | Function bot |
+| `BotServiceKind.Sdk` | SDK bot |
 
 ## BotServiceSkuName Values
 
-| Value                  | Description   |
-| ---------------------- | ------------- |
-| `BotServiceSkuName.F0` | Free tier     |
+| Value | Description |
+|-------|-------------|
+| `BotServiceSkuName.F0` | Free tier |
 | `BotServiceSkuName.S1` | Standard tier |
 
 ## BotMsaAppType Values
 
-| Value                           | Description                    |
-| ------------------------------- | ------------------------------ |
-| `BotMsaAppType.MultiTenant`     | Multi-tenant app               |
-| `BotMsaAppType.SingleTenant`    | Single-tenant app              |
+| Value | Description |
+|-------|-------------|
+| `BotMsaAppType.MultiTenant` | Multi-tenant app |
+| `BotMsaAppType.SingleTenant` | Single-tenant app |
 | `BotMsaAppType.UserAssignedMSI` | User-assigned managed identity |
 
 ## Best Practices
@@ -302,8 +304,8 @@ using Azure;
 try
 {
     var operation = await botCollection.CreateOrUpdateAsync(
-        WaitUntil.Completed,
-        botName,
+        WaitUntil.Completed, 
+        botName, 
         botData);
 }
 catch (RequestFailedException ex) when (ex.Status == 409)
@@ -318,17 +320,20 @@ catch (RequestFailedException ex)
 
 ## Related SDKs
 
-| SDK                                             | Purpose                   | Install                                                            |
-| ----------------------------------------------- | ------------------------- | ------------------------------------------------------------------ |
-| `Azure.ResourceManager.BotService`              | Bot management (this SDK) | `dotnet add package Azure.ResourceManager.BotService`              |
-| `Microsoft.Bot.Builder`                         | Bot Framework SDK         | `dotnet add package Microsoft.Bot.Builder`                         |
-| `Microsoft.Bot.Builder.Integration.AspNet.Core` | ASP.NET Core integration  | `dotnet add package Microsoft.Bot.Builder.Integration.AspNet.Core` |
+| SDK | Purpose | Install |
+|-----|---------|---------|
+| `Azure.ResourceManager.BotService` | Bot management (this SDK) | `dotnet add package Azure.ResourceManager.BotService` |
+| `Microsoft.Bot.Builder` | Bot Framework SDK | `dotnet add package Microsoft.Bot.Builder` |
+| `Microsoft.Bot.Builder.Integration.AspNet.Core` | ASP.NET Core integration | `dotnet add package Microsoft.Bot.Builder.Integration.AspNet.Core` |
 
 ## Reference Links
 
-| Resource               | URL                                                                                                  |
-| ---------------------- | ---------------------------------------------------------------------------------------------------- |
-| NuGet Package          | https://www.nuget.org/packages/Azure.ResourceManager.BotService                                      |
-| API Reference          | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.botservice                              |
-| GitHub Source          | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/botservice/Azure.ResourceManager.BotService |
-| Azure Bot Service Docs | https://learn.microsoft.com/azure/bot-service/                                                       |
+| Resource | URL |
+|----------|-----|
+| NuGet Package | https://www.nuget.org/packages/Azure.ResourceManager.BotService |
+| API Reference | https://learn.microsoft.com/dotnet/api/azure.resourcemanager.botservice |
+| GitHub Source | https://github.com/Azure/azure-sdk-for-net/tree/main/sdk/botservice/Azure.ResourceManager.BotService |
+| Azure Bot Service Docs | https://learn.microsoft.com/azure/bot-service/ |
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

@@ -4,8 +4,7 @@ This file contains detailed patterns, checklists, and code samples referenced by
 
 # Workflow Patterns
 
-Guide for implementing tasks using Conductor's TDD workflow, managing phase checkpoints, handling git commits, and
-executing the verification protocol that ensures quality throughout implementation.
+Guide for implementing tasks using Conductor's TDD workflow, managing phase checkpoints, handling git commits, and executing the verification protocol that ensures quality throughout implementation.
 
 ## When to Use This Skill
 
@@ -23,8 +22,7 @@ Follow these 11 steps for each task:
 
 ### Step 1: Select Next Task
 
-Read plan.md and identify the next pending `[ ]` task. Select tasks in order within the current phase. Do not skip ahead
-to later phases.
+Read plan.md and identify the next pending `[ ]` task. Select tasks in order within the current phase. Do not skip ahead to later phases.
 
 ### Step 2: Mark as In Progress
 
@@ -415,25 +413,29 @@ During implementation, deviations from the plan may occur. Handle them systemati
 
 ### Types of Deviations
 
-**Scope Addition** Discovered requirement not in original spec.
+**Scope Addition**
+Discovered requirement not in original spec.
 
 - Document in spec.md as new requirement
 - Add tasks to plan.md
 - Note addition in task comments
 
-**Scope Reduction** Feature deemed unnecessary during implementation.
+**Scope Reduction**
+Feature deemed unnecessary during implementation.
 
 - Mark tasks as `[-]` (skipped) with reason
 - Update spec.md scope section
 - Document decision rationale
 
-**Technical Deviation** Different implementation approach than planned.
+**Technical Deviation**
+Different implementation approach than planned.
 
 - Note deviation in task completion comment
 - Update tech-stack.md if dependencies changed
 - Document why original approach was unsuitable
 
-**Requirement Change** Understanding of requirement changes during work.
+**Requirement Change**
+Understanding of requirement changes during work.
 
 - Update spec.md with corrected requirement
 - Adjust plan.md tasks if needed

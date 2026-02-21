@@ -25,8 +25,7 @@ description: Code review between tasks
 # 2. Code quality
 ```
 
-**Why it failed**: Agent read description, thought "code review between tasks means one review", never read the
-flowchart.
+**Why it failed**: Agent read description, thought "code review between tasks means one review", never read the flowchart.
 
 **Fix**:
 
@@ -71,7 +70,8 @@ search-conversations supports multiple modes. Run --help for details.
 ```markdown
 # ❌ BAD: Repeat workflow
 
-When searching, dispatch agent with template... [20 lines of repeated instructions]
+When searching, dispatch agent with template...
+[20 lines of repeated instructions]
 
 # ✅ GOOD: Reference other skill
 
@@ -83,12 +83,15 @@ Use subagents for searches. See [delegating-to-subagents] for workflow.
 ```markdown
 # ❌ BAD: Verbose (42 words)
 
-Partner: "How did we handle auth errors in React Router?" You: I'll search past conversations for patterns. [Dispatch
-subagent with query: "React Router authentication error handling 401"]
+Partner: "How did we handle auth errors in React Router?"
+You: I'll search past conversations for patterns.
+[Dispatch subagent with query: "React Router authentication error handling 401"]
 
 # ✅ GOOD: Minimal (20 words)
 
-Partner: "Auth errors in React Router?" You: Searching... [Dispatch subagent → synthesis]
+Partner: "Auth errors in React Router?"
+You: Searching...
+[Dispatch subagent → synthesis]
 ```
 
 ## Keyword Strategy

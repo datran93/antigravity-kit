@@ -1,9 +1,6 @@
 ---
 name: observe-whatsapp
-description:
-  "Observe and troubleshoot WhatsApp in Kapso: debug message delivery, inspect webhook deliveries/retries, triage API
-  errors, and run health checks. Use when investigating production issues, message failures, or webhook delivery
-  problems."
+description: "Observe and troubleshoot WhatsApp in Kapso: debug message delivery, inspect webhook deliveries/retries, triage API errors, and run health checks. Use when investigating production issues, message f..."
 source: "https://github.com/gokapso/agent-skills/tree/master/skills/observe-whatsapp"
 risk: safe
 ---
@@ -12,13 +9,11 @@ risk: safe
 
 ## When to use
 
-Use this skill for operational diagnostics: message delivery investigation, webhook delivery debugging, error triage,
-and WhatsApp health checks.
+Use this skill for operational diagnostics: message delivery investigation, webhook delivery debugging, error triage, and WhatsApp health checks.
 
 ## Setup
 
 Env vars:
-
 - `KAPSO_API_BASE_URL` (host only, no `/platform/v1`)
 - `KAPSO_API_KEY`
 
@@ -45,41 +40,39 @@ Env vars:
 
 ### Messages
 
-| Script                   | Purpose                          |
-| ------------------------ | -------------------------------- |
-| `messages.js`            | List messages                    |
-| `message-details.js`     | Get message details              |
+| Script | Purpose |
+|--------|---------|
+| `messages.js` | List messages |
+| `message-details.js` | Get message details |
 | `lookup-conversation.js` | Find conversation by phone or ID |
 
 ### Errors and logs
 
-| Script                  | Purpose                        |
-| ----------------------- | ------------------------------ |
-| `errors.js`             | List message errors            |
-| `api-logs.js`           | List external API logs         |
+| Script | Purpose |
+|--------|---------|
+| `errors.js` | List message errors |
+| `api-logs.js` | List external API logs |
 | `webhook-deliveries.js` | List webhook delivery attempts |
 
 ### Health
 
-| Script               | Purpose                   |
-| -------------------- | ------------------------- |
-| `overview.js`        | Project overview          |
+| Script | Purpose |
+|--------|---------|
+| `overview.js` | Project overview |
 | `whatsapp-health.js` | Phone number health check |
 
 ### OpenAPI
 
-| Script                | Purpose                                  |
-| --------------------- | ---------------------------------------- |
+| Script | Purpose |
+|--------|---------|
 | `openapi-explore.mjs` | Explore OpenAPI (search/op/schema/where) |
 
 Install deps (once):
-
 ```bash
 npm i
 ```
 
 Examples:
-
 ```bash
 node scripts/openapi-explore.mjs --spec platform search "webhook deliveries"
 node scripts/openapi-explore.mjs --spec platform op listWebhookDeliveries
@@ -92,9 +85,9 @@ node scripts/openapi-explore.mjs --spec platform schema WebhookDelivery
 
 ## References
 
-- [references/message-debugging-reference.md](references/message-debugging-reference.md) - Message debugging guide
-- [references/triage-reference.md](references/triage-reference.md) - Error triage guide
-- [references/health-reference.md](references/health-reference.md) - Health check guide
+- references/message-debugging-reference.md - Message debugging guide
+- references/triage-reference.md - Error triage guide
+- references/health-reference.md - Health check guide
 
 ## Related skills
 
@@ -102,7 +95,6 @@ node scripts/openapi-explore.mjs --spec platform schema WebhookDelivery
 - `automate-whatsapp` - Workflows, agents, and automations
 
 <!-- FILEMAP:BEGIN -->
-
 ```text
 [observe-whatsapp file map]|root: .
 |.:{package.json,SKILL.md}
@@ -113,5 +105,5 @@ node scripts/openapi-explore.mjs --spec platform schema WebhookDelivery
 |scripts/lib/status:{args.js,kapso-api.js}
 |scripts/lib/triage:{args.js,kapso-api.js}
 ```
-
 <!-- FILEMAP:END -->
+

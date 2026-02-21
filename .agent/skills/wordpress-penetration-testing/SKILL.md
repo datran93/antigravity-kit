@@ -1,26 +1,22 @@
 ---
-name: WordPress Penetration Testing
-description:
-  This skill should be used when the user asks to "pentest WordPress sites", "scan WordPress for vulnerabilities",
-  "enumerate WordPress users, themes, or plugins", "exploit WordPress vulnerabilities", or "use WPScan". It provides
-  comprehensive WordPress security assessment methodologies.
+name: wordpress-penetration-testing
+description: "This skill should be used when the user asks to \"pentest WordPress sites\", \"scan WordPress for vulnerabilities\", \"enumerate WordPress users, themes, or plugins\", \"exploit WordPress vu..."
 metadata:
   author: zebbern
   version: "1.1"
+risk: unknown
+source: community
 ---
 
 # WordPress Penetration Testing
 
 ## Purpose
 
-Conduct comprehensive security assessments of WordPress installations including enumeration of users, themes, and
-plugins, vulnerability scanning, credential attacks, and exploitation techniques. WordPress powers approximately 35% of
-websites, making it a critical target for security testing.
+Conduct comprehensive security assessments of WordPress installations including enumeration of users, themes, and plugins, vulnerability scanning, credential attacks, and exploitation techniques. WordPress powers approximately 35% of websites, making it a critical target for security testing.
 
 ## Prerequisites
 
 ### Required Tools
-
 - WPScan (pre-installed in Kali Linux)
 - Metasploit Framework
 - Burp Suite or OWASP ZAP
@@ -28,7 +24,6 @@ websites, making it a critical target for security testing.
 - cURL or wget
 
 ### Required Knowledge
-
 - WordPress architecture and structure
 - Web application testing fundamentals
 - HTTP protocol understanding
@@ -67,7 +62,6 @@ nmap -p 80,443 --script http-wordpress-enum target.com
 ```
 
 Key WordPress files and directories:
-
 - `/wp-admin/` - Admin dashboard
 - `/wp-login.php` - Login page
 - `/wp-content/` - Themes, plugins, uploads
@@ -122,7 +116,6 @@ curl -s http://target.com/comments/feed/
 ```
 
 Version sources:
-
 - Meta generator tag in HTML
 - readme.html file
 - RSS/Atom feeds
@@ -148,7 +141,6 @@ curl -s http://target.com/wp-content/themes/
 ```
 
 Theme vulnerability checks:
-
 ```bash
 # Search for theme exploits
 searchsploit wordpress theme <theme_name>
@@ -181,7 +173,6 @@ curl -s http://target.com/wp-content/plugins/
 ```
 
 Common vulnerable plugins to check:
-
 ```bash
 # Search for plugin exploits
 searchsploit wordpress plugin <plugin_name>
@@ -271,7 +262,6 @@ wpscan --url http://target.com -U admin -P wordlist.txt
 ```
 
 Password attack methods:
-
 - `wp-login` - Standard login form
 - `xmlrpc` - XML-RPC multicall (faster)
 - `xmlrpc-multicall` - Multiple passwords per request
@@ -420,54 +410,51 @@ wpscan --url https://target.com --disable-tls-checks
 
 ### WPScan Enumeration Flags
 
-| Flag     | Description        |
-| -------- | ------------------ |
-| `-e at`  | All themes         |
-| `-e vt`  | Vulnerable themes  |
-| `-e ap`  | All plugins        |
-| `-e vp`  | Vulnerable plugins |
-| `-e u`   | Users (1-10)       |
-| `-e cb`  | Config backups     |
-| `-e dbe` | Database exports   |
+| Flag | Description |
+|------|-------------|
+| `-e at` | All themes |
+| `-e vt` | Vulnerable themes |
+| `-e ap` | All plugins |
+| `-e vp` | Vulnerable plugins |
+| `-e u` | Users (1-10) |
+| `-e cb` | Config backups |
+| `-e dbe` | Database exports |
 
 ### Common WordPress Paths
 
-| Path                   | Purpose         |
-| ---------------------- | --------------- |
-| `/wp-admin/`           | Admin dashboard |
-| `/wp-login.php`        | Login page      |
-| `/wp-content/uploads/` | User uploads    |
-| `/wp-includes/`        | Core files      |
-| `/xmlrpc.php`          | XML-RPC API     |
-| `/wp-json/`            | REST API        |
+| Path | Purpose |
+|------|---------|
+| `/wp-admin/` | Admin dashboard |
+| `/wp-login.php` | Login page |
+| `/wp-content/uploads/` | User uploads |
+| `/wp-includes/` | Core files |
+| `/xmlrpc.php` | XML-RPC API |
+| `/wp-json/` | REST API |
 
 ### WPScan Command Examples
 
-| Purpose         | Command                                                      |
-| --------------- | ------------------------------------------------------------ |
-| Basic scan      | `wpscan --url http://target.com`                             |
-| All enumeration | `wpscan --url http://target.com -e at,ap,u`                  |
-| Password attack | `wpscan --url http://target.com -U admin -P pass.txt`        |
-| Aggressive      | `wpscan --url http://target.com --detection-mode aggressive` |
+| Purpose | Command |
+|---------|---------|
+| Basic scan | `wpscan --url http://target.com` |
+| All enumeration | `wpscan --url http://target.com -e at,ap,u` |
+| Password attack | `wpscan --url http://target.com -U admin -P pass.txt` |
+| Aggressive | `wpscan --url http://target.com --detection-mode aggressive` |
 
 ## Constraints and Limitations
 
 ### Legal Considerations
-
 - Obtain written authorization before testing
 - Stay within defined scope
 - Document all testing activities
 - Follow responsible disclosure
 
 ### Technical Limitations
-
 - WAF may block scanning
 - Rate limiting may prevent brute-force
 - Some plugins may have false negatives
 - XML-RPC may be disabled
 
 ### Detection Evasion
-
 - Use random user agents: `--random-user-agent`
 - Throttle requests: `--throttle 1000`
 - Use proxy rotation
@@ -478,7 +465,6 @@ wpscan --url https://target.com --disable-tls-checks
 ### WPScan Shows No Vulnerabilities
 
 **Solutions:**
-
 1. Use API token for vulnerability database
 2. Try aggressive detection mode
 3. Check for WAF blocking scans
@@ -487,7 +473,6 @@ wpscan --url https://target.com --disable-tls-checks
 ### Brute-Force Blocked
 
 **Solutions:**
-
 1. Use XML-RPC method instead of wp-login
 2. Add throttling: `--throttle 500`
 3. Use different user agents
@@ -496,8 +481,10 @@ wpscan --url https://target.com --disable-tls-checks
 ### Cannot Access Admin Panel
 
 **Solutions:**
-
 1. Verify credentials are correct
 2. Check for two-factor authentication
 3. Look for IP whitelist restrictions
 4. Check for login URL changes (security plugins)
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

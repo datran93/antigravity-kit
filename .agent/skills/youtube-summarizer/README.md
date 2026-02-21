@@ -2,15 +2,15 @@
 
 > Extract transcripts from YouTube videos and generate comprehensive, detailed summaries
 
-**Version:** 1.2.0 **Status:** ✨ Zero-Config | 🌍 Universal **Platforms:** GitHub Copilot CLI, Claude Code
+**Version:** 1.2.0
+**Status:** ✨ Zero-Config | 🌍 Universal
+**Platforms:** GitHub Copilot CLI, Claude Code
 
 ---
 
 ## Overview
 
-The **youtube-summarizer** skill automates the extraction of YouTube video transcripts and generates verbose, structured
-summaries using the STAR + R-I-S-E framework. Perfect for documenting educational content, lectures, tutorials, or any
-informational videos without rewatching them.
+The **youtube-summarizer** skill automates the extraction of YouTube video transcripts and generates verbose, structured summaries using the STAR + R-I-S-E framework. Perfect for documenting educational content, lectures, tutorials, or any informational videos without rewatching them.
 
 ---
 
@@ -70,7 +70,6 @@ copilot> summarize this video: https://www.youtube.com/watch?v=abc123
 ```
 
 **Output:**
-
 - Comprehensive summary of lecture content
 - Key concepts and terminology
 - Examples and practical applications
@@ -83,7 +82,6 @@ copilot> summarize youtube video https://youtu.be/xyz789
 ```
 
 **Output:**
-
 - Step-by-step breakdown of tutorial
 - Code snippets and commands mentioned
 - Best practices highlighted
@@ -96,7 +94,6 @@ copilot> extract youtube transcript https://youtube.com/watch?v=def456
 ```
 
 **Output:**
-
 - Speaker insights and arguments
 - Statistics and data points
 - Case studies and examples
@@ -109,7 +106,6 @@ copilot> summarize youtube video https://youtu.be/ghi789
 ```
 
 **Output:**
-
 - Vocabulary and expressions used
 - Grammar points explained
 - Cultural references
@@ -122,7 +118,6 @@ copilot> summarize youtube video https://www.youtube.com/watch?v=jkl012
 ```
 
 **Output:**
-
 - Research findings presented
 - Methodology explained
 - Results and conclusions
@@ -137,51 +132,46 @@ Every summary follows this comprehensive structure:
 ```markdown
 # [Video Title]
 
-**Canal:** [Channel Name] **Duração:** [Duration] **URL:** [Video URL] **Data de Publicação:** [Date]
+**Canal:** [Channel Name]
+**Duração:** [Duration]
+**URL:** [Video URL]
+**Data de Publicação:** [Date]
 
 ---
 
 ## 📊 Síntese Executiva
-
 [High-level overview, 2-3 paragraphs]
 
 ---
 
 ## 📝 Resumo Detalhado
-
 ### [Topic 1]
-
 [Detailed analysis with examples, data, quotes]
 
 ### [Topic 2]
-
 [Continued breakdown...]
 
 ---
 
 ## 💡 Principais Insights
-
 - **Insight 1:** [Explanation]
 - **Insight 2:** [Explanation]
 
 ---
 
 ## 📚 Conceitos e Terminologia
-
 - **Term 1:** [Definition]
 - **Term 2:** [Definition]
 
 ---
 
 ## 🔗 Recursos Mencionados
-
 - [Resource 1]
 - [Resource 2]
 
 ---
 
 ## 📌 Conclusão
-
 [Final synthesis and key takeaways]
 ```
 
@@ -191,8 +181,7 @@ Every summary follows this comprehensive structure:
 
 - **Python 3.x** (usually pre-installed on macOS/Linux)
 - **pip** (Python package manager)
-- **[youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)** by
-  [Julien Depoix](https://github.com/jdepoix) (installed automatically by the skill)
+- **[youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)** by [Julien Depoix](https://github.com/jdepoix) (installed automatically by the skill)
 
 ### Manual Installation (Optional)
 
@@ -277,15 +266,13 @@ Possible reasons:
 ### Q: How long does it take to generate a summary?
 
 **A:** Depends on video length:
-
 - Short videos (5-10 min): 30-60 seconds
 - Medium videos (20-40 min): 1-2 minutes
 - Long videos (60+ min): 2-5 minutes
 
 ### Q: Can I summarize videos in languages other than English/Portuguese?
 
-**A:** Yes! The skill attempts to extract transcripts in the video's original language. If unavailable, it falls back to
-English.
+**A:** Yes! The skill attempts to extract transcripts in the video's original language. If unavailable, it falls back to English.
 
 ### Q: Will this work with YouTube Music videos?
 
@@ -293,8 +280,7 @@ English.
 
 ### Q: Can I customize the summary length?
 
-**A:** The skill prioritizes completeness by design (verbose summaries). If you need shorter summaries, you can ask the
-AI to condense the output afterward.
+**A:** The skill prioritizes completeness by design (verbose summaries). If you need shorter summaries, you can ask the AI to condense the output afterward.
 
 ### Q: Does this download the video?
 
@@ -303,19 +289,16 @@ AI to condense the output afterward.
 ### Q: Can I save the summary to a file?
 
 **A:** Yes! After the summary is generated, the skill offers flexible save options:
-
 - **Summary only** - Markdown file with structured summary
 - **Summary + transcript** - Markdown file with summary and raw transcript appended
 - **Transcript only** - Plain text file with raw transcript (NEW in v1.2.0)
 - **Display only** - No files saved, summary shown in terminal
 
-Files are saved as `resumo-{VIDEO_ID}-{YYYY-MM-DD}.md` (summary) or `transcript-{VIDEO_ID}-{YYYY-MM-DD}.txt`
-(transcript-only).
+Files are saved as `resumo-{VIDEO_ID}-{YYYY-MM-DD}.md` (summary) or `transcript-{VIDEO_ID}-{YYYY-MM-DD}.txt` (transcript-only).
 
 ### Q: When should I save just the transcript?
 
 **A:** Use the transcript-only option when you:
-
 - Need raw content for further analysis
 - Want to process the text with other tools
 - Prefer to create your own summary later
@@ -339,7 +322,6 @@ cd cli-ai-skills
 ```
 
 This creates symlinks in:
-
 - `~/.copilot/skills/youtube-summarizer/` (GitHub Copilot CLI)
 - `~/.claude/skills/youtube-summarizer/` (Claude Code)
 
@@ -367,18 +349,17 @@ Found a bug or have a feature request? Contributions welcome!
 
 ## License
 
-MIT License - see [LICENSE](../../../LICENSE) for details.
+MIT License - see LICENSE for details.
 
 ---
 
 ## Acknowledgments
 
-- **[youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)** by
-  [Julien Depoix](https://github.com/jdepoix) - Python library for extracting YouTube video transcripts
+- **[youtube-transcript-api](https://github.com/jdepoix/youtube-transcript-api)** by [Julien Depoix](https://github.com/jdepoix) - Python library for extracting YouTube video transcripts
 - **Anthropic STAR/R-I-S-E frameworks** - For structured summarization
 
 ---
 
 **Built with ❤️ by Eric Andrade**
 
-_Version 1.1.0 | Last updated: February 2026_
+*Version 1.1.0 | Last updated: February 2026*

@@ -1,17 +1,13 @@
 ---
 name: react-flow-architect
-description:
-  "Expert ReactFlow architect for building interactive graph applications with hierarchical node-edge systems,
-  performance optimization, and auto-layout integration. Use when Claude needs to create or optimize ReactFlow
-  applications for: (1) Interactive process graphs with expand/collapse navigation, (2) Hierarchical tree structures
-  with drag & drop, (3) Performance-optimized large datasets with incremental rendering, (4) Auto-layout integration
-  with Dagre, (5) Complex state management for nodes and edges, or any advanced ReactFlow visualization requirements."
+description: "Expert ReactFlow architect for building interactive graph applications with hierarchical node-edge systems, performance optimization, and auto-layout integration. Use when Claude needs to create or..."
+risk: unknown
+source: community
 ---
 
 # ReactFlow Architect
 
-Build production-ready ReactFlow applications with hierarchical navigation, performance optimization, and advanced state
-management.
+Build production-ready ReactFlow applications with hierarchical navigation, performance optimization, and advanced state management.
 
 ## Quick Start
 
@@ -56,30 +52,33 @@ interface TreeNode extends Node {
 #### Incremental Node Building
 
 ```typescript
-const buildVisibleNodes = useCallback((allNodes: TreeNode[], expandedIds: Set<string>, otherDeps: any[]) => {
-  const visibleNodes = new Map<string, TreeNode>();
-  const visibleEdges = new Map<string, TreeEdge>();
+const buildVisibleNodes = useCallback(
+  (allNodes: TreeNode[], expandedIds: Set<string>, otherDeps: any[]) => {
+    const visibleNodes = new Map<string, TreeNode>();
+    const visibleEdges = new Map<string, TreeEdge>();
 
-  // Start with root nodes
-  const rootNodes = allNodes.filter((n) => n.data.level === 0);
+    // Start with root nodes
+    const rootNodes = allNodes.filter((n) => n.data.level === 0);
 
-  // Recursively add visible nodes
-  const addVisibleChildren = (node: TreeNode) => {
-    visibleNodes.set(node.id, node);
+    // Recursively add visible nodes
+    const addVisibleChildren = (node: TreeNode) => {
+      visibleNodes.set(node.id, node);
 
-    if (expandedIds.has(node.id)) {
-      const children = allNodes.filter((n) => n.parentNode === node.id);
-      children.forEach((child) => addVisibleChildren(child));
-    }
-  };
+      if (expandedIds.has(node.id)) {
+        const children = allNodes.filter((n) => n.parentNode === node.id);
+        children.forEach((child) => addVisibleChildren(child));
+      }
+    };
 
-  rootNodes.forEach((root) => addVisibleChildren(root));
+    rootNodes.forEach((root) => addVisibleChildren(root));
 
-  return {
-    nodes: Array.from(visibleNodes.values()),
-    edges: Array.from(visibleEdges.values()),
-  };
-}, []);
+    return {
+      nodes: Array.from(visibleNodes.values()),
+      edges: Array.from(visibleEdges.values()),
+    };
+  },
+  [],
+);
 ```
 
 ### Performance Optimization
@@ -89,7 +88,11 @@ Handle large datasets with incremental rendering and memoization.
 #### Incremental Rendering
 
 ```typescript
-const useIncrementalGraph = (allNodes: Node[], allEdges: Edge[], expandedList: string[]) => {
+const useIncrementalGraph = (
+  allNodes: Node[],
+  allEdges: Edge[],
+  expandedList: string[],
+) => {
   const prevExpandedListRef = useRef<Set<string>>(new Set());
   const prevOtherDepsRef = useRef<any[]>([]);
 
@@ -203,7 +206,10 @@ const graphReducer = (state: GraphState, action: GraphAction): GraphState => {
 #### History Management
 
 ```typescript
-const useHistoryManager = (state: GraphState, dispatch: Dispatch<GraphAction>) => {
+const useHistoryManager = (
+  state: GraphState,
+  dispatch: Dispatch<GraphAction>,
+) => {
   const canUndo = state.historyIndex > 0;
   const canRedo = state.historyIndex < state.history.length - 1;
 
@@ -285,7 +291,11 @@ const debouncedLayout = useMemo(() => debounce(applyLayout, 150), []);
 Isolate selected nodes and their direct connections:
 
 ```typescript
-const useFocusMode = (selectedNodeId: string, allNodes: Node[], allEdges: Edge[]) => {
+const useFocusMode = (
+  selectedNodeId: string,
+  allNodes: Node[],
+  allEdges: Edge[],
+) => {
   return useMemo(() => {
     if (!selectedNodeId) return { nodes: allNodes, edges: allEdges };
 
@@ -327,7 +337,8 @@ const searchNodes = useCallback((nodes: Node[], query: string) => {
   const lowerQuery = query.toLowerCase();
   return nodes.filter(
     (node) =>
-      node.data.label.toLowerCase().includes(lowerQuery) || node.data.description?.toLowerCase().includes(lowerQuery),
+      node.data.label.toLowerCase().includes(lowerQuery) ||
+      node.data.description?.toLowerCase().includes(lowerQuery),
   );
 }, []);
 
@@ -377,7 +388,10 @@ class GraphAnalyzer {
   }
 
   countNodes(content) {
-    const nodePatterns = [/nodes:\s*\[.*?\]/gs, /const\s+\w+\s*=\s*\[.*?id:.*?position:/gs];
+    const nodePatterns = [
+      /nodes:\s*\[.*?\]/gs,
+      /const\s+\w+\s*=\s*\[.*?id:.*?position:/gs,
+    ];
 
     let totalCount = 0;
     nodePatterns.forEach((pattern) => {
@@ -445,7 +459,10 @@ class GraphAnalyzer {
 
 ```typescript
 // Use Map for O(1) lookups instead of array.find
-const nodesById = useMemo(() => new Map(allNodes.map((n) => [n.id, n])), [allNodes]);
+const nodesById = useMemo(
+  () => new Map(allNodes.map((n) => [n.id, n])),
+  [allNodes],
+);
 
 // Cache layout results
 const layoutCacheRef = useRef<Map<string, Node[]>>(new Map());
@@ -595,5 +612,7 @@ export default function InteractiveGraph() {
 }
 ```
 
-This comprehensive skill provides everything needed to build production-ready ReactFlow applications with hierarchical
-navigation, performance optimization, and advanced state management patterns.
+This comprehensive skill provides everything needed to build production-ready ReactFlow applications with hierarchical navigation, performance optimization, and advanced state management patterns.
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

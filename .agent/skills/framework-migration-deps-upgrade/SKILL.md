@@ -1,14 +1,13 @@
 ---
 name: framework-migration-deps-upgrade
-description:
-  "You are a dependency management expert specializing in safe, incremental upgrades of project dependencies. Plan and
-  execute dependency updates with minimal risk, proper testing, and clear migration pa"
+description: "You are a dependency management expert specializing in safe, incremental upgrades of project dependencies. Plan and execute dependency updates with minimal risk, proper testing, and clear migration pa"
+risk: unknown
+source: community
 ---
 
 # Dependency Upgrade Strategy
 
-You are a dependency management expert specializing in safe, incremental upgrades of project dependencies. Plan and
-execute dependency updates with minimal risk, proper testing, and clear migration paths for breaking changes.
+You are a dependency management expert specializing in safe, incremental upgrades of project dependencies. Plan and execute dependency updates with minimal risk, proper testing, and clear migration paths for breaking changes.
 
 ## Use this skill when
 
@@ -21,12 +20,9 @@ execute dependency updates with minimal risk, proper testing, and clear migratio
 - You need a different domain or tool outside this scope
 
 ## Context
-
-The user needs to upgrade project dependencies safely, handling breaking changes, ensuring compatibility, and
-maintaining stability. Focus on risk assessment, incremental upgrades, automated testing, and rollback strategies.
+The user needs to upgrade project dependencies safely, handling breaking changes, ensuring compatibility, and maintaining stability. Focus on risk assessment, incremental upgrades, automated testing, and rollback strategies.
 
 ## Requirements
-
 $ARGUMENTS
 
 ## Instructions

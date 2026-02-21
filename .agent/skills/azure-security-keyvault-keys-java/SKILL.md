@@ -1,9 +1,9 @@
 ---
 name: azure-security-keyvault-keys-java
-description:
-  Azure Key Vault Keys Java SDK for cryptographic key management. Use when creating, managing, or using RSA/EC keys,
-  performing encrypt/decrypt/sign/verify operations, or working with HSM-backed keys.
+description: "Azure Key Vault Keys Java SDK for cryptographic key management. Use when creating, managing, or using RSA/EC keys, performing encrypt/decrypt/sign/verify operations, or working with HSM-backed keys."
 package: com.azure:azure-security-keyvault-keys
+risk: unknown
+source: community
 ---
 
 # Azure Key Vault Keys (Java)
@@ -50,14 +50,14 @@ CryptographyClient cryptoClient = new CryptographyClientBuilder()
 
 ## Key Types
 
-| Type      | Description                      |
-| --------- | -------------------------------- |
-| `RSA`     | RSA key (2048, 3072, 4096 bits)  |
-| `RSA_HSM` | RSA key in HSM                   |
-| `EC`      | Elliptic Curve key               |
-| `EC_HSM`  | Elliptic Curve key in HSM        |
-| `OCT`     | Symmetric key (Managed HSM only) |
-| `OCT_HSM` | Symmetric key in HSM             |
+| Type | Description |
+|------|-------------|
+| `RSA` | RSA key (2048, 3072, 4096 bits) |
+| `RSA_HSM` | RSA key in HSM |
+| `EC` | Elliptic Curve key |
+| `EC_HSM` | Elliptic Curve key in HSM |
+| `OCT` | Symmetric key (Managed HSM only) |
+| `OCT_HSM` | Symmetric key in HSM |
 
 ## Create Keys
 
@@ -80,7 +80,7 @@ KeyVaultKey rsaKeyWithOptions = keyClient.createRsaKey(new CreateRsaKeyOptions("
     .setExpiresOn(OffsetDateTime.now().plusYears(1))
     .setNotBefore(OffsetDateTime.now())
     .setEnabled(true)
-    .setKeyOperations(KeyOperation.ENCRYPT, KeyOperation.DECRYPT,
+    .setKeyOperations(KeyOperation.ENCRYPT, KeyOperation.DECRYPT, 
                        KeyOperation.WRAP_KEY, KeyOperation.UNWRAP_KEY)
     .setTags(Map.of("environment", "production")));
 
@@ -304,27 +304,27 @@ KeyVaultKey importedKey = keyClient.importKey(importOptions);
 
 ## Encryption Algorithms
 
-| Algorithm      | Key Type | Description                   |
-| -------------- | -------- | ----------------------------- |
-| `RSA1_5`       | RSA      | RSAES-PKCS1-v1_5              |
-| `RSA_OAEP`     | RSA      | RSAES with OAEP (recommended) |
-| `RSA_OAEP_256` | RSA      | RSAES with OAEP using SHA-256 |
-| `A128GCM`      | OCT      | AES-GCM 128-bit               |
-| `A256GCM`      | OCT      | AES-GCM 256-bit               |
-| `A128CBC`      | OCT      | AES-CBC 128-bit               |
-| `A256CBC`      | OCT      | AES-CBC 256-bit               |
+| Algorithm | Key Type | Description |
+|-----------|----------|-------------|
+| `RSA1_5` | RSA | RSAES-PKCS1-v1_5 |
+| `RSA_OAEP` | RSA | RSAES with OAEP (recommended) |
+| `RSA_OAEP_256` | RSA | RSAES with OAEP using SHA-256 |
+| `A128GCM` | OCT | AES-GCM 128-bit |
+| `A256GCM` | OCT | AES-GCM 256-bit |
+| `A128CBC` | OCT | AES-CBC 128-bit |
+| `A256CBC` | OCT | AES-CBC 256-bit |
 
 ## Signature Algorithms
 
-| Algorithm | Key Type | Hash          |
-| --------- | -------- | ------------- |
-| `RS256`   | RSA      | SHA-256       |
-| `RS384`   | RSA      | SHA-384       |
-| `RS512`   | RSA      | SHA-512       |
-| `PS256`   | RSA      | SHA-256 (PSS) |
-| `ES256`   | EC P-256 | SHA-256       |
-| `ES384`   | EC P-384 | SHA-384       |
-| `ES512`   | EC P-521 | SHA-512       |
+| Algorithm | Key Type | Hash |
+|-----------|----------|------|
+| `RS256` | RSA | SHA-256 |
+| `RS384` | RSA | SHA-384 |
+| `RS512` | RSA | SHA-512 |
+| `PS256` | RSA | SHA-256 (PSS) |
+| `ES256` | EC P-256 | SHA-256 |
+| `ES384` | EC P-384 | SHA-384 |
+| `ES512` | EC P-521 | SHA-512 |
 
 ## Error Handling
 
@@ -362,3 +362,6 @@ AZURE_KEYVAULT_URL=https://<vault-name>.vault.azure.net
 - "encrypt decrypt Java", "sign verify Java"
 - "RSA key", "EC key", "HSM key"
 - "key rotation", "wrap unwrap key"
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.

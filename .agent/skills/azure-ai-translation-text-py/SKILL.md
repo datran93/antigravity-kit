@@ -1,15 +1,16 @@
 ---
 name: azure-ai-translation-text-py
-description: |
+description: "|"
   Azure AI Text Translation SDK for real-time text translation, transliteration, language detection, and dictionary lookup. Use for translating text content in applications.
   Triggers: "text translation", "translator", "translate text", "transliterate", "TextTranslationClient".
 package: azure-ai-translation-text
+risk: unknown
+source: community
 ---
 
 # Azure AI Text Translation SDK for Python
 
-Client library for Azure AI Translator text translation service for real-time text translation, transliteration, and
-language operations.
+Client library for Azure AI Translator text translation service for real-time text translation, transliteration, and language operations.
 
 ## Installation
 
@@ -254,15 +255,15 @@ async def translate_text():
 
 ## Client Methods
 
-| Method                       | Description                             |
-| ---------------------------- | --------------------------------------- |
-| `translate`                  | Translate text to one or more languages |
-| `transliterate`              | Convert text between scripts            |
-| `detect`                     | Detect language of text                 |
-| `find_sentence_boundaries`   | Identify sentence boundaries            |
-| `lookup_dictionary_entries`  | Dictionary lookup for translations      |
-| `lookup_dictionary_examples` | Get usage examples                      |
-| `get_supported_languages`    | List supported languages                |
+| Method | Description |
+|--------|-------------|
+| `translate` | Translate text to one or more languages |
+| `transliterate` | Convert text between scripts |
+| `detect` | Detect language of text |
+| `find_sentence_boundaries` | Identify sentence boundaries |
+| `lookup_dictionary_entries` | Dictionary lookup for translations |
+| `lookup_dictionary_examples` | Get usage examples |
+| `get_supported_languages` | List supported languages |
 
 ## Best Practices
 
@@ -273,3 +274,6 @@ async def translate_text():
 5. **Handle profanity** appropriately for your application
 6. **Use html text_type** when translating HTML content
 7. **Include alignment** for applications needing word mapping
+
+## When to Use
+This skill is applicable to execute the workflow or actions described in the overview.
