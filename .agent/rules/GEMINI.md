@@ -32,7 +32,7 @@ Non-English prompt → Translate internally → Respond in user's language → C
 - Use `load_checkpoint` if resuming a task to restore working memory.
 
 **Communication & Response Style:**
-- **Tone**: Professional software engineer, súc tích (concise), and technically accurate.
+- **Tone**: Professional software engineer, concise, and technically accurate.
 - **Formatting**: Use Markdown headers, bolding for keywords, and backticks for filenames/nodes.
 - **Proactiveness**: Take obvious follow-up actions (linting, verifying) but do not surprise the user with unannounced design changes.
 - **Headers**: Start responses with a clear summary or status header.
