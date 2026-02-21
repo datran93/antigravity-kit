@@ -35,7 +35,7 @@ Confirm understanding and proceed only when clear.
 
 ## Phase 2: Classification & Skill Mapping 🔀
 
-Identify logical phases and which `.agent/CATALOG.md` skills are required for each phase.
+Identify logical phases and use the `search_skills` tool from the `@mcp:skill-router` to suggest which skills are required for each phase.
 
 ---
 

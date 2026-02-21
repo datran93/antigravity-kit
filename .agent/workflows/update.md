@@ -21,7 +21,7 @@ Guide the AI to update, enhance, or modify existing features systematically with
 
 ## Phase 1: Classification & Context 🔍 (Socratic Gate)
 
-Identify the feature being modified. Check `.agent/CATALOG.md` for necessary skills (e.g., framework patterns).
+Identify the feature being modified. Use `search_skills` from `@mcp:skill-router` to find necessary skills (e.g., framework patterns).
 
 Read the existing codebase to understand Current State. **If request is vague, ask:** What exactly should change? Should
 existing behavior be preserved?
@@ -57,7 +57,8 @@ compatibility where necessary (e.g., API signatures).
 
 ## Phase 5: Verification & Delivery ✅
 
-Run smoke tests, linting, and unit tests to ensure nothing broke.
+Run smoke tests, linting, and unit tests to ensure nothing broke. 
+If this was a multi-step update, use `save_checkpoint` from `@mcp:context-manager` to finalize the status before ending.
 
 Save a summary to `update-{slug}.md`:
 

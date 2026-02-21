@@ -30,11 +30,11 @@ in the chat suggestion dropdown.
 
 ## What's Included
 
-| Component     | Count | Description                                                        |
-| ------------- | ----- | ------------------------------------------------------------------ |
-| **Agents**    | 20    | Specialist AI personas (frontend, backend, security, PM, QA, etc.) |
-| **Skills**    | 37    | Domain-specific knowledge modules                                  |
-| **Workflows** | 11    | Slash command procedures                                           |
+| Component        | Description                                                               |
+| ---------------- | ------------------------------------------------------------------------- |
+| **Integrations** | Powerful MCP Servers (`mcp:database-inspector`, `mcp:skill-router`, etc.) |
+| **Skills**       | 880+ Domain-specific knowledge modules                                    |
+| **Workflows**    | 15 Slash command procedures                                               |
 
 ## Usage
 
@@ -115,31 +115,43 @@ AI: 🤖 Using @debugger for systematic analysis...
 
 Invoke workflows with slash commands:
 
-| Command          | Description                           |
-| ---------------- | ------------------------------------- |
-| `/brainstorm`    | Explore options before implementation |
-| `/create`        | Create new features or apps           |
-| `/debug`         | Systematic debugging                  |
-| `/deploy`        | Deploy application                    |
-| `/enhance`       | Improve existing code                 |
-| `/orchestrate`   | Multi-agent coordination              |
-| `/plan`          | Create task breakdown                 |
-| `/preview`       | Preview changes locally               |
-| `/status`        | Check project status                  |
-| `/test`          | Generate and run tests                |
-| `/ui-ux-pro-max` | Design with 50 styles                 |
+| Command                 | Description                                           |
+| ----------------------- | ----------------------------------------------------- |
+| `/brainstorm`           | Explore options before implementation                 |
+| `/create`               | Create new features or apps                           |
+| `/db`                   | Act on databases with `@mcp:database-inspector`       |
+| `/debug`                | Systematic debugging                                  |
+| `/deploy`               | Deploy application                                    |
+| `/design`               | UI/UX discovery, design system generation             |
+| `/git-commit`           | Git stage, commit, and pre-rebase workflow            |
+| `/git-push`             | Git pull rebase, conflict resolution, push            |
+| `/gitlab-mr-read-fix`   | Read MR discussions via `@mcp:gitlab-mr-discussions`  |
+| `/gitlab-mr-reply-push` | Push fixes and reply via `@mcp:gitlab-mr-discussions` |
+| `/orchestrate`          | Multi-agent coordination for complex tasks            |
+| `/plan`                 | Create comprehensive task breakdown                   |
+| `/redis`                | Act on Redis datastores safely                        |
+| `/test`                 | Generate and run tests                                |
+| `/update`               | Update or enhance existing codebase                   |
 
 Example:
 
 ```
-/brainstorm authentication system
+/db explain the users table
 /create landing page with hero section
-/debug why login fails
+/redis GET active_accounts
 ```
 
-### 4. Using Skills
+### 4. MCP Server Integration
 
-Skills are loaded automatically based on task context. The AI reads skill descriptions and applies relevant knowledge.
+The kit relies heavily on the **Model Context Protocol (MCP)** for secure, structured access to resources:
+- `@mcp:skill-router`: Automatically searches and loads the perfect skills for your query.
+- `@mcp:database-inspector`: Connects to Postgres, MySQL, and Redis to execute safe read-only queries.
+- `@mcp:context-manager`: Persists progress checkpoints during long-running multi-file tasks.
+- `@mcp:doc-researcher`: Fetches the latest bleeding-edge SOTA syntax before composing new features.
+
+### 5. Using Skills
+
+Skills are loaded automatically based on task context (using the `search_skills` MCP). The AI reads skill descriptions and applies relevant knowledge precisely.
 
 ## License
 

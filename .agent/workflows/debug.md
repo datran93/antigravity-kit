@@ -22,8 +22,7 @@ Guide agents to debug issues methodically: understand → hypothesize → invest
 
 ## Phase 1: Classification & Skill Mapping 🔀
 
-Identify the core domain of the bug (Frontend, Backend, Database, Infrastructure, etc.) and map relevant skills from
-`.agent/CATALOG.md`.
+Identify the core domain of the bug (Frontend, Backend, Database, Infrastructure, etc.) and use `search_skills` from `@mcp:skill-router` to map relevant debugging or domain skills.
 
 ---
 
@@ -50,6 +49,7 @@ List possible causes, ordered by likelihood (High, Medium, Low). Prioritize test
 ## Phase 4: Systematic Investigation 🔍
 
 Test each hypothesis one by one (using logs, breakpoints, minimal reproduction, etc.). Track your findings.
+If this is a long-running debug session, periodically save your state using `save_checkpoint` from `@mcp:context-manager`.
 
 ---
 

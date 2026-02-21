@@ -5,3 +5,12 @@ antigravity-doc
 tests
 others
 .env
+.venv
+.chroma_db
+*.log
+context.db
+research_cache.db
+__pycache__
+test_*.py
+progress.md
+

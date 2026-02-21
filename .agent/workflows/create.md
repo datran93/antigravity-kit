@@ -15,7 +15,7 @@ Guide the AI to create new things systematically: services, systems, apps, compo
 
 ## Phase 1: Classification & Skill Mapping 🔀
 
-Analyze the request to identify the creation type. Check `.agent/CATALOG.md` to load required skills.
+Analyze the request to identify the creation type. Use the `search_skills` tool from the `@mcp:skill-router` server to load required skills based on semantic understanding.
 
 ```markdown
 🔀 **Creation Type:** [e.g., Web App, API, Model] 🛠️ **Primary Skills:** `@[skill-1]`, `@[skill-2]`
@@ -49,9 +49,11 @@ Foundation → Data Layer → Business Logic → UI → Tests).
 
 Follow the build order layer by layer. For each:
 
-1. Read relevant `SKILL.md` files.
-2. Build the component.
-3. Verify it works before moving on.
+1. Read relevant `SKILL.md` files downloaded from the router.
+2. If using new libraries/latest versions, use `search_latest_syntax` from `@mcp:doc-researcher` to ensure you are not writing legacy code.
+3. Build the component.
+4. Verify it works before moving on.
+5. For complex tasks, use `save_checkpoint` from `@mcp:context-manager` to persist your progress and active files.
 
 Perform continuous Quality Checks (e.g., adherence to `clean-code`).
 
