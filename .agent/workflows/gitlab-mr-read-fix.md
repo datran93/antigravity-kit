@@ -7,14 +7,14 @@ This workflow automates the first half of addressing a GitLab Merge Request (MR)
 
 ## Requirements
 - The user must provide the Merge Request IID (e.g., `!123` or just `123`) or the Agent should be able to deduce the current MR from the branch context.
-- The GitLab MCP server must be configured and authenticated.
+- The `glab` CLI must be installed and authenticated.
 
 ## Workflow Steps
 
 1. **Get Discussions & Notes from the Merge Request**
-   Use the GitLab MCP tools to fetch the discussions for the specified MR.
-   - Tool: `mcp_gitlab_mr_discussions` or `mcp_gitlab_get_merge_request_notes`
-   - Parameters: `merge_request_iid`
+   Use the `glab` CLI to fetch the discussions for the specified MR.
+   - Command: `glab mr view [iid] --comments`
+   - Parameters: `iid` (Merge Request IID)
    
    *Agent Action*: Read through unresolved threads and notes. Identify the specific files and lines of code mentioned by the reviewers and the requested changes.
 

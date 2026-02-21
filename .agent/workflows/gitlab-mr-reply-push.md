@@ -7,8 +7,8 @@ This workflow automates the second half of addressing a GitLab Merge Request (MR
 
 ## Requirements
 - You must have already completed the `/gitlab-mr-read-fix` workflow (or applied fixes manually).
-- The GitLab MCP server must be configured and authenticated.
-- You must know the Merge Request IID.
+- The `glab` CLI must be installed and authenticated.
+- You must know the Merge Request IID (or be on the correct branch).
 
 ## Workflow Steps
 
@@ -20,10 +20,11 @@ This workflow automates the second half of addressing a GitLab Merge Request (MR
    git push origin $(git rev-parse --abbrev-ref HEAD)
    ```
 
-2. **Reply to and Resolve Discussions**
-   Once the code is pushed, go back to the GitLab discussions and inform the reviewer.
-   - To reply to a thread, use `mcp_gitlab_create_merge_request_discussion_note` with the `discussion_id` and a message like: *"Fixed in the latest commit."*
-   - To resolve the thread, use `mcp_gitlab_resolve_merge_request_thread` with `resolved: true`.
+2. **Reply to Discussions**
+   Once the code is pushed, use `glab` to inform the reviewer.
+   - To add a comment to the MR, use: `glab mr note [iid] -m "Fixed in the latest commit."`
+   - If you are on the MR branch, you can omit the IID: `glab mr note -m "Fixed in the latest commit."`
+   - To view the MR and resolve threads in the browser: `glab mr view -w`
 
 ## Final Verification
 Confirm with the user that all targeted discussions have been replied to and marked as resolved, and that the changes were successfully pushed to GitLab.
