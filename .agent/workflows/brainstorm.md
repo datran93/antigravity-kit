@@ -2,95 +2,66 @@
 description: Structured brainstorming for projects and features. Explores multiple options - NO implementation.
 ---
 
-# /brainstorm - Structured Idea Exploration
+# /brainstorm - High-Leverage Idea Exploration
 
-Guide agents to brainstorm user ideas systematically: understand → explore → evaluate → **user decides → save**.
+Guide the user through a structured exploration of ideas: Context → Divergence → Evaluation → Selection.
 
-🚨 **CRITICAL RULE: This workflow generates OPTIONS ONLY. No implementation suggestions!**
-
-## When to Use
-
-- `/brainstorm [topic]`
-- Keywords: "explore", "options", "ideas", "approach", "how should I", "what if"
+🚨 **CRITICAL RULE: This workflow generates OPTIONS ONLY. No implementation details, code snippets, or task plans.**
 
 ---
 
-## Phase 1: Classification & Skill Mapping 🔀
+## Phase 1: Context & Skill Discovery 🔍
 
-### Identify Relevant Skills
+1. **Skill Mapping**: Use `@mcp:skill-router` (`search_skills`) to find domain-specific knowledge.
+2. **Context Intake**: Use the **Socratic Gate** (Multiple Choice) to clarify:
+   - **Problem**: What is the root cause?
+   - **Constraints**: Budget, tech stack, or deadline limitations?
+   - **Success**: What does a "perfect" solution look like?
 
-Analyze the topic and list related skills from `.agent/CATALOG.md`.
+---
 
+## Phase 2: Divergent Options 🌐
+
+Generate exactly **3 distinct options** with different trade-offs (e.g., Fast/Cheap, Scalable/Premium, Unconventional/Risky).
+
+For each option, provide:
+- **Concept**: High-level approach.
+- **Mental Model**: How to think about this solution.
+- **Why it fits**: Alignment with user constraints.
+
+---
+
+## Phase 3: Convergent Analysis 📊
+
+Evaluate the options using a comparison matrix:
+
+| Metric     | Option 1     | Option 2 | Option 3 |
+| :--------- | :----------- | :------- | :------- |
+| **Effort** | Low/Med/High | ...      | ...      |
+| **Impact** | ...          | ...      | ...      |
+| **Risk**   | ...          | ...      | ...      |
+
+Highlight the **Non-Obvious Trade-offs** for each.
+
+---
+
+## Phase 4: Recommendation & Decision 💡
+
+1. **Synthesize**: Recommend one option based on the weighed trade-offs.
+2. **STOP**: Wait for the user to choose or iterate. **DO NOT provide code or implementation steps.**
+
+---
+
+## Phase 5: Decision Persistence 📝 (Post-Selection)
+
+**🔔 Execute ONLY after a choice is made.**
+
+Save the decision to `brainstorm-{slug}.md` for long-term memory.
+
+### Template:
 ```markdown
-🔀 **Topic:** [identified topic] 🛠️ **Primary Skills:** `@[skill-1]`, `@[skill-2]`
-```
-
----
-
-## Phase 2: Understanding Lock 🔒 (Socratic Gate)
-
-**🛑 MANDATORY: Fully understand the problem before generating options.**
-
-Extract Context:
-
-- **Problem:** What needs solving?
-- **Goal:** Desired outcome?
-- **Constraints:** Any tech, time, or resource limitations?
-- **Context:** Greenfield / Existing system?
-
-If insufficient information, **ASK** clarifying questions before brainstorming. Once clear, summarize the problem and
-wait for user confirmation.
-
----
-
-## Phase 3: Divergent Thinking 🌐 (Generate Options)
-
-Generate a minimum of **3 options** (include at least 1 unconventional approach). For each option provide:
-
-- **Clear name**
-- **Short description**
-- **How it works** (high-level conceptually)
-
----
-
-## Phase 4: Convergent Analysis 📊 (Evaluate)
-
-Evaluate each option objectively based on Effort, Impact, Risk, Scalability, and Reversibility.
-
-Create a Pros/Cons list and a Comparison Matrix.
-
----
-
-## Phase 5: Recommendation & Decision 💡
-
-Synthesize a recommendation explaining why it best fits the constraints.
-
-**🛑 STOP HERE. Wait for the user to choose an option.** Do NOT suggest implementation details.
-
----
-
-## Phase 6: Save Decision 📝
-
-**🔔 Only execute this AFTER user selects an option.**
-
-Save the accepted approach to `brainstorm-{slug}.md` and notify the user.
-
-### Output Template:
-
-```markdown
-## 📝 Decision Record
-
-**Date:** [YYYY-MM-DD] **Decision:** Option [X] - [Name] **Rationale:** [Why chosen]
-
-### Context
-
-[Problem being solved]
-
-### Chosen Approach
-
-[Detailed description]
-
-### Trade-offs Accepted
-
-- [Trade-off 1]
+# Decision: [Option Name]
+**Date**: [YYYY-MM-DD]
+**Rationale**: Why this won over other options.
+**Trade-offs**: Explicitly accepted drawbacks.
 ```
