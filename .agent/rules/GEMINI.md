@@ -53,9 +53,9 @@ Non-English prompt → Translate internally → Respond in user's language → C
 ## 🚨 MANDATORY: 3-STEP PROCESSING FLOW
 
 You must complete the following steps in order and NEVER skip them:
-1. **CLASSIFY REQUEST**: Determine Type and Tier.
-2. **SKILL ROUTING**: Semantic search and apply SKILL.md.
-3. **EXECUTE TASK**: Context Discovery -> SOTA Research -> Execute -> Verify -> Deliver.
+1. **CLASSIFY REQUEST**: Identify the type and domain.
+2. **SKILL DISCOVERY**: Mandatory semantic search via `@mcp:skill-router`.
+3. **EXECUTE TASK**: Full 4-Phase execution (Context -> Planning -> Execution -> Verification).
 
 ### ⛔ ANTI-SKIP ENFORCEMENT
 
@@ -65,6 +65,7 @@ You must complete the following steps in order and NEVER skip them:
 | Skipped Step 2 (no skills loaded)  | Response lacks depth → Re-run search_skills, enhance          |
 | Skipped SOTA Research              | Code is potentially LEGACY → STOP, run `search_latest_syntax` |
 | Started code before Context check  | Code is UNGUIDED → Stop, survey codebase first                |
+| No Progress Report/Checkpointing   | Workflow is UNTRACKED → STOP, create plan and save checkpoint |
 
 ### 🔐 Priority Hierarchy (BINDING)
 
@@ -76,31 +77,23 @@ P1: SKILL.md files        → Detailed patterns and techniques (Single Source of
 
 ## 📥 STEP 1: REQUEST CLASSIFIER
 
-**Analyze keywords + context → Determine Type → Set Execution Tier:**
+**Analyze keywords + context → Determine Type:**
 
-| Request Type      | Decision Heuristics (Rule of Thumb)             | Trigger Keywords                              | Tier / Mode     |
-| :---------------- | :---------------------------------------------- | :-------------------------------------------- | :-------------- |
-| **CLARIFICATION** | Informational/Conceptual. No code changes.      | "what is", "how", "why"                       | T0 (Direct)     |
-| **SURVEY/INTEL**  | Analysis of state/code/repo. No implementation. | "analyze", "audit", "find"                    | T0 + Explorer   |
-| **OPTIMIZATION**  | Improving existing code status/perf.            | "refactor", "cleanup", "optimize"             | T1+ (Execution) |
-| **SIMPLE CODE**   | Specific fix/add restricted to 1 file.          | "fix", "add", "update"                        | T1+ (Execution) |
-| **COMPLEX CODE**  | Feature creation affecting multiple files.      | "build", "create", "implement"                | Full (Agent)    |
-| **DESIGN/UI**     | Visual/UX focus, dashboard/component styles.    | "design", "ui", "premium"                     | Full (Agent)    |
-| **SYSTEM/SYNC**   | Infrastructure, ENV, or script automation.      | "sync", "setup", "env", "script"              | T1+ (Execution) |
-| **SLASH CMD**     | Workflow trigger using /command syntax.         | /create, /orchestrate, /debug, /plan, /update | Workflow Mode   |
-
-### 📊 Tier Assessment Matrix
-
-| Tier     | Definition & Complexity                                              | Requirements                                       |
-| :------- | :------------------------------------------------------------------- | :------------------------------------------------- |
-| **T0**   | **Knowledge Only**. Pure information retrieval or basic explanation. | Direct response.                                   |
-| **T1+**  | **Implementation Light**. Changes to existing logic or 1-3 files.    | Socratic Gate (Multiple Choice).                   |
-| **Full** | **Systemic Build**. New features, complex logic, multi-file arch.    | Implementation Plan + Socratic Gate + Checkpoints. |
+| Request Type      | Decision Heuristics (Rule of Thumb)             | Trigger Keywords                              |
+| :---------------- | :---------------------------------------------- | :-------------------------------------------- |
+| **CLARIFICATION** | Informational/Conceptual. No code changes.      | "what is", "how", "why"                       |
+| **SURVEY/INTEL**  | Analysis of state/code/repo. No implementation. | "analyze", "audit", "find"                    |
+| **OPTIMIZATION**  | Improving existing code status/perf.            | "refactor", "cleanup", "optimize"             |
+| **SIMPLE CODE**   | Specific fix/add restricted to 1 file.          | "fix", "add", "update"                        |
+| **COMPLEX CODE**  | Feature creation affecting multiple files.      | "build", "create", "implement"                |
+| **DESIGN/UI**     | Visual/UX focus, dashboard/component styles.    | "design", "ui", "premium"                     |
+| **SYSTEM/SYNC**   | Infrastructure, ENV, or script automation.      | "sync", "setup", "env", "script"              |
+| **SLASH CMD**     | Workflow trigger using /command syntax.         | /create, /orchestrate, /debug, /plan, /update |
 
 **Output format after classification:**
 
 ```markdown
-📥 **Request Type:** [TYPE] → [TIER]
+📥 **Request Type:** [TYPE]
 ```
 ---
 
@@ -127,7 +120,7 @@ P1: SKILL.md files        → Detailed patterns and techniques (Single Source of
 ```
 ---
 
-## ⚡ STEP 3: TASK EXECUTION (4-Phase Execution)
+## ⚡ STEP 3: TASK EXECUTION (4 Phase Protocol)
 
 **Now you may proceed with the actual work following these 4 phases:**
 
@@ -136,30 +129,27 @@ P1: SKILL.md files        → Detailed patterns and techniques (Single Source of
 - **Do not write code immediately.**
 - **Working Memory:** Use `list_active_tasks` (from `@mcp:context-manager`) to check for pending background work, or `load_checkpoint` if you are explicitly resuming a previous task.
 - **🚨 Knowledge Check**: Check KI summaries for existing analysis on the topic to avoid redundant work.
-- **🚨 SOTA Research (MANDATORY)**: ALWAYS use `search_latest_syntax` or `read_website_markdown` (from `@mcp:doc-researcher`) before implementing new features or using external libraries. You MUST ensure you write modern code and avoid deprecated APIs. Skipping this for any Tier 1+ or Full request is a violation.
+- **🚨 SOTA Research (MANDATORY)**: ALWAYS use `search_latest_syntax` or `read_website_markdown` (from `@mcp:doc-researcher`) before implementing new features or using external libraries.
 - **Architecture Discovery**: Use `get_project_architecture` (from `@mcp:ast-explorer`) to map project relationships.
 - Read existing `README.md`, `.cursorrules`, `.clinerules`, or scan relevant architecture files using `grep_search` / `view_file`.
-- Understand the current state of the codebase to retain consistency.
 
-### Phase 2: Execute with Skills
+### Phase 2: Progress Report (Plan)
 
-- For **T0 (Questions)**: Respond directly using loaded knowledge. No Socratic Gate required.
-- For **T1+ and Full**: Apply Socratic Gate if vague. If clear, implement the solution using the patterns learned from
-  the loaded skills.
+- **Breakdown Task**: Before starting, provide a clear, bulleted list of small, atomic tasks.
+- **Socratic Gate**: Apply the gate if requirements are vague or if the approach needs trade-off decisions.
+- **Wait for Confirmation**: If the task is large/impactful, confirm the plan with the user.
 
-### Phase 3: Trust, but Verify
+### Phase 3: Execute & Checkpoint
 
-- **You must verify your changes.**
-- Run linter (e.g., `npm run lint`), compiler (e.g., `tsc`), or tests if available before claiming success.
-- **UI/Web Apps:** If working on frontend code, instruct the user to verify the UI/layout in the browser before Checkpointing. Do not blindly assume visual correctness.
-- Ensure no regressions are introduced.
+- **Atomic Execution**: Complete tasks one by one from your breakdown.
+- **🚨 MANDATORY CHECKPOINTS**: Use `save_checkpoint` from `@mcp:context-manager` **after completing each small task**. This ensures session persistence and easy recovery.
+- For longer workflows, provide a status update after each checkpoint.
 
-### Phase 4: Deliver & Checkpoint
+### Phase 4: Verify & Deliver
 
-- For small tasks, deliver the final atomic change.
-- For **Full (Agent)** multi-file tasks: Report progress after each file or component as a "Checkpoint" before
-  proceeding. Don't process 5+ complex files in a single burst without saving state and asking/confirming progress.
-- **Persist Memory:** MANDATORY for long-running workflows. Explicitly use the `save_checkpoint` tool from `@mcp:context-manager` to snapshot the current task ID, completed steps, and next pending actions into the workspace database.
+- **Verification**: Run linter (e.g., `npm run lint`), compiler (e.g., `tsc`), or tests before claiming success.
+- **UI/Web Apps:** If working on frontend code, instruct the user to verify the UI/layout in the browser.
+- **Final Report**: Deliver the final change and summarize what was done, referencing the completed tasks.
 
 ---
 
