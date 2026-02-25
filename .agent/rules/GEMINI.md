@@ -25,12 +25,13 @@ trigger: always_on
 - **Pre-flight**: Before using any MCP tool, verify availability with a simple call.
 - **Graceful Degradation**: If MCP tool unavailable, fallback to standard tools:
 
-  | MCP Tool               | Fallback                                            |
-  | ---------------------- | --------------------------------------------------- |
-  | `@mcp:context-manager` | Use `.agent/checkpoints/` directory with JSON files |
-  | `@mcp:ast-explorer`    | Use `grep_search` + glob patterns                   |
-  | `@mcp:doc-researcher`  | Use `codesearch` tool                               |
-  | `@mcp:skill-router`    | Use `glob_search` for `.agent/skills/*.md`          |
+  | MCP Tool                  | Fallback                                            |
+  | ------------------------- | --------------------------------------------------- |
+  | `@mcp:context-manager`    | Use `.agent/checkpoints/` directory with JSON files |
+  | `@mcp:ast-explorer`       | Use `grep_search` + glob patterns                   |
+  | `@mcp:doc-researcher`     | Use `codesearch` tool                               |
+  | `@mcp:skill-router`       | Use `glob_search` for `.agent/skills/*.md`          |
+  | `@mcp:database-inspector` | Use `usql` CLI tool via `run_command`               |
 
 - **Log Warning**: Always inform user when falling back from MCP to standard tools.
 
@@ -94,6 +95,8 @@ Minimize user friction by providing choices:
 - **New Feature**: "How should we handle X? [A] Option A, [B] Option B".
 - **Bug Fix**: "Confirming impact: This fix resets Y. Proceed? [Yes/No]".
 - **Vague**: "Objective seems to be Z. Is this for [1] Perf, [2] Security, or [3] UX?".
+- **Critical Action Verification**: Before executing any destructive or critical action (e.g., database writes, bulk file deletions, 
+production deployments), the Agent **MUST** explicitly describe the action and ask for user confirmation.
 
 ---
 

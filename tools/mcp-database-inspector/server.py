@@ -145,7 +145,7 @@ def inspect_schema(connection_string: str, table_name: str) -> str:
         return f"❌ Error inspecting table '{table_name}': {str(e)}"
 
 @mcp.tool()
-def run_read_query(connection_string: str, query: str, limit: int = 10) -> str:
+def run_read_query(connection_string: str, query: str) -> str:
     """
     Execute a read-only SQL query to preview raw data. DO NOT use this for INSERT/UPDATE/DELETE.
     Results are returned in JSON format.
@@ -154,7 +154,6 @@ def run_read_query(connection_string: str, query: str, limit: int = 10) -> str:
     Args:
         connection_string: SQLAlchemy connection string.
         query: The raw SQL query to run (e.g., 'SELECT * FROM users'). For Redis: 'GET mykey'.
-        limit: Max number of rows to return (defaults to 10 to prevent massive memory dumps).
     """
     try:
         if connection_string.startswith("redis://") or connection_string.startswith("rediss://"):
@@ -211,15 +210,8 @@ def run_read_query(connection_string: str, query: str, limit: int = 10) -> str:
 
         engine = create_engine(connection_string)
 
-        # Enforce LIMIT inside query logically if possible, or visually check
-        if "LIMIT " not in query_upper:
-            # We strictly enforce limit on the cursor level instead of parsing complex SQL
-            safe_query = f"{query} LIMIT {limit}"
-        else:
-            safe_query = query
-
         with engine.connect() as conn:
-            result_proxy = conn.execute(text(safe_query))
+            result_proxy = conn.execute(text(query))
             rows = result_proxy.fetchall()
             keys = result_proxy.keys()
 
@@ -238,8 +230,8 @@ def run_read_query(connection_string: str, query: str, limit: int = 10) -> str:
             json_result = json.dumps(data, default=json_serial, indent=2)
 
             output = [
-                f"✅ QUERY RESULTS (Limited to {limit} rows max)",
-                f"SQL = `{safe_query}`",
+                f"✅ QUERY RESULTS",
+                f"SQL = `{query}`",
                 "```json",
                 json_result,
                 "```"
@@ -248,6 +240,58 @@ def run_read_query(connection_string: str, query: str, limit: int = 10) -> str:
 
     except Exception as e:
         return f"❌ Error executing query: {str(e)}"
+
+@mcp.tool()
+def run_write_query(connection_string: str, query: str, confirm: bool = False) -> str:
+    """
+    Execute a write SQL query (INSERT/UPDATE/DELETE/ALTER/DROP/CREATE).
+    This tool allows modifying the database.
+    AGENT: You MUST ask the user for explicit confirmation in the chat before calling this tool with confirm=True.
+
+    Args:
+        connection_string: SQLAlchemy connection string.
+        query: The raw SQL query or Redis command to run.
+        confirm: Must be True to execute. If False, the tool will return a request for confirmation.
+    """
+    if not confirm:
+        return f"⚠️  CONFIRMATION REQUIRED: You are about to execute a WRITE/DML operation:\n\n`{query}`\n\nPlease confirm if you want to proceed. Set 'confirm=True' only after user approval."
+
+    try:
+        # Handle Redis
+        if connection_string.startswith("redis://") or connection_string.startswith("rediss://"):
+            import redis
+            r = redis.from_url(connection_string)
+            query_parts = query.strip().split()
+            if not query_parts:
+                return "❌ Empty query"
+
+            # For Redis, we allow all commands in this tool
+            res = r.execute_command(*query_parts)
+
+            # Decode recursive function for bytes
+            def decode_redis(obj):
+                if isinstance(obj, bytes):
+                    return obj.decode('utf-8', errors='replace')
+                elif isinstance(obj, list) or isinstance(obj, tuple) or isinstance(obj, set):
+                    return [decode_redis(i) for i in obj]
+                elif isinstance(obj, dict):
+                    return {decode_redis(k): decode_redis(v) for k, v in obj.items()}
+                return obj
+
+            decoded_res = decode_redis(res)
+            return f"✅ REDIS WRITE SUCCESS\nCMD = `{query}`\nResult: {json.dumps(decoded_res, indent=2) if isinstance(decoded_res, (dict, list)) else decoded_res}"
+
+        # Handle SQL
+        engine = create_engine(connection_string)
+        # We use .begin() to ensure a transaction is started and committed
+        with engine.begin() as conn:
+            result_proxy = conn.execute(text(query))
+            row_count = result_proxy.rowcount
+
+            return f"✅ WRITE QUERY SUCCESS\nSQL = `{query}`\nRows affected: {row_count}"
+
+    except Exception as e:
+        return f"❌ Error executing write query: {str(e)}"
 
 if __name__ == "__main__":
     mcp.run(transport='stdio')
