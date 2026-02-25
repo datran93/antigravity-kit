@@ -10,15 +10,28 @@ trigger: always_on
 
 - **Bilingual Support**: Non-English prompt → Translate internally → Respond in user's language → Code and comments in
   **English**.
-- **Style**: Professional, technically accurate, concise. Use headers, bolding, and backticks.
-- **Proactiveness**: Take follow-up actions (lint/test) automatically **UNLESS in Plan Mode**.
 
 ### 🛠️ MCP Tool Mastery (Priority Over Bash)
 
-1. **Memory**: `@mcp:context-manager` (`save_checkpoint`, `load_checkpoint`) for any multi-file task.
-2. **Discovery**: `@mcp:ast-explorer` (`get_project_architecture`) for mapping; `@mcp:database-inspector` for DB schema/data.
-3. **Research**: `@mcp:doc-researcher` (`search_latest_syntax`) before writing new logic to avoid legacy code.
-4. **Standard Tools**: Use `view_file`, `grep_search`, `list_dir`, `replace_file_content` instead of raw bash (`cat`, `ls`, `sed`).
+| MCP Server                       | Tool Name                  | Description & Usage                                                                       |
+| :------------------------------- | :------------------------- | :---------------------------------------------------------------------------------------- |
+| **`@mcp:ast-explorer`**          | `get_project_architecture` | Get AST-based structural overview. Extracts Classes/Functions/Methods for Py, Go, JS, TS. |
+| **`@mcp:context-manager`**       | `save_checkpoint`          | Persist progress, completed/next steps, active files, and notes to `context.db`.          |
+|                                  | `load_checkpoint`          | Recover context from a saved checkpoint ID.                                               |
+|                                  | `list_active_tasks`        | List all tasks and their current status in the workspace.                                 |
+| **`@mcp:database-inspector`**    | `list_tables`              | List all tables/views in SQL or sample keys in Redis.                                     |
+|                                  | `inspect_schema`           | Get detailed schema (columns, types, PK/FK) for a table or Redis key.                     |
+|                                  | `run_read_query`           | Execute read-only SQL/Redis queries.                                                      |
+|                                  | `run_write_query`          | Execute write SQL/Redis queries. **MANDATORY**: Ask user first, then set `confirm=True`.  |
+| **`@mcp:doc-researcher`**        | `search_latest_syntax`     | Real-time web search for SOTA syntax, best practices, and documentation.                  |
+|                                  | `read_website_markdown`    | Scrape a specific URL and return its content as clean Markdown.                           |
+| **`@mcp:figma-reader`**          | `read_figma_design`        | Read raw design structure, layers, and metadata from a Figma URL.                         |
+|                                  | `export_figma_images`      | Render specific Figma nodes (layers) as temporary image URLs.                             |
+|                                  | `get_design_details`       | Get deep JSON details for specific Figma node IDs.                                        |
+| **`@mcp:gitlab-mr-discussions`** | `read_mr_discussions`      | Fetch all comment threads and resolution status from a GitLab MR.                         |
+|                                  | `reply_to_mr_discussion`   | Post a reply to a specific GitLab discussion thread.                                      |
+|                                  | `resolve_mr_discussion`    | Resolve or unresolve a discussion thread on GitLab.                                       |
+| **`@mcp:skill-router`**          | `search_skills`            | Semantic search for the most relevant skills based on the task query.            |
 
 ### 🔧 MCP Tool Availability Check
 
@@ -34,12 +47,6 @@ trigger: always_on
   | `@mcp:database-inspector` | Use `usql` CLI tool via `run_command`               |
 
 - **Log Warning**: Always inform user when falling back from MCP to standard tools.
-
-### 🚦 Mode Awareness
-
-- **Plan Mode (Read-Only)**: Only observe, analyze, plan. NO file edits or system changes.
-- **Execute Mode**: Full execution capabilities including edits, commits, and commands.
-- **Detection**: Check system reminders for active mode constraints.
 
 ---
 
@@ -78,7 +85,7 @@ trigger: always_on
 #### Phase 3: Atomic Execution
 
 - **Action**: Implement tasks one by one.
-- **Persistence**: Call `@mcp:context-manager` (`save_checkpoint`) after completing each major task or file.
+- **Persistence**: Call `@mcp:context-manager` (`save_checkpoint`) after completing each task.
 
 #### Phase 4: Verification & Delivery
 
@@ -96,7 +103,7 @@ Minimize user friction by providing choices:
 - **Bug Fix**: "Confirming impact: This fix resets Y. Proceed? [Yes/No]".
 - **Vague**: "Objective seems to be Z. Is this for [1] Perf, [2] Security, or [3] UX?".
 - **Critical Action Verification**: Before executing any destructive or critical action (e.g., database writes, bulk file deletions, 
-production deployments), the Agent **MUST** explicitly describe the action and ask for user confirmation.
+  **production deployments), the Agent **MUST** explicitly describe the action and ask for user confirmation.
 
 ---
 
