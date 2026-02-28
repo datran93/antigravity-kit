@@ -3,7 +3,7 @@ import sqlite3
 import json
 from datetime import datetime
 from mcp.server.fastmcp import FastMCP
-from typing import List
+from typing import List, Optional
 
 mcp = FastMCP("McpContextManager")
 
