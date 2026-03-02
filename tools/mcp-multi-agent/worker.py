@@ -9,65 +9,19 @@ import sqlite3
 import subprocess
 import fcntl
 
-def acquire_token_bucket(workspace, max_rpm=10, max_concurrent=2):
-    db_path = os.path.join(workspace, ".agent_logs", "rate_limit.db")
-    os.makedirs(os.path.dirname(db_path), exist_ok=True)
-
-    lock_file = os.path.join(workspace, ".agent_logs", "rate_limit.lock")
+def acquire_global_lock(workspace):
+    lock_file = os.path.join(workspace, ".agent_logs", "llm_request.lock")
+    os.makedirs(os.path.dirname(lock_file), exist_ok=True)
     f = open(lock_file, "w")
-
-    while True:
+    try:
+        # Wait for the lock (blocking)
         fcntl.flock(f, fcntl.LOCK_EX)
-        try:
-            conn = sqlite3.connect(db_path)
-            conn.execute('''CREATE TABLE IF NOT EXISTS requests (
-                            id INTEGER PRIMARY KEY AUTOINCREMENT,
-                            timestamp REAL,
-                            status TEXT
-                        )''')
+        return f
+    except Exception:
+        return None
 
-            curr_time = time.time()
-
-            # Clean up old timestamps (older than 60s)
-            conn.execute("DELETE FROM requests WHERE timestamp < ?", (curr_time - 60,))
-
-            # Reset 'running' stuck requests (older than 10 mins to be safe)
-            conn.execute("DELETE FROM requests WHERE status = 'running' AND timestamp < ?", (curr_time - 600,))
-
-            cursor = conn.cursor()
-            cursor.execute("SELECT COUNT(*) FROM requests")
-            rpm_count = cursor.fetchone()[0]
-
-            cursor.execute("SELECT COUNT(*) FROM requests WHERE status = 'running'")
-            concurrent_count = cursor.fetchone()[0]
-
-            if rpm_count < max_rpm and concurrent_count < max_concurrent:
-                # Limit not reached, proceed with request
-                cursor.execute("INSERT INTO requests (timestamp, status) VALUES (?, 'running')", (curr_time,))
-                req_id = cursor.lastrowid
-                conn.commit()
-                conn.close()
-                fcntl.flock(f, fcntl.LOCK_UN)
-                return req_id, f, db_path
-            else:
-                conn.commit()
-                conn.close()
-        except Exception:
-            pass
-
-        fcntl.flock(f, fcntl.LOCK_UN)
-        time.sleep(1)
-
-def release_token_bucket(req_id, f, db_path):
-    if f and req_id:
-        fcntl.flock(f, fcntl.LOCK_EX)
-        try:
-            conn = sqlite3.connect(db_path)
-            conn.execute("UPDATE requests SET status = 'done' WHERE id = ?", (req_id,))
-            conn.commit()
-            conn.close()
-        except:
-            pass
+def release_global_lock(f):
+    if f:
         fcntl.flock(f, fcntl.LOCK_UN)
         f.close()
 
@@ -229,12 +183,12 @@ def main():
         # Solution 3: Strict Brevity
         prompt += "CRITICAL: Output ONLY a technical summary and the next delegation command. No conversational filler or greetings. Be ultra-concise."
 
-        # Acquire token bucket to allow concurrency but prevent rate limiting
-        req_id, lock_f, rate_db = acquire_token_bucket(args.workspace, max_rpm=10, max_concurrent=2)
+        # Acquire global lock to serialize LLM requests
+        lock = acquire_global_lock(args.workspace)
         try:
             run_engine_command(args.engine, prompt, args.workspace, db_path, args.role)
         finally:
-            release_token_bucket(req_id, lock_f, rate_db)
+            release_global_lock(lock)
             # Mandatory cooldown to prevent RPM spikes
             time.sleep(2)
 
@@ -276,12 +230,12 @@ def main():
             # Solution 3: Strict Terse Output Instruction at the end
             prompt += "FINAL INSTRUCTION: Read history, take actions via tools, and output a technical summary ONLY. No filler. No intro. No outro."
 
-            # Acquire token bucket to allow concurrency but prevent rate limiting
-            req_id, lock_f, rate_db = acquire_token_bucket(args.workspace, max_rpm=10, max_concurrent=2)
+            # Acquire global lock to serialize LLM requests
+            lock = acquire_global_lock(args.workspace)
             try:
                 run_engine_command(args.engine, prompt, args.workspace, db_path, args.role)
             finally:
-                release_token_bucket(req_id, lock_f, rate_db)
+                release_global_lock(lock)
                 # Mandatory cooldown to prevent RPM spikes
                 time.sleep(2)
 
