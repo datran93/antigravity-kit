@@ -184,7 +184,7 @@ def enforce_socratic_gate(action_name: str, impact_description: str, options: Li
     return prompt
 
 @mcp.tool()
-def delegate_to_subagent(workspace_path: str, target_role: str, task_description: str, context_files: List[str], timeout_mins: int = 10, run_background: bool = True, engine: str = "kilocode") -> str:
+def delegate_to_subagent(workspace_path: str, target_role: str, task_description: str, context_files: List[str], timeout_mins: int = 10, run_background: bool = True, engine: str = "kilocode", model: str = "") -> str:
     """
     Delegate a task to a subagent running.
     If run_background is True, spawns the agent and returns immediately (parallel mode), sending logs to the bus.
@@ -194,12 +194,27 @@ def delegate_to_subagent(workspace_path: str, target_role: str, task_description
         # Publish an initial message indicating the subagent is starting
         publish_message(workspace_path, f"subagent_{target_role}", "system", "all", f"Spawning Subagent '{target_role}' for task: {task_description}")
 
+        role_requirements = ""
+        if "coder" in target_role.lower():
+            role_requirements = (
+                "\nCODER-SPECIFIC REQUIREMENTS:\n"
+                "1. CLEAN CODE & TESTABILITY: Write clean, readable code following SOLID principles. "
+                "Ensure logic is isolated and use dependency injection to make the code highly testable by others.\n"
+            )
+        elif "tester" in target_role.lower():
+            role_requirements = (
+                "\nTESTER-SPECIFIC REQUIREMENTS:\n"
+                "1. COMPREHENSIVE UNIT TESTING: You MUST write unit tests for ALL individual functions implemented by the coder. "
+                "Aim for 100% logic coverage of new components. Ensure tests are robust and independent.\n"
+            )
+
         system_prompt = (
             f"You are a strict {target_role.upper()} in a Multi-Agent architecture. Your current task is: {task_description}. "
             "CRITICAL COMMUNICATION POLICY:\n"
             "1. EXECUTE FULLY: Focus on finishing the code/test task before chatting. NO intermediate updates.\n"
             "2. BATCH MESSAGES: Only send ONE final message when the milestone is reached.\n"
             "3. NO NITPICKING: Be pragmatic and goal-oriented. Do not ask for confirmation.\n"
+            f"{role_requirements}"
             "Once done, output a final summary of your work."
         )
 
@@ -210,8 +225,10 @@ def delegate_to_subagent(workspace_path: str, target_role: str, task_description
 
         worker_script = os.path.join(os.path.dirname(os.path.abspath(__file__)), "worker.py")
         python_exec = sys.executable if sys.executable else "python"
-        # FIX: use task_description instead of undefined prompt, and pass --engine
+        # FIX: use task_description instead of undefined prompt, and pass --engine and --model
         cmd = f"{python_exec} {shlex.quote(worker_script)} --workspace {shlex.quote(workspace_path)} --role {shlex.quote(target_role)} --instruction {shlex.quote(system_prompt)} --task {shlex.quote(task_description)} --engine {shlex.quote(engine)}"
+        if model:
+            cmd += f" --model {shlex.quote(model)}"
 
         publish_message(workspace_path, f"subagent_{target_role}", "system", "all", f"Spawning Daemon: {cmd}")
 

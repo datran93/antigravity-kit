@@ -15,9 +15,16 @@ ENGINE="kilocode"
 while [[ "$#" -gt 0 ]]; do
     case $1 in
         -e|--engine) ENGINE="$2"; shift ;;
+        -m|--model) MODEL="$2"; shift ;;
     esac
     shift
 done
+
+# Pass model argument if provided
+MODEL_ARG=""
+if [ -n "$MODEL" ]; then
+    MODEL_ARG="--model $MODEL"
+fi
 
 echo "🔋 Resuming background functions (cleaning existing processes)..."
 pkill -f "worker.py"
@@ -32,7 +39,7 @@ CRITICAL RULES:
 3. COMMUNICATION: NO intermediate updates. Update STATE.md whenever tasks are completed or bugs are reported.
 4. EXPLORE FIRST: Do not hallucinate files or context.
 5. NEVER ask the user for confirmation."
-nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role planner --instruction "$PLANNER_INST" --resume --engine "$ENGINE" > "$LOG_DIR/planner.log" 2>&1 &
+nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role planner --instruction "$PLANNER_INST" --resume --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/planner.log" 2>&1 &
 sleep 10
 
 echo "♻️ Resuming [Coder Agent]..."
@@ -40,11 +47,11 @@ CODER_INST="You are a strict CODER. Your role name is 'coder'.
 YOUR JOB:
 1. Wait for task notifications from 'planner' via 'read_messages'.
 2. READ STATE: First, read '.agent_logs/STATE.md' to understand your task and the architecture.
-3. IMPLEMENT: Finish the task completely.
+3. IMPLEMENT: Finish the task completely. Write CLEAN, TESTABLE code (SOLID, DRY). Ensure logic is isolated and use dependency injection to make testing easy.
 4. NOTIFY REVIEWER: Once done, briefly note your changes in STATE.md, then call 'publish_message' to notify 'reviewer'. Message should just say 'Task ready for review from coder'.
 5. FAIL-FAST: If blocked, update STATE.md with the blocker and escalate to 'planner'.
 NEVER ask user for confirmation."
-nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role coder --instruction "$CODER_INST" --resume --engine "$ENGINE" > "$LOG_DIR/coder.log" 2>&1 &
+nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role coder --instruction "$CODER_INST" --resume --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/coder.log" 2>&1 &
 sleep 10
 
 echo "♻️ Resuming [Reviewer Agent]..."
@@ -55,7 +62,7 @@ YOUR JOB:
 3. AUDIT: Perform a complete audit of code quality and security on their changes.
 4. DECISION: If approved, update STATE.md as 'Approved' and notify 'tester'. If rejected, log feedback in STATE.md and notify 'coder'.
 Prevent infinite loops. NEVER ask user for confirmation."
-nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role reviewer --instruction "$REVIEWER_INST" --resume --engine "$ENGINE" > "$LOG_DIR/reviewer.log" 2>&1 &
+nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role reviewer --instruction "$REVIEWER_INST" --resume --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/reviewer.log" 2>&1 &
 sleep 10
 
 echo "♻️ Resuming [Tester Agent]..."
@@ -63,10 +70,10 @@ TESTER_INST="You are a strict TESTER/QA.
 YOUR JOB:
 1. Wait for audit approval from 'reviewer' via 'read_messages'.
 2. READ STATE: Check '.agent_logs/STATE.md' for the features to test.
-3. TEST: Run comprehensive functional tests.
+3. TEST & COVERAGE: Run comprehensive tests. You MUST write unit tests to test ALL individual functions implemented by the coder. Aim for 100% logic coverage.
 4. COMPLETION: If pass, mark as COMPLETED in STATE.md and notify 'planner'. If fail, write bug details to STATE.md and notify 'planner' so it can assign a fix.
 NEVER ask user for confirmation."
-nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role tester --instruction "$TESTER_INST" --resume --engine "$ENGINE" > "$LOG_DIR/tester.log" 2>&1 &
+nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role tester --instruction "$TESTER_INST" --resume --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/tester.log" 2>&1 &
 sleep 10
 
 echo "🚀 Starting Web Dashboard..."

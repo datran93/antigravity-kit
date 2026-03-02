@@ -121,13 +121,19 @@ def log_to_bus(db_path, sender, topic, content, receiver="all"):
     except Exception as e:
         print(f"DB Error log_to_bus: {e}")
 
-def run_engine_command(engine, prompt, workspace, db_path, role):
+def run_engine_command(engine, prompt, workspace, db_path, role, model=None):
     try:
         if engine == "gemini" or engine == "copilot":
             cmd = f"{engine} -p {shlex.quote(prompt)}"
         else:
             # Default to 'run' command for kilocode and opencode
             cmd = f"{engine} run {shlex.quote(prompt)}"
+            if model:
+                cmd += f" --model {shlex.quote(model)}"
+
+            # Auto-approve if engine is kilocode or opencode (to prevent hangs)
+            if engine in ["kilocode", "opencode"]:
+                cmd += " --auto"
 
         my_env = os.environ.copy()
 
@@ -219,7 +225,8 @@ def main():
     parser.add_argument('--role', required=True)
     parser.add_argument('--instruction', required=True)
     parser.add_argument('--task', required=False, default="")
-    parser.add_argument('--engine', required=False, default="kilocode", choices=["kilocode", "opencode", "gemini", "copilot"])
+    parser.add_argument('--engine', required=False, default="kilocode", choices=["kilocode", "opencode", "gemini", "copilot", "openrouter"])
+    parser.add_argument('--model', required=False, default=None, help="Specific model to use (provider/model)")
     parser.add_argument('--resume', action='store_true', help="Resume agent with previous memory context")
     args = parser.parse_args()
 
@@ -241,7 +248,7 @@ def main():
         # Acquire token bucket to allow concurrency but prevent rate limiting
         req_id, lock_f, rate_db = acquire_token_bucket(args.workspace, max_rpm=10, max_concurrent=2)
         try:
-            run_engine_command(args.engine, prompt, args.workspace, db_path, args.role)
+            run_engine_command(args.engine, prompt, args.workspace, db_path, args.role, model=args.model)
         finally:
             release_token_bucket(req_id, lock_f, rate_db)
             # Mandatory cooldown to prevent RPM spikes
@@ -288,7 +295,7 @@ def main():
             # Acquire token bucket to allow concurrency but prevent rate limiting
             req_id, lock_f, rate_db = acquire_token_bucket(args.workspace, max_rpm=10, max_concurrent=2)
             try:
-                run_engine_command(args.engine, prompt, args.workspace, db_path, args.role)
+                run_engine_command(args.engine, prompt, args.workspace, db_path, args.role, model=args.model)
             finally:
                 release_token_bucket(req_id, lock_f, rate_db)
                 # Mandatory cooldown to prevent RPM spikes
