@@ -75,7 +75,9 @@ def strip_ansi_codes(text):
     return ansi_escape.sub('', text)
 
 def get_db_connection(db_path):
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, timeout=30.0)
+    conn.execute('PRAGMA journal_mode=WAL')
+    conn.execute('PRAGMA synchronous=NORMAL')
     conn.execute('''
         CREATE TABLE IF NOT EXISTS messages (
             id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -123,17 +125,19 @@ def read_unread_messages(db_path, role):
 
 def log_to_bus(db_path, sender, topic, content, receiver="all"):
     max_retries = 5
+    conn = None
     clean_content = strip_ansi_codes(content) if content else ""
     for attempt in range(max_retries):
         try:
             conn = get_db_connection(db_path)
+            conn.execute("BEGIN IMMEDIATE")
             cursor = conn.cursor()
             cursor.execute("INSERT INTO messages (topic, sender_role, receiver_role, content) VALUES (?, ?, ?, ?)",
                           (topic, sender, receiver, clean_content))
             conn.commit()
-            conn.close()
             return
         except sqlite3.OperationalError as e:
+            if conn: conn.rollback()
             if "locked" in str(e).lower():
                 time.sleep(0.5 * (attempt + 1))
                 continue
@@ -142,6 +146,8 @@ def log_to_bus(db_path, sender, topic, content, receiver="all"):
         except Exception as e:
             print(f"DB Error log_to_bus: {e}")
             return
+        finally:
+            if conn: conn.close()
 
 def run_engine_command(engine, prompt, workspace, db_path, role, model=None):
     try:
@@ -281,8 +287,8 @@ def main():
             sys.exit(0)
 
     # Adaptive polling logic for persistent daemons
-    current_sleep = 2
-    max_sleep = 15
+    current_sleep = 1
+    max_sleep = 5
 
     # Core event loop: wait for messages and process them
     while True:
@@ -335,6 +341,8 @@ def main():
 
         # Sleep tight
         time.sleep(current_sleep)
+        if random.random() < 0.05: # Occasional heartbeat to show daemon is alive
+             log_to_bus(db_path, "system", f"status_{args.role}", "Agent is idling, waiting for messages.", receiver="log")
 
 if __name__ == "__main__":
     main()

@@ -34,9 +34,11 @@ trigger: always_on
 |                                  | `reply_to_mr_discussion`                                        | Post a reply to a specific GitLab discussion thread.                                                                 |
 |                                  | `resolve_mr_discussion`                                         | Resolve or unresolve a discussion thread on GitLab.                                                                  |
 | **`@mcp:mcp-http-client`**       | `http_request`, `import_curl`, `set_env`                        | Execute HTTP requests with **{{var}} placeholders**, **cURL import**, and `.rest` logging.                           |
-| **`@mcp:notebooklm`**            | `notebook_query`, `research_start`                              | Query NotebookLM notebooks for source-grounded insights and start deep research.                                     |
+| **`@mcp:mcp-multi-agent`**       | `delegate_to_subagent`, `publish_message`, `read_messages`      | Orchestrate subagents, internal messaging, and enforce **Socratic Gates**.                                           |
+|                                  | `enforce_socratic_gate`                                         | Mandates user confirmation for high-impact or ambiguous actions.                                                     |
 | **`@mcp:skill-router`**          | `search_skills`                                                 | Semantic search for skills. Supports `tags_filter` for exact matching and returns Mini-RAG previews.                 |
-| **`@mcp:stitch`**                | `generate_screen_from_text`                                     | Generate and edit UI screens/components using Google's Stitch AI design tool.                                        |
+| **`@mcp:stitch`**                | `generate_screen_from_text`, `edit_screens`                     | Generate and edit UI screens/components using Google's Stitch AI design tool.                                        |
+
 
 ---
 
@@ -47,29 +49,37 @@ The workflow follows a multi-agent architectural pattern to handle requests robu
 
 ### 1. Planner Agent (Initial & Orchestration)
 - **Role**: Understand user requests, discover context, and plan the execution.
-- **Action**: Uses `@mcp:skill-router` (`search_skills`) to find relevant skills. Uses `@mcp:ast-explorer` and other discovery tools to map the impact area.
-- **Output**: Calls `@mcp:context-manager` (`initialize_task_plan`) to persist the plan. Hands over tasks to Code Agent.
+- **Action**: Follows the `[/planner-architect](file://.agent/workflows/planner-architect.md)` workflow. Uses `@mcp:skill-router` (`search_skills`) to find relevant skills. Uses `@mcp:ast-explorer` and other discovery tools to map the impact area.
+- **Output**: Calls `@mcp:context-manager` (`initialize_task_plan`) to persist the plan. Hands over tasks to Code Agent via `@mcp:mcp-multi-agent` (`delegate_to_subagent`).
 
 ### 2. Code Agent (Execution)
-- **Role**: Implement tasks section by section.
-- **Action**: Writes, refactors, and engineers the solution based on the plan.
-- **Output**: Upon completing a task snippet, exchanges internal messages with the Test Agent and calls `@mcp:context-manager` (`complete_task_step`).
+- **Role**: Implement tasks following **Clean Code** and **Testability** standards.
+- **Action**: Follows the `[/coder-implementation](file://.agent/workflows/coder-implementation.md)` workflow. Writes, refactors, and engineers the solution based on the plan.
+- **Output**: Upon completing a task, sends a message to the Reviewer for feedback. Does **NOT** mark tasks as complete.
 
 ### 3. Test Agent (Verification)
 - **Role**: Check functionality, stability, and quality.
-- **Action**: Runs tests, verification commands (`run_command`), and ensures code behaves correctly under edge cases.
+- **Action**: Follows the `[/tester-verification](file://.agent/workflows/tester-verification.md)` workflow. Runs tests, verification commands (`run_command`), and ensures code behaves correctly under edge cases.
 - **Output**: Exchanges feedback with Code Agent for fixes. Once passing, sends to Review Agent.
 
 ### 4. Review Agent (Audit & Handover)
 - **Role**: Final quality, security, and standards validation.
-- **Action**: Audits the PR/changes, ensures adherence to SOTA & coding standards.
+- **Action**: Follows the `[/reviewer-audit](file://.agent/workflows/reviewer-audit.md)` workflow. Audits the PR/changes, ensures adherence to SOTA & coding standards.
 - **Output**: Synthesizes the final report. Hands back to the user or back to Planner for missed requirements.
 
-### ⛔ INTERNAL COMMUNICATION & GOVERNANCE
+### ⛔ INTERNAL COMMUNICATION & GOVERNANCE (DEADLOCK PREVENTION)
 
-- **Internal Loops**: Agents MUST exchange internal messages for continuous iteration until the requirement is met. None of the intermediate failures should be exposed directly unless user intervention is absolutely required.
-- **Graceful Handoffs**: Save checkpoints (`save_checkpoint`) during critical transitions between agents.
-- **Final Reporting**: Only report back the summarized status to the USER once the Review Agent approves the completion.
+To prevent deadlocks (where all agents sleep) and resource conflicts, follow these rules:
+
+1.  **Star Topology (Planner as Dispatcher)**: Every subagent (Coder, Tester, Reviewer) MUST report back to the **Planner** or the next designated role after every work block. The Planner is the "Source of Truth" for the pipeline state.
+2.  **Mandatory Activation Message**: An active Agent MUST NOT exit or idle without calling `publish_message` to signal the next participant. If a task is blocked, notify the Planner.
+3.  **Exclusive Resource Ownership**: 
+    - **Planner**: Task Plan (`.agent/tasks.md`) & Checkpoints.
+    - **Code Agent**: Source code (`src/`, etc.).
+    - **Test Agent**: Test files and execution environments.
+    - **Reviewer**: Read-only access.
+4.  **Sequential Handoffs**: Use `run_background=False` for critical state transitions to ensure the parent process (Planner/Coordinator) maintains execution flow.
+5.  **Atomic State Updates**: All writes to shared state must use the `@mcp:context-manager` tools sequentially.
 
 ---
 
@@ -87,7 +97,7 @@ Minimize user friction by providing choices:
 
 ## 📌 Metadata
 
-- **Version**: 1.0.0
-- **Last Updated**: 2026-02-28
+- **Version**: 1.0.1
+- **Last Updated**: 2026-03-03
 - **Maintainer**: Antigravity Team
 - **Related**: `.agent/skills/*.md`, `GEMINI.md`

@@ -48,53 +48,39 @@ if [ -f "$WORKSPACE_DB" ]; then
     rm "$WORKSPACE_DB"
 fi
 
-echo "🚀 Summoning [Planner Agent] for project: $WORKSPACE..."
-PLANNER_INST="You are a strict PLANNER and ARCHITECT. You are the leader of a static 4-agent team: planner, coder, reviewer, tester.
-CRITICAL RULES:
-1. STATE MANAGEMENT: Maintain a single source of truth at '.agent_logs/STATE.md'. It must track Architecture, Task Status, and Current Assignments.
-2. NO SPAWNING: DO NOT use 'delegate_to_subagent'. Use 'publish_message' to assign tasks to 'coder'.
-3. ASSIGNMENT: To start a task, update STATE.md then 'publish_message(workspace_path=\"$WORKSPACE\", topic=\"task\", sender_role=\"planner\", receiver_role=\"coder\", content=\"Task #X assigned. Check STATE.md\")'.
-4. COMPLETION: When 'tester' notifies you of completion, mark the task as done in STATE.md. If 'tester' reports bugs, assign a fix back to 'coder'.
-5. EXPLORE FIRST: Do not hallucinate files or context.
-NEVER ask the user for confirmation."
+echo "🚀 Summoning [Planner Agent]..."
+PLANNER_INST="You are the LEAD PLANNER and ARCHITECT.
+MANDATORY PROTOCOLS:
+1. WORKFLOW: Follow '.agent/workflows/planner-architect.md' strictly.
+2. COORDITANION: You are the Dispatcher. Assign tasks to 'coder' via 'publish_message'.
+3. NO DEADLOCK: Never idle without a message.
+4. PLAN: Maintain the project plan using @mcp:context-manager."
 nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role planner --instruction "$PLANNER_INST" --task "$TASK" --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/planner.log" 2>&1 &
-sleep 10
+sleep 5
 
 echo "🚀 Summoning [Coder Agent]..."
-CODER_INST="You are a strict CODER. Your role name is 'coder'. You are part of a 4-agent team (planner, coder, reviewer, tester).
-YOUR JOB:
-1. POLLING: Periodically call 'read_messages(workspace_path=\"$WORKSPACE\", receiver_role=\"coder\")' to wait for tasks from 'planner' or rework from 'reviewer'.
-2. READ STATE: Read '.agent_logs/STATE.md' to understand the architecture and your specific task.
-3. IMPLEMENT: Write CLEAN, TESTABLE code (SOLID, DRY). Use dependency injection. Ensure logic is isolated.
-4. HANDOFF: Once done, update STATE.md then call 'publish_message(workspace_path=\"$WORKSPACE\", topic=\"review\", sender_role=\"coder\", receiver_role=\"reviewer\", content=\"Task ready for review\")'.
-5. FAIL-FAST: If blocked, update STATE.md and notify 'planner'.
-NEVER ask user for confirmation."
+CODER_INST="You are the CODER.
+MANDATORY PROTOCOLS:
+1. WORKFLOW: Follow '.agent/workflows/coder-implementation.md' strictly.
+2. REPORT: Always report status back to the Planner.
+3. QUALITY: Write Clean, Testable code."
 nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role coder --instruction "$CODER_INST" --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/coder.log" 2>&1 &
-sleep 10
+sleep 5
 
 echo "🚀 Summoning [Reviewer Agent]..."
-REVIEWER_INST="You are a strict REVIEWER/AUDITOR. You are part of a 4-agent team (planner, coder, reviewer, tester).
-YOUR JOB:
-1. Wait for notifications from 'coder' via 'read_messages(workspace_path=\"$WORKSPACE\", receiver_role=\"reviewer\")'.
-2. AUDIT: Read '.agent_logs/STATE.md' and the changed code. Perform a complete audit of quality and security.
-3. DECISION:
-   - IF APPROVED: Update STATE.md and 'publish_message(workspace_path=\"$WORKSPACE\", topic=\"test\", sender_role=\"reviewer\", receiver_role=\"tester\", content=\"Review passed. Proceed to test\")'.
-   - IF REJECTED: Log feedback in STATE.md and 'publish_message(workspace_path=\"$WORKSPACE\", topic=\"rework\", sender_role=\"reviewer\", receiver_role=\"coder\", content=\"Review failed. See feedback in STATE.md\")'.
-Prevent infinite loops. NEVER ask user for confirmation."
+REVIEWER_INST="You are the REVIEWER.
+MANDATORY PROTOCOLS:
+1. WORKFLOW: Follow '.agent/workflows/reviewer-audit.md' strictly.
+2. READ-ONLY: Never modify source code. Request fixes from the coder."
 nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role reviewer --instruction "$REVIEWER_INST" --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/reviewer.log" 2>&1 &
-sleep 10
+sleep 5
 
 echo "🚀 Summoning [Tester Agent]..."
-TESTER_INST="You are a strict TESTER/QA. You are part of a 4-agent team (planner, coder, reviewer, tester).
-YOUR JOB:
-1. Wait for audit approval from 'reviewer' via 'read_messages(workspace_path=\"$WORKSPACE\", receiver_role=\"tester\")'.
-2. TEST & COVERAGE: Read STATE.md. Write unit tests for ALL functions implemented by coder. Aim for 100% logic coverage. Ensure tests are independent.
-3. RESULT:
-   - IF PASS: Mark as COMPLETED in STATE.md and 'publish_message(workspace_path=\"$WORKSPACE\", topic=\"completion\", sender_role=\"tester\", receiver_role=\"planner\", content=\"Task COMPLETED successfully\")'.
-   - IF FAIL: Write bug details to STATE.md and 'publish_message(workspace_path=\"$WORKSPACE\", topic=\"bug\", sender_role=\"tester\", receiver_role=\"planner\", content=\"Bugs found. See STATE.md for details\")'.
-NEVER ask user for confirmation."
+TESTER_INST="You are the TESTER.
+MANDATORY PROTOCOLS:
+1. WORKFLOW: Follow '.agent/workflows/tester-verification.md' strictly.
+2. TEST: Write and run tests for all code logic."
 nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role tester --instruction "$TESTER_INST" --engine "$ENGINE" $MODEL_ARG > "$LOG_DIR/tester.log" 2>&1 &
-
 echo "🚀 Starting Web Dashboard..."
 export MULTI_AGENT_DB_PATH="$WORKSPACE_DB"
 cd "$SCRIPT_DIR" || exit

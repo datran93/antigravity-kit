@@ -20,7 +20,9 @@ def get_db_connection(workspace_path: str):
     os.makedirs(log_dir, exist_ok=True)
     db_path = os.path.join(log_dir, "multi_agent_bus.db")
 
-    conn = sqlite3.connect(db_path)
+    conn = sqlite3.connect(db_path, timeout=30.0)
+    conn.execute('PRAGMA journal_mode=WAL')
+    conn.execute('PRAGMA synchronous=NORMAL')
     conn.row_factory = sqlite3.Row
     cursor = conn.cursor()
     cursor.execute('''
@@ -36,17 +38,19 @@ def get_db_connection(workspace_path: str):
     ''')
     conn.commit()
     return conn
-
 def internal_log(workspace_path: str, sender: str, topic: str, content: str, receiver: str = "all"):
+    conn = None
     try:
         conn = get_db_connection(workspace_path)
+        conn.execute("BEGIN IMMEDIATE")
         cursor = conn.cursor()
         cursor.execute('INSERT INTO messages (topic, sender_role, receiver_role, content) VALUES (?, ?, ?, ?)',
                       (topic, sender, receiver, content))
         conn.commit()
-        conn.close()
     except:
-        pass
+        if conn: conn.rollback()
+    finally:
+        if conn: conn.close()
 
 @mcp.tool()
 def publish_message(workspace_path: str, topic: str, sender_role: str, receiver_role: str, content: str) -> str:
@@ -96,6 +100,7 @@ def publish_message(workspace_path: str, topic: str, sender_role: str, receiver_
     for attempt in range(max_retries):
         try:
             conn = get_db_connection(workspace_path)
+            conn.execute("BEGIN IMMEDIATE")
             cursor = conn.cursor()
             cursor.execute('''
                 INSERT INTO messages (topic, sender_role, receiver_role, content)
@@ -206,27 +211,28 @@ def delegate_to_subagent(workspace_path: str, target_role: str, task_description
         publish_message(workspace_path, f"subagent_{target_role}", "system", "all", f"Spawning Subagent '{target_role}' for task: {task_description}")
 
         role_requirements = ""
-        if "coder" in target_role.lower():
-            role_requirements = (
-                "\nCODER-SPECIFIC REQUIREMENTS:\n"
-                "1. CLEAN CODE & TESTABILITY: Write clean, readable code following SOLID principles. "
-                "Ensure logic is isolated and use dependency injection to make the code highly testable by others.\n"
-            )
-        elif "tester" in target_role.lower():
-            role_requirements = (
-                "\nTESTER-SPECIFIC REQUIREMENTS:\n"
-                "1. COMPREHENSIVE UNIT TESTING: You MUST write unit tests for ALL individual functions implemented by the coder. "
-                "Aim for 100% logic coverage of new components. Ensure tests are robust and independent.\n"
-            )
+
+        workflow_file = ""
+        role_lower = target_role.lower()
+        if "planner" in role_lower:
+            workflow_file = ".agent/workflows/planner-architect.md"
+        elif "coder" in role_lower:
+            workflow_file = ".agent/workflows/coder-implementation.md"
+        elif "reviewer" in role_lower:
+            workflow_file = ".agent/workflows/reviewer-audit.md"
+        elif "tester" in role_lower:
+            workflow_file = ".agent/workflows/tester-verification.md"
 
         system_prompt = (
-            f"You are a strict {target_role.upper()} in a Multi-Agent architecture. Your current task is: {task_description}. "
-            "CRITICAL COMMUNICATION POLICY:\n"
-            "1. EXECUTE FULLY: Focus on finishing the code/test task before chatting. NO intermediate updates.\n"
-            "2. BATCH MESSAGES: Only send ONE final message when the milestone is reached.\n"
-            "3. NO NITPICKING: Be pragmatic and goal-oriented. Do not ask for confirmation.\n"
+            f"You are the {target_role.upper()} in a Multi-Agent architecture. Your current task is: {task_description}.\n\n"
+            "MANDATORY PROTOCOLS:\n"
+            f"1. WORKFLOW ADHERENCE: You MUST follow the instructions in '[{workflow_file}](file:///{workspace_path}/{workflow_file})'. Read it before taking action.\n"
+            "2. GLOBAL RULES: Follow all rules in '[GEMINI.md](file:///.agent/rules/GEMINI.md)'.\n"
+            "3. STAR TOPOLOGY: Report status back to the PLANNER or the next role in the workflow via `publish_message` after every work block.\n"
+            "4. NO DEADLOCKS: You MUST NOT exit or idle without sending an activation message to the next participant. If stuck, notify the Planner.\n"
+            "5. CONCISE COMMUNICATION: Focus on technical execution. Only send ONE final message summarizing your work.\n"
             f"{role_requirements}"
-            "Once done, output a final summary of your work."
+            "Once task is finished, output a technical summary and wait for instructions."
         )
 
         # Prepare context by referring to files if specified
