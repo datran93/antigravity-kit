@@ -9,19 +9,64 @@ import sqlite3
 import subprocess
 import fcntl
 
-def acquire_global_lock(workspace):
-    lock_file = os.path.join(workspace, ".agent_logs", "llm_request.lock")
-    os.makedirs(os.path.dirname(lock_file), exist_ok=True)
-    f = open(lock_file, "w")
-    try:
-        # Wait for the lock (blocking)
-        fcntl.flock(f, fcntl.LOCK_EX)
-        return f
-    except Exception:
-        return None
+def acquire_token_bucket(workspace, max_rpm=10, max_concurrent=2):
+    db_path = os.path.join(workspace, ".agent_logs", "rate_limit.db")
+    os.makedirs(os.path.dirname(db_path), exist_ok=True)
 
-def release_global_lock(f):
-    if f:
+    lock_file = os.path.join(workspace, ".agent_logs", "rate_limit.lock")
+    f = open(lock_file, "w")
+
+    while True:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        try:
+            conn = sqlite3.connect(db_path)
+            conn.execute('''CREATE TABLE IF NOT EXISTS requests (
+                            id INTEGER PRIMARY KEY AUTOINCREMENT,
+                            timestamp REAL,
+                            status TEXT
+                        )''')
+
+            curr_time = time.time()
+
+            # Clean up old timestamps (older than 60s)
+            conn.execute("DELETE FROM requests WHERE timestamp < ?", (curr_time - 60,))
+
+            # Reset 'running' stuck requests (older than 10 mins)
+            conn.execute("DELETE FROM requests WHERE status = 'running' AND timestamp < ?", (curr_time - 600,))
+
+            cursor = conn.cursor()
+            cursor.execute("SELECT COUNT(*) FROM requests")
+            rpm_count = cursor.fetchone()[0]
+
+            cursor.execute("SELECT COUNT(*) FROM requests WHERE status = 'running'")
+            concurrent_count = cursor.fetchone()[0]
+
+            if rpm_count < max_rpm and concurrent_count < max_concurrent:
+                cursor.execute("INSERT INTO requests (timestamp, status) VALUES (?, 'running')", (curr_time,))
+                req_id = cursor.lastrowid
+                conn.commit()
+                conn.close()
+                fcntl.flock(f, fcntl.LOCK_UN)
+                return req_id, f, db_path
+            else:
+                conn.commit()
+                conn.close()
+        except Exception:
+            pass
+
+        fcntl.flock(f, fcntl.LOCK_UN)
+        time.sleep(1)
+
+def release_token_bucket(req_id, f, db_path):
+    if f and req_id:
+        fcntl.flock(f, fcntl.LOCK_EX)
+        try:
+            conn = sqlite3.connect(db_path)
+            conn.execute("UPDATE requests SET status = 'done' WHERE id = ?", (req_id,))
+            conn.commit()
+            conn.close()
+        except:
+            pass
         fcntl.flock(f, fcntl.LOCK_UN)
         f.close()
 
@@ -46,35 +91,63 @@ def get_db_connection(db_path):
     return conn
 
 def read_unread_messages(db_path, role):
-    try:
-        conn = get_db_connection(db_path)
-        cursor = conn.cursor()
-        cursor.execute("SELECT id, sender_role, content FROM messages WHERE receiver_role = ? AND is_read = 0 ORDER BY created_at ASC", (role,))
-        rows = cursor.fetchall()
+    max_retries = 5
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = get_db_connection(db_path)
+            # Fix Race Condition: Use BEGIN IMMEDIATE to lock the DB for writing early.
+            # This ensures only one process reads and marks messages as read at a time.
+            conn.execute("BEGIN IMMEDIATE")
+            cursor = conn.cursor()
+            cursor.execute("SELECT id, sender_role, content FROM messages WHERE receiver_role = ? AND is_read = 0 ORDER BY created_at ASC", (role,))
+            rows = cursor.fetchall()
 
-        if rows:
-            msg_ids = [r['id'] for r in rows]
-            placeholders = ', '.join(['?'] * len(msg_ids))
-            cursor.execute(f"UPDATE messages SET is_read = 1 WHERE id IN ({placeholders})", msg_ids)
-            conn.commit()
+            if rows:
+                msg_ids = [r['id'] for r in rows]
+                placeholders = ', '.join(['?'] * len(msg_ids))
+                cursor.execute(f"UPDATE messages SET is_read = 1 WHERE id IN ({placeholders})", msg_ids)
+                conn.commit()
+            else:
+                conn.rollback()
 
-        conn.close()
-        return rows
-    except Exception as e:
-        print(f"DB Error: {e}")
-        return []
+            return rows
+        except sqlite3.OperationalError as e:
+            if "locked" in str(e).lower():
+                time.sleep(0.5 * (attempt + 1))
+                continue
+            if conn: conn.rollback()
+            return []
+        except Exception as e:
+            print(f"DB Error read_unread_messages: {e}")
+            if conn: conn.rollback()
+            return []
+        finally:
+            if conn: conn.close()
+
+    return []
 
 def log_to_bus(db_path, sender, topic, content, receiver="all"):
-    try:
-        clean_content = strip_ansi_codes(content) if content else ""
-        conn = get_db_connection(db_path)
-        cursor = conn.cursor()
-        cursor.execute("INSERT INTO messages (topic, sender_role, receiver_role, content) VALUES (?, ?, ?, ?)",
-                      (topic, sender, receiver, clean_content))
-        conn.commit()
-        conn.close()
-    except Exception as e:
-        print(f"DB Error log_to_bus: {e}")
+    max_retries = 5
+    clean_content = strip_ansi_codes(content) if content else ""
+    for attempt in range(max_retries):
+        try:
+            conn = get_db_connection(db_path)
+            cursor = conn.cursor()
+            cursor.execute("INSERT INTO messages (topic, sender_role, receiver_role, content) VALUES (?, ?, ?, ?)",
+                          (topic, sender, receiver, clean_content))
+            conn.commit()
+            conn.close()
+            return
+        except sqlite3.OperationalError as e:
+            if "locked" in str(e).lower():
+                time.sleep(0.5 * (attempt + 1))
+                continue
+            print(f"DB Operational Error (log_to_bus): {e}")
+            return
+        except Exception as e:
+            print(f"DB Error log_to_bus: {e}")
+            return
 
 def run_engine_command(engine, prompt, workspace, db_path, role):
     try:
@@ -83,6 +156,9 @@ def run_engine_command(engine, prompt, workspace, db_path, role):
         else:
             # Default to 'run' command for kilocode and opencode
             cmd = f"{engine} run {shlex.quote(prompt)}"
+            # AUTO-APPROVE: Essential for autonomous speed.
+            if engine in ["kilocode"]:
+                cmd += " --auto"
 
         my_env = os.environ.copy()
 
@@ -177,12 +253,12 @@ def main():
         # Solution 3: Strict Brevity
         prompt += "CRITICAL: Output ONLY a technical summary and the next delegation command. No conversational filler or greetings. Be ultra-concise."
 
-        # Acquire global lock to serialize LLM requests
-        lock = acquire_global_lock(args.workspace)
+        # Acquire token bucket to allow concurrency but prevent rate limiting
+        req_id, lock_f, rate_db = acquire_token_bucket(args.workspace, max_rpm=10, max_concurrent=2)
         try:
             run_engine_command(args.engine, prompt, args.workspace, db_path, args.role)
         finally:
-            release_global_lock(lock)
+            release_token_bucket(req_id, lock_f, rate_db)
             # Mandatory cooldown to prevent RPM spikes
             time.sleep(2)
 
@@ -218,17 +294,17 @@ def main():
             # Solution 3: Strict Terse Output Instruction at the end
             prompt += "FINAL INSTRUCTION: Read history, take actions via tools, and output a technical summary ONLY. No filler. No intro. No outro."
 
-            # Acquire global lock to serialize LLM requests
-            lock = acquire_global_lock(args.workspace)
+            # Acquire token bucket to allow concurrency but prevent rate limiting
+            req_id, lock_f, rate_db = acquire_token_bucket(args.workspace, max_rpm=10, max_concurrent=2)
             try:
                 run_engine_command(args.engine, prompt, args.workspace, db_path, args.role)
             finally:
-                release_global_lock(lock)
+                release_token_bucket(req_id, lock_f, rate_db)
                 # Mandatory cooldown to prevent RPM spikes
                 time.sleep(2)
 
         # Sleep tight to avoid eating CPU, with jitter to avoid rate limits
-        time.sleep(random.randint(10, 30))
+        time.sleep(random.randint(1, 5))
 
 if __name__ == "__main__":
     main()

@@ -57,32 +57,32 @@ echo "🚀 Summoning [Coder Agent]..."
 CODER_INST="You are a strict CODER.
 YOUR JOB:
 1. Wait for tasks from 'planner' by calling 'read_messages(receiver_role=\"coder\")'.
-2. EXPLORE: Use tools (list_dir, view_file) to understand existing code before writing. Do not hallucinate.
-3. IMPLEMENT FULLY: Do not send messages during code execution. Finish the entire task or at least a significant milestone before talking.
-4. NOTIFY REVIEWER: Once a large feature block is written and self-verified, call 'publish_message' to notify 'reviewer' for code audit. NO status updates like 'starting work' or 'file X updated'.
-5. FAIL-FAST: If blocked, summarize the exact issue and escalate to 'planner'.
-DO NOT plan the architecture. Just implement. NEVER ask user for confirmation."
+2. EXPLORE: Use tools (list_dir, view_file) to understand code. DO NOT be timid.
+3. IMPLEMENT PROACTIVELY: Fix the entire issue in one run. Batch multiple file edits. Use 'replace_file_content' or 'multi_replace_file_content' to make significant progress.
+4. NOTIFY REVIEWER: Once done, call 'publish_message' to notify 'reviewer'. NO status updates.
+5. FAIL-FAST: If blocked, escalate to 'planner' immediately.
+DO NOT plan. Just implement. NEVER ask user for confirmation."
 nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role coder --instruction "$CODER_INST" --engine "$ENGINE" > "$LOG_DIR/coder.log" 2>&1 &
 sleep 10
 
 echo "🚀 Summoning [Reviewer Agent]..."
-REVIEWER_INST="You are a strict REVIEWER/AUDITOR.
+REVIEWER_INST="You are a strict REVIEWER.
 YOUR JOB:
-1. Wait for implementation notification from 'coder' by calling 'read_messages(receiver_role=\"reviewer\")'.
-2. FINAL AUDIT: Perform a complete audit of code quality, security, and standards.
-3. DECISION: If approved, notify 'tester' to begin functional verification. If rejected, notify 'coder' with concrete feedback.
-4. FEEDBACK: Only provide blocked feedback. Do not nitpick or start discussions.
-Prevent infinite loops. NEVER ask user for confirmation."
+1. Wait for notification from 'coder'.
+2. CRITICAL AUDIT ONLY: Focus on functional bugs, security, and major architectural violations. IGNORE style or nitpicks.
+3. DECISION: If OK, notify 'tester'. If FAIL, notify 'coder'.
+4. BE FAST: Prioritize moving the task to 'tester' as quickly as possible.
+NEVER ask user for confirmation."
 nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role reviewer --instruction "$REVIEWER_INST" --engine "$ENGINE" > "$LOG_DIR/reviewer.log" 2>&1 &
 sleep 10
 
 echo "🚀 Summoning [Tester Agent]..."
-TESTER_INST="You are a strict TESTER/QA.
+TESTER_INST="You are a strict TESTER.
 YOUR JOB:
-1. Wait for audit approval from 'reviewer' by calling 'read_messages(receiver_role=\"tester\")'.
-2. TEST FULL SUITE: Run comprehensive functional tests and check edge cases.
-3. SINGLE REPORT: Send ONE message with all test results.
-4. COMPLETION: If tests pass, notify 'planner' that the task is COMPLETED. If they fail, notify 'coder' with a full bug list.
+1. Wait for 'reviewer' approval.
+2. FUNCTIONAL TEST: Run the code. Check edge cases.
+3. COMPLETION: If pass, notify 'planner'. If fail, notify 'coder'.
+4. BE ATOMIC: Send results in one message. No chatter.
 NEVER ask user for confirmation."
 nohup "$PYTHON_ENV" -u "$WORKER_SCRIPT" --workspace "$WORKSPACE" --role tester --instruction "$TESTER_INST" --engine "$ENGINE" > "$LOG_DIR/tester.log" 2>&1 &
 

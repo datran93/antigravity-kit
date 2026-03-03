@@ -37,71 +37,101 @@ def get_db_connection(workspace_path: str):
     conn.commit()
     return conn
 
-@mcp.tool()
-def publish_message(workspace_path: str, topic: str, sender_role: str, receiver_role: str, content: str) -> str:
-    """
-    Publish a message to the internal message bus.
-    Allows agents to communicate asynchronously without polluting the main user conversation.
-    """
-    try:
-        conn = get_db_connection(workspace_path)
-        cursor = conn.cursor()
-        cursor.execute('''
-            INSERT INTO messages (topic, sender_role, receiver_role, content)
-            VALUES (?, ?, ?, ?)
-        ''', (topic, sender_role, receiver_role, content))
-        conn.commit()
-        msg_id = cursor.lastrowid
-        conn.close()
-        return f"✅ Message {msg_id} published from {sender_role} to {receiver_role} on topic '{topic}'."
-    except Exception as e:
-        return f"❌ Error publishing message: {str(e)}"
+    # Solution: Retry logic for DB locking
+    max_retries = 5
+    for attempt in range(max_retries):
+        try:
+            conn = get_db_connection(workspace_path)
+            cursor = conn.cursor()
+            cursor.execute('''
+                INSERT INTO messages (topic, sender_role, receiver_role, content)
+                VALUES (?, ?, ?, ?)
+            ''', (topic, sender_role, receiver_role, content))
+            conn.commit()
+            msg_id = cursor.lastrowid
+            conn.close()
+            return f"✅ Message {msg_id} published from {sender_role} to {receiver_role} on topic '{topic}'."
+        except sqlite3.OperationalError as e:
+            if "locked" in str(e).lower():
+                import time
+                time.sleep(0.5 * (attempt + 1))
+                continue
+            return f"❌ SQLite Operational Error: {str(e)}"
+        except Exception as e:
+            return f"❌ Error publishing message: {str(e)}"
+
+    return "❌ Error: Database remained locked after multiple retries."
+
+import time
 
 @mcp.tool()
 def read_messages(workspace_path: str, receiver_role: str, topic: str = "", unread_only: bool = True) -> str:
     """
     Read messages from the internal message bus for a specific role.
+    Uses atomic 'BEGIN IMMEDIATE' to prevent duplicate processing.
     """
-    try:
-        conn = get_db_connection(workspace_path)
-        cursor = conn.cursor()
-        query = "SELECT * FROM messages WHERE receiver_role = ?"
-        params = [receiver_role]
+    max_retries = 5
+    for attempt in range(max_retries):
+        conn = None
+        try:
+            conn = get_db_connection(workspace_path)
+            # Atomic Lock: Ensure only one agent can read/mark messages at a time
+            conn.execute("BEGIN IMMEDIATE")
+            cursor = conn.cursor()
 
-        if topic:
-            query += " AND topic = ?"
-            params.append(topic)
+            query = "SELECT * FROM messages WHERE receiver_role = ?"
+            params = [receiver_role]
 
-        if unread_only:
-            query += " AND is_read = 0"
+            if topic:
+                query += " AND topic = ?"
+                params.append(topic)
 
-        query += " ORDER BY created_at ASC"
+            if unread_only:
+                query += " AND is_read = 0"
 
-        cursor.execute(query, params)
-        rows = cursor.fetchall()
+            query += " ORDER BY created_at ASC"
 
-        if not rows:
+            cursor.execute(query, params)
+            rows = cursor.fetchall()
+
+            if not rows:
+                conn.rollback()
+                conn.close()
+                return "No messages found."
+
+            res = [f"📬 Messages for {receiver_role}:"]
+            msg_ids = []
+            for r in rows:
+                msg_ids.append(r['id'])
+                res.append(f"--- [ID: {r['id']} | Topic: {r['topic']} | From: {r['sender_role']} | Time: {r['created_at']}] ---")
+                res.append(r['content'])
+                res.append("")
+
+            if unread_only and msg_ids:
+                # Mark as read
+                placeholders = ', '.join(['?'] * len(msg_ids))
+                cursor.execute(f"UPDATE messages SET is_read = 1 WHERE id IN ({placeholders})", msg_ids)
+                conn.commit()
+            else:
+                conn.rollback()
+
             conn.close()
-            return "No messages found."
+            return "\n".join(res)
+        except sqlite3.OperationalError as e:
+            if "locked" in str(e).lower():
+                time.sleep(0.5 * (attempt + 1))
+                continue
+            if conn: conn.rollback()
+            return f"❌ SQLite Operational Error: {str(e)}"
+        except Exception as e:
+            if conn: conn.rollback()
+            return f"❌ Error reading messages: {str(e)}"
+        finally:
+            if conn and conn.total_changes == 0: # Check if con is still open and unused
+                try: conn.close()
+                except: pass
 
-        res = [f"📬 Messages for {receiver_role}:"]
-        msg_ids = []
-        for r in rows:
-            msg_ids.append(r['id'])
-            res.append(f"--- [ID: {r['id']} | Topic: {r['topic']} | From: {r['sender_role']} | Time: {r['created_at']}] ---")
-            res.append(r['content'])
-            res.append("")
-
-        if unread_only and msg_ids:
-            # Mark as read
-            placeholders = ', '.join(['?'] * len(msg_ids))
-            cursor.execute(f"UPDATE messages SET is_read = 1 WHERE id IN ({placeholders})", msg_ids)
-            conn.commit()
-
-        conn.close()
-        return "\n".join(res)
-    except Exception as e:
-        return f"❌ Error reading messages: {str(e)}"
+    return "❌ Error: Database remained locked after multiple retries."
 
 @mcp.tool()
 def clear_topic(workspace_path: str, topic: str) -> str:
