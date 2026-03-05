@@ -1,5 +1,0 @@
-mcp
-pydantic
-fastapi
-uvicorn
-jinja2

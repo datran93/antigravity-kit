@@ -2,9 +2,9 @@
 description: Structured workflow for Planning and Architectural design. Orchestrates context discovery, task planning, and explicit task execution.
 ---
 
-# 🏗️ Planner / Architect Workflow (The Orchestrator)
+# 🏗️ Planner / Architect Workflow (The Architect)
 
-This workflow guides you to analyze requirements, map the codebase, design the architecture, and orchestrate the execution pipeline by performing the tasks directly yourself, rather than delegating to subagents.
+This workflow guides you to analyze requirements (handed over by the Project Manager), map the codebase, design the architecture, and orchestrate the execution pipeline by performing the tasks directly yourself.
 
 ## 🚀 Execution Phase
 
@@ -26,7 +26,7 @@ Initialize the lifecycle of the task in the project state.
 
 ### Phase 4: Task Execution 🤝 (Self-Execution)
 Execute the plan one step at a time by taking on the required roles yourself.
-- **GATE**: Call `@mcp:mcp-multi-agent` (`enforce_socratic_gate`) for high-impact decisions with the USER.
+- **GATE**: Ask the USER directly for explicit confirmation for high-impact decisions or destructive actions.
 - **EXECUTE**: Switch your mindset to the appropriate role (`coder`, `reviewer`, `tester`) based on the task nature and perform the work directly.
 - Read the corresponding `.agent/workflows/<role>.md` if needed to understand the expectations of that role.
 
@@ -39,12 +39,12 @@ Analyze the result of your work to determine the next path.
 - **New requirements discovered?** -> Use `@mcp:context-manager` (`add_task_step`) to dynamically append new steps to the current task plan.
 
 ### Phase 6: Mission Success 🏁
-- Once all tasks in the plan are marked as complete, synthesize the final walkthrough for the USER.
-- Update the final architecture docs and save the project context.
+- Once all tasks in the plan are marked as complete, update the final architecture docs and save the project context.
+- Transition back to the `project-manager` role to formulate the final delivery and communicate with the USER.
 
 ## 🔴 Critical Constraints
 1. **Ownership of Completion**: You must ensure high quality before calling `complete_task_step`.
-2. **Self-Execution**: Do not delegate to subagents via `delegate_to_subagent`. Perform the actions yourself using your tools.
+2. **Self-Execution**: Break down the task into atomic steps so that the `coder` and `tester` roles can execute them independently.
 3. **Summarization**: Keep track of the project's progress logically in your context.
 
 ---

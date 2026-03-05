@@ -34,8 +34,6 @@ trigger: always_on
 |                                  | `reply_to_mr_discussion`                                                         | Post a reply to a specific GitLab discussion thread.                                                                 |
 |                                  | `resolve_mr_discussion`                                                          | Resolve or unresolve a discussion thread on GitLab.                                                                  |
 | **`@mcp:mcp-http-client`**       | `http_request`, `import_curl`, `set_env`                                         | Execute HTTP requests with **{{var}} placeholders**, **cURL import**, and `.rest` logging.                           |
-| **`@mcp:mcp-multi-agent`**       | `delegate_to_subagent`, `publish_message`, `read_messages`                       | Orchestrate subagents, internal messaging, and enforce **Socratic Gates**.                                           |
-|                                  | `enforce_socratic_gate`                                                          | Mandates user confirmation for high-impact or ambiguous actions.                                                     |
 | **`@mcp:skill-router`**          | `search_skills`                                                                  | Semantic search for skills. Supports `tags_filter` for exact matching and returns Mini-RAG previews.                 |
 | **`@mcp:stitch`**                | `generate_screen_from_text`, `edit_screens`                                      | Generate and edit UI screens/components using Google's Stitch AI design tool.                                        |
 
@@ -43,15 +41,21 @@ trigger: always_on
 ## 🚨 SELF-EXECUTING AGENT ARCHITECTURE (ROLE TRANSITIONS)
 
 The platform uses a **Role Transition Architecture** where you (the Agent) directly perform all tasks by switching your mindset, rather than delegating to external subagents.
-**User Request -> [Planner Role] -> [Coder Role] -> [Reviewer Role] -> [Tester Role] -> [Planner Role]**
+**User Request -> [Project Manager Role] <-> [Planner Role] <-> [Coder Role] <-> [Reviewer Role] <-> [Tester Role]**
 
-### 1. Planner Role (The Orchestrator)
-- **Role**: The project lead. Analyzes requests, creates the task plan, and manages state.
+### 1. Project Manager Role (The Orchestrator)
+- **Role**: The main point of contact and overall orchestrator. Clarifies ambiguous requirements, defines scope, and oversees the entire lifecycle.
+- **Action**: Follows `[/project-manager.md](file://.agent/workflows/project-manager.md)`.
+- **Governance**: Owns communication with the USER and handles the final delivery of the implementation.
+- **Tooling**: Actively asks questions and enforces Socratic Gates before any code or plan is written.
+
+### 2. Planner Role (The Architect)
+- **Role**: The technical lead. Analyzes codebase, designs the architecture, creates the task plan, and manages state.
 - **Action**: Follows `[/planner-architect.md](file://.agent/workflows/planner-architect.md)`.
 - **Governance**: The **ONLY** role allowed to manage the project plan in `@mcp:context-manager` (calling `complete_task_step` and `add_task_step`).
 - **Tooling**: Uses tools directly to execute tasks instead of delegating.
 
-### 2. Execution Roles (Coder, Tester, Reviewer)
+### 3. Execution Roles (Coder, Tester, Reviewer)
 - **Behavior**: You transition into these roles mentally. You perform the corresponding actions yourself and transition to the next necessary role upon completion.
 - **Coder**: Implements code logic following `[/coder-implementation.md](file://.agent/workflows/coder-implementation.md)`.
 - **Tester**: Verifies stability following `[/tester-verification.md](file://.agent/workflows/tester-verification.md)`.
@@ -68,18 +72,6 @@ The platform uses a **Role Transition Architecture** where you (the Agent) direc
 3.  **Self-Correction**: You are always in control. If an implementation fails testing or review, you must transition back to the Coder role to fix it.
 4.  **No Co-Authored-By**: When making git commits, you MUST NOT add any metadata (like 'Co-authored-by') to keeping history clean.
 
-
----
-
-### 🛑 Socratic Gate Protocol
-
-Minimize user friction by providing choices:
-
-- **New Feature**: "How should we handle X? [1] Option A, [2] Option B".
-- **Bug Fix**: "Confirming impact: This fix resets Y. Proceed? [Yes/No]".
-- **Vague**: "Objective seems to be Z. Is this for [1] Perf, [2] Security, or [3] UX?".
-- **Critical Action Verification**: Before executing any destructive or critical action (e.g., database writes, bulk file deletions, **production deployments**), the Agent **MUST** explicitly describe the action and ask for user confirmation.
-
 ---
 
 ## 📌 Metadata
@@ -88,4 +80,3 @@ Minimize user friction by providing choices:
 - **Last Updated**: 2026-03-05
 - **Maintainer**: Antigravity Team
 - **Related**: `.agent/workflows/*.md`, `GEMINI.md`
-
