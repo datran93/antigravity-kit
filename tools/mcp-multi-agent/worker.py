@@ -190,7 +190,7 @@ def log_to_bus(db_path, sender, topic, content, receiver="all"):
 def run_engine_command(engine, prompt, workspace, db_path, role, model=None):
     try:
         if engine in ["copilot", "gemini"]:
-            flag = " --allow-all-tools" if engine == "copilot" else ""
+            flag = " --allow-all-tools" if engine == "copilot" else " --yolo"
             cmd = f"{engine} -p {shlex.quote(prompt)}{flag}"
         else:
             # Default to 'run' command for kilocode and opencode
@@ -297,7 +297,7 @@ def main():
     parser.add_argument('--role', required=True)
     parser.add_argument('--instruction', required=True)
     parser.add_argument('--task', required=False, default="")
-    parser.add_argument('--engine', required=False, default="copilot", choices=["kilocode", "opencode", "gemini", "copilot"])
+    parser.add_argument('--engine', required=False, default="opencode", choices=["kilocode", "opencode", "gemini", "copilot"])
     parser.add_argument('--model', required=False, default=None, help="Specific model to use (provider/model)")
     parser.add_argument('--resume', action='store_true', help="Resume agent with previous memory context")
     args = parser.parse_args()

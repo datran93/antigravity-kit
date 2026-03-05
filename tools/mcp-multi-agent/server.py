@@ -231,7 +231,7 @@ def enforce_socratic_gate(action_name: str, impact_description: str, options: Li
     return prompt
 
 @mcp.tool()
-def delegate_to_subagent(workspace_path: str, target_role: str, task_description: str, context_files: List[str], timeout_mins: int = 10, run_background: bool = False, engine: str = "copilot", model: str = "") -> str:
+def delegate_to_subagent(workspace_path: str, target_role: str, task_description: str, context_files: List[str], timeout_mins: int = 10, run_background: bool = False, engine: str = "opencode", model: str = "") -> str:
     """
     Delegate a task to a subagent running.
     If run_background is True, spawns the agent and returns immediately (parallel mode), sending logs to the bus.

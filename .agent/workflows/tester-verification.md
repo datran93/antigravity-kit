@@ -1,17 +1,16 @@
 ---
-description: Structured workflow for the Test Agent. Handles test generation, execution, and verification of code from Coder.
+description: Structured workflow for Testing. Handles test generation, execution, and verification of implemented code.
 ---
 
-# 🧪 Tester / Verification Workflow (Ephemeral)
+# 🧪 Tester / Verification Workflow
 
-This workflow guides an **ephemeral Test Subagent** through verifying the functionality and stability of code changes. It focuses on comprehensive coverage, edge-case validation, and ensuring the project remains bug-free before returning a technical summary and exiting.
+This workflow guides you through verifying the functionality and stability of code changes. It focuses on comprehensive coverage, edge-case validation, and ensuring the project remains bug-free.
 
 ## 🚀 Verification Phase
 
 ### Phase 1: Intake & Strategy 📥
-Load the context provided by the Planner.
-- Analyze the `task_description` and `context_files`.
-- Understand the implementation logic by reviewing recent summaries from the Coder.
+Load the context of the implemented code.
+- Understand the implementation logic that needs testing.
 - Use `@mcp:skill-router` (`search_skills`) to find relevant testing frameworks (Jest, Go test, Pytest, etc.).
 
 ### Phase 2: Test Engineering 🧪
@@ -26,23 +25,19 @@ Run the test suite and evaluate the results.
 - Execute tests using `run_command` (e.g., `npm test`, `go test ./...`, `pytest`).
 - **MANDATORY**: Capture and analyze the logs for any failures.
 
-### Phase 4: Feedback & Summary 📝
-Synthesize the final report for the Planner.
-- **PASS**: If all tests pass, summarize the coverage and confirm stability.
-- **FAIL**: If tests fail, provide relevant error logs and pinpoint the failure in implementation.
-- Suggest specific fixes for the Coder if possible.
+### Phase 4: Feedback & Resolution 📝
+Act on the test results.
+- **PASS**: If all tests pass, summarize the coverage and confirm stability. Mark the overall step as complete.
+- **FAIL**: If tests fail, analyze the error logs, transition back to the `coder` role, and pinpoint the failure in implementation to fix it.
 
-### Phase 5: Termination ⚰️
-- Output the report as your final message.
-- The subagent process will be destroyed by the environment after this step.
+### Phase 5: Role Transition 🔄
+- Once tests pass, transition back to the `planner` role to pick up the next task in the plan.
 
 ## 🔴 Critical Constraints
-1. **Exclusive Test Ownership**: You are the ONLY agent allowed to write or modify files in the test directories.
-2. **No Implementation Fixes**: Do NOT modify the Coder's implementation files directly. Report failures for the Planner to re-route to a Coder.
-3. **Automated Verification**: Always run actual commands; never assume code works based on a visual scan.
-4. **No Project Ownership**: You are a temporary worker. Do not mark tasks as complete.
+1. **Automated Verification**: Always run actual commands; never assume code works based on a visual scan.
+2. **End-to-End Ownership**: If a test fails, you are responsible for fixing the implementation until it passes.
 
 ---
 
 > [!IMPORTANT]
-> If a test fails, include the EXACT error logs in your summary to ensure the Coder can fix it without needing to re-run the tests manually.
+> Use the exact error logs to ensure you fix the root cause quickly when you switch back to the Coder role.

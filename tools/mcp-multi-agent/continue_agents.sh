@@ -9,7 +9,7 @@ WORKSPACE=$(pwd)
 LOG_DIR="$WORKSPACE/.agent_logs"
 mkdir -p "$LOG_DIR"
 
-ENGINE="copilot"
+ENGINE="opencode"
 TASK=""
 
 # Parse options

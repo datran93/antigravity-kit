@@ -1,42 +1,38 @@
 ---
-description: Structured workflow for Code Review and Quality Audit. Orchestrates feedback loops with Coder and handovers to Tester.
+description: Structured workflow for Code Review and Quality Audit. Orchestrates feedback loops to the Coder role.
 ---
 
-# 🔍 Reviewer / Audit Workflow (Ephemeral)
+# 🔍 Reviewer / Audit Workflow
 
-This workflow guides an **ephemeral Review Subagent** to perform rigorous code reviews, ensuring adherence to Clean Code, Testability, and Project Standards before returning a technical summary and exiting.
+This workflow guides you to perform rigorous code reviews on your own implementations, ensuring adherence to Clean Code, Testability, and Project Standards before advancing to testing.
 
 ## 🚀 Audit Phase
 
 ### Phase 1: Review Intake 📥
-Load the context provided by the Planner.
-- Analyze the `task_description` and `context_files`.
-- Review the sumaries from the Coder to understand the changes made.
+Load the context of the recent code changes.
 - Identify the target quality standards using `@mcp:skill-router` (`search_skills`).
+- Understand what was just implemented in the `coder` role.
 
 ### Phase 2: Rigorous Code Audit 🔍
-Perform a deep analysis of the changes without executing them.
+Perform a deep analysis of the changes.
 - **Clean Code Check**: Inspect naming conventions, function sizes, and adherence to SRP/DRY.
 - **Testability Check**: Ensure the code is decoupled and easily testable (e.g., uses Dependency Injection).
 - **Security & Standards Audit**: Look for common vulnerabilities or violations of industry best practices.
 
-### Phase 3: Feedback & Summary 📝
-Synthesize the audit results for the Planner.
-- **NEEDS FIX**: If issues are found, list them clearly with line references and specific correction advice.
-- **APPROVED**: If code meets standards, provide a positive summary of the implementation quality and architectural fit.
+### Phase 3: Feedback & Resolution 📝
+Act on the audit results.
+- **NEEDS FIX**: If issues are found, list them clearly, transition back to the `coder` role, and fix them immediately.
+- **APPROVED**: If code meets standards, proceed to the next testing or planning phase.
 - Detail any potential long-term maintenance concerns.
 
-### Phase 4: Termination ⚰️
-- Output the audit summary as your final message.
-- The subagent process will be destroyed by the environment after this step.
+### Phase 4: Role Transition 🔄
+- Successfully passing the review means transitioning to the `tester` role or continuing the plan.
 
 ## 🔴 Critical Constraints
-1. **Strictly Read-Only**: The Reviewer MUST NOT modify code or execute state-changing commands.
-2. **No Implementation Fixes**: Do NOT attempt to fix errors found; report them clearly for the Planner to re-route to a Coder.
-3. **Internal Governance**: Do not recommend testing if the code does not meet the basic quality baseline.
-4. **No Project Ownership**: You are a temporary worker. Do not mark tasks as complete.
+1. **Strictly Audit First**: Evaluate the code objectively before trying to fix it.
+2. **Internal Governance**: Do not proceed to testing if the code does not meet the basic quality baseline.
 
 ---
 
 > [!TIP]
-> Focus your feedback on "Why" something should change, not just "What". This helps the Coder learn the project's architectural standards.
+> Focus your feedback on "Why" something should change, not just "What". Keep yourself accountable to the project's architectural standards.

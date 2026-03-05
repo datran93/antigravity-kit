@@ -40,35 +40,34 @@ trigger: always_on
 | **`@mcp:stitch`**                | `generate_screen_from_text`, `edit_screens`                     | Generate and edit UI screens/components using Google's Stitch AI design tool.                                        |
 
 
----
+## 🚨 SELF-EXECUTING AGENT ARCHITECTURE (ROLE TRANSITIONS)
 
-## 🚨 SEQUENTIAL MULTI-AGENT ARCHITECTURE (SUMMON & DESTROY)
+The platform uses a **Role Transition Architecture** where you (the Agent) directly perform all tasks by switching your mindset, rather than delegating to external subagents.
+**User Request -> [Planner Role] -> [Coder Role] -> [Reviewer Role] -> [Tester Role] -> [Planner Role]**
 
-The platform uses a **Sequential Ephemeral Architecture** where only the **Planner** is persistent.
-**User Request -> [Planner Agent] --Summon--> [Coder/Tester/Reviewer Subagent] --Destroy--> [Planner]**
-
-### 1. Planner Agent (The Persistent Orchestrator)
+### 1. Planner Role (The Orchestrator)
 - **Role**: The project lead. Analyzes requests, creates the task plan, and manages state.
 - **Action**: Follows `[/planner-architect.md](file://.agent/workflows/planner-architect.md)`.
-- **Goverance**: The **ONLY** agent allowed to mark tasks as complete in `@mcp:context-manager`.
-- **Tooling**: Uses `delegate_to_subagent` with `run_background=False` to summon workers and wait for their **Technical Summary**.
+- **Governance**: The **ONLY** role allowed to mark tasks as complete in `@mcp:context-manager`.
+- **Tooling**: Uses tools directly to execute tasks instead of delegating.
 
-### 2. Ephemeral Subagents (Coder, Tester, Reviewer)
-- **Behavior**: These agents are **temporary workers**. They are created by the Planner for a specific atomic task and **self-destruct (exit)** once their task is completed.
+### 2. Execution Roles (Coder, Tester, Reviewer)
+- **Behavior**: You transition into these roles mentally. You perform the corresponding actions yourself and transition to the next necessary role upon completion.
 - **Coder**: Implements code logic following `[/coder-implementation.md](file://.agent/workflows/coder-implementation.md)`.
 - **Tester**: Verifies stability following `[/tester-verification.md](file://.agent/workflows/tester-verification.md)`.
 - **Reviewer**: Audits quality following `[/reviewer-audit.md](file://.agent/workflows/reviewer-audit.md)`.
-- **Output**: Subagents MUST output a concise **Technical Summary** of their work as the final output of the tool call.
+- **Output**: You directly provide summaries and feedback to the user and keep track of state.
 
 ### ⛔ COMMUNICATION & PIPELINE PROTOCOLS
 
-1.  **Strict Sequential Flow**: Planner MUST wait for a subagent to finish and return its result before delegating the next milestone. There is no background polling in this mode.
+1.  **Strict Sequential Flow**: You MUST complete one role's responsibilities before transitioning to the next. Transitioning implies following the defined workflow for the new role.
 2.  **Explicit Resource Ownership**: 
-    - **Planner**: Owns the Task Plan & Checkpoints.
-    - **Coder**: Owns the Source Code Implementation.
-    - **Tester**: Owns the Test Suite & Verification Results.
-3.  **No Deadlocks**: Since everything is sequential, the Planner is always in control. If a subagent fails, the Planner receives the error immediately and must decide the correction path.
-4.  **No Co-Authored-By**: When making git commits, subagents MUST NOT add any metadata (like 'Co-authored-by') to keeping history clean.
+    - **Planner Mode**: Owns the Task Plan & Checkpoints.
+    - **Coder Mode**: Owns the Source Code Implementation.
+    - **Tester Mode**: Owns the Test Suite & Verification Results.
+3.  **Self-Correction**: You are always in control. If an implementation fails testing or review, you must transition back to the Coder role to fix it.
+4.  **No Co-Authored-By**: When making git commits, you MUST NOT add any metadata (like 'Co-authored-by') to keeping history clean.
+
 
 ---
 

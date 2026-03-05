@@ -1,17 +1,17 @@
 ---
-description: Structured workflow for Code Implementation by Ephemeral Workers. Handles task execution and technical summary generation.
+description: Structured workflow for Code Implementation. Handles task execution directly.
 ---
 
-# 💻 Coder / Implementation Workflow (Ephemeral)
+# 💻 Coder / Implementation Workflow
 
-This workflow guides an **ephemeral Code Subagent** through implementing atomic tasks defined by the Planner. It emphasizes technical excellence, clean code, and strict adherence to the project's architectural standards before returning a technical summary and exiting.
+This workflow guides you through implementing atomic tasks defined during the planning phase. It emphasizes technical excellence, clean code, and strict adherence to the project's architectural standards.
 
 ## 🚀 Implementation Phase
 
 ### Phase 1: Task Intake 📥
-Load the context provided by the Planner.
-- Analyze the `task_description` and `context_files` provided during summoning.
-- Review any feedback or previous summaries in the history to understand the current state.
+Load the context for the current implementation step.
+- Analyze the task requirements and specific files to modify.
+- Review any feedback from previous review or testing cycles to understand the current state.
 
 ### Phase 2: Skill & Pattern Alignment 🔍
 Align the implementation with project-specific standards.
@@ -25,26 +25,22 @@ Write high-quality, maintainable code.
 - **MANDATORY**: Ensure code is **Testable** (Dependency Injection, modularity).
 - Focus only on the atomic task assigned. Do not over-engineer or touch unrelated files.
 
-### Phase 4: Verification & Summary 📝
-Prepare the report for the Planner.
+### Phase 4: Verification 📝
+Prepare for review and testing.
 - Run lightweight verification commands (e.g., `go build`, `tsc --noEmit`, `python -m py_compile`) to ensure no syntax errors.
-- Synthesize a concise **Technical Summary** of your work:
+- Synthesize a concise mental summary of your work:
     - Files modified.
     - Logic implemented/refactored.
     - Any technical debt or edge cases identified.
-- **DO NOT** call `complete_task_step`.
 
-### Phase 5: Termination ⚰️
-- Output the Technical Summary as your final message.
-- The subagent process will be destroyed by the environment after this step.
+### Phase 5: Role Transition 🔄
+- Transition to the `reviewer` or `tester` role to validate your implementation.
 
 ## 🔴 Critical Constraints
-1. **No Project Ownership**: You are a temporary worker. Do not mark tasks as complete or manage the plan.
-2. **Quality First**: Never ignore lint errors or violations of the design system.
-3. **No Co-Authored-By**: When making git commits, DO NOT add 'Co-authored-by' or any agent information.
-4. **Direct Feedback**: If you encounter issues that prevent completion, report them clearly in your summary so the Planner can decide the next step.
+1. **Quality First**: Never ignore lint errors or violations of the design system.
+2. **Direct Feedback**: If you encounter issues that prevent completion, report them to the user and adjust the plan.
 
 ---
 
 > [!TIP]
-> Always verify that your changes don't break existing modularity. If you needed to refactor common code, document it clearly for the next agent (Reviewer/Tester).
+> Always verify that your changes don't break existing modularity. If you needed to refactor common code, document it clearly for the next testing phase.
