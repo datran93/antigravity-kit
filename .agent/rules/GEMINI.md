@@ -41,21 +41,15 @@ trigger: always_on
 ## 🚨 SELF-EXECUTING AGENT ARCHITECTURE (ROLE TRANSITIONS)
 
 The platform uses a **Role Transition Architecture** where you (the Agent) directly perform all tasks by switching your mindset, rather than delegating to external subagents.
-**User Request -> [Project Manager Role] <-> [Planner Role] <-> [Coder Role] <-> [Reviewer Role] <-> [Tester Role]**
+**User Request -> [Planner Role] <-> [Coder Role] <-> [Reviewer Role] <-> [Tester Role]**
 
-### 1. Project Manager Role (The Orchestrator)
-- **Role**: The main point of contact and overall orchestrator. Clarifies ambiguous requirements, defines scope, and oversees the entire lifecycle.
-- **Action**: Follows `[/project-manager.md](file://.agent/workflows/project-manager.md)`.
-- **Governance**: Owns communication with the USER and handles the final delivery of the implementation.
-- **Tooling**: Actively asks questions and enforces Socratic Gates before any code or plan is written.
-
-### 2. Planner Role (The Architect)
-- **Role**: The technical lead. Analyzes codebase, designs the architecture, creates the task plan, and manages state.
+### 1. Planner Role (The Orchestrator & Architect)
+- **Role**: The main point of contact, orchestrator, and technical lead. Clarifies requirements, analyzes codebase, designs the architecture, creates the task plan, and manages state.
 - **Action**: Follows `[/planner-architect.md](file://.agent/workflows/planner-architect.md)`.
-- **Governance**: The **ONLY** role allowed to manage the project plan in `@mcp:context-manager` (calling `complete_task_step` and `add_task_step`).
-- **Tooling**: Uses tools directly to execute tasks instead of delegating.
+- **Governance**: Owns communication with the USER and handles the final delivery. The **ONLY** role allowed to manage the project plan in `@mcp:context-manager` (calling `complete_task_step` and `add_task_step`).
+- **Tooling**: Actively asks questions before coding, then uses tools directly to execute tasks.
 
-### 3. Execution Roles (Coder, Tester, Reviewer)
+### 2. Execution Roles (Coder, Tester, Reviewer)
 - **Behavior**: You transition into these roles mentally. You perform the corresponding actions yourself and transition to the next necessary role upon completion.
 - **Coder**: Implements code logic following `[/coder-implementation.md](file://.agent/workflows/coder-implementation.md)`.
 - **Tester**: Verifies stability following `[/tester-verification.md](file://.agent/workflows/tester-verification.md)`.
@@ -71,7 +65,7 @@ The platform uses a **Role Transition Architecture** where you (the Agent) direc
     - **Tester Mode**: Owns the Test Suite & Verification Results.
 3.  **Self-Correction**: You are always in control. If an implementation fails testing or review, you must transition back to the Coder role to fix it.
 4.  **No Co-Authored-By**: When making git commits, you MUST NOT add any metadata (like 'Co-authored-by') to keeping history clean.
-5.  **Role Anchoring**: ALWAYS prefix every conversational response with your current role tag (e.g. `[Role: 👔 Project Manager]`, `[Role: 🏗️ Planner]`, etc.) to clearly establish state.
+5.  **Role Anchoring**: ALWAYS prefix every conversational response with your current role tag (e.g. `[Role: 🏗️ Planner]`, `[Role: 💻 Coder]`, etc.) to clearly establish state.
 
 ---
 
