@@ -1,7 +1,0 @@
-mcp
-pydantic
-tree-sitter
-tree-sitter-python
-tree-sitter-go
-tree-sitter-javascript
-tree-sitter-typescript

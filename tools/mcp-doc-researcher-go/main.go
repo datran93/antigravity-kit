@@ -181,6 +181,74 @@ func main() {
 		return mcp.NewToolResultText(finalStr), nil
 	})
 
+	// Tool: read_doc_file
+	readDocTool := mcp.NewTool("read_doc_file",
+		mcp.WithDescription("Read the contents of a local .doc, .docx, or .pdf document.\\nSupports pagination for large documents. Each page returns up to 8000 characters."),
+		mcp.WithString("file_path", mcp.Required(), mcp.Description("The absolute path to the local .doc, .docx, or .pdf file (e.g. '/Users/doc.pdf')")),
+		mcp.WithNumber("page", mcp.Description("The page number to read (default 1).")),
+	)
+
+	s.AddTool(readDocTool, func(ctx context.Context, request mcp.CallToolRequest) (*mcp.CallToolResult, error) {
+		args := request.GetArguments()
+		filePath, ok := args["file_path"].(string)
+		if !ok {
+			return mcp.NewToolResultError("file_path is required"), nil
+		}
+
+		pageFloat, ok := args["page"].(float64)
+		page := 1
+		if ok {
+			page = int(pageFloat)
+		}
+
+		cacheKey := generateCacheKey("doc_full", filePath)
+		var content string
+		if cachedFull := getCache(cacheKey); cachedFull != nil {
+			content = *cachedFull
+		} else {
+			var err error
+			content, err = ReadLocalDoc(filePath)
+			if err != nil {
+				return mcp.NewToolResultError(fmt.Sprintf("Failed to read document: %v", err)), nil
+			}
+			setCache(cacheKey, content)
+		}
+
+		chunkSize := 8000
+		totalLength := len(content)
+		totalPages := (totalLength + chunkSize - 1) / chunkSize
+		if totalPages == 0 {
+			totalPages = 1
+		}
+
+		if page < 1 {
+			page = 1
+		}
+		if page > totalPages {
+			page = totalPages
+		}
+
+		startIdx := (page - 1) * chunkSize
+		endIdx := startIdx + chunkSize
+		if endIdx > totalLength {
+			endIdx = totalLength
+		}
+
+		pageContent := content[startIdx:endIdx]
+
+		header := fmt.Sprintf("📄 Source: %s | Page %d/%d\n--------------------------------------------------\n", filePath, page, totalPages)
+		footer := "\n--------------------------------------------------\n"
+
+		if page < totalPages {
+			footer += fmt.Sprintf("💡 (Page %d/%d. There is more content. Extract the next page by calling this tool again with page=%d)\n", page, totalPages, page+1)
+		} else {
+			footer += "✅ (End of document)\n"
+		}
+
+		finalStr := header + pageContent + footer
+		return mcp.NewToolResultText(finalStr), nil
+	})
+
 	if err := server.ServeStdio(s); err != nil {
 		log.Fatalf("Server error: %v", err)
 	}

@@ -1,6 +1,0 @@
-mcp
-sqlalchemy
-psycopg2-binary
-pymysql
-pydantic
-redis
