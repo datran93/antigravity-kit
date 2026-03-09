@@ -98,6 +98,7 @@ Analyze the result of your work to determine the next path.
 - **Tester Failed?** -> Switch back to `coder` role with the failure logs to fix.
 - **Pass?** -> Mark step as complete via `@mcp:context-manager` (`complete_task_step`), and call `clear_drift` to reset
   the failure counter. Ensure to pass `active_files`.
+- **Auto-Commit**: Automatically stage and commit your changes using `run_command` (`git add` and `git commit`). The commit must represent a meaningful, atomic chunk of work—neither too massive nor too trivial. Write clear, descriptive commit messages explaining *what* and *why*.
 - **Inject Ghost Context**: If you encounter a language gotcha or complex quirk while fixing a file, call
   `@mcp:context-manager` (`annotate_file`) to attach that lesson directly to the file. This ensures future interactions
   with this file immediately retrieve the short-term memory lesson.
@@ -128,6 +129,7 @@ Analyze the result of your work to determine the next path.
    system to the USER. Keep updates highly readable, formatted, and concise.
 5. **Role Anchoring**: ALWAYS prefix every conversational response with `[Role: 🏗️ Planner]` to establish explicit
    mindset and behavior.
+6. **Continuous Committing**: Automatically commit work after completing every task or feature. Ensure commits are atomic, meaningful, and appropriately sized (not too large, not too small).
 
 ---
 
