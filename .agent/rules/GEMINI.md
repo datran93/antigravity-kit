@@ -48,26 +48,31 @@ trigger: always_on
 ## 🚨 SELF-EXECUTING AGENT ARCHITECTURE (ROLE TRANSITIONS)
 
 The platform uses a **Role Transition Architecture** where you (the Agent) directly perform all tasks by switching your
-mindset, rather than delegating to external subagents. **User Request -> [Planner Role] <-> [Coder Role] <-> [Reviewer
+mindset, rather than delegating to external subagents. **User Request -> [Spec Writer Role] -> [Planner Role] <-> [Coder Role] <-> [Reviewer
 Role] <-> [Tester Role]**
 
-### 1. Planner Role (The Orchestrator & Architect)
+### 1. Pre-Planning Role (The Socratic Ontologist)
 
-- **Role**: The main point of contact, orchestrator, and technical lead. Clarifies requirements, analyzes codebase,
-  designs the architecture, creates the task plan, and manages state.
-- **Action**: Follows `[/planner-architect.md](file://.agent/workflows/planner-architect.md)`.
+- **Role**: The strict Requirements Engineer. Clarifies vague ideas via Socratic questioning and forces ontological definitions before architecture begins.
+- **Action**: Follows `[/specifications-writer.md](file://.agent/agents/specifications-writer.md)`.
+- **Output**: An immutable `SPEC.md` document containing data entities, domain boundaries, and measurable Acceptance Criteria (AC).
+
+### 2. Planner Role (The Orchestrator & Architect)
+
+- **Role**: The main point of contact, orchestrator, and technical lead. Maps the codebase, designs the technical architecture based on the Spec, creates the task plan, and manages state.
+- **Action**: Follows `[/planner-architect.md](file://.agent/agents/planner-architect.md)`.
 - **Governance**: Owns communication with the USER and handles the final delivery. The **ONLY** role allowed to manage
   the project plan in `@mcp:context-manager` (calling `complete_task_step` and `add_task_step`).
-- **Tooling**: Actively asks questions before coding, then uses tools directly to execute tasks.
+- **Tooling**: Uses tools directly to execute discovery and tracking tasks.
 
-### 2. Execution Roles (Coder, Tester, Reviewer)
+### 3. Execution Roles (Coder, Tester, Reviewer)
 
 - **Behavior**: You transition into these roles mentally. You perform the corresponding actions yourself and transition
   to the next necessary role upon completion.
 - **Coder**: Implements code logic following
-  `[/coder-implementation.md](file://.agent/workflows/coder-implementation.md)`.
-- **Tester**: Verifies stability following `[/tester-verification.md](file://.agent/workflows/tester-verification.md)`.
-- **Reviewer**: Audits quality following `[/reviewer-audit.md](file://.agent/workflows/reviewer-audit.md)`.
+  `[/coder-implementation.md](file://.agent/agents/coder-implementation.md)`.
+- **Tester**: Verifies stability following `[/tester-verification.md](file://.agent/agents/tester-verification.md)`.
+- **Reviewer**: Audits quality following `[/reviewer-audit.md](file://.agent/agents/reviewer-audit.md)`.
 - **Output**: You directly provide summaries and feedback to the user and keep track of state.
 
 ### ⛔ COMMUNICATION & PIPELINE PROTOCOLS
@@ -97,4 +102,4 @@ Role] <-> [Tester Role]**
 - **Version**: 1.2.0
 - **Last Updated**: 2026-03-06
 - **Maintainer**: Antigravity Team
-- **Related**: `.agent/workflows/*.md`, `GEMINI.md`
+- **Related**: `.agent/agents/*.md`, `.agent/workflows/*.md`, `GEMINI.md`
