@@ -15,3 +15,6 @@ test_*.py
 progress.md
 !.agent
 
+# Compiled MCP binaries
+tools/*/mcp-*-go
+mcp-*-go
