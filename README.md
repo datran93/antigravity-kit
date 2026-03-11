@@ -19,13 +19,13 @@ agk
 
 ### ⚠️ Important Note on `.gitignore`
 
-If you are using AI-powered editors like **Cursor** or **Windsurf**, adding the `.agent/` folder to your `.gitignore`
+If you are using AI-powered editors like **Cursor** or **Windsurf**, adding the `.agents/` folder to your `.gitignore`
 may prevent the IDE from indexing the workflows. This results in slash commands (like `/plan`, `/debug`) not appearing
 in the chat suggestion dropdown.
 
-**Recommended Solution:** To keep the `.agent/` folder local (not tracked by Git) while maintaining AI functionality:
+**Recommended Solution:** To keep the `.agents/` folder local (not tracked by Git) while maintaining AI functionality:
 
-1. Ensure `.agent/` is **NOT** in your project's `.gitignore`.
+1. Ensure `.agents/` is **NOT** in your project's `.gitignore`.
 2. Instead, add it to your local exclude file: `.git/info/exclude`
 
 ## What's Included
@@ -38,25 +38,25 @@ in the chat suggestion dropdown.
 
 ## Usage
 
-### 1. Managing .agent Folder
+### 1. Managing .agents Folder
 
 Run these commands in any project root:
 
 | Command                | Description                                    |
 | ---------------------- | ---------------------------------------------- |
-| `agk install`          | Install .agent folder (auto-excludes from git) |
+| `agk install`          | Install .agents folder (auto-excludes from git) |
 | `agk install --force`  | Force install, overwrite existing              |
-| `agk update`           | Update .agent folder to latest version         |
+| `agk update`           | Update .agents folder to latest version         |
 | `agk update --dry-run` | Preview changes without applying               |
 | `agk update --offline` | Update using cached repo (no network)          |
 | `agk status`           | Check if updates are available                 |
-| `agk remove`           | Remove .agent folder (with confirmation)       |
+| `agk remove`           | Remove .agents folder (with confirmation)       |
 | `agk remove --force`   | Remove without confirmation                    |
 | `agk version`          | Show version and cache commit                  |
 | `agk --help`           | Show full help with examples                   |
 
 ```bash
-# Install .agent folder
+# Install .agents folder
 agk install
 
 # Force install (overwrite existing)
@@ -74,11 +74,11 @@ agk update --offline
 # Check for updates
 agk status
 
-# Remove .agent folder
+# Remove .agents folder
 agk remove
 ```
 
-> **Note:** The `docs/` folder inside `.agent/` is preserved during updates.
+> **Note:** The `docs/` folder inside `.agents/` is preserved during updates.
 
 ### 2. Using Agents
 
@@ -144,6 +144,7 @@ Example:
 ### 4. MCP Server Integration
 
 The kit relies heavily on the **Model Context Protocol (MCP)** for secure, structured access to resources:
+
 - `@mcp:skill-router`: Automatically searches and loads the perfect skills for your query.
 - `@mcp:database-inspector`: Connects to Postgres, MySQL, and Redis to execute safe read-only queries.
 - `@mcp:context-manager`: Persists progress checkpoints during long-running multi-file tasks.
@@ -151,7 +152,8 @@ The kit relies heavily on the **Model Context Protocol (MCP)** for secure, struc
 
 ### 5. Using Skills
 
-Skills are loaded automatically based on task context (using the `search_skills` MCP). The AI reads skill descriptions and applies relevant knowledge precisely.
+Skills are loaded automatically based on task context (using the `search_skills` MCP). The AI reads skill descriptions
+and applies relevant knowledge precisely.
 
 ## License
 

@@ -16,7 +16,7 @@ var IGNORE_DIRS = map[string]bool{
 	"dist":         true,
 	"build":        true,
 	".next":        true,
-	".agent":       true,
+	".agents":      true,
 }
 
 func getProjectFiles(workspacePath string) []string {

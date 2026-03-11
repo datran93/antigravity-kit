@@ -23,7 +23,7 @@ import (
 
 var (
 	workspaceRoot = "/Users/datran/LearnDev/antigravity-kit"
-	skillsDir     = filepath.Join(workspaceRoot, ".agent", "skills")
+	skillsDir     = filepath.Join(workspaceRoot, ".agents", "skills")
 	dbDir         = filepath.Join(workspaceRoot, "tools", "mcp-skill-router-go", ".db")
 	dbFile        = filepath.Join(dbDir, "skills_cache.json")
 	mu            sync.Mutex

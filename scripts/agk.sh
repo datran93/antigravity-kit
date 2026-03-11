@@ -19,8 +19,8 @@ SCRIPT_DIR="$( cd -P "$( dirname "$SOURCE" )" && pwd )"
 CACHE_DIR="$HOME/.antigravity/cache"
 REPO_URL="git@github.com:Dang-Hai-Tran/antigravity-kit.git"
 REPO_NAME="antigravity-kit"
-SOURCE_AGENT_DIR="$CACHE_DIR/$REPO_NAME/.agent"
-TARGET_AGENT_DIR="./.agent"
+SOURCE_AGENT_DIR="$CACHE_DIR/$REPO_NAME/.agents"
+TARGET_AGENT_DIR="./.agents"
 
 # Colors
 GREEN='\033[0;32m'
@@ -76,24 +76,24 @@ sync_repo() {
     log_success "Repository synced."
 }
 
-# Add .agent to git exclude
+# Add .agents to git exclude
 add_git_exclude() {
     [ ! -d ".git" ] && return
 
     local exclude=".git/info/exclude"
-    grep -q "^\.agent$" "$exclude" 2>/dev/null || echo ".agent" >> "$exclude"
+    grep -q "^\.agents$" "$exclude" 2>/dev/null || echo ".agents" >> "$exclude"
 }
 
-# Remove .agent from git exclude
+# Remove .agents from git exclude
 remove_git_exclude() {
     [ ! -d ".git" ] && return
 
     local exclude=".git/info/exclude"
-    if [ -f "$exclude" ] && grep -q "^\.agent$" "$exclude"; then
+    if [ -f "$exclude" ] && grep -q "^\.agents$" "$exclude"; then
         if [[ "$OSTYPE" == "darwin"* ]]; then
-            sed -i '' '/^\.agent$/d' "$exclude"
+            sed -i '' '/^\.agents$/d' "$exclude"
         else
-            sed -i '/^\.agent$/d' "$exclude"
+            sed -i '/^\.agents$/d' "$exclude"
         fi
     fi
 }
@@ -104,41 +104,41 @@ remove_git_exclude() {
 
 cmd_install() {
     if [ -d "$TARGET_AGENT_DIR" ]; then
-        log_error ".agent already exists. Use 'agk update' or remove it first."
+        log_error ".agents already exists. Use 'agk update' or remove it first."
         exit 1
     fi
 
     sync_repo
 
-    log_info "Installing .agent..."
+    log_info "Installing .agents..."
     cp -R "$SOURCE_AGENT_DIR" "$TARGET_AGENT_DIR" 2>/dev/null
 
     add_git_exclude
-    log_success ".agent installed!"
+    log_success ".agents installed!"
 }
 
 cmd_update() {
     sync_repo
 
     if [ ! -d "$TARGET_AGENT_DIR" ]; then
-        log_info ".agent not found. Installing..."
+        log_info ".agents not found. Installing..."
         cp -R "$SOURCE_AGENT_DIR" "$TARGET_AGENT_DIR" 2>/dev/null
         add_git_exclude
-        log_success ".agent installed!"
+        log_success ".agents installed!"
         return
     fi
 
-    log_info "Updating .agent..."
+    log_info "Updating .agents..."
     rm -rf "$TARGET_AGENT_DIR" 2>/dev/null
     cp -R "$SOURCE_AGENT_DIR" "$TARGET_AGENT_DIR" 2>/dev/null
-    log_success ".agent updated!"
+    log_success ".agents updated!"
 }
 
 cmd_status() {
     sync_repo
 
     if [ ! -d "$TARGET_AGENT_DIR" ]; then
-        log_error ".agent not found. Run 'agk install'."
+        log_error ".agents not found. Run 'agk install'."
         exit 1
     fi
 
@@ -146,7 +146,7 @@ cmd_status() {
     diff_output=$(diff -r --brief "$SOURCE_AGENT_DIR" "$TARGET_AGENT_DIR" 2>/dev/null | grep -v "\.DS_Store")
 
     if [ -z "$diff_output" ]; then
-        log_success ".agent is up to date."
+        log_success ".agents is up to date."
     else
         log_info "Updates available. Run 'agk update'."
     fi
@@ -154,17 +154,17 @@ cmd_status() {
 
 cmd_remove() {
     if [ ! -d "$TARGET_AGENT_DIR" ]; then
-        log_error ".agent not found."
+        log_error ".agents not found."
         exit 1
     fi
 
-    echo -e "${RED}WARNING: This will delete .agent folder.${NC}"
+    echo -e "${RED}WARNING: This will delete .agents folder.${NC}"
     read -p "Continue? (y/N): " confirm
     [[ ! "$confirm" =~ ^[Yy]$ ]] && { log_info "Cancelled."; return; }
 
     rm -rf "$TARGET_AGENT_DIR" 2>/dev/null
     remove_git_exclude
-    log_success ".agent removed!"
+    log_success ".agents removed!"
 }
 
 
@@ -215,13 +215,13 @@ Antigravity Kit v$VERSION
 Usage: agk <command>
 
 Commands:
-  install       Install .agent folder
-  update        Update .agent to latest
+  install       Install .agents folder
+  update        Update .agents to latest
   status        Check for updates
-  remove        Remove .agent folder
-  sync-skills   Sync local .agent with awesome-skills repo
-  sync-env      Copy current directory .env to .agent/scripts/.env
-  show-env      Print the current .env from .agent/scripts/.env
+  remove        Remove .agents folder
+  sync-skills   Sync local .agents with awesome-skills repo
+  sync-env      Copy current directory .env to .agents/scripts/.env
+  show-env      Print the current .env from .agents/scripts/.env
   help          Show this help
 
 EOF

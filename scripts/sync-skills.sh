@@ -1,10 +1,10 @@
 #!/bin/bash
 
 # sync-skills.sh
-# Synchronizes local .agent with the antigravity-awesome-skills repository.
+# Synchronizes local .agents with the antigravity-awesome-skills repository.
 
 # --- Configuration ---
-AGENT_DIR="/Users/datran/LearnDev/antigravity-kit/.agent"
+AGENT_DIR="/Users/datran/LearnDev/antigravity-kit/.agents"
 REPO_DIR="/Users/datran/LearnDev/antigravity-awesome-skills"
 
 # --- 1. Pull the latest content ---
@@ -17,7 +17,7 @@ cd - > /dev/null || exit 1
 
 # --- Validation ---
 if [ ! -d "$AGENT_DIR" ]; then
-  echo "❌ Error: Local .agent directory not found at $AGENT_DIR"
+  echo "❌ Error: Local .agents directory not found at $AGENT_DIR"
   exit 1
 fi
 
