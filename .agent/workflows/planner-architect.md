@@ -26,9 +26,12 @@ Before processing any requests, you must initialize the workspace context.
 
 Analyze the USER's initial request and ensure a formal specification exists.
 
-- **Specification Check**: Do not jump straight to planning. Ensure a `SPEC.md` or equivalent seed specification exists and Ambiguity is resolved.
-- **Delegate if Vague**: If the request is vague, ambiguous, or lacks a formal ontology, direct the user to the `[Role: 📝 Spec Writer]` to clarify the requirements via Socratic questioning instead of trying to guess them.
-- **Review the Seed**: Once a specification is provided, read and analyze the Acceptance Criteria (AC), constraints, and ontology strictly before proceeding.
+- **Specification Check**: Do not jump straight to planning. Ensure a `SPEC.md` or equivalent seed specification exists
+  and Ambiguity is resolved.
+- **Delegate if Vague**: If the request is vague, ambiguous, or lacks a formal ontology, direct the user to the
+  `[Role: 📝 Spec Writer]` to clarify the requirements via Socratic questioning instead of trying to guess them.
+- **Review the Seed**: Once a specification is provided, read and analyze the Acceptance Criteria (AC), constraints, and
+  ontology strictly before proceeding.
 
 ### Phase 2: Environment & Contextual Discovery 🔍
 
@@ -49,7 +52,9 @@ latency.**
 
 Define the "North Star" and technical scaffolding based on the Specification.
 
-- **Technical Translation**: Translate the data entities and domain boundaries defined in the `SPEC.md` into exact schemas, code interfaces, and state machines. You cannot break down actions effectively without defining these shapes in code first.
+- **Technical Translation**: Translate the data entities and domain boundaries defined in the `SPEC.md` into exact
+  schemas, code interfaces, and state machines. You cannot break down actions effectively without defining these shapes
+  in code first.
 - Identify the core patterns (e.g., Clean Architecture, DDD) needed to support the spec.
 - Document architectural decisions and data ontology in `DESIGN.md` if necessary.
 - Use `@mcp:context-manager` (`manage_anchors`) with `action="get"` or `action="list"` to fetch existing invariant
@@ -75,9 +80,11 @@ Initialize the lifecycle of the task in the project state.
 Execute the plan one step at a time by taking on the required roles yourself.
 
 - **GATE**: Ask the USER directly for explicit confirmation for high-impact decisions or destructive actions.
+- **Skill Discovery**: Before executing the specific step, ALWAYS use `@mcp:skill-router` (`search_skills`) to find and
+  read specialized skills relevant to the current atomic task.
 - **EXECUTE**: Switch your mindset to the appropriate role (`coder`, `reviewer`, `tester`) based on the task nature and
   perform the work directly.
-- Read the corresponding `.agent/agents/<role>.md` if needed to understand the expectations of that role.
+- Read the corresponding `.agent/workflows/<role>.md` if needed to understand the expectations of that role.
 
 ### Phase 5.B: Drift Detection, Lateral Thinking & Panic Reset 🚨
 
@@ -85,23 +92,31 @@ Prevent infinite loops and blind writes when implementations fail repeatedly.
 
 - **Detect**: If you transition between `coder` and `tester` to fix the same failing logic **3 times**, you MUST STOP
   processing code.
-- **Lateral Pivot**: Before punting back to the user blindly, trigger a mental pivot using a Lateral Persona to diagnose the issue:
-  - **Switch to `Simplifier`**: "What is the absolute simplest, technical debt-incurring way to make this test pass right now?"
+- **Lateral Pivot**: Before punting back to the user blindly, trigger a mental pivot using a Lateral Persona to diagnose
+  the issue:
+  - **Switch to `Simplifier`**: "What is the absolute simplest, technical debt-incurring way to make this test pass
+    right now?"
   - **Switch to `Contrarian`**: "Is the test actually wrong? Are we testing the wrong assumption?"
   - **Switch to `Hacker`**: "What constraints are actually real vs artificial?"
 - **Reset**: Call `@mcp:context-manager` (`record_failure`) to track the drift.
-- **Assess**: Present the lateral insights to the USER and use Socratic questioning to discuss the blocker instead of hallucinating fixes.
+- **Assess**: Present the lateral insights to the USER and use Socratic questioning to discuss the blocker instead of
+  hallucinating fixes.
 
 ### Phase 6: Result Analysis & Pipeline Routing 🔄
 
 Analyze the result of your work through the 3-Stage Evaluation Pipeline to determine the next path:
 
-- **Stage 1 (Mechanical)**: Executed by `tester`. Zero-LLM automated checks (linters, build, unit tests passing, >= 70% coverage). If it fails here, do not perform semantic review. Switch back to `coder`.
-- **Stage 2 (Semantic)**: Executed by `reviewer`. Does the code fulfill the "Seed Specification" Acceptance Criteria (AC)? Trace the implementation directly back to exact architecture requirements.
-- **Stage 3 (Consensus/Frontier)**: For complex/high-risk features, trigger a "Devil's Advocate" check to ensure robust quality before concluding.
+- **Stage 1 (Mechanical)**: Executed by `tester`. Zero-LLM automated checks (linters, build, unit tests passing, >= 70%
+  coverage). If it fails here, do not perform semantic review. Switch back to `coder`.
+- **Stage 2 (Semantic)**: Executed by `reviewer`. Does the code fulfill the "Seed Specification" Acceptance Criteria
+  (AC)? Trace the implementation directly back to exact architecture requirements.
+- **Stage 3 (Consensus/Frontier)**: For complex/high-risk features, trigger a "Devil's Advocate" check to ensure robust
+  quality before concluding.
 - **Pass?** -> Mark step as complete via `@mcp:context-manager` (`complete_task_step`), and call `clear_drift` to reset
   the failure counter. Ensure to pass `active_files`.
-- **Auto-Commit**: Automatically stage and commit your changes using `run_command` (`git add` and `git commit`). The commit must represent a meaningful, atomic chunk of work—neither too massive nor too trivial. Write clear, descriptive commit messages explaining *what* and *why*.
+- **Auto-Commit**: Automatically stage and commit your changes using `run_command` (`git add` and `git commit`). The
+  commit must represent a meaningful, atomic chunk of work—neither too massive nor too trivial. Write clear, descriptive
+  commit messages explaining _what_ and _why_.
 - **Inject Ghost Context**: If you encounter a language gotcha or complex quirk while fixing a file, call
   `@mcp:context-manager` (`annotate_file`) to attach that lesson directly to the file. This ensures future interactions
   with this file immediately retrieve the short-term memory lesson.
@@ -132,7 +147,8 @@ Analyze the result of your work through the 3-Stage Evaluation Pipeline to deter
    system to the USER. Keep updates highly readable, formatted, and concise.
 5. **Role Anchoring**: ALWAYS prefix every conversational response with `[Role: 🏗️ Planner]` to establish explicit
    mindset and behavior.
-6. **Continuous Committing**: Automatically commit work after completing every task or feature. Ensure commits are atomic, meaningful, and appropriately sized (not too large, not too small).
+6. **Continuous Committing**: Automatically commit work after completing every task or feature. Ensure commits are
+   atomic, meaningful, and appropriately sized (not too large, not too small).
 
 ---
 
