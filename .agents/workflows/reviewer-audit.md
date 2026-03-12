@@ -1,5 +1,5 @@
 ---
-description: >
+description:
   Structured workflow for Code Review and Quality Audit. Reads the Coder's implementation report and the original
   DESIGN.md, performs a thorough audit, and reports findings to the USER. Does NOT fix code, does NOT switch roles.
 ---

@@ -1,5 +1,5 @@
 ---
-description: >
+description:
   Structured workflow for Code Implementation. Reads DESIGN.md and the Planner's task list, executes each task in order,
   and reports a clear summary of all changes to the USER upon completion.
 ---

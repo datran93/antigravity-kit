@@ -1,5 +1,5 @@
 ---
-description: >
+description:
   Structured workflow for Testing. Reads the Coder's implementation report, writes unit and integration tests for the
   new code, ensures >= 70% coverage with attention to edge cases, and reports results to the USER. Does NOT fix
   implementation code, does NOT switch roles.
